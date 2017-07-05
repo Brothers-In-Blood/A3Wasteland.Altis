@@ -1594,19 +1594,17 @@ boatsArray = compileFinal str
 ];
 AutonomousArray = compileFinal str
 [
-["Mk-21 Centurion SAM",											"B_SAM_System_02_F",															25000],
-["Mk-49 Spartan SAM",												"B_SAM_System_01_F",															25000],
+["Mk-21 Centurion SAM",											"B_SAM_System_02_F",															350000],
+["Mk-49 Spartan SAM",												"B_SAM_System_01_F",															125000],
 ["Mk30A HMG .50 Sentry (NATO)",							"B_HMG_01_A_F",																		10000],
 ["Mk30A HMG .50 Sentry (CSAT)",							"O_HMG_01_A_F",																		10000],
 ["Mk30A HMG .50 Sentry (AAF)",							"I_HMG_01_A_F",																		10000],
 ["Mk32A GMG 20mm Sentry (NATO)",						"B_GMG_01_A_F",																		15000],
 ["Mk32A GMG 20mm Sentry (CSAT)",						"O_GMG_01_A_F",																		15000],
 ["Mk32A GMG 20mm Sentry (AAF)",							"I_GMG_01_A_F",																		15000],
-["Praetorian 1C AAA",												"B_AAA_System_01_F",															25000]
-
-
-
+["Praetorian 1C AAA",												"B_AAA_System_01_F",															225000]
 ];
+
 allVehStoreVehicles = compileFinal str (call landArray + call armoredArray + call tanksArray + call helicoptersArray + call planesArray + call boatsArray + call AutonomousArray);
 
 uavArray = compileFinal str
