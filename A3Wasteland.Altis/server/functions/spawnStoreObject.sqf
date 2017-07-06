@@ -24,7 +24,7 @@ _isBaseStore = ["BaseStore", _npcName] call fn_startsWith;
 private _storeNPC = missionNamespace getVariable [_npcName, objNull];
 private _marker = _npcName;
 
-if (_key != "" && isPlayer _player && {_isGenStore || _isGunStore || _isVehStore}) then
+if (_key != "" && isPlayer _player && {_isGenStore || _isGunStore || _isVehStore || _isBaseStore}) then
 {
 	_timeoutKey = _key + "_timeout";
 	_objectID = "";
@@ -38,7 +38,7 @@ if (_key != "" && isPlayer _player && {_isGenStore || _isGunStore || _isVehStore
 
 		switch (true) do
 		{
-			case _isGenStore: { _objectsArray = genObjectsArray };
+			case _isGenStore: { _objectsArray = AllBaseParts };
 			case _isGunStore: { _objectsArray = staticGunsArray };
 			case _isBaseStore: { _objectsArray = AllBaseParts};
 		};
@@ -236,7 +236,12 @@ if (_key != "" && isPlayer _player && {_isGenStore || _isGunStore || _isVehStore
 					_object setFuelCargo 0;
 					_object setRepairCargo 0;
 					_object enableDynamicSimulation true;
+					_object setVariable ["moveable", true, true];
  				};
+				case (_object iskindof "Thing"):
+				{
+					_object setVariable ["moveable", true, true];
+				};
  			};
 
 			if (_skipSave) then

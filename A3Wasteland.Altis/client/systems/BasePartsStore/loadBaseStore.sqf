@@ -11,7 +11,7 @@
 disableSerialization;
 
 private ["_genshopDialog", "_Dialog", "_playerMoney", "_owner"];
-_genshopDialog = createDialog "BaseStored";
+_genshopDialog = createDialog "BaseStore";
 
 _Dialog = findDisplay BaseStore_DIALOG;
 _playerMoney = _Dialog displayCtrl BaseStore_money;

@@ -97,6 +97,7 @@ getItemInfo = "client\functions\getItemInfo.sqf" call mf_compile;
 getInventory = "client\systems\generalStore\getInventory.sqf" call mf_compile;
 getSellPriceList = "client\systems\selling\getSellPriceList.sqf" call mf_compile;
 populateGeneralStore = "client\systems\generalStore\populateGenStore.sqf" call mf_compile;
+populateBaseStore = "client\systems\BasePartsStore\populateBaseStore.sqf" call mf_compile;
 populateGunStore = "client\systems\gunStore\populateGunStore.sqf" call mf_compile;
 populateVehicleStore = "client\systems\vehicleStore\populateVehicleStore.sqf" call mf_compile;
 requestStoreObject = "client\functions\requestStoreObject.sqf" call mf_compile;

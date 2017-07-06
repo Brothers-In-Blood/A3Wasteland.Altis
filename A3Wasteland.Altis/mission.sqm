@@ -8,7 +8,7 @@ class EditorData
 	toggles=522;
 	class ItemIDProvider
 	{
-		nextID=2313;
+		nextID=2314;
 	};
 	class MarkerIDProvider
 	{
@@ -16,14 +16,14 @@ class EditorData
 	};
 	class LayerIndexProvider
 	{
-		nextID=44;
+		nextID=45;
 	};
 	class Camera
 	{
-		pos[]={24269.969,258.69458,15075.11};
-		dir[]={-0.95434427,-0.2966474,0.035903014};
-		up[]={-0.29646087,0.95497751,0.011152379};
-		aside[]={0.037591405,4.940448e-007,0.99932367};
+		pos[]={22889.635,591.62244,13531.717};
+		dir[]={-0.66550595,-0.33571419,-0.66668099};
+		up[]={-0.23719159,0.94195336,-0.23761123};
+		aside[]={-0.7077567,3.080786e-007,0.70650291};
 	};
 };
 binarizationWanted=0;
@@ -6030,7 +6030,7 @@ class Mission
 			name="Jet_1";
 			type="Empty";
 			colorName="ColorYellow";
-			angle=226.99944;
+			angle=226.99942;
 			id=1960;
 			atlOffset=-17.910013;
 		};
@@ -6162,7 +6162,7 @@ class Mission
 			text="Service";
 			type="hd_dot";
 			colorName="ColorGreen";
-			angle=97.489052;
+			angle=97.489044;
 			id=1954;
 			atlOffset=11.120422;
 		};
@@ -7705,14 +7705,14 @@ class Mission
 						angles[]={0,0.84789842,0};
 					};
 					side="Civilian";
-					flags=7;
+					flags=6;
 					class Attributes
 					{
 						init="call{[this] spawn A3W_fnc_setupStoreNPC}";
 						name="BaseStore1";
 					};
-					id=2304;
-					type="C_man_w_worker_F";
+					id=2313;
+					type="C_man_1_1_F";
 					atlOffset=0.00082397461;
 					class CustomAttributes
 					{

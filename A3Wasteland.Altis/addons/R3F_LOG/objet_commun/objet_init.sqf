@@ -1,10 +1,10 @@
 /**
- * Initialise un objet déplaçable/héliportable/remorquable/transportable
- * 
+ * Initialise un objet dï¿½plaï¿½able/hï¿½liportable/remorquable/transportable
+ *
  * @param 0 l'objet
- * 
+ *
  * Copyright (C) 2014 Team ~R3F~
- * 
+ *
  * This program is free software under the terms of the GNU General Public License version 3.
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
@@ -25,22 +25,22 @@ if (isNil {_objet getVariable "R3F_LOG_disabled"}) then
 	_objet setVariable ["R3F_LOG_disabled", false];  //on altis its smarter to only enable deplacement on objects we WANT players to move so if it doesnt find an r3f tag, it disables r3f on the object
 };
 
-// Définition locale de la variable si elle n'est pas définie sur le réseau
+// Dï¿½finition locale de la variable si elle n'est pas dï¿½finie sur le rï¿½seau
 if (isNil {_objet getVariable "R3F_LOG_est_transporte_par"}) then
 {
 	_objet setVariable ["R3F_LOG_est_transporte_par", objNull, false];
 };
 
-// Définition locale de la variable si elle n'est pas définie sur le réseau
+// Dï¿½finition locale de la variable si elle n'est pas dï¿½finie sur le rï¿½seau
 if (isNil {_objet getVariable "R3F_LOG_est_deplace_par"}) then
 {
 	_objet setVariable ["R3F_LOG_est_deplace_par", objNull, false];
 };
 
-// Définition locale de la variable si elle n'est pas définie sur le réseau
+// Dï¿½finition locale de la variable si elle n'est pas dï¿½finie sur le rï¿½seau
 if (isNil {_objet getVariable "R3F_LOG_proprietaire_verrou"}) then
 {
-	// En mode de lock side : uniquement si l'objet appartient initialement à une side militaire
+	// En mode de lock side : uniquement si l'objet appartient initialement ï¿½ une side militaire
 	if (R3F_LOG_CFG_lock_objects_mode == "side") then
 	{
 		switch (getNumber (_config >> "side")) do
@@ -52,7 +52,7 @@ if (isNil {_objet getVariable "R3F_LOG_proprietaire_verrou"}) then
 	}
 	else
 	{
-		// En mode de lock faction : uniquement si l'objet appartient initialement à une side militaire
+		// En mode de lock faction : uniquement si l'objet appartient initialement ï¿½ une side militaire
 		if (R3F_LOG_CFG_lock_objects_mode == "faction") then
 		{
 			switch (getNumber (_config >> "side")) do
@@ -67,11 +67,11 @@ if (isNil {_objet getVariable "R3F_LOG_proprietaire_verrou"}) then
 // Si on peut embarquer dans l'objet
 if (isNumber (_config >> "preciseGetInOut")) then
 {
-	// Ne pas monter dans un véhicule qui est en cours de transport
+	// Ne pas monter dans un vï¿½hicule qui est en cours de transport
 	_objet addEventHandler ["GetIn", R3F_LOG_FNCT_EH_GetIn];
 };
 
-// Indices du tableau des fonctionnalités retourné par R3F_LOG_FNCT_determiner_fonctionnalites_logistique
+// Indices du tableau des fonctionnalitï¿½s retournï¿½ par R3F_LOG_FNCT_determiner_fonctionnalites_logistique
 #define __can_be_depl_heli_remorq_transp 0
 #define __can_be_moved_by_player 1
 #define __can_lift 2
@@ -96,10 +96,9 @@ else
 
 if (_fonctionnalites select __can_be_moved_by_player) then
 {
-	_objet addAction [("<img image='client\icons\r3f_lift.paa' color='#00eeff'/> <t color=""#00eeff"">" + format [STR_R3F_LOG_action_deplacer_objet, _nom] + "</t>"), {_this call R3F_LOG_FNCT_objet_deplacer}, false, 5, false, true, "", "!R3F_LOG_mutex_local_verrou && R3F_LOG_objet_addAction == _target && R3F_LOG_action_deplacer_objet_valide && !(_target getVariable ['objectLocked', false])"];
-	//_objet addAction [("<img image='client\icons\r3f_lock.paa' color='#ff0000'/> <t color='#ff0000'>" + STR_LOCK_OBJECT + "</t>"), "addons\R3F_LOG\objet_deplacable\objectLockStateMachine.sqf", _doLock, -5, false, true, "", "R3F_LOG_objet_addAction == _target && R3F_LOG_action_deplacer_objet_valide && Object_canLock && (!(_target isKindOf 'AllVehicles') || {_target isKindOf 'StaticWeapon'})"];
-	_objet addAction [("<img image='client\icons\r3f_lock.paa' color='#ff0000'/> <t color='#ff0000'>" + STR_LOCK_OBJECT + "</t>"), "addons\R3F_LOG\objet_deplacable\objectLockStateMachine.sqf", _doLock, -5, false, true, "", "R3F_LOG_objet_addAction == _target && {R3F_LOG_action_deplacer_objet_valide && {Object_canLock && {[] call Object_safePos && {(!(_target isKindOf 'AllVehicles') || _target isKindOf 'StaticWeapon')}}}}"];
-	_objet addAction [("<img image='client\icons\r3f_unlock.paa' color='#06ef00'/> <t color='#06ef00'>" + STR_UNLOCK_OBJECT + "</t>"), "addons\R3F_LOG\objet_deplacable\objectLockStateMachine.sqf", _doUnlock, -5, false, true, "", "R3F_LOG_objet_addAction == _target && R3F_LOG_action_deplacer_objet_valide && !Object_canLock"];
+	_objet addAction [("<img image='client\icons\r3f_lift.paa' color='#00eeff'/> <t color=""#00eeff"">" + format [STR_R3F_LOG_action_deplacer_objet, _nom] + "</t>"), {_this call R3F_LOG_FNCT_objet_deplacer}, false, 5, false, true, "", "!R3F_LOG_mutex_local_verrou && R3F_LOG_objet_addAction == _target && R3F_LOG_action_deplacer_objet_valide && !(_target getVariable ['objectLocked', false]) && (_target getVariable ['moveable', false])"];
+	_objet addAction [("<img image='client\icons\r3f_lock.paa' color='#ff0000'/> <t color='#ff0000'>" + STR_LOCK_OBJECT + "</t>"), "addons\R3F_LOG\objet_deplacable\objectLockStateMachine.sqf", _doLock, -5, false, true, "", "R3F_LOG_objet_addAction == _target && {R3F_LOG_action_deplacer_objet_valide && {Object_canLock && {[] call Object_safePos && {(!(_target isKindOf 'AllVehicles') || _target isKindOf 'StaticWeapon')}}}}  && (_target getVariable ['moveable', false])"];
+	_objet addAction [("<img image='client\icons\r3f_unlock.paa' color='#06ef00'/> <t color='#06ef00'>" + STR_UNLOCK_OBJECT + "</t>"), "addons\R3F_LOG\objet_deplacable\objectLockStateMachine.sqf", _doUnlock, -5, false, true, "", "R3F_LOG_objet_addAction == _target && R3F_LOG_action_deplacer_objet_valide && !Object_canLock  && (_target getVariable ['moveable', false])"];
 };
 
 if (_fonctionnalites select __can_be_towed) then
@@ -108,9 +107,9 @@ if (_fonctionnalites select __can_be_towed) then
 	{
 		_objet addAction [("<img image='client\icons\r3f_tow.paa' color='#00dd00'/> <t color=""#00dd00"">" + STR_R3F_LOG_action_remorquer_deplace + "</t>"), {_this call R3F_LOG_FNCT_remorqueur_remorquer_deplace}, nil, 6, true, true, "", "!R3F_LOG_mutex_local_verrou && R3F_LOG_objet_addAction == _target && R3F_LOG_joueur_deplace_objet == _target && R3F_LOG_action_remorquer_deplace_valide"];
 	};
-	
+
 	_objet addAction [("<img image='client\icons\r3f_tow.paa' color='#00dd00'/> <t color=""#00dd00"">" + format [STR_R3F_LOG_action_remorquer_direct, _nom] + "</t>"), {_this call R3F_LOG_FNCT_remorqueur_remorquer_direct}, nil, 5, false, true, "", "!R3F_LOG_mutex_local_verrou && R3F_LOG_objet_addAction == _target && R3F_LOG_action_remorquer_direct_valide && Object_canLock"];
-	
+
 	_objet addAction [("<img image='client\icons\r3f_untow.paa' color='#00dd00'/> <t color=""#00dd00"">" + STR_R3F_LOG_action_detacher + "</t>"), {_this call R3F_LOG_FNCT_remorqueur_detacher}, nil, 6, true, true, "", "!R3F_LOG_mutex_local_verrou && R3F_LOG_objet_addAction == _target && R3F_LOG_action_detacher_valide"];
 };
 
@@ -118,13 +117,13 @@ if (_fonctionnalites select __can_be_transported_cargo) then
 {
 	if (_fonctionnalites select __can_be_moved_by_player) then
 	{
-		_objet addAction [("<img image='client\icons\r3f_loadin.paa' color='#dddd00'/> <t color=""#dddd00"">" + STR_R3F_LOG_action_charger_deplace + "</t>"), {_this call R3F_LOG_FNCT_transporteur_charger_deplace}, nil, 8, true, true, "", "!R3F_LOG_mutex_local_verrou && R3F_LOG_objet_addAction == _target && R3F_LOG_joueur_deplace_objet == _target && R3F_LOG_action_charger_deplace_valide"];
+		_objet addAction [("<img image='client\icons\r3f_loadin.paa' color='#dddd00'/> <t color=""#dddd00"">" + STR_R3F_LOG_action_charger_deplace + "</t>"), {_this call R3F_LOG_FNCT_transporteur_charger_deplace}, nil, 8, true, true, "", "!R3F_LOG_mutex_local_verrou && R3F_LOG_objet_addAction == _target && R3F_LOG_joueur_deplace_objet == _target && R3F_LOG_action_charger_deplace_valide  && (_target getVariable ['moveable', false])"];
 	};
-	
-	_objet addAction [("<img image='client\icons\r3f_loadin.paa' color='#dddd00'/> <t color=""#dddd00"">" + format [STR_R3F_LOG_action_selectionner_objet_charge, _nom] + "</t>"), {_this call R3F_LOG_FNCT_transporteur_selectionner_objet}, nil, 5, false, true, "", "!R3F_LOG_mutex_local_verrou && R3F_LOG_objet_addAction == _target && R3F_LOG_action_selectionner_objet_charge_valide && Object_canLock"];
+
+	_objet addAction [("<img image='client\icons\r3f_loadin.paa' color='#dddd00'/> <t color=""#dddd00"">" + format [STR_R3F_LOG_action_selectionner_objet_charge, _nom] + "</t>"), {_this call R3F_LOG_FNCT_transporteur_selectionner_objet}, nil, 5, false, true, "", "!R3F_LOG_mutex_local_verrou && R3F_LOG_objet_addAction == _target && R3F_LOG_action_selectionner_objet_charge_valide && Object_canLock  && (_target getVariable ['moveable', false])"];
 };
 
 if (_fonctionnalites select __can_be_moved_by_player) then
 {
-	_objet addAction [("<t color=""#ff9600"">" + STR_R3F_LOG_action_revendre_usine_deplace + "</t>"), {_this call R3F_LOG_FNCT_usine_revendre_deplace}, nil, 7, false, true, "", "!R3F_LOG_mutex_local_verrou && R3F_LOG_objet_addAction == _target && R3F_LOG_action_revendre_usine_deplace_valide"];
+	_objet addAction [("<t color=""#ff9600"">" + STR_R3F_LOG_action_revendre_usine_deplace + "</t>"), {_this call R3F_LOG_FNCT_usine_revendre_deplace}, nil, 7, false, true, "", "!R3F_LOG_mutex_local_verrou && R3F_LOG_objet_addAction == _target && R3F_LOG_action_revendre_usine_deplace_valide  && (_target getVariable ['moveable', false])"];
 };

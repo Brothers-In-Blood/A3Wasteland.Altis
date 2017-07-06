@@ -102,6 +102,15 @@ _exclObjectIDs = [];
 				case "lockDown": { _value }; // BASE LOCKER
 				case "Lights": { _value }; // BASE LOCKER
 				case "password": { _value }; // BASE LOCKER - SAFE - DOOR
+				case "moveable": {_value};
+				case "bis_disabled_Door_1": {_value};
+				case "bis_disabled_Door_2": {_value};
+				case "bis_disabled_Door_3": {_value};
+				case "bis_disabled_Door_4": {_value};
+				case "bis_disabled_Door_5": {_value};
+				case "bis_disabled_Door_6": {_value};
+				case "bis_disabled_Door_7": {_value};
+				case "bis_disabled_Door_8": {_value};
 				case "ownerName":
 				{
 					switch (typeName _value) do
@@ -118,11 +127,13 @@ _exclObjectIDs = [];
 					};
 				};
 			};
-
 			_obj setVariable [_var, _value, true];
 		} forEach _variables;
+		
+		//make sure existing objects are given moveable variable. Comment line after update.
+		_obj setVariable ["moveable", true, true];
 
-		// Base locker lights 
+		// Base locker lights
     if (_obj getVariable ["lights",""] == "off") then
     {
       _obj setHit ["light_1_hit", 0.97];

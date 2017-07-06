@@ -67,7 +67,15 @@ if (_obj iskindof "Static") then {
 			["bis_disabled_Door_5", 0],
 			["bis_disabled_Door_6", 0],
 			["bis_disabled_Door_7", 0],
-			["bis_disabled_Door_8", 0]
+			["bis_disabled_Door_8", 0],
+			["moveable", false]
+		];
+};
+
+if (_obj iskindof "thing") then {
+	{ _variables pushBack [_x select 0, _obj getVariable _x] } forEach
+		[
+			["moveable", false]
 		];
 };
 
