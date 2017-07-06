@@ -20,10 +20,10 @@ _setupVars =
 		"I_Plane_Fighter_03_CAS_dynamicLoadout_F",
 		"I_Plane_Fighter_03_AA_dynamicLoadout_F",
 		"I_Plane_Fighter_04_dynamicLoadout_F",
-	        "O_Plane_Fighter_02_dynamicLoadout_F",
-	        "O_Plane_Fighter_02_Stealth_dynamicLoadout_F",
-	        "B_Plane_Fighter_01_dynamicLoadout_F",
-	        "B_Plane_Fighter_01_Stealth_dynamicLoadout_F"
+    "O_Plane_Fighter_02_dynamicLoadout_F",
+    "O_Plane_Fighter_02_Stealth_dynamicLoadout_F",
+    "B_Plane_Fighter_01_dynamicLoadout_F",
+    "B_Plane_Fighter_01_Stealth_dynamicLoadout_F"
 
 	] call BIS_fnc_selectRandom;
 
