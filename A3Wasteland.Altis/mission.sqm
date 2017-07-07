@@ -8,7 +8,7 @@ class EditorData
 	toggles=522;
 	class ItemIDProvider
 	{
-		nextID=2314;
+		nextID=2318;
 	};
 	class MarkerIDProvider
 	{
@@ -16,14 +16,14 @@ class EditorData
 	};
 	class LayerIndexProvider
 	{
-		nextID=45;
+		nextID=46;
 	};
 	class Camera
 	{
-		pos[]={22889.635,591.62244,13531.717};
-		dir[]={-0.66550595,-0.33571419,-0.66668099};
-		up[]={-0.23719159,0.94195336,-0.23761123};
-		aside[]={-0.7077567,3.080786e-007,0.70650291};
+		pos[]={22266.391,23.720375,14594.726};
+		dir[]={-0.66571403,-0.38478869,-0.63936704};
+		up[]={-0.2775225,0.92300135,-0.26653913};
+		aside[]={-0.69269907,-2.0650623e-007,0.7212435};
 	};
 };
 binarizationWanted=0;
@@ -46,7 +46,8 @@ addons[]=
 	"A3_Structures_F_Heli_Items_Luggage",
 	"A3_Structures_F_Heli_Furniture",
 	"A3_Weapons_F",
-	"A3_Characters_F_Jets_Vests"
+	"A3_Characters_F_Jets_Vests",
+	"A3_Structures_F_Argo_Industrial_Agriculture"
 };
 class AddonsMetaData
 {
@@ -215,7 +216,7 @@ class Mission
 	};
 	class Entities
 	{
-		items=327;
+		items=330;
 		class Item0
 		{
 			dataType="Group";
@@ -6030,7 +6031,7 @@ class Mission
 			name="Jet_1";
 			type="Empty";
 			colorName="ColorYellow";
-			angle=226.99942;
+			angle=226.9994;
 			id=1960;
 			atlOffset=-17.910013;
 		};
@@ -6162,7 +6163,7 @@ class Mission
 			text="Service";
 			type="hd_dot";
 			colorName="ColorGreen";
-			angle=97.489044;
+			angle=97.489037;
 			id=1954;
 			atlOffset=11.120422;
 		};
@@ -7773,6 +7774,108 @@ class Mission
 			colorName="ColorBlack";
 			id=2312;
 			atlOffset=-223.54123;
+		};
+		class Item327
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={22241.953,5.6475544,14569.136};
+				angles[]={0,2.9465597,0};
+			};
+			side="Empty";
+			flags=1;
+			class Attributes
+			{
+			};
+			id=2314;
+			type="Land_Shed_08_grey_F";
+			atlOffset=0.35884142;
+		};
+		class Item328
+		{
+			dataType="Group";
+			side="Civilian";
+			class Entities
+			{
+				items=1;
+				class Item0
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={22244.961,4.7816916,14571.08};
+						angles[]={0,2.9997671,0};
+					};
+					side="Civilian";
+					flags=6;
+					class Attributes
+					{
+						init="call{[this] spawn A3W_fnc_setupStoreNPC}";
+						name="BaseStore2";
+					};
+					id=2316;
+					type="C_man_1_1_F";
+					atlOffset=0.087436199;
+					class CustomAttributes
+					{
+						class Attribute0
+						{
+							property="speaker";
+							expression="_this setspeaker _value;";
+							class Value
+							{
+								class data
+								{
+									class type
+									{
+										type[]=
+										{
+											"STRING"
+										};
+									};
+									value="Male06GRE";
+								};
+							};
+						};
+						class Attribute1
+						{
+							property="pitch";
+							expression="_this setpitch _value;";
+							class Value
+							{
+								class data
+								{
+									class type
+									{
+										type[]=
+										{
+											"SCALAR"
+										};
+									};
+									value=0.95999998;
+								};
+							};
+						};
+						nAttributes=2;
+					};
+				};
+			};
+			class Attributes
+			{
+			};
+			id=2315;
+			atlOffset=0.087436199;
+		};
+		class Item329
+		{
+			dataType="Marker";
+			position[]={22150.01,0,14474.849};
+			name="BaseStore2_objSpawn";
+			type="Empty";
+			colorName="ColorBlack";
+			id=2317;
+			atlOffset=-3.163584;
 		};
 	};
 };
