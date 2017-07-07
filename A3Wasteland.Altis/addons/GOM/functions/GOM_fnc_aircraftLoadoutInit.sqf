@@ -26,7 +26,7 @@ GOM_fnc_addAircraftLoadout = {
 	params [["_obj",objnull],["_pilot",""]];
 	if (_pilot isEqualTo "PILOT" AND isPlayer driver _obj) exitWith {_add = [_obj,"PILOT"] call GOM_fnc_AircraftLoadout};
 
-	[_obj,["Service Vehicle",{_this call GOM_fnc_aircraftLoadout}, [], 1, true, true, "", "isPlayer _this AND {_this isequalto vehicle _this} AND {speed _this isequalto 0}"]] remoteExec ["addAction",0,true];
+	[_obj,["Service Vehicle",{_this call GOM_fnc_aircraftLoadout}, [], -99, true, true, "", "isPlayer _this AND {_this isequalto vehicle _this} AND {speed _this isequalto 0}"]] remoteExec ["addAction",0,true];
 	true
 
 };
