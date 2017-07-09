@@ -18,12 +18,12 @@ if (!isNil "_uid") then {
 					"Lights OFF",
 					"Lights ON",
 					"Lock Doors",
-					"Unlock Doors"
+					"Unlock Doors",
 					"Show objects owned by you",
 					"Show Base Border",
 					"Lock Down Base",
 					"Release Lock Down",
-					"Relock Base Objects",
+					"Relock Base Objects"
 	];
 
 	{

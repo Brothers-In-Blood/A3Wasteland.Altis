@@ -53,6 +53,7 @@ briefing = 0; // if 0, skip Continue button
 #include "client\systems\groups\dialog\groupManagement.hpp"
 #include "client\systems\gunStore\dialog\gunshop_settings.hpp"
 #include "client\systems\generalStore\dialog\genstore_settings.hpp"
+#include "client\systems\BasePartsStore\dialog\BaseStore_settings.hpp"
 #include "client\systems\vehicleStore\dialog\vehiclestore_settings.hpp"
 #include "client\systems\vehicleStore\dialog\vicstoredialogs.hpp"
 #include "client\systems\adminPanel\dialog\adminMenu.hpp"

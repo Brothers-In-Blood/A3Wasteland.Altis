@@ -73,9 +73,6 @@ switch (_lockState) do
 		{
 			_object setVariable ["objectLocked", true, true];
 			_object setVariable ["ownerUID", getPlayerUID player, true];
-			_object addMPEventHandler ["HandleDamage", {false}];
-			_object addMPEventHandler ["Hit", {_obj setDamage 0}];
-
 			pvar_manualObjectSave = netId _object;
 			publicVariableServer "pvar_manualObjectSave";
 

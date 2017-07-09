@@ -19,11 +19,12 @@ _itemEntrySent params [["_class","",[""]]];
 _isGenStore = ["GenStore", _npcName] call fn_startsWith;
 _isGunStore = ["GunStore", _npcName] call fn_startsWith;
 _isVehStore = ["VehStore", _npcName] call fn_startsWith;
+_isBaseStore = ["BaseStore", _npcName] call fn_startsWith;
 
 private _storeNPC = missionNamespace getVariable [_npcName, objNull];
 private _marker = _npcName;
 
-if (_key != "" && isPlayer _player && {_isGenStore || _isGunStore || _isVehStore}) then
+if (_key != "" && isPlayer _player && {_isGenStore || _isGunStore || _isVehStore || _isBaseStore}) then
 {
 	_timeoutKey = _key + "_timeout";
 	_objectID = "";
@@ -31,14 +32,15 @@ if (_key != "" && isPlayer _player && {_isGenStore || _isGunStore || _isVehStore
 	private _playerGroup = group _player;
 	_playerSide = side _playerGroup;
 
-	if (_isGenStore || _isGunStore) then
+	if (_isGenStore || _isGunStore || _isBaseStore) then
 	{
 		_npcName = _npcName + "_objSpawn";
 
 		switch (true) do
 		{
-			case _isGenStore: { _objectsArray = genObjectsArray };
+			case _isGenStore: { _objectsArray = AllBaseParts };
 			case _isGunStore: { _objectsArray = staticGunsArray };
+			case _isBaseStore: { _objectsArray = AllBaseParts};
 		};
 
 		if (!isNil "_objectsArray") then
@@ -178,26 +180,13 @@ if (_key != "" && isPlayer _player && {_isGenStore || _isGunStore || _isVehStore
 			//assign AI to the vehicle so it can actually be used
 			if (_isUAV) then
 			{
-				if (_object iskindof "StaticWeapon") then
+				[_object, _playerSide, _playerGroup] spawn
 				{
-					Switch (true) do
+					params ["_uav", "_playerSide", "_playerGroup"];
+					_grp = [_uav, _playerSide, true] call fn_createCrewUAV;
+					if (isNull (_uav getVariable ["ownerGroupUAV", grpNull])) then
 					{
-						case (playerside == East):
-						{
-							_AI = _playerGroup createUnit ["O_UAV_AI", _object, [], 0, "NONE"];
-							_AI moveInGunner _object;
-						};
-					};
-				} else
-				{
-					[_object, _playerSide, _playerGroup] spawn
-					{
-						params ["_uav", "_playerSide", "_playerGroup"];
-						_grp = [_uav, _playerSide, true] call fn_createCrewUAV;
-						if (isNull (_uav getVariable ["ownerGroupUAV", grpNull])) then
-						{
-							_uav setVariable ["ownerGroupUAV", _playerGroup, true]; // not currently used
-						};
+						_uav setVariable ["ownerGroupUAV", _playerGroup, true]; // not currently used
 					};
 				};
 			};
@@ -243,12 +232,35 @@ if (_key != "" && isPlayer _player && {_isGenStore || _isGunStore || _isVehStore
  			{
  				case (_object isKindOf "Static"):
  				{
- 					_object setAmmoCargo 0;
-					_object setFuelCargo 0;
-					_object setRepairCargo 0;
 					_object enableDynamicSimulation true;
+					_object setVariable ["moveable", true, true];
  				};
- 			};
+				case (_object iskindof "Thing"):
+				{
+					_object enableDynamicSimulation true;
+					_object setVariable ["moveable", true, true];
+				};
+			};
+			if ({_object iskindof _x} count [
+					"Box_NATO_AmmoVeh_F",
+					"B_Slingload_01_Ammo_F",
+					"B_Slingload_01_Fuel_F",
+					"B_Slingload_01_Medevac_F",
+					"B_Slingload_01_Repair_F",
+					"StorageBladder_01_fuel_forest_F",
+					"StorageBladder_01_fuel_sand_F",
+					"Land_fs_feed_F",
+					"Land_FuelStation_01_pump_malevil_F",
+					"Land_FuelStation_Feed_F",
+					"Land_Pod_Heli_Transport_04_fuel_F",
+					"Land_Pod_Heli_Transport_04_repair_F"
+				] > 0) then	{
+				_object setAmmoCargo 0;
+				_object setFuelCargo 0;
+				_object setRepairCargo 0;
+				_object enableDynamicSimulation true;
+				[_object] remoteExecCall ["GOM_fnc_addAircraftLoadout", 0, _object];
+			}:
 
 			if (_skipSave) then
 			{

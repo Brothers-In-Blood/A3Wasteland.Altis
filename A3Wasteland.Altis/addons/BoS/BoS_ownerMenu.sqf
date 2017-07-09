@@ -21,7 +21,6 @@ if (!isNil "_uid") then {
 					"Unlock Doors",
 					"Show objects owned by you",
 					"Show Base Border",
-					"Repair Locker",
 					"Lock Down Base",
 					"Release Lock Down",
 					"Relock Base Objects",
