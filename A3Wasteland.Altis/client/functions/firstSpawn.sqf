@@ -53,9 +53,6 @@ player addEventHandler ["Put",
 		}];
 	};
 }];
-
-player addEventHandler ["WeaponDisassembled", { _this spawn weaponDisassembledEvent }];
-player addEventHandler ["WeaponAssembled",
 {
 	params ["_player", "_obj"];
 
@@ -89,17 +86,17 @@ player addEventHandler ["WeaponAssembled",
 			_obj setAutonomous false; // disable autonomous mode by default on static designators so they stay on target after releasing controls
 		};
 
-		
+
 		if (isNil {_obj getVariable "A3W_handleDamageEH"}) then
 		{
 			_obj setVariable ["A3W_handleDamageEH", _obj addEventHandler ["HandleDamage", vehicleHandleDamage]];
 		};
 
 		{
-			[_x, ["UAV","",""]] remoteExec ["A3W_fnc_setName", 0, _x]; 
+			[_x, ["UAV","",""]] remoteExec ["A3W_fnc_setName", 0, _x];
 		} forEach crew _obj;
 	};
-}];
+};
 
 player addEventHandler ["InventoryOpened",
 {

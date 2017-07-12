@@ -212,13 +212,9 @@ FAR_Drag_Load_Vehicle =
 	if (alive player && alive _draggedUnit && attachedTo _draggedUnit == player) then
 	{
 		FAR_isDragging = false;
-
-		if ([_draggedUnit, _veh, true] call fn_canGetIn) then
-		{
-			_draggedUnit setVariable ["FAR_cancelAutoEject", true, true];
-			detach _draggedUnit;
-			[_draggedUnit, _veh, true] call A3W_fnc_getInFast;
-		};
+		_draggedUnit setVariable ["FAR_cancelAutoEject", true, true];
+		detach _draggedUnit;
+		[_draggedUnit, _veh, true] call A3W_fnc_getInFast;
 	};
 }
 call mf_compile;
@@ -413,7 +409,7 @@ FAR_Check_Load_Dragged =
 	_veh = cursorObject;
 	_draggedUnit = player getVariable ["FAR_isDragging", objNull];
 
-	player distance _veh <= (sizeOf typeOf _veh / 3) max 2 && [_draggedUnit, _veh, true] call fn_canGetIn && [_draggedUnit, player] call A3W_fnc_isFriendly
+	player distance _veh <= (sizeOf typeOf _veh / 3) max 2 && [_draggedUnit, _veh, true] && [_draggedUnit, player] call A3W_fnc_isFriendly
 }
 call mf_compile;
 

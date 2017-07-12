@@ -126,13 +126,6 @@ _begintime = diag_tickTime;
 							case 5:
 							{
 								_loot = ((lootworldObject_list select _lootClass) select 1) call BIS_fnc_selectRandom;
-
-								if (_loot == "Land_Can_V3_F" && {["A3W_unlimitedStamina"] call isConfigOn} ||
-								   {(_loot == "Land_BakedBeans_F" || _loot == "Land_BottlePlastic_V2_F") && !(["A3W_survivalSystem"] call isConfigOn)}) exitWith
-								{
-									_lootholder = objNull;
-								};
-
 								_lootholder = createVehicle [_loot, _tmpPos, [], 0, "CAN_COLLIDE"];
 								_lootholder setPosATL _tmpPos;
 								if(_loot == "Land_CanisterFuel_F") then {

@@ -20,6 +20,7 @@ if (!isNil "_uid") then {
 					"Lock Doors", //2
 					"Unlock Doors", //3
 					"Show objects owned by you", //4
+					"Show Base Border", //5
 					"Lock Down Base", //6
 					"Release Lock Down", //7
 					"Relock Base Objects", //8

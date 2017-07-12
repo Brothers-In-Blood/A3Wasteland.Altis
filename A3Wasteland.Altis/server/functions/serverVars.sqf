@@ -22,8 +22,6 @@ currentStaticHelis = []; // Storage for the heli marker numbers so that we don't
 essentialsList =
 [
 	"B_supplyCrate_F"
-	/* "Land_Sacks_goods_F", */
-	/* "Land_BarrelWater_F" */
 ];
 
 //Object List - Random Spawns.

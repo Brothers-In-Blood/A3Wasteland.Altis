@@ -140,7 +140,7 @@ _successExec =
 	_currBox3 = _Boxes3 call BIS_fnc_selectRandom;
 	_box3 = createVehicle [_currBox3, _lastPos, [], 2, "None"];
 	_box3  setDir random 360;
-	_box13  setammocargo 0;
+	_box3  setammocargo 0;
 	_box3 allowDamage false;
 
 	_Boxes4 = ["Box_T_East_Ammo_F", "Box_T_East_Wps_F", "Box_East_AmmoOrd_F", "Box_CSAT_Equip_F", "Box_CSAT_Uniforms_F", "Box_East_WpsLaunch_F", "Box_T_East_WpsSpecial_F", "Box_East_Support_F", "Box_East_AmmoVeh_F"];

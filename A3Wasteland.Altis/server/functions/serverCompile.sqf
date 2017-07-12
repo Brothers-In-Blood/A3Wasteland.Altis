@@ -93,7 +93,6 @@ fn_updatePlayerScore = [_path, "fn_updatePlayerScore.sqf"] call mf_compile;
 fn_vehicleGetInOutServer = [_path, "fn_vehicleGetInOutServer.sqf"] call mf_compile;
 fn_vehicleKilledServer = [_path, "fn_vehicleKilledServer.sqf"] call mf_compile;
 hintBroadcast = [_path, "hintBroadcast.sqf"] call mf_compile;
-parachuteLiftedVehicle = [_path, "parachuteLiftedVehicle.sqf"] call mf_compile;
 playerRespawnServer = [_path, "playerRespawnServer.sqf"] call mf_compile;
 processGroupInvite = [_path, "processGroupInvite.sqf"] call mf_compile;
 processItems = [_path, "processItems.sqf"] call mf_compile;
@@ -111,7 +110,6 @@ updateConnectingClients = "territory\client\updateConnectingClients.sqf" call mf
 vehicleRepair = [_path, "vehicleRepair.sqf"] call mf_compile;
 vehicleSetup = [_path, "vehicleSetup.sqf"] call mf_compile;
 waitUntilBagTaken = [_path, "waitUntilBagTaken.sqf"] call mf_compile;
-weaponDisassembledServer = [_path, "weaponDisassembledServer.sqf"] call mf_compile;
 
 //Player Management
 server_playerDied = [_path, "serverAiDied.sqf"] call mf_compile;

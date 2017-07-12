@@ -17,8 +17,6 @@ _storeOwnerName = _this select 1;
 _crateType = _this select 2;
 
 _ammoClasses = ["Box_NATO_Ammo_F","Box_NATO_Grenades_F","Box_NATO_AmmoOrd_F","Box_IND_Ammo_F","Box_IND_Grenades_F","Box_IND_AmmoOrd_F","Box_EAST_Ammo_F","Box_EAST_Grenades_F","Box_EAST_AmmoOrd_F"];
-//_weaponClasses = ["Box_NATO_Wps_F","Box_NATO_WpsLaunch_F","Box_NATO_WpsSpecial_F","Box_NATO_Support_F","Box_IND_Wps_F","Box_IND_WpsLaunch_F","Box_IND_WpsSpecial_F","Box_IND_Support_F", "Box_EAST_Wps_F","Box_EAST_WpsLaunch_F","Box_EAST_WpsSpecial_F","Box_EAST_Support_F"];
-
 _createCrate =
 {
 	private["_classes", "_storeOwnerID", "_storeOwnerName","_class","_playerPos","_sbox"];
@@ -43,5 +41,3 @@ _createCrate =
 };
 
 if(_crateType == PURCHASED_CRATE_TYPE_AMMO) then {[_ammoClasses, _storeOwnerID, _storeOwnerName] call _createCrate;};
-//if(_crateType == PURCHASED_CRATE_TYPE_WEAPON) then {[_weaponClasses, _storeOwnerID, _storeOwnerName] call _createCrate;};
-

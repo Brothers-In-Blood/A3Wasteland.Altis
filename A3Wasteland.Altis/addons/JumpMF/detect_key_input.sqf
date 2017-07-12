@@ -75,14 +75,6 @@ if (_pressedKey in actionKeys "GetOver") then
 
 				removeMissionEventHandler ["EachFrame", _frameEvent];
 
-				/*[player, _prevMove] call switchMoveGlobal;
-				player setVelocity
-				[
-					_prevVel select 0,
-					_prevVel select 1,
-					(velocity player) select 2
-				];*/
-
 				sleep 0.5; // Cooldown
 				horde_jumpmf_var_jumping = false;
 			};

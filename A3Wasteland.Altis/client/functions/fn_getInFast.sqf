@@ -8,9 +8,7 @@ params [["_unit",objNull,[objNull]], ["_vehicle",objNull,[objNull]], ["_passenge
 
 if (!local _unit) exitWith
 {
-	private _preCheck = [_unit, _vehicle, _passengerOnly] call fn_canGetIn;
-	if (_preCheck) then { _this remoteExecCall ["A3W_fnc_getInFast", _unit] }; // self-call function remotely
-	_preCheck
+	_this remoteExecCall ["A3W_fnc_getInFast", _unit]// self-call function remotely
 };
 
 if !(alive _vehicle && alive _unit && isNull objectParent _unit) exitWith { false };
