@@ -90,8 +90,6 @@ A3W_mapDraw_thread = [] spawn
 			_allDeadMen = allDeadMen;
 			_playableUnits = if (playerSide in [BLUFOR,OPFOR]) then { allPlayers } else { units player }; //playableUnits;
 
-			//reverse _allUAVs;
-			//reverse _allDeadMen;
 			reverse _playableUnits;
 
 			{
@@ -104,8 +102,6 @@ A3W_mapDraw_thread = [] spawn
 					if (_icon == "") then { _icon = "iconMan" };
 
 					_color = if (group _uavOwner == group player) then { [0,1,0,1] } else { [1,1,1,1] };
-					//_pos = if (_mapIconsEnabled) then { DEFAULT_ICON_POS(_uav) } else { getPosASLVisual _uav };
-
 					_newArrayIcons pushBack [[_icon, _color, nil, 24, 24, getDirVisual _uav, "", 1], _uav, A3W_mapDraw_iconPosUAV]; // draw icon
 
 					if (showPlayerNames) then
@@ -121,9 +117,6 @@ A3W_mapDraw_thread = [] spawn
 
 				if (IS_FRIENDLY_PLAYER(_x) || (_newUnit getVariable ["playerSpawning", false] && IS_FRIENDLY_PLAYER(_newUnit))) then
 				{
-					//_veh = vehicle _x;
-					//_pos = if (_mapIconsEnabled) then { DEFAULT_ICON_POS(_veh) } else { getPosASLVisual _x };
-
 					_newArrayIcons pushBack [["\A3\ui_f_curator\Data\CfgMarkers\kia_ca.paa", [0,0,0,0.6], nil, 22, 22, 0], _x, A3W_mapDraw_iconPos]; // draw skull
 				};
 			} forEach _allDeadMen;
@@ -141,7 +134,6 @@ A3W_mapDraw_thread = [] spawn
 
 						_color = if (group _x == group player) then { [0,1,0,1] } else { [1,1,1,1] };
 						_vehColor = if ({group _x == group player} count crew _veh > 0) then { [0,1,0,1] } else { _color }; // make vehicle green if group player in it
-						//_pos = if (_mapIconsEnabled) then { DEFAULT_ICON_POS(_veh) } else { getPosASLVisual _veh };
 						_dir = if (_icon == "iconParachute") then { 0 } else { getDirVisual _veh };
 
 						if (_veh == _x && _x call A3W_fnc_isUnconscious) then { _vehColor = [1,0.25,0,1] }; // make icon orange if awaiting revive

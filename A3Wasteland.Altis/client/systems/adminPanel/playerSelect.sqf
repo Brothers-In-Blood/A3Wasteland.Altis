@@ -69,7 +69,6 @@ if (_uid call isAdmin) then
 		{
 			_warnText = ctrlText _warnMessage;
 			_playerName = name player;
-			[format ["Message from Admin: %1", _warnText], "A3W_fnc_titleTextMessage", _target, false] call A3W_fnc_MP;
 			["PlayerMgmt_Warn", format ["%1 (%2) - %3", name _target, getPlayerUID _target, _warnText]] call notifyAdminMenu;
 		};
 		case 2: //Slay

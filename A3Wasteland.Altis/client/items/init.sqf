@@ -8,7 +8,6 @@
 //@file Description: Initialize Wasteland Items
 //@file Argument: the path to the directory holding this file.
 
-[_this, "survival"] call mf_init;
 [_this, "misc"] call mf_init;
 [_this, "jerrycan"] call mf_init;
 [_this, "beacon"] call mf_init;

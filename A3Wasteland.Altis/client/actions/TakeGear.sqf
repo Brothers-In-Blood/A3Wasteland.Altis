@@ -11,22 +11,33 @@ if (mutexScriptInProgress) exitWith
   ["You are already performing another action.", 5] call mf_notify_client;
 };
 
-private ["_vehicle", "_vehClass", "_checks", "_firstCheck", "_time", "_money", "_success", "_loudout"];
+private ["_Target", "_TargetClass", "_checks", "_firstCheck", "_time", "_money", "_success", "_loudout"];
 
-_vehicle = cursorTarget;
-_vehClass = typeOf _vehicle;
-_uniform =  uniform _vehicle;
-_backpack = backpack _vehicle;
-_vest = vest _vehicle;
-_headgear = headgear _vehicle;
-_goggles = goggles _vehicle;
-_items = assigneditems _vehicle;
-_mags = magazines _vehicle;
+//Target Equipment
+_Target = cursorTarget;
+_TargetClass = typeOf _TargetClass;
+_uniform =  uniform _Target;
+_backpack = backpack _Target;
+_vest = vest _Target;
+_headgear = headgear _Target;
+_goggles = goggles _Target;
+_items = assigneditems _Target;
+_mags = magazines _Target;
+
+//Player Equipment
+_playeruniform =  uniform player;
+_playerbackpack = backpack player;
+_playervest = vest player;
+_playerheadgear = headgear player;
+_playergoggles = goggles player;
+_playeritems = assigneditems player;
+_playermags = magazines player;
+_playerweapons = weapons player;
 
 
 
 
-if (isNull _vehicle) exitWith {};
+if (isNull _Target) exitWith {};
 
 _checks =
 {
@@ -53,7 +64,7 @@ _checks =
   [_failed, _text];
 };
 
-_firstCheck = [0, _vehicle] call _checks;
+_firstCheck = [0, _Target] call _checks;
 
 if (_firstCheck select 0) exitWith
 {
@@ -65,35 +76,32 @@ mutexScriptInProgress = true;
 // Salvage time and default money reward according to vehicle type
 switch (true) do
 {
-  case (_vehClass isKindOf "Man"):
+  case (_TargetClass isKindOf "Man"):
   {
     _time = 15;
     player forceAddUniform _uniform;
-    /*player addBackpack _backpack;
-    player addvest _vest;
-    player addHeadgear _headgear;
-    player addGoggles _goggles;
-    player addMagazines _mags;
-    player assignItem _items;*/
+    removeAllWeapons _Target;
+    removeAllAssignedItems _Target;*/
+    removeUniform _Target;
+    removeVest _Target;
+    removeBackpack _Target;
+    removeGoggles _Target;
+    removeHeadgear _Target;
+    _ground = "GroundWeaponHolder" createVehicle position player;
+    player action ["PutBag"];
+    player action ["DropWeapon", _ground, _x] forEach _playerweapons;
+    player action ["DropMagazine", _ground, _x] forEach _playermags;
   };
   default  {}; // Everything else
 };
 
 mutexScriptInProgress = true;
 
-_success = [_time, format ["AinvPknlMstpSlayW%1Dnon_medic", [player, true] call getMoveWeapon], _checks, [_vehicle]] call a3w_actions_start;
+_success = [_time, format ["AinvPknlMstpSlayW%1Dnon_medic", [player, true] call getMoveWeapon], _checks, [_Target]] call a3w_actions_start;
 
 mutexScriptInProgress = false;
 
 if (_success) then
 {
-  // deleteVehicle _vehicle;
-  /*removeAllWeapons _vehicle;
-  removeAllAssignedItems _vehicle;*/
-  removeUniform _vehicle;
-  /*removeVest _vehicle;
-  removeBackpack _vehicle;
-  removeGoggles _vehicle;
-  removeHeadgear _vehicle;*/
   /*[format ["Finished Taking Gear"]] call mf_notify_client;*/
-}; 
+};

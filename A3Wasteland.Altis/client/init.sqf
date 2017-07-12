@@ -16,8 +16,6 @@ if (!isServer) then
 
 waitUntil {!isNil "A3W_serverSetupComplete"};
 
-[] execVM "client\functions\bannedNames.sqf";
-
 showPlayerIcons = true;
 mutexScriptInProgress = false;
 respawnDialogActive = false;
@@ -130,10 +128,6 @@ call compile preprocessFileLineNumbers "client\functions\setupClientPVars.sqf";
 //client Executes
 A3W_scriptThreads pushBack execVM "client\systems\hud\playerHud.sqf";
 
-if (["A3W_survivalSystem"] call isConfigOn) then
-{
-	execVM "client\functions\initSurvival.sqf";
-};
 
 [] spawn
 {
@@ -150,7 +144,6 @@ if (["A3W_survivalSystem"] call isConfigOn) then
 	};
 
 	[] execVM "client\functions\createGeneralStoreMarkers.sqf";
-	[] execVM "client\functions\createSupplyVehicleMarker.sqf";
 	[] execVM "client\functions\createVehicleStoreMarkers.sqf";
 	[] execVM "client\functions\createLegendMarkers.sqf";
 };
@@ -159,7 +152,6 @@ A3W_clientSetupComplete = compileFinal "true";
 
 [] spawn playerSpawn;
 
-A3W_scriptThreads pushBack execVM "addons\fpsFix\vehicleManager.sqf";
 A3W_scriptThreads pushBack execVM "addons\Lootspawner\LSclientScan.sqf";
 [] execVM "client\functions\drawPlayerIcons.sqf";
 //[] execVM "addons\camera\functions.sqf";
