@@ -2,21 +2,21 @@
 // * This project is licensed under the GNU Affero GPL v3. Copyright © 2014 A3Wasteland.com *
 // ******************************************************************************************
 //	@file Version: 1.0
-//	@file Name: populateGenStore.sqf
+//	@file Name: populateBaseStore.sqf
 //	@file Author: [404] Deadbeat, [KoS] His_Shadow, AgentRev
 //	@file Created: 20/11/2012 05:13
 //	@file Args:
 
-#include "dialog\genstoreDefines.sqf";
+#include "dialog\BaseStoreDefines.sqf";
 disableSerialization;
 private ["_switch", "_dialog", "_itemlist", "_itemlisttext", "_itemDesc", "_showPicture", "_itemsArray", "_playerSideNum", "_parentCfg", "_weapon", "_picture", "_listIndex", "_showItem", "_factionCfg", "_faction", "_isUniform", "_sideCfg", "_side"];
 _switch = _this select 0;
 
 // Grab access to the controls
-_dialog = findDisplay genstore_DIALOG;
-_itemlist = _dialog displayCtrl genstore_item_list;
-_itemlisttext = _dialog displayCtrl genstore_item_TEXT;
-_itemDesc = _dialog displayCtrl genstore_item_desc;
+_dialog = findDisplay BaseStore_DIALOG;
+_itemlist = _dialog displayCtrl BaseStore_item_list;
+_itemlisttext = _dialog displayCtrl BaseStore_item_TEXT;
+_itemDesc = _dialog displayCtrl BaseStore_item_desc;
 
 //Clear the list
 lbClear _itemlist;
@@ -30,56 +30,39 @@ switch(_switch) do
 {
 	case 0:
 	{
-		_itemsArray = call headArray;
+		_itemsArray = call BaseManagementArray;
+		_showPicture = false;
 	};
 	case 1:
 	{
-		_itemsArray = call uniformArray;
+		_itemsArray = call BuildingsArray;
+		_showPicture = false;
 	};
 	case 2:
 	{
-		_itemsArray = call vestArray;
+		_itemsArray = call FencesAndWallsArray;
+		_showPicture = false;
 	};
 	case 3:
 	{
-		_itemsArray = call backpackArray;
+		_itemsArray = call lightsArray;
+		_showPicture = false;
 	};
 	case 4:
 	{
-		_itemsArray = call genItemArray;
+		_itemsArray = call ObjectsArray;
+		_showPicture = false;
 	};
 	case 5:
 	{
-		_itemsArray = call customPlayerItems;
-
-		_excludedItems = [];
-
-		if !(playerSide in [BLUFOR,OPFOR]) then
-		{
-			_excludedItems pushBack "warchest";
-		};
-
-		if (["A3W_unlimitedStamina"] call isConfigOn) then
-		{
-			_excludedItems pushBack "energydrink";
-		};
-
-		if !(["A3W_survivalSystem"] call isConfigOn) then
-		{
-			_excludedItems pushBack "water";
-			_excludedItems pushBack "cannedfood";
-		};
-
-		if (count _excludedItems > 0) then
-		{
-			_itemsArray = [_itemsArray, { !((_x select 1) in _excludedItems) }] call BIS_fnc_conditionalSelect;
-		};
-	};
-	/*case 6:
-	{
-		_itemsArray = call AllBaseParts;
+		_itemsArray = call ServiceObjectsArray;
 		_showPicture = false;
-	};*/
+	};
+	case 6:
+	{
+		_itemsArray = call TowersArray;
+		_showPicture = false;
+	};
 	default
 	{
 		_itemsArray = [];

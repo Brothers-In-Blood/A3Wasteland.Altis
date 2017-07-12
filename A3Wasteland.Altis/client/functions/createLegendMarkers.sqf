@@ -12,6 +12,7 @@ _markers =
 	["GS - General Store", "mil_dot", "ColorBlue", [1,1]],
 	["VS - Vehicle Store", "mil_dot", "ColorOrange", [1,1]],
 	["SV - Supply Vehicle", "mil_dot", "ColorGreen", [1,1]],
+	["BS - Base Parts Store", "mil_dot", "ColorRed", [1,1]],
 	["CVN-83 - USS Freedom", "mil_dot", "ColorKhaki", [1,1]]
 ];
 

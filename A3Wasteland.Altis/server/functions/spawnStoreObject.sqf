@@ -19,11 +19,12 @@ _itemEntrySent params [["_class","",[""]]];
 _isGenStore = ["GenStore", _npcName] call fn_startsWith;
 _isGunStore = ["GunStore", _npcName] call fn_startsWith;
 _isVehStore = ["VehStore", _npcName] call fn_startsWith;
+_isBaseStore = ["BaseStore", _npcName] call fn_startsWith;
 
 private _storeNPC = missionNamespace getVariable [_npcName, objNull];
 private _marker = _npcName;
 
-if (_key != "" && isPlayer _player && {_isGenStore || _isGunStore || _isVehStore}) then
+if (_key != "" && isPlayer _player && {_isGenStore || _isGunStore || _isVehStore || _isBaseStore}) then
 {
 	_timeoutKey = _key + "_timeout";
 	_objectID = "";
@@ -31,14 +32,15 @@ if (_key != "" && isPlayer _player && {_isGenStore || _isGunStore || _isVehStore
 	private _playerGroup = group _player;
 	_playerSide = side _playerGroup;
 
-	if (_isGenStore || _isGunStore) then
+	if (_isGenStore || _isGunStore || _isBaseStore) then
 	{
 		_npcName = _npcName + "_objSpawn";
 
 		switch (true) do
 		{
-			case _isGenStore: { _objectsArray = genObjectsArray };
+			case _isGenStore: { _objectsArray = AllBaseParts };
 			case _isGunStore: { _objectsArray = staticGunsArray };
+			case _isBaseStore: { _objectsArray = AllBaseParts};
 		};
 
 		if (!isNil "_objectsArray") then
@@ -175,10 +177,9 @@ if (_key != "" && isPlayer _player && {_isGenStore || _isGunStore || _isVehStore
 			};
 
 			private _isUAV = (round getNumber (configFile >> "CfgVehicles" >> _class >> "isUav") > 0);
-
+			//assign AI to the vehicle so it can actually be used
 			if (_isUAV) then
 			{
-				//assign AI to the vehicle so it can actually be used
 				[_object, _playerSide, _playerGroup] spawn
 				{
 					params ["_uav", "_playerSide", "_playerGroup"];
@@ -189,7 +190,6 @@ if (_key != "" && isPlayer _player && {_isGenStore || _isGunStore || _isVehStore
 					};
 				};
 			};
-
 			if (isPlayer _player && !(_player getVariable [_timeoutKey, true])) then
 			{
 				_player setVariable [_key, _objectID, true];
@@ -219,7 +219,7 @@ if (_key != "" && isPlayer _player && {_isGenStore || _isGunStore || _isVehStore
 
 			_object setDir (if (_object isKindOf "Plane") then { markerDir _marker } else { random 360 });
 
-			_isDamageable = !(_object isKindOf "ReammoBox_F"); //
+			_isDamageable = !(_object isKindOf "ReammoBox_F");
 
 			[_object] call vehicleSetup;
 			_object allowDamage _isDamageable;

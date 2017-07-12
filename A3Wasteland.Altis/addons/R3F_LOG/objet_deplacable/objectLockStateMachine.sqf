@@ -73,7 +73,6 @@ switch (_lockState) do
 		{
 			_object setVariable ["objectLocked", true, true];
 			_object setVariable ["ownerUID", getPlayerUID player, true];
-
 			pvar_manualObjectSave = netId _object;
 			publicVariableServer "pvar_manualObjectSave";
 

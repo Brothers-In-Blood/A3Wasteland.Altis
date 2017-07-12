@@ -247,7 +247,7 @@ storePurchaseHandle = _this spawn
 							};
 						};
 					};
-					// Crates transferred to genObjectsArray below
+					// Crates transferred to AllBaseParts below
 					/*case "ammocrate":
 					{
 						[currentOwnerID, currentOwnerName, PURCHASED_CRATE_TYPE_AMMO] execVM "client\functions\placePurchasedCrate.sqf";
@@ -290,7 +290,7 @@ storePurchaseHandle = _this spawn
 				_requestKey = call A3W_fnc_generateKey;
 				_x call requestStoreObject;
 			};
-		} forEach (call genObjectsArray);
+		} forEach (call AllBaseParts);
 	};
 
 	if (isNil "_price") then

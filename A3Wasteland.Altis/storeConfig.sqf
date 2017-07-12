@@ -840,16 +840,14 @@ genItemArray = compileFinal str
 allStoreMagazines = compileFinal str (call ammoArray + call throwputArray + call genItemArray);
 allRegularStoreItems = compileFinal str (call allGunStoreFirearms + call allStoreMagazines + call accessoriesArray);
 allStoreGear = compileFinal str (call headArray + call uniformArray + call vestArray + call backpackArray);
+allGenStoreVanillaItems = compileFinal str (call genItemArray + call allStoreGear);
 
-genObjectsArray = compileFinal str
+BaseManagementArray = compileFinal str
 [
-	//Base Management Objects
-	["*****Base Management*****",														"Land_HumanSkull_F",										1],
-	["Base Manager",																				"Land_SatellitePhone_F",								500000],
-	//["Base Manager",																			"Land_Device_assembled_F",							500],
-
-	//Buildings
-	["*****Buildings*****",																	"Land_HumanSkull_F",										1],
+	["Base Manager",																				"Land_SatellitePhone_F",								500000]
+];
+BuildingsArray = compileFinal str
+[
 	["Construction (Huge)",																	"Land_WIP_F",														7000],
 	["Construction (Small)",																"Land_Unfinished_Building_01_F",				3000],
 	["Construction (Large)",																"Land_Unfinished_Building_02_F",				5000],
@@ -867,6 +865,8 @@ genObjectsArray = compileFinal str
 	["Kiosk (Newspaper)",																		"Land_Kiosk_papers_F",									500],
 	["Kiosk (Red Burger)",																	"Land_Kiosk_redburger_F",								500],
 	["Lighthouse (Large)",																	"Land_LightHouse_F",										75000],
+	["Lighthouse (Medium,Green)",                           "Land_Lighthouse_03_green_F",           7500],
+	["Lighthouse (Medium,Red)",                             "Land_Lighthouse_03_red_F",             7500],
 	["Lighthouse (Small)",																	"Land_Lighthouse_small_F",							3000],
 	["Mechanic Garage",																			"Land_CarService_F",										500],
 	["Military Cargo (Biohazard)",													"Land_Research_house_V1_F",							1500],
@@ -886,28 +886,7 @@ genObjectsArray = compileFinal str
 	["Office",																							"Land_Offices_01_V1_F",									100000],
 	["Shed,Open Sided (Large)",															"Land_Shed_Big_F",											3000],
 	["Shed,Open Sided (Small)",															"Land_Shed_Small_F",										1000],
-
-	//Fences
-	["*****Fences*****",																		"Land_HumanSkull_F",										1],
-	["Bag Fence (Corner)",                                  "Land_BagFence_Corner_F",               150],
-	["Bag Fence (End)",                                     "Land_BagFence_End_F",                  150],
-	["Bag Fence (Long)",                                    "Land_BagFence_Long_F",                 200],
-	["Bag Fence (Round)",                                   "Land_BagFence_Round_F",                150],
-	["Bag Fence (Short)",                                   "Land_BagFence_Short_F",                150],
-	["Barbed Wire,Tall",																		"Land_IndFnc_3_F",											200],
-	["Barbed Wire,Tall (Corner)",														"Land_IndFnc_Corner_F",									200],
-	["Barbed Wire,Tall (Post)",															"Land_IndFnc_Pole_F",										100],
-	["Caution,Plastic (Blue)",															"PlasticBarrier_03_blue_F",							50],
-	["Caution,Plastic (Orange)",														"Land_PlasticBarrier_03_F",							50],
-	["Caution Tape",																				"TapeSign_F",														50],
-	["Chickenwire (Post)",                                  "Land_Wired_Fence_4mD_F",               20],
-	["Chickenwire (4m)",                                    "Land_Wired_Fence_8m_F",                10],
-	["Razorwire (5m)",                                      "Land_New_WiredFence_5m_F",             400],
-	["Razorwire (10m)",                                     "Land_New_WiredFence_10m_F",            800],
-	["Razorwire (Gate)",                                    "Land_Mil_WiredFence_Gate_F",           500],
-
-	//Houses
-	["*****Houses*****",                                    "Land_HumanSkull_F",                    1],
+	["Supermarket",                                         "Land_Supermarket_01_malden_F",         50000],
 	["Cobblestone with Balcony 2 Story (Large,White)",      "Land_i_House_Big_02_V3_F",             10000],
 	["Cobblestone with Porch 2 Story (Large,White)",        "Land_i_House_Big_01_V3_F",             10000],
 	["Cobblestone Bungalow(Small,White)",                   "Land_i_House_Small_01_V3_F",           5000],
@@ -923,12 +902,14 @@ genObjectsArray = compileFinal str
 	["Stone 2 Story with Balcony (Large,Brown)",            "Land_i_Stone_HouseBig_V3_F",           3000],
 	["Stone 2 Story with Balcony (Large,Grey)",             "Land_i_Stone_HouseBig_V1_F",           3000],
 	["Stone 2 Story with Balcony (Large,Sand)",             "Land_i_Stone_HouseBig_V2_F",           3000],
-	["Stone Townhouse (Large,Brown)",                       "Land_i_Stone_HouseSmall_V3_F",         2000],
-	["Stone Townhouse (Large,Grey)",                        "Land_i_Stone_HouseSmall_V1_F",         2000],
-	["Stone Townhouse (Large,Sand)",                        "Land_i_Stone_HouseSmall_V2_F",         2000],
+	["Stone Barn (Brown)",                                  "Land_Barn_01_brown_F",                 20000],
+	["Stone Barn (Grey)",                                   "Land_Barn_01_grey_F",                  20000],
 	["Stone Cottage (Small,Grey)",                          "Land_i_Stone_Shed_V1_F",               1500],
 	["Stone Cottage (Small,Brown)",                         "Land_i_Stone_Shed_V3_F",               1500],
 	["Stone Cottage (Small,Sand)",                          "Land_i_Stone_Shed_V2_F",               1500],
+	["Stone Townhouse (Large,Brown)",                       "Land_i_Stone_HouseSmall_V3_F",         2000],
+	["Stone Townhouse (Large,Grey)",                        "Land_i_Stone_HouseSmall_V1_F",         2000],
+	["Stone Townhouse (Large,Sand)",                        "Land_i_Stone_HouseSmall_V2_F",         2000],
 	["Stucco Addition 1 Story (White)",                     "Land_i_Addon_02_V1_F",                 2500],
 	["Stucco Bungalow(Small,Slum)",                         "Land_u_House_Small_01_V1_F",           1500],
 	["Stucco Bungalow(Small,White)",                        "Land_i_House_Small_01_V1_F",           2500],
@@ -949,10 +930,59 @@ genObjectsArray = compileFinal str
 	["Stucco 2 Story with Balcony (Large,Yellow)",          "Land_i_House_Big_02_V2_F",             5000],
 	["Stucco 2 Story with Porch (Large,Slum)",              "Land_u_House_Big_01_V1_F",             3000],
 	["Stucco 2 Story with Porch (Large,White)",             "Land_i_House_Big_01_V1_F",             5000],
-	["Stucco 2 Story with Porch (Large,Yellow)",            "Land_i_House_Big_01_V2_F",             5000],
+	["Stucco 2 Story with Porch (Large,Yellow)",            "Land_i_House_Big_01_V2_F",             5000]
+];
+FencesAndWallsArray = compileFinal str
+[
+	["Bag Fence (Corner)",                                  "Land_BagFence_Corner_F",               150],
+	["Bag Fence (End)",                                     "Land_BagFence_End_F",                  150],
+	["Bag Fence (Long)",                                    "Land_BagFence_Long_F",                 200],
+	["Bag Fence (Round)",                                   "Land_BagFence_Round_F",                150],
+	["Bag Fence (Short)",                                   "Land_BagFence_Short_F",                150],
+	["Barbed Wire,Tall",																		"Land_IndFnc_3_F",											200],
+	["Barbed Wire,Tall (Corner)",														"Land_IndFnc_Corner_F",									200],
+	["Barbed Wire,Tall (Post)",															"Land_IndFnc_Pole_F",										100],
+	["Caution,Plastic (Blue)",															"PlasticBarrier_03_blue_F",							50],
+	["Caution,Plastic (Orange)",														"Land_PlasticBarrier_03_F",							50],
+	["Caution Tape",																				"TapeSign_F",														50],
+	["Chickenwire (Post)",                                  "Land_Wired_Fence_4mD_F",               20],
+	["Chickenwire (4m)",                                    "Land_Wired_Fence_8m_F",                10],
+	["Razorwire (5m)",                                      "Land_New_WiredFence_5m_F",             400],
+	["Razorwire (10m)",                                     "Land_New_WiredFence_10m_F",            800],
+	["Razorwire (Gate)",                                    "Land_Mil_WiredFence_Gate_F",           500],
+	["Vineyard",                                            "Land_VineyardFence_01_F",              100],
+	["Bunker Wall (1 Block)",                               "Land_Bunker_01_blocks_1_F",            1000],
+	["Bunker Wall (3 Blocks)",                              "Land_Bunker_01_blocks_3_F",            2500],
+	["Canal (Large)",                                       "Land_Canal_Wall_10m_F",                2500],
+	["Canal (Small)",                                       "Land_Canal_WallSmall_10m_F",           1000],
+	["Canal (Stairs)",                                      "Land_Canal_Wall_Stairs_F",             2500],
+	["City (4m)",                                           "Land_City2_4m_F",                      600],
+	["City (8m)",                                           "Land_City2_8m_F",                      300],
+	["City (Pillar)",                                       "Land_City2_PillarD_F",                 200],
+	["City,Decorative (4m)",                                "Land_City_4m_F",                       300],
+	["City,Decorative(8m)",                                 "Land_City_8m_F",                       600],
+	["City,Decorative(Gate)",                               "Land_City_Gate_F",                     500],
+	["City,Decorative(Pillar)",                             "Land_City_Pillar_F",                   200],
+	["Cobblestone (4m)",                                    "Land_Stone_4m_F",                      200],
+	["Cobblestone (8m)",                                    "Land_Stone_8m_F",                      400],
+	["Cobblestone (Gate)",                                  "Land_Stone_Gate_F",                    500],
+	["Cobblestone (Pillar)",                                "Land_Stone_pillar_F",                  200],
+	["Concrete, Acoustic Panel",                            "Land_Wall_IndCnc_2deco_F",             250],
+	["Concrete,Layered (Post)",                             "Land_Wall_IndCnc_Pole_F",              100],
+	["Concrete,Layered",                                    "Land_Wall_IndCnc_4_F",                 300],
+	["Concrete,Reinforced (x1 Tall)",                       "Land_CncWall1_F",                      400],
+	["Concrete,Reinforced (x4 Tall)",                       "Land_CncWall4_F",                      600],
+	["Concrete,Small (4m)",                                 "Land_Concrete_SmallWall_4m_F",         200],
+	["Concrete,Small (8m)",                                 "Land_Concrete_SmallWall_8m_F",         400],
+	["Military (4m Green)",                                 "Land_Mil_WallBig_4m_F",                300],
+	["Military (Corner,Green)",                             "Land_Mil_WallBig_Corner_F",            150],
+	["Pipe and Concrete (Short)",                           "Land_Pipe_fence_4m_F",                 100],
+	["Pipe and Concrete (Tall)",                            "Land_PipeWall_concretel_8m_F",         200],
+	["Stones,Piled (Low,Long)",                             "Land_StoneWall_01_s_10m_F",            100]
+];
 
-	//Lights
-	["*****Lights*****",                                    "Land_HumanSkull_F",                    1],
+lightsArray = compileFinal str
+[
 	["Airport Pole Lamp (3 Halogen 1 Red)",                 "Land_LampAirport_F",                   2500],
 	["Halogen Light Pole",                                  "Land_LampHalogen_F",                   1000],
 	["Harbor Lamp",                                         "Land_LampHarbour_F",                   500],
@@ -971,17 +1001,10 @@ genObjectsArray = compileFinal str
 	["Street Light,Globes",                                 "Land_LampDecor_F",                     500],
 	["Street Light (Small)",                                "Land_LampStreet_small_F",              500],
 	["Street Light (Large)",                                "Land_LampStreet_F",                    700],
-	["Traffic Cone with Light",                             "RoadCone_L_F",                         100],
-
-	//Objects
-	["*****Objects*****",                                   "Land_HumanSkull_F",                    1],
-	["Bag Fence (Corner)",                                  "Land_BagFence_Corner_F",               150],
-	["Bag Fence (End)",                                     "Land_BagFence_End_F",                  150],
-	["Bag Fence (Long)",                                    "Land_BagFence_Long_F",                 200],
-	["Bag Fence (Round)",                                   "Land_BagFence_Round_F",                150],
-	["Bag Fence (Short)",                                   "Land_BagFence_Short_F",                150],
-	["Bag Bunker (Small)",                                  "Land_BagBunker_Small_F",               250],
-	["Bag Bunker (Large)",                                  "Land_BagBunker_Large_F",               500],
+	["Traffic Cone with Light",                             "RoadCone_L_F",                         100]
+];
+ObjectsArray = compileFinal str
+[
 	["Bag Barricade (Short)",                               "Land_SandbagBarricade_01_half_F",      100],
 	["Bag Barricade (Tall)",                                "Land_SandbagBarricade_01_F",           200],
 	["Bag Barricade,Shoot Hole",                            "Land_SandbagBarricade_01_hole_F",      200],
@@ -1011,6 +1034,10 @@ genObjectsArray = compileFinal str
 	["Berm,Large (Brown)",                                  "ContainmentArea_01_sand_F",            500],
 	["Berm,Small (Green)",                                  "ContainmentArea_02_forest_F",          300],
 	["Berm,Small (Brown)",                                  "ContainmentArea_02_sand_F",            300],
+	["Bunker,HQ",                                           "Land_Bunker_01_HQ_F",                  50000],
+	["Bunker (Large)",                                      "Land_Bunker_01_big_F",                 50000],
+	["Bunker (Small)",                                      "Land_Bunker_01_small_F",               15000],
+	["Bunker (Tall)",                                       "Land_Bunker_01_tall_F",                25000],
 	["Camo Ammo Cache",                                     "Box_FIA_Support_F",                    1000],
 	["Concrete Block",                                      "BlockConcrete_F",                      1000],
 	["Concrete Pipe",                                       "Land_ConcretePipe_F",                  500],
@@ -1046,6 +1073,10 @@ genObjectsArray = compileFinal str
 	["Flag,US",                                             "Flag_US_F",                            1776],
 	["Flag,Viper",                                          "Flag_Viper_F",                         1000],
 	["Flag,White",                                          "Flag_White_F",                         100000],
+	["Fuel Station Roof",                                   "Land_fs_roof_F",                       500],
+	["Fuel Station Roof (Malden)",                          "Land_FuelStation_01_roof_malevil_F",   5000],
+	["Fuel Station Roof (Sun Oil)",                         "Land_FuelStation_Shed_F",              800],
+	["Fuel Station Sign (Malden)",                          "Land_FuelStation_01_prices_malevil_F", 25000],
 	["Gate,Traffic Boom",                                   "Land_BarGate_F",                       500],
 	["Grave,Concrete",                                      "Land_Grave_V1_F",                      500],
 	["Grave,Concrete (Damaged)",                            "Land_Grave_V2_F",                      300],
@@ -1134,9 +1165,14 @@ genObjectsArray = compileFinal str
 	["Sidewalk,Wide",                                       "Land_Pavement_wide_F",                 50],
 	["Sidewalk,Narrow (Corner)",                            "Land_Pavement_narrow_corner_F",        50],
 	["Sidewalk,Wide (Corner)",                              "Land_Pavement_wide_corner_F",          50],
+	["Sign,For Rent",                                       "Land_SignM_forRent_F",                 100],
+	["Sign,For Sale",                                       "Land_SignM_forSale_F",                 100],
+	["Sign,Military Area (Greek/English)",                  "Land_Sign_WarningMilitaryArea_F",      200],
+	["Sign,Military Area (Small,Greek/English)",            "Land_Sign_WarningMilAreaSmall_F",      100],
+	["Sign,Military Vehicles (Greek/English)",              "Land_Sign_WarningMilitaryVehicles_F",  100],
+	["Sign,Mines",                                          "Land_Sign_Mines_F",                    100],
 	["Sign,Traffic Direction (Left)",                       "ArrowDesk_L_F",                        200],
 	["Sign,Traffic Direction (Right)",                      "ArrowDesk_R_F",                        200],
-	["Sign,Mines",                                          "Land_Sign_Mines_F",                    100],
 	["Sign,Unexploded Ammo",                                "Land_Sign_WarningUnexplodedAmmo_F",    100],
 	["Sling Boxes (NATO)",                                  "B_CargoNet_01_ammo_F",                 10000],
 	["Sling Box",                                           "CargoNet_01_box_F",                    10000],
@@ -1159,11 +1195,10 @@ genObjectsArray = compileFinal str
 	["Traffic Cone (Small)",                                "RoadCone_F",                           10],
 	["Tree Planter",                                        "Land_TreeBin_F",                       300],
 	["Tunnel Entrance",                                     "Land_Factory_Tunnel_F",                5000],
-	["Workbench with Vise",                                 "Land_Workbench_01_F",                  50],
-
-
-	//Service Objects
-	["*****Service Objects*****",                           "Land_HumanSkull_F",                    1],
+	["Workbench with Vise",                                 "Land_Workbench_01_F",                  50]
+];
+ServiceObjectsArray = compileFinal str
+[
 	["Container,Fuel",                                      "B_Slingload_01_Fuel_F",                10000],
 	["Container,Medical",                                   "B_Slingload_01_Medevac_F",             2000],
 	["Container,Repair",                                    "B_Slingload_01_Repair_F",              10000],
@@ -1173,10 +1208,10 @@ genObjectsArray = compileFinal str
 	["Fuel Pump (Malden)",                                  "Land_FuelStation_01_pump_malevil_F",   2500],
 	["Fuel Pump (Sun Oil)",                                 "Land_FuelStation_Feed_F",              2500],
 	["Taru Pod (Fuel)",                                     "Land_Pod_Heli_Transport_04_fuel_F",    10000],
-	["Taru Pod (Repair)",                                   "Land_Pod_Heli_Transport_04_repair_F",  10000],
-
-	//Towers
-	["*****Towers*****",                                    "Land_HumanSkull_F",                    1],
+	["Taru Pod (Repair)",                                   "Land_Pod_Heli_Transport_04_repair_F",  10000]
+];
+TowersArray = compileFinal str
+[
 	["Air Traffic Control",                                 "Land_Airport_Tower_F",                 50000],
 	["Bag Bunker",                                          "Land_BagBunker_Tower_F",               1000],
 	["Castle (Stone)",                                      "Land_Castle_01_tower_F",               5000],
@@ -1194,39 +1229,10 @@ genObjectsArray = compileFinal str
 	["Radio Tower (Narrow)",                                "Land_TTowerBig_2_F",                   50000],
 	["Radio Tower (Wide)",                                  "Land_TTowerBig_1_F",                   50000],
 	["Solar Collector",                                     "Land_spp_Tower_F",                     100000],
-	["Water Reservoir",                                     "Land_ReservoirTower_F",                25000],
+	["Water Reservoir",                                     "Land_ReservoirTower_F",                25000]
+];
 
-	//Walls
-	["*****Walls*****",                                     "Land_HumanSkull_F",                    1],
-	["Bunker Wall (1 Block)",                               "Land_Bunker_01_blocks_1_F",            1000],
-	["Bunker Wall (3 Blocks)",                              "Land_Bunker_01_blocks_3_F",            2500],
-	["Canal (Large)",                                       "Land_Canal_Wall_10m_F",                2500],
-	["Canal (Small)",                                       "Land_Canal_WallSmall_10m_F",           1000],
-	["Canal (Stairs)",                                      "Land_Canal_Wall_Stairs_F",             2500],
-	["City (4m)",                                           "Land_City2_4m_F",                      600],
-	["City (8m)",                                           "Land_City2_8m_F",                      300],
-	["City (Pillar)",                                       "Land_City2_PillarD_F",                 200],
-	["City,Decorative (4m)",                                "Land_City_4m_F",                       300],
-	["City,Decorative(8m)",                                 "Land_City_8m_F",                       600],
-	["City,Decorative(Gate)",                               "Land_City_Gate_F",                     500],
-	["City,Decorative(Pillar)",                             "Land_City_Pillar_F",                   200],
-	["Cobblestone (4m)",                                    "Land_Stone_4m_F",                      200],
-	["Cobblestone (8m)",                                    "Land_Stone_8m_F",                      400],
-	["Cobblestone (Gate)",                                  "Land_Stone_Gate_F",                    500],
-	["Cobblestone (Pillar)",                                "Land_Stone_pillar_F",                  200],
-	["Concrete, Acoustic Panel",                            "Land_Wall_IndCnc_2deco_F",             250],
-	["Concrete,Layered (Post)",                             "Land_Wall_IndCnc_Pole_F",              100],
-	["Concrete,Layered",                                    "Land_Wall_IndCnc_4_F",                 300],
-	["Concrete,Reinforced (x1 Tall)",                       "Land_CncWall1_F",                      400],
-	["Concrete,Reinforced (x4 Tall)",                       "Land_CncWall4_F",                      600],
-	["Concrete,Small (4m)",                                 "Land_Concrete_SmallWall_4m_F",         200],
-	["Concrete,Small (8m)",                                 "Land_Concrete_SmallWall_8m_F",         400],
-	["Military (4m Green)",                                 "Land_Mil_WallBig_4m_F",                300],
-	["Military (Corner,Green)",                             "Land_Mil_WallBig_Corner_F",            150],
-	["Pipe and Concrete (Short)",                           "Land_Pipe_fence_4m_F",                 100],
-	["Pipe and Concrete (Tall)",                            "Land_PipeWall_concretel_8m_F",         200],
-	["Stones,Piled (Low,Long)",                             "Land_StoneWall_01_s_10m_F",            100]
-
+AllBaseParts =  compileFinal str ( call TowersArray + call ServiceObjectsArray + call ObjectsArray + call lightsArray + call FencesAndWallsArray + call BuildingsArray + call BaseManagementArray);
 //Require Apex:
 /*
 
@@ -1334,6 +1340,9 @@ genObjectsArray = compileFinal str
 ["Bag Fence (Short, Green)", "Land_BagFence_01_short_green_F", 150, "object"],
 ["Bag Bunker (Small, Green)", "Land_BagBunker_01_small_green_F", 250, "object"],
 ["Bag Bunker (Large, Green)", "Land_BagBunker_01_large_green_F", 500, "object"],
+["Sign,Military Area",                                  "Land_SignM_WarningMilitaryArea_english_F", 200],
+["Sign,Military Area (Small)",                          "Land_SignM_WarningMilAreaSmall_english_F", 100],
+["Sign,Military Vehicles",                              "Land_SignM_WarningMilitaryVehicles_english_F", 100],
 
 */
 
@@ -1366,17 +1375,22 @@ genObjectsArray = compileFinal str
 
 	//For future fun
 	/*
+	["Rock,Tall (Black)", "Land_W_sharpRock_wallV", 1000000],
+	["Rock,Tall (Brown)", "Land_BluntRock_wallV", 1000000],
+	["Rock,Tall (Grey)", "Land_SharpRock_wallV", 1000000],
+	["Rock,Tall (White)", "Land_Limestone_01_wallV_F", 1000000],
+	["Rock,Long (Black)", "Land_W_sharpRock_wallH", 500000],
+	["Rock,Long (Brown)", "Land_BluntRock_wallH", 500000],
+	["Rock,Long (Grey)", "Land_SharpRock_wallH", 500000],
+	["Rock,Long (White)", "Land_Limestone_01_wallH_F", 500000],
 	["Radio,Survival (Camo)","Land_SurvivalRadio_F",40],
 	["Device,Disassembled (Lighted)","Land_Device_disassembled_F",500],
 	["Device,Slingable (Lighted)","Land_Device_slingloadable_F",500], //Bad
 	["Shed,Concrete Mixing",                                "Land_cmp_Shed_F",                      1000],
+	["Rocks, Wavebreakers",                                 "Land_Sea_Wall_F",                      25000],
 	["Bag Bunker Tower (Green)", "Land_HBarrier_01_tower_green_F", 1000, "object"]
 
 	*/
-];
-
-allGenStoreVanillaItems = compileFinal str (call genItemArray + call genObjectsArray + call allStoreGear);
-
 //Text name,classname,buy cost,spawn type,sell price (selling not implemented) or spawning color
 landArray = compileFinal str
 [
@@ -1535,25 +1549,25 @@ planesArray = compileFinal str
 	["Ceasar BTT (racing)","C_Plane_Civil_01_Racing_F",3000,"vehicle"],
 	["F/A-181 Black Wasp II (Stealth)","B_Plane_Fighter_01_Stealth_F",750000,"vehicle"],
 	["F/A-181 Black Wasp II","B_Plane_Fighter_01_F",775000,"vehicle"],
-	["K40 Ababil-3 UAV (Unarmed)",							"O_UAV_02_dynamicLoadout_F",											100000,							"vehicle",				"greyhawkRecon"],
-	["K40 Ababil-3 UAV (Bomber)",								"I_UAV_02_dynamicLoadout_F",											250000,							"vehicle",				"greyhawkBomber"],
-	["K40 Ababil-3 UAV (Missiles)",							"O_UAV_02_dynamicLoadout_F",											700000,							"vehicle",				"greyhawkMissile"],
-	["K40 Ababil-3 UAV (Bomber)",								"O_UAV_02_dynamicLoadout_F",											250000,							"vehicle",				"greyhawkBomber"],
-	["K40 Ababil-3 UAV (Unarmed)",							"I_UAV_02_dynamicLoadout_F",											100000,							"vehicle",				"greyhawkRecon"],
-	["K40 Ababil-3 UAV (Missiles)",							"I_UAV_02_dynamicLoadout_F",											700000,							"vehicle",				"greyhawkMissile"],
-	["KH-3A Fenghuang",													"O_T_UAV_04_CAS_F",																575000,							"vehicle"],
+	["K40 Ababil-3 UAV (Unarmed)",							"O_UAV_02_dynamicLoadout_F",											100000,						"vehicle",				"greyhawkRecon"],
+	["K40 Ababil-3 UAV (Bomber)",								"I_UAV_02_dynamicLoadout_F",											250000,						"vehicle",				"greyhawkBomber"],
+	["K40 Ababil-3 UAV (Missiles)",							"O_UAV_02_dynamicLoadout_F",											700000,						"vehicle",				"greyhawkMissile"],
+	["K40 Ababil-3 UAV (Bomber)",								"O_UAV_02_dynamicLoadout_F",											250000,						"vehicle",				"greyhawkBomber"],
+	["K40 Ababil-3 UAV (Unarmed)",							"I_UAV_02_dynamicLoadout_F",											100000,						"vehicle",				"greyhawkRecon"],
+	["K40 Ababil-3 UAV (Missiles)",							"I_UAV_02_dynamicLoadout_F",											700000,						"vehicle",				"greyhawkMissile"],
+	["KH-3A Fenghuang",													"O_T_UAV_04_CAS_F",																575000,						"vehicle"],
 	["MQ4A Greyhawk UAV (Bomber)",							"B_UAV_02_dynamicLoadout_F",											250000,							"vehicle",				"greyhawkBomber"],// Bomber UAVs are a lot harder to use,hence why they are cheaper than Missile ones
 	["MQ4A Greyhawk  (Unarmed)",								"B_UAV_02_dynamicLoadout_F",											100000,							"vehicle",				"greyhawkRecon"],
 	["MQ4A Greyhawk UAV (Missiles)",						"B_UAV_02_dynamicLoadout_F",											700000,							"vehicle",				"greyhawkMissile"],
-	["To-199 Neophron CAS",											"O_Plane_CAS_02_dynamicLoadout_F",								750000,							"vehicle"],
-	["To-201 Shikra",														"O_Plane_Fighter_02_F",														775000,							"vehicle"],
-	["To-201 Shikra (Stealth)",									"O_Plane_Fighter_02_Stealth_F",										750000,							"vehicle"],
+	["To-199 Neophron CAS","O_Plane_CAS_02_dynamicLoadout_F",750000,"vehicle"],
+	["To-201 Shikra","O_Plane_Fighter_02_F",775000,"vehicle"],
+	["To-201 Shikra (Stealth)","O_Plane_Fighter_02_Stealth_F",750000,"vehicle"],
 	["UCAV Sentinel",														"B_UAV_05_F",																			400000,							"vehicle"],
-	["V-44 X Blackfish (Vehicle Transport)",		"B_T_VTOL_01_vehicle_F",													30000,							"vehicle"],
-	["V-44 X Blackfish (Infrantry Transport)",	"B_T_VTOL_01_infantry_F",													20000,							"vehicle"],
-	["V-44 X Blackfish (Armed)",								"B_T_VTOL_01_armed_F",														700000,							"vehicle"],
-	["Y-32 Xi'an (Vehicle Transport)",					"O_T_VTOL_02_vehicle_F",													750000,							"vehicle"],
-	["Y-32 Xi'an (Infrantry Transport)",				"O_T_VTOL_02_infantry_F",													750000,							"vehicle"]
+	["V-44 X Blackfish (Vehicle Transport)","B_T_VTOL_01_vehicle_F",30000,"vehicle"],
+	["V-44 X Blackfish (Infrantry Transport)","B_T_VTOL_01_infantry_F",20000,"vehicle"],
+	["V-44 X Blackfish (Armed)","B_T_VTOL_01_armed_F",700000,"vehicle"],
+	["Y-32 Xi'an (Vehicle Transport)","O_T_VTOL_02_vehicle_F",750000,"vehicle"],
+	["Y-32 Xi'an (Infrantry Transport)","O_T_VTOL_02_infantry_F",750000,"vehicle"]
 
 ];
 
@@ -1580,16 +1594,17 @@ boatsArray = compileFinal str
 ];
 AutonomousArray = compileFinal str
 [
-["Mk-21 Centurion SAM",											"B_SAM_System_02_F",															25000],
-["Mk-49 Spartan SAM",												"B_SAM_System_01_F",															25000],
+["Mk-21 Centurion SAM",											"B_SAM_System_02_F",															350000],
+["Mk-49 Spartan SAM",												"B_SAM_System_01_F",															125000],
 ["Mk30A HMG .50 Sentry (NATO)",							"B_HMG_01_A_F",																		10000],
 ["Mk30A HMG .50 Sentry (CSAT)",							"O_HMG_01_A_F",																		10000],
 ["Mk30A HMG .50 Sentry (AAF)",							"I_HMG_01_A_F",																		10000],
 ["Mk32A GMG 20mm Sentry (NATO)",						"B_GMG_01_A_F",																		15000],
 ["Mk32A GMG 20mm Sentry (CSAT)",						"O_GMG_01_A_F",																		15000],
 ["Mk32A GMG 20mm Sentry (AAF)",							"I_GMG_01_A_F",																		15000],
-["Praetorian 1C AAA",												"B_AAA_System_01_F",															25000]
+["Praetorian 1C AAA",												"B_AAA_System_01_F",															225000]
 ];
+
 allVehStoreVehicles = compileFinal str (call landArray + call armoredArray + call tanksArray + call helicoptersArray + call planesArray + call boatsArray + call AutonomousArray);
 
 uavArray = compileFinal str
