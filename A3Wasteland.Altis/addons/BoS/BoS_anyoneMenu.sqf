@@ -18,7 +18,6 @@ if (!isNil "_uid") then
 	_panelOptions = [
 					"Show objects owned by you",
 					"Show Base Border",
-					"Repair Locker"
 	];
 
 	{

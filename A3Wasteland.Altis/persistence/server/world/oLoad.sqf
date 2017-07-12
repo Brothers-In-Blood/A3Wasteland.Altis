@@ -129,7 +129,6 @@ _exclObjectIDs = [];
 			};
 			_obj setVariable [_var, _value, true];
 		} forEach _variables;
-		
 		//make sure existing objects are given moveable variable. Comment line after update.
 		_obj setVariable ["moveable", true, true];
 
@@ -156,7 +155,6 @@ _exclObjectIDs = [];
 			case (_locked < 1): { true };
 			default { false };
 		};
-
 		if (_unlock) then
 		{
 			_obj setVariable ["objectLocked", false, true];
@@ -216,6 +214,25 @@ _exclObjectIDs = [];
 
 		_exclVehicleIDs pushBack _vehicleID;
 		_exclObjectIDs pushBack _objectID;
+	};
+
+	//Restore Service Objects
+	if ({_obj iskindof _x} count [
+			"Box_NATO_AmmoVeh_F",
+			"B_Slingload_01_Ammo_F",
+			"B_Slingload_01_Fuel_F",
+			"B_Slingload_01_Medevac_F",
+			"B_Slingload_01_Repair_F",
+			"StorageBladder_01_fuel_forest_F",
+			"StorageBladder_01_fuel_sand_F",
+			"Land_fs_feed_F",
+			"Land_FuelStation_01_pump_malevil_F",
+			"Land_FuelStation_Feed_F",
+			"Land_Pod_Heli_Transport_04_fuel_F",
+			"Land_Pod_Heli_Transport_04_repair_F"
+		] > 0) then	{
+		_obj enableDynamicSimulation true;
+		[_obj] remoteExecCall ["GOM_fnc_addAircraftLoadout", 0, _obj];
 	};
 } forEach _objects;
 

@@ -144,7 +144,6 @@ A3W_scriptThreads pushBack execVM "client\systems\hud\playerHud.sqf";
 	};
 
 	[] execVM "client\functions\createGeneralStoreMarkers.sqf";
-	[] execVM "client\functions\createBaseStoreMarkers.sqf";
 	[] execVM "client\functions\createVehicleStoreMarkers.sqf";
 	[] execVM "client\functions\createLegendMarkers.sqf";
 };

@@ -8,15 +8,15 @@ class EditorData
 	toggles=522;
 	class ItemIDProvider
 	{
-		nextID=2318;
+		nextID=2320;
 	};
 	class MarkerIDProvider
 	{
-		nextID=316;
+		nextID=321;
 	};
 	class LayerIndexProvider
 	{
-		nextID=46;
+		nextID=47;
 	};
 	class Camera
 	{
@@ -216,7 +216,7 @@ class Mission
 	};
 	class Entities
 	{
-		items=330;
+		items=332;
 		class Item0
 		{
 			dataType="Group";
@@ -6031,7 +6031,7 @@ class Mission
 			name="Jet_1";
 			type="Empty";
 			colorName="ColorYellow";
-			angle=226.9994;
+			angle=226.99939;
 			id=1960;
 			atlOffset=-17.910013;
 		};
@@ -7790,7 +7790,7 @@ class Mission
 			};
 			id=2314;
 			type="Land_Shed_08_grey_F";
-			atlOffset=0.35884142;
+			atlOffset=0.35884094;
 		};
 		class Item328
 		{
@@ -7816,7 +7816,7 @@ class Mission
 					};
 					id=2316;
 					type="C_man_1_1_F";
-					atlOffset=0.087436199;
+					atlOffset=0.087435722;
 					class CustomAttributes
 					{
 						class Attribute0
@@ -7865,7 +7865,7 @@ class Mission
 			{
 			};
 			id=2315;
-			atlOffset=0.087436199;
+			atlOffset=0.087435722;
 		};
 		class Item329
 		{
@@ -7876,6 +7876,28 @@ class Mission
 			colorName="ColorBlack";
 			id=2317;
 			atlOffset=-3.163584;
+		};
+		class Item330
+		{
+			dataType="Marker";
+			position[]={22244.939,0,14571.266};
+			name="BasePartsStore2";
+			text="BS";
+			type="mil_dot";
+			colorName="ColorRed";
+			id=2318;
+			atlOffset=-4.0498719;
+		};
+		class Item331
+		{
+			dataType="Marker";
+			position[]={5837.332,0,20104.461};
+			name="BasePartsStore1";
+			text="BS";
+			type="mil_dot";
+			colorName="ColorRed";
+			id=2319;
+			atlOffset=-224.82167;
 		};
 	};
 };
