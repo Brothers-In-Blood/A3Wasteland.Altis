@@ -193,8 +193,8 @@ class GOMRscCheckbox_2802: GOMRscCheckBox
 	y = 20 * GUI_GRID_H + GUI_GRID_Y;
 	w = 1 * GUI_GRID_W;
 	h = 1 * GUI_GRID_H;
-};*/
-/*class GOMRscText_1003: GOMRscText
+};
+class GOMRscText_1003: GOMRscText
 {
 	idc = 1003;
 
@@ -328,7 +328,7 @@ class GOMRscFrame_1807: GOMRscFrame
 	w = 39 * GUI_GRID_W;
 	h = 9.5 * GUI_GRID_H;
 };
-/*class GOMRscCombo_2101: GOMRscCombo
+class GOMRscCombo_2101: GOMRscCombo
 {
 	idc = 2101;
 
@@ -337,7 +337,7 @@ class GOMRscFrame_1807: GOMRscFrame
 	y = 16 * GUI_GRID_H + GUI_GRID_Y;
 	w = 6.5 * GUI_GRID_W;
 	h = 1 * GUI_GRID_H;
-};*/
+};
 class GOMRscFrame_1808: GOMRscFrame
 {
 	idc = 1808;
@@ -347,7 +347,7 @@ class GOMRscFrame_1808: GOMRscFrame
 	w = 7.5 * GUI_GRID_W;
 	h = 6.5 * GUI_GRID_H;
 };
-/*class GOMRscEdit_1401: GOMRscEdit
+class GOMRscEdit_1401: GOMRscEdit
 {
 	idc = 1401;
 
@@ -356,8 +356,8 @@ class GOMRscFrame_1808: GOMRscFrame
 	y = 19.5 * GUI_GRID_H + GUI_GRID_Y;
 	w = 6.5 * GUI_GRID_W;
 	h = 1 * GUI_GRID_H;
-};*/
-/*class GOMRscButton_1606: GOMRscButton
+};
+class GOMRscButton_1606: GOMRscButton
 {
 	idc = 1606;
 
@@ -376,7 +376,7 @@ class GOMRscButton_1607: GOMRscButton
 	y = 21 * GUI_GRID_H + GUI_GRID_Y;
 	w = 3 * GUI_GRID_W;
 	h = 1 * GUI_GRID_H;
-};*/
+};
 class GOMRscFrame_1809: GOMRscFrame
 {
 	idc = 1809;
@@ -386,7 +386,7 @@ class GOMRscFrame_1809: GOMRscFrame
 	w = 7.5 * GUI_GRID_W;
 	h = 6.5 * GUI_GRID_H;
 };
-/*class GOMRscButton_1608: GOMRscButton
+class GOMRscButton_1608: GOMRscButton
 {
 	idc = 1608;
 
@@ -395,7 +395,7 @@ class GOMRscFrame_1809: GOMRscFrame
 	y = 17.5 * GUI_GRID_H + GUI_GRID_Y;
 	w = 6.5 * GUI_GRID_W;
 	h = 1 * GUI_GRID_H;
-};*/
+};
 class GOMRscButton_1609: GOMRscButton
 {
 	idc = 1609;
