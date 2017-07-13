@@ -42,7 +42,6 @@ _vehicle setVariable ["A3W_engineEH", _vehicle addEventHandler ["Engine", vehicl
 _vehicle addEventHandler ["GetIn", fn_vehicleGetInOutServer];
 _vehicle addEventHandler ["GetOut", fn_vehicleGetInOutServer];
 _vehicle addEventHandler ["Killed", fn_vehicleKilledServer];
-/*_vehicle enableDynamicSimulation true;*/
 
 if ({_class isKindOf _x} count ["Air","UGV_01_base_F"] > 0) then
 {
@@ -115,10 +114,6 @@ switch (true) do
 		{
 			_vehicle addMagazineTurret ["300Rnd_20mm_shells", [-1]];
 		};
-	};
-	case (_class isKindOf "StaticWeapon"):
-	{
-		_vehicle setVariable ["moveable", true];
 	};
 };
 

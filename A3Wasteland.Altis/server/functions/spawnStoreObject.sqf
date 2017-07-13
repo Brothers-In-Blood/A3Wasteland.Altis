@@ -146,6 +146,8 @@ if (_key != "" && isPlayer _player && {_isGenStore || _isGunStore || _isVehStore
 			if (_player getVariable [_timeoutKey, true]) then { breakOut "spawnStoreObject" }; // Timeout
 
 			_object = createVehicle [_class, _safePos, [], 0, ""];
+			_object setVariable ["moveable", true, true];
+			_object enableDynamicSimulation true;
 
 			if (_waterNonBoat) then
 			{
@@ -227,25 +229,6 @@ if (_key != "" && isPlayer _player && {_isGenStore || _isGunStore || _isVehStore
 
 			clearBackpackCargoGlobal _object;
 
-			//Setup Service Objects
- 			switch (true) do
- 			{
- 				case (_object isKindOf "Static"):
- 				{
-					_object enableDynamicSimulation true;
-					_object setVariable ["moveable", true, true];
- 				};
-				case (_object iskindof "Thing"):
-				{
-					_object enableDynamicSimulation true;
-					_object setVariable ["moveable", true, true];
-				};
-				case (_object iskindof "staticweapon"):
-				{
-					_object enableDynamicSimulation true;
-					_object setVariable ["moveable", true, true];
-				};
-			};
 			if ({_object iskindof _x} count [
 					"Box_NATO_AmmoVeh_F",
 					"B_Slingload_01_Ammo_F",
