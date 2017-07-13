@@ -126,12 +126,14 @@ _successExec =
 	_currBox1 = _Boxes1 call BIS_fnc_selectRandom;
 	_box1 = createVehicle [_currBox1, _lastPos, [], 2, "None"];
 	_box1 setDir random 360;
+	_box1 setVariable ["moveable", true, true];
 	_box1 allowDamage false;
 
 	_Boxes2 = ["Box_IED_Exp_F","Box_Syndicate_WpsLaunch_F"];
 	_currBox2 = _Boxes2 call BIS_fnc_selectRandom;
 	_box2 = createVehicle [_currBox2, _lastPos, [], 2, "None"];
 	_box2 setDir random 360;
+	_box2 setVariable ["moveable", true, true];
 	_box2 allowDamage false;
 
 	_successHintMessage = "The ambush has been stopped, the weapon crates and vehicles are now yours to take.";

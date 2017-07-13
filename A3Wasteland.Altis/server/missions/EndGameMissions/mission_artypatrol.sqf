@@ -415,41 +415,35 @@ _failedExec = nil;
 
 _successExec =
 {
-	// Mission completed
-
-	/*for "_x" from 1 to 10 do
-	{
-		_cash = "Land_Money_F" createVehicle markerPos _marker;
-		_cash setPos ((markerPos _marker) vectorAdd ([[2 + random 2,0,0], random 360] call BIS_fnc_rotateVector2D));
-		_cash setDir random 360;
-		_cash setVariable["cmoney",25000,true];
-		_cash setVariable["owner","world",true];
-	};*/
-
-	//This works
 	_box1 = "B_supplyCrate_F" createVehicle getMarkerPos _marker;
     [_box1,"Launchers_Tier_2"] call fn_refillbox;
 	_box1 allowDamage false;
+	_box1 setVariable ["moveable", true, true];
 
 	_box2 = "Box_NATO_Wps_F" createVehicle getMarkerPos _marker;
     [_box2,"mission_USSpecial2"] call fn_refillbox;
 	_box2 allowDamage false;
+	_box2 setVariable ["moveable", true, true];
 
 	_box3 = "Box_NATO_Support_F" createVehicle getMarkerPos _marker;
     [_box3,"mission_snipers"] call fn_refillbox;
 	_box3 allowDamage false;
+	_box3 setVariable ["moveable", true, true];
 
 	_box4 = "Box_NATO_Support_F" createVehicle getMarkerPos _marker;
     [_box4,"mission_snipers"] call fn_refillbox;
 	_box4 allowDamage false;
+	_box4 setVariable ["moveable", true, true];
 
 	_box5 = "B_supplyCrate_F" createVehicle getMarkerPos _marker;
     [_box5,"GEVP"] call fn_refillbox;
 	_box5 allowDamage false;
+	_box5 setVariable ["moveable", true, true];
 
 	_box6 = "B_supplyCrate_F" createVehicle getMarkerPos _marker;
     [_box6,"Launchers_Tier_2"] call fn_refillbox;
 	_box6 allowDamage false;
+	_box6 setVariable ["moveable", true, true];
 
 	_successHintMessage = "The patrol has been stopped, the money, crates and vehicles are yours to take.";
 };

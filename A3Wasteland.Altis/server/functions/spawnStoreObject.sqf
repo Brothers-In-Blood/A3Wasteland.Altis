@@ -240,6 +240,11 @@ if (_key != "" && isPlayer _player && {_isGenStore || _isGunStore || _isVehStore
 					_object enableDynamicSimulation true;
 					_object setVariable ["moveable", true, true];
 				};
+				case (_object iskindof "staticweapon"):
+				{
+					_object enableDynamicSimulation true;
+					_object setVariable ["moveable", true, true];
+				};
 			};
 			if ({_object iskindof _x} count [
 					"Box_NATO_AmmoVeh_F",
@@ -260,7 +265,7 @@ if (_key != "" && isPlayer _player && {_isGenStore || _isGunStore || _isVehStore
 				_object setRepairCargo 0;
 				_object enableDynamicSimulation true;
 				[_object] remoteExecCall ["GOM_fnc_addAircraftLoadout", 0, _object];
-			}:
+			};
 
 			if (_skipSave) then
 			{

@@ -31,9 +31,11 @@ _bargate = createVehicle ["Land_BarGate_F", _missionPos, [], 0, "NONE"];
 _bargate setDir _markerDir;
 _bunker1 = createVehicle ["Land_BagBunker_Small_F", _bargate modelToWorld [6.5,-2,-4.1], [], 0, "NONE"];
 _obj1 = createVehicle ["I_GMG_01_high_F", _bargate modelToWorld [6.5,-2,-4.1], [], 0, "NONE"];
+_obj1 setVariable ["moveable", true, true];
 _bunker1 setDir _markerDir;
 _bunker2 = createVehicle ["Land_BagBunker_Small_F", _bargate modelToWorld [-8,-2,-4.1], [], 0, "NONE"];
 _obj2 = createVehicle ["I_GMG_01_high_F", _bargate modelToWorld [-8,-2,-4.1], [], 0, "NONE"];
+_obj2 setVariable ["moveable", true, true];
 _bunker2 setDir _markerDir;
 
 	// NPC Randomizer
@@ -68,6 +70,7 @@ _successExec =
 
 	_box1 = createVehicle [_randomCase, _missionPos, [], 5, "None"];
 	_box1 setDir random 360;
+	_box1 setVariable ["moveable", true, true];
 	[_box1, _randomBox] call fn_refillbox;
 
 	// Mission completed

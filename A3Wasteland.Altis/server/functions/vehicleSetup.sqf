@@ -116,6 +116,10 @@ switch (true) do
 			_vehicle addMagazineTurret ["300Rnd_20mm_shells", [-1]];
 		};
 	};
+	case (_class isKindOf "StaticWeapon"):
+	{
+		_vehicle setVariable ["moveable", true];
+	};
 };
 
 _weapons = getArray (configFile >> "CfgVehicles" >> _class >> "weapons");

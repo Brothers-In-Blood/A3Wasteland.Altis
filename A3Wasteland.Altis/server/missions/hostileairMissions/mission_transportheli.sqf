@@ -172,14 +172,17 @@ _successExec =
 
 	_box1 = createVehicle ["Box_NATO_Wps_F", _lastPos, [], 5, "None"];
 	_box1 setDir random 360;
+	_box1 setVariable ["moveable", true, true];
 	[_box1, _box1Select] call fn_refillbox;
 
 	_box2 = createVehicle ["Box_East_Wps_F", _lastPos, [], 5, "None"];
 	_box2 setDir random 360;
+	_box2 setVariable ["moveable", true, true];
 	[_box2, _box2Select] call fn_refillbox;
 
 	_box3 = createVehicle ["Box_IND_WpsSpecial_F", _lastPos, [], 5, "None"];
 	_box3 setDir random 360;
+	_box3 setVariable ["moveable", true, true];
 	[_box3, _box3Select] call fn_refillbox;
 
 	_successHintMessage = "The helicopter escort has been taken down! Ammo crates have fallen near the wreck.";
