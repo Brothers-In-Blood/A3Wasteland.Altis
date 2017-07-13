@@ -89,6 +89,7 @@ _object = switch (_type) do
 		_object setVariable ["A3W_purchasedVehicle", true, true];
 		_object setVariable ["ownerUID", getPlayerUID _player, true];
 		_object setVariable ["R3F_LOG_Disabled", true, true]; // Make vehicle locked
+		_object setVariable ["moveable", true, true];
 		_object lock 2; // Make vehicle locked
 		[_object, false] call vehicleSetup;
 				if (_object getVariable ["A3W_purchasedVehicle", false] && !isNil "fn_manualVehicleSave") then
@@ -106,6 +107,7 @@ _object = switch (_type) do
 		_object setVariable ["R3F_LOG_Disabled", false, true];
 		[_object, _selectionClass] call fn_refillbox;
 		_object setVariable ["A3W_inventoryLockR3F", false, true];
+		_object setVariable ["moveable", true, true];
 		_object attachTo [_heli, [0,0,-5]]; //Attach Object to the heli
 		_object
 	};
@@ -115,6 +117,7 @@ _object = switch (_type) do
 		_object = createVehicle ["Land_Sacks_goods_F", _objectSpawnPos, [], 0, "None"];
 		diag_log format ["Apoc's Airdrop Assistance - Object Spawned at %1", position _object];
 		_object setVariable ["A3W_purchasedStoreObject", true];
+		_object setVariable ["moveable", true, true];
 		_object setVariable ["food", 50, true];
 		_object setVariable ["R3F_LOG_Disabled", false, true];
 		_object attachTo [_heli, [0,0,-5]]; //Attach Object to the heli
@@ -126,6 +129,7 @@ _object = switch (_type) do
 		_object = createVehicle ["Land_BarrelWater_F", _objectSpawnPos, [], 0, "None"];
 		diag_log format ["Apoc's Airdrop Assistance - Object Spawned at %1", position _object];
 		_object setVariable ["A3W_purchasedStoreObject", true];
+		_object setVariable ["moveable", true, true];
 		_object setVariable ["water",50, true];
 		_object setVariable ["R3F_LOG_Disabled", false, true];
 		_object attachTo [_heli, [0,0,-5]]; //Attach Object to the heli
@@ -138,6 +142,7 @@ _object = switch (_type) do
 		diag_log format ["Apoc's Airdrop Assistance - Object Spawned at %1", position _object];
 		_object setVariable ["A3W_purchasedStoreObject", true];
 		_object setVariable ["R3F_LOG_disabled",false,true];
+		_object setVariable ["moveable", true, true];
 		_object attachTo [_heli, [0,0,-5]]; //Attach Object to the heli
 		[_object, ["Land_Cargo_Tower_V1_F", ["Land_Canal_Wall_Stairs_F", 2], ["Land_Mil_WallBig_4m_F", 5], ["Land_Canal_WallSmall_10m_F", 10], ["Land_RampConcreteHigh_F",2], ["Land_RampConcrete_F", 2],["BlockConcrete_F",4],["Land_BagFence_Round_F",2],["Land_BagFence_Short_F",4],["Land_HBarrier_3_F",2],["Land_Crash_barrier_F",2],["Land_LampShabby_F",4]] ] execVM "addons\R3F_LOG\auto_load_in_vehicle.sqf";
 		clearBackpackCargoGlobal _object;
@@ -153,6 +158,7 @@ _object = switch (_type) do
 		_object = createVehicle ["Box_NATO_AmmoVeh_F", _objectSpawnPos, [], 0, "None"];
 		diag_log format ["Apoc's Airdrop Assistance - Object Spawned at %1", position _object];
 		_object setVariable ["A3W_purchasedStoreObject", true];
+		_object setVariable ["moveable", true, true];
 		_object setVariable ["R3F_LOG_Disabled", false, true];
 		_object attachTo [_heli, [0,0,-5]]; //Attach Object to the heli
 		_object
@@ -164,6 +170,7 @@ _object = switch (_type) do
 		_object setVariable ["R3F_LOG_Disabled", false, true];
 		[_object, "mission_USSpecial"] call fn_refillbox;
 		_object setVariable ["A3W_inventoryLockR3F", false, true];
+		_object setVariable ["moveable", true, true];
 		_object attachTo [_heli, [0,0,-5]]; //Attach Object to the heli
 		_object
 		};
