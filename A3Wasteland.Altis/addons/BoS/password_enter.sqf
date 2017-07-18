@@ -8,7 +8,7 @@
 
 //#define DURATION 10
 
-_object = cursorObject;
+_object = nearestObject [player, "Land_SatellitePhone_F"];
 
 OutputText = nil;
 
