@@ -25,6 +25,7 @@ _plane setPosATL [_pos select 0, _pos select 1, ((getPosATL _plane) select 2) - 
 _plane setVelocity [0,0,0.01];
 _plane setDamage 0;
 _plane setVariable ["moveable", true, true];
+_plane enableDynamicSimulation true;
 
 if (_planeType isKindOf "Plane_Fighter_03_dynamicLoadout_base_F") then
 {

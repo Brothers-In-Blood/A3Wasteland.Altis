@@ -23,6 +23,7 @@ _vehicle setPosATL [_pos select 0, _pos select 1, _pos select 2];
 _vehicle setDir random 360;
 _vehicle setVelocity [0,0,0.01];
 _vehicle setVariable ["moveable", true, true];
+_vehicle enableDynamicSimulation true;
 
 _vehicle setDamage (random 0.5); // setDamage must always be called before vehicleSetup
 

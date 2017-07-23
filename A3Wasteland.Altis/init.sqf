@@ -49,6 +49,10 @@ A3W_scriptThreads = [];
 [] execVM "storeConfig.sqf"; // Separated as its now v large
 [] execVM "briefing.sqf";
 
+// Teambalancer
+call compile preprocessFileLineNumbers "client\functions\teamBalance.sqf";
+
+
 if (!isDedicated) then
 {
 	[] spawn

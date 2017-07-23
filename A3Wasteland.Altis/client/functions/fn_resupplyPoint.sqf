@@ -558,7 +558,7 @@ Switch (true) do
 
 
 	// Dynamic Vehicles with 10 pylons
-	case ({_vehicle iskindof _x} count ["O_Plane_Fighter_02_Stealth_F", "I_Plane_Fighter_03_dynamicLoadout_F"] >0):
+	case ({_vehicle iskindof _x} count ["B_Plane_CAS_01_dynamicLoadout_F", "O_Plane_CAS_02_dynamicLoadout_F"] >0):
 	{
 			//Determine Weapons Loaded on Pylons
 		_pylonsequiped = GetPylonMagazines _vehicle;

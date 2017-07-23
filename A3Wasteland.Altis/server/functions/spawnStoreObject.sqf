@@ -182,6 +182,7 @@ if (_key != "" && isPlayer _player && {_isGenStore || _isGunStore || _isVehStore
 			//assign AI to the vehicle so it can actually be used
 			if (_isUAV) then
 			{
+				_object enableDynamicSimulation false;
 				[_object, _playerSide, _playerGroup] spawn
 				{
 					params ["_uav", "_playerSide", "_playerGroup"];

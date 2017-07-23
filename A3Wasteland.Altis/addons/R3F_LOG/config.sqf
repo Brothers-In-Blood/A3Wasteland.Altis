@@ -973,7 +973,10 @@ R3F_LOG_CFG_can_be_transported_cargo = R3F_LOG_CFG_can_be_transported_cargo +
   ["Land_Statue_01_F", 5],
   ["Land_Pedestal_02_F", 5],
   ["Land_Monument_01_F", 20],
-	["Slingload_base_F", 1000]
+	["Slingload_base_F", 1000],
+	["B_SAM_System_02_F", 20],
+	["B_SAM_System_01_F", 20],
+	["B_AAA_System_01_F", 20]
 
 ];
 

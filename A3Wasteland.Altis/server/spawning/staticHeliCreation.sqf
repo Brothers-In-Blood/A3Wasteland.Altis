@@ -37,6 +37,7 @@ _spawnPos = _this select 1;
 
 	_currHeli enableSimulationGlobal true;
 	_currHeli setVariable ["moveable", true, true];
+	_currHeli enableDynamicSimulation true;
 /*}
 else
 {
