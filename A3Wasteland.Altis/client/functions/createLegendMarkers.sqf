@@ -7,8 +7,8 @@
 _markers =
 [
 	["Legend:", "EmptyIcon", "ColorWhite", [1,1]],
-	["Website: bibgaming.com", "EmptyIcon", "ColorRed", [1,1]],
-	["TeamSpeak: ts3.bibgaming.net", "EmptyIcon", "ColorRed", [1,1]],
+	["Website: bibgaming.com", "EmptyIcon", "ColorWhite", [1,1]],
+	["TeamSpeak: ts3.bibgaming.com", "EmptyIcon", "ColorWhite", [1,1]],
 	["GS - General Store", "mil_dot", "ColorBlue", [1,1]],
 	["VS - Vehicle Store", "mil_dot", "ColorOrange", [1,1]],
 	["SV - Supply Vehicle", "mil_dot", "ColorGreen", [1,1]],
