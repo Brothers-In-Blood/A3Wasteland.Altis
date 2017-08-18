@@ -16,6 +16,8 @@
   ["Heal self", "client\functions\healSelf.sqf",0,2,false,false,"","((damage player)>0.01 && (damage player)<0.25499) && (('FirstAidKit' in (items player)) || ('Medikit' in (items player))) "],
 	//Hide Body
   ["<img image='client\icons\cancel.paa'/> Hide Body", "client\actions\hide.sqf", [], 1, false, false, "", "!isNull cursorObject && !alive cursorObject && {cursorObject isKindOf 'Man' && player distance cursorObject <= (sizeOf typeOf cursorObject / 3) max 2}"],
+	//Take Gear
+  ["<img image='client\icons\cancel.paa'/> Take Gear", "client\actions\TakeGear.sqf", [], 1, false, false, "", "!isNull cursorObject && !alive cursorObject && {cursorObject isKindOf 'Man' && player distance cursorObject <= (sizeOf typeOf cursorObject / 3) max 2}"],
 	//Push Land Vehicle
 	["Push vehicle", "server\functions\pushVehicle.sqf", [2.5, true], 1, false, false, "", "[2.5] call canPushVehicleOnFoot"],
   // Push Water Vehicle

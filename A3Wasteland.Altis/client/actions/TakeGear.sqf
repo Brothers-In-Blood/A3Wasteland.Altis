@@ -15,7 +15,7 @@ private ["_Target", "_TargetClass", "_checks", "_firstCheck", "_time", "_money",
 
 //Target Equipment
 _Target = cursorTarget;
-_TargetClass = typeOf _TargetClass;
+_TargetClass = typeOf _Target;
 _uniform =  uniform _Target;
 _backpack = backpack _Target;
 _vest = vest _Target;
@@ -73,24 +73,14 @@ if (_firstCheck select 0) exitWith
 
 mutexScriptInProgress = true;
 
-// Salvage time and default money reward according to vehicle type
 switch (true) do
 {
   case (_TargetClass isKindOf "Man"):
   {
     _time = 15;
-    player forceAddUniform _uniform;
-    removeAllWeapons _Target;
-    removeAllAssignedItems _Target;*/
-    removeUniform _Target;
-    removeVest _Target;
-    removeBackpack _Target;
-    removeGoggles _Target;
-    removeHeadgear _Target;
-    _ground = "GroundWeaponHolder" createVehicle position player;
+    _ground = "GroundWeaponHolder_Scripted" createVehicle position player;
     player action ["PutBag"];
-    player action ["DropWeapon", _ground, _x] forEach _playerweapons;
-    player action ["DropMagazine", _ground, _x] forEach _playermags;
+    player action ["DropWeapon", _ground, currentweapon player];
   };
   default  {}; // Everything else
 };
@@ -103,5 +93,12 @@ mutexScriptInProgress = false;
 
 if (_success) then
 {
-  /*[format ["Finished Taking Gear"]] call mf_notify_client;*/
+  player forceAddUniform _uniform;
+  player additem _vest;
+  player additem _backpack;
+  player additem _headgear;
+  player additem _goggles;
+  {player additem _x} foreach _items;
+  {player additem _x} foreach _mags;
+  deleteVehicle _Target;
 };
