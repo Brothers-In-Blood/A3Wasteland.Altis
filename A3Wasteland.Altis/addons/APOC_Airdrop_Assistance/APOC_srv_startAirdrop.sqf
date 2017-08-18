@@ -41,7 +41,6 @@ _grp = createGroup civilian;
 if(isNil("_grp2"))then{_grp2 = createGroup civilian;}else{_grp2 = _grp2;};
 _flyHeight = 350;
 _dropSpot = [(position _player select 0),(position _player select 1),_flyHeight];
-_flyHeight = 200;  //Distance from ground that heli will fly at
 _heliStartDistance = 2000;
 _spos=[(_dropSpot select 0) - (sin _heliDirection) * _heliStartDistance, (_dropSpot select 1) - (cos _heliDirection) * _heliStartDistance, (_flyHeight+200)];
 
@@ -58,7 +57,7 @@ _crew triggerDynamicSimulation true;
 
 _heli setCaptive true;
 
-_heliDistance = 200;
+_heliDistance = 2000;
 _dir = ((_dropSpot select 0) - (_spos select 0)) atan2 ((_dropSpot select 1) - (_spos select 1));
 _flySpot = [(_dropSpot select 0) + (sin _dir) * _heliDistance, (_dropSpot select 1) + (cos _dir) * _heliDistance, _flyHeight];
 
