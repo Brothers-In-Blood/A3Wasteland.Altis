@@ -12,4 +12,4 @@ _obj = _this select 0;
 _obj setVariable [call vChecksum, true];
 //Make base objects much harder to kill
 _obj addEventHandler ["HandleDamage", {0.00001}];
-_obj addMPEventHandler ["MPHit", {_obj setDamage 0}];
+_obj addEventHandler ["Hit", {_obj setDamage 0}];
