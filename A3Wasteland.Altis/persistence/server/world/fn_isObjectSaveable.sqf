@@ -10,8 +10,8 @@ _class = typeOf _obj;
 
 #include "functions.sqf"
 
-({((alive _obj &&
-    _obj getVariable ["objectLocked", false] ||
+(alive _obj &&
+{((_obj getVariable ["objectLocked", false] ||
    {(["A3W_extDB_SaveUnlockedObjects"] call isConfigOn && _obj getVariable ["ownerUID",""] != "") ||
    !isNil {_obj getVariable "A3W_objectID"} && _savingMethod == "extDB"}) &&
   {(_baseSavingOn && {_class call _isSaveable}) ||
