@@ -74,12 +74,12 @@ hostileairMissions =
 	["mission_HostileHeliFormation", 1],
 	["mission_HostileJet", 1],
 	["mission_HostileVTOL", 1],
-  ["mission_transportheli", 1]
+	["mission_transportheli", 1]
 ];
 
-EndGameMissions =
+PrimaryMissions =
 [
-	"mission_artypatrol, 1"
+	["mission_artypatrol", 1]
 ];
 
 MainMissions = [MainMissions, [["A3W_heliPatrolMissions", ["mission_Coastal_Convoy", "mission_HostileHeliFormation"]], ["A3W_underWaterMissions", ["mission_ArmedDiversquad"]]]] call removeDisabledMissions;

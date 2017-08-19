@@ -5,7 +5,7 @@
 //	@file Author: WitchDoctor [GGO]
 
 if (!isServer) exitwith {};
-#include "EndGameMissionDefines.sqf";
+#include "PrimaryMissionDefines.sqf";
 
 private ["_convoyVeh","_veh1","_veh2","_veh3","_veh4","_veh5","_veh6","_veh7","_veh8","_veh9","_veh10","_createVehicle1","_createVehicle2","_createVehicle3","_vehicles", "_leader", "_speedMode", "_waypoint", "_vehicleName", "_numWaypoints", "_cash", "_box1", "_box2", "_box3", "_randomBox1", "_randomBox2", "_randomBox3", "_Case1", "_Case2", "_Case3"];
 

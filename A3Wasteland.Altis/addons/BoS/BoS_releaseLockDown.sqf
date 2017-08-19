@@ -24,7 +24,7 @@ if (_lockdown) then {
 } else {
 	_baseobjects = nearestObjects [_manager, ["All"], 100];
 	{ _x setVariable ["LockedDown", false, true]} foreach _baseobjects;
-	_manager setvariable ["Baselockenabled", true, true];
+	_manager setvariable ["Baselockenabled", false, true];
 	cursorobject enableSimulationGlobal true;
 	hint "Released Lock Down";
 };
