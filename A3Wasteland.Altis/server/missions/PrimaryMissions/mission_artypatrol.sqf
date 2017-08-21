@@ -400,7 +400,7 @@ _setupObjects =
 	_vehicleName2 = getText (configFile >> "CfgVehicles" >> _veh6 >> "displayName");
 	_vehicleName3 = getText (configFile >> "CfgVehicles" >> _veh9 >> "displayName");
 
-	_missionHintText = format ["A convoy containing at least a <t color='%4'>%1</t>, a <t color='%4'>%2</t> and a <t color='%4'>%3</t> is patrolling a high value location! Stop the partol and collect the high value weapons crate and money!", _vehicleName, _vehicleName2, _vehicleName3, EndGameMissionColor];
+	_missionHintText = format ["A convoy containing at least a <t color='%4'>%1</t>, a <t color='%4'>%2</t> and a <t color='%4'>%3</t> is patrolling a high value location! Stop the partol and collect the high value weapons crate and money!", _vehicleName, _vehicleName2, _vehicleName3, PrimaryMissionColor];
 
 	_numWaypoints = count waypoints _aiGroup;
 };
@@ -448,4 +448,4 @@ _successExec =
 	_successHintMessage = "The patrol has been stopped, the money, crates and vehicles are yours to take.";
 };
 
-_this call EndGameMissionProcessor;
+_this call PrimaryMissionProcessor;

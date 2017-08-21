@@ -5,7 +5,7 @@
 //	@file Author: AgentRev
 
 #define MISSION_PROC_TYPE_NAME "Primary"
-#define MISSION_PROC_TIMEOUT (["A3W_PrimaryMissionTimeout", 120*60] call getPublicVar)
+#define MISSION_PROC_TIMEOUT (["A3W_PrimaryMissionTimeout", 240*60] call getPublicVar)
 #define MISSION_PROC_COLOR_DEFINE PrimaryMissionColor
 
 #include "PrimaryMissions\PrimaryMissionDefines.sqf"

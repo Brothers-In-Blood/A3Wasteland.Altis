@@ -6,8 +6,8 @@
 
 #define MISSION_CTRL_PVAR_LIST PrimaryMissions
 #define MISSION_CTRL_TYPE_NAME "Primary Mission"
-#define MISSION_CTRL_FOLDER "PrimaryMisions"
-#define MISSION_CTRL_DELAY (["A3W_PrimaryMissionDelay", 120*60] call getPublicVar)
+#define MISSION_CTRL_FOLDER "PrimaryMissions"
+#define MISSION_CTRL_DELAY (["A3W_PrimaryMissionDelay", 1*60] call getPublicVar)
 #define MISSION_CTRL_COLOR_DEFINE PrimaryMissionColor
 
 #include "PrimaryMissions\PrimaryMissionDefines.sqf"
