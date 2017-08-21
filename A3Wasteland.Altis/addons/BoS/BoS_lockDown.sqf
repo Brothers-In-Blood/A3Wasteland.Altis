@@ -8,10 +8,12 @@ private ["_baseobjects", "_manager"];
 private ["_baseobjects", "_manager"];
 
 _manager = cursorObject;
+_lockdown = false;
+
 
 _managers = nearestObjects [ _manager, ["Land_SatellitePhone_F"], 100];
-if ( count _managers > 0) then {
-	_getmanagerstatus = {_x getVariable ["Baselockenabled", true]} foreach _managers;
+if ( count _managers > 1) then {
+	_getmanagerstatus = [{_x getVariable ["Baselockenabled", false]} foreach _managers];
 	_checker = [true];
 	_findlockedmanager = _checker arrayIntersect _getmanagerstatus;
 	if (count _findlockedmanager > 0) then {
