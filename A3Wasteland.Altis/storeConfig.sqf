@@ -389,7 +389,7 @@ accessoriesArray = compileFinal str
 	["NVS",																	"optic_NVS",																500,							"item"],
 	["TWS",																	"optic_tws",																5000,							"item"],// To hide from store list,add "HIDDEN" after "item",like "item","HIDDEN"]
 	["TWS MG",																"optic_tws_mg",																6000,							"item"],
-	["Nightstalker",														"optic_Nightstalker",														500,							"item"]
+	["Nightstalker",														"optic_Nightstalker",														5000,							"item"]
 ];
 
 // If commented,means the color/camo isn't implemented or is a duplicate of another hat
@@ -1453,7 +1453,7 @@ helicoptersArray = compileFinal str
 	["Mi-290 Taru (Transport) [DLC]",											"O_Heli_Transport_04_covered_F",										9500,						"vehicle"],
 	["Mi-290 Taru (Medical) [DLC]",												"O_Heli_Transport_04_medevac_F",										12500,						"vehicle"],
 	["Mi-48 Kajman",															"O_Heli_Attack_02_dynamicLoadout_F",									550000,						"vehicle"],
-	["MQ-12 Falcon",															"B_T_UAV_03_dynamicLoadout_F",											575000,						"vehicle"],
+	["MQ-12 Falcon",															"B_T_UAV_03_dynamicLoadout_F",											1575000,						"vehicle"],
 	["PO-30 Orca (Unarmed)",													"O_Heli_Light_02_dynamicLoadout_F",										30000,						"vehicle",						"variant_orcaUnArm"],
 	["PO-30 Orca (Unarmed)",													"O_Heli_Light_02_dynamicLoadout_F",										6000,						"vehicle",						"variant_orcaUnArm"],
 	["PO-30 Orca (6.5mm + DAGR)",												"O_Heli_Light_02_dynamicLoadout_F",										75000,						"vehicle",						"variant_orcaGUNDAGR"],
@@ -1477,21 +1477,21 @@ planesArray = compileFinal str
 	["A-164 Wipeout",															"B_Plane_CAS_01_dynamicLoadout_F",										1000000,					"vehicle"],
 	["Caesar BTT",																"C_Plane_Civil_01_F",													3000,						"vehicle"],
 	["Ceasar BTT (racing)",														"C_Plane_Civil_01_Racing_F",											3000,						"vehicle"],
-	["F/A-181 Black Wasp II (Stealth)",											"B_Plane_Fighter_01_Stealth_F",											1250000,					"vehicle"],
+	["F/A-181 Black Wasp II (Stealth)",											"B_Plane_Fighter_01_Stealth_F",											1750000,					"vehicle"],
 	["F/A-181 Black Wasp II",													"B_Plane_Fighter_01_F",													1500000,					"vehicle"],
 	["K40 Ababil-3 UAV (Unarmed)",												"O_UAV_02_dynamicLoadout_F",											100000,						"vehicle",						"variant_greyhawkRecon"],
 	["K40 Ababil-3 UAV (Bomber)",												"I_UAV_02_dynamicLoadout_F",											250000,						"vehicle",						"variant_greyhawkBomber"],
-	["K40 Ababil-3 UAV (Missiles)",												"O_UAV_02_dynamicLoadout_F",											700000,						"vehicle",						"variant_greyhawkMissile"],
+	["K40 Ababil-3 UAV (Missiles)",												"O_UAV_02_dynamicLoadout_F",											1700000,						"vehicle",						"variant_greyhawkMissile"],
 	["K40 Ababil-3 UAV (Bomber)",												"O_UAV_02_dynamicLoadout_F",											250000,						"vehicle",						"variant_greyhawkBomber"],
 	["K40 Ababil-3 UAV (Unarmed)",												"I_UAV_02_dynamicLoadout_F",											100000,						"vehicle",						"variant_greyhawkRecon"],
-	["K40 Ababil-3 UAV (Missiles)",												"I_UAV_02_dynamicLoadout_F",											700000,						"vehicle",						"variant_greyhawkMissile"],
+	["K40 Ababil-3 UAV (Missiles)",												"I_UAV_02_dynamicLoadout_F",											1700000,						"vehicle",						"variant_greyhawkMissile"],
 	["KH-3A Fenghuang",															"O_T_UAV_04_CAS_F",														575000,						"vehicle"],
 	["MQ4A Greyhawk UAV (Bomber)",												"B_UAV_02_dynamicLoadout_F",											250000,						"vehicle",						"variant_greyhawkBomber"],// Bomber UAVs are a lot harder to use,hence why they are cheaper than Missile ones
 	["MQ4A Greyhawk  (Unarmed)",												"B_UAV_02_dynamicLoadout_F",											100000,						"vehicle",						"variant_greyhawkRecon"],
-	["MQ4A Greyhawk UAV (Missiles)",											"B_UAV_02_dynamicLoadout_F",											700000,						"vehicle",						"variant_greyhawkMissile"],
+	["MQ4A Greyhawk UAV (Missiles)",											"B_UAV_02_dynamicLoadout_F",											1700000,						"vehicle",						"variant_greyhawkMissile"],
 	["To-199 Neophron CAS",														"O_Plane_CAS_02_dynamicLoadout_F",										1000000,					"vehicle"],
-	["To-201 Shikra",															"O_Plane_Fighter_02_F",													1250000,					"vehicle"],
-	["To-201 Shikra (Stealth)",													"O_Plane_Fighter_02_Stealth_F",											1500000,					"vehicle"],
+	["To-201 Shikra",															"O_Plane_Fighter_02_F",													1500000,					"vehicle"],
+	["To-201 Shikra (Stealth)",													"O_Plane_Fighter_02_Stealth_F",											1750000,					"vehicle"],
 	["UCAV Sentinel",															"B_UAV_05_F",															400000,						"vehicle"],
 	["V-44 X Blackfish (Vehicle Transport)",									"B_T_VTOL_01_vehicle_F",												30000,						"vehicle"],
 	["V-44 X Blackfish (Infrantry Transport)",									"B_T_VTOL_01_infantry_F",												20000,						"vehicle"],
