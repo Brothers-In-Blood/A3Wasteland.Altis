@@ -117,7 +117,7 @@ class GOMRscButton_1601: GOMRscButton
 	w = 6.5 * GUI_GRID_W;
 	h = 1 * GUI_GRID_H;
 };
-/*class GOMRscStructuredText_1105: GOMRscStructuredText
+class GOMRscStructuredText_1105: GOMRscStructuredText
 {
 	idc = 1105;
 
@@ -136,7 +136,7 @@ class GOMRscEdit_1400: GOMRscEdit
 	y = 11 * GUI_GRID_H + GUI_GRID_Y;
 	w = 6.5 * GUI_GRID_W;
 	h = 1 * GUI_GRID_H;
-};*/
+};
 class GOMRscButton_1602: GOMRscButton
 {
 	idc = 1602;
