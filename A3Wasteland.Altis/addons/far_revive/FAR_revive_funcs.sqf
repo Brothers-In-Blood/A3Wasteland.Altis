@@ -4,6 +4,7 @@
 #include "FAR_defines.sqf"
 
 #define FAR_Max_Distance 2.5
+#define FAR_Revive_Duration 10 //seconds
 
 ////////////////////////////////////////////////
 // Player Actions
@@ -29,7 +30,7 @@ call mf_compile;
 // Handle Death
 ////////////////////////////////////////////////
 FAR_HandleDamage_EH = "addons\far_revive\FAR_HandleDamage_EH.sqf" call mf_compile;
-FAR_fnc_headshotHitPartEH = "addons\far_revive\FAR_headshotHitPartEH.sqf" call mf_compile;
+//FAR_fnc_headshotHitPartEH = "addons\far_revive\FAR_headshotHitPartEH.sqf" call mf_compile;
 
 ////////////////////////////////////////////////
 // Make Player Unconscious
@@ -75,19 +76,32 @@ FAR_HandleTreating =
 			_target setVariable ["FAR_treatedBy", player, true];
 			player setVariable ["FAR_isTreating", _target];
 
-			_medicMove = format ["AinvPknlMstpSlayW%1Dnon_medic", [player, true] call getMoveWeapon];
-			player playMove _medicMove;
+			//_medicMove = format ["AinvPknlMstpSlayW%1Dnon_medic", [player, true] call getMoveWeapon];
+			//player playMove _medicMove;
 
-			waitUntil {sleep 0.1; animationState player == _medicMove || !CAN_PERFORM};
-			waitUntil {sleep 0.1; animationState player != _medicMove || !CAN_PERFORM};
+			_checks =
+			{
+				params ["_progress", "_target", "_isRevive"];
+				private _failed = true;
+				private _text = "Action failed!";
 
-			if (CAN_PERFORM) then
+				if (CAN_PERFORM) then
+				{
+					_failed = false;
+					_text = format [["Stabilizing %1%2 complete","Reviving %1%2 complete"] select _isRevive, floor (_progress * 100), "%"];
+				};
+
+				[_failed, _text];
+			};
+
+			_success = [FAR_Revive_Duration, "", _checks, [_target, _revive]] call a3w_actions_start;
+
+			if (_success && CAN_PERFORM) then
 			{
 				if (_revive) then
 				{
 					_target setVariable ["FAR_isUnconscious", 0, true];
 					[player, "reviveCount", 1] call fn_addScore;
-					player removeItem "Medikit";
 				}
 				else
 				{
@@ -205,23 +219,27 @@ call mf_compile;
 
 FAR_Drag_Load_Vehicle =
 {
-	params [["_veh",cursorObject]];
+	params [["_veh",cursorTarget]];
 	private "_draggedUnit";
 	_draggedUnit = player getVariable ["FAR_isDragging", objNull];
 
 	if (alive player && alive _draggedUnit && attachedTo _draggedUnit == player) then
 	{
 		FAR_isDragging = false;
-		_draggedUnit setVariable ["FAR_cancelAutoEject", true, true];
-		detach _draggedUnit;
-		[_draggedUnit, _veh, true] call A3W_fnc_getInFast;
+
+		if ([_draggedUnit, _veh, true] call fn_canGetIn) then
+		{
+			_draggedUnit setVariable ["FAR_cancelAutoEject", true, true];
+			detach _draggedUnit;
+			[_draggedUnit, _veh, true] call A3W_fnc_getInFast;
+		};
 	};
 }
 call mf_compile;
 
 FAR_Eject_Injured =
 {
-	params [["_veh",cursorObject]];
+	params [["_veh",cursorTarget]];
 
 	{
 		if (UNCONSCIOUS(_x) && [_x, player] call A3W_fnc_isFriendly) then
@@ -323,7 +341,7 @@ call mf_compile;
 
 #define ABDOMEN_ASL(UNIT) (AGLtoASL (UNIT modelToWorldVisual (UNIT selectionPosition "spine1")))
 #define FAR_Target_INVALID(TARGET) (!alive TARGET || (!isPlayer TARGET && !FAR_Debugging) || TARGET distance player > FAR_Max_Distance || !UNCONSCIOUS(TARGET) || BEING_TREATED(TARGET) || DRAGGED(TARGET) || \
-(TARGET != cursorObject && {!(lineIntersectsObjs [ABDOMEN_ASL(player), ABDOMEN_ASL(TARGET), TARGET, player, false, 4] isEqualTo [])}))
+(TARGET != cursorTarget && {!(lineIntersectsObjs [ABDOMEN_ASL(player), ABDOMEN_ASL(TARGET), TARGET, player, false, 4] isEqualTo [])}))
 
 // lineIntersectsObjs is to check whether or not there is a wall between an imaginary line that goes from the medic's abdomen to the target's abdomen, if the target is not being aimed at directly
 
@@ -333,7 +351,7 @@ call mf_compile;
 FAR_FindTarget =
 {
 	private ["_target", "_unit"];
-	_target = cursorObject;
+	_target = cursorTarget;
 
 	if (FAR_Target_INVALID(_target)) then
 	{
@@ -406,10 +424,10 @@ call mf_compile;
 FAR_Check_Load_Dragged =
 {
 	private ["_veh", "_draggedUnit"];
-	_veh = cursorObject;
+	_veh = cursorTarget;
 	_draggedUnit = player getVariable ["FAR_isDragging", objNull];
 
-	player distance _veh <= (sizeOf typeOf _veh / 3) max 2 && [_draggedUnit, _veh, true] && [_draggedUnit, player] call A3W_fnc_isFriendly
+	player distance _veh <= (sizeOf typeOf _veh / 3) max 2 && [_draggedUnit, _veh, true] call fn_canGetIn && [_draggedUnit, player] call A3W_fnc_isFriendly
 }
 call mf_compile;
 
@@ -419,7 +437,7 @@ call mf_compile;
 FAR_Check_Eject_Injured =
 {
 	private "_veh";
-	_veh = cursorObject;
+	_veh = cursorTarget;
 
 	player distance _veh <= (sizeOf typeOf _veh / 3) max 2 && !(_veh isKindOf "Man") && {{UNCONSCIOUS(_x) && [_x, player] call A3W_fnc_isFriendly} count crew _veh > 0}
 }

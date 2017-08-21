@@ -7,7 +7,7 @@ switch (_mode) do {
 	case 0: {//init
 		_console_history = __uiGet(balca_console_history);
 		if (isNil{_console_history}) then {
-			_console_history = ["hint format [""%1"",cursorObject]"];
+			_console_history = ["hint format [""%1"",cursortarget]"];
 			__uiSet(balca_console_history,_console_history);
 			{
 				GET_CTRL(balca_debug_console_history_IDC) lbAdd _x;

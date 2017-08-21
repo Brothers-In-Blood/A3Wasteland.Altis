@@ -123,7 +123,7 @@ if (_key != "" && isPlayer _player && {_isGenStore || _isGunStore || _isVehStore
 			if (!isNull _storeNPC && surfaceIsWater _npcPos && !_seaSpawn) then
 			{
 				_markerPos set [2, _npcPos select 2];
- 				_spawnPosAGL = ASLtoAGL _markerPos;
+				_spawnPosAGL = ASLtoAGL _markerPos;
 				_safePos = if (_canFloat) then { _spawnPosAGL } else { ASLtoATL _markerPos };
 				_waterNonBoat = true;
 			}
@@ -142,6 +142,7 @@ if (_key != "" && isPlayer _player && {_isGenStore || _isGunStore || _isVehStore
 					deleteVehicle _x;
 				};
 			} forEach nearestObjects [_spawnPosAGL, ["LandVehicle","Air","Ship"], 25];
+			} forEach nearestObjects [_spawnPosAGL, ["LandVehicle","Air","Ship"], 25 max sizeOf _class];
 
 			if (_player getVariable [_timeoutKey, true]) then { breakOut "spawnStoreObject" }; // Timeout
 

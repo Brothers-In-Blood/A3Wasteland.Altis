@@ -38,8 +38,8 @@ pp_setup_terminal = {
   if (_terminal getVariable ["A3W_parkingTerminalSetupDone",false]) exitWith {};
   private _garage = param [1, nearestBuilding _terminal];
 
-  if (local _terminal) then { _terminal allowDamage false };
-  if (local _garage) then { _garage allowDamage false };
+  _terminal allowDamage false;
+  _garage allowDamage false;
   _terminal setVariable ["R3F_LOG_disabled", true]; //don't allow players to move the table
   _garage setVariable ["R3F_LOG_disabled", true];
 
@@ -81,7 +81,7 @@ pp_create_terminal = {
     case (_garage isKindOf "Land_Carrier_01_base_F"): { [-28.663,108.289,23.9749] };
     default                                           { [0,0,0] };
   };
- 
+
   _pos = AGLtoASL (_garage modelToWorld _offset);
   _garage allowDamage false;
 
@@ -135,7 +135,7 @@ pp_get_near_vehicles = {
   ARGVX4(0,_player,objNull,[]);
 
   def(_vehicles);
-  _vehicles = (nearestObjects [_player, ["LandVehicle","Air","Ship"], 50]);
+  _vehicles = (nearestObjects [_player, ["LandVehicle","Air","Ship"], 50]) select {!(_x getVariable ["A3W_lockpickDisabled",false])};
 
   init(_filtered,[]);
   def(_uid);

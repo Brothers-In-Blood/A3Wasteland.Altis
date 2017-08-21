@@ -10,12 +10,12 @@ if (PG_get(STATUS)) then {
 	[] spawn {
 		while {PG_get(STATUS)} do {
 			sleep 0.5;
-			_cursorObject = cursorObject;
-			if ((alive _cursorObject)) then {
+			_cursortarget = cursorTarget;
+			if ((alive _cursortarget)) then {
 				cutRsc ["balca_debug_hint","PLAIN"];
-				_crew = crew _cursorObject;
-				GET_CTRL(balca_hint_text_IDC) ctrlSetText format ["%1 Damage: %2",typeOf _cursorObject, round((damage _cursorObject)*100)/100];
-				if (((count _crew) > 0)and!(_cursorObject isKindOf "CAManBase")) then {
+				_crew = crew _cursortarget;
+				GET_CTRL(balca_hint_text_IDC) ctrlSetText format ["%1 Damage: %2",typeOf _cursortarget, round((damage _cursortarget)*100)/100];
+				if (((count _crew) > 0)and!(_cursortarget isKindOf "CAManBase")) then {
 					_crew_stat = [];
 					{_crew_stat set [count _crew_stat, round((damage _x)*100)/100]} forEach _crew;
 					GET_CTRL(balca_hint_text2_IDC) ctrlSetText format ["Crew status: %1",_crew_stat];

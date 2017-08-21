@@ -85,7 +85,7 @@ class balca_debug_main
 				x = 0; w = column_weight-column_div;
 				y = btn_height*8;
 				text = "Delete vehicle";
-				action = "deleteVehicle cursorObject;";
+				action = "deleteVehicle cursorTarget;";
 			};
 
 
