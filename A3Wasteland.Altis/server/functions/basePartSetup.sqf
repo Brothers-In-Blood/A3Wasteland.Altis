@@ -8,8 +8,11 @@ if (!isServer) exitWith {};
 
 private "_obj";
 _obj = _this select 0;
-
 _obj setVariable [call vChecksum, true];
+
 //Make base objects much harder to kill
-_obj addMPEventHandler ["HandleDamage", {false}];
-_obj addMPEventHandler ["Hit", {_obj setDamage 0}];
+if (_obj isKindOf "Static") then
+{
+_obj addEventHandler ["HandleDamage", {0.00001}];
+_obj addEventHandler ["Hit", {_obj setDamage 0.0001}];
+};

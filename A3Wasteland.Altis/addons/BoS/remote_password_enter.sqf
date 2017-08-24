@@ -2,13 +2,13 @@
 // * This project is licensed under the GNU Affero GPL v3. Copyright � 2014 	BadVolt 	*
 // ******************************************************************************************
 //	@file Version: 1.0
-//	@file Name: password_enter.sqf
-//	@file Author: BadVolt
+//	@file Name: remote_password_enter.sqf
+//	@file Author: BIB_Monkey
 //	@file Description: Entering password and open the doors for duration. Then closes them.
 
 //#define DURATION 10
 
-_object = cursorObject;
+_object = nearestObject [player, "Land_SatellitePhone_F"];
 
 OutputText = nil;
 
@@ -17,7 +17,7 @@ createDialog "AF_Keypad";
 waitUntil {!(isNil "OutputText")};
 
 if (OutputText == _object getVariable ["password", ""]) then {
-	execVM "addons\BoS\BoS_remotecoownerMenu.sqf";	
+	execVM "addons\BoS\BoS_Remote_coownerMenu.sqf";	
 	//[format ["Doors opened for %1 seconds ",DURATION], 5] call mf_notify_client;
 }else{
 	["Wrong PIN!", 5] call mf_notify_client;

@@ -1,8 +1,8 @@
 // ******************************************************************************************
 // * This project is licensed under the GNU Affero GPL v3. Copyright © 2016 A3Wasteland.com *
 // ******************************************************************************************
-//  @file Name: fn_AmmoTruck.sqf
-//  @file Author: Wiking, AgentRev, micovery
+//  @file Name: fn_AResupplyPoint.sqf
+//  @file Author: BIB_Monkey
 
 #define RESUPPLY_TRUCK_DISTANCE 20
 #define PRICE_RELATIONSHIP 10 // resupply price = brand-new store price divided by PRICE_RELATIONSHIP
@@ -108,7 +108,7 @@ Switch (true) do
 		"I_GMG_01_F", "I_GMG_01_high_F", "I_GMG_01_A_F", "I_Mortar_01_F", "I_static_AA_F", "I_static_AT_F", "I_C_Boat_Transport_02_F", "C_Heli_Light_01_civil_F",
 		"C_Van_01_fuel_F", "C_Hatchback_01_F", "C_Hatchback_01_sport_F", "C_Kart_01_F", "C_Kart_01_Blu_F", "C_Kart_01_Fuel_F", "C_Kart_01_Red_F", "C_Kart_01_Vrana_F",
 		"C_Offroad_02_unarmed_F", "C_Offroad_01_F", "C_Offroad_01_repair_F", "C_Quadbike_01_F", "C_SUV_01_F", "C_Van_01_transport_F", "C_Van_01_box_F", "C_Truck_02_fuel_F",
-		"C_Truck_02_box_F", "C_Truck_02_transport_F", "C_Truck_02_covered_F", "C_Plane_Civil_01_F", "C_Plane_Civil_01_racing_F"
+		"C_Truck_02_box_F", "C_Truck_02_transport_F", "C_Truck_02_covered_F", "C_Plane_Civil_01_F", "C_Plane_Civil_01_racing_F", "O_T_LSV_02_armed_F", "O_MBT_02_cannon_F"
 	]>0):
 	{
 		//Non Dynamic vehicles are service based on percentage of store price
@@ -558,7 +558,7 @@ Switch (true) do
 
 
 	// Dynamic Vehicles with 10 pylons
-	case ({_vehicle iskindof _x} count ["O_Plane_Fighter_02_Stealth_F", "I_Plane_Fighter_03_dynamicLoadout_F"] >0):
+	case ({_vehicle iskindof _x} count ["B_Plane_CAS_01_dynamicLoadout_F", "O_Plane_CAS_02_dynamicLoadout_F"] >0):
 	{
 			//Determine Weapons Loaded on Pylons
 		_pylonsequiped = GetPylonMagazines _vehicle;

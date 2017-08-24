@@ -17,7 +17,7 @@ if (!isServer) exitWith {};
 
 private ["_soldierTypes", "_uniformTypes", "_vestTypes", "_weaponTypes", "_group", "_position", "_rank", "_soldier"];
 
-_soldierTypes = ["O_V_Soldier_JTAC_ghex_F", "CO_T_Soldier_F", "O_V_Soldier_Exp_ghex_F", "O_V_Soldier_Medic_ghex_F", "O_V_Soldier_LAT_ghex_F", "O_V_Soldier_TL_ghex_F"];
+_soldierTypes = ["C_man_polo_1_F", "C_man_polo_2_F", "C_man_polo_3_F", "C_man_polo_4_F", "C_man_polo_5_F", "C_man_polo_6_F"];
 _uniformTypes = ["U_O_V_Soldier_Viper_F"];
 _vestTypes = ["V_HarnessO_ghex_F"];
 _weaponTypes = ["arifle_CTAR_blk_F","arifle_ARX_ghex_F"];

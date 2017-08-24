@@ -108,26 +108,6 @@ waitUntil
 	};
 	_oldAiCount = _newAiCount;
 
-//// AI Reinforcement Section  //Apoc ////////////////////////////////////////////////////////////////////////////////////////////////////
-	/*if (((_newAiCount < _startAiCount/2) && (!_reinforcementsCalled)) && !(MISSION_PROC_TYPE_NAME == "Bounty")) then
-	{
-		if (_reinforceChance > _reinforceChanceRoll) then
-		{
-			for "_i" from 1 to _reinforcementsToCall step 1 do{
-				nul = [_marker,4,true,false,1500,"random",true,200,150,8,0.5,50,true,false,false,true,_marker,false,"default",_aigroup,nil,1,false,200] execVM "addons\AI_Spawn\heliParadrop.sqf";
-				diag_log format ["WASTELAND SERVER - %1 Mission%2 Reinforcements Called: %3.  %5 of %4 AI remaining", MISSION_PROC_TYPE_NAME, _controllerSuffix, _missionType, _startAiCount, _newAiCount];
-				_reinforcementsCalled = True;
-				sleep 30;
-			};
-			if ((floor random(100))>85) then
-			{
-				_aiGroup2 = [_marker] execVM "server\missions\factoryMethods\createReinforceAttackHelicopter.sqf";
-				diag_log format ["WASTELAND SERVER - %1 Mission%2 Attack Helo Called: %3.  %5 of %4 AI remaining", MISSION_PROC_TYPE_NAME, _controllerSuffix, _missionType, _startAiCount, _newAiCount];
-			};
-		};
-	};*/
-//// AI Reinforcement Section  //Apoc ////////////////////////////////////////////////////////////////////////////////////////////////////
-
 	if (!isNull _leaderTemp) then { _leader = _leaderTemp }; // Update current leader
 
 	if (!isNil "_waitUntilMarkerPos") then { _marker setMarkerPos (call _waitUntilMarkerPos) };

@@ -133,7 +133,7 @@ _setupObjects =
 	_missionPicture = getText (configFile >> "CfgVehicles" >> (_vehicleClass param [0,""]) >> "picture");
 	_vehicleName = getText (configFile >> "CfgVehicles" >> (_vehicleClass param [0,""]) >> "displayName");
 
-	_missionHintText = format ["An armed <t color='%2'>%1</t> is patrolling the island. Intercept it and recover its cargo!", _vehicleName, sideMissionColor];
+	_missionHintText = format ["An armed <t color='%2'>%1</t> is patrolling the island. Intercept it and recover its cargo!", _vehicleName, hostileairMissionColor];
 
 	_numWaypoints = count waypoints _aiGroup;
 };
@@ -164,10 +164,12 @@ _successExec =
 
 		_box1 = createVehicle ["Box_NATO_Wps_F", (getPosATL _veh) vectorAdd ([[_veh call fn_vehSafeDistance, 0, 0], random 360] call BIS_fnc_rotateVector2D), [], 5, "None"];
 		_box1 setDir random 360;
+		_box1 setVariable ["moveable", true, true];
 		[_box1, "mission_USSpecial"] call fn_refillbox;
 
 		_box2 = createVehicle ["Box_East_Wps_F", (getPosATL _veh) vectorAdd ([[_veh call fn_vehSafeDistance, 0, 0], random 360] call BIS_fnc_rotateVector2D), [], 5, "None"];
 		_box2 setDir random 360;
+		_box2 setVariable ["moveable", true, true];
 		[_box2, "mission_USLaunchers"] call fn_refillbox;
 	};
 

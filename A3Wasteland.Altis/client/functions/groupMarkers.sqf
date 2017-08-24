@@ -48,6 +48,7 @@ _groupMembers spawn
 				if ({_x select 0 == _unit} count _groupMembersArray == 0) then
 				{
 					_groupMembersArray pushBack [_unit, name _unit, "groupMember_" + getPlayerUID _unit, false];
+					//_groupMembersArray pushBack [_unit, name _unit, "groupMember_" + name _unit, false];
 				};
 			};
 		} forEach units player;

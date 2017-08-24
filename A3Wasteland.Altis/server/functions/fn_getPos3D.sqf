@@ -8,3 +8,13 @@
 // while most functions require positions to be from ground or sea wave level, whichever is highest
 
 ASLToAGL getPosASL _this
+
+/*private "_pos";
+_pos = getPosATL _this;
+
+if (surfaceIsWater _pos) then
+{
+	_pos = getPosASLW _this;
+};
+
+_pos*/

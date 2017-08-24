@@ -18,7 +18,7 @@ mf_items_cratemoney_withdraw = [_path, "withdraw.sqf"] call mf_compile;
 mf_items_cratemoney_nearest =
 {
 	private "_target";
-	_target = cursorObject;
+	_target = cursorTarget;
 	if (player distance _target <= 3 && {_target isKindOf "ReammoBox_F"}) then { _target } else { objNull }
 } call mf_compile;
 

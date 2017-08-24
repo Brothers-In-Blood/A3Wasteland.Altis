@@ -10,7 +10,7 @@ if (!hasInterface) exitWith {};
 
 #define ICON_fadeDistance 2500
 #define ICON_limitDistance 5000
-#define ICON_sizeScale 0.75
+#define ICON_sizeScale 0.25
 #define MINE_ICON_MAX_DISTANCE 10 // 200 is Arma 3 default for mine detector
 #define UNIT_POS(UNIT) (UNIT modelToWorldVisual (UNIT selectionPosition "spine3")) //[0, 0, 1.25]) // Torso height
 #define UAV_UNIT_POS(UNIT) (((vehicle UNIT) modelToWorldVisual [0, 0, 0]) vectorAdd [0, 0, 0.5])

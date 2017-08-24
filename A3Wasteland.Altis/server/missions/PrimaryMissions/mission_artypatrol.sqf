@@ -5,7 +5,7 @@
 //	@file Author: WitchDoctor [GGO]
 
 if (!isServer) exitwith {};
-#include "EndGameMissionDefines.sqf";
+#include "PrimaryMissionDefines.sqf";
 
 private ["_convoyVeh","_veh1","_veh2","_veh3","_veh4","_veh5","_veh6","_veh7","_veh8","_veh9","_veh10","_createVehicle1","_createVehicle2","_createVehicle3","_vehicles", "_leader", "_speedMode", "_waypoint", "_vehicleName", "_numWaypoints", "_cash", "_box1", "_box2", "_box3", "_randomBox1", "_randomBox2", "_randomBox3", "_Case1", "_Case2", "_Case3"];
 
@@ -400,7 +400,7 @@ _setupObjects =
 	_vehicleName2 = getText (configFile >> "CfgVehicles" >> _veh6 >> "displayName");
 	_vehicleName3 = getText (configFile >> "CfgVehicles" >> _veh9 >> "displayName");
 
-	_missionHintText = format ["A convoy containing at least a <t color='%4'>%1</t>, a <t color='%4'>%2</t> and a <t color='%4'>%3</t> is patrolling a high value location! Stop the partol and collect the high value weapons crate and money!", _vehicleName, _vehicleName2, _vehicleName3, EndGameMissionColor];
+	_missionHintText = format ["A convoy containing at least a <t color='%4'>%1</t>, a <t color='%4'>%2</t> and a <t color='%4'>%3</t> is patrolling a high value location! Stop the partol and collect the high value weapons crate and money!", _vehicleName, _vehicleName2, _vehicleName3, PrimaryMissionColor];
 
 	_numWaypoints = count waypoints _aiGroup;
 };
@@ -415,43 +415,37 @@ _failedExec = nil;
 
 _successExec =
 {
-	// Mission completed
-
-	/*for "_x" from 1 to 10 do
-	{
-		_cash = "Land_Money_F" createVehicle markerPos _marker;
-		_cash setPos ((markerPos _marker) vectorAdd ([[2 + random 2,0,0], random 360] call BIS_fnc_rotateVector2D));
-		_cash setDir random 360;
-		_cash setVariable["cmoney",25000,true];
-		_cash setVariable["owner","world",true];
-	};*/
-
-	//This works
 	_box1 = "B_supplyCrate_F" createVehicle getMarkerPos _marker;
     [_box1,"Launchers_Tier_2"] call fn_refillbox;
 	_box1 allowDamage false;
+	_box1 setVariable ["moveable", true, true];
 
 	_box2 = "Box_NATO_Wps_F" createVehicle getMarkerPos _marker;
     [_box2,"mission_USSpecial2"] call fn_refillbox;
 	_box2 allowDamage false;
+	_box2 setVariable ["moveable", true, true];
 
 	_box3 = "Box_NATO_Support_F" createVehicle getMarkerPos _marker;
     [_box3,"mission_snipers"] call fn_refillbox;
 	_box3 allowDamage false;
+	_box3 setVariable ["moveable", true, true];
 
 	_box4 = "Box_NATO_Support_F" createVehicle getMarkerPos _marker;
     [_box4,"mission_snipers"] call fn_refillbox;
 	_box4 allowDamage false;
+	_box4 setVariable ["moveable", true, true];
 
 	_box5 = "B_supplyCrate_F" createVehicle getMarkerPos _marker;
     [_box5,"GEVP"] call fn_refillbox;
 	_box5 allowDamage false;
+	_box5 setVariable ["moveable", true, true];
 
 	_box6 = "B_supplyCrate_F" createVehicle getMarkerPos _marker;
     [_box6,"Launchers_Tier_2"] call fn_refillbox;
 	_box6 allowDamage false;
+	_box6 setVariable ["moveable", true, true];
 
 	_successHintMessage = "The patrol has been stopped, the money, crates and vehicles are yours to take.";
 };
 
-_this call EndGameMissionProcessor;
+_this call PrimaryMissionProcessor;

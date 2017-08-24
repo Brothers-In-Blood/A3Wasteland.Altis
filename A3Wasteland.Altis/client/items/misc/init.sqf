@@ -23,7 +23,7 @@ _icon = "client\icons\repair.paa";
 mf_nearest_vehicle = {
 	private ["_types", "_obj", "_dist"];
 	_types = _this;
-	_obj = cursorObject;
+	_obj = cursorTarget;
 	if (!isNull _obj && {{_obj isKindOf _x} count _types == 0}) then { _obj = objNull };
 	_obj
 } call mf_compile;

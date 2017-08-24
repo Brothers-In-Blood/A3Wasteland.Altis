@@ -10,7 +10,7 @@
 // _x select 2 = Name
 // _x select 3 = Value
 
-#define GET_HALF_PRICE(PRICE) ((ceil (((PRICE) / 2) / 5)) * 5)
+#define GET_HALF_PRICE(PRICE) ((ceil ((PRICE) * 0.3)))
 
 private ["_obj", "_sellValue", "_objItems", "_objMags", "_objWeapons", "_weaponArray", "_class", "_container", "_allStoreMagazines", "_allGunStoreFirearms", "_allStoreItems", "_weaponEntry", "_weaponClass", "_weaponQty", "_weaponCfg", "_weaponCfgModel", "_masterCfg", "_found", "_cfgItems", "_allObjItems", "_item", "_itemClass", "_itemQty", "_itemValue", "_itemQtyArr", "_cfgCategory", "_magFullAmmo", "_magFullPrice", "_magValue", "_itemName"];
 
@@ -125,6 +125,7 @@ _allObjItems = [];
 	_itemQty = _x select 1;
 	_itemQtyArr = nil;
 	_itemValue = 10;
+	_sellValue = 0;
 
 	if (typeName _itemQty == "ARRAY") then
 	{
@@ -175,7 +176,7 @@ _allObjItems = [];
 		_itemName = getText (configFile >> _cfgCategory >> _itemClass >> "displayName");
 
 		_item set [2, _itemName];
-		_item set [3, _itemValue];
+		_item set [3, [_itemValue, _sellValue] select (_sellValue > 0)];
 	};
 } forEach _allObjItems;
 

@@ -52,18 +52,18 @@ if (_uid call isAdmin) then
 					["A3W_teleport", "onMapSingleClick",
 					{
 						private "_waterPos";
- 						if (surfaceIsWater _pos) then
- 						{
- 							_top = +_pos;
- 							_top set [2, (_top select 2) + 1000];
- 							_buildings = (lineIntersectsSurfaces [_top, _pos, objNull, objNull, true, -1, "GEOM", "NONE"]) select {(_x select 2) isKindOf "Building"};
- 
- 							if !(_buildings isEqualTo []) then
- 							{
- 								_waterPos = _buildings select 0 select 0;
- 							};
- 						};
- 						if (isNil "_waterPos") then { vehicle player setPos _pos } else { vehicle player setPosASL _waterPos };
+						if (surfaceIsWater _pos) then
+						{
+							_top = +_pos;
+							_top set [2, (_top select 2) + 1000];
+							_buildings = (lineIntersectsSurfaces [_top, _pos, objNull, objNull, true, -1, "GEOM", "NONE"]) select {(_x select 2) isKindOf "Building"};
+
+							if !(_buildings isEqualTo []) then
+							{
+								_waterPos = _buildings select 0 select 0;
+							};
+						};
+						if (isNil "_waterPos") then { vehicle player setPos _pos } else { vehicle player setPosASL _waterPos };
 						if (!isNil "notifyAdminMenu") then { ["teleport", _pos] spawn notifyAdminMenu };
 						["A3W_teleport", "onMapSingleClick"] call BIS_fnc_removeStackedEventHandler;
 						true
@@ -72,9 +72,9 @@ if (_uid call isAdmin) then
 				};
 				case 5: //Money
 				{
-					_money = 1000000;
+					_money = 500000;
 					player setVariable ["cmoney", (player getVariable ["cmoney",0]) + _money, true];
-
+					if (!isNil "notifyAdminMenu") then { ["money", _money] call notifyAdminMenu };
 				};
 				case 6: //Debug Menu
 				{

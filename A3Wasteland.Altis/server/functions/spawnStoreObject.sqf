@@ -123,7 +123,7 @@ if (_key != "" && isPlayer _player && {_isGenStore || _isGunStore || _isVehStore
 			if (!isNull _storeNPC && surfaceIsWater _npcPos && !_seaSpawn) then
 			{
 				_markerPos set [2, _npcPos select 2];
- 				_spawnPosAGL = ASLtoAGL _markerPos;
+				_spawnPosAGL = ASLtoAGL _markerPos;
 				_safePos = if (_canFloat) then { _spawnPosAGL } else { ASLtoATL _markerPos };
 				_waterNonBoat = true;
 			}
@@ -141,11 +141,13 @@ if (_key != "" && isPlayer _player && {_isGenStore || _isGunStore || _isVehStore
 				{
 					deleteVehicle _x;
 				};
-			} forEach nearestObjects [_spawnPosAGL, ["LandVehicle","Air","Ship"], 25];
+			//} forEach nearestObjects [_spawnPosAGL, ["LandVehicle","Air","Ship"], 25];
+			} forEach nearestObjects [_spawnPosAGL, ["LandVehicle","Air","Ship"], 25 max sizeOf _class];
 
 			if (_player getVariable [_timeoutKey, true]) then { breakOut "spawnStoreObject" }; // Timeout
 
 			_object = createVehicle [_class, _safePos, [], 0, ""];
+			_object setVariable ["moveable", true, true];
 
 			if (_waterNonBoat) then
 			{
@@ -227,20 +229,6 @@ if (_key != "" && isPlayer _player && {_isGenStore || _isGunStore || _isVehStore
 
 			clearBackpackCargoGlobal _object;
 
-			//Setup Service Objects
- 			switch (true) do
- 			{
- 				case (_object isKindOf "Static"):
- 				{
-					_object enableDynamicSimulation true;
-					_object setVariable ["moveable", true, true];
- 				};
-				case (_object iskindof "Thing"):
-				{
-					_object enableDynamicSimulation true;
-					_object setVariable ["moveable", true, true];
-				};
-			};
 			if ({_object iskindof _x} count [
 					"Box_NATO_AmmoVeh_F",
 					"B_Slingload_01_Ammo_F",
@@ -258,9 +246,8 @@ if (_key != "" && isPlayer _player && {_isGenStore || _isGunStore || _isVehStore
 				_object setAmmoCargo 0;
 				_object setFuelCargo 0;
 				_object setRepairCargo 0;
-				_object enableDynamicSimulation true;
 				[_object] remoteExecCall ["GOM_fnc_addAircraftLoadout", 0, _object];
-			}:
+			};
 
 			if (_skipSave) then
 			{

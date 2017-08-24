@@ -42,13 +42,6 @@ switch (_lockState) do
 			_object = _this select 1;
 			_failed = true;
 
-			_reLockers = nearestObjects [player, ["Land_Device_assembled_F","Land_SatellitePhone_F"], 200];
-			if (count _reLockers > 0) then {
-				_reLocker = _reLockers select 0;
-				}else{
-				_reLocker = objNull;
-				};
-
 			switch (true) do
 			{
 				case (!alive player): { _text = "" };
@@ -56,7 +49,6 @@ switch (_lockState) do
 				case (vehicle player != player): { _text = "Action failed! You can't do this in a vehicle" };
 				case (!isNull (_object getVariable ["R3F_LOG_est_transporte_par", objNull])): { _text = "Action failed! Somebody moved the object" };
 				case (_object getVariable ["objectLocked", false]): { _text = "Somebody else locked it before you" };
-				case (_reLocker getVariable ["lockDown", false] && alive _reLocker): { _text = "You cannot lock objects close to a base under Lock Down" }; // Re Locker
 				default
 				{
 					_failed = false;
@@ -93,13 +85,6 @@ switch (_lockState) do
 			_object = _this select 1;
 			_failed = true;
 
-			_reLockers = nearestObjects [player, ["Land_Device_assembled_F","Land_SatellitePhone_F"], 200];
-			if (count _reLockers > 0) then {
-				_reLocker = _reLockers select 0;
-				}else{
-				_reLocker = objNull;
-			};
-
 			switch (true) do
 			{
 				case (!alive player): {};
@@ -107,7 +92,7 @@ switch (_lockState) do
 				case (vehicle player != player): { _text = "Action failed! You can't do this in a vehicle" };
 				case (!isNull (_object getVariable ["R3F_LOG_est_transporte_par", objNull])): { _text = "Action failed! Somebody moved the object" };
 				case !(_object getVariable ["objectLocked", false]): { _text = "Somebody else unlocked it before you" };
-				case (_reLocker getVariable ["lockDown", false] && alive _reLocker): { _text = "You cannot unlock objects close to a base under Lock Down" }; // Re Locker
+				case (_object getVariable ["LockedDown", false]): {_text = "Object is locked down"};
 				default
 				{
 					_failed = false;
@@ -126,7 +111,6 @@ switch (_lockState) do
 			_object setVariable ["ownerUID", nil, true];
 			_object setVariable ["baseSaving_hoursAlive", nil, true];
 			_object setVariable ["baseSaving_spawningTime", nil, true];
-			_object addEventHandler ["HandleDamage", {_this select 2}];;
 
 			pvar_manualObjectSave = netId _object;
 			publicVariableServer "pvar_manualObjectSave";

@@ -22,11 +22,14 @@ if !(_class isKindOf "AllVehicles") exitWith {}; // if not actual vehicle, finis
 
 clearBackpackCargoGlobal _vehicle;
 
+/*
 // Disable thermal on all manned vehicles
-if (getNumber (configFile >> "CfgVehicles" >> _class >> "isUav") < 1) then
+// if (getNumber (configFile >> "CfgVehicles" >> _class >> "isUav") < 1) then
+if (round getNumber (configFile >> "CfgVehicles" >> _class >> "isUav") < 1) then
 {
 	_vehicle disableTIEquipment false;
 };
+*/
 
 _vehicle setUnloadInCombat [false, false]; // Try to prevent AI from getting out of vehicles while in combat (not sure if this actually works...)
 
@@ -42,7 +45,6 @@ _vehicle setVariable ["A3W_engineEH", _vehicle addEventHandler ["Engine", vehicl
 _vehicle addEventHandler ["GetIn", fn_vehicleGetInOutServer];
 _vehicle addEventHandler ["GetOut", fn_vehicleGetInOutServer];
 _vehicle addEventHandler ["Killed", fn_vehicleKilledServer];
-/*_vehicle enableDynamicSimulation true;*/
 
 if ({_class isKindOf _x} count ["Air","UGV_01_base_F"] > 0) then
 {

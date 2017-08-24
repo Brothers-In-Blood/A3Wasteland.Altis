@@ -16,6 +16,14 @@
   ["Heal self", "client\functions\healSelf.sqf",0,2,false,false,"","((damage player)>0.01 && (damage player)<0.25499) && (('FirstAidKit' in (items player)) || ('Medikit' in (items player))) "],
 	//Hide Body
   ["<img image='client\icons\cancel.paa'/> Hide Body", "client\actions\hide.sqf", [], 1, false, false, "", "!isNull cursorObject && !alive cursorObject && {cursorObject isKindOf 'Man' && player distance cursorObject <= (sizeOf typeOf cursorObject / 3) max 2}"],
+	//Take Gear
+  ["<img image='client\icons\cancel.paa'/> Take Gear", "client\actions\TakeGear.sqf", [], 1, false, false, "", "!isNull cursorObject && !alive cursorObject && {cursorObject isKindOf 'Man' && player distance cursorObject <= (sizeOf typeOf cursorObject / 3) max 2}"],
+	//Re-initialize UAV
+  ["Re-Initilize UAV", "client\actions\reinitializeUAV.sqf", [], 1, false, false, "", "{_x in ['B_UavTerminal','O_UavTerminal','I_UavTerminal']} count assignedItems player > 0 && {cursorTarget iskindof _x} count ['UAV_02_base_F', 'UAV_04_base_F', 'UAV_03_base_F', 'UGV_01_base_F', 'StaticWeapon'] >0"],
+	//Disable UAV
+  ["Disable UAV", "client\actions\disableUAV.sqf", [], 1, false, false, "", "{_x in ['B_UavTerminal','O_UavTerminal','I_UavTerminal']} count assignedItems player > 0 && {cursorTarget iskindof _x} count ['UAV_02_base_F', 'UAV_04_base_F', 'UAV_03_base_F', 'UGV_01_base_F', 'StaticWeapon'] >0"],
+	//Disable UAV IFF
+  // ["Disable UAV IFF", "client\actions\disableUAVIFF.sqf", [], 1, false, false, "", "{_x in ['B_UavTerminal','O_UavTerminal','I_UavTerminal']} count assignedItems player > 0 && {cursorTarget iskindof _x} count ['UAV_02_base_F', 'UAV_04_base_F', 'UAV_03_base_F', 'UGV_01_base_F', 'StaticWeapon'] >0"],
 	//Push Land Vehicle
 	["Push vehicle", "server\functions\pushVehicle.sqf", [2.5, true], 1, false, false, "", "[2.5] call canPushVehicleOnFoot"],
   // Push Water Vehicle
@@ -28,7 +36,7 @@
   //Holster Weapon
 	["Holster Weapon", { player action ["SwitchWeapon", player, player, 100] }, [], -11, false, false, "", "vehicle player == player && currentWeapon player != '' && (stance player != 'CROUCH' || currentWeapon player != handgunWeapon player)"], // A3 v1.58 bug, holstering handgun while crouched causes infinite anim loop
   //Remote Base Access
-  ["Acess Remote Base Management", "client\actions\BaseManegement.sqf", [], -98, false, true, ""],
+  ["Acess Remote Base Management", "client\actions\BaseManegement.sqf", [], -98, false, true, "","{_x in ['B_UavTerminal','O_UavTerminal','I_UavTerminal']} count assignedItems player > 0"],
 	//Open Player Menu
 	[format ["<img image='client\icons\playerMenu.paa' color='%1'/> <t color='%1'>[</t>Player Menu<t color='%1'>]</t>", "#FF8000"], "client\systems\playerMenu\init.sqf", [], -99, false],
   //Cancel Action
@@ -44,39 +52,7 @@
   //Detect Beacons
   ["Track Beacons", "addons\beacondetector\beacondetector.sqf",0,-10,false,false,"","('MineDetector' in (items player)) && !BeaconScanInProgress"],
   ["<img image='\a3\Ui_f\data\GUI\Cfg\CommunicationMenu\transport_ca.paa'/> <t color='#FFFFFF'>Cancel tracking.</t>", "Beaconscanstop = true",0,-10,false,false,"","BeaconScanInProgress"]
-	//Service System
-	/*["Service System", "GOM_fnc_aircraftLoadout", [], -90, false, true, "", "({cursorobject iskindof _x} count
-		[
-			'Box_NATO_AmmoVeh_F',
-			'B_Slingload_01_Ammo_F',
-			'B_Slingload_01_Fuel_F',
-			'B_Slingload_01_Medevac_F',
-			'B_Slingload_01_Repair_F',
-			'StorageBladder_01_fuel_forest_F',
-			'StorageBladder_01_fuel_sand_F',
-			'Land_fs_feed_F',
-			'Land_FuelStation_01_pump_malevil_F',
-			'Land_FuelStation_Feed_F',
-			'Land_Pod_Heli_Transport_04_fuel_F',
-			'Land_Pod_Heli_Transport_04_repair_F',
-			'C_Offroad_01_repair_F',
-			'C_Van_01_fuel_F',
-			'B_G_Van_01_fuel_F',
-			'B_Truck_01_fuel_F',
-			'B_Truck_01_Repair_F',
-			'B_Truck_01_ammo_F',
-			'O_Truck_03_fuel_F',
-			'O_Truck_03_repair_F',
-			'O_Truck_03_ammo_F',
-			'I_Truck_02_fuel_F',
-			'I_Truck_02_box_F',
-			'I_Truck_02_ammo_F',
-			'B_APC_Tracked_01_CRV_F',
-			'O_Heli_Transport_04_ammo_F',
-			'O_Heli_Transport_04_repair_F',
-			'O_Heli_Transport_04_fuel_'
-		] > 0)"]*/
-	];
+];
 
 if (["A3W_vehicleLocking"] call isConfigOn) then
 {

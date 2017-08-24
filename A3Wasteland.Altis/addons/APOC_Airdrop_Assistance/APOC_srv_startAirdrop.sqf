@@ -41,7 +41,6 @@ _grp = createGroup civilian;
 if(isNil("_grp2"))then{_grp2 = createGroup civilian;}else{_grp2 = _grp2;};
 _flyHeight = 350;
 _dropSpot = [(position _player select 0),(position _player select 1),_flyHeight];
-_flyHeight = 200;  //Distance from ground that heli will fly at
 _heliStartDistance = 2000;
 _spos=[(_dropSpot select 0) - (sin _heliDirection) * _heliStartDistance, (_dropSpot select 1) - (cos _heliDirection) * _heliStartDistance, (_flyHeight+200)];
 
@@ -49,16 +48,14 @@ diag_log format ["AAA - Heli Spawned at %1", _spos];
 _heli = createVehicle [_heliType, _spos, [], 0, "FLY"];
 _heli setVariable ["R3F_LOG_disabled", true, true];
 [_heli] call vehicleSetup;
-_heli enableDynamicSimulation false;
 
 
 _crew = [_grp, _spos] call createRandomSoldierC;
 _crew moveInDriver _heli;
-_crew triggerDynamicSimulation true;
 
 _heli setCaptive true;
 
-_heliDistance = 200;
+_heliDistance = 2000;
 _dir = ((_dropSpot select 0) - (_spos select 0)) atan2 ((_dropSpot select 1) - (_spos select 1));
 _flySpot = [(_dropSpot select 0) + (sin _dir) * _heliDistance, (_dropSpot select 1) + (cos _dir) * _heliDistance, _flyHeight];
 
@@ -89,6 +86,7 @@ _object = switch (_type) do
 		_object setVariable ["A3W_purchasedVehicle", true, true];
 		_object setVariable ["ownerUID", getPlayerUID _player, true];
 		_object setVariable ["R3F_LOG_Disabled", true, true]; // Make vehicle locked
+		_object setVariable ["moveable", true, true];
 		_object lock 2; // Make vehicle locked
 		[_object, false] call vehicleSetup;
 				if (_object getVariable ["A3W_purchasedVehicle", false] && !isNil "fn_manualVehicleSave") then
@@ -106,6 +104,7 @@ _object = switch (_type) do
 		_object setVariable ["R3F_LOG_Disabled", false, true];
 		[_object, _selectionClass] call fn_refillbox;
 		_object setVariable ["A3W_inventoryLockR3F", false, true];
+		_object setVariable ["moveable", true, true];
 		_object attachTo [_heli, [0,0,-5]]; //Attach Object to the heli
 		_object
 	};
@@ -115,6 +114,7 @@ _object = switch (_type) do
 		_object = createVehicle ["Land_Sacks_goods_F", _objectSpawnPos, [], 0, "None"];
 		diag_log format ["Apoc's Airdrop Assistance - Object Spawned at %1", position _object];
 		_object setVariable ["A3W_purchasedStoreObject", true];
+		_object setVariable ["moveable", true, true];
 		_object setVariable ["food", 50, true];
 		_object setVariable ["R3F_LOG_Disabled", false, true];
 		_object attachTo [_heli, [0,0,-5]]; //Attach Object to the heli
@@ -126,6 +126,7 @@ _object = switch (_type) do
 		_object = createVehicle ["Land_BarrelWater_F", _objectSpawnPos, [], 0, "None"];
 		diag_log format ["Apoc's Airdrop Assistance - Object Spawned at %1", position _object];
 		_object setVariable ["A3W_purchasedStoreObject", true];
+		_object setVariable ["moveable", true, true];
 		_object setVariable ["water",50, true];
 		_object setVariable ["R3F_LOG_Disabled", false, true];
 		_object attachTo [_heli, [0,0,-5]]; //Attach Object to the heli
@@ -138,6 +139,7 @@ _object = switch (_type) do
 		diag_log format ["Apoc's Airdrop Assistance - Object Spawned at %1", position _object];
 		_object setVariable ["A3W_purchasedStoreObject", true];
 		_object setVariable ["R3F_LOG_disabled",false,true];
+		_object setVariable ["moveable", true, true];
 		_object attachTo [_heli, [0,0,-5]]; //Attach Object to the heli
 		[_object, ["Land_Cargo_Tower_V1_F", ["Land_Canal_Wall_Stairs_F", 2], ["Land_Mil_WallBig_4m_F", 5], ["Land_Canal_WallSmall_10m_F", 10], ["Land_RampConcreteHigh_F",2], ["Land_RampConcrete_F", 2],["BlockConcrete_F",4],["Land_BagFence_Round_F",2],["Land_BagFence_Short_F",4],["Land_HBarrier_3_F",2],["Land_Crash_barrier_F",2],["Land_LampShabby_F",4]] ] execVM "addons\R3F_LOG\auto_load_in_vehicle.sqf";
 		clearBackpackCargoGlobal _object;
@@ -153,6 +155,7 @@ _object = switch (_type) do
 		_object = createVehicle ["Box_NATO_AmmoVeh_F", _objectSpawnPos, [], 0, "None"];
 		diag_log format ["Apoc's Airdrop Assistance - Object Spawned at %1", position _object];
 		_object setVariable ["A3W_purchasedStoreObject", true];
+		_object setVariable ["moveable", true, true];
 		_object setVariable ["R3F_LOG_Disabled", false, true];
 		_object attachTo [_heli, [0,0,-5]]; //Attach Object to the heli
 		_object
@@ -164,6 +167,7 @@ _object = switch (_type) do
 		_object setVariable ["R3F_LOG_Disabled", false, true];
 		[_object, "mission_USSpecial"] call fn_refillbox;
 		_object setVariable ["A3W_inventoryLockR3F", false, true];
+		_object setVariable ["moveable", true, true];
 		_object attachTo [_heli, [0,0,-5]]; //Attach Object to the heli
 		_object
 		};

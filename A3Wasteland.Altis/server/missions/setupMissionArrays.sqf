@@ -34,6 +34,7 @@ PatrolMissions =
 [
 	["mission_militaryPatrol", 1],
 	["mission_altisPatrol", 1]
+	
 ];
 
 vehicleMissions =
@@ -74,12 +75,13 @@ hostileairMissions =
 	["mission_HostileHeliFormation", 1],
 	["mission_HostileJet", 1],
 	["mission_HostileVTOL", 1],
-  ["mission_transportheli", 1]
+	["mission_transportheli", 1]
+	
 ];
 
-EndGameMissions =
+PrimaryMissions =
 [
-	"mission_artypatrol, 1"
+	["mission_artypatrol", 1]
 ];
 
 MainMissions = [MainMissions, [["A3W_heliPatrolMissions", ["mission_Coastal_Convoy", "mission_HostileHeliFormation"]], ["A3W_underWaterMissions", ["mission_ArmedDiversquad"]]]] call removeDisabledMissions;
@@ -96,6 +98,7 @@ MoneyMissions = [MoneyMissions, [["A3W_underWaterMissions", ["mission_SunkenTrea
 { _x set [2, false] } forEach extraMissions;
 { _x set [2, false] } forEach aquaticMissions;
 { _x set [2, false] } forEach hostileairMissions;
+{ _x set [2, false] } forEach PrimaryMissions;
 
 MissionSpawnMarkers = [];
 JetSpawnMarkers = [];

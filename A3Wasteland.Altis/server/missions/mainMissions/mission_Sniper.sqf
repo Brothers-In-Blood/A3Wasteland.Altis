@@ -24,7 +24,7 @@ _setupObjects =
 
 	_aiGroup setCombatMode "RED";
 	_aiGroup setBehaviour "COMBAT";
-	
+
 	_missionHintText = format ["A Sniper Nest has been spotted. Head to the marked area and Take them out! Be careful they are fully armed and dangerous!", mainMissionColor];
 };
 
@@ -40,11 +40,12 @@ _failedExec =
 _successExec =
 {
 	// Mission completed
-	
+
 	_boxes1 = ["Box_East_WpsSpecial_F","Box_IND_WpsSpecial_F"];
 	_currBox1 = _boxes1 call BIS_fnc_selectRandom;
 	_box1 = createVehicle [_currBox1, _lastPos, [], 2, "None"];
 	_box1 allowDamage false;
+	_box1 setVariable ["moveable", true, true];
 	_box1 setVariable ["R3F_LOG_disabled", false, true];
 
 	_successHintMessage = format ["The snipers are dead! Well Done!"];

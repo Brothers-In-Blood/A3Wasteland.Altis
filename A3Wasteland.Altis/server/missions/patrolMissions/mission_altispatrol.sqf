@@ -159,18 +159,22 @@ _successExec =
 
 	_box1 = "Box_NATO_Support_F" createVehicle getMarkerPos _marker;
     [_box1,"Ammo_Drop"] call fn_refillbox;
+		_box1 setVariable ["moveable", true, true];
 	_box1 allowDamage false;
 
 	_box2 = "Box_NATO_Wps_F" createVehicle getMarkerPos _marker;
     [_box2,"mission_USSpecial"] call fn_refillbox;
+		_box2 setVariable ["moveable", true, true];
 	_box2 allowDamage false;
 
 	_box3 = "Box_NATO_Support_F" createVehicle getMarkerPos _marker;
     [_box3,"mission_snipers"] call fn_refillbox;
+		_box3 setVariable ["moveable", true, true];
 	_box3 allowDamage false;
 
 	_box4 = "B_supplyCrate_F" createVehicle getMarkerPos _marker;
     [_box4,"Launchers_Tier_2"] call fn_refillbox;
+		_box4 setVariable ["moveable", true, true];
 	_box4 allowDamage false;
 
 	{ _x setVariable ["R3F_LOG_disabled", false, true] } forEach [_box1, _box2, _box3, _box4];

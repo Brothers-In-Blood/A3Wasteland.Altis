@@ -6,7 +6,7 @@
 
 private ["_veh", "_vPos", "_pPos", "_vel"];
 
-_veh = cursorObject;
+_veh = cursorTarget;
 _vPos = getPosASL _veh;
 _pPos = getPosASL player;
 _vel = _this select 0;

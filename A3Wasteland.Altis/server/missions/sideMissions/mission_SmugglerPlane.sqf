@@ -125,18 +125,21 @@ _successExec =
 	_currBox1 = _Boxes1 call BIS_fnc_selectRandom;
 	_box1 = createVehicle [_currBox1, _lastPos, [], 2, "None"];
 	_box1 setDir random 360;
+	_box1 setVariable ["moveable", true, true];
 	_box1 allowDamage false;
 
 	_Boxes2 = ["Box_Syndicate_WpsLaunch_F","Box_Syndicate_Wps_F","","Box_NATO_Equip_F"];
 	_currBox2 = _Boxes2 call BIS_fnc_selectRandom;
 	_box2 = createVehicle [_currBox2, _lastPos, [], 2, "None"];
 	_box2 setDir random 360;
+	_box2 setVariable ["moveable", true, true];
 	_box2 allowDamage false;
 
 	_Boxes3 = ["Box_Syndicate_WpsLaunch_F","Box_Syndicate_Wps_F","","Box_NATO_Equip_F"];
 	_currBox3 = _Boxes1 call BIS_fnc_selectRandom;
 	_box3 = createVehicle [_currBox3, _lastPos, [], 2, "None"];
 	_box3 setDir random 360;
+	_box3 setVariable ["moveable", true, true];
 	_box3 allowDamage false;
 
 	{ _x setVariable ["R3F_LOG_disabled", false, true] } forEach [_box1, _box2];

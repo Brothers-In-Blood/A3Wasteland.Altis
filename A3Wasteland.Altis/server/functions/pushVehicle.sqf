@@ -25,7 +25,7 @@ if (_vel != 0) then
 	{
 		if (_onFoot) then
 		{
-			_veh = cursorObject;
+			_veh = cursorTarget;
 		}
 		else
 		{
