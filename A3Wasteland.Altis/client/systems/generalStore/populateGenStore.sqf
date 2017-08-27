@@ -214,8 +214,8 @@ _playerSideNum = switch (playerSide) do
 								"U_C_Driver_3",
 								"U_C_Driver_4",
 								"U_C_Driver_1_white",
-								"U_C_Driver_1_yellow"
-								"U_B_CombatUniform_mcam_vest"
+								"U_C_Driver_1_yellow",
+								"U_B_CombatUniform_mcam_vest",
 								"U_O_V_Soldier_Viper_F",
 								"U_O_V_Soldier_Viper_hex_F",
 								"U_B_survival_uniform",
