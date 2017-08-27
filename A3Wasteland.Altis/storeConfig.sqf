@@ -7,8 +7,6 @@
 # @@Create Date: 2013-09-16 20:40:58
 #*********************************************************/
 
-// █████ FOR USE WITH APEX SNEAK PREVIEW BRANCH ONLY! █████
-
 // This tracks which store owner the client is interacting with
 currentOwnerName = "";
 
