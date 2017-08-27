@@ -52,7 +52,7 @@ mf_compile = compileFinal
 			compileFinal toString _code
 		};
 	};
-);
+');
 
 // Simple command I use to make initialization scripts clean and simple.
 // uses mf_ namespace to avoid any issues.
