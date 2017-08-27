@@ -1,5 +1,5 @@
 // @file Name: aj_FunctionsDefinition.hpp
-// @file Author:  wiking.at
+// @file Author:	wiking.at
 // @file Author: www.armajunkies.de
 
 class ajzeus
