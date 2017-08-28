@@ -29,7 +29,9 @@
 	//Attach Static Object To Vehicle
 	["Dettach From Vehicle", "client\actions\AttachtoVehicle.sqf", [], 1, false, false, "", "cursorTarget iskindof 'Car_F' && cursorTarget getVariable ['Attached', false]"],
 	//Tow Vehicle
-	["tow Vehicle", "client\actions\AttachtoVehicle.sqf", [], 1, false, false, "", "cursorTarget iskindof 'Car_F' && cursorTarget getVariable ['Attached', false]"],
+	["tow Vehicle", "client\actions\TowVehicle.sqf", [], 1, false, false, "", "cursorTarget iskindof 'Car_F' && cursorTarget getVariable ['Attached', false]"],
+	//Pickup Object
+	["Pickup Object", "client\actions\PickupObject.sqf", [], 1, false, false, "", "cursorTarget iskindof 'Car_F' && cursorTarget getVariable ['Attached', false]"],
 	//Push Land Vehicle
 	["Push vehicle", "server\functions\pushVehicle.sqf", [2.5, true], 1, false, false, "", "[2.5] call canPushVehicleOnFoot"],
 	// Push Water Vehicle
