@@ -835,7 +835,7 @@ backpackArray = compileFinal str
 	["Bergen (Hex)",															"B_Bergen_hex_F",													1000,						"backpack",						"noDLC"],
 	["Bergen (MTP)",															"B_Bergen_mcamo_F",													1000,						"backpack",						"noDLC"],
 	["Bergen (Tropic)",															"B_Bergen_tna_F",													1000,						"backpack",						"noDLC"]
-]
+];
 
 genItemArray = compileFinal str
 [
