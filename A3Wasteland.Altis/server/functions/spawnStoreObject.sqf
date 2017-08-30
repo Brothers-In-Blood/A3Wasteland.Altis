@@ -229,20 +229,24 @@ if (_key != "" && isPlayer _player && {_isGenStore || _isGunStore || _isVehStore
 
 			clearBackpackCargoGlobal _object;
 
-			if ({_object iskindof _x} count [
-					"Box_NATO_AmmoVeh_F",
-					"B_Slingload_01_Ammo_F",
-					"B_Slingload_01_Fuel_F",
-					"B_Slingload_01_Medevac_F",
-					"B_Slingload_01_Repair_F",
-					"StorageBladder_01_fuel_forest_F",
-					"StorageBladder_01_fuel_sand_F",
-					"Land_fs_feed_F",
-					"Land_FuelStation_01_pump_malevil_F",
-					"Land_FuelStation_Feed_F",
-					"Land_Pod_Heli_Transport_04_fuel_F",
-					"Land_Pod_Heli_Transport_04_repair_F"
-				] > 0) then	{
+			if ({_object iskindof _x} count 
+			[
+				"Box_NATO_AmmoVeh_F",
+				"Box_EAST_AmmoVeh_F",
+				"Box_IND_AmmoVeh_F",
+				"B_Slingload_01_Ammo_F",
+				"B_Slingload_01_Fuel_F",
+				"B_Slingload_01_Medevac_F",
+				"B_Slingload_01_Repair_F",
+				"StorageBladder_01_fuel_forest_F",
+				"StorageBladder_01_fuel_sand_F",
+				"Land_fs_feed_F",
+				"Land_FuelStation_01_pump_malevil_F",
+				"Land_FuelStation_Feed_F",
+				"Land_Pod_Heli_Transport_04_fuel_F",
+				"Land_Pod_Heli_Transport_04_repair_F"
+			] > 0) then	
+			{
 				_object setAmmoCargo 0;
 				_object setFuelCargo 0;
 				_object setRepairCargo 0;

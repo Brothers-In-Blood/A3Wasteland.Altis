@@ -191,6 +191,12 @@ _successExec =
 	_box9 setVariable ["moveable", true, true];
 	_box9 allowDamage false;
 
+	_allboxes = [_box1, _box2, _box3, _box4, _box5, _box6, _box7, _box8, _box9]
+	//Enable service objects
+	if (_x iskindof "Box_NATO_AmmoVeh_F" || _x iskindof "Box_EAST_AmmoVeh_F" || _x iskindof"Box_IND_AmmoVeh_F") then
+	{
+		[_x] remoteExecCall ["GOM_fnc_addAircraftLoadout", 0, _x];
+	} foreach _allboxes
 
 	_successHintMessage = "The sky is clear again, the enemy supply drop was taken out! Cargo has fallen near the wreck, go find it!";
 };

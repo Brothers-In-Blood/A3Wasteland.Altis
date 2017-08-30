@@ -167,8 +167,10 @@ launcherArray = compileFinal str
 allGunStoreFirearms = compileFinal str (call pistolArray + call smgArray + call rifleArray + call lmgArray + call launcherArray);
 
 staticGunsArray = compileFinal str
-[
-	["Vehicle Ammo Crate",													"Box_NATO_AmmoVeh_F",														5000000],
+[	
+	["Vehicle Ammo Crate (NATO)",											"Box_NATO_AmmoVeh_F",														5000000],
+	["Vehicle Ammo Crate (NATO)",											"Box_EAST_AmmoVeh_F",														5000000],
+	["Vehicle Ammo Crate (AAF)",											"Box_IND_AmmoVeh_F",														5000000],
 	["Ammo Container",														"B_Slingload_01_Ammo_F",													1000000],
 	["Explosives Crate(Empty)",												"Box_NATO_AmmoOrd_F",														100],
 	["Ammo Crate (Empty)",													"Box_NATO_Ammo_F",															100],
