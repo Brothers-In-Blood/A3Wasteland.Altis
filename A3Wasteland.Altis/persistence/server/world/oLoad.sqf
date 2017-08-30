@@ -219,6 +219,8 @@ _exclObjectIDs = [];
 	//Restore Service Objects
 	if ({_obj iskindof _x} count [
 			"Box_NATO_AmmoVeh_F",
+			"Box_EAST_AmmoVeh_F",
+			"Box_IND_AmmoVeh_F",
 			"B_Slingload_01_Ammo_F",
 			"B_Slingload_01_Fuel_F",
 			"B_Slingload_01_Medevac_F",
