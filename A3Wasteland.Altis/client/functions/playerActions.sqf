@@ -25,17 +25,17 @@
 	//Disable UAV IFF
 	//["Disable UAV IFF", "client\actions\disableUAVIFF.sqf", [], 1, false, false, "", "{_x in ['B_UavTerminal','O_UavTerminal','I_UavTerminal']} count assignedItems player > 0 && {cursorTarget iskindof _x} count ['UAV_02_base_F', 'UAV_04_base_F', 'UAV_03_base_F', 'UGV_01_base_F', 'StaticWeapon'] >0"],
 	//Attach Static Weapon To Vehicle
-	["Attach To Vehicle", "client\actions\AttachtoVehicle.sqf", [], 1, false, false, "", "cursorTarget iskindof 'StaticWeapon'&& !(cursorTarget getVariable ['Attached', false)]"],
+	["Attach To Vehicle", "client\actions\AttachtoVehicle.sqf", [], 1, false, false, "", "cursorTarget iskindof 'StaticWeapon'&& !(cursorTarget getVariable ['Attached', false])"],
 	//Dettach Static Object To Vehicle
 	["Dettach From Vehicle", "client\actions\DettachFromVehicle.sqf", [], 1, false, false, "", "cursorTarget iskindof 'Car_F' && cursorTarget getVariable ['Attached', false] && cursorTarget getVariable ['Moveable', false]"],
 	//Tow Vehicle
 	["tow Vehicle", "client\actions\TowVehicle.sqf", [], 1, false, false, "", "cursorTarget iskindof 'Car_F' && cursorTarget getVariable ['Attached', false]"],
 	//Pickup Object
-	["Pickup Object", "client\actions\PickupObject.sqf", [], 1, false, false, "", "({cursorTarget iskindof _x} count ['StaticWeapon', 'Reammobox_F', 'Items_base_F', 'NonStrategic']) && !(cursorTarget getVariable ['Carried', false]) && cursorTarget getVariable ['Moveable', false]"],
+	["Pickup Object", "client\actions\PickupObject.sqf", [], 1, false, false, "", "({cursorTarget iskindof _x} count ['StaticWeapon', 'Reammobox_F', 'Items_base_F', 'NonStrategic']>0) && cursorTarget getVariable ['Moveable', false]"],
 	//Drop Object
 	["Pickup Object", "client\actions\DropObject.sqf", [], 1, false, false, "", "player getVariable ['Carrying', false]"],
 	//Transport Object
-	["Attach To Vehicle", "client\actions\TransportObject.sqf", [], 1, false, false, "", "cursorTarget iskindof 'All' && !(cursorTarget getVariable ['Attached', false)] && cursorTarget getVariable ['Moveable', false]"],
+	["Attach To Vehicle", "client\actions\TransportObject.sqf", [], 1, false, false, "", "cursorTarget iskindof 'All' && !(cursorTarget getVariable ['Attached', false]) && cursorTarget getVariable ['Moveable', false]"],
 	//Push Land Vehicle
 	["Push vehicle", "server\functions\pushVehicle.sqf", [2.5, true], 1, false, false, "", "[2.5] call canPushVehicleOnFoot"],
 	// Push Water Vehicle
@@ -46,7 +46,7 @@
 	//Picku Money
 	["<img image='client\icons\money.paa'/> Pickup Money", "client\actions\pickupMoney.sqf", [], 1, false, false, "", "{_x getVariable ['owner', ''] != 'mission'} count (player nearEntities ['Land_Money_F', 5]) > 0"],
 	//Holster Weapon
-	["Holster Weapon", { player action ["SwitchWeapon", player, player, 100] }, [], -11, false, false, "", "vehicle player == player && currentWeapon player != '' && (stance player != 'CROUCH' || currentWeapon player != handgunWeapon player)"], // A3 v1.58 bug, holstering handgun while crouched causes infinite anim loop
+	["Holster Weapon", { player action ["SwitchWeapon", player, player, 100] }, [], -11, false, false, "", "vehicle player == player && currentWeapon player != '' && (stance player != 'CROUCH' || currentWeapon player != handgunWeapon player)"],
 	//Remote Base Access
 	["Acess Remote Base Management", "client\actions\BaseManegement.sqf", [], -98, false, true, "","{_x in ['B_UavTerminal','O_UavTerminal','I_UavTerminal']} count assignedItems player > 0"],
 	//Open Player Menu
