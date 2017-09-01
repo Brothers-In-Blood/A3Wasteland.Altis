@@ -341,7 +341,7 @@ GOM_fnc_setPylonsRearm =
 		playSound "Click";
 		_veh setVariable ["GOM_fnc_aircraftLoadoutRearmingInProgress",false,true];
 		_ammosource setVariable ["GOM_fnc_aircraftLoadoutBusyAmmoSource",false,true];
-		_veh setVehicleAmmo 1
+		_veh setVehicleAmmo 1;
 		systemchat "Vehicle rearmed!";
 	};
 	true
