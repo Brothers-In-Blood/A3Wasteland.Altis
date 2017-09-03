@@ -48,12 +48,10 @@ diag_log format ["AAA - Heli Spawned at %1", _spos];
 _heli = createVehicle [_heliType, _spos, [], 0, "FLY"];
 _heli setVariable ["R3F_LOG_disabled", true, true];
 [_heli] call vehicleSetup;
-_heli enableDynamicSimulation false;
 
 
 _crew = [_grp, _spos] call createRandomSoldierC;
 _crew moveInDriver _heli;
-_crew triggerDynamicSimulation true;
 
 _heli setCaptive true;
 
