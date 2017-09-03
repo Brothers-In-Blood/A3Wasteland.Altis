@@ -17,7 +17,7 @@ if (!isServer) exitWith {};
 
 private ["_soldierTypes", "_uniformTypes", "_vestTypes", "_weaponTypes", "_group", "_position", "_rank", "_soldier", "_face", "_voice"];
 
-_soldierTypes = ["B_GEN_Soldier_F"];
+_soldierTypes = ["C_man_polo_1_F", "C_man_polo_2_F", "C_man_polo_3_F", "C_man_polo_4_F", "C_man_polo_5_F", "C_man_polo_6_F"];
 _uniformTypes = ["U_B_GEN_Soldier_F"];
 _vestTypes = ["V_TacVest_gen_F"];
 _weaponTypes = ["SMG_05_F"];

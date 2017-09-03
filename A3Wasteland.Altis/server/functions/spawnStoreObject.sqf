@@ -141,14 +141,13 @@ if (_key != "" && isPlayer _player && {_isGenStore || _isGunStore || _isVehStore
 				{
 					deleteVehicle _x;
 				};
-			} forEach nearestObjects [_spawnPosAGL, ["LandVehicle","Air","Ship"], 25];
+			//} forEach nearestObjects [_spawnPosAGL, ["LandVehicle","Air","Ship"], 25];
 			} forEach nearestObjects [_spawnPosAGL, ["LandVehicle","Air","Ship"], 25 max sizeOf _class];
 
 			if (_player getVariable [_timeoutKey, true]) then { breakOut "spawnStoreObject" }; // Timeout
 
 			_object = createVehicle [_class, _safePos, [], 0, ""];
 			_object setVariable ["moveable", true, true];
-			_object enableDynamicSimulation true;
 
 			if (_waterNonBoat) then
 			{
@@ -183,7 +182,6 @@ if (_key != "" && isPlayer _player && {_isGenStore || _isGunStore || _isVehStore
 			//assign AI to the vehicle so it can actually be used
 			if (_isUAV) then
 			{
-				_object enableDynamicSimulation false;
 				[_object, _playerSide, _playerGroup] spawn
 				{
 					params ["_uav", "_playerSide", "_playerGroup"];
@@ -248,7 +246,6 @@ if (_key != "" && isPlayer _player && {_isGenStore || _isGunStore || _isVehStore
 				_object setAmmoCargo 0;
 				_object setFuelCargo 0;
 				_object setRepairCargo 0;
-				_object enableDynamicSimulation true;
 				[_object] remoteExecCall ["GOM_fnc_addAircraftLoadout", 0, _object];
 			};
 

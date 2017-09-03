@@ -34,6 +34,7 @@ PatrolMissions =
 [
 	["mission_militaryPatrol", 1],
 	["mission_altisPatrol", 1]
+	
 ];
 
 vehicleMissions =
@@ -75,6 +76,7 @@ hostileairMissions =
 	["mission_HostileJet", 1],
 	["mission_HostileVTOL", 1],
 	["mission_transportheli", 1]
+	
 ];
 
 PrimaryMissions =
@@ -96,6 +98,7 @@ MoneyMissions = [MoneyMissions, [["A3W_underWaterMissions", ["mission_SunkenTrea
 { _x set [2, false] } forEach extraMissions;
 { _x set [2, false] } forEach aquaticMissions;
 { _x set [2, false] } forEach hostileairMissions;
+{ _x set [2, false] } forEach PrimaryMissions;
 
 MissionSpawnMarkers = [];
 JetSpawnMarkers = [];
