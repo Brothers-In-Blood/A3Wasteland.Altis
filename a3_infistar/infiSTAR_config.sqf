@@ -550,6 +550,7 @@ _cMenu =
 	'RscMenuMove',
 	'RscMenuFormations',
 	'#USER:AirdropMenu',
+	'#USER:LogisticsMenu',
 	'#USER:ASL_Deploy_Ropes_Count_Menu',
 	'#USER:asl_show_select_ropes_menu_array',
 	'#USER:VehicleMenu',
