@@ -231,7 +231,6 @@ _exclObjectIDs = [];
 			"Land_Pod_Heli_Transport_04_fuel_F",
 			"Land_Pod_Heli_Transport_04_repair_F"
 		] > 0) then	{
-		_obj enableDynamicSimulation true;
 		[_obj] remoteExecCall ["GOM_fnc_addAircraftLoadout", 0, _obj];
 	};
 } forEach _objects;
