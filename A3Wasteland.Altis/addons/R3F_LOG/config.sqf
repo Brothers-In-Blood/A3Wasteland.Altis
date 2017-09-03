@@ -374,7 +374,8 @@ R3F_LOG_CFG_can_be_transported_cargo = R3F_LOG_CFG_can_be_transported_cargo +
 	// e.g. : ["MyTransportableObjectClassName1", itsCost], ["MyTransportableObjectClassName2", itsCost]
 	//Parant Classes
 	["ReammoBox_F", 1],
-	["Tank", 250], 
+	["Tank", 250],
+	["StaticWeapon", 5],
 	//Child Classes
 	["APC_Tracked_01_base_F", 200],
 	["APC_Tracked_02_base_F", 200],
