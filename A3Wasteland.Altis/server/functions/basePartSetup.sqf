@@ -11,5 +11,8 @@ _obj = _this select 0;
 _obj setVariable [call vChecksum, true];
 
 //Make base objects much harder to kill
+if (_obj isKindOf "Static") then
+{
 _obj addEventHandler ["HandleDamage", {0.00001}];
-_obj addEventHandler ["Hit", {_damage = getDammage _obj; _obj setDamage (_damage+0.0001)}];
+_obj addEventHandler ["Hit", {_obj setDamage 0.0001}];
+};

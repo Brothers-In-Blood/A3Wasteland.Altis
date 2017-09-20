@@ -15,50 +15,50 @@
 /*
 PYLON OPTIONS:
 	AIR TO GROUND MISSILES:
-		"PylonRack_1Rnd_LG_scalpel" 						SCALPEL X1
-		"PylonRack_3Rnd_LG_scalpel"  						SCALPEL X3
-		"PylonRack_4Rnd_LG_scalpel"							SCALPEL X4
-		"PylonRack_1Rnd_Missile_AGM_02_F" 			MACER AGM X1
-		"PylonRack_Missile_AGM_02_x1"						MACER II AGM X1
-		"PylonMissile_Missile_AGM_02_x2" 				MACER AGM X2
-		"PylonRack_Missile_AGM_02_x2"						MACER II X2
-		"PylonRack_3Rnd_Missile_AGM_02_F" 			MACER AGM X3
-		"PylonRack_12Rnd_PG_missiles" 					DAGR X12
+		"PylonRack_1Rnd_LG_scalpel"						SCALPEL X1
+		"PylonRack_3Rnd_LG_scalpel"						SCALPEL X3
+		"PylonRack_4Rnd_LG_scalpel"						SCALPEL X4
+		"PylonRack_1Rnd_Missile_AGM_02_F"				MACER AGM X1
+		"PylonRack_Missile_AGM_02_x1"					MACER II AGM X1
+		"PylonMissile_Missile_AGM_02_x2"				MACER AGM X2
+		"PylonRack_Missile_AGM_02_x2"					MACER II X2
+		"PylonRack_3Rnd_Missile_AGM_02_F"				MACER AGM X3
+		"PylonRack_12Rnd_PG_missiles"					DAGR X12
 		"PylonRack_1Rnd_Missile_AGM_01_F"				SHARUR X1
-		"PylonMissile_Missile_AGM_KH25_x1"			KH-25 X1
+		"PylonMissile_Missile_AGM_KH25_x1"				KH-25 X1
 
 	AIR TO AIR MISSILES:
-		"PylonRack_1Rnd_Missile_AA_04_F" 				FALCHION 22 X1
-		"PylonRack_1Rnd_AAA_missiles" 					ASRAAM X1
+		"PylonRack_1Rnd_Missile_AA_04_F"				FALCHION 22 X1
+		"PylonRack_1Rnd_AAA_missiles"					ASRAAM X1
 		"PylonRack_Missile_AMRAAM_C_x1"					AMRAAM C X1
 		"PylonRack_Missile_AMRAAM_C_x2"					AMRAAM C X2
-		"PylonMissile_Missile_AMRAAM_D_INT_x1" 	AMRAAM D X1
-		"PylonRack_Missile_AMRAAM_D_x2" 				AMRAAM D X2
-		"PylonRack_Missile_BIM9X_x2" 						BIM9X X2
+		"PylonMissile_Missile_AMRAAM_D_INT_x1"			AMRAAM D X1
+		"PylonRack_Missile_AMRAAM_D_x2"					AMRAAM D X2
+		"PylonRack_Missile_BIM9X_x2"					BIM9X X2
 		"PylonMissile_Missile_BIM9X_x1"					BIM8X X1
 		"PylonRack_1Rnd_Missile_AA_03_F"				SAHR-3
 		"PylonMissile_Missile_AA_R73_x1"				R-73 X1
 		"PylonMissile_Missile_AA_R77_x1"				R-77 X1
-		"PylonRack_1Rnd_GAA_missiles"						ZYPHER X1
+		"PylonRack_1Rnd_GAA_missiles"					ZYPHER X1
 
 	ROCKETS:
-		"PylonRack_12Rnd_missiles" 							DAR ROCKETS X12
+		"PylonRack_12Rnd_missiles"						DAR ROCKETS X12
 		"PylonRack_7Rnd_Rocket_04_HE_F"					SHRIEKER HE ROCKETS X7
-		"PylonRack_7Rnd_Rocket_04_AP_F" 				SHRIEKER AP ROCKETS X7
+		"PylonRack_7Rnd_Rocket_04_AP_F"					SHRIEKER AP ROCKETS X7
 		"PylonRack_20Rnd_Rocket_03_HE_F"				TRATNYR HE ROCKETS X20
 		"PylonRack_20Rnd_Rocket_03_AP_F"				TRATNYR AP ROCKETS X20
 		"PylonRack_19Rnd_Rocket_Skyfire"				SKYFIRE X19
 
 	 Guided BOMBS:
-		"PylonMissile_1Rnd_Bomb_04_F" 					GBU-12 GUIDED BOMB NATO X1
-		"PylonMissile_1Rnd_Bomb_03_F"						LOM-250G GUIDED BOMB CSAT X1
-		"PylonMissile_Bomb_GBU12_x1" 						GBU-12 LASER GUIDIED BOMB X1
-		"PylonRack_Bomb_GBU12_x2"								GBU-12 LASER GUIDED BOMB X2
-		"PylonMissile_Bomb_KAB250_x1"						KAB250 GUIDED BOMB X1
+		"PylonMissile_1Rnd_Bomb_04_F"					GBU-12 GUIDED BOMB NATO X1
+		"PylonMissile_1Rnd_Bomb_03_F"					LOM-250G GUIDED BOMB CSAT X1
+		"PylonMissile_Bomb_GBU12_x1"					GBU-12 LASER GUIDIED BOMB X1
+		"PylonRack_Bomb_GBU12_x2"						GBU-12 LASER GUIDED BOMB X2
+		"PylonMissile_Bomb_KAB250_x1"					KAB250 GUIDED BOMB X1
 	Dumb Bombs:
-	"PylonMissile_1Rnd_Mk82_F" 							MK-82 DUMB BOMB X1
+	"PylonMissile_1Rnd_Mk82_F"							MK-82 DUMB BOMB X1
 	GUNS:
-		"PylonWeapon_300Rnd_20mm_shells"			20mm TWIN CANNON
+		"PylonWeapon_300Rnd_20mm_shells"				20mm TWIN CANNON
 		"PylonWeapon_2000Rnd_65x39_belt"				6.5mm GATTLING GUN (RIGHT SIDE)
 
 		NUMBER OF PYLONS:

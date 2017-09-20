@@ -34,43 +34,6 @@ _playeritems = assigneditems player;
 _playermags = magazines player;
 _playerweapons = weapons player;
 
-
-
-
-if (isNull _Target) exitWith {};
-
-_checks =
-{
-  private ["_progress", "_object", "_failed", "_text"];
-  _progress = _this select 0;
-  _object = _this select 1;
-  _failed = true;
-
-  switch (true) do
-  {
-    case (!alive player): { _text = "" };
-    case (vehicle player != player): { _text = "Action failed! You can't do this in a vehicle" };
-    case (player distance _object > (sizeOf typeOf _object / 3) max 2): { _text = "Action failed! You are too far away from the body" };
-    case (isNull _object): { _text = "The body no longer exists" };
-    case (alive _object || {alive _x} count crew _object > 0): { _text = "You Can't do that" };
-    case (doCancelAction): { doCancelAction = false; _text = "Takig gear cancelled" };
-    default
-    {
-      _failed = false;
-      _text = format ["Taking gear %1%2 complete", floor (_progress * 100), "%"];
-    };
-  };
-
-  [_failed, _text];
-};
-
-_firstCheck = [0, _Target] call _checks;
-
-if (_firstCheck select 0) exitWith
-{
-  [_firstCheck select 1, 5] call mf_notify_client;
-};
-
 mutexScriptInProgress = true;
 
 switch (true) do
@@ -78,9 +41,13 @@ switch (true) do
   case (_TargetClass isKindOf "Man"):
   {
     _time = 15;
-    _ground = "GroundWeaponHolder_Scripted" createVehicle position player;
+    
     player action ["PutBag"];
-    player action ["DropWeapon", _ground, currentweapon player];
+    _target removeUniform _target;
+    _target removevest _target;
+    _target removeBackpack _target;
+    {_target removeItem _x} foreach _items;
+    {_target removeItem _x} foreach _mags;
   };
   default  {}; // Everything else
 };
@@ -94,11 +61,10 @@ mutexScriptInProgress = false;
 if (_success) then
 {
   player forceAddUniform _uniform;
-  player additem _vest;
-  player additem _backpack;
-  player additem _headgear;
-  player additem _goggles;
-  {player additem _x} foreach _items;
+  player assignItem _vest;
+  player assignitem _backpack;
+  player assignitem _headgear;
+  player assignitem _goggles;
+  {player assignitem _x} foreach _items;
   {player additem _x} foreach _mags;
-  deleteVehicle _Target;
 };
