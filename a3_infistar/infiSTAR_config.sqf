@@ -192,15 +192,15 @@ _adminUIDandAccess =
 			'Dump unique client variables',
 			'Restrain',
 			'Unrestrain',
-			'Arsenal'	// Adds Arsenal to the mousewheel actions if you press "," on the Numpad!
+			'Arsenal'	// Adds Arsenal to the mousewheel actions if you press "." on the Numpad!
 		]
 	],
 	[
 		[
-			"76561197968586068", //Dingus
-			"76561198028001330", // Lava_Bear
-			"76561198053288509" //RunnerNS
-
+			'76561197968586068', //Dingus
+			'76561198028001330', // Lava_Bear
+			'76561198053288509', //RunnerNS
+			'76561198083874174' //FireFirstAce
 		],	// Admins with UIDs in this Array have their Access defined in the array below.
 		[
 			'Teleport On Map Click',
