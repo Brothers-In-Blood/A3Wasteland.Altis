@@ -34,7 +34,6 @@ _playeritems = assigneditems player;
 _playermags = magazines player;
 _playerweapons = weapons player;
 
-mutexScriptInProgress = true;
 
 switch (true) do
 {
