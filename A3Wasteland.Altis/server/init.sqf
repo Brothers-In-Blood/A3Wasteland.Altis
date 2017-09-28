@@ -219,7 +219,7 @@ if (_hcObjSavingOn) then
 		if (_timeSavingOn || _weatherSavingOn) then
 		{
 			"currentDate" addPublicVariableEventHandler ("client\functions\clientTimeSync.sqf" call mf_compile);
-			// drn_DynamicWeather_MainThread = [] execVM "addons\scripts\DynamicWeatherEffects.sqf";
+			drn_DynamicWeather_MainThread = [] execVM "addons\scripts\DynamicWeatherEffects.sqf";
 		};
 	};
 };
