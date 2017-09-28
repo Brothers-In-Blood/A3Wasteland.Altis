@@ -27,7 +27,7 @@
 	//Attach Static Weapon To Vehicle
 	["Attach To Vehicle", "client\actions\AttachtoVehicle.sqf", [], -10, false, false, "", "(cursorTarget iskindof 'StaticWeapon' || cursorTarget iskindof 'Reammobox_F')&& !(cursorTarget getVariable ['Attached', false])"],
 	// //Dettach Static Object To Vehicle
-	["Dettach From Vehicle", "client\actions\DettachFromVehicle.sqf", [], -10, false, false, "", "cursorTarget iskindof 'Car_F' && cursorTarget getVariable ['Attached', false] && cursorTarget getVariable ['Moveable', false]"],
+	["Dettach From Vehicle", "client\actions\DetachFromVehicle.sqf", [], -10, false, false, "", "cursorTarget iskindof 'Car_F' && cursorTarget getVariable ['Attached', false]"],
 	// //Tow Vehicle
 	// ["tow Vehicle", "client\actions\TowVehicle.sqf", [], -10, false, false, "", "cursorTarget iskindof 'Car_F' && cursorTarget getVariable ['Attached', false]"],
 	// //Pickup Object
