@@ -10,7 +10,7 @@
 // General settings
 A3W_teamPlayersMap = 1;											// Show all friendly players on the map at all times, regardless of difficulty level (0 = no, 1 = yes)
 A3W_disableGlobalVoice = 1;										// Auto-switch channel to Direct communication whenever broadcasting voice on global, unless being admin (0 = no, 1 = yes)
-A3W_disableSideVoice = 2;										// Auto-switch channel to Direct communication whenever broadcasting voice on side (0 = no, 1 = block Ind team, 2 = block all teams)
+A3W_disableSideVoice = 1;										// Auto-switch channel to Direct communication whenever broadcasting voice on side (0 = no, 1 = block Ind team, 2 = block all teams)
 A3W_uavControl = "owner";										// Restrict connection to UAVs based on ownership ("owner", "group", "side")
 A3W_disableUavFeed = 0;											// Force disable UAV PIP feed to prevent thermal camera abuse (0 = no, 1 = yes)
 //A3W_disableBuiltInThermal = 0;								// Display a black screen if the player tries to use thermal vision built-in a handheld weapon like Titan launcher or laser designator (0 = no, 1 = yes)
@@ -56,6 +56,8 @@ A3W_atmEditorPlacedOnly = 0;									// Only allow access via ATMs placed from t
 A3W_atmMapIcons = 1;											// Draw small icons on the map that indicate ATM locations (0 = no, 1 = yes)
 A3W_atmRemoveIfDisabled = 1;									// Remove all ATMs from map if A3W_atmEnabled is set to 0 (0 = no, 1 = yes)
 
+//Bounty Setting
+A3W_atmBounties = 1;											// Enable bounties
 A3W_bountyMax = 5000000;										// Maximum amount of money that can be set as a bounty on someone
 A3W_bountyMinStart = 25000;										// Minimum amount of money to start a bounty on someone
 A3W_bountyRewardPerc = 100;										// Percentage of cost that goes to bounty reward
