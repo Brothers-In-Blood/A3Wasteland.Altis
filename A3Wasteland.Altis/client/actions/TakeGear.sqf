@@ -11,14 +11,15 @@ if (mutexScriptInProgress) exitWith
 	["You are already performing another action.", 5] call mf_notify_client;
 };
 
-private ["_Target", "_TargetClass", "_checks", "_firstCheck", "_time", "_money", "_success", "_loudout"];
-
 //Target Equipment
 _Target = cursorTarget;
 _TargetClass = typeOf _Target;
 _uniform = uniform _Target;
+_uniformItems = uniformItems _target;
 _backpack = backpack _Target;
+_backpackItems = backpackItems _target;
 _vest = vest _Target;
+_vestitems = vestItems _Target;
 _headgear = headgear _Target;
 _goggles = goggles _Target;
 _items = assigneditems _Target;
@@ -26,49 +27,49 @@ _mags = magazines _Target;
 
 //Player Equipment
 _playeruniform = uniform player;
-_playerbackpack = backpack player;
+_playerUniformItems = uniformItems player;
 _playervest = vest player;
+_playervestItems = vestItems player;
 _playerheadgear = headgear player;
 _playergoggles = goggles player;
 _playeritems = assigneditems player;
 _playermags = magazines player;
 _playerweapons = weapons player;
+_time = 15;
 
 if (_target getvariable ["takegear", false]) exitwith 
 {
-	titletext ["Someone else is taking this gear", "PLAINDOWN"];
-};
-
-switch (true) do
-{
-	case (_TargetClass isKindOf "Man"):
-	{
-		_time = 15;
-		_target setvariable ["takegear", true, true];
-	};
-	default	{}; // Everything else
+	titletext ["Someone else is taking this gear", "PLAIN DOWN"];
 };
 
 mutexScriptInProgress = true;
-
-_success = [_time, format ["AinvPknlMstpSlayW%1Dnon_medic", [player, true] call getMoveWeapon], _checks, [_Target]] call a3w_actions_start;
-
+titleText ["Shoving crap into backpack", "PLAIN DOWN"];
+{player addItemToBackpack _x} foreach _playerUniformItems;
+{player addItemToBackpack _x} foreach _playervestItems;
+player additemtobackpack _playergoggles;
+player additemtobackpack _playerheadgear;
+player addItemToBackpack _playeruniform;
+player action ["PutBag"];
+sleep 5;
+titleText ["Stripping Corpse", "PLAIN DOWN"];
+removeUniform _target;
+removevest _target;
+removeBackpack _target;
+sleep 5;
+titletext ["Wearing a deadmans clothes", "PLAIN DOWN"];
+player forceAddUniform _uniform;
+{player addItemToUniform _x} foreach _uniformItems;
+player addVest _vest;
+{player addItemToVest _x} foreach _vestitems;
+player addBackpack _backpack;
+{player addItemToBackpack _x} foreach _backpackItems;
+player addHeadgear _headgear;
+player addGoggles _goggles;
+sleep 5;
+{player additem _x} foreach _items;
+{player assignitem _x} foreach _items;
+// {player additem _x} foreach _mags;
+_target setvariable ["takegear", false, true];
+titletext ["All done", "PLAIN DOWN"];
 
 mutexScriptInProgress = false;
-
-if (_success) then
-{
-	player action ["PutBag"];
-	removeUniform _target;
-	removevest _target;
-	removeBackpack _target;
-	{_target removeItem _x} foreach _items;
-	{_target removeItem _x} foreach _mags;
-	player forceAddUniform _uniform;
-	player assignItem _vest;
-	player assignitem _backpack;
-	player assignitem _headgear;
-	player assignitem _goggles;
-	{player assignitem _x} foreach _items;
-	{player additem _x} foreach _mags;
-};
