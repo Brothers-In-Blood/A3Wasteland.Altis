@@ -196,7 +196,7 @@ _successExec =
 	if (_x iskindof "Box_NATO_AmmoVeh_F" || _x iskindof "Box_EAST_AmmoVeh_F" || _x iskindof"Box_IND_AmmoVeh_F") then
 	{
 		[_x] remoteExecCall ["GOM_fnc_addAircraftLoadout", 0, _x];
-	} foreach _allboxes
+	} foreach _allboxes;
 
 	_successHintMessage = "The sky is clear again, the enemy supply drop was taken out! Cargo has fallen near the wreck, go find it!";
 };
