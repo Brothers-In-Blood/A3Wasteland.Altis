@@ -10,18 +10,19 @@ _attached = attachedObjects _vehicle;
 _vehLocation = getPosATL _vehicle;
 
 {
-	if (_x getVariable ["Towed", false]) then {} else
+	if (_x getVariable ["Towed", false]) then 
 	{
 		detach _x;
 		_detachpos = [_vehLocation,5,15,3,1,0,0] call findSafePos;
 		_x setPosATL _detachpos;
 		_x setVariable ["Towed", false, true];
 		_vehicle setVariable ["Towing", false, true];
+
 	};
 } foreach _attached;
 
 {
-	_variables = 
+	private _VehVariables = 
 	[
 		"Attached",
 		"StaticAttached",
@@ -37,14 +38,15 @@ _vehLocation = getPosATL _vehicle;
 		"Location9_Attached",
 		"Location10_Attached"	
 	];
-	if (_x getVariable ["Attached", false]) then {} else
+	if (_x getVariable ["Attached", false]) then 
 	{
 		detach _x;
-		_detachpos = [_vehLocation,5,15,3,1,0,0] call findSafePos;
+		_detachpos = [_vehLocation,5,10,3,1,0,0] call findSafePos;
 		_x setPosATL _detachpos;
 		_x setVariable ["Attached", false, true];
-		_vehicle setvariable {[_x, false, true]} forEach _variables;
-		_x setvariable ["Moveable", true, true];
+		_x setVariable ["moveable", true, true];
+		{_vehicle setvariable [_x, false, true]} forEach _VehVariables;
+
 	};
 } foreach _attached;
 

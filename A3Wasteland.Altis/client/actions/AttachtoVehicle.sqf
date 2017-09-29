@@ -55,32 +55,47 @@ if (_distance <=10) then
 							{
 								//let the player know what's going on 
 								titleText ["Attaching to Offroad", "PLAIN"];
-								//Attach the static to the vehicle
-								_static attachTo [_vehicle, [-0.3,-1.9,0.9]];
-								//Set the Statics direction
-								_static setdir 180;
+								
+								for "_i" from 0 to 2 do //have to repeat this section so that it takes effect
+								{
+									//Attach the static to the vehicle
+									_static attachTo [_vehicle, [-0.3,-1.9,0.9]];
+									//Set the Statics direction
+									_static setdir 180;
+								};
 								//Set the variables
 								_static setVariable ["Attached", true, true];
+								_static setvariable ["moveable", false, true];
 								_vehicle setVariable ["StaticAttached", true, true];
 								_vehicle setVariable ["Attached", true, true];
+
 							};
 						//Low and autonomous HMG and GMG
 							if ({_static iskindof _x} count["B_HMG_01_F","O_HMG_01_F","I_HMG_01_F","B_HMG_01_A_F","O_HMG_01_A_F","I_HMG_01_A_F","B_GMG_01_F","O_GMG_01_F","I_GMG_01_F"]>0) then
 							{
 								titleText ["Attaching to Offroad", "PLAIN"];
 								_vehicle animateSource ["hideRearDoor",1]; // Hide the tailgate so it isn't in the way
-								_static attachTo [_vehicle, [0,-1.9,0.4]];
-								_static setdir 180;
+								for "_i" from 0 to 2 do 
+								{
+									_static attachTo [_vehicle, [0,-1.9,0.4]];
+									_static setdir 180;
+								};
 								_static setVariable ["Attached", true, true];
+								_static setvariable ["moveable", false, true];
 								_vehicle setVariable ["StaticAttached", true, true];
+								_vehicle setVariable ["Attached", true, true];
 							};
 						//Mortor
 							if ({_static iskindof _x} count["B_Mortar_01_F","O_Mortar_01_F","I_Mortar_01_F"]>0) then
 							{
 								titleText ["Attaching to Offroad", "PLAIN"];
-								_static attachTo [_vehicle, [0.2,-1.8,1.49012e-008]];
-								_static setdir 180;
+								for "_i" from 0 to 2 do 
+								{
+									_static attachTo [_vehicle, [0.2,-1.8,1.49012e-008]];
+									_static setdir 180;
+								};
 								_static setVariable ["Attached", true, true];
+								_static setvariable ["moveable", false, true];
 								_vehicle setVariable ["StaticAttached", true, true];
 								_vehicle setVariable ["Attached", true, true];
 							};
@@ -88,9 +103,14 @@ if (_distance <=10) then
 							if ({_static iskindof _x} count["AT_01_base_F","AA_01_base_F"]>0) then
 							{
 								titleText ["Attaching to Offroad", "PLAIN"];
+								for "_i" from 0 to 2 do 
+								{
+									_static attachTo [_vehicle, [1.49012e-008,-1.7,0.3]];
+									_static setdir 180;
+								};
 								_static attachTo [_vehicle, [1.49012e-008,-1.7,0.3]];
-								_static setdir 180;
 								_static setVariable ["Attached", true, true];
+								_static setvariable ["moveable", false, true];
 								_vehicle setVariable ["StaticAttached", true, true];
 								_vehicle setVariable ["Attached", true, true];
 							};
@@ -148,9 +168,6 @@ if (_distance <=10) then
 							{
 								titleText ["Cannot Attach to this Vehicle", "PLAIN"];
 							};
-						} else
-						{
-							titletext ["Staticweapon already attached", "PLAIN"]
 						};
 					//Ofroad (Armed)
 						if (_vehicle iskindof "Offroad_01_armed_base_F") then
@@ -195,11 +212,27 @@ if (_distance <=10) then
 							titleText ["Static Weapon Already Installed", "PLAIN"];
 						};
 					//Static LD's
-						if !(_attachedSLD) then
+					} else
+					{
+						titletext ["Staticweapon already attached", "PLAIN"]
+					};
+					if !(_attachedSLD) then
+					{
+					//Offroad (unarmed)
+						if  (_vehicle iskindof "Offroad_01_unarmed_base_F")then
 						{
-						//Offroad (unarmed)
-							if  (_vehicle iskindof "Offroad_01_unarmed_base_F")then
+							if ({_static iskindof _x} count["Static_Designator_02_base_F", "Static_Designator_01_base_F"]>0)then
 							{
+								titleText ["Attaching to Offroad", "PLAIN"];
+								_static attachTo [_vehicle, [1.49012e-008,0.0999999,0.9]];
+								_static setVariable ["Attached", true, true];
+								_vehicle setVariable ["LocationSLD_Attached", true, true];
+								_vehicle setVariable ["Attached", true, true];
+							};
+						};
+					//Offroad Repair
+						if  (_vehicle iskindof "Offroad_01_repair_base_F")then
+						{
 								if ({_static iskindof _x} count["Static_Designator_02_base_F", "Static_Designator_01_base_F"]>0)then
 								{
 									titleText ["Attaching to Offroad", "PLAIN"];
@@ -208,35 +241,22 @@ if (_distance <=10) then
 									_vehicle setVariable ["LocationSLD_Attached", true, true];
 									_vehicle setVariable ["Attached", true, true];
 								};
-							};
-						//Offroad Repair
-							if  (_vehicle iskindof "Offroad_01_repair_base_F")then
-							{
-									if ({_static iskindof _x} count["Static_Designator_02_base_F", "Static_Designator_01_base_F"]>0)then
-									{
-										titleText ["Attaching to Offroad", "PLAIN"];
-										_static attachTo [_vehicle, [1.49012e-008,0.0999999,0.9]];
-										_static setVariable ["Attached", true, true];
-										_vehicle setVariable ["LocationSLD_Attached", true, true];
-										_vehicle setVariable ["Attached", true, true];
-									};
-							};
-						//Ofroad (Armed)
-							if  (_vehicle iskindof "I_G_Offroad_01_armed_F")then
-							{
-								if ({_static iskindof _x} count["Static_Designator_02_base_F", "Static_Designator_01_base_F"]>0)then
-								{
-									titleText ["Attaching to Offroad", "PLAIN"];
-									_static attachTo [_vehicle, [1.49012e-008,1.9,-0.2]];
-									_static setVariable ["Attached", true, true];
-									_vehicle setVariable ["LocationSLD_Attached", true, true];
-									_vehicle setVariable ["Attached", true, true];
-								};
-							};
-						} else
-						{
-							titleText ["Remote Laser Designator already installed", "PLAIN"];
 						};
+					//Ofroad (Armed)
+						if  (_vehicle iskindof "I_G_Offroad_01_armed_F")then
+						{
+							if ({_static iskindof _x} count["Static_Designator_02_base_F", "Static_Designator_01_base_F"]>0)then
+							{
+								titleText ["Attaching to Offroad", "PLAIN"];
+								_static attachTo [_vehicle, [1.49012e-008,1.9,-0.2]];
+								_static setVariable ["Attached", true, true];
+								_vehicle setVariable ["LocationSLD_Attached", true, true];
+								_vehicle setVariable ["Attached", true, true];
+							};
+						};
+					} else
+					{
+						titleText ["Remote Laser Designator already installed", "PLAIN"];
 					};
 				};
 				if (_static isKindOf "ReammoBox_F")then
@@ -244,7 +264,7 @@ if (_distance <=10) then
 					if (({_vehicle iskindof _x} count ["Offroad_01_base_F", "Offroad_01_military_base_F"]>0) && !(_vehicle iskindof "Offroad_01_armed_base_F")) then
 					{
 						//Define Attachment points
-						_attach1 = [1.49012e-008,-1.8,0.1];
+						_attach1 = [1.49012e-008,-1.8,0.3];
 						_attach2 = [1.49012e-008,-1.8,0.1];
 						_attach3 = [1.49012e-008,-1.8,-0.3];
 						_attach4 = [0.3,-1.8,-0.5];
@@ -270,7 +290,7 @@ if (_distance <=10) then
 										_static attachTo [_vehicle, _attach1];
 										//Set the variables
 										_static setVariable ["Attached", true, true];
-										_static setVariable ["Moveable", false, true];
+										_static setVariable ["moveable", false, true];
 										_vehicle setvariable ["Attached", true, true];
 										_vehicle setVariable ["Location1_Attached", true, true];
 									};
