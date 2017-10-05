@@ -15,9 +15,9 @@ _isBeaconEntry = { [_variables, "a3w_spawnBeacon", false] call fn_getFromPairs }
 
 _worldDir = "persistence\server\world";
 _methodDir = format ["%1\%2", _worldDir, call A3W_savingMethodDir];
-
 _objCount = 0;
 _objects = call compile preprocessFileLineNumbers format ["%1\getObjects.sqf", _methodDir];
+_objectsArray = [];
 
 _exclObjectIDs = [];
 
@@ -25,15 +25,12 @@ _exclObjectIDs = [];
 	private ["_allowed", "_obj", "_objectID", "_class", "_pos", "_dir", "_locked", "_damage", "_allowDamage", "_owner", "_variables", "_weapons", "_magazines", "_items", "_backpacks", "_turretMags", "_ammoCargo", "_fuelCargo", "_repairCargo", "_hoursAlive", "_valid"];
 
 	{ (_x select 1) call compile format ["%1 = _this", _x select 0]	} forEach _x;
-
 	if (isNil "_locked") then { _locked = 1 };
 	if (isNil "_hoursAlive") then { _hoursAlive = 0 };
 	_valid = false;
-
 	if (!isNil "_class" && !isNil "_pos" && {_maxLifetime <= 0 || _hoursAlive < _maxLifetime}) then
 	{
 		if (isNil "_variables") then { _variables = [] };
-
 		_allowed = switch (true) do
 		{
 			case (call _isWarchestEntry):       { _warchestSavingOn };
@@ -42,17 +39,17 @@ _exclObjectIDs = [];
 			case (_class call _isStaticWeapon): { _staticWeaponSavingOn };
 			default                             { _baseSavingOn };
 		};
-
 		if (!_allowed) exitWith {};
-
 		_objCount = _objCount + 1;
 		_valid = true;
 
 		{ if (typeName _x == "STRING") then { _pos set [_forEachIndex, parseNumber _x] } } forEach _pos;
 
 		_obj = createVehicle [_class, _pos, [], 0, "None"];
+		_objectsArray pushBack _obj;
 		_obj allowDamage false;
 		_obj hideObjectGlobal true;
+		_obj enableSimulation false;
 		_obj setPosWorld ATLtoASL _pos;
 
 		if (!isNil "_dir") then
@@ -201,8 +198,6 @@ _exclObjectIDs = [];
 
 			reload _obj;
 		};
-
-		_obj hideObjectGlobal false;
 	};
 
 	if (!_valid && !isNil "_objectID") then
@@ -211,7 +206,6 @@ _exclObjectIDs = [];
 		{
 			_obj setVariable ["A3W_objectID", nil, true];
 		};
-
 		_exclVehicleIDs pushBack _vehicleID;
 		_exclObjectIDs pushBack _objectID;
 	};
@@ -237,10 +231,35 @@ _exclObjectIDs = [];
 	};
 } forEach _objects;
 
+{
+	//Restore building, towers, etc first
+	if (_x iskindof "NonStrategic") then
+	{
+		_x hideObjectGlobal false;
+		_x enableSimulation true;
+	};
+} foreach _objectsArray; // entities "NonStrategic";
+{
+	//Restore things that go in those buildings
+	if (_x iskindof "Thing") then
+	{
+		_x hideObjectGlobal false;
+		_x enableSimulation true;
+	};
+} foreach _objectsArray; // foreach entities "Thing";
+{
+	//Restore eerything else
+	if (_x iskindof "All") then
+	{
+		_x hideObjectGlobal false;
+		_x enableSimulation true;
+	};
+} foreach _objectsArray; // foreach entities "Thing";
+
+
 if (_warchestMoneySavingOn) then
 {
 	_amounts = call compile preprocessFileLineNumbers format ["%1\getWarchestMoney.sqf", _methodDir];
-
 	pvar_warchest_funds_west = (_amounts select 0) max 0;
 	publicVariable "pvar_warchest_funds_west";
 	pvar_warchest_funds_east = (_amounts select 1) max 0;
@@ -248,5 +267,4 @@ if (_warchestMoneySavingOn) then
 };
 
 diag_log format ["A3Wasteland - world persistence loaded %1 objects from %2", _objCount, call A3W_savingMethodName];
-
 _exclObjectIDs call fn_deleteObjects;
