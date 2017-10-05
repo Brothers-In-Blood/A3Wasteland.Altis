@@ -381,7 +381,7 @@ switch (_boxType) do
 			["wep", "launch_Titan_F", 2,4],
 			//Mags
 			["mag", "RPG32_HE_F", 8],
-			["mag", "Titan_AP", 8]
+			["mag", "Titan_AP", 4]
 		];
 	};
 	case "airdrop_Medical":
