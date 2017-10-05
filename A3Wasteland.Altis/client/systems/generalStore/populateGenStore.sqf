@@ -75,11 +75,11 @@ switch(_switch) do
 			_itemsArray = [_itemsArray, { !((_x select 1) in _excludedItems) }] call BIS_fnc_conditionalSelect;
 		};
 	};
-	/*case 6:
+	case 6:
 	{
-		_itemsArray = call AllBaseParts;
+		_itemsArray = call gencratesArray;
 		_showPicture = false;
-	};*/
+	};
 	default
 	{
 		_itemsArray = [];

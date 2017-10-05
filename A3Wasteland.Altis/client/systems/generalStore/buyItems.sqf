@@ -299,13 +299,11 @@ storePurchaseHandle = _this spawn
 			if (_itemData == _x select 1) exitWith
 			{
 				_price = _x select 4;
-
 				// Ensure the player has enough money
 				if (_price > _playerMoney) exitWith
 				{
 					[_itemText] call _showInsufficientFundsError;
 				};
-
 				if !(_itemData call mf_inventory_is_full) then
 				{
 					[_itemData, 1] call mf_inventory_add;
@@ -314,7 +312,6 @@ storePurchaseHandle = _this spawn
 				{
 					[_itemText] call _showInsufficientSpaceError;
 				};
-
 				//populate the inventory items
 				[] execVM "client\systems\generalStore\getInventory.sqf";
 			};
