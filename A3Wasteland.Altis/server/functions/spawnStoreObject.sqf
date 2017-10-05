@@ -38,7 +38,7 @@ if (_key != "" && isPlayer _player && {_isGenStore || _isGunStore || _isVehStore
 
 		switch (true) do
 		{
-			case _isGenStore: { _objectsArray = AllBaseParts };
+			case _isGenStore: { _objectsArray = gencratesArray };
 			case _isGunStore: { _objectsArray = staticGunsArray };
 			case _isBaseStore: { _objectsArray = AllBaseParts};
 		};
@@ -206,7 +206,7 @@ if (_key != "" && isPlayer _player && {_isGenStore || _isGunStore || _isVehStore
 			{
 				if (!surfaceIsWater _safePos) then
 				{
-					_object setPosATL [_safePos select 0, _safePos select 1, 0.05];
+					_object setPosATL [_safePos select 0, _safePos select 1, 0.1];
 				};
 
 				_object setVelocity [0,0,0.01];
