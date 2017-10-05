@@ -8,18 +8,25 @@ Purpose: Attach static weapons and objects to Vehicles
 _static = cursortarget;
 //Find the nearest vehicle
 _vehicle = nearestObject [_static, "Car_F"];
+//Get the vehicle className
+_class = typeof _vehicle;
 //Find the position of the static weapon
 _posstatic = getPos _static;
 //Find the position of the vehicle
 _posvehicle = getPos _vehicle;
 //get the distance between the two objects
 _distance = _posstatic distance _posvehicle;
+//Get the name of the vehicle
+_displayname = str configProperties [configFile>>"cfgVehicles">>_class>>"displayName"];
+hint _displayname;
+
 
 //Make sure the vehicle is in range
 if (_distance <=10) then
 {
 	switch (true) do 
 	{
+		//Offroad Variants
 		case (_vehicle iskindof "Offroad_01_base_F"): 
 		{
 			//determine already attached locations
@@ -36,6 +43,16 @@ if (_distance <=10) then
 			_attached8 = _vehicle getVariable ["Location8_Attached", false];
 			_attached9 = _vehicle getVariable ["Location9_Attached", false];
 			_attached10 = _vehicle getVariable ["Location10_Attached", false];
+
+			//Define Attachment points
+			_attach1 = [1.49012e-008,-1.8,0.3];
+			_attach2 = [1.49012e-008,-1.8,0.1];
+			_attach3 = [1.49012e-008,-1.8,-0.3];
+			_attach4 = [0.3,-1.8,-0.5];
+			_attach5 = [-0.4,-1.8,-0.5];
+			_attach6 = [0,-1.1,-0.4];
+			_atach7 = [0,-1.7,-0.4];
+			_attach8 = [0,-2.3,-0.4];
 
 			//make sure theres an empty spot
 			_spotarray = [_attachedStatic,_Attached1,_Attached2,_Attached3,_attached4,_attached5,_attached6,_attached7,_attached8,_attached9,_attached10,_attachedSLD];
@@ -56,7 +73,7 @@ if (_distance <=10) then
 								//let the player know what's going on 
 								titleText ["Attaching to Offroad", "PLAIN"];
 								
-								for "_i" from 0 to 2 do //have to repeat this section so that it takes effect
+								for "_i" from 0 to 10 do //have to repeat this section so that it takes effect
 								{
 									//Attach the static to the vehicle
 									_static attachTo [_vehicle, [-0.3,-1.9,0.9]];
@@ -74,8 +91,8 @@ if (_distance <=10) then
 							if ({_static iskindof _x} count["B_HMG_01_F","O_HMG_01_F","I_HMG_01_F","B_HMG_01_A_F","O_HMG_01_A_F","I_HMG_01_A_F","B_GMG_01_F","O_GMG_01_F","I_GMG_01_F"]>0) then
 							{
 								titleText ["Attaching to Offroad", "PLAIN"];
-								_vehicle animateSource ["hideRearDoor",1]; // Hide the tailgate so it isn't in the way
-								for "_i" from 0 to 2 do 
+								_vehicle animate ["HideDoor3",1]; // Hide the tailgate so it isn't in the way
+								for "_i" from 0 to 10 do 
 								{
 									_static attachTo [_vehicle, [0,-1.9,0.4]];
 									_static setdir 180;
@@ -89,7 +106,7 @@ if (_distance <=10) then
 							if ({_static iskindof _x} count["B_Mortar_01_F","O_Mortar_01_F","I_Mortar_01_F"]>0) then
 							{
 								titleText ["Attaching to Offroad", "PLAIN"];
-								for "_i" from 0 to 2 do 
+								for "_i" from 0 to 10 do 
 								{
 									_static attachTo [_vehicle, [0.2,-1.8,1.49012e-008]];
 									_static setdir 180;
@@ -103,7 +120,7 @@ if (_distance <=10) then
 							if ({_static iskindof _x} count["AT_01_base_F","AA_01_base_F"]>0) then
 							{
 								titleText ["Attaching to Offroad", "PLAIN"];
-								for "_i" from 0 to 2 do 
+								for "_i" from 0 to 10 do 
 								{
 									_static attachTo [_vehicle, [1.49012e-008,-1.7,0.3]];
 									_static setdir 180;
@@ -263,15 +280,6 @@ if (_distance <=10) then
 				{
 					if (({_vehicle iskindof _x} count ["Offroad_01_base_F", "Offroad_01_military_base_F"]>0) && !(_vehicle iskindof "Offroad_01_armed_base_F")) then
 					{
-						//Define Attachment points
-						_attach1 = [1.49012e-008,-1.8,0.3];
-						_attach2 = [1.49012e-008,-1.8,0.1];
-						_attach3 = [1.49012e-008,-1.8,-0.3];
-						_attach4 = [0.3,-1.8,-0.5];
-						_attach5 = [-0.4,-1.8,-0.5];
-						_attach6 = [0,-1.1,-0.4];
-						_atach7 = [0,-1.7,-0.4];
-						_attach8 = [0,-2.3,-0.4];
 						if !(_attachedStatic) then
 						{
 							if ((count _spots)>0) then
@@ -440,6 +448,62 @@ if (_distance <=10) then
 					} else
 					{
 						titleText ["Only Unarmed Offroad, can transport Crates", "PLAIN"]
+					};
+				};
+			};
+		};
+		case (_vehicle iskindof "Truck_01_base_F"):
+		{
+			//HEMMT Trackter
+			if (_vehicle iskindof "B_Truck_01_mover_F") then
+			{
+				_attachedStatic = _vehicle getVariable ["StaticAttached", false];		// Special Spot for Static Weapon (may preclude loading of static objects)
+				_attachedSLD = _vehicle getVariable ["LocationSLD_Attached", false];	// Special Spot for Static laser designator
+				if (_static isKindOf "StaticWeapon") then
+				{
+					if !(_attachedStatic) then 
+					{
+						if ({_static iskindof _x} count["B_HMG_01_high_F","O_HMG_01_high_F","I_HMG_01_high_F","B_GMG_01_high_F","O_GMG_01_high_F","I_GMG_01_high_F", "B_HMG_01_F","O_HMG_01_F","I_HMG_01_F","B_HMG_01_A_F","O_HMG_01_A_F","I_HMG_01_A_F","B_GMG_01_F","O_GMG_01_F","I_GMG_01_F", "B_Mortar_01_F","O_Mortar_01_F","I_Mortar_01_F", "B_static_AT_F","O_static_AT_F","I_static_AT_F","B_static_AA_F","O_static_AA_F","I_static_AA_F"]>0) then
+						{
+							titleText ["Cannot Attach to this Vehicle", "PLAIN"];
+						};
+						if (_static iskindof "B_SAM_System_02_F") then
+						{
+							titleText ["Attaching to Offroad", "PLAIN"];
+							_static attachTo [_vehicle, [0,-2.8,1.5]];
+							_static setVariable ["Attached", true, true];
+							_static setvariable ["moveable", false, true];
+							_vehicle setVariable ["StaticAttached", true, true];
+							_vehicle setVariable ["Attached", true, true];
+						};
+						if (_static iskindof "B_SAM_System_01_F") then
+						{
+							titleText ["Attaching to Offroad", "PLAIN"];
+							_static attachTo [_vehicle, [0,-3.2,1.3]];
+							_static setVariable ["Attached", true, true];
+							_static setvariable ["moveable", false, true];
+							_vehicle setVariable ["StaticAttached", true, true];
+							_vehicle setVariable ["Attached", true, true];
+						};
+						if (_static iskindof "B_AAA_System_01_F") then
+						{
+							titleText ["Attaching to Offroad", "PLAIN"];
+							_static attachTo [_vehicle, [0,-2.8,2]];
+							_static setVariable ["Attached", true, true];
+							_static setvariable ["moveable", false, true];
+							_vehicle setVariable ["StaticAttached", true, true];
+							_vehicle setVariable ["Attached", true, true];
+						};
+					};
+					if !(_attachedSLD) then
+					{
+						if ({_static iskindof _x} count ["Static_Designator_02_base_F", "Static_Designator_01_base_F"]>0) then
+						{
+							titleText ["Attaching to Offroad", "PLAIN"];
+							_static attachTo [_vehicle, [1.49012e-008,3.2,1.3]];
+							_vehicle setVariable ["LocationSLD_Attached", true, true];
+							_vehicle setVariable ["Attached", true, true];
+						};
 					};
 				};
 			};
