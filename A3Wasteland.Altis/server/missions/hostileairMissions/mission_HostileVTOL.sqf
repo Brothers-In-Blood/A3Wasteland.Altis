@@ -126,7 +126,11 @@ _successExec =
 	_currBox1 = _Boxes1 call BIS_fnc_selectRandom;
 	_box1 = createVehicle [_currBox1, _lastPos, [], 2, "None"];
 	_box1 setDir random 360;
-	_box1 setammocargo 0;
+	if (_box1 isKindOf "Box_East_AmmoVeh_F") then
+	{
+		_box1 setammocargo 0;
+		[_box1] remoteExecCall ["GOM_fnc_addAircraftLoadout", 0, _box1];
+	};
 	_box1 setVariable ["moveable", true, true];
 	_box1 allowDamage false;
 
@@ -134,7 +138,11 @@ _successExec =
 	_currBox2 = _Boxes2 call BIS_fnc_selectRandom;
 	_box2 = createVehicle [_currBox2, _lastPos, [], 2, "None"];
 	_box2 setDir random 360;
-	_box2 setammocargo 0;
+	if (_box2 isKindOf "Box_East_AmmoVeh_F") then
+	{
+		_box2 setammocargo 0;
+		[_box2] remoteExecCall ["GOM_fnc_addAircraftLoadout", 0, _box2];
+	};
 	_box2 setVariable ["moveable", true, true];
 	_box2 allowDamage false;
 
@@ -142,7 +150,11 @@ _successExec =
 	_currBox3 = _Boxes3 call BIS_fnc_selectRandom;
 	_box3 = createVehicle [_currBox3, _lastPos, [], 2, "None"];
 	_box3  setDir random 360;
-	_box3  setammocargo 0;
+	if (_box3 isKindOf "Box_East_AmmoVeh_F") then
+	{
+		_box3 setammocargo 0;
+		[_box3] remoteExecCall ["GOM_fnc_addAircraftLoadout", 0, _box3];
+	};
 	_box3 setVariable ["moveable", true, true];
 	_box3 allowDamage false;
 
@@ -150,7 +162,11 @@ _successExec =
 	_currBox4 = _Boxes4 call BIS_fnc_selectRandom;
 	_box4 = createVehicle [_currBox4, _lastPos, [], 2, "None"];
 	_box4 setDir random 360;
-	_box4 setammocargo 0;
+	if (_box4 isKindOf "Box_East_AmmoVeh_F") then
+	{
+		_box4 setammocargo 0;
+		[_box4] remoteExecCall ["GOM_fnc_addAircraftLoadout", 0, _box4];
+	};
 	_box4 setVariable ["moveable", true, true];
 	_box4 allowDamage false;
 
@@ -158,7 +174,11 @@ _successExec =
 	_currBox5 = _Boxes5 call BIS_fnc_selectRandom;
 	_box5 = createVehicle [_currBox5, _lastPos, [], 2, "None"];
 	_box5 setDir random 360;
-	_box5 setammocargo 0;
+	if (_box5 isKindOf "Box_East_AmmoVeh_F") then
+	{
+		_box5 setammocargo 0;
+		[_box5] remoteExecCall ["GOM_fnc_addAircraftLoadout", 0, _box5];
+	};
 	_box5 setVariable ["moveable", true, true];
 	_box5 allowDamage false;
 
@@ -166,7 +186,11 @@ _successExec =
 	_currBox6 = _Boxes6 call BIS_fnc_selectRandom;
 	_box6 = createVehicle [_currBox6, _lastPos, [], 2, "None"];
 	_box6 setDir random 360;
-	_box6 setammocargo 0;
+	if (_bo61 isKindOf "Box_East_AmmoVeh_F") then
+	{
+		_box6 setammocargo 0;
+		[_box6] remoteExecCall ["GOM_fnc_addAircraftLoadout", 0, _box6];
+	};
 	_box6 setVariable ["moveable", true, true];
 	_box6 allowDamage false;
 
@@ -174,7 +198,11 @@ _successExec =
 	_currBox7 = _Boxes7 call BIS_fnc_selectRandom;
 	_box7 = createVehicle [_currBox7, _lastPos, [], 2, "None"];
 	_box7 setDir random 360;
-	_box7 setammocargo 0;
+	if (_box7 isKindOf "Box_East_AmmoVeh_F") then
+	{
+		_box7 setammocargo 0;
+		[_box7] remoteExecCall ["GOM_fnc_addAircraftLoadout", 0, _box7];
+	};
 	_box7 setVariable ["moveable", true, true];
 	_box7 allowDamage false;
 
@@ -182,7 +210,11 @@ _successExec =
 	_currBox8 = _Boxes8 call BIS_fnc_selectRandom;
 	_box8 = createVehicle [_currBox8, _lastPos, [], 2, "None"];
 	_box8 setDir random 360;
-	_box8 setammocargo 0;
+	if (_box8 isKindOf "Box_East_AmmoVeh_F") then
+	{
+		_box8 setammocargo 0;
+		[_box8] remoteExecCall ["GOM_fnc_addAircraftLoadout", 0, _box8];
+	};
 	_box8 setVariable ["moveable", true, true];
 	_box8 allowDamage false;
 
@@ -190,15 +222,13 @@ _successExec =
 	_currBox9 = _Boxes9 call BIS_fnc_selectRandom;
 	_box9 = createVehicle [_currBox9, _lastPos, [], 2, "None"];
 	_box9 setDir random 360;
-	_box9 setammocargo 0;
+	if (_box9 isKindOf "Box_East_AmmoVeh_F") then
+	{
+		_box9 setammocargo 0;
+		[_box9] remoteExecCall ["GOM_fnc_addAircraftLoadout", 0, _box9];
+	};
 	_box9 setVariable ["moveable", true, true];
 	_box9 allowDamage false;
-	_allboxes = [_box1, _box2, _box3, _box4, _box5, _box6, _box7, _box8, _box9]
-	//Enable service objects
-	if (_x iskindof "Box_NATO_AmmoVeh_F" || _x iskindof "Box_EAST_AmmoVeh_F" || _x iskindof"Box_IND_AmmoVeh_F") then
-	{
-		[_x] remoteExecCall ["GOM_fnc_addAircraftLoadout", 0, _x];
-	} foreach _allboxes
 	_successHintMessage = "The sky is clear again, the enemy supply drop was taken out! Cargo has fallen near the wreck, go find it!.";
 };
 
