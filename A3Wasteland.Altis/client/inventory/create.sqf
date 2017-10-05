@@ -13,12 +13,12 @@
  *      id {string} - a unique item id.
  *      name {string} - the Text that the player sees.
  *      use {function} - the function that is called when the item is used.
- *          Note: MUST return true or false... see "use.sqf" for details.
+ *      Note: MUST return true or false... see "use.sqf" for details.
  *      object {string} - the object type to place on the gound when dropped.
  *      icon {string} - the icon to use for the item
  *      max {integer | function} - the maximum qty of this item a player can
- *          carry, either a number or a function returning a number.
- *          see "is_full.sqf" for details.
+ *      carry, either a number or a function returning a number.
+ *      "is_full.sqf" for details.
  */
 
 #include "define.sqf"

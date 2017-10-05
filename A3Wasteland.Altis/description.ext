@@ -186,4 +186,5 @@ class CfgSounds
 			titles[] = {};
 		};
 };
+
 #include "infiSTAR_AdminMenu.hpp"

@@ -16,7 +16,8 @@ MF_ITEMS_PINLOCK = "pinlock";
 MF_ITEMS_PINLOCK_TYPE = "Land_SatellitePhone_F";
 MF_ITEMS_PINLOCK_ICON = "client\icons\keypad.paa";
 
-mf_pinlock_nearest_vehicle = {
+mf_pinlock_nearest_vehicle = 
+{
 	["LandVehicle", "Air", "Ship"] call mf_nearest_vehicle
 } call mf_compile;
 
