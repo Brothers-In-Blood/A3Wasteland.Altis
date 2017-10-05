@@ -19,7 +19,7 @@ APOC_AA_VehOptions =
 
 APOC_AA_SupOptions =
 [
-  ["Launchers", 			                           "airdrop_Launchers", 			                    60000,	                     "supply"],
+  ["Launchers", 			                           "airdrop_Launchers", 			                    180000,	                     "supply"],
   ["Sniper Rifles", 	                           "airdrop_Snipers", 				                    50000,	                     "supply"],
   ["Rifles", 				                             "airdrop_Rifles", 				                      45000,	                     "supply"],
   ["LMGs", 				                               "airdrop_LMGs", 				                        45000,	                     "supply"],
