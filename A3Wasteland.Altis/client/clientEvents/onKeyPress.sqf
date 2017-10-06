@@ -140,7 +140,6 @@ if (!_handled && _key in (actionKeys "MoveDown" + actionKeys "MoveUp")) then
 	};
 };
 
-} // ####################
 else // UNCONSCIOUS
 {
 	if (_key == 57) then // spacebar
