@@ -7,7 +7,7 @@
 	Arma AntiHack & AdminTools - infiSTAR.de
 */
 /* *******************Developer : infiSTAR (infiSTAR23@gmail.com)******************* */
-/* **************infiSTAR Copyright®© 2011 - 2017 All rights reserved.************** */
+/* **************infiSTAR Copyrightï¿½ï¿½ 2011 - 2017 All rights reserved.************** */
 /* *********************************www.infiSTAR.de********************************* */
 diag_log '<infiSTAR.de> VERSION: infiSTAR.de 29-08-2017 21-18-37 (v253)';
 comment 'Antihack & AdminTools - Christian Lorenzen - www.infiSTAR.de - License: (CC)';
@@ -232,7 +232,7 @@ _verybadStrings =
 	'gggg_eeee_ffff','mord all','teleport all','__byass','_altislifeh4x','antifrezze','ownscripts','ownscripted','mesnu',
 	'mystic_','init re','init life re','spoody','gef_','throx_','_adasaasasa','_dsfnsjf','cheatmenu','in54nity','markad','fuck_me_','_v4fin',
 	'a3randvar','infinite ammo','player markers','+ _code +','RANDOMVAR',
-	'i can break these cuffs','give 100k','kill all','grimbae','pony menu','35sp','lyštîc mêñu',
+	'i can break these cuffs','give 100k','kill all','grimbae','pony menu','35sp','lyï¿½tï¿½c mï¿½ï¿½u',
 	'insert script','3x3cutor','c4sh','T e l e p o r t'
 ];
 _blacklistedVariables append [
@@ -1091,7 +1091,7 @@ if(_option isEqualTo 0)exitWith
 	clearBackpackCargoGlobal _vehObj;
 	clearItemCargoGlobal _vehObj;
 	addToRemainsCollector[_vehObj];
-	_vehObj disableTIEquipment true;
+	_vehObj disableTIEquipment false;
 	"; if(_MOD == 'Epoch')then{ _A3AHstring = _A3AHstring + "
 	if(_vehObj isKindOf 'Air' || _vehObj isKindOf 'Ship' || _vehObj isKindOf 'LandVehicle')then
 	{
@@ -5527,5 +5527,5 @@ diag_log format['<infiSTAR.de> %1 - AntiHack loaded!',time];
 /* ********************************************************************************* */
 /* *********************************www.infiSTAR.de********************************* */
 /* *******************Developed by infiSTAR (infiSTAR23@gmail.com)****************** */
-/* **************infiSTAR Copyright®© 2011 - 2017 All rights reserved.************** */
+/* **************infiSTAR Copyrightï¿½ï¿½ 2011 - 2017 All rights reserved.************** */
 /* ****DayZAntiHack.com***DayZAntiHack.de***ArmaAntiHack.com***Arma3AntiHack.com**** */
