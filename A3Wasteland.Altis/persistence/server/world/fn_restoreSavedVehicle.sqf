@@ -25,15 +25,6 @@ _veh = createVehicle [_class, _tempPos, [], if (isNil "_safeDistance") then { 0 
 _veh allowDamage false;
 _veh hideObjectGlobal true;
 
-if (_veh iskindof "Plane_Fighter_01_Base_F") then
-{
-	_veh animate ['wing_fold_l',1]; 
-	_veh animate ['wing_fold_r',1]; 
-	_veh animate ['wing_fold_cover_l',1]; 
-	_veh animate ['wing_fold_cover_r',1];
-};
-
-
 private _velMag = vectorMagnitude velocity _veh;
 
 if (isNil "_safeDistance") then
@@ -191,7 +182,7 @@ if (!isNil "_backpacks") then
 	{
 		_x params ["_bpack"];
 
-		if (!(_bpack isKindOf "Weapon_Bag_Base") || {{_bpack isKindOf _x} count ["B_UAV_01_backpack_F", "B_Static_Designator_01_weapon_F", "O_Static_Designator_02_weapon_F"] > 0}) then
+		if (!(_bpack isKindOf "Weapon_Bag_Base") || {[["_UAV_","_Designator_"], _bpack] call fn_findString != -1}) then
 		{
 			_veh addBackpackCargoGlobal _x;
 		};

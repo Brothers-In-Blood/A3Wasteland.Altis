@@ -76,7 +76,7 @@ if ({_vehicle iskindof _x} count
 		_vehicle setFuelCargo 0;
 		_vehicle setRepairCargo 0;
 		[_vehicle] remoteExecCall ["GOM_fnc_addAircraftLoadout", 0, _vehicle];
-	};
+};
 
 [_vehicle, _brandNew] call A3W_fnc_setVehicleLoadout;
 
@@ -147,6 +147,11 @@ switch (true) do
 	{
 		// Add quadbike horn to karts
 		_vehicle addWeaponTurret ["MiniCarHorn", [-1]];
+	};
+	case (_class isKindOf "B_GEN_Offroad_01_gen_F"):
+	{
+		_vehicle removeWeaponTurret ["SportCarHorn", [-1]];
+		_vehicle addWeaponTurret ["AmbulanceHorn", [-1]];
 	};
 };
 
