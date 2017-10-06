@@ -861,7 +861,7 @@ genItemArray = compileFinal str
 	["Laser Designator (Green)",												"Laserdesignator_01_khk_F",											1000,						"binoc"],
 	["Laser Designator (Hex)",													"Laserdesignator_02",												1000,						"binoc",						"noDLC"],
 	["Laser Designator (Olive)",												"Laserdesignator_03",												1000,						"binoc",						"noDLC"],
-	["Laser Designator (Sand)",													"Laserdesignator",													1000,						"binoc",						"noDLC"],						// Increase price to 2500 if A3W_disableBuiltInThermal = 0
+	["Laser Designator (Sand)",													"Laserdesignator",													1000,						"binoc",						"noDLC"],
 	["Medical Drone(AAF)",														"I_UAV_06_medical_backpack_F",										5000,						"backpack"],
 	["Medical Drone(CIV)",														"C_UAV_06_medical_backpack_F",										5000,						"backpack"],
 	["Medical Drone(CSAT)",														"O_UAV_06_medical_backpack_F",										5000,						"backpack"],
