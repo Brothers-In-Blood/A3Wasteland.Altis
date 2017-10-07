@@ -2040,7 +2040,7 @@ colorsArray = compileFinal str
 //Display Name,Class Name,Description,Picture,Buy Price,Sell Price.
 customPlayerItems = compileFinal str
 [
-	["Vehicle Pinlock","pinlock",localize "STR_WL_ShopDescriptions_Pinlock","client\icons\keypad.paa",1000,500],
+	//["Vehicle Pinlock","pinlock",localize "STR_WL_ShopDescriptions_Pinlock","client\icons\keypad.paa",1000,500],
 	["Jerry Can (Full)","jerrycanfull",localize "STR_WL_ShopDescriptions_fuelFull","client\icons\jerrycan.paa",150,75],
 	["Jerry Can (Empty)","jerrycanempty",localize "STR_WL_ShopDescriptions_fuelEmpty","client\icons\jerrycan.paa",50,25],
 	["Camo Net","camonet",localize "STR_WL_ShopDescriptions_Camo","client\icons\camonet.paa",200,100],

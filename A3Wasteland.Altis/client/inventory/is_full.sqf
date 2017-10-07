@@ -21,7 +21,8 @@ private ["_item", "_full"];
 _full = true;
 _item = _this call mf_inventory_get;
 _max = _item select MAX;
-switch (typeName _max) do {
+switch (typeName _max) do 
+{
 	case "SCALAR": {
 		_full = _max <= (_item select QTY);
 	};

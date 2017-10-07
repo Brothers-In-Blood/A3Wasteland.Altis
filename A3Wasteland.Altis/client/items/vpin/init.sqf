@@ -21,7 +21,7 @@ mf_pinlock_nearest_vehicle =
 	["LandVehicle", "Air", "Ship"] call mf_nearest_vehicle
 } call mf_compile;
 
-[MF_ITEMS_PINLOCK, "Vehicle Pinlock", _applypin, MF_ITEMS_PINLOCK_TYPE, MF_ITEMS_PINLOCK_ICON, 1] call mf_inventory_create;
+[MF_ITEMS_PINLOCK, "Vehicle Pinlock", _applypin, MF_ITEMS_PINLOCK_TYPE, MF_ITEMS_PINLOCK_ICON, 4] call mf_inventory_create;
 
 mf_can_applypin = [_path, "can_applypin.sqf"] call mf_compile;
 
