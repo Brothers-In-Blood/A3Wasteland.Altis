@@ -120,7 +120,7 @@ if (_fonctionnalites select __can_be_transported_cargo) then
 		_objet addAction [("<img image='client\icons\r3f_loadin.paa' color='#dddd00'/> <t color=""#dddd00"">" + STR_R3F_LOG_action_charger_deplace + "</t>"), {_this call R3F_LOG_FNCT_transporteur_charger_deplace}, nil, 8, true, true, "", "!R3F_LOG_mutex_local_verrou && R3F_LOG_objet_addAction == _target && R3F_LOG_joueur_deplace_objet == _target && R3F_LOG_action_charger_deplace_valide  && (_target getVariable ['moveable', false])"];
 	};
 
-	_objet addAction [("<img image='client\icons\r3f_loadin.paa' color='#dddd00'/> <t color=""#dddd00"">" + format [STR_R3F_LOG_action_selectionner_objet_charge, _nom] + "</t>"), {_this call R3F_LOG_FNCT_transporteur_selectionner_objet}, nil, 5, false, true, "", "!R3F_LOG_mutex_local_verrou && R3F_LOG_objet_addAction == _target && R3F_LOG_action_selectionner_objet_charge_valide && Object_canLock  && (_target getVariable ['moveable', false])"];
+	_objet addAction [("<img image='client\icons\r3f_loadin.paa' color='#dddd00'/> <t color=""#dddd00"">" + format [STR_R3F_LOG_action_selectionner_objet_charge, _nom] + "</t>"), {_this call R3F_LOG_FNCT_transporteur_selectionner_objet}, nil, 5, false, true, "", "!R3F_LOG_mutex_local_verrou && R3F_LOG_objet_addAction == _target && R3F_LOG_action_selectionner_objet_charge_valide && Object_canLock"];
 };
 
 if (_fonctionnalites select __can_be_moved_by_player) then
