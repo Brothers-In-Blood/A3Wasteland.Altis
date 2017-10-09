@@ -75,7 +75,10 @@ A3W_fnc_getInFast = [_clientFunc, "fn_getInFast.sqf"] call mf_compile;
 A3W_fnc_isBleeding = [_serverFunc, "fn_isBleeding.sqf"] call mf_compile;
 A3W_fnc_isFriendly = [_clientFunc, "fn_isFriendly.sqf"] call mf_compile;
 A3W_fnc_isUnconscious = [_serverFunc, "fn_isUnconscious.sqf"] call mf_compile;
+A3W_fnc_killBroadcast = "client\systems\killFeed\fn_killBroadcast.sqf" call mf_compile;
+A3W_fnc_killFeedEntry = "client\systems\killFeed\fn_killFeedEntry.sqf" call mf_compile;
 A3W_fnc_pushVehicle = [_serverFunc, "pushVehicle.sqf"] call mf_compile;
+A3W_fnc_setVarServer = [_serverFunc, "fn_setVarServer.sqf"] call mf_compile;
 A3W_fnc_setVehicleLoadout = [_serverFunc, "fn_setVehicleLoadout.sqf"] call mf_compile;
 A3W_fnc_towingHelper = [_serverFunc, "towingHelper.sqf"] call mf_compile;
 applyVehicleTexture = "client\systems\vehicleStore\applyVehicleTexture.sqf" call mf_compile;
@@ -89,6 +92,7 @@ fn_addTurretWeapons = [_serverFunc, "fn_addTurretWeapons.sqf"] call mf_compile;
 fn_allPlayers = [_serverFunc, "allPlayers.sqf"] call mf_compile;
 fn_boundingBoxReal = [_serverFunc, "fn_boundingBoxReal.sqf"] call mf_compile;
 fn_canGetIn = [_clientFunc, "fn_canGetIn.sqf"] call mf_compile;
+fn_compatibleWeapons = [_clientFunc, "fn_compatibleWeapons.sqf"] call mf_compile;
 fn_createCrewUAV = [_serverFunc, "fn_createCrewUAV.sqf"] call mf_compile;
 fn_enableSimulationGlobal = [_serverFunc, "fn_enableSimulationGlobal.sqf"] call mf_compile;
 fn_enableSimulationServer = [_serverFunc, "fn_enableSimulationServer.sqf"] call mf_compile;
@@ -96,6 +100,7 @@ fn_filterString = [_serverFunc, "fn_filterString.sqf"] call mf_compile;
 fn_findInPairs = [_serverFunc, "fn_findInPairs.sqf"] call mf_compile;
 fn_findPilot = [_clientFunc, "fn_findPilot.sqf"] call mf_compile;
 fn_findString = [_serverFunc, "fn_findString.sqf"] call mf_compile;
+fn_findTurretShooter = [_clientFunc, "fn_findTurretShooter.sqf"] call mf_compile;
 fn_forceAddItem = [_clientFunc, "fn_forceAddItem.sqf"] call mf_compile;
 fn_getFromPairs = [_serverFunc, "fn_getFromPairs.sqf"] call mf_compile;
 fn_getPos3D = [_serverFunc, "fn_getPos3D.sqf"] call mf_compile;
@@ -140,7 +145,7 @@ vehicleDammagedEvent = [_serverFunc, "vehicleDammagedEvent.sqf"] call mf_compile
 vehicleEngineEvent = [_serverFunc, "vehicleEngineEvent.sqf"] call mf_compile;
 vehicleHandleDamage = [_serverFunc, "vehicleHandleDamage.sqf"] call mf_compile;
 vehicleHitTracking = [_serverFunc, "vehicleHitTracking.sqf"] call mf_compile;
-A3W_fnc_aj_s_refreshZeus = "addons\aj\zeus\fn_aj_s_refreshZeus.sqf" call mf_compile;	//name has has to started with A3W_fnc_
+
 call compile preprocessFileLineNumbers "server\functions\mf_remote.sqf";
 
 "pvar_switchMoveGlobal" addPublicVariableEventHandler { ((_this select 1) select 0) switchMove ((_this select 1) select 1) };

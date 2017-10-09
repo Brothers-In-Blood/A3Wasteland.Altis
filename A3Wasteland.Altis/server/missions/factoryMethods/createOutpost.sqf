@@ -44,7 +44,6 @@ _objs = [];
 	if (!isNil "_init") then { _obj call _init };
 
 	_obj setVariable ["R3F_LOG_disabled", true, true];
-	_obj setVariable ["moveable", true, true];
 	[_obj] call basePartSetup;
 	_objs pushBack _obj;
 } forEach _objList;

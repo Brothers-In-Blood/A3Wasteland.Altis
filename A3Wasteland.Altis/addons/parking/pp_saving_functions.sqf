@@ -123,7 +123,6 @@ if (isServer) then {
 
     if !(_saveFlag) then {
       _vehicle setVariable ["A3W_purchasedVehicle", true];
-      _vehicle setVariable ["A3W_missionVehicle", false];
     };
 
     [_this, _player, _vehicle, _uid, _vehOwner, _parked_vehicles, _saveFlag] spawn

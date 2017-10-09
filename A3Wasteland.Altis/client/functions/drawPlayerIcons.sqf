@@ -8,10 +8,12 @@
 
 if (!hasInterface) exitWith {};
 
-#define ICON_fadeDistance 2500
-#define ICON_limitDistance 5000
-#define ICON_sizeScale 0.25
-#define MINE_ICON_MAX_DISTANCE 10 // 200 is Arma 3 default for mine detector
+#define ICON_fadeDistance 1250
+#define ICON_limitDistance 2000
+#define ICON_sizeScale 0.75
+
+#define MINE_ICON_MAX_DISTANCE 200 // 200 is Arma 3 default for mine detector
+
 #define UNIT_POS(UNIT) (UNIT modelToWorldVisual (UNIT selectionPosition "spine3")) //[0, 0, 1.25]) // Torso height
 #define UAV_UNIT_POS(UNIT) (((vehicle UNIT) modelToWorldVisual [0, 0, 0]) vectorAdd [0, 0, 0.5])
 #define CENTER_POS(OBJ) (OBJ modelToWorldVisual [0,0,0])
@@ -69,6 +71,8 @@ drawPlayerIcons_thread = [] spawn
 		};
 	} forEach _mineColor;
 
+	_noBuiltInThermal = ["A3W_disableBuiltInThermal"] call isConfigOn;
+
 	private ["_dist"];
 
 	// Execute every frame
@@ -91,6 +95,7 @@ drawPlayerIcons_thread = [] spawn
 					_simulation = getText (configFile >> "CfgVehicles" >> typeOf _unit >> "simulation");
 					_isUavUnit = (_simulation == "UAVPilot");
 
+					//_dist = _unit distance positionCameraToWorld [0,0,0];
 					_posCode = ([1,2] select _isUavUnit) call drawPlayerIcons_posCode;
 					_pos = _unit call _posCode;
 
@@ -169,16 +174,66 @@ drawPlayerIcons_thread = [] spawn
 				};
 			} forEach allUnits;
 
-			if (_detectedMinesDisabled && "MineDetector" in items player) then
+			if ("MineDetector" in items player) then
 			{
-				_posCode = 0 call drawPlayerIcons_posCode;
-
+				// override manual mine detection
 				{
-					if (mineActive _x && _x distance player <= MINE_ICON_MAX_DISTANCE) then
+					if (mineActive _x && !(_x mineDetectedBy playerSide)) then
 					{
-						_newArray pushBack [[_mineIcon, _mineColor, CENTER_POS(_x), 1, 1, 0, "", 2, 0, "PuristaMedium", "", true], _x, _posCode];
+						playerSide revealMine _x;
 					};
-				} forEach detectedMines playerSide;
+				} forEach (player nearObjects ["MineBase", 10]);
+
+				if (_detectedMinesDisabled) then
+				{
+					_posCode = 0 call drawPlayerIcons_posCode;
+
+					{
+						if (mineActive _x && _x distance player <= MINE_ICON_MAX_DISTANCE) then
+						{
+							_newArray pushBack [[_mineIcon, _mineColor, CENTER_POS(_x), 1, 1, 0, "", 2, 0, "PuristaMedium", "", true], _x, _posCode];
+						};
+					} forEach detectedMines playerSide;
+				};
+			};
+
+			if (_noBuiltInThermal || (currentWeapon player) select [0,15] == "Laserdesignator") then
+			{
+				_thermalActive = currentVisionMode player isEqualTo 2;
+
+				if (_thermalActive || !isNil "A3W_builtInThermalOffline") then
+				{
+					_weapon = currentWeapon player;
+					_ownWeapon = true;
+
+					{
+						_x params ["_unit", "","","", "_ffv"];
+
+						if (_unit == player) exitWith
+						{
+							_ownWeapon = _ffv;
+						};
+					} forEach fullCrew [objectParent player, "", false];
+
+					if (_thermalActive && {cameraOn == vehicle player && _weapon in weapons player && _ownWeapon &&
+						({_x == "TI"} count getArray (configFile >> "CfgWeapons" >> _weapon >> "visionMode") > 0 ||
+						 {!("{_x == 'TI'} count getArray (_x >> 'visionMode') > 0" configClasses (configFile >> "CfgWeapons" >> _weapon >> "OpticsModes") isEqualTo [])})}) then
+					{
+						if (isNil "A3W_builtInThermalOffline") then
+						{
+							"A3W_thermalOffline" cutText ["THERMAL IMAGING OFFLINE", "BLACK", 0.001, false];
+							A3W_builtInThermalOffline = true;
+						};
+					}
+					else
+					{
+						if (!isNil "A3W_builtInThermalOffline") then
+						{
+							"A3W_thermalOffline" cutText ["", "PLAIN", 0.001, false];
+							A3W_builtInThermalOffline = nil;
+						};
+					};
+				};
 			};
 		};
 

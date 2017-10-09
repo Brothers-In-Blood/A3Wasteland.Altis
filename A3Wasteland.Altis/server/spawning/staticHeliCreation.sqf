@@ -36,7 +36,6 @@ _spawnPos = _this select 1;
 	// _currHeli spawn cleanVehicleWreck;
 
 	_currHeli enableSimulationGlobal true;
-	_currHeli setVariable ["moveable", true, true];
 /*}
 else
 {

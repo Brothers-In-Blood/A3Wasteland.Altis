@@ -197,7 +197,7 @@ storePurchaseHandle = _this spawn
 			if (isNil "_price") then
 			{
 				{
-					// Exact copy of AllBaseParts call in buyItems.sqf
+					// Exact copy of genObjectsArray call in buyItems.sqf
 					if (_itemData == _x select 1) exitWith
 					{
 						_class = _x select 1;

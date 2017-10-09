@@ -21,29 +21,35 @@ _setupObjects =
 
 	_vehicleClass = if (missionDifficultyHard) then
 	{
-		["B_Heli_Attack_01_F", "O_Heli_Attack_02_black_F"] call BIS_fnc_selectRandom;
+		selectRandom ["B_Heli_Attack_01_dynamicLoadout_F", "O_Heli_Attack_02_dynamicLoadout_F"] ;
 	}
 	else
 	{
-		["B_Heli_Light_01_armed_F", "O_Heli_Light_02_F", "I_Heli_light_03_F"] call BIS_fnc_selectRandom;
+		selectRandom [["B_Heli_Light_01_dynamicLoadout_F", "pawneeNormal"], ["O_Heli_Light_02_dynamicLoadout_F", "orcaDAGR"], "I_Heli_light_03_dynamicLoadout_F"];
 	};
 
 	_createVehicle =
 	{
-		private ["_type", "_position", "_direction", "_vehicle", "_soldier"];
+		private ["_type", "_position", "_direction", "_variant", "_vehicle", "_soldier"];
 
 		_type = _this select 0;
 		_position = _this select 1;
 		_direction = _this select 2;
+		_variant = _type param [1,"",[""]];
+
+		if (_type isEqualType []) then
+		{
+			_type = _type select 0;
+		};
 
 		_vehicle = createVehicle [_type, _position, [], 0, "FLY"];
-		_vehicle setVehicleReportRemoteTargets true;
-		_vehicle setVehicleReceiveRemoteTargets true;
-		_vehicle setVehicleRadar 1;
-		_vehicle confirmSensorTarget [west, true];
-		_vehicle confirmSensorTarget [east, true];
-		_vehicle confirmSensorTarget [resistance, true];
 		_vehicle setVariable ["R3F_LOG_disabled", true, true];
+
+		if (_variant != "") then
+		{
+			_vehicle setVariable ["A3W_vehicleVariant", _variant, true];
+		};
+
 		[_vehicle] call vehicleSetup;
 
 		_vehicle setDir _direction;
@@ -53,7 +59,6 @@ _setupObjects =
 		// the little bird, orca, and hellcat do not require gunners and should not have any passengers
 		_soldier = [_aiGroup, _position] call createRandomSoldierC;
 		_soldier moveInDriver _vehicle;
- _soldier triggerDynamicSimulation true;
 
 		switch (true) do
 		{
@@ -118,8 +123,8 @@ _setupObjects =
 
 	_missionPos = getPosATL leader _aiGroup;
 
-	_missionPicture = getText (configFile >> "CfgVehicles" >> _vehicleClass >> "picture");
-	_vehicleName = getText (configFile >> "CfgVehicles" >> _vehicleClass >> "displayName");
+	_missionPicture = getText (configFile >> "CfgVehicles" >> (_vehicleClass param [0,""]) >> "picture");
+	_vehicleName = getText (configFile >> "CfgVehicles" >> (_vehicleClass param [0,""]) >> "displayName");
 
 	_missionHintText = format ["An armed <t color='%2'>%1</t> is patrolling the island. Intercept it and recover its cargo!", _vehicleName, sideMissionColor];
 
@@ -152,12 +157,10 @@ _successExec =
 
 		_box1 = createVehicle ["Box_NATO_Wps_F", (getPosATL _veh) vectorAdd ([[_veh call fn_vehSafeDistance, 0, 0], random 360] call BIS_fnc_rotateVector2D), [], 5, "None"];
 		_box1 setDir random 360;
-		_box1 setVariable ["moveable", true, true];
 		[_box1, "mission_USSpecial"] call fn_refillbox;
 
 		_box2 = createVehicle ["Box_East_Wps_F", (getPosATL _veh) vectorAdd ([[_veh call fn_vehSafeDistance, 0, 0], random 360] call BIS_fnc_rotateVector2D), [], 5, "None"];
 		_box2 setDir random 360;
-		_box2 setVariable ["moveable", true, true];
 		[_box2, "mission_USLaunchers"] call fn_refillbox;
 	};
 

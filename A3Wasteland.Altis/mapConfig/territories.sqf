@@ -12,14 +12,21 @@
 // 4 - Territory category, currently unused. See territory/README.md for details.
 
 [
-	["TERRITORY_0_ABDERA", "Abdera", 5000, "CITY"],
-	["TERRITORY_1_OREOKASTRO", "Oreokastro", 5000, "CITY"],
-	["TERRITORY_2_KOREFACTORY", "Kore Factory", 5000, "CITY"],
-	["TERRITORY_3_KALOCHORI", "Kalochori", 5000, "CITY"],
-	["TERRITORY_4_MILITARYHILL", "Military Hill", 5000, "CITY"],
-	["TERRITORY_5_THERISA", "Therisa", 5000, "CITY"],
-	["TERRITORY_6_GHOSTHOTEL", "Ghost Hotel", 5000, "CITY"],
-	["TERRITORY_7_MOLOS", "Molos", 5000, "CITY"],
-	["TERRITORY_8_PANAGIA", "Panagia", 5000, "CITY"],
-	["TERRITORY_9_SFAKA", "Sfaka", 5000, "CITY"]
+	["TERRITORY_THRONOS_CASTLE", "Thronos Castle", 500, "CASTLE"],
+	//["TERRITORY_KASTRO_CASTLE", "Kastro Castle", 500, "CASTLE"],
+	["TERRITORY_SW_AIRFIELD", "AAC Airfield", 500, "AIRFIELD"],
+	["TERRITORY_MAIN_AIRBASE_SW", "Altis Airport (SW)", 750, "AIRBASE"],
+	["TERRITORY_MAIN_AIRBASE_CENTER", "Altis Airport (Center)", 750, "AIRBASE"],
+	["TERRITORY_MAIN_AIRBASE_NE", "Altis Airport (NE)", 750, "AIRBASE"],
+	["TERRITORY_NE_AIRFIELD", "Molos Airfield", 500, "AIRFIELD"],
+	["TERRITORY_SE_AIRFIELD", "Selakano Airfield", 500, "AIRFIELD"],
+	["TERRITORY_NW_AIRFIELD", "Northwest Airfield", 500, "AIRFIELD"],
+	["TERRITORY_SALTFLATS_AIRFIELD", "Saltflats", 500, "AIRFIELD"],
+	["TERRITORY_WEST_POWER_PLANT", "West Power Plant", 500, "POWER"],
+	["TERRITORY_CENTER_POWER_PLANT", "Center Power Plant", 500, "POWER"],
+	["TERRITORY_IRAKLIA_RUINS", "Iraklia Ruins", 500, "RUINS"],
+	["TERRITORY_ARTINARKI_RUINS", "Artinarki Ruins", 500, "RUINS"],
+	["TERRITORY_MAGOS_TRANSMITTER", "Magos Transmitter", 500, "TRANSMITTER"],
+	["TERRITORY_PYRSOS_TRANSMITTER", "Pyrsos Transmitter", 500, "TRANSMITTER"],
+	["TERRITORY_MILITARY_RESEARCH", "Telos Military Base", 500, "MILITARY"]
 ]

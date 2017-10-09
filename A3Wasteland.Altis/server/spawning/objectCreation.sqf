@@ -50,7 +50,6 @@ switch (true) do
 
 _obj allowDamage _allowDamage;
 _obj setVariable ["allowDamage", _allowDamage, true];
-_obj setVariable ["moveable", true, true];
 
 // fix for sunken/rissen objects :)
 _adjustZ = switch (true) do

@@ -524,7 +524,7 @@ va_check_outside_actions = {
   init(_player,player);
 
 
-  _target_vehicle = [_player, 7] call va_outside_target;
+  _target_vehicle = [_player, 3.5] call va_outside_target;
   //player groupChat format["_target_vehicle = %1",_target_vehicle];
   if (!isOBJECT(_target_vehicle) || {insideAVehicle(_player) || {not(alive _player)}}) exitWith {
     [_player] call va_outside_remove_actions;

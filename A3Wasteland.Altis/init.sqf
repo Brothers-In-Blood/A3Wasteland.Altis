@@ -15,12 +15,7 @@
 #endif
 
 enableSaving [false, false];
-enableEnvironment [false, true];
-
-// block script injection exploit
-inGameUISetEventHandler ["PrevAction", ""];
-inGameUISetEventHandler ["Action", ""];
-inGameUISetEventHandler ["NextAction", ""];
+A3W_sessionTimeStart = diag_tickTime;
 
 _descExtPath = str missionConfigFile;
 currMissionDir = compileFinal str (_descExtPath select [0, count _descExtPath - 15]);
@@ -56,19 +51,14 @@ if (!isDedicated) then
 		if (hasInterface) then // Normal player
 		{
 			9999 cutText ["Welcome to A3Wasteland, please wait for your client to initialize", "BLACK", 0.01];
-
 			waitUntil {!isNull player};
 			player setVariable ["playerSpawning", true, true];
 			playerSpawning = true;
-
 			removeAllWeapons player;
 			client_initEH = player addEventHandler ["Respawn", { removeAllWeapons (_this select 0) }];
-
 			// Reset group & side
 			[player] joinSilent createGroup playerSide;
-
 			execVM "client\init.sqf";
-
 			if ((vehicleVarName player) select [0,17] == "BIS_fnc_objectVar") then { player setVehicleVarName "" }; // undo useless crap added by BIS
 		}
 		else // Headless
@@ -95,24 +85,11 @@ if (hasInterface || isServer) then
 	[] execVM "addons\parking\functions.sqf";
 	[] execVM "addons\storage\functions.sqf";
 	[] execVM "addons\vactions\functions.sqf";
-	[] execVM "addons\APOC_Airdrop_Assistance\init.sqf";
-	[] execVM "addons\R3F_LOG\init.sqf";
-	//[] execVM "addons\proving_ground\init.sqf";
-	[] execVM "addons\AF_Keypad\AF_KP_vars.sqf";
+	[] execVM "addons\R3F_ARTY_AND_LOG\init.sqf";
 	[] execVM "addons\JumpMF\init.sqf";
 	[] execVM "addons\outlw_magrepack\MagRepack_init.sqf";
 	[] execVM "addons\lsd_nvg\init.sqf";
 	[] execVM "addons\stickyCharges\init.sqf";
-	[] execVM "addons\laptop\init.sqf";
-	// if (isNil "drn_DynamicWeather_MainThread") then { drn_DynamicWeather_MainThread = [] execVM "addons\scripts\DynamicWeatherEffects.sqf" };
-	[] execVM "addons\bounty\init.sqf";
-	[] execVM "addons\Crater_Cleaner\cratercleaner.sqf";
+	if (isNil "drn_DynamicWeather_MainThread") then { drn_DynamicWeather_MainThread = [] execVM "addons\scripts\DynamicWeatherEffects.sqf" };
 };
 
-// Remove line drawings from map
-/*(createTrigger ["EmptyDetector", [0,0,0], false]) setTriggerStatements
-[
-	"!triggerActivated thisTrigger",
-	"thisTrigger setTriggerTimeout [30,30,30,false]",
-	"{if (markerShape _x == 'POLYLINE') then {deleteMarker _x}} forEach allMapMarkers"
-];*/

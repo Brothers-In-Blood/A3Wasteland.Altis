@@ -28,7 +28,6 @@ private _success = [DURATION, ANIMATION, _checks, [_vehicle]] call a3w_actions_s
 
 if (_success) then
 {
-    player removeItem "Toolkit";
 	[_vehicle, player] call A3W_fnc_takeOwnership;
 	["Acquiring complete!", 5] call mf_notify_client;
 };

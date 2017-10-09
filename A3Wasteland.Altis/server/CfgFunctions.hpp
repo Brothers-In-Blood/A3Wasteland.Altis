@@ -11,7 +11,7 @@ class ServerDir
 	class setLockState {file = "server\functions\fn_setLockState.sqf";};
 	class setupMissionObject {file = "server\functions\setupMissionObject.sqf";};
 	class setupMissionATM {file = "server\functions\setupMissionATM.sqf";};
-	class setupResupplyPoint {file = "server\functions\fn_setupResupplyPoint.sqf";};
+	class setupResupplyTruck {file = "server\functions\fn_setupResupplyTruck.sqf";};
 	class setupStoreNPC {file = "server\functions\setupStoreNPC.sqf";};
 	class takeOwnership {file = "server\functions\fn_takeOwnership.sqf";};
 };
