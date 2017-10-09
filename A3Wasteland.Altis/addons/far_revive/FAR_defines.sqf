@@ -22,12 +22,12 @@
 	1 = All units can revive
 	2 = Same as 1 but a medikit is required to revive
 */
-#define FAR_ReviveMode 2
+#define FAR_ReviveMode 0
 
 // cutText layer
 #define FAR_cutTextLayer 7890
 
-// Damage multiplier applied to units when inconscious
+// Damage multiplier applied to units when unconscious
 #define FAR_DamageMultiplier 0.005
 
 // Functions
@@ -41,7 +41,6 @@
 #define IS_TREATING(UNIT) (!isNull TREATED_BY(UNIT))
 #define IS_MEDICAL_VEHICLE(VEH) (round getNumber (configfile >> "CfgVehicles" >> typeOf VEH >> "attendant") > 0)
 #define IS_MEDIC(UNIT) ((FAR_ReviveMode > 0 || {IS_MEDICAL_VEHICLE(UNIT)}) && (FAR_ReviveMode != 2 || {"Medikit" in items UNIT || {IS_MEDICAL_VEHICLE(UNIT) && unitIsUAV UNIT}}))
-
 #define HEALER ([player, cameraOn] select (cameraOn == getConnectedUAV player))
 #define ABDOMEN_ASL(UNIT) (AGLtoASL (UNIT modelToWorldVisual (UNIT selectionPosition "spine1")))
 #define FAR_Target_INVALID(TARGET) (!alive TARGET || (!isPlayer TARGET && !FAR_Debugging) || TARGET distance HEALER > FAR_Max_Distance || !UNCONSCIOUS(TARGET) || BEING_TREATED(TARGET) || DRAGGED(TARGET) || \

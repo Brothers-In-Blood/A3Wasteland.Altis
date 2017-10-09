@@ -13,7 +13,6 @@ if (isServer) exitWith {};
 #define MAIN_LOOP_INTERVAL 5
 #define START_LOOP_QTY_PER_FRAME 5
 #define MAX_LOOP_QTY_PER_FRAME 10
-
 #define MOVEMENT_DISTANCE_RESCAN 100
 #define MAX_IDLE_TIME (5*60)
 #define DISABLE_DISTANCE_R3F (MOVEMENT_DISTANCE_RESCAN + 100)
@@ -36,20 +35,14 @@ A3W_vehicleManager =
 {
 	private ["_vehicle", "_isAnimal", "_isMotorVehicle", "_tryEnable", "_dist"];
 	_vehicle = _this;
-
 	if (!(_vehicle isKindOf "CAManBase") && (isNil "R3F_LOG_PUBVAR_point_attache" || {_vehicle != R3F_LOG_PUBVAR_point_attache})) then
 	{
 		_isAnimal = _vehicle isKindOf "Animal";
 		_isThing = _vehicle isKindOf "Thing";
 		_tryEnable = true;
-
-		if (!local _vehicle &&
-		   {(count crew _vehicle == 0 || _isAnimal) &&
-		   (_vehicle getVariable ["fpsFix_simulationCooloff", 0] < diag_tickTime) &&
-		   ((getPos _vehicle) select 2 < 1 || {_vehicle isKindOf "Static"})}) then
+		if (!local _vehicle && {(count crew _vehicle == 0 || _isAnimal) && (_vehicle getVariable ["fpsFix_simulationCooloff", 0] < diag_tickTime) && ((getPos _vehicle) select 2 < 1 || {_vehicle isKindOf "Static"})}) then
 		{
 			_dist = _vehicle distance positionCameraToWorld [0,0,0];
-
 			if (_dist > DISABLE_DISTANCE_MOBILE || {
 					vectorMagnitude velocity _vehicle < 0.1 && (
 						(_dist > DISABLE_DISTANCE_R3F || !(_vehicle getVariable ["R3F_LOG_init_done", false])) && {
@@ -63,27 +56,22 @@ A3W_vehicleManager =
 				_tryEnable = false;
 			};
 		};
-
 		if (_tryEnable && !simulationEnabled _vehicle) then
 		{
 			_vehicle enableSimulation true;
 		};
-
 		if !(_vehicle getVariable ["fpsFix_eventHandlers", false]) then
 		{
 			if (_vehicle isKindOf "AllVehicles" && !_isAnimal) then
 			{
 				_vehicle addEventHandler ["GetIn", A3W_vehicleManagerEventCode];
 			};
-
 			if (_isThing) then
 			{
 				_vehicle addEventHandler ["EpeContactStart", A3W_vehicleManagerEventCode];
 			};
-
 			_vehicle addEventHandler ["Explosion", A3W_vehicleManagerEventCode];
 			_vehicle addEventHandler ["Killed", A3W_vehicleManagerEventCode];
-
 			_vehicle setVariable ["fpsFix_eventHandlers", true];
 		};
 	};
@@ -102,14 +90,11 @@ while {true} do
 {
 	_startTime = diag_tickTime;
 	_camPos = positionCameraToWorld [0,0,0];
-
 	if (_lastPos distance _camPos > MOVEMENT_DISTANCE_RESCAN || diag_tickTime - _initTime >= MAX_IDLE_TIME) then
 	{
 		_lastPos = _camPos;
 		_entities = entities "All";
-
 		_loopQty = [A3W_vehicleManager, _entities, MAIN_LOOP_INTERVAL, _oldCount, _totalTime, _loopQty, false, MAX_LOOP_QTY_PER_FRAME] call fn_loopSpread;
-
 		_oldCount = count _entities;
 		_totalTime = diag_tickTime - _startTime;
 		uiSleep (MAIN_LOOP_INTERVAL - _totalTime);

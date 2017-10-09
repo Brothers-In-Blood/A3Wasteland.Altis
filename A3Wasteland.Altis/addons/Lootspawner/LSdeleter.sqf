@@ -9,19 +9,15 @@ _objLifetime = _this;
 while {true} do
 {
 	_countDel = 0;
-
 	{
 		_objClass = _x;
 		_objIsContainer = ({_x == _objClass} count exclcontainer_list > 0);
-
 		{
 			_obj = _x;
 			_objEmpty = false;
 			_playerNear = false;
-
 			// try to get local server Var "Lootready"
 			_objVar = _obj getVariable "Lootready";
-
 			// if "Lootready" NOT present then its not spawned by LS or in creation
 			if (!isNil "_objVar") then
 			{
@@ -38,7 +34,6 @@ while {true} do
 								_objEmpty = true;
 							};
 						};
-
 						// check if any player is near
 						{
 							if (isPlayer _x && _x distance _obj < 500) exitWith
@@ -47,7 +42,6 @@ while {true} do
 							};
 							sleep 0.001;
 						} forEach playableUnits;
-
 						if ((!_objIsContainer || _objEmpty) && !_playerNear) then
 						{
 							deleteVehicle _x;
@@ -56,15 +50,12 @@ while {true} do
 					};
 				};
 			};
-
 			sleep 0.001;
 		} forEach allMissionObjects _x;
 	} forEach LSusedclass_list;
-
 	if (_countDel > 0) then
 	{
 		diag_log format ["-- LOOTSPAWNER deleted %1 objects --", _countDel];
 	};
-
 	uiSleep 60;
 };

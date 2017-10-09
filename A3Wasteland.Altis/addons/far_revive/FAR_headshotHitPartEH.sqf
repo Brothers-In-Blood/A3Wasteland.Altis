@@ -7,7 +7,6 @@
 // this file is outdated and no longer functional
 
 #include "FAR_defines.sqf"
-
 params [["_vals",0]];
 
 if !(_vals isEqualType []) exitWith {}; // is sometimes object
@@ -21,37 +20,28 @@ if (!(_selections arrayIntersect ["head","face_hub"] isEqualTo []) && _direct) t
 		_targetEH = _target getVariable "FAR_headshotHitPartEH";
 		if (!isNil "_targetEH") then { _target removeEventHandler ["HitPart", _targetEH] };
 	};
-
 	if (local _target) then
 	{
 		_hit params ["_directDmg", "", "", "", ["_ammo",""]];
-
-		// "_directDmg" is not the actual damage inflicted by the bullet, but rather the default damage value it would inflict without armor
-
-		if ((isPlayer _target || FAR_Debugging) && _directDmg >= 1 &&
-		   {_ammo select [0,2] == "B_" && (!([_shooter, _target] call A3W_fnc_isFriendly) || FAR_Debugging) && !(_target getVariable ["FAR_headshotHitTimeout", false])}) then
+		if ((isPlayer _target || FAR_Debugging) && _directDmg >= 1 && {_ammo select [0,2] == "B_" && (!([_shooter, _target] call A3W_fnc_isFriendly) || FAR_Debugging) && !(_target getVariable ["FAR_headshotHitTimeout", false])}) then
 		{
 			if (UNCONSCIOUS(_target)) then
 			{
 				private "_killerVehicle";
 				_killerVehicle = _target getVariable "FAR_killerUnit";
-
 				if (isNil "_killerVehicle") then
 				{
 					[_target, _shooter, _ammo] call FAR_setKillerInfo;
 					_killerVehicle = _target getVariable ["FAR_killerUnit", objNull];
 				};
-
 				if (_killerVehicle isEqualTo _shooter && _target getVariable ["FAR_killerAmmo", ""] == _ammo) then
 				{
 					_primeSuspect = _target getVariable ["FAR_killerPrimeSuspect", objNull];
-
 					if (isNull _primeSuspect) then
 					{
 						_primeSuspect = _target call FAR_findKiller;
 						_target setVariable ["FAR_killerPrimeSuspect", _primeSuspect];
 					};
-
 					// DING DING DING
 					if (isPlayer _primeSuspect && _primeSuspect isKindOf "Man") then
 					{

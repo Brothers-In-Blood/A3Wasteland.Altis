@@ -20,7 +20,6 @@ _spInterval = _this select 1;
 _chfullfuel = _this select 2;
 _genZadjust = _this select 3;
 _chpSpot = _this select 4;
-
 _begintime = diag_tickTime;
 {
 	if (!(_x getVariable ["A3W_purchasedStoreObject", false]) && isNil {_x getVariable "baseSaving_hoursAlive"}) then
@@ -30,7 +29,6 @@ _begintime = diag_tickTime;
 	_buildPosViable_list = [];
 	_buildPosZadj_list = [];
 	_lBuildVar = (_x getVariable ["BuildingLoot", [0, 0]]);
-	//diag_log format["-- LOOTSPAWNER DEBUG BaP _lBuildVar: v%1v v%2v --", _lBuildVar ,_x];
 	if ((_lBuildVar select 0) < 2) then {
 		_timeStamp = _lBuildVar select 1;
 		if ((_timeStamp == 0) || {serverTime - _timeStamp > _spInterval}) then {
@@ -52,7 +50,6 @@ _begintime = diag_tickTime;
 				};
 				sleep 0.001;
 			}forEach Buildingstoloot_list;
-			//diag_log format["-- LOOTSPAWNER DEBUG BaP: v%1v%2v :: v%3v :: v%4v --", _BaPname, _lootClass, _buildPosViable_list, _buildPosZadj_list];
 			//get spawn position, here the former _x
 			if (count _buildPosViable_list > 0) then
 			{
@@ -76,17 +73,13 @@ _begintime = diag_tickTime;
 						sleep 0.001;
 						//check what type of loot to spawn, get chance for loot every time, so all combos in spawnClassChance_list are viable
 						_lootType = [[1,2,3,4,5], spawnClassChance_list select _lootClass] call fn_selectRandomWeighted;
-
 						if (isNil "_lootType") exitWith {};
-
 						_lootholder = objNull;
-
 						if (_lootType < 5) then
 						{
 							_lootholder = createVehicle ["GroundWeaponHolder", _tmpPos, [], 0, "CAN_COLLIDE"];
 							_lootholder setPosATL _tmpPos;
 						};
-
 						switch (_lootType) do
 						{
 							//special for weapons
@@ -126,13 +119,11 @@ _begintime = diag_tickTime;
 							case 5:
 							{
 								_loot = ((lootworldObject_list select _lootClass) select 1) call BIS_fnc_selectRandom;
-
 								if (_loot == "Land_Can_V3_F" && {["A3W_unlimitedStamina"] call isConfigOn} ||
 								   {(_loot == "Land_BakedBeans_F" || _loot == "Land_BottlePlastic_V2_F") && !(["A3W_survivalSystem"] call isConfigOn)}) exitWith
 								{
 									_lootholder = objNull;
 								};
-
 								_lootholder = createVehicle [_loot, _tmpPos, [], 0, "CAN_COLLIDE"];
 								_lootholder setPosATL _tmpPos;
 								if(_loot == "Land_CanisterFuel_F") then {
@@ -167,31 +158,25 @@ _begintime = diag_tickTime;
 								};
 							};
 						};
-
 						if (!isNull _lootholder) then
 						{
 							_height = getTerrainHeightASL _spwnPos;
-
 							// buildingPos returns ATL over ground and ASL over water
 							if (_height < 0) then {
 								_lootholder setPosASL _spwnPos;
 							} else {
 								_lootholder setPosATL _spwnPos;
 							};
-
 							sleep 0.001;
 							// Fix for wrong height (getPos Z = height above floor under object)
 							_spwnPos set [2, (_spwnPos select 2) - ((getPos _lootholder) select 2)];
-
 							// must be done twice
 							if (_height < 0) then {
 								_lootholder setPosASL _spwnPos;
 							} else {
 								_lootholder setPosATL _spwnPos;
 							};
-
 							_lootholder setdir (random 360);
-
 							//1 category loot only per place so -> exit For
 							//no lootpiling
 							_lootholder setVariable ["Lootready", diag_tickTime];
@@ -207,4 +192,3 @@ _begintime = diag_tickTime;
 	sleep 0.001;
 	};
 }forEach _BaP_list;
-//diag_log format["-- LOOTSPAWNER DEBUG BaP: %1 buildings ready, needed %2s, EXIT now --", (count _BaP_list), (diag_tickTime - _begintime)];
