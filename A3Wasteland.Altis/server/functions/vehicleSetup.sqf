@@ -34,6 +34,12 @@ _vehicle addEventHandler ["GetIn", fn_vehicleGetInOutServer];
 _vehicle addEventHandler ["GetOut", fn_vehicleGetInOutServer];
 _vehicle addEventHandler ["Killed", fn_vehicleKilledServer];
 
+//Setup Vpin
+_vehicle setVariable ["vPin", true, true];
+_rNumber = format ["%1", ceil (random 9999)];
+_vehicle setVariable ["password", _rNumber, true];
+[format ["Your pincode is %1",_rNumber], 5] call mf_notify_client;
+
 if ({_class isKindOf _x} count ["Air","UGV_01_base_F"] > 0) then
 {
 	_vehicle remoteExec ["A3W_fnc_setupAntiExplode", 0, _vehicle];
