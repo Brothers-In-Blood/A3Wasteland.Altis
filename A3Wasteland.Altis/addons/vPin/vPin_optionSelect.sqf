@@ -14,15 +14,12 @@ _uid = getPlayerUID player;
 if (!isNil "_uid") then
 {
 	_panelType = _this select 0;
-
 	_displayvPin = uiNamespace getVariable ["vPin_Menu", displayNull];
-
 	switch (true) do
 	{
 		case (!isNull _displayvPin): // vPin panel
 		{
 			_vPin_select = _displayvPin displayCtrl vPin_Menu_option;
-
 			switch (lbCurSel _vPin_select) do
 			{
 				case 0: // unlock Vehicle

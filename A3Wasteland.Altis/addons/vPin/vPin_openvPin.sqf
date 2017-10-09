@@ -21,7 +21,6 @@ if (!isNil "_vPins") then
 		{
 			[[netId _vPins, 1], "A3W_fnc_setLockState", _vPins] call A3W_fnc_MP; // Unlock
 		};
-
 		_vPins setVariable ["objectLocked", false, true]; 
 		_vPins setVariable ["R3F_LOG_disabled",false,true];	
 		playSound3d ["a3\sounds_f\air\Heli_Attack_01\close.wss", player, true];
