@@ -24,7 +24,7 @@ _setupVars =
 
 	//randomize amount of units
 	_nbUnits = _nbUnits + round(random (_nbUnits*0.5));
-	// reduce radius for larger towns. for example to avoid endless hide and seek in kavala ;)
+	// reduce radius for larger towns. for example to avoid endless hide and seek in kavala ;
 	_buildingRadius = if (_buildingRadius > 201) then {(_buildingRadius*0.5)} else {_buildingRadius};
 	// 25% change on AI not going on rooftops
 	if (random 1 < 0.75) then { _putOnRoof = true } else { _putOnRoof = false };
@@ -45,7 +45,7 @@ _setupObjects =
 	_box2 setVariable ["moveable", true, true];
 	[_box2, "mission_USLaunchers"] call fn_refillbox;
 
-	// create some atmosphere around the crates 8)
+	// create some atmosphere around the crates
 	_tent1 = createVehicle ["Land_cargo_addon02_V2_F", _missionPos, [], 3, "None"];
 	_tent1 setDir random 360;
 	_chair1 = createVehicle ["Land_CampingChair_V1_F", _missionPos, [], 2, "None"];
@@ -57,7 +57,7 @@ _setupObjects =
 
 	{ _x setVariable ["R3F_LOG_disabled", true, true] } forEach [_box1, _box2];
 
-	// spawn some rebels/enemies :)
+	// spawn some rebels/enemies :
 	_aiGroup = createGroup CIVILIAN;
 	[_aiGroup, _missionPos, _nbUnits] call createCustomGroup2;
 
@@ -81,6 +81,7 @@ _successExec =
 {
 	// Mission completed
 	{ _x setVariable ["R3F_LOG_disabled", false, true] } forEach [_box1, _box2];
+	{ _x setVariable ["moveable", true, true] } forEach [_box1, _box2];
 
 	_successHintMessage = format ["Nice work!<br/><br/><t color='%1'>%2</t><br/>is a safe place again!<br/>Their belongings are now yours to take!", sideMissionColor, _townName];
 	{ deleteVehicle _x } forEach [_tent1, _chair1, _chair2, _cFire1];
