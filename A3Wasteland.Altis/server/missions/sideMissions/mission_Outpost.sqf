@@ -44,7 +44,6 @@ _failedExec =
 _successExec =
 {
 	// Mission complete
-	{ _x setVariable ["R3F_LOG_disabled", false, true] } forEach _objects;
 	[_locationsArray, _missionLocation, _objects] call setLocationObjects;
 
 	_successHintMessage = "The outpost has been captured, good work.";

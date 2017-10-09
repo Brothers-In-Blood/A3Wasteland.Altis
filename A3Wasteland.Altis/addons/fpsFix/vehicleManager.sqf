@@ -15,14 +15,13 @@ if (isServer) exitWith {};
 #define MAX_LOOP_QTY_PER_FRAME 10
 #define MOVEMENT_DISTANCE_RESCAN 100
 #define MAX_IDLE_TIME (5*60)
-#define DISABLE_DISTANCE_R3F (MOVEMENT_DISTANCE_RESCAN + 100)
 #define DISABLE_DISTANCE_MOBILE 2000
 #define DISABLE_DISTANCE_IMMOBILE 1000
 #define DISABLE_DISTANCE_THING 100
 
 scriptName "vehicleManager";
 
-private ["_eventCode", "_vehicleManager", "_lastPos", "_R3F_attachPoint"];
+private ["_eventCode", "_vehicleManager", "_lastPos"];
 
 A3W_vehicleManagerEventCode =
 {
@@ -35,7 +34,7 @@ A3W_vehicleManager =
 {
 	private ["_vehicle", "_isAnimal", "_isMotorVehicle", "_tryEnable", "_dist"];
 	_vehicle = _this;
-	if (!(_vehicle isKindOf "CAManBase") && (isNil "R3F_LOG_PUBVAR_point_attache" || {_vehicle != R3F_LOG_PUBVAR_point_attache})) then
+	if (!(_vehicle isKindOf "CAManBase")) then
 	{
 		_isAnimal = _vehicle isKindOf "Animal";
 		_isThing = _vehicle isKindOf "Thing";
@@ -45,7 +44,7 @@ A3W_vehicleManager =
 			_dist = _vehicle distance positionCameraToWorld [0,0,0];
 			if (_dist > DISABLE_DISTANCE_MOBILE || {
 					vectorMagnitude velocity _vehicle < 0.1 && (
-						(_dist > DISABLE_DISTANCE_R3F || !(_vehicle getVariable ["R3F_LOG_init_done", false])) && {
+						{
 							(_dist > DISABLE_DISTANCE_IMMOBILE && !_isAnimal) ||
 							(_dist > DISABLE_DISTANCE_THING && _isThing && !(_vehicle getVariable ["inventoryIsOpen", false]))
 						}

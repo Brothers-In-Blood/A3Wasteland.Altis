@@ -43,7 +43,6 @@ _objs = [];
 	if (!isNil "_damage") then {_obj setDamage _damage };
 	if (!isNil "_init") then { _obj call _init };
 
-	_obj setVariable ["R3F_LOG_disabled", true, true];
 	[_obj] call basePartSetup;
 	_objs pushBack _obj;
 } forEach _objList;

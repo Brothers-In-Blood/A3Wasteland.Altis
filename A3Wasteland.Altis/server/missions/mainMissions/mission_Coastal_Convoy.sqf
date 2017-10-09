@@ -58,7 +58,6 @@ _setupObjects =
 		};
 
 		_vehicle = createVehicle [_type, _position, [], 0, "FLY"];
-		_vehicle setVariable ["R3F_LOG_disabled", true, true];
 
 		if (_variant != "") then
 		{

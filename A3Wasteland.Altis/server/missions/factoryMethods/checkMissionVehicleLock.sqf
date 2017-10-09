@@ -34,7 +34,7 @@ if (_vehicle isKindOf "LandVehicle") then
 
 (units _group) allowGetIn true;
 
-while {alive _vehicle && _vehicle getVariable ["R3F_LOG_disabled", false]} do
+while {alive _vehicle} do
 {
 	if ({alive _x && group _x == _group} count crew _vehicle > 0) then
 	{

@@ -25,7 +25,6 @@ A3W_fnc_unflip = {
 } call mf_compile;
 
 A3W_fnc_lock  = {
-  //diag_log format["%1 call A3W_fnc_lock", _this];
   ARGVX3(0,_left,objNull);
   ARGVX3(1,_right,0);
   _left lock _right;
@@ -34,7 +33,6 @@ A3W_fnc_lock  = {
   def(_locked);
   _locked = (_right == 2 || {_right == 3});
   _left setVariable ["objectLocked", _locked, true];
-  _left setVariable ["R3F_LOG_disabled",_locked, true];
 } call mf_compile;
 
 generic_picture_path = {

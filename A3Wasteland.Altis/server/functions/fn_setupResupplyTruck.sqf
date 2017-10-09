@@ -34,7 +34,6 @@ if (_static) then
 {
 	_veh allowDamage false;
 	_veh setVariable ["A3W_lockpickDisabled", true];
-	_veh setVariable ["R3F_LOG_disabled", true];
 
 	if (isServer) then
 	{

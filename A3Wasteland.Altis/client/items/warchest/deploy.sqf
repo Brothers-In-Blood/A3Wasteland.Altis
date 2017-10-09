@@ -35,7 +35,6 @@ if (_success) then {
 	_warchest = createVehicle [MF_ITEMS_WARCHEST_OBJECT_TYPE, [player, [0,1.5,0]] call relativePos, [], 0, "CAN_COLLIDE"];
 	_warchest setDir (getDir player + 180);
 	_warchest setVariable ['side', playerSide, true];
-	_warchest setVariable ["R3F_LOG_disabled", true];
 	_warchest setVariable ["a3w_warchest", true, true];
 	pvar_manualObjectSave = netId _warchest;
 	publicVariableServer "pvar_manualObjectSave";

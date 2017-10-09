@@ -40,8 +40,6 @@ pp_setup_terminal = {
 
   _terminal allowDamage false;
   _garage allowDamage false;
-  _terminal setVariable ["R3F_LOG_disabled", true]; //don't allow players to move the table
-  _garage setVariable ["R3F_LOG_disabled", true];
 
   if (isServer) then
   {
@@ -56,7 +54,6 @@ pp_setup_terminal = {
       _dummy allowDamage false;
       _dummy setPosWorld (getPosWorld _terminal vectorAdd [0,0,-0.1]); // vectorAdd to compensate for elevated shed floor
       _dummy setVectorDirAndUp [vectorDir _terminal, vectorUp _terminal];
-      _dummy setVariable ["R3F_LOG_disabled", true, true];
       _terminal attachTo [_dummy, [0,0,0]];
     };
 
@@ -64,7 +61,6 @@ pp_setup_terminal = {
     _laptop = createSimpleObject ["Land_Laptop_unfolded_F", getPosASL _terminal]; //createVehicle ["Land_Laptop_unfolded_F", getPosASL _terminal, [], 0, ""];
     _laptop allowDamage false;
     _laptop attachTo [_terminal, [0,-0.1,0.55]];
-    _laptop setVariable ["R3F_LOG_disabled", true, true]; //don't allow players to move the laptop
   };
 
   _terminal setVariable ["A3W_parkingTerminalSetupDone", true];

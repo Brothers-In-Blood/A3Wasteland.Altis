@@ -23,7 +23,6 @@ _setupObjects =
 	_missionPos = markerPos _missionLocation;
 
 	_box1 = createVehicle ["Box_NATO_Wps_F", _missionPos, [], 0, "None"];
-	_box1 setVariable ["R3F_LOG_disabled", true, true];
 	_box1 setDir random 360;
 	[_box1, "mission_USSpecial"] call fn_refillbox;
 
@@ -73,7 +72,6 @@ _failedExec =
 _successExec =
 {
 	// Mission complete
-	_box1 setVariable ["R3F_LOG_disabled", false, true];
 	_vehicle lockDriver false;
 
 	// Give the rewards
