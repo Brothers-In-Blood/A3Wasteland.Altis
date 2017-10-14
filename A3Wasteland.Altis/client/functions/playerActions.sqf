@@ -3,7 +3,7 @@
 // ******************************************************************************************
 //	@file Version: 1.2
 //	@file Name: playerActions.sqf
-//	@file Author: [404] Deadbeat, [404] Costlyy, [GoT] JoSchaap, AgentRev
+//	@file Author: [404] Deadbeat, [404] Costlyy, [GoT] JoSchaap, AgentRev, BIB_Monkey
 //	@file Created: 20/11/2012 05:19
 
 { [player, _x] call fn_addManagedAction } forEach
@@ -13,7 +13,7 @@
 	//Open Magic Parachute
 	[format ["<t color='#FF00FF'>Open magic parachute (%1)</t>", (actionKeysNamesArray "GetOver") param [0,"<'Step over' keybind>"]], A3W_fnc_openParachute, [], 99, true, true, "", "vehicle player == player && (getPos player) select 2 > 2.5"],
 	//Heal Self
-	["Heal self", "client\functions\healSelf.sqf",0,2,false,false,"","((damage player)>0.01 && (damage player)<0.25499) && (('FirstAidKit' in (items player)) || ('Medikit' in (items player))) "],
+	["Heal self", "client\actions\healSelf.sqf",0,2,false,false,"","(damage player)>0.01 && 'Medikit' in (items player)"],
 	//Hide Body
 	["<img image='client\icons\cancel.paa'/> Hide Body", "client\actions\hide.sqf", [], 1, false, false, "", "!isNull cursorObject && !alive cursorObject && {cursorObject isKindOf 'Man' && player distance cursorObject <= (sizeOf typeOf cursorObject / 3) max 2}"],
 	//Take Gear
