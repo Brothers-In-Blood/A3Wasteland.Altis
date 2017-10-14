@@ -68,7 +68,7 @@ if (_obj iskindof "Static") then {
 			["bis_disabled_Door_6", 0],
 			["bis_disabled_Door_7", 0],
 			["bis_disabled_Door_8", 0],
-			["moveable", false],
+			["Moveable", false],
 			["Baselockenabled", false],
 			["LockedDown", false]
 		];
@@ -77,9 +77,9 @@ if (_obj iskindof "Static") then {
 if (_obj iskindof "thing") then {
 	{ _variables pushBack [_x select 0, _obj getVariable _x] } forEach
 		[
-			["moveable", false],
+			["Moveable", false],
 			["Baselockenabled", false],
-			["LockedDown", false]
+			["LockedDown", false],
 		];
 };
 _r3fSide = _obj getVariable "R3F_Side";
