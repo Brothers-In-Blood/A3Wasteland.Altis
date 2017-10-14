@@ -108,16 +108,6 @@ if (_key != "" && isPlayer _player && {_isGenStore || _isGunStore || _isVehStore
 	{
 		_itemPrice = _itemEntry select 2;
 		_skipSave = "SKIPSAVE" in (_itemEntry select [3,999]);
-
-		/*if (_class isKindOf "Box_NATO_Ammo_F") then
-		{
-			switch (side _player) do
-			{
-				case OPFOR:       { _class = "Box_East_Ammo_F" };
-				case INDEPENDENT: { _class = "Box_IND_Ammo_F" };
-			};
-		};*/
-
 		if (_player getVariable ["cmoney", 0] >= _itemPrice) then
 		{
 			private _markerPos = markerPos _marker;
@@ -174,6 +164,11 @@ if (_key != "" && isPlayer _player && {_isGenStore || _isGunStore || _isVehStore
 			_object setVariable ["A3W_purchasedStoreObject", true];
 			_object setVariable ["ownerUID", getPlayerUID _player, true];
 			_object setVariable ["ownerName", name _player, true];
+			if ({_object iskindof _x} count ["ReammoBox_F", "Thing", "StaticWeapon"]>0) then
+			{
+				_object setVariable ["Moveable", true, true];
+				_object setVariable ["LogisticsEnabled", true, true];
+			};
 
 			private _variant = (_itemEntry select {_x isEqualType "" && {_x select [0,8] == "variant_"}}) param [0,""];
 
