@@ -3,7 +3,7 @@
 // ******************************************************************************************
 //	@file Version: 1.0
 //	@file Name: vehicleSetup.sqf
-//	@file Author: AgentRev
+//	@file Author: AgentRev Edited by: BIB_Monkey
 //	@file Created: 15/06/2013 19:57
 
 if (!isServer) exitWith {};
@@ -36,9 +36,7 @@ _vehicle addEventHandler ["Killed", fn_vehicleKilledServer];
 
 //Setup Vpin
 _vehicle setVariable ["vPin", true, true];
-_rNumber = format ["%1", ceil (random 9999)];
-_vehicle setVariable ["password", _rNumber, true];
-[format ["Your pincode is %1",_rNumber], 5] call mf_notify_client;
+_vehicle setVariable ["password", 0000, true];
 
 if ({_class isKindOf _x} count ["Air","UGV_01_base_F"] > 0) then
 {

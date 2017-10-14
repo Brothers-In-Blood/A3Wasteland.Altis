@@ -346,7 +346,7 @@ class Mission
 {
 	class Intel
 	{
-		briefingName="A3Wasteland Altis v1.3c";
+		briefingName=" BIB A3Wasteland Altis (v1.4)";
 		overviewText="Wasteland By BIBGaming.com";
 		resistanceWest=0;
 		timeOfChanges=28800;
