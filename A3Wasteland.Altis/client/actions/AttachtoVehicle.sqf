@@ -20,7 +20,6 @@ _distance = _posstatic distance _posvehicle;
 _displayname = str configProperties [configFile>>"cfgVehicles">>_class>>"displayName"];
 hint _displayname;
 
-
 //Make sure the vehicle is in range
 if (_distance <=10) then
 {
@@ -470,7 +469,7 @@ if (_distance <=10) then
 						if (_static iskindof "B_SAM_System_02_F") then
 						{
 							titleText ["Attaching to Offroad", "PLAIN"];
-							_static attachTo [_vehicle, [0,-2.8,1.5]];
+							_static attachTo [_vehicle, [0,-2.8,1.6]];
 							_static setVariable ["Attached", true, true];
 							_static setvariable ["moveable", false, true];
 							_vehicle setVariable ["StaticAttached", true, true];
@@ -479,7 +478,7 @@ if (_distance <=10) then
 						if (_static iskindof "B_SAM_System_01_F") then
 						{
 							titleText ["Attaching to Offroad", "PLAIN"];
-							_static attachTo [_vehicle, [0,-3.2,1.3]];
+							_static attachTo [_vehicle, [0,-3.2,1.4]];
 							_static setVariable ["Attached", true, true];
 							_static setvariable ["moveable", false, true];
 							_vehicle setVariable ["StaticAttached", true, true];
@@ -488,7 +487,7 @@ if (_distance <=10) then
 						if (_static iskindof "B_AAA_System_01_F") then
 						{
 							titleText ["Attaching to Offroad", "PLAIN"];
-							_static attachTo [_vehicle, [0,-2.8,2]];
+							_static attachTo [_vehicle, [0,-2.8,2.1]];
 							_static setVariable ["Attached", true, true];
 							_static setvariable ["moveable", false, true];
 							_vehicle setVariable ["StaticAttached", true, true];
