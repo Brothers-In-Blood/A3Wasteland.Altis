@@ -9,8 +9,8 @@
 if (!isServer) exitWith {};
 
 params [["_vehicle",objNull,[objNull]], ["_brandNew",true,[false]]]; // _brandNew: true for newly spawned/purchased vehicle (default), false for vehicles restored from save
-private _centerOfMass = getCenterOfMass _vehicle;
-private _class = typeOf _vehicle;
+private ["_class", "_getInOut", "_centerOfMass", "_weapons"];
+_class = typeOf _vehicle;
 
 _vehicle setVariable [call vChecksum, true];
 
@@ -40,8 +40,7 @@ _vehicle setUnloadInCombat [false, false]; // Try to prevent AI from getting out
 } forEach (_class call getHitPoints);
 
 _vehicle setVariable ["A3W_hitPointSelections", true, true];
-_vehicle setVariable ["CanTow", true, true];
-_vehicle setVariable ["Towable", true, true];
+
 _vehicle setVariable ["A3W_handleDamageEH", _vehicle addEventHandler ["HandleDamage", vehicleHandleDamage]];
 _vehicle setVariable ["A3W_dammagedEH", _vehicle addEventHandler ["Dammaged", vehicleDammagedEvent]];
 _vehicle setVariable ["A3W_engineEH", _vehicle addEventHandler ["Engine", vehicleEngineEvent]];
@@ -68,12 +67,14 @@ switch (true) do
 	case (_class isKindOf "SUV_01_base_F"):
 	{
 		// Lower SUV center of mass to prevent rollovers
+		_centerOfMass = getCenterOfMass _vehicle;
 		_centerOfMass set [2, -0.657]; // original = -0.557481
 		_vehicle setCenterOfMass _centerOfMass;
 	};
 	case (_class isKindOf "MRAP_02_base_F"):
 	{
 		// Lower Ifrit center of mass to prevent rollovers
+		_centerOfMass = getCenterOfMass _vehicle;
 		_centerOfMass set [2, (_centerOfMass select 2) - 0.1]; // cannot be static number like SUV due to different values for each variant
 		_vehicle setCenterOfMass _centerOfMass;
 	};
@@ -100,7 +101,7 @@ switch (true) do
 	};
 };
 
-private _weapons = getArray (configFile >> "CfgVehicles" >> _class >> "weapons");
+_weapons = getArray (configFile >> "CfgVehicles" >> _class >> "weapons");
 
 // Horn customizations
 switch (true) do
