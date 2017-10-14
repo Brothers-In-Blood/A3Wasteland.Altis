@@ -128,7 +128,7 @@ if (!_handled && _key in (actionKeys "MoveDown" + actionKeys "MoveUp")) then
 }
 else // UNCONSCIOUS
 {
-	if (_key == 57) then // spacebar
+	if (_key == 28) then // enter
 	{
 		execVM "client\functions\confirmSuicide.sqf";
 		_handled = true;
