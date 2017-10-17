@@ -36,11 +36,17 @@ if (_success) then {
 	_beacon setDir (getDir player + 270);
 	_beacon setVariable ["allowDamage", true, true];
 	_beacon setVariable ["a3w_spawnBeacon", true, true];
+	_beacon setVariable ["R3F_LOG_disabled", true];
 	_beacon setVariable ["side", playerSide, true];
 	_beacon setVariable ["ownerName", name player, true];
 	_beacon setVariable ["ownerUID", _uid, true];
 	_beacon setVariable ["packing", false, true];
 	_beacon setVariable ["groupOnly", (playerSide == INDEPENDENT), true];
+	/*{
+		if (_x getVariable ["ownerUID",""] == _uid) then {
+			pvar_spawn_beacons = pvar_spawn_beacons - [_x];
+		};
+	} forEach pvar_spawn_beacons;*/
 
 	pvar_spawn_beacons pushBack _beacon;
 	publicVariable "pvar_spawn_beacons";

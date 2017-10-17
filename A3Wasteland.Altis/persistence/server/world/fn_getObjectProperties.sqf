@@ -40,11 +40,13 @@ switch (true) do
 	case (_obj call _isWarchest):
 	{
 		_variables pushBack ["a3w_warchest", true];
+		_variables pushBack ["R3F_LOG_disabled", true];
 		_variables pushBack ["side", str (_obj getVariable ["side", sideUnknown])];
 	};
 	case (_obj call _isBeacon):
 	{
 		_variables pushBack ["a3w_spawnBeacon", true];
+		_variables pushBack ["R3F_LOG_disabled", true];
 		_variables pushBack ["side", str (_obj getVariable ["side", sideUnknown])];
 		_variables pushBack ["packing", false];
 		_variables pushBack ["groupOnly", _obj getVariable ["groupOnly", false]];
@@ -53,6 +55,13 @@ switch (true) do
 };
 
 _owner = _obj getVariable ["ownerUID", ""];
+
+_r3fSide = _obj getVariable "R3F_Side";
+
+if (!isNil "_r3fSide") then
+{
+	_variables pushBack ["R3F_Side", str _r3fSide];
+};
 
 _weapons = [];
 _magazines = [];

@@ -40,56 +40,60 @@ lsd_nvSensitivityBar =
 // wait until in game before adding the keyEH
 waitUntil {!isNull MAIN_DISPLAY};
 
-MAIN_DISPLAY displayAddEventHandler 
-[
-	"KeyDown",
+MAIN_DISPLAY displayAddEventHandler ["KeyDown",
+{
+	private ["_ctrlID", "_dikCode", "_shift", "_ctrl", "_alt", "_handled"];
+
+	_ctrlID = _this select 0;
+	_dikCode = _this select 1;
+	_shift = _this select 2;
+	_ctrl = _this select 3;
+	_alt = _this select 4;
+	_handled = false;
+
+	// if there's a dialog or map up, or there is no nv, just quit
+	// 	shift is required now
+	if ( dialog || visibleMap || !lsd_nvOn || !_shift) exitWith { false };
+
+	switch (_dikCode) do
 	{
-		private ["_ctrlID", "_dikCode", "_shift", "_ctrl", "_alt", "_handled"];
-		_ctrlID = _this select 0;
-		_dikCode = _this select 1;
-		_shift = _this select 2;
-		_ctrl = _this select 3;
-		_alt = _this select 4;
-		_handled = false;
-		// if there's a dialog or map up, or there is no nv, just quit
-		// 	shift is required now
-		if ( dialog || visibleMap || !lsd_nvOn || !_shift) exitWith { false };
-		switch (_dikCode) do
+		case PAGE_UP:
 		{
-			case PAGE_UP:
+			if (lsd_nvSensitivity < MAX_SENSITIVITY) then
 			{
-				if (lsd_nvSensitivity < MAX_SENSITIVITY) then
-				{
-					lsd_nvSensitivity = lsd_nvSensitivity + INCREMENT;
-					_handled = true;
-				};
-			};
-			case PAGE_DOWN:
-			{
-				if (lsd_nvSensitivity > MIN_SENSITIVITY) then
-				{
-					lsd_nvSensitivity = lsd_nvSensitivity - INCREMENT;
-					_handled = true;
-				};
+				lsd_nvSensitivity = lsd_nvSensitivity + INCREMENT;
+				_handled = true;
 			};
 		};
-		if (_handled) then
+		case PAGE_DOWN:
 		{
-			if (lsd_nvSensitivity >= MAX_SENSITIVITY) then // go to auto mode
+			if (lsd_nvSensitivity > MIN_SENSITIVITY) then
 			{
-				setAperture -1;
-			}
-			else // manual mode
-			{
-				setAperture (lsd_nvSensitivity / 2);
+				lsd_nvSensitivity = lsd_nvSensitivity - INCREMENT;
+				_handled = true;
 			};
-			playSound "FD_Timer_F";
-			("lsd_Rsc_nvHint" call BIS_fnc_rscLayer) cutRsc ["LSD_Rsc_nvHint","PLAIN"];
-			((uiNamespace getVariable "LSD_Rsc_nvHint") displayCtrl 1) ctrlSetStructuredText parseText(lsd_nvSensitivityBar select lsd_nvSensitivity);
 		};
-		_handled
-	}
-];
+	};
+
+	if (_handled) then
+	{
+		if (lsd_nvSensitivity >= MAX_SENSITIVITY) then // go to auto mode
+		{
+			setAperture -1;
+		}
+		else // manual mode
+		{
+			setAperture (lsd_nvSensitivity / 2);
+		};
+
+		playSound "FD_Timer_F";
+
+		("lsd_Rsc_nvHint" call BIS_fnc_rscLayer) cutRsc ["LSD_Rsc_nvHint","PLAIN"];
+		((uiNamespace getVariable "LSD_Rsc_nvHint") displayCtrl 1) ctrlSetStructuredText parseText(lsd_nvSensitivityBar select lsd_nvSensitivity);
+	};
+
+	_handled
+}];
 
 0 spawn
 {
@@ -109,6 +113,7 @@ MAIN_DISPLAY displayAddEventHandler
 					{
 						setAperture (lsd_nvSensitivity / 2);
 					};
+
 					lsd_nvOn = true;
 				};
 			}
@@ -121,6 +126,7 @@ MAIN_DISPLAY displayAddEventHandler
 				};
 			};
 		};
+
 		sleep 0.1;
 		false
 	};

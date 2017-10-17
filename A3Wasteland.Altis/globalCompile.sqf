@@ -13,11 +13,11 @@ _DEBUG = format ["%1", _this select 0];
 
 // Compile a function from a file.
 // if in debug mode, the function will be dyncamically compiled every call.
-// if not in debug mode, the function will be compileFinaled
+// if not in debug mode, the function will be compileFinal'd
 // example: my_fnc_name = ["path/to/folder", "my_fnc.sqf"] call mf_compile;
 // example: my_fnc_name = ["path/to/folder/my_fnc.sqf"] call mf_compile;
 // later in the code you can simply use call my_fnc_name;
-// you can also pass raw code to get it compileFinaled
+// you can also pass raw code to get it compileFinal'd
 // example: my_fnc_name = {diag_log "hey"} call mf_compile;
 mf_compile = compileFinal
 ('

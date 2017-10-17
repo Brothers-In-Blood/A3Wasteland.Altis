@@ -5,8 +5,7 @@ _text = param [3, controlNull, [0, controlNull]];
 _sliderView = param [4, controlNull, [0, controlNull]];
 _varType = param [5, "", [""]];
 
-if (_state == 1) then 
-{
+if (_state == 1) then {
 	call compile format ["%1 = true",_syncVar];
 	call compile format ["profileNamespace setVariable ['%1',%1]", _syncVar];
 	ctrlEnable [_slider, false];
@@ -17,8 +16,8 @@ if (_state == 1) then
 
 	call compile format ["%1 = %2", _varType, (sliderPosition _sliderView) min CHVD_maxObj max 0];
 	call compile format ["profileNamespace setVariable ['%1',%1]", _varType];
-} else 
-{
+	//[3] call CHVD_fnc_updateSettings;
+} else {
 	call compile format ["%1 = false",_syncVar];
 	call compile format ["profileNamespace setVariable ['%1',%1]", _syncVar];
 	ctrlEnable [_slider, true];

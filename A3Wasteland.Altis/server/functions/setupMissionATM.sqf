@@ -16,6 +16,7 @@ if (local _atm) then
 };
 
 _atm setVariable ["A3W_atmEditorPlaced", true];
+_atm setVariable ["R3F_LOG_disabled", true];
 
 if (isNil "A3W_atmArray") then
 {

@@ -53,6 +53,8 @@ _setupObjects =
 	_cFire1	= createVehicle ["Campfire_burning_F", _missionPos, [], 2, "None"];
 
 
+	{ _x setVariable ["R3F_LOG_disabled", true, true] } forEach [_box1, _box2];
+
 	// spawn some rebels/enemies :)
 	_aiGroup = createGroup CIVILIAN;
 	[_aiGroup, _missionPos, _nbUnits] call createCustomGroup2;
@@ -76,6 +78,8 @@ _failedExec =
 _successExec =
 {
 	// Mission completed
+	{ _x setVariable ["R3F_LOG_disabled", false, true] } forEach [_box1, _box2];
+
 	_successHintMessage = format ["Nice work!<br/><br/><t color='%1'>%2</t><br/>is a safe place again!<br/>Their belongings are now yours to take!", sideMissionColor, _townName];
 	{ deleteVehicle _x } forEach [_tent1, _chair1, _chair2, _cFire1];
 };

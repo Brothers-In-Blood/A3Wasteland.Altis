@@ -40,6 +40,8 @@ ps_setup_box = {
 
   if (local _box) then { _box allowDamage false };
   if (local _garage) then { _garage allowDamage false };
+  _box setVariable ["R3F_LOG_disabled", true];
+  _garage setVariable ["R3F_LOG_disabled", true];
 
   _box setVariable ["A3W_storageBoxSetupDone", true];
 };

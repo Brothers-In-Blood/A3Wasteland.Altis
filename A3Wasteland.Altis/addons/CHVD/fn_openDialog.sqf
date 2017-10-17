@@ -28,20 +28,26 @@ disableSerialization;
 
 {
 	_ctrl = ((finddisplay 2900) displayCtrl (_x select 0));
-	if (!CHVD_allowTerrain) then 
-	{
+	if (!CHVD_allowTerrain) then {
 		_ctrl ctrlEnable false;
 	};
-	_textLow = if (isLocalized "STR_chvd_low") then {localize "STR_chvd_low"} else {"Standard"};
-	_ctrl lbAdd _textLow;
+	//if (CHVD_allowNoGrass) then {
+		_textLow = if (isLocalized "STR_chvd_low") then {localize "STR_chvd_low"} else {"Standard"};
+		_ctrl lbAdd _textLow;
+	//};
 	_textStandard = if (isLocalized "STR_chvd_standard") then {localize "STR_chvd_standard"} else {"High"};
 	_ctrl lbAdd _textStandard;
 	_textHigh = if (isLocalized "STR_chvd_high") then {localize "STR_chvd_high"} else {"Very High"};
 	_ctrl lbAdd _textHigh;
 	_textVeryHigh = if (isLocalized "STR_chvd_veryHigh") then {localize "STR_chvd_veryHigh"} else {"Ultra"};
 	_ctrl lbAdd _textVeryHigh;
+	
 	_sel = [_x select 1] call CHVD_fnc_selTerrainQuality;
-	_ctrl lbSetCurSel _sel;
+	//if (CHVD_allowNoGrass) then {
+		_ctrl lbSetCurSel _sel;
+	/*} else {
+		_ctrl lbSetCurSel (_sel - 1);
+	};*/
 } forEach [[1500,CHVD_footTerrain],[1501,CHVD_carTerrain],[1502,CHVD_airTerrain]];
 
 {
@@ -55,32 +61,26 @@ disableSerialization;
 } forEach [[1500,"CHVD_footTerrain",1400],[1501,"CHVD_carTerrain",1401],[1502,"CHVD_airTerrain",1402]];
 
 
-if (CHVD_footSyncObj) then 
-{
+if (CHVD_footSyncObj) then {
 	ctrlEnable [1901,false];
 	ctrlEnable [1007,false];
-} else 
-{	
+} else {	
 	ctrlEnable [1901,true];
 	ctrlEnable [1007,true];
 };
 
-if (CHVD_carSyncObj) then 
-{
+if (CHVD_carSyncObj) then {
 	ctrlEnable [1903,false];
 	ctrlEnable [1014,false];
-} else 
-{	
+} else {	
 	ctrlEnable [1903,true];
 	ctrlEnable [1014,true];
 };
 
-if (CHVD_airSyncObj) then 
-{
+if (CHVD_airSyncObj) then {
 	ctrlEnable [1905,false];
 	ctrlEnable [1018,false];
-} else 
-{	
+} else {	
 	ctrlEnable [1905,true];
 	ctrlEnable [1018,true];
 };

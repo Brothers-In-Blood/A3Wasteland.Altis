@@ -10,6 +10,7 @@ private _targetGroup = group _target;
 private _targetSide = side _targetGroup;
 private _targetVehicle = vehicle _target;
 private _sourceVehicle = vehicle _source;
+
 private _killer = _source;
 private _killerVehicle = _sourceVehicle;
 private _killerWeapon = "";
@@ -44,24 +45,31 @@ if (!(_killer isKindOf "Man") || (_ammo == "" && _targetVehicle != _sourceVehicl
 	else
 	{
 		if (isNull _killerVehicle) exitWith {}; // unsolved death
+
 		private _suspects = (crew _killerVehicle) select {alive _x || isPlayer _x};
+
 		if (count _suspects == 0) exitWith {}; // crushed by empty vehicle
+
 		private _firstCrew = _suspects select 0;
 		private _firstCrewGroup = group _firstCrew;
 		private _driver = driver _killerVehicle;
+
 		if (_ammo == "") then
 		{
 			if (!isNull _driver) then // roadkill with driver still seated
 			{
 				_killer = _driver;
+
 				if (isAgent teamMember _driver && !isNull (_driver getVariable ["A3W_driverAssistOwner", objNull])) then // driver assist roadkill
 				{
 					private _effComm = effectiveCommander _killerVehicle;
+
 					if (alive _effComm || isPlayer _effComm) then
 					{
 						_killer = _effComm;
 					};
 				};
+
 				_target setVariable ["A3W_deathCause_local", ["roadkill"]];
 			};
 		}
@@ -70,6 +78,7 @@ if (!(_killer isKindOf "Man") || (_ammo == "" && _targetVehicle != _sourceVehicl
 			private _shooter = [_target, _killerVehicle, _ammo] call fn_findTurretShooter; // killed by turret gunner (old method)
 			if (!isNull _shooter) then { _killer = _shooter };
 		};
+
 		// if roadkill but driver bailed out or turret kill but gunner bailed out, and the first crewmember is an enemy, award him the kill
 		if !(_killer isKindOf "Man") then
 		{
@@ -85,6 +94,7 @@ if (!(_killer isKindOf "Man") || (_ammo == "" && _targetVehicle != _sourceVehicl
 if (isUavConnected _killerVehicle /*&& _targetVehicle != _killerVehicle*/) then
 {
 	private _uavOwner = (uavControl _killerVehicle) select 0;
+
 	if (!isNull _uavOwner) then
 	{
 		_killer = _uavOwner;
@@ -101,6 +111,7 @@ else
 	if ((_ammo isKindOf "GrenadeHand" || _ammo isKindOf "IRStrobeBase") && !(_ammo isKindOf "G_40mm_Smoke")) then // all vanilla throwables
 	{
 		private _magsCfg = (format ["getText (_x >> 'ammo') == '%1'", _ammo]) configClasses (configFile >> "CfgMagazines");
+
 		if !(_magsCfg isEqualTo []) then
 		{
 			_killerWeapon = configName (_magsCfg select 0);
@@ -115,11 +126,13 @@ if (_killer isKindOf "Man") then
 	{
 		private _shooter = [_killer, _killerVehicle] select (unitIsUAV _killerVehicle && _killer != _source); // if (unitIsUAV _killerVehicle && _killer == _source) then killer shot from UGV passenger seat
 		private _compatibleWeapons = [_shooter, _ammo] call fn_compatibleWeapons;
+
 		if !(_compatibleWeapons isEqualTo []) then
 		{
 			if (_shooter isKindOf "Man") then
 			{
 				_killerWeapon = currentMuzzle _shooter;
+
 				// player switched weapon while bullet in flight, tag first compatible weapon
 				if ({_x == _killerWeapon} count _compatibleWeapons == 0) then
 				{
@@ -167,3 +180,7 @@ private _killerAI = (!isNull _killer && !isPlayer _killer && isNil {_killer getV
 		["FAR_killerSuspects", []] // always empty, used to mark completion of data collection
 	]
 ] call A3W_fnc_setVarServer;
+
+//systemChat format ["FAR_setKillerInfo: %1", [typeOf _killer, typeOf _killerVehicle, _killerWeapon, _ammo, _killerDistance]];
+//systemChat format ["FAR_setKillerInfo: %1", [typeOf _target, name _target, typeOf _source, _ammo, _suspects, _instigator]];
+//diag_log format ["FAR_setKillerInfo: %1", [typeOf _target, name _target, typeOf _source, _ammo, _suspects, _instigator]];

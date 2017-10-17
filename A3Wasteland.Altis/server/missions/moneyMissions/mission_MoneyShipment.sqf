@@ -138,6 +138,7 @@ _setupObjects =
 		_direction = _this select 2;
 
 		_vehicle = createVehicle [_type, _position, [], 0, "None"];
+		_vehicle setVariable ["R3F_LOG_disabled", true, true];
 		[_vehicle] call vehicleSetup;
 
 		_vehicle setDir _direction;

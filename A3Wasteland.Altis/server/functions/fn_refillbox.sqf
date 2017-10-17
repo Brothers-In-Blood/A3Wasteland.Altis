@@ -20,6 +20,7 @@ _box setVariable [call vChecksum, true];
 
 _box allowDamage false; // No more fucking busted crates
 _box setVariable ["allowDamage", false, true];
+_box setVariable ["A3W_inventoryLockR3F", true, true];
 
 // Clear pre-existing cargo first
 //clearBackpackCargoGlobal _box;

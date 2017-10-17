@@ -33,6 +33,7 @@ if (!isNil "_vecUp") then
 	_desk setVectorUp _vecUp;
 };
 
+_desk setVariable ["R3F_LOG_disabled", true, true];
 _desk disableCollisionWith _storeOwner;
 
 _desk

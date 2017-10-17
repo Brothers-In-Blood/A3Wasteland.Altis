@@ -162,6 +162,7 @@ else
 
 	if (!isNil "_vehicle" && {typeName _vehicle == "OBJECT"}) then
 	{
+		_vehicle setVariable ["R3F_LOG_disabled", false, true];
 		_vehicle setVariable ["A3W_missionVehicle", true, true];
 		_vehicle setVariable ["A3W_lockpickDisabled", nil, true];
 
@@ -183,6 +184,7 @@ else
 					_x setVariable ["A3W_skipAutoSave", true, true];
 				};
 
+				_x setVariable ["R3F_LOG_disabled", false, true];
 				_x setVariable ["A3W_missionVehicle", true, true];
 				_x setVariable ["A3W_lockpickDisabled", nil, true];
 
