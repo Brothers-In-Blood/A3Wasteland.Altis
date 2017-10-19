@@ -79,7 +79,7 @@ if (_obj iskindof "thing") then {
 		[
 			["Moveable", false],
 			["Baselockenabled", false],
-			["LockedDown", false],
+			["LockedDown", false]
 		];
 };
 _r3fSide = _obj getVariable "R3F_Side";
