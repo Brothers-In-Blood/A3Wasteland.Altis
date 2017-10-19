@@ -62,7 +62,7 @@ if !(_unit getVariable ["A3W_killScoreRegistered", false]) then
 		//Pay bounty to killer 
 		if(!_friendlyFire)then
 		{ 
-			bountyAmount = _unit getVariable ["bounty", 0]; 
+			_bountyAmount = _unit getVariable ["bounty", 0]; 
 			if(_bountyAmount > 0)then
 			{ 
 				[_unit, _killer, _bountyAmount] call bountyRedeem; 
