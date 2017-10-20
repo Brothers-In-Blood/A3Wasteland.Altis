@@ -1635,7 +1635,6 @@ helicoptersArray = compileFinal str
 
 planesArray = compileFinal str
 [
-
 	["A-143 Buzzard",															"I_Plane_Fighter_03_dynamicLoadout_F",								390000,						"vehicle"],
 	["A-149 Gryphon",															"I_Plane_Fighter_04_F",												690000,						"vehicle"],
 	["A-164 Wipeout",															"B_Plane_CAS_01_dynamicLoadout_F",									1000000,					"vehicle"],
@@ -1643,12 +1642,14 @@ planesArray = compileFinal str
 	["Ceasar BTT (racing)",														"C_Plane_Civil_01_Racing_F",										3000,						"vehicle"],
 	["F/A-181 Black Wasp II (Stealth)",											"B_Plane_Fighter_01_Stealth_F",										1750000,					"vehicle"],
 	["F/A-181 Black Wasp II",													"B_Plane_Fighter_01_F",												1500000,					"vehicle"],
-	["K40 Ababil-3 UAV (Unarmed)",												"O_UAV_02_dynamicLoadout_F",										100000,						"vehicle",						"variant_greyhawkRecon"],
+	["K40 Ababil-3 UAV (Unarmed)",												"O_UAV_02_F",														25000,						"vehicle"],
 	["K40 Ababil-3 UAV (Bomber)",												"I_UAV_02_dynamicLoadout_F",										250000,						"vehicle",						"variant_greyhawkBomber"],
 	["K40 Ababil-3 UAV (Missiles)",												"O_UAV_02_dynamicLoadout_F",										1700000,					"vehicle",						"variant_greyhawkMissile"],
+	["K40 Ababil-3 UAV (Unarmed)",												"I_UAV_02_F",														25000,						"vehicle"],
 	["K40 Ababil-3 UAV (Bomber)",												"O_UAV_02_dynamicLoadout_F",										250000,						"vehicle",						"variant_greyhawkBomber"],
 	["K40 Ababil-3 UAV (Missiles)",												"I_UAV_02_dynamicLoadout_F",										1700000,					"vehicle",						"variant_greyhawkMissile"],
 	["KH-3A Fenghuang",															"O_T_UAV_04_CAS_F",													575000,						"vehicle"],
+	["MQ4A Greyhawk UAV (Unarmed)",												"B_UAV_02_F",														25000,						"vehicle"],
 	["MQ4A Greyhawk UAV (Bomber)",												"B_UAV_02_dynamicLoadout_F",										250000,						"vehicle",						"variant_greyhawkBomber"],// Bomber UAVs are a lot harder to use,hence why they are cheaper than Missile ones
 	["MQ4A Greyhawk UAV (Missiles)",											"B_UAV_02_dynamicLoadout_F",										1700000,					"vehicle",						"variant_greyhawkMissile"],
 	["To-199 Neophron CAS",														"O_Plane_CAS_02_dynamicLoadout_F",									1000000,					"vehicle"],
@@ -1660,7 +1661,6 @@ planesArray = compileFinal str
 	["V-44 X Blackfish (Armed)",												"B_T_VTOL_01_armed_F",												700000,						"vehicle"],
 	["Y-32 Xi'an (Vehicle Transport)",											"O_T_VTOL_02_vehicle_F",											750000,						"vehicle"],
 	["Y-32 Xi'an (Infrantry Transport)",										"O_T_VTOL_02_infantry_F",											750000,						"vehicle"]
-
 ];
 
 boatsArray = compileFinal str
