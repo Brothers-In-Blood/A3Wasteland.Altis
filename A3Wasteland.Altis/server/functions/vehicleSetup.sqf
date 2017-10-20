@@ -44,7 +44,7 @@ if ({_class isKindOf _x} count ["Air","UGV_01_base_F"] > 0) then
 };
 
 if ({_vehicle iskindof _x} count
-		[
+	[
 		"C_Offroad_01_repair_F",
 		"C_Van_02_service_F",
 		"C_Van_01_fuel_F",
@@ -62,7 +62,7 @@ if ({_vehicle iskindof _x} count
 		"O_Heli_Transport_04_ammo_F",
 		"O_Heli_Transport_04_repair_F",
 		"O_Heli_Transport_04_fuel_F"
-		] >0)
+	] >0)
 	then
 	{
 		_vehicle setAmmoCargo 0;
@@ -70,6 +70,21 @@ if ({_vehicle iskindof _x} count
 		_vehicle setRepairCargo 0;
 		[_vehicle] remoteExecCall ["GOM_fnc_addAircraftLoadout", 0, _vehicle];
 };
+
+//Recon Drones
+if ({_vehicle iskindof _x} count 
+	[
+		"O_UAV_02_F",
+		"I_UAV_02_F",
+		"B_UAV_02_F"
+	]>0)
+	Then
+	{
+		_vehicle animate ["hideweapons",1];
+		_vehicle removeweapon "missiles_SCALPEL";
+		_vehicle setammo 0;
+		_vehicle addMagazineTurret "Laserbatteries";
+	};
 
 [_vehicle, _brandNew] call A3W_fnc_setVehicleLoadout;
 
