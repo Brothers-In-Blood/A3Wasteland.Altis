@@ -103,6 +103,7 @@ else
 
 	_dataTemp = _data;
 	_data = [["PlayerSaveValid", true]];
+
 	_ghostingTimer = ["A3W_extDB_GhostingTimer", 5*60] call getPublicVar;
 
 	if (_ghostingTimer > 0) then
@@ -121,6 +122,7 @@ else
 			};
 		};
 	};
+
 	_data append _dataTemp;
 	//_data pushBack ["BankMoney", _bank];
 };
@@ -129,17 +131,17 @@ private _bank = 0;
 private _bounty = 0;
 private _bountyKills = [];
 
+_result = [["getPlayerStatusXMap", _UID, _environment], 2] call extDB_Database_async;
+
 if (_moneySaving) then
 {
-	_result = ["getPlayerBankMoney:" + _UID, 2] call extDB_Database_async;
 	_bank = _result param [0,0];
 };
 
 if (["A3W_atmBounties"] call isConfigOn) then
 {
-	_result = ["getPlayerBounty:" + _UID, 2] call extDB_Database_async; 
-	_bounty = _result param [0,0]; 
-	_bountyKills = _result param [1,[]]; 
+	_bounty = _result param [1,0];
+	_bountyKills = _result param [2,[]];
 };
 
 _data append
