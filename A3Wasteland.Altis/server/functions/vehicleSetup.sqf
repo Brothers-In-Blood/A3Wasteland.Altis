@@ -46,6 +46,7 @@ if ({_class isKindOf _x} count ["Air","UGV_01_base_F"] > 0) then
 if ({_vehicle iskindof _x} count
 		[
 		"C_Offroad_01_repair_F",
+		"C_Van_02_service_F",
 		"C_Van_01_fuel_F",
 		"B_G_Van_01_fuel_F",
 		"B_Truck_01_fuel_F",

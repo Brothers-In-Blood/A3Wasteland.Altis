@@ -19,7 +19,8 @@ civilianVehicles =
 	"C_SUV_01_F",
 	"C_Offroad_01_F",
 	["I_C_Offroad_02_unarmed_F", "C_Offroad_02_unarmed_F"],
-	["C_Van_01_box_F", "C_Van_01_transport_F"]
+	["C_Van_01_box_F", "C_Van_01_transport_F"],
+	["C_Van_02_medevac_F","C_Van_02_vehicle_F","C_Van_02_transport_F","I_G_Van_02_vehicle_F","B_G_Van_02_transport_F"]
 ];
 
 //Light Military Vehicle List - Random Spawns
