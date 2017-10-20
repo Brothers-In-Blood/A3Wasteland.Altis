@@ -16,14 +16,14 @@ class EditorData
 	};
 	class LayerIndexProvider
 	{
-		nextID=64;
+		nextID=68;
 	};
 	class Camera
 	{
-		pos[]={-22.120239,68.063148,68.878441};
-		dir[]={0.4590393,-0.12739499,0.87924337};
-		up[]={0.058960155,0.99185199,0.11293192};
-		aside[]={0.88646632,-3.4022378e-008,-0.46281132};
+		pos[]={-27.98103,260.83356,-183.58521};
+		dir[]={0.011945676,-0.56400037,0.82569796};
+		up[]={0.0081588393,0.82577658,0.56394011};
+		aside[]={0.99990481,3.6445999e-007,-0.014466733};
 	};
 };
 binarizationWanted=0;
@@ -297,6 +297,7 @@ class AddonsMetaData
 };
 class DynamicSimulation
 {
+	enable=0;
 	class EnableRadiuses
 	{
 		Vehicle=5000;
@@ -309,10 +310,11 @@ class DynamicSimulation
 randomSeed=3783014;
 class ScenarioData
 {
-	author="thegreatmonkey68";
+	author="BIB_Monkey";
+	disabledAI=1;
 	class Header
 	{
-		gameType="Survive";
+		gameType="Sandbox";
 	};
 	wreckRemovalMaxTime=3600;
 };
@@ -349,18 +351,24 @@ class Mission
 		briefingName=" BIB A3Wasteland Altis (v1.4)";
 		overviewText="Wasteland By BIBGaming.com";
 		resistanceWest=0;
-		timeOfChanges=28800;
 		startWeather=0;
 		startWind=0;
+		startWaves=0.20493233;
 		forecastWeather=0;
 		forecastWind=0;
-		forecastWaves=0;
+		forecastWaves=0.19649974;
+		rainForced=1;
+		lightningsForced=1;
+		wavesForced=1;
+		windForced=1;
 		year=2035;
 		month=6;
 		hour=12;
 		minute=-15;
-		startFogDecay=0.001;
-		forecastFogDecay=0.001;
+		startFogBase=-1000;
+		forecastFogBase=-1000;
+		startFogDecay=0;
+		forecastFogDecay=0;
 	};
 	class Entities
 	{
@@ -6158,7 +6166,7 @@ class Mission
 			name="Jet_1";
 			type="Empty";
 			colorName="ColorYellow";
-			angle=226.99918;
+			angle=226.99916;
 			id=1960;
 			atlOffset=-17.910013;
 		};
