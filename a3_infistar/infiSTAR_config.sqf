@@ -84,7 +84,7 @@ _adminUIDandAccess =
 [
 		[
 		[// Admins with UIDs in this Array have their Access defined in the array below.
-			'76561198116851407', //Wilks
+			//'76561198116851407', //Wilks
 			'76561198073390625', //Monkey
 			'76561197960446555', //Masher
 			'76561198068891152', //WhichDoctor
@@ -97,8 +97,8 @@ _adminUIDandAccess =
 			'76561197983136779', //Lacks
 			'76561198091057992', //Titus
 			'76561197979953643', //Sayrus
-			'76561197996525927', //Smokebreak
-			'76561198074088415' //Cats
+			'76561197996525927' //Smokebreak
+			//'76561198074088415' //Cats
 		],
 		[
 			'Teleport On Map Click',
