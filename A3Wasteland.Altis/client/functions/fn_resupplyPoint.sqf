@@ -331,7 +331,7 @@ Switch (true) do
 			_vehicle setFuel 1;
 			titleText ["Vehicle Ready!", "PLAIN"];
 		} else {
-				titleText format ["You don't have enough money, %1 costs %2 to resupply", _vehname, _totalprice];
+				titleText [format ["You don't have enough money, %1 costs %2 to resupply", _vehname, _totalprice], "PLAIN DOWN"];
 		};
 	};
 
