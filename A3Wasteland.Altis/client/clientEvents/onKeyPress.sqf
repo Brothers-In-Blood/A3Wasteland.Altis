@@ -40,7 +40,7 @@ switch (true) do
 	{
 		if (soundVolume > 0.5) then
 		{
-			0.5 fadeSound 0.1;
+			0.5 fadeSound 0.01;
 			["You've inserted your earplugs.", 5] call mf_notify_client;
 		}
 		else
@@ -109,7 +109,7 @@ if (!_handled && _key in actionKeys "GetOut") then
 		{
 			[] spawn
 			{
-				if !(["Are you sure you want to eject?", "Confirm", true, true] call BIS_fnc_guiMessage) exitWith {};
+				// if !(["Are you sure you want to eject?", "Confirm", true, true] call BIS_fnc_guiMessage) exitWith {};
 				[[], fn_emergencyEject] execFSM "call.fsm";
 			};
 
