@@ -208,6 +208,29 @@ if (_key != "" && isPlayer _player && {_isGenStore || _isGunStore || _isVehStore
 				"Land_Pod_Heli_Transport_04_repair_F"
 			] > 0) then	
 			{
+				private _AmmoResourcesMax =
+				[
+						["Box_NATO_AmmoVeh_F",					5000],
+						["Box_EAST_AmmoVeh_F",					5000],
+						["Box_IND_AmmoVeh_F",					5000],
+						["B_Slingload_01_Ammo_F",				30000]
+
+				];
+				private _FuelResourcesMax =
+				[
+					["B_Slingload_01_Fuel_F",					20000],
+					["StorageBladder_01_fuel_forest_F",			15000],
+					["StorageBladder_01_fuel_sand_F",			15000],
+					["Land_fs_feed_F",							100000],
+					["Land_FuelStation_01_pump_malevil_F",		100000],
+					["Land_FuelStation_Feed_F",					100000],
+					["Land_Pod_Heli_Transport_04_fuel_F",		22000]
+				];
+				private _RepairResourcesMax =
+				[
+					["B_Slingload_01_Repair_F",					25000],
+					["Land_Pod_Heli_Transport_04_repair_F",		22000]
+				];
 				_object setAmmoCargo 0;
 				_object setFuelCargo 0;
 				_object setRepairCargo 0;

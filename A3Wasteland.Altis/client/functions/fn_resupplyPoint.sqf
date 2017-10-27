@@ -1,8 +1,8 @@
-// ******************************************************************************************
-// * This project is licensed under the GNU Affero GPL v3. Copyright © 2016 A3Wasteland.com *
-// ******************************************************************************************
-//  @file Name: fn_ResupplyPoint.sqf
-//  @file Author: BIB_Monkey
+/*
+file Name: fn_ResupplyPoint.sqf
+Author: BIB_Monkey
+Purpose: Allow players to rearm, repair, refuel, and resupply vehicles. Charges dynamically based on what is needed.
+*/
 
 //Config Defines
 	#define Fuel_Cost 10 //Price per liter of fuel
@@ -185,7 +185,6 @@
 	];
 //check if caller is in vehicle
 	if (_vehicle == _unit) exitWith {};
-
 //Define Vehicle Status
 	private _vehClass = typeOf _vehicle;
 	private _vehCfg = configFile >> "CfgVehicles" >> _vehClass;
@@ -200,10 +199,10 @@
 	private _vehRepairResource = _vehicle getvariable ["GOM_fnc_repairCargo", 0];
 //Define Player Status
 	private _money = player getvariable ["cmoney", 0];
-
 //Calculate Resupply Prices
 	//Calculate fuel cost
-		private _FuelCost = round ((_vehfuelcap - (_vehfuel * _vehfuelcap)) * Fuel_Cost);
+		private _fuelramaining = ceil (_vehfuel * _vehfuelcap);
+		private _ReFuelCost = ceil ((_vehfuelcap - _fuelramaining) * Fuel_Cost);
 	//Calculate repair cost
 		// set vehicle price for vehicle not found in vehicle store
 		private _vehprice = 1000;
@@ -214,24 +213,31 @@
 				_vehprice = _x select 2;
 			};
 		} forEach (call allVehStoreVehicles + call staticGunsArray);
-		private _RepairCost = (_vehDamage * _vehprice);
+		private _RepairCost = ceil (_vehDamage * _vehprice);
 	//Calculate Rearm Cost
 		//initialize Cost variable
 			private _RearmCost = 0;
 		//Calculate rearm cost based on equiped magazines
 			{
 				private _mag = _x select 0;
+				// player globalchat format ["Selected ammo is= %1", _mag];
 				private _magammo = _x select 2;
+				// player globalchat format ["Remaining ammo = %1", _magammo];
 				{
 					if (_mag == _x select 0) then
 					{
 						private _maxammo = _x select 1;
+						// player globalchat format ["Maximum ammo = %1", _maxammo];
 						private _ammoprice = _x select 2;
+						// player globalchat format ["Price of ammo = %1", _ammoprice];
 						private _ammoneeded = (_maxammo - _magammo);
+						// player globalchat format ["Needed ammo = %1", _ammoneeded];
 						private _ammocost = (_ammoneeded * _ammoprice);
-						_RearmCost = ( _RearmCost + _ammoprice);
+						// player globalchat format ["Ammo cost= %1", _ammocost];
+						_RearmCost = ( _RearmCost + _ammocost);
+						// player globalchat format ["Rearm costs is = %1", _RearmCost];
 					};
-				}foreach _magprices;
+				} foreach _magprices;
 			} foreach _mags;
 	//calcuate Ammo Resource costs
 		//initialize Cost variable
@@ -269,7 +275,7 @@
 				};
 			} foreach _RepairResourcesMax;
 	//Calculate Total cost of resupply
-		private _TotalPrice = (_AmmoResourceCost + _FuelResourceCost + _RepairResourceCost + _RearmCost + _RepairCost + _FuelCost);
+		private _TotalPrice = (_AmmoResourceCost + _FuelResourceCost + _RepairResourceCost + _RearmCost + _RepairCost + _ReFuelCost);
 
 //Start Resupply
 	// Check player has enough money
@@ -309,7 +315,7 @@
 							_vehicle setDammage 0;
 						};
 					//Refuel Section
-						if (_FuelCost > 0) then
+						if (_ReFuelCost > 0) then
 						{
 							titleText ["Refueling...", "PLAIN DOWN"];
 							sleep 15;
