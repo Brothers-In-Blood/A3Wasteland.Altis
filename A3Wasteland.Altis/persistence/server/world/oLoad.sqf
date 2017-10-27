@@ -108,6 +108,9 @@ _exclObjectIDs = [];
 				case "bis_disabled_Door_6": {_value};
 				case "bis_disabled_Door_7": {_value};
 				case "bis_disabled_Door_8": {_value};
+				case "GOM_fnc_fuelCargo" : {_value};
+				case "GOM_fnc_ammoCargo" : {_value};
+				case "GOM_fnc_repairCargo" : {_value};
 				case "ownerName":
 				{
 					switch (typeName _value) do
@@ -227,7 +230,7 @@ _exclObjectIDs = [];
 			"Land_Pod_Heli_Transport_04_fuel_F",
 			"Land_Pod_Heli_Transport_04_repair_F"
 		] > 0) then	{
-		[_obj] remoteExecCall ["GOM_fnc_addAircraftLoadout", 0, _obj];
+		_obj spawn GOM_fnc_addAircraftLoadoutToObject;
 	};
 } forEach _objects;
 

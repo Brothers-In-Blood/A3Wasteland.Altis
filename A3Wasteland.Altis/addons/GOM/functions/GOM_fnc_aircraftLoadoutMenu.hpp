@@ -1,3 +1,6 @@
+//GOM_fnc_aircraftLoadout V1.34 made by Grumpy Old Man 17-5-2017
+
+
 class GOM_aircraftLoadoutMenu
 {
     text = "Aircraft Loadout Module";

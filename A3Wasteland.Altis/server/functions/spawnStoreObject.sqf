@@ -211,7 +211,7 @@ if (_key != "" && isPlayer _player && {_isGenStore || _isGunStore || _isVehStore
 				_object setAmmoCargo 0;
 				_object setFuelCargo 0;
 				_object setRepairCargo 0;
-				[_object] remoteExecCall ["GOM_fnc_addAircraftLoadout", 0, _object];
+				_object spawn GOM_fnc_addAircraftLoadoutToObject;
 			};
 			if (_skipSave) then
 			{

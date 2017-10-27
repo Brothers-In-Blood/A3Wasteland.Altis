@@ -133,48 +133,6 @@ _turretMags = []; // magazinesAmmo _veh;
 _turretMags2 = (magazinesAllTurrets _veh) select {_x select 0 != "FakeWeapon" && (_x select 0) select [0,5] != "Pylon"} apply {_x select [0,3]};
 _turretMags3 = _veh call fn_getPylonsAmmo;
 
-// deprecated
-/*
-_hasDoorGuns = isClass (configFile >> "CfgVehicles" >> _class >> "Turrets" >> "RightDoorGun");
-
-_turrets = allTurrets [_veh, false];
-
-if !(_class isKindOf "B_Heli_Transport_03_unarmed_F") then
-{
-	_turrets = [[-1]] + _turrets; // only add driver turret if not unarmed Huron, otherwise flares get saved twice
-};
-
-if (_hasDoorGuns) then
-{
-	// remove left door turret, because its mags are already returned by magazinesAmmo
-	{
-		if (_x isEqualTo [1]) exitWith
-		{
-			_turrets set [_forEachIndex, 1];
-		};
-	} forEach _turrets;
-
-	_turrets = _turrets - [1];
-};
-
-{
-	_path = _x;
-
-	{
-		if ([_turretMags, _x, -1] call fn_getFromPairs == -1 || _hasDoorGuns) then
-		{
-			if (_veh currentMagazineTurret _path == _x && {count _turretMags3 == 0}) then
-			{
-				_turretMags3 pushBack [_x, _path, [_veh currentMagazineDetailTurret _path] call getMagazineDetailAmmo];
-			}
-			else
-			{
-				_turretMags2 pushBack [_x, _path];
-			};
-		};
-	} forEach (_veh magazinesTurret _path);
-} forEach _turrets;*/
-
 _ammoCargo = getAmmoCargo _veh;
 _fuelCargo = getFuelCargo _veh;
 _repairCargo = getRepairCargo _veh;
@@ -189,6 +147,14 @@ if (isNil "_repairCargo" || {!finite _repairCargo}) then { _repairCargo = 0 };
 [
   ["vPin", false],
   ["password", ""]
+];
+
+//Service system
+{ _variables pushBack [_x select 0, _veh getVariable _x] } forEach
+[
+  ["GOM_fnc_repairCargo", nil],
+  ["GOM_fnc_fuelCargo", nil],
+  ["GOM_fnc_ammoCargo", nil]
 ];
 
 _owner = _veh getVariable ["ownerUID", ""];

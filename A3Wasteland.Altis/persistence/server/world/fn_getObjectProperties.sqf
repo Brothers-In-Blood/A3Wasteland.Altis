@@ -70,7 +70,10 @@ if (_obj iskindof "Static") then {
 			["bis_disabled_Door_8", 0],
 			["Moveable", false],
 			["Baselockenabled", false],
-			["LockedDown", false]
+			["LockedDown", false],
+			["GOM_fnc_fuelCargo",0],
+			["GOM_fnc_ammoCargo",0],
+			["GOM_fnc_repairCargo",0]
 		];
 };
 

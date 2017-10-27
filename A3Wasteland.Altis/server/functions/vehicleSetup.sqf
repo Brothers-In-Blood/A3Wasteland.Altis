@@ -56,19 +56,66 @@ if ({_vehicle iskindof _x} count
 		"O_Truck_03_repair_F",
 		"O_Truck_03_ammo_F",
 		"I_Truck_02_fuel_F",
-		"I_Truck_02_box_F",
 		"I_Truck_02_ammo_F",
 		"B_APC_Tracked_01_CRV_F",
 		"O_Heli_Transport_04_ammo_F",
 		"O_Heli_Transport_04_repair_F",
 		"O_Heli_Transport_04_fuel_F"
 	] >0)
-	then
+then
+{
+	private _AmmoResourcesMax =
+	[
+			["B_Truck_01_ammo_F",					25000],
+			["O_Truck_03_ammo_F", 					15000],
+			["I_Truck_02_ammo_F",					10000],
+			["B_APC_Tracked_01_CRV_F",				500],
+			["O_Heli_Transport_04_ammo_F",			20000]
+
+	];
+	private _FuelResourcesMax =
+	[
+			["C_Van_01_fuel_F",						1000],
+			["B_G_Van_01_fuel_F",					1000],
+			["B_Truck_01_fuel_F",					25000],
+			["O_Truck_03_fuel_F",					20000],
+			["I_Truck_02_fuel_F",					15000],
+			["B_APC_Tracked_01_CRV_F",				500],
+			["O_Heli_Transport_04_fuel_F",			22000]
+
+	];
+	private _RepairResourcesMax =
+	[
+			["C_Offroad_01_repair_F",				500],
+			["C_Van_02_service_F",					1000],
+			["B_Truck_01_Repair_F",					25000],
+			["O_Truck_03_repair_F",					20000],
+			["B_APC_Tracked_01_CRV_F",				500],
+			["O_Heli_Transport_04_repair_F",		22000]
+
+	];
+	_vehicle setAmmoCargo 0;
+	_vehicle setFuelCargo 0;
+	_vehicle setRepairCargo 0;
+	_vehicle spawn GOM_fnc_addAircraftLoadoutToObject;
 	{
-		_vehicle setAmmoCargo 0;
-		_vehicle setFuelCargo 0;
-		_vehicle setRepairCargo 0;
-		[_vehicle] remoteExecCall ["GOM_fnc_addAircraftLoadout", 0, _vehicle];
+		if (_Vehclass == _x select 0) then
+		{
+			_Vehicle setVariable ["GOM_fnc_ammoCargo", _x select 1];
+		};
+	} foreach _AmmoResourcesMax;
+	{
+		If (_Vehclass == _x select 0) then
+		{
+			_Vehicle setVariable ["GOM_fnc_fuelCargo", _x select 1];
+		};
+	} foreach _FuelResourcesMax;
+	{
+		if (_vehclass == _x select 0) then
+		{
+			_Vehicle setVariable ["GOM_fnc_repairCargo", _x select 1];
+		};
+	} foreach _RepairResourcesMax;
 };
 
 //Recon Drones
@@ -78,13 +125,11 @@ if ({_vehicle iskindof _x} count
 		"I_UAV_02_F",
 		"B_UAV_02_F"
 	]>0)
-	Then
-	{
-		_vehicle animate ["hideweapons",1];
-		_vehicle removeweapon "missiles_SCALPEL";
-		_vehicle setammo 0;
-		_vehicle addMagazineTurret "Laserbatteries";
-	};
+Then
+{
+	_vehicle animate ["hideweapons",1];
+	_vehicle removeweapon "missiles_SCALPEL";
+};
 
 [_vehicle, _brandNew] call A3W_fnc_setVehicleLoadout;
 
