@@ -130,13 +130,13 @@ _exclObjectIDs = [];
 			_obj setVariable [_var, _value, true];
 		} forEach _variables;
 		//make sure existing objects are given moveable variable. Comment line after update.
-		_obj setVariable ["moveable", true, true];
+		//_obj setVariable ["moveable", true, true];
 
 		// Base locker lights
-    if (_obj getVariable ["lights",""] == "off") then
-    {
-      _obj setHit ["light_1_hit", 0.97];
-    };
+		if (_obj getVariable ["lights",""] == "off") then
+		{
+		_obj setHit ["light_1_hit", 0.97];
+		};
 
 		clearWeaponCargoGlobal _obj;
 		clearMagazineCargoGlobal _obj;

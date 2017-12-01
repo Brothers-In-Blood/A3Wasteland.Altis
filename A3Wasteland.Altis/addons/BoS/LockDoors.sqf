@@ -8,7 +8,7 @@ private _manager = cursorObject;
 private _lockdown = false;
 
 
-private _managers = nearestObjects [ _manager, ["Land_SatellitePhone_F"], 100, true];
+private _managers = nearestObjects [ _manager, ["Land_SatellitePhone_F"], 50, true];
 if ( count _managers > 1) then 
 {
 	private _getmanagerstatus = [{_x getVariable ["Baselockenabled", false]} foreach _managers];
@@ -62,7 +62,7 @@ if (_lockdown) then
 				"Land_i_Stone_HouseSmall_V1_F",
 				"Land_i_Stone_HouseSmall_V2_F",
 				"Wall"
-			], 100];
+			], 25];
 
 		//Objects with Three Doors
 		{
@@ -94,7 +94,7 @@ if (_lockdown) then
 				"Land_Cargo_Tower_V2_F",
 				"Land_MilOffices_V1_F",
 				"Land_CarService_F"
-			], 100];
+			], 25];
 
 	//Objects with 4 doors
 		{
@@ -117,7 +117,7 @@ if (_lockdown) then
 				"Land_i_Shop_01_V1_F",
 				"Land_i_Shop_01_V2_F"
 				
-			], 100];
+			], 25];
 
 	//Objects with only one Door
 		{
@@ -150,7 +150,7 @@ if (_lockdown) then
 				"Land_i_Stone_Shed_V1_F",
 				"Land_i_Stone_Shed_V3_F",
 				"Wall"
-		], 100];
+		], 25];
 
 	//Industrial Sheds; because BIS is bad and lazy and it's the only building that doesn't conform to convention
 		{
@@ -168,7 +168,7 @@ if (_lockdown) then
 			_x setVariable ['bis_disabled_Door_6',1,true];
 			_x setVariable ['bis_disabled_Door_8',1,true];
 		} forEach nearestObjects [player,
-			["Land_i_Shed_Ind_F"], 100];
+			["Land_i_Shed_Ind_F"], 25];
 
 	//Objects with 8 Doors
 		{
@@ -192,6 +192,6 @@ if (_lockdown) then
 				"Land_i_Barracks_V1_F",
 				"Land_i_Barracks_V2_F",
 				"Land_u_Barracks_V2_F"
-			], 100];
+			], 25];
 	hint "Doors Locked";
 };

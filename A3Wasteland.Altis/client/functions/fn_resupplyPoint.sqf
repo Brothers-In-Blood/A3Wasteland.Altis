@@ -5,7 +5,7 @@ Purpose: Allow players to rearm, repair, refuel, and resupply vehicles. Charges 
 */
 
 //Config Defines
-	#define Fuel_Cost 10 //Price per liter of fuel
+	#define Fuel_Cost 5 //Price per liter of fuel
 	#define Repair_Cost 10 //Price per Kg of repair cargo
 	#define Ammo_Cost 50 //Price Per Kg of Ammo Cargo
 //Check if mutex lock is active.
@@ -179,6 +179,7 @@ Purpose: Allow players to rearm, repair, refuel, and resupply vehicles. Charges 
 			["C_Van_02_service_F",					1000],
 			["B_Truck_01_Repair_F",					25000],
 			["O_Truck_03_repair_F",					20000],
+			["I_Truck_02_box_F",					15000],
 			["B_APC_Tracked_01_CRV_F",				500],
 			["O_Heli_Transport_04_repair_F",		22000]
 
@@ -202,40 +203,45 @@ Purpose: Allow players to rearm, repair, refuel, and resupply vehicles. Charges 
 //Calculate Resupply Prices
 	//Calculate fuel cost
 		private _fuelramaining = ceil (_vehfuel * _vehfuelcap);
+		// player globalchat format ["Remaing fuel is %1 liters", _fuelramaining];
 		private _ReFuelCost = ceil ((_vehfuelcap - _fuelramaining) * Fuel_Cost);
+		// player globalchat format ["It will cost %1 to refuel the vehicle", _ReFuelCost];
 	//Calculate repair cost
 		// set vehicle price for vehicle not found in vehicle store
 		private _vehprice = 1000;
 		//Get Vehicle Price from store arrays
 		{
-			if (_vehClass == _x select 1) exitWith
+			private _check = _x select 1;
+			if (_vehClass == _check) exitWith
 			{
 				_vehprice = _x select 2;
+				player globalchat format ["Vehicles Purchase Price was %1", _vehprice];
 			};
 		} forEach (call allVehStoreVehicles + call staticGunsArray);
 		private _RepairCost = ceil (_vehDamage * _vehprice);
+		// player globalchat format ["Repair Cost is %1, because the vehicle was %2 damaged", _RepairCost, _vehDamage];
 	//Calculate Rearm Cost
 		//initialize Cost variable
 			private _RearmCost = 0;
 		//Calculate rearm cost based on equiped magazines
 			{
 				private _mag = _x select 0;
-				// player globalchat format ["Selected ammo is= %1", _mag];
+				player globalchat format ["Selected ammo is= %1", _mag];
 				private _magammo = _x select 2;
-				// player globalchat format ["Remaining ammo = %1", _magammo];
+				player globalchat format ["Remaining ammo = %1", _magammo];
 				{
 					if (_mag == _x select 0) then
 					{
 						private _maxammo = _x select 1;
-						// player globalchat format ["Maximum ammo = %1", _maxammo];
+						player globalchat format ["Maximum ammo = %1", _maxammo];
 						private _ammoprice = _x select 2;
-						// player globalchat format ["Price of ammo = %1", _ammoprice];
+						player globalchat format ["Price of ammo = %1", _ammoprice];
 						private _ammoneeded = (_maxammo - _magammo);
-						// player globalchat format ["Needed ammo = %1", _ammoneeded];
+						player globalchat format ["Needed ammo = %1", _ammoneeded];
 						private _ammocost = (_ammoneeded * _ammoprice);
-						// player globalchat format ["Ammo cost= %1", _ammocost];
+						player globalchat format ["Ammo cost= %1", _ammocost];
 						_RearmCost = ( _RearmCost + _ammocost);
-						// player globalchat format ["Rearm costs is = %1", _RearmCost];
+						player globalchat format ["Rearm costs is = %1", _RearmCost];
 					};
 				} foreach _magprices;
 			} foreach _mags;
@@ -244,34 +250,55 @@ Purpose: Allow players to rearm, repair, refuel, and resupply vehicles. Charges 
 			private _AmmoResourceCost = 0;
 		//Calculate price based on expended resouces
 			{
-				if (_Vehclass == _x select 0) then
+				private _Cost = 0;
+				private _Check = _x select 0;
+				if (_Vehclass iskindof _Check) then
 				{
 					private _ResourceMax = _x select 1;
-					_AmmoResourceCost = ((_ResourceMax - _VehAmmoResource) * Ammo_Cost);
+					_Cost = ((_ResourceMax - _VehAmmoResource) * Ammo_Cost);
+					//player globalchat format ["Vehicle remianing resources: %1 Maximum resources: %2 Cost to resupply: %3", _VehAmmoResource, _ResourceMax, _Cost];
+					if (_Cost >= 0) then
+					{
+						_AmmoResourceCost = _Cost;
+					};
 				};
 			} foreach _AmmoResourcesMax;
+			// player globalchat format ["Vehicle remianing resources: %1 Cost to resupply: %2", _VehAmmoResource, _AmmoResourceCost];
 	//Calculate Fuel Resource Cost
 		//Initialize cost Variable
 			private _FuelResourceCost = 0;
 		//Calculate price based on expended resouces
 			{
-				If (_Vehclass == _x select 0) then
+				private _Cost = 0;
+				private _Check = _x select 0;
+				if (_Vehclass iskindof _Check) then
 				{
+					private _ResourceMax = _x select 1;
+					_Cost = ((_ResourceMax - _vehfuelresource) * Fuel_Cost);
+					// player globalchat format ["Vehicle remianing resources: %1 Maximum resources: %2 Cost to resupply: %3", _vehfuelresource, _ResourceMax, _Cost];
+					if (_Cost >= 0) then
 					{
-						private _ResourceMax = _x select 1;
-						_FuelResourceCost = ((_ResourceMax - _vehfuelresource) * Fuel_Cost);
+						_FuelResourceCost = _Cost;
 					};
 				};
+				
 			} foreach _FuelResourcesMax;
 	//Calculate Repair Resource Cost
 		//Initialize cost variable
 			private _RepairResourceCost = 0;
 		//Calculate price based on expended resouces
 			{
-			if (_vehclass == _x select 0) then
+				private _Cost = 0;
+				private _Check = _x select 0;
+				if (_Vehclass iskindof _Check) then
 				{
 					private _ResourceMax = _x select 1;
-					_RepairResourceCost = ((_ResourceMax - _vehRepairResource) * Repair_Cost);
+					_Cost = ((_ResourceMax - _vehRepairResource) * Repair_Cost);
+					// player globalchat format ["Vehicle remianing resources: %1 Maximum resources: %2 Cost to resupply: %3", _vehRepairResource, _ResourceMax, _Cost];
+					if (_Cost >= 0) then
+					{
+						_RepairResourceCost = _Cost;
+					};
 				};
 			} foreach _RepairResourcesMax;
 	//Calculate Total cost of resupply
@@ -283,92 +310,97 @@ Purpose: Allow players to rearm, repair, refuel, and resupply vehicles. Charges 
 		{
 			//Prompt player to confirm cost
 			_msg = format ["%1<br/><br/>%2", format ["It will cost you $%1 to resupply %2.", _totalprice, _vehName], "Do you want to proceed?"];
-			[_msg, "Resupply Vehicle", true, true] call BIS_fnc_guiMessage;
-			mutexScriptInProgress = true;  //prevents players from doing other actions
-			doCancelAction = false;
-			//Subtract cost from player money
-			player setVariable ["cmoney", (player getVariable ["cmoney",0]) - _totalprice, true];
-	//Resupply Start
-		//Turn of vehicle engine
-			_vehicle engineOn false;
-		//Setup Switch for service completion
-			private _ResupplyComplete = false;
-		//Begine Service Actions
-			//Inform player of engine status
-				titleText ["Starting Services. Vehicle Engine must Remain Off. No refunds for aborted services.", "PLAIN DOWN"];
-				sleep 3;
-			//Make sure that vehicle engine remains off during resupply and beging servicing
-				while {!(isEngineOn _vehicle)} do
-				{
-					//Rearm Section
-						if (_RearmCost > 0) then
-						{
-							titleText ["Rearming...", "PLAIN DOWN"];
-							sleep 15;
-							_vehicle setVehicleAmmo 1;
-						};
-					//Repair Section
-						if (_repaircost > 0) then
-						{
-							titleText ["Reparing...", "PLAIN DOWN"];
-							sleep 15;
-							_vehicle setDammage 0;
-						};
-					//Refuel Section
-						if (_ReFuelCost > 0) then
-						{
-							titleText ["Refueling...", "PLAIN DOWN"];
-							sleep 15;
-							_vehicle setFuel 1;
-						};
-					//Ammo Resource Section
-						if (_AmmoResourceCost > 0) then
-						{
-							{
-								if (_Vehclass == _x select 0) then
-								{
-									titleText ["Resupplying Ammunition Cargo...", "PLAIN DOWN"];
-									sleep 15;
-									_Vehicle setVariable ["GOM_fnc_ammoCargo", _x select 1];
-								};
-							} foreach _AmmoResourcesMax;
-						};
-					// Fuel resource Section
-						if (_FuelResourceCost > 0) then
-						{
-							{
-								If (_Vehclass == _x select 0) then
-								{
-									titleText ["Resupplying Fuel Cargo...", "PLAIN DOWN"];
-									sleep 15;
-									_Vehicle setVariable ["GOM_fnc_fuelCargo", _x select 1];
-								};
-							} foreach _FuelResourcesMax;
-						};
-					//Repair Resource Section
-						if (_RepairResourceCost > 0) then
-						{
-							{
-								if (_vehclass == _x select 0) then
-								{
-									titleText ["Resupplying Repair Cargo...", "PLAIN DOWN"];
-									sleep 15;
-									_Vehicle setVariable ["GOM_fnc_repairCargo", _x select 1];
-								};
-							} foreach _RepairResourcesMax;
-						};
-					//Set Completion to True
-						_ResupplyComplete = true;
-					//Turn Vehicle Engine On to end servicing
-						_vehicle engineOn true;
-				};
-		//Choose Exit text based on completion status
-			if (_ResupplyComplete) then
+			if ([_msg, "Resupply Vehicle", true, true] call BIS_fnc_guiMessage) then
 			{
-				titleText ["Vehicle Ready!", "PLAIN DOWN"];
-			} else
-			{
-				titleText ["Service Aborted. NO REFUNDS", "PLAIN DOWN"];
+				mutexScriptInProgress = true;  //prevents players from doing other actions
+				doCancelAction = false;
+				//Subtract cost from player money
+				player setVariable ["cmoney", (player getVariable ["cmoney",0]) - _totalprice, true];
+				//Resupply Start
+					//Turn of vehicle engine
+						_vehicle engineOn false;
+					//Setup Switch for service completion
+						private _ResupplyComplete = false;
+					//Begine Service Actions
+						//Inform player of engine status
+							titleText ["Starting Services. Vehicle Engine must Remain Off. No refunds for aborted services.", "PLAIN DOWN"];
+							sleep 3;
+						//Make sure that vehicle engine remains off during resupply and beging servicing
+							if (isEngineOn _vehicle) exitwith {titletext ["Resupply Canceled, Vehicle engine started", "PLAIN DOWN"]};
+							//Rearm Section
+								if (_RearmCost > 0) then
+								{
+									titleText ["Rearming...", "PLAIN DOWN"];
+									sleep 15;
+									_vehicle setVehicleAmmo 1;
+								};
+							if (isEngineOn _vehicle) exitwith {titletext ["Resupply Canceled, Vehicle engine started", "PLAIN DOWN"]};
+							//Repair Section
+								if (_repaircost > 0) then
+								{
+									titleText ["Reparing...", "PLAIN DOWN"];
+									sleep 15;
+									_vehicle setDammage 0;
+								};
+							if (isEngineOn _vehicle) exitwith {titletext ["Resupply Canceled, Vehicle engine started", "PLAIN DOWN"]};
+							//Refuel Section
+								if (_ReFuelCost > 0) then
+								{
+									titleText ["Refueling...", "PLAIN DOWN"];
+									sleep 15;
+									_vehicle setFuel 1;
+								};
+							if (isEngineOn _vehicle) exitwith {titletext ["Resupply Canceled, Vehicle engine started", "PLAIN DOWN"]};
+							//Ammo Resource Section
+								if (_AmmoResourceCost > 0) then
+								{
+									{
+										if (_Vehclass iskindof (_x select 0)) then
+										{
+											titleText ["Resupplying Ammunition Cargo...", "PLAIN DOWN"];
+											sleep 15;
+											_Vehicle setVariable ["GOM_fnc_ammoCargo", _x select 1, true];
+										};
+									} foreach _AmmoResourcesMax;
+								};
+							if (isEngineOn _vehicle) exitwith {titletext ["Resupply Canceled, Vehicle engine started", "PLAIN DOWN"]};
+							// Fuel resource Section
+								if (_FuelResourceCost > 0) then
+								{
+									{
+										If (_Vehclass iskindof (_x select 0)) then
+										{
+											titleText ["Resupplying Fuel Cargo...", "PLAIN DOWN"];
+											sleep 15;
+											_Vehicle setVariable ["GOM_fnc_fuelCargo", _x select 1, true];
+										};
+									} foreach _FuelResourcesMax;
+								};
+							if (isEngineOn _vehicle) exitwith {titletext ["Resupply Canceled, Vehicle engine started", "PLAIN DOWN"]};
+							//Repair Resource Section
+								if (_RepairResourceCost > 0) then
+								{
+									{
+										if (_vehclass iskindof (_x select 0)) then
+										{
+											titleText ["Resupplying Repair Cargo...", "PLAIN DOWN"];
+											sleep 15;
+											_Vehicle setVariable ["GOM_fnc_repairCargo", _x select 1, true];
+										};
+									} foreach _RepairResourcesMax;
+								};
+							//Set Completion to True
+								_ResupplyComplete = true;
+							//Turn Vehicle Engine On to end servicing
+								_vehicle engineOn true;
+					//Choose Exit text based on completion status
+						if (_ResupplyComplete) then
+						{
+							titleText ["Vehicle Ready!", "PLAIN DOWN"];
+						} else
+						{
+							titleText ["Service Aborted. NO REFUNDS", "PLAIN DOWN"];
+						};
 			};
 	// Exit text if player doesn't have enough money		
 		} else

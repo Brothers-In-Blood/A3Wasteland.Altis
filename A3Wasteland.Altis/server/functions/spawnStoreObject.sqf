@@ -124,6 +124,7 @@ if (_key != "" && isPlayer _player && {_isGenStore || _isGunStore || _isVehStore
 			if (_player getVariable [_timeoutKey, true]) then { breakOut "spawnStoreObject" }; // Timeout
 			_object = createVehicle [_class, _safePos, [], 0, ""];
 			_object setVariable ["moveable", true, true];
+			private _class = typeof _object;
 			if (_waterNonBoat) then
 			{
 				private _posSurf = getPos _object;
@@ -205,15 +206,37 @@ if (_key != "" && isPlayer _player && {_isGenStore || _isGunStore || _isVehStore
 				"Land_FuelStation_01_pump_malevil_F",
 				"Land_FuelStation_Feed_F",
 				"Land_Pod_Heli_Transport_04_fuel_F",
-				"Land_Pod_Heli_Transport_04_repair_F"
+				"Land_Pod_Heli_Transport_04_repair_F",
+				"C_Offroad_01_repair_F",
+				"C_Van_02_service_F",
+				"C_Van_01_fuel_F",
+				"B_G_Van_01_fuel_F",
+				"B_Truck_01_fuel_F",
+				"B_Truck_01_Repair_F",
+				"B_Truck_01_ammo_F",
+				"O_Truck_03_fuel_F",
+				"O_Truck_03_repair_F",
+				"O_Truck_03_ammo_F",
+				"I_Truck_02_fuel_F",
+				"I_Truck_02_ammo_F",
+				"I_Truck_02_box_F",	
+				"B_APC_Tracked_01_CRV_F",
+				"O_Heli_Transport_04_ammo_F",
+				"O_Heli_Transport_04_repair_F",
+				"O_Heli_Transport_04_fuel_F"
 			] > 0) then	
 			{
 				private _AmmoResourcesMax =
 				[
-						["Box_NATO_AmmoVeh_F",					5000],
-						["Box_EAST_AmmoVeh_F",					5000],
-						["Box_IND_AmmoVeh_F",					5000],
-						["B_Slingload_01_Ammo_F",				30000]
+					["Box_NATO_AmmoVeh_F",						5000],
+					["Box_EAST_AmmoVeh_F",						5000],
+					["Box_IND_AmmoVeh_F",						5000],
+					["B_Slingload_01_Ammo_F",					30000],
+					["B_Truck_01_ammo_F",						25000],
+					["O_Truck_03_ammo_F", 						15000],
+					["I_Truck_02_ammo_F",						10000],
+					["B_APC_Tracked_01_CRV_F",					500],
+					["O_Heli_Transport_04_ammo_F",				20000]
 
 				];
 				private _FuelResourcesMax =
@@ -224,17 +247,49 @@ if (_key != "" && isPlayer _player && {_isGenStore || _isGunStore || _isVehStore
 					["Land_fs_feed_F",							100000],
 					["Land_FuelStation_01_pump_malevil_F",		100000],
 					["Land_FuelStation_Feed_F",					100000],
-					["Land_Pod_Heli_Transport_04_fuel_F",		22000]
+					["Land_Pod_Heli_Transport_04_fuel_F",		22000],
+					["C_Van_01_fuel_F",							1000],
+					["B_G_Van_01_fuel_F",						1000],
+					["B_Truck_01_fuel_F",						25000],
+					["O_Truck_03_fuel_F",						20000],
+					["I_Truck_02_fuel_F",						15000],
+					["B_APC_Tracked_01_CRV_F",					500],
+					["O_Heli_Transport_04_fuel_F",				22000]
 				];
 				private _RepairResourcesMax =
 				[
 					["B_Slingload_01_Repair_F",					25000],
-					["Land_Pod_Heli_Transport_04_repair_F",		22000]
+					["Land_Pod_Heli_Transport_04_repair_F",		22000],
+					["C_Offroad_01_repair_F",					500],
+					["C_Van_02_service_F",						1000],
+					["B_Truck_01_Repair_F",						25000],
+					["O_Truck_03_repair_F",						20000],
+					["I_Truck_02_box_F",						15000],
+					["B_APC_Tracked_01_CRV_F",					500],
+					["O_Heli_Transport_04_repair_F",			22000]
 				];
 				_object setAmmoCargo 0;
 				_object setFuelCargo 0;
 				_object setRepairCargo 0;
 				_object spawn GOM_fnc_addAircraftLoadoutToObject;
+				{
+				if (_class iskindof (_x select 0)) then
+				{
+					_object setVariable ["GOM_fnc_ammoCargo", _x select 1, true];
+				};
+				} foreach _AmmoResourcesMax;
+				{
+				If (_class iskindof (_x select 0)) then
+				{
+					_object setVariable ["GOM_fnc_fuelCargo", _x select 1, true];
+				};
+				} foreach _FuelResourcesMax;
+				{
+				if (_class iskindof (_x select 0)) then
+				{
+					_object setVariable ["GOM_fnc_repairCargo", _x select 1, true];
+				};
+				} foreach _RepairResourcesMax;
 			};
 			if (_skipSave) then
 			{

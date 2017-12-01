@@ -34,47 +34,9 @@ List of commands used by remoteExec:
 	setRepairCargo
 	setFuel
 */
-//config array for mag mass
 
-// GOM_fnc_addAircraftLoadout =
-// {
-// 	params [["_unit",objnull]];
-// 	if (_unit isequalto objnull) exitWith {systemchat "You need to enter a player as parameter"};
-// 	waitUntil {_unit isequalto _unit};
-// 	sleep 1;
-// 	_support = [_unit,"GOM_aircraftLoadoutMenu"] call BIS_fnc_addCommMenuItem;
-// 	_unit setvariable ["GOM_fnc_aircraftLoadoutCommID",_support];
-// 	true
-// };
 
-// GOM_fnc_removeAircraftLoadout =
-// {
-// 	params [["_unit",player]];
-// 	_ID = _unit getvariable ["GOM_fnc_aircraftLoadoutCommID",-1];
-// 	[_unit,_ID] call BIS_fnc_removeCommMenuItem;
-// 	true
-// };
 
-//works on dedi confirmed
-//trigger settings:
-//Type: None
-//Activation: Any Player
-//Present
-//Repeatable, server only
-//condition this
-//onActivation: [thislist] remoteexec ["GOM_fnc_addAircraftLoadoutArea",[0,-2] select isDedicated] //no JIP needed here
-// GOM_fnc_addAircraftLoadoutArea =
-// {
-// 	params ["_thislist"];
-// 	if !(vehicle player in _thislist) exitWith {false};
-// 	if (player isequalto vehicle player) exitWith {false};
-// 	_support = [player,"GOM_aircraftLoadoutMenu"] call BIS_fnc_addCommMenuItem;
-// 	player setvariable ["GOM_fnc_aircraftLoadoutCommID",_support];
-// 	_initpos = getposasl player;
-// 	waituntil {!alive player OR player distance2d _initPos > 30};
-// 	_remove = player spawn GOM_fnc_removeAircraftLoadout;
-// 	true
-// };
 
 GOM_fnc_addAircraftLoadoutToObject =
 {

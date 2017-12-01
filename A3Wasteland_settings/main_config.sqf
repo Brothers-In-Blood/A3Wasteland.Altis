@@ -61,7 +61,7 @@ A3W_atmBounties = 1;											// Enable bounties
 A3W_bountyMax = 5000000;										// Maximum amount of money that can be set as a bounty on someone
 A3W_bountyMinStart = 25000;										// Minimum amount of money to start a bounty on someone
 A3W_bountyRewardPerc = 100;										// Percentage of cost that goes to bounty reward
-A3W_bountyLifetime = 7*24;										// Maximum lifetime in hours for bounty kills to store in DB (storing bounty kills is to prevent from forming groups with someone you collected bounty on)
+A3W_bountyLifetime = 3*24;										// Maximum lifetime in hours for bounty kills to store in DB (storing bounty kills is to prevent from forming groups with someone you collected bounty on)
 
 // Persistence settings
 A3W_savingMethod = "extDB";										// Method used for saving data ("profile", "iniDB", "extDB")
@@ -78,9 +78,9 @@ A3W_staticWeaponSaving = 1;										// Save locked static weapons and their mag
 A3W_warchestSaving = 1;											// Save warchest objects deployed by players between server restarts (0 = no, 1 = yes)
 A3W_warchestMoneySaving = 1;									// Save warchest team money between server restarts (0 = no, 1 = yes)
 A3W_spawnBeaconSaving = 1;										// Save spawn beacons between server restarts (0 = no, 1 = yes)
-A3W_objectLifetime = 10*24;										// Maximum lifetime in hours for saved objects (baseparts, crates, etc. except vehicles) across server restarts (0 = no time limit)
+A3W_objectLifetime = 3*24;										// Maximum lifetime in hours for saved objects (baseparts, crates, etc. except vehicles) across server restarts (0 = no time limit)
 A3W_vehicleLifetime = 0;										// Maximum lifetime in hours for saved vehicles across server restarts, regardless of usage (0 = no time limit)
-A3W_vehicleMaxUnusedTime = 10*24;								// Maximum parking time in hours after which unused saved vehicles will be marked for deletion (0 = no time limit)
+A3W_vehicleMaxUnusedTime = 3*24;								// Maximum parking time in hours after which unused saved vehicles will be marked for deletion (0 = no time limit)
 A3W_serverSavingInterval = 1*60;								// Interval in seconds between automatic vehicle & object saves; should be kept at 1 min for profileNamespace and iniDB, while for extDB it can be relaxed to 3-5 mins
 A3W_mineSaving = 1;												// Save placed mines between server restarts (0 = no, 1 = yes)
 A3W_mineLifetime = 12;											// Maximum lifetime in hours for saved mines across server restarts (0 = no time limit)
@@ -168,5 +168,5 @@ A3W_hostileairMissionDelay = 20*60;								// Time in seconds between hostile ai
 A3W_hostileairMissionTimeout = 30*60;							// Time in seconds that a hostile air will run for, unless completed
 A3W_aquaticMissionDelay = 5*60;									// Time in seconds between aquatic Missions
 A3W_aquaticMissionTimeout = 60*60;								// Time in seconds that a aquatic Mission will run for, unless completed
-A3W_PrimaryMissionDelay = 240*60;								// Time in seconds between Primary Missions  
+A3W_PrimaryMissionDelay = 180*60;								// Time in seconds between Primary Missions  
 A3W_PrimaryMissionTimeout = 240*60;								// Time in seconds that a Primary Mission will run for, unless completed

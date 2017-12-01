@@ -8,7 +8,7 @@ if(mutexScriptInProgress) exitWith {
 	player globalChat "The current operation isn't finished !";
 };
 
-private["_totalDuration", "_checks", "_success"];
+private ["_totalDuration", "_checks", "_success"];
 
 mutexScriptInProgress = true;
 _totalDuration = BoS_coolDownTimer;

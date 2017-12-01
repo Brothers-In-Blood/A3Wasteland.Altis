@@ -1592,38 +1592,6 @@ if(_option isEqualTo 15)exitWith
 		detach _unit;
 	};
 };
-if(_option isEqualTo 16)exitWith
-{
-	if(isNil'EPOCH_WeatherStaticForecast')then{EPOCH_WeatherStaticForecast=[19,1,[1,1,40],1,[5,5]];};
-	_somethingChanged = false;
-	_FOG_VALUE = _array select 2;
-	if(_FOG_VALUE != fog)then
-	{
-		EPOCH_WeatherStaticForecast set [2,_FOG_VALUE];
-		0 setFog _FOG_VALUE;
-	};
-	_OVERCAST_VALUE = _array select 3;
-	if(_OVERCAST_VALUE != overcast)then
-	{
-		EPOCH_WeatherStaticForecast set [3,_OVERCAST_VALUE];
-		0 setOvercast _OVERCAST_VALUE;
-		_somethingChanged = true;
-	};
-	_RAIN_VALUE = _array select 4;
-	if(_RAIN_VALUE != rain)then
-	{
-		EPOCH_WeatherStaticForecast set [1,_RAIN_VALUE];
-		0 setRain _RAIN_VALUE;
-		_somethingChanged = true;
-	};
-	if(_somethingChanged)then{
-		"; if(_MOD == 'Epoch')then{ _A3AHstring = _A3AHstring + "
-		skipTime 1;
-		"; }; _A3AHstring = _A3AHstring + "
-		simulWeatherSync;
-		forceWeatherChange;
-	};
-};
 if(_option isEqualTo 5000)exitWith
 {
 	_select = _array select 2;
@@ -2493,11 +2461,6 @@ _AH_MAIN_BLOCK = {
 				_log = format[''BadCommand: %1'',_txt];
 				[_name,_puid,''BAN'',toArray(_log)] call _AHKickLog;
 				[] call _AHKickOFF;
-			};
-			if(_ltxt find ''admin'' > -1) then
-			{
-				(findDisplay 24) closeDisplay 0;
-				player say3D ''babycry'';
 			};
 		};
 		if(_ltxt in [''killme'',''/killme'',''kill me'',''/kill me'',''/suicide'',''suicide''])then{

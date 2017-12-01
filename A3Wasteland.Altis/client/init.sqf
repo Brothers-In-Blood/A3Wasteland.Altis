@@ -110,9 +110,6 @@ if (count (["config_territory_markers", []] call getPublicVar) > 0) then
 	[] execVM "territory\client\setupCaptureTriggers.sqf";
 };
 
-//Setup player menu scroll action.
-//[] execVM "client\clientEvents\onMouseWheel.sqf";
-
 // Load custom keys from profile
 call compile preprocessFileLineNumbers "client\clientEvents\customKeys.sqf";
 
@@ -180,3 +177,5 @@ inGameUISetEventHandler ["Action", "_this call A3W_fnc_inGameUIActionEvent"];
 		_x setVariable ["side", playerSide, true];
 	};
 } forEach pvar_spawn_beacons;
+
+setTerrainGrid 1;

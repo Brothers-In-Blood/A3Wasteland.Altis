@@ -70,10 +70,7 @@ if (_obj iskindof "Static") then {
 			["bis_disabled_Door_8", 0],
 			["Moveable", false],
 			["Baselockenabled", false],
-			["LockedDown", false],
-			["GOM_fnc_fuelCargo",0],
-			["GOM_fnc_ammoCargo",0],
-			["GOM_fnc_repairCargo",0]
+			["LockedDown", false]
 		];
 };
 
@@ -83,6 +80,7 @@ if (_obj iskindof "thing") then {
 			["Moveable", false],
 			["Baselockenabled", false],
 			["LockedDown", false]
+
 		];
 };
 _r3fSide = _obj getVariable "R3F_Side";
@@ -122,20 +120,41 @@ _ammoCargo = getAmmoCargo _obj;
 _fuelCargo = getFuelCargo _obj;
 _repairCargo = getRepairCargo _obj;
 
-// BASE - SAFE LOCKING Start
+
 switch (true) do
 {
-  case ( {_obj isKindOf _x} count ["Land_Device_assembled_F","Land_SatellitePhone_F"]>0):
-  {
-    { _variables pushBack [_x select 0, _obj getVariable _x] } forEach
-    [
-      ["password", ""],
-      ["lights", ""],
-      ["lockDown", false]
-    ];
-  };
+
+	case ( {_obj isKindOf _x} count ["Land_Device_assembled_F","Land_SatellitePhone_F"]>0):
+	{
+		{ _variables pushBack [_x select 0, _obj getVariable _x] } forEach
+		[
+			["password", ""],
+			["lights", ""],
+			["lockDown", false]
+		];
+	};
+	case ({_obj isKindOf _x} count 
+	[
+		"Box_NATO_AmmoVeh_F",
+		"Box_EAST_AmmoVeh_F",
+		"Box_IND_AmmoVeh_F",
+		"B_Slingload_01_Ammo_F",
+		"B_Slingload_01_Fuel_F",
+		"B_Slingload_01_Medevac_F",
+		"B_Slingload_01_Repair_F",
+		"StorageBladder_01_fuel_forest_F",
+		"StorageBladder_01_fuel_sand_F",
+		"Land_fs_feed_F",
+		"Land_FuelStation_01_pump_malevil_F",
+		"Land_FuelStation_Feed_F",
+		"Land_Pod_Heli_Transport_04_fuel_F",
+		"Land_Pod_Heli_Transport_04_repair_F"
+	]>0):
+	{
+		{ _variables pushBack [_x select 0, _obj getVariable _x] } forEach [["GOM_fnc_repairCargo", nil],["GOM_fnc_fuelCargo", nil],["GOM_fnc_ammoCargo", nil]];
+	}
 };
-//BASE - SAFE LOCKING End
+
 
 // Fix for -1.#IND
 if (isNil "_ammoCargo" || {!finite _ammoCargo}) then { _ammoCargo = 0 };
