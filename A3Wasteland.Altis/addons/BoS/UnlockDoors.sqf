@@ -59,7 +59,7 @@ if (_lockdown) then
 				"Land_i_Stone_Shed_V1_F",
 				"Land_i_Stone_Shed_V3_F",
 				"Wall"
-		], 25];
+		], 35];
 
 	//Objects with Two Doors
 		{
@@ -94,7 +94,7 @@ if (_lockdown) then
 				"Land_i_Stone_HouseSmall_V3_F",
 				"Land_i_Stone_HouseSmall_V1_F",
 				"Land_i_Stone_HouseSmall_V2_F"
-			], 25];
+			], 35];
 
 	//Objects with Three Doors
 		{
@@ -125,7 +125,7 @@ if (_lockdown) then
 				"Land_Cargo_Tower_V2_F",
 				"Land_MilOffices_V1_F",
 				"Land_CarService_F"
-			], 25];
+			], 35];
 
 	//Objects with 4 doors
 		{
@@ -147,7 +147,7 @@ if (_lockdown) then
 				"Land_i_Shop_01_V3_F",
 				"Land_i_Shop_01_V1_F",
 				"Land_i_Shop_01_V2_F"
-			], 25];
+			], 35];
 
 	//Industrial Sheds; because BIS is bad and lazy and it's the only building that doesn't conform to convention
 		{
@@ -164,8 +164,9 @@ if (_lockdown) then
 			_x setVariable ['bis_disabled_Door_5',0,true];
 			_x setVariable ['bis_disabled_Door_6',0,true];
 			_x setVariable ['bis_disabled_Door_8',0,true];
+			_x setVariable ['bis_disabled_Door_8',0,true];
 		} forEach nearestObjects [player,
-			["Land_i_Shed_Ind_F"], 25];
+			["Land_i_Shed_Ind_F"], 35];
 
 
 	//Objects with 8 Doors
@@ -190,7 +191,7 @@ if (_lockdown) then
 				"Land_i_Barracks_V1_F",
 				"Land_i_Barracks_V2_F",
 				"Land_u_Barracks_V2_F"
-			], 25];
+			], 35];
 
 	hint "Doors Locked";
 };

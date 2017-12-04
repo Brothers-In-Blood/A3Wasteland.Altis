@@ -5,7 +5,7 @@
 
 private ["_price", "_playerMoney"];
 
-#define RADIUS 25
+#define RADIUS 35
 _maxLifetime = ["A3W_objectLifetime", 0] call getPublicVar;
 _objects = nearestObjects [position player, ["thingX", "Building", "ReammoBox_F"], RADIUS];
 _ownedObjects = {typeName _x == "OBJECT" && {!(isNil {_x getVariable "ownerUID"})} && {_x getVariable "objectLocked"}} count _objects;

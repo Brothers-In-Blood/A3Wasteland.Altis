@@ -7,7 +7,7 @@
 private _manager = cursorObject;
 private _lockdown = false;
 
-_managers = nearestObjects [ _manager, ["Land_SatellitePhone_F"], 50, true];
+_managers = nearestObjects [ _manager, ["Land_SatellitePhone_F"], 70, true];
 if ( count _managers > 1) then 
 {
 	_getmanagerstatus = [{_x getVariable ["Baselockenabled", false]} foreach _managers];
@@ -27,7 +27,7 @@ if (_lockdown) then
 	hint "Base Underlockdown. Action Aborted";
 } else 
 {
-	_baseobjects = nearestObjects [_manager, ["All"], 25];
+	_baseobjects = nearestObjects [_manager, ["All"], 35];
 	{ _x setVariable ["Moveable", true, true]} foreach _baseobjects;
 	{ _x setVariable ["lockeddown", false, true]} foreach _baseobjects;
 	_manager setvariable ["Baselockenabled", false, true];

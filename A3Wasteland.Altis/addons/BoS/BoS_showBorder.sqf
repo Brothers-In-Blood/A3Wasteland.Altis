@@ -4,7 +4,7 @@
 //	@file Created: 20150217 21:19
 //	@file Info:
 
-#define RADIUS 25
+#define RADIUS 35
 #define AMOUNT 100
 
 

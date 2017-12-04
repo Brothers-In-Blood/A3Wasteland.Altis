@@ -24,6 +24,6 @@
 } forEach nearestObjects [player, [
 	"Static",
 	"Thing"
-], 25];
+], 35];
 
 hint "Lights ON";
