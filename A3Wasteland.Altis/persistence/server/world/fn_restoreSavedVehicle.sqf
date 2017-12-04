@@ -69,7 +69,7 @@ if ({_veh iskindof _x} count
 	] >0)
 then
 {
-	_vehicle spawn GOM_fnc_addAircraftLoadoutToObject;
+	_veh spawn GOM_fnc_addAircraftLoadoutToObject;
 };
 
 
