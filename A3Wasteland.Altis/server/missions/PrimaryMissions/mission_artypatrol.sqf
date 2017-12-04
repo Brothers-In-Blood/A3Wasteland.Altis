@@ -445,6 +445,14 @@ _successExec =
 	_box6 setVariable ["moveable", true, true];
 
 	_successHintMessage = "The patrol has been stopped, the money, crates and vehicles are yours to take.";
+
+	{
+		private _vehicle = _x;
+		if (_x iskindof "B_APC_Tracked_01_CRV_F") then
+		{
+			_vehicle spawn GOM_fnc_addAircraftLoadoutToObject;
+		};
+	} foreach [_veh1, _veh2, _veh3, _veh4, _veh5, _veh6, _veh7, _veh8, _veh9, _veh10];
 };
 
 _this call PrimaryMissionProcessor;
