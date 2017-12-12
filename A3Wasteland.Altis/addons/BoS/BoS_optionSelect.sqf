@@ -1,6 +1,6 @@
 //	@file Version:
 //	@file Name:
-//	@file Author: Cael817
+//	@file Author: Cael817 Edited By: BIB_Monkey
 //	@file Created:
 
 #define BoS_Menu_option 17001
@@ -24,27 +24,22 @@ if (!isNil "_uid") then
 			{
 				case 0: //Turn off all lights
 				{
-					closeDialog 0;
 					execVM "addons\BoS\BoS_lightsOff.sqf";;
 				};
 				case 1: //Turn on all lighs
 				{
-					closeDialog 0;
 					execVM "addons\BoS\BoS_lightsOn.sqf";
 				};
 				case 2: //Lock Doors
 				{
-					closeDialog 0;
 					execVM "addons\Bos\LockDoors.sqf";
 				};
 				Case 3: //Unlock Doors
 				{
-					closeDialog 0;
 					execVM "addons\Bos\UnlockDoors.sqf";
 				};
 				case 4: //Mark Owned Object
 				{
-					closeDialog 0;
 					execVM "addons\BoS\BoS_markOwned.sqf";
 				};
 				case 5: //Show Base Border
@@ -64,10 +59,14 @@ if (!isNil "_uid") then
 				};
 				case 8: //Relock Base Objects
 				{
-					closeDialog 0;
 					execVM "addons\BoS\BoS_reLock.sqf";
 				};
-				case 9: //Change Password
+				case 9: //Resupply Service Objects
+				{
+					closedialog 0;
+					execVM "addons\BoS\ResupplyServiceObjects.sqf";
+				};
+				case 10: //Change Password
 				{
 					closeDialog 0;
 					execVM "addons\Bos\password_change.sqf";

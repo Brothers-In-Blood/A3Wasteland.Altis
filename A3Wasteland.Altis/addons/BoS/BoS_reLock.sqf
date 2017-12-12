@@ -12,7 +12,7 @@ _ownedObjects = {typeName _x == "OBJECT" && {!(isNil {_x getVariable "ownerUID"}
 //_ownedObjects = {typeName _x == "OBJECT" && {_x getVariable ["ownerUID",""] == getPlayerUID player}} count _objects; // Use this if you want only owned objects to be relocked.
 
 _playerMoney = player getVariable "cmoney";
-_price = _ownedObjects * 1;
+_price = _ownedObjects * 500;
 _playerMoney = player getVariable "cmoney";
 
 
@@ -82,6 +82,7 @@ if (!isNil "_price") then
 		_marker setMarkerTextLocal _name;
 	reLockedObjectMapMarkers pushBack _marker;
 	};
+	_x setDamage 0;
 } forEach _objects;
 
 

@@ -4,11 +4,11 @@ Author: BIB_Monkey
 Purpose: Lock exterior doors of base objects within radius of base manager
 */
 
-private _manager = cursorObject;
+private _manager = nearestObject [player, "Land_SatellitePhone_F"];
 private _lockdown = false;
 
 
-private _managers = nearestObjects [ _manager, ["Land_SatellitePhone_F"], 50, true];
+private _managers = nearestObjects [ _manager, ["Land_SatellitePhone_F"], 70, true];
 if ( count _managers > 1) then 
 {
 	private _getmanagerstatus = [{_x getVariable ["Baselockenabled", false]} foreach _managers];

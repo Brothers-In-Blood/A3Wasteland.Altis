@@ -218,7 +218,7 @@ Purpose: Allow players to rearm, repair, refuel, and resupply vehicles. Charges 
 				player globalchat format ["Vehicles Purchase Price was %1", _vehprice];
 			};
 		} forEach (call allVehStoreVehicles + call staticGunsArray);
-		private _RepairCost = ceil (_vehDamage * _vehprice);
+		private _RepairCost = ceil ((_vehDamage * _vehprice)/2);
 		// player globalchat format ["Repair Cost is %1, because the vehicle was %2 damaged", _RepairCost, _vehDamage];
 	//Calculate Rearm Cost
 		//initialize Cost variable

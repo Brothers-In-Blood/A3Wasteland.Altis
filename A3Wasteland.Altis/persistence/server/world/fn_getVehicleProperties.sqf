@@ -153,26 +153,40 @@ if (isNil "_repairCargo" || {!finite _repairCargo}) then { _repairCargo = 0 };
 
 if ({_veh isKindOf _x} count 
 	[
-		"C_Offroad_01_repair_F",
-		"C_Van_02_service_F",
 		"C_Van_01_fuel_F",
 		"B_G_Van_01_fuel_F",
 		"B_Truck_01_fuel_F",
-		"B_Truck_01_Repair_F",
-		"B_Truck_01_ammo_F",
 		"O_Truck_03_fuel_F",
-		"O_Truck_03_repair_F",
-		"O_Truck_03_ammo_F",
 		"I_Truck_02_fuel_F",
-		"I_Truck_02_ammo_F",
-		"I_Truck_02_box_F",	
 		"B_APC_Tracked_01_CRV_F",
-		"O_Heli_Transport_04_ammo_F",
-		"O_Heli_Transport_04_repair_F",
 		"O_Heli_Transport_04_fuel_F"
 	]>0) then
 	{ 
-		{_variables pushBack [_x select 0, _veh getVariable _x]} forEach [["GOM_fnc_repairCargo", nil], ["GOM_fnc_fuelCargo", nil], ["GOM_fnc_ammoCargo", nil]];
+		{_variables pushBack [_x select 0, _veh getVariable _x]} forEach [["GOM_fnc_fuelCargo", 0]];
+	};
+if ({_veh isKindOf _x} count 
+	[
+		"B_Truck_01_ammo_F",
+		"O_Truck_03_ammo_F",
+		"I_Truck_02_ammo_F",
+		"B_APC_Tracked_01_CRV_F",
+		"O_Heli_Transport_04_ammo_F"
+	]>0) then
+	{ 
+		{_variables pushBack [_x select 0, _veh getVariable _x]} forEach [["GOM_fnc_ammoCargo", 0]];
+	};
+if ({_veh isKindOf _x} count 
+	[
+		"C_Offroad_01_repair_F",
+		"C_Van_02_service_F",
+		"B_Truck_01_Repair_F",
+		"O_Truck_03_repair_F",
+		"I_Truck_02_box_F",	
+		"B_APC_Tracked_01_CRV_F",
+		"O_Heli_Transport_04_repair_F"
+	]>0) then
+	{ 
+		{_variables pushBack [_x select 0, _veh getVariable _x]} forEach [["GOM_fnc_repairCargo", 0]];
 	};
 
 

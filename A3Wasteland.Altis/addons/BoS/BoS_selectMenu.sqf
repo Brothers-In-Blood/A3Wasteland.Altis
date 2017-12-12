@@ -3,7 +3,7 @@
 // ******************************************************************************************
 //	@file Version: 1.0
 //	@file Name: BoS_selectMenu.sqf
-//	@file Author: LouD / Cael817 for original script
+//	@file Author: LouD / Cael817 for original script Edited by: BIB_Monkey
 //	@file Description: Baselocker script
 
 #define PLAYER_CONDITION "(vehicle player == player && {!isNull cursorObject})"

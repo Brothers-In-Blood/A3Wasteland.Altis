@@ -553,8 +553,6 @@ else
 		};
 	} forEach entities "CAManBase";
 };
-//Enable Logistics System
-//[] execVM "server/logistics/init.sqf"
 
 //Execute Server Missions.
 if (["A3W_serverMissions"] call isConfigOn) then
@@ -568,3 +566,6 @@ if !(["A3W_hcObjCleanup"] call isConfigOn) then
 	// Start clean-up loop
 	execVM "server\WastelandServClean.sqf";
 };
+
+//Start Weather System
+execVM "server\weather.sqf";

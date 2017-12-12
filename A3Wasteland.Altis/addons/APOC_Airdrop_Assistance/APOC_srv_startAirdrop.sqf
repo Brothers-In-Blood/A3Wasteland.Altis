@@ -245,7 +245,7 @@ playSound3D ["a3\sounds_f\sfx\radio\ambient_radio22.wss",_player,false,getPosASL
 WaitUntil {(((position _object) select 2) < (_flyHeight-20))};
 _heli fire "CMFlareLauncher";
 _objectPosDrop = position _object;
-_para = createVehicle ["B_Parachute_02_F", _objectPosDrop, [], 0, ""];
+_para = createVehicle ["B_Parachute_02_F", _objectPosDrop, [], 0, "NONE"];
 _object attachTo [_para,[0,0,-1.5]];
 
 _smoke1= "SmokeShellGreen" createVehicle getPos _object;

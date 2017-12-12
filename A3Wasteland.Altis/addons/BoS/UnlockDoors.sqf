@@ -4,11 +4,11 @@ Author: BIB_Monkey
 Purpose: unlock exterior doors of base objects within radius of base manager
 */
 
-private _manager = cursorObject;
+private _manager = nearestObject [player, "Land_SatellitePhone_F"];
 private _lockdown = false;
 
 
-private _managers = nearestObjects [ _manager, ["Land_SatellitePhone_F"], 50, true];
+private _managers = nearestObjects [ _manager, ["Land_SatellitePhone_F"], 70, true];
 if ( count _managers > 1) then 
 {
 	private _getmanagerstatus = [{_x getVariable ["Baselockenabled", false]} foreach _managers];
@@ -163,7 +163,7 @@ if (_lockdown) then
 			_x setVariable ['bis_disabled_Door_4',0,true];
 			_x setVariable ['bis_disabled_Door_5',0,true];
 			_x setVariable ['bis_disabled_Door_6',0,true];
-			_x setVariable ['bis_disabled_Door_8',0,true];
+			_x setVariable ['bis_disabled_Door_7',0,true];
 			_x setVariable ['bis_disabled_Door_8',0,true];
 		} forEach nearestObjects [player,
 			["Land_i_Shed_Ind_F"], 35];
@@ -193,5 +193,5 @@ if (_lockdown) then
 				"Land_u_Barracks_V2_F"
 			], 35];
 
-	hint "Doors Locked";
+	hint "Doors unlocked";
 };

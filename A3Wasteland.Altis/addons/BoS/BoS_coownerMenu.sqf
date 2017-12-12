@@ -1,6 +1,7 @@
 //	@file Version:
 //	@file Name:
 //	@file Author: Cael817, all credit to A3W
+// Edited By: BIB Monkey
 //	@file Created:
 
 #define BoS_Menu_option 17001
@@ -21,7 +22,9 @@ if (!isNil "_uid") then
 		"Show Base Border", //5
 		"Lock Down Base", //6
 		"Release Lock Down", //7
-		"Relock Base Objects" ///8
+		"Relock Base Objects", //8
+		"Resupply"//9
+
 	];
 	{
 		_BoS_select lbAdd _x;

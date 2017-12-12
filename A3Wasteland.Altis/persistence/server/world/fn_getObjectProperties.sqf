@@ -133,26 +133,18 @@ switch (true) do
 			["lockDown", false]
 		];
 	};
-	case ({_obj isKindOf _x} count 
-	[
-		"Box_NATO_AmmoVeh_F",
-		"Box_EAST_AmmoVeh_F",
-		"Box_IND_AmmoVeh_F",
-		"B_Slingload_01_Ammo_F",
-		"B_Slingload_01_Fuel_F",
-		"B_Slingload_01_Medevac_F",
-		"B_Slingload_01_Repair_F",
-		"StorageBladder_01_fuel_forest_F",
-		"StorageBladder_01_fuel_sand_F",
-		"Land_fs_feed_F",
-		"Land_FuelStation_01_pump_malevil_F",
-		"Land_FuelStation_Feed_F",
-		"Land_Pod_Heli_Transport_04_fuel_F",
-		"Land_Pod_Heli_Transport_04_repair_F"
-	]>0):
+	case ({_obj isKindOf _x} count ["Box_NATO_AmmoVeh_F", "Box_EAST_AmmoVeh_F", "Box_IND_AmmoVeh_F", "B_Slingload_01_Ammo_F" ]>0):
 	{
-		{ _variables pushBack [_x select 0, _obj getVariable _x] } forEach [["GOM_fnc_repairCargo", nil],["GOM_fnc_fuelCargo", nil],["GOM_fnc_ammoCargo", nil]];
-	}
+		{ _variables pushBack [_x select 0, _obj getVariable _x] } forEach [["GOM_fnc_ammoCargo", 0]];
+	};
+	case ({_obj isKindOf _x} count  ["B_Slingload_01_Repair_F", "Land_Pod_Heli_Transport_04_repair_F"]>0):
+	{
+		{ _variables pushBack [_x select 0, _obj getVariable _x] } forEach [["GOM_fnc_repairCargo", 0]];
+	};
+	case ({_obj isKindOf _x} count ["StorageBladder_01_fuel_forest_F", "StorageBladder_01_fuel_sand_F", "Land_fs_feed_F", "Land_FuelStation_01_pump_malevil_F", "Land_FuelStation_Feed_F", "Land_Pod_Heli_Transport_04_fuel_F"]>0):
+	{
+		{ _variables pushBack [_x select 0, _obj getVariable _x] } forEach [["GOMfnc_fuelCargo", 0]];
+	};
 };
 
 

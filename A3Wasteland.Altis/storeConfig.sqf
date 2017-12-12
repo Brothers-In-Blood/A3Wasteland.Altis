@@ -205,7 +205,7 @@ throwputArray = compileFinal str
 [
 
 	["APERS Bounding Mine",													"APERSBoundingMine_Range_Mag",												250],
-	["APERS Dispenser",														"APERSMineDispenser_Mag",													50],
+	["APERS Dispenser",														"APERSMineDispenser_Mag",													5000],
 	["APERS Mine",															"APERSMine_Range_Mag",														300],
 	["APERS Tripwire Mine",													"APERSTripMine_Wire_Mag",													200],
 	["AT Mine",																"ATMine_Range_Mag",															400],
@@ -288,9 +288,9 @@ ammoArray = compileFinal str
 	["RPG-42 Anti-Tank Rocket",												"RPG32_F",																	250],		// Direct damage: high			| Splash damage: low		| Guidance: none
 	["RPG-42 High-Explosive Rocket",										"RPG32_HE_F",																250],		// Direct damage: medium		| Splash damage: medium | Guidance: none
 	["PCML Anti-Tank Missile",												"NLAW_F",																	1200],		// Direct damage: very high | Splash damage: low		| Guidance: laser,ground vehicles
-	["Titan Anti-Tank Missile",												"Titan_AT",																	5000],		// Direct damage: high			| Splash damage: low		| Guidance: mouse,laser,ground vehicles
+	["Titan Anti-Tank Missile",												"Titan_AT",																	12500],		// Direct damage: high			| Splash damage: low		| Guidance: mouse,laser,ground vehicles
 	["Titan Anti-Personnel Missile",										"Titan_AP",																	10000],		// Direct damage: low			 | Splash damage: high	 | Guidance: mouse,laser
-	["Titan Anti-Air Missile",												"Titan_AA",																	7000],		// Direct damage: low			 | Splash damage: medium | Guidance: aircraft
+	["Titan Anti-Air Missile",												"Titan_AA",																	15000],		// Direct damage: low			 | Splash damage: medium | Guidance: aircraft
 	["40mm HE Grenade Round",												"1Rnd_HE_Grenade_shell",													125],
 	["40mm 3Rnd HE Grenades",												"3Rnd_HE_Grenade_shell",													250],
 	["40mm Smoke Round (White)",											"1Rnd_Smoke_Grenade_shell",													50],
@@ -1290,7 +1290,6 @@ ObjectsArray = compileFinal str
 	// ["Berm,Small (Green)",																		"ContainmentArea_02_forest_F",													300],
 	// ["Concrete Block",																			"BlockConcrete_F",																			1000],
 	// ["Concrete Pipe",																			"Land_ConcretePipe_F",																	500],
-	// ["Container,Cargo",																			"B_Slingload_01_Cargo_F",															5000],
 	// ["Counter,Retail with Cash Register",														"Land_CashDesk_F",																			300],
 	// ["Counter,Wood (Slum)",																		"Land_WoodenCounter_01_F",															20],
 	// ["Curb,Concrete",																			"Land_Obstacle_Saddle_F",															50],
@@ -1447,14 +1446,15 @@ ServiceObjectsArray = compileFinal str
 	["Sling Boxes (NATO)",																		"B_CargoNet_01_ammo_F",								10000],
 	["Support Crate",																			"Box_NATO_Support_F",								100],
 	["Taru Pod (Transport)",																	"Land_Pod_Heli_Transport_04_box_F",					1000],
+	["Container,Cargo",																			"B_Slingload_01_Cargo_F",							5000],
 	["Container,Fuel",																			"B_Slingload_01_Fuel_F",							150000],
 	["Container,Medical",																		"B_Slingload_01_Medevac_F",							2000],
 	["Container,Repair",																		"B_Slingload_01_Repair_F",							300000],
-	["Fuel Bladder (Green)",																	"StorageBladder_01_fuel_forest_F",					800000],
-	["Fuel Bladder (Brown)",																	"StorageBladder_01_fuel_sand_F",					800000],
-	["Fuel Pump",																				"Land_fs_feed_F",									502500],
-	["Fuel Pump (Malden)",																		"Land_FuelStation_01_pump_malevil_F",				502500],
-	["Fuel Pump (Sun Oil)",																		"Land_FuelStation_Feed_F",							502500],
+	// ["Fuel Bladder (Green)",																	"StorageBladder_01_fuel_forest_F",					800000],
+	// ["Fuel Bladder (Brown)",																	"StorageBladder_01_fuel_sand_F",					800000],
+	// ["Fuel Pump",																				"Land_fs_feed_F",									502500],
+	// ["Fuel Pump (Malden)",																		"Land_FuelStation_01_pump_malevil_F",				502500],
+	// ["Fuel Pump (Sun Oil)",																		"Land_FuelStation_Feed_F",							502500],
 	["Taru Pod (Fuel)",																			"Land_Pod_Heli_Transport_04_fuel_F",				115000],
 	["Taru Pod (Repair)",																		"Land_Pod_Heli_Transport_04_repair_F",				225000]
 ];
@@ -2038,7 +2038,6 @@ colorsArray = compileFinal str
 //Display Name,Class Name,Description,Picture,Buy Price,Sell Price.
 customPlayerItems = compileFinal str
 [
-	//["Vehicle Pinlock","pinlock",localize "STR_WL_ShopDescriptions_Pinlock","client\icons\keypad.paa",1000,500],
 	["Jerry Can (Full)","jerrycanfull",localize "STR_WL_ShopDescriptions_fuelFull","client\icons\jerrycan.paa",150,75],
 	["Jerry Can (Empty)","jerrycanempty",localize "STR_WL_ShopDescriptions_fuelEmpty","client\icons\jerrycan.paa",50,25],
 	["Camo Net","camonet",localize "STR_WL_ShopDescriptions_Camo","client\icons\camonet.paa",200,100],

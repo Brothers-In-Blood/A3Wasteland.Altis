@@ -122,9 +122,8 @@ if (_key != "" && isPlayer _player && {_isGenStore || _isGunStore || _isVehStore
 				};
 			} forEach nearestObjects [_spawnPosAGL, ["LandVehicle","Air","Ship"], 25 max sizeOf _class];
 			if (_player getVariable [_timeoutKey, true]) then { breakOut "spawnStoreObject" }; // Timeout
-			_object = createVehicle [_class, _safePos, [], 0, ""];
+			_object = createVehicle [_class, _safePos, [], 0, "NONE"];
 			_object setVariable ["moveable", true, true];
-			private _class = typeof _object;
 			if (_waterNonBoat) then
 			{
 				private _posSurf = getPos _object;
@@ -273,22 +272,28 @@ if (_key != "" && isPlayer _player && {_isGenStore || _isGunStore || _isVehStore
 				_object setRepairCargo 0;
 				_object spawn GOM_fnc_addAircraftLoadoutToObject;
 				{
-				if (_class iskindof (_x select 0)) then
-				{
-					_object setVariable ["GOM_fnc_ammoCargo", _x select 1, true];
-				};
+					private _check = _x select 0;
+					private _value = _x select 1;
+					if (_object iskindof _check) then
+					{
+						_object setVariable ["GOM_fnc_ammoCargo", _value, true];
+					};
 				} foreach _AmmoResourcesMax;
 				{
-				If (_class iskindof (_x select 0)) then
-				{
-					_object setVariable ["GOM_fnc_fuelCargo", _x select 1, true];
-				};
+					private _check = _x select 0;
+					private _value = _x select 1;
+					if (_object iskindof _check) then
+					{
+						_object setVariable ["GOM_fnc_fuelCargo", _value, true];
+					};
 				} foreach _FuelResourcesMax;
 				{
-				if (_class iskindof (_x select 0)) then
-				{
-					_object setVariable ["GOM_fnc_repairCargo", _x select 1, true];
-				};
+					private _check = _x select 0;
+					private _value = _x select 1;
+					if (_object iskindof _check) then
+					{
+						_object setVariable ["GOM_fnc_repairCargo", _value, true];
+					};
 				} foreach _RepairResourcesMax;
 			};
 			if (_skipSave) then
