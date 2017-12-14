@@ -1,7 +1,7 @@
 /*
 file Name: A3Wasteland_settings\admins.sqf
 Author: BIB_Monkey
-Purpose: Define serer backers for ingame perks
+Purpose: Define server backers for ingame perks
 */
 
 // Level 1 backers
@@ -31,7 +31,7 @@ level4 =
 //Level 5 backers, Custom Uniforms
 level5 =
 [
-	// ["Player UID", "CustomUniformName"]
+
 ];
 
 //Level 6 backers
