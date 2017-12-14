@@ -13,7 +13,7 @@ private _isUAV = (round getNumber (configFile >> "CfgVehicles" >> _class >> "isU
 private ([["_flying"],[]] select isNil "_flying");
 _flying = (!isNil "_flying" && {_flying > 0});
 
-private _special = ["","FLY"] select (_isUAV && _flying);
+private _special = ["NONE","FLY"] select (_isUAV && _flying);
 private _tempPos = +_pos;
 
 if (isNil "_safeDistance" && _special == "") then
