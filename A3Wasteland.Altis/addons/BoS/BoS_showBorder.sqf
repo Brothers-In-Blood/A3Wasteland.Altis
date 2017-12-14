@@ -4,18 +4,41 @@
 //	@file Created: 20150217 21:19
 //	@file Info:
 
-#define RADIUS 35
 #define AMOUNT 100
 
 
 _target = cursorObject;
 _target_pos = getPos _target;
+//Get manager level
+private _ManagerLevel = _target getVariable ["ManagerLevel", 1];
+//set default base radius for level 1 manager
+private _BaseRadius = 10;
+//set base radius based on manager level
+switch (_ManagerLevel) do
+{
+	case (2):
+	{
+		_BaseRadius = 20;
+	};
+	case (3):
+	{
+		_BaseRadius = 30;
+	};
+	case (4):
+	{
+		_BaseRadius = 40;
+	};
+	case (5):
+	{
+		_BaseRadius = 50;
+	};
+};
 
 //hint format["%1", _target_pos];
 
 if (isNil "borderObjects") then {
     borderObjects = [];
-    _rad = RADIUS;
+    _rad = _BaseRadius;
     _bcount = AMOUNT;
     _inc = 360/_bcount; 
     for "_ang" from 1 to 360 step _inc do {
@@ -27,7 +50,7 @@ if (isNil "borderObjects") then {
 		borderObjects pushBack _light;
     };
 	//["Added Markers around the base radius (30m) they will be removed in 30 seconds", 5] call mf_notify_client;
-	[format ["Added Markers around the base radius (%1m) they will be removed in 30 seconds",RADIUS], 5] call mf_notify_client;	
+	[format ["Added Markers around the base radius (%1m) they will be removed in 30 seconds",_BaseRadius], 5] call mf_notify_client;	
 };
 
 sleep 30;
