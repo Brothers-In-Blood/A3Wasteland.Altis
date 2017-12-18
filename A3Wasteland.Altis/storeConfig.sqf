@@ -139,19 +139,19 @@ lmgArray = compileFinal str
 	["CAR-95-1 LMG",														"arifle_CTARS_blk_F",														300],
 	["LIM-85 LMG",															"LMG_03_F",																	350],
 
-	["SPMG MMG (Sand)",														"MMG_02_sand_F",															750],
-	["SPMG MMG (MTP)",														"MMG_02_camo_F",															750],
-	["SPMG MMG (Black)",													"MMG_02_black_F",															750],
-	["Navid MMG (Tan)",														"MMG_01_tan_F",																1000],
-	["Navid MMG (Hex)",														"MMG_01_hex_F",																1000]
+	["SPMG MMG (Sand)",														"MMG_02_sand_F",															1500],
+	["SPMG MMG (MTP)",														"MMG_02_camo_F",															1500],
+	["SPMG MMG (Black)",													"MMG_02_black_F",															1500],
+	["Navid MMG (Tan)",														"MMG_01_tan_F",																2500],
+	["Navid MMG (Hex)",														"MMG_01_hex_F",																2500]
 ];
 
 launcherArray = compileFinal str
 [
-	["RPG-7",																"launch_RPG7_F",															350],
-	["RPG-42 Alamut",														"launch_RPG32_F",															400],
-	["RPG-42 Alamut (G Hex)",												"launch_RPG32_ghex_F",														400,					"noDLC"],
-	["PCML",																"launch_NLAW_F",															600],
+	["RPG-7",																"launch_RPG7_F",															700],
+	["RPG-42 Alamut",														"launch_RPG32_F",															800],
+	["RPG-42 Alamut (G Hex)",												"launch_RPG32_ghex_F",														800,					"noDLC"],
+	["PCML",																"launch_NLAW_F",															1200],
 	["Titan MPRL Compact (Sand)",											"launch_Titan_short_F",														4500],
 	["Titan MPRL Compact (Coyote)",											"launch_O_Titan_short_F",													4500],
 	["Titan MPRL Compact (Olive)",											"launch_I_Titan_short_F",													4500],
@@ -171,7 +171,7 @@ staticGunsArray = compileFinal str
 	["Vehicle Ammo Crate (NATO)",											"Box_NATO_AmmoVeh_F",														300000],
 	["Vehicle Ammo Crate (NATO)",											"Box_EAST_AmmoVeh_F",														300000],
 	["Vehicle Ammo Crate (AAF)",											"Box_IND_AmmoVeh_F",														300000],
-	["Ammo Container",														"B_Slingload_01_Ammo_F",													1575000],
+	["Ammo Container",														"B_Slingload_01_Ammo_F",													787500],
 	["Explosives Crate(Empty)",												"Box_NATO_AmmoOrd_F",														100],
 	["Ammo Crate (Empty)",													"Box_NATO_Ammo_F",															100],
 	["Granade Crate (Empty)",												"Box_NATO_Grenades_F",														100],
@@ -180,7 +180,7 @@ staticGunsArray = compileFinal str
 	["Weapon Crate (Empty)",												"Box_NATO_Wps_F",															100],
 	["Static Titan AT 4Rnd (NATO)",											"B_static_AT_F",															20000],
 	["Static Titan AT 4Rnd (CSAT)",											"O_static_AT_F",															20000],
-	["Static Titan AT 4Rnd (AAF)",											"I_static_AT_F",															2000],
+	["Static Titan AT 4Rnd (AAF)",											"I_static_AT_F",															20000],
 	["Static Titan AA 4Rnd (NATO)",											"B_static_AA_F",															25000],
 	["Static Titan AA 4Rnd (CSAT)",											"O_static_AA_F",															25000],
 	["Static Titan AA 4Rnd (AAF)",											"I_static_AA_F",															25000],
@@ -205,7 +205,7 @@ throwputArray = compileFinal str
 [
 
 	["APERS Bounding Mine",													"APERSBoundingMine_Range_Mag",												250],
-	["APERS Dispenser",														"APERSMineDispenser_Mag",													5000],
+	["APERS Dispenser",														"APERSMineDispenser_Mag",													15000],
 	["APERS Mine",															"APERSMine_Range_Mag",														300],
 	["APERS Tripwire Mine",													"APERSTripMine_Wire_Mag",													200],
 	["AT Mine",																"ATMine_Range_Mag",															400],
@@ -276,23 +276,23 @@ ammoArray = compileFinal str
 	["7.62mm 150Rnd Box",													"150Rnd_762x54_Box",														150],
 	["7.62mm 150Rnd Tracer (Green) Box",									"150Rnd_762x54_Box_Tracer",													125],
 	[".338 LM 10Rnd Mag",													"10Rnd_338_Mag",															50],
-	[".338 NM 130Rnd Belt",													"130Rnd_338_Mag",															150],
+	[".338 NM 130Rnd Belt",													"130Rnd_338_Mag",															300],
 	["9.3mm 10Rnd Mag",														"10Rnd_93x64_DMR_05_Mag",													50],
-	["9.3mm 150Rnd Belt",													"150Rnd_93x64_Mag",															150],
+	["9.3mm 150Rnd Belt",													"150Rnd_93x64_Mag",															300],
 	[".408 7Rnd Cheetah Mag",												"7Rnd_408_Mag",																50],
 	["12.7mm 5Rnd Mag",														"5Rnd_127x108_Mag",															50],
 	["12.7mm 5Rnd Armor-Piercing Mag",										"5Rnd_127x108_APDS_Mag",													60],
 	["12.7mm 10Rnd Subsonic Mag",											"10Rnd_127x54_Mag",															75],
 	[".50 BW 10Rnd Mag",													"10Rnd_50BW_Mag_F",															50],
-	["PG-7VM HEAT Grenade",													"RPG7_F",																	200],		// Direct damage: medium		| Splash damage: low		| Guidance: none
+	["PG-7VM HEAT Grenade",													"RPG7_F",																	250],		// Direct damage: medium		| Splash damage: low		| Guidance: none
 	["RPG-42 Anti-Tank Rocket",												"RPG32_F",																	250],		// Direct damage: high			| Splash damage: low		| Guidance: none
 	["RPG-42 High-Explosive Rocket",										"RPG32_HE_F",																250],		// Direct damage: medium		| Splash damage: medium | Guidance: none
 	["PCML Anti-Tank Missile",												"NLAW_F",																	1200],		// Direct damage: very high | Splash damage: low		| Guidance: laser,ground vehicles
 	["Titan Anti-Tank Missile",												"Titan_AT",																	12500],		// Direct damage: high			| Splash damage: low		| Guidance: mouse,laser,ground vehicles
 	["Titan Anti-Personnel Missile",										"Titan_AP",																	10000],		// Direct damage: low			 | Splash damage: high	 | Guidance: mouse,laser
 	["Titan Anti-Air Missile",												"Titan_AA",																	15000],		// Direct damage: low			 | Splash damage: medium | Guidance: aircraft
-	["40mm HE Grenade Round",												"1Rnd_HE_Grenade_shell",													125],
-	["40mm 3Rnd HE Grenades",												"3Rnd_HE_Grenade_shell",													250],
+	["40mm HE Grenade Round",												"1Rnd_HE_Grenade_shell",													250],
+	["40mm 3Rnd HE Grenades",												"3Rnd_HE_Grenade_shell",													500],
 	["40mm Smoke Round (White)",											"1Rnd_Smoke_Grenade_shell",													50],
 	["40mm Smoke Round (Purple)",											"1Rnd_SmokePurple_Grenade_shell",											50],
 	["40mm Smoke Round (Blue)",												"1Rnd_SmokeBlue_Grenade_shell",												50],
@@ -390,9 +390,9 @@ accessoriesArray = compileFinal str
 	["LRPS (G Hex)",														"optic_LRPS_ghex_F",														300,							"item"],
 	["LRPS (Tropic)",														"optic_LRPS_tna_F",															300,							"item"],
 	["NVS",																	"optic_NVS",																500,							"item"],
-	["TWS",																	"optic_tws",																5000,							"item"],// To hide from store list,add "HIDDEN" after "item",like "item","HIDDEN"
-	["TWS MG",																"optic_tws_mg",																6000,							"item"],
-	["Nightstalker",														"optic_Nightstalker",														5000,							"item"]
+	["TWS",																	"optic_tws",																10000,							"item"],// To hide from store list,add "HIDDEN" after "item",like "item","HIDDEN"
+	["TWS MG",																"optic_tws_mg",																10000,							"item"],
+	["Nightstalker",														"optic_Nightstalker",														10000,							"item"]
 ];
 
 // If commented,means the color/camo isn't implemented or is a duplicate of another hat
@@ -1526,7 +1526,7 @@ landArray = compileFinal str
 	["HEMTT Fuel",																"B_Truck_01_fuel_F",												130000,						"vehicle"],
 	["HEMTT Medical",															"B_Truck_01_medical_F",												10000,						"vehicle"],
 	["HEMTT Repair",															"B_Truck_01_Repair_F",												255000,						"vehicle"],
-	["HEMTT Ammo",																"B_Truck_01_ammo_F",												1255000,					"vehicle"],
+	["HEMTT Ammo",																"B_Truck_01_ammo_F",												625000,					"vehicle"],
 	["Base Cracker",															"O_Truck_03_device_F",												1000000,					"vehicle"],
 	["Tempest Transport",														"O_Truck_03_transport_F",											6000,						"vehicle"],
 	["Tempest Covered",															"O_Truck_03_covered_F",												7500,						"vehicle"],
@@ -1583,9 +1583,9 @@ tanksArray = compileFinal str
 	["M2A4 Slammer HMG",														"B_MBT_01_TUSK_F",													130000,					"vehicle"],						// Commander gun variant
 	["T-100 Varsuk",															"O_MBT_02_cannon_F",												140000,					"vehicle"],
 	["MBT-52 Kuma",																"I_MBT_03_cannon_F",												150000,					"vehicle"],
-	["CRV-6e Bobcat",															"B_APC_Tracked_01_CRV_F",											5000000,					"vehicle"],
-	["M4 Scorcher",																"B_MBT_01_arty_F",													3500000,					"vehicle"],
-	["M5 Sandstorm MLRS",														"B_MBT_01_mlrs_F",													5000000,					"vehicle"]
+	["CRV-6e Bobcat",															"B_APC_Tracked_01_CRV_F",											1000000,					"vehicle"],
+	["M4 Scorcher",																"B_MBT_01_arty_F",													1000000,					"vehicle"],
+	["M5 Sandstorm MLRS",														"B_MBT_01_mlrs_F",													1000000,					"vehicle"]
 ];
 
 
@@ -1614,8 +1614,8 @@ helicoptersArray = compileFinal str
 	["Mi-290 Taru (Bench) [DLC]",												"O_Heli_Transport_04_bench_F",										9000,						"vehicle"],
 	["Mi-290 Taru (Transport) [DLC]",											"O_Heli_Transport_04_covered_F",									9500,						"vehicle"],
 	["Mi-290 Taru (Medical) [DLC]",												"O_Heli_Transport_04_medevac_F",									12500,						"vehicle"],
-	["Mi-48 Kajman",															"O_Heli_Attack_02_dynamicLoadout_F",								550000,						"vehicle"],
-	["MQ-12 Falcon",															"B_T_UAV_03_dynamicLoadout_F",										1575000,					"vehicle"],
+	["Mi-48 Kajman",															"O_Heli_Attack_02_dynamicLoadout_F",								300000,						"vehicle"],
+	["MQ-12 Falcon",															"B_T_UAV_03_dynamicLoadout_F",										350000,					"vehicle"],
 	["PO-30 Orca (Unarmed)",													"O_Heli_Light_02_dynamicLoadout_F",									30000,						"vehicle",						"variant_orcaUnArm"],
 	["PO-30 Orca (Unarmed)",													"O_Heli_Light_02_dynamicLoadout_F",									6000,						"vehicle",						"variant_orcaUnArm"],
 	["PO-30 Orca (6.5mm + DAGR)",												"O_Heli_Light_02_dynamicLoadout_F",									75000,						"vehicle",						"variant_orcaGUNDAGR"],
@@ -1634,31 +1634,31 @@ helicoptersArray = compileFinal str
 planesArray = compileFinal str
 [
 	["A-143 Buzzard",															"I_Plane_Fighter_03_dynamicLoadout_F",								390000,						"vehicle"],
-	["A-149 Gryphon",															"I_Plane_Fighter_04_F",												690000,						"vehicle"],
-	["A-164 Wipeout",															"B_Plane_CAS_01_dynamicLoadout_F",									1000000,					"vehicle"],
+	["A-149 Gryphon",															"I_Plane_Fighter_04_F",												400000,						"vehicle"],
+	["A-164 Wipeout",															"B_Plane_CAS_01_dynamicLoadout_F",									450000,					"vehicle"],
 	["Caesar BTT",																"C_Plane_Civil_01_F",												3000,						"vehicle"],
 	["Ceasar BTT (racing)",														"C_Plane_Civil_01_Racing_F",										3000,						"vehicle"],
-	["F/A-181 Black Wasp II (Stealth)",											"B_Plane_Fighter_01_Stealth_F",										1750000,					"vehicle"],
-	["F/A-181 Black Wasp II",													"B_Plane_Fighter_01_F",												1500000,					"vehicle"],
+	["F/A-181 Black Wasp II (Stealth)",											"B_Plane_Fighter_01_Stealth_F",										500000,					"vehicle"],
+	["F/A-181 Black Wasp II",													"B_Plane_Fighter_01_F",												550000,					"vehicle"],
 	["K40 Ababil-3 UAV (Unarmed)",												"O_UAV_02_F",														25000,						"vehicle"],
 	["K40 Ababil-3 UAV (Bomber)",												"I_UAV_02_dynamicLoadout_F",										250000,						"vehicle",						"variant_greyhawkBomber"],
-	["K40 Ababil-3 UAV (Missiles)",												"O_UAV_02_dynamicLoadout_F",										1700000,					"vehicle",						"variant_greyhawkMissile"],
+	["K40 Ababil-3 UAV (Missiles)",												"O_UAV_02_dynamicLoadout_F",										450000,					"vehicle",						"variant_greyhawkMissile"],
 	["K40 Ababil-3 UAV (Unarmed)",												"I_UAV_02_F",														25000,						"vehicle"],
 	["K40 Ababil-3 UAV (Bomber)",												"O_UAV_02_dynamicLoadout_F",										250000,						"vehicle",						"variant_greyhawkBomber"],
-	["K40 Ababil-3 UAV (Missiles)",												"I_UAV_02_dynamicLoadout_F",										1700000,					"vehicle",						"variant_greyhawkMissile"],
-	["KH-3A Fenghuang",															"O_T_UAV_04_CAS_F",													575000,						"vehicle"],
+	["K40 Ababil-3 UAV (Missiles)",												"I_UAV_02_dynamicLoadout_F",										425000,					"vehicle",						"variant_greyhawkMissile"],
+	["KH-3A Fenghuang",															"O_T_UAV_04_CAS_F",													375000,						"vehicle"],
 	["MQ4A Greyhawk UAV (Unarmed)",												"B_UAV_02_F",														25000,						"vehicle"],
 	["MQ4A Greyhawk UAV (Bomber)",												"B_UAV_02_dynamicLoadout_F",										250000,						"vehicle",						"variant_greyhawkBomber"],// Bomber UAVs are a lot harder to use,hence why they are cheaper than Missile ones
-	["MQ4A Greyhawk UAV (Missiles)",											"B_UAV_02_dynamicLoadout_F",										1700000,					"vehicle",						"variant_greyhawkMissile"],
-	["To-199 Neophron CAS",														"O_Plane_CAS_02_dynamicLoadout_F",									1000000,					"vehicle"],
-	["To-201 Shikra",															"O_Plane_Fighter_02_F",												1500000,					"vehicle"],
-	["To-201 Shikra (Stealth)",													"O_Plane_Fighter_02_Stealth_F",										1750000,					"vehicle"],
+	["MQ4A Greyhawk UAV (Missiles)",											"B_UAV_02_dynamicLoadout_F",										425000,					"vehicle",						"variant_greyhawkMissile"],
+	["To-199 Neophron CAS",														"O_Plane_CAS_02_dynamicLoadout_F",									450000,					"vehicle"],
+	["To-201 Shikra",															"O_Plane_Fighter_02_F",												550000,					"vehicle"],
+	["To-201 Shikra (Stealth)",													"O_Plane_Fighter_02_Stealth_F",										500000,					"vehicle"],
 	["UCAV Sentinel",															"B_UAV_05_F",														400000,						"vehicle"],
 	["V-44 X Blackfish (Vehicle Transport)",									"B_T_VTOL_01_vehicle_F",											30000,						"vehicle"],
 	["V-44 X Blackfish (Infrantry Transport)",									"B_T_VTOL_01_infantry_F",											20000,						"vehicle"],
-	["V-44 X Blackfish (Armed)",												"B_T_VTOL_01_armed_F",												700000,						"vehicle"],
-	["Y-32 Xi'an (Vehicle Transport)",											"O_T_VTOL_02_vehicle_F",											750000,						"vehicle"],
-	["Y-32 Xi'an (Infrantry Transport)",										"O_T_VTOL_02_infantry_F",											750000,						"vehicle"]
+	["V-44 X Blackfish (Armed)",												"B_T_VTOL_01_armed_F",												400000,						"vehicle"],
+	["Y-32 Xi'an (Vehicle Transport)",											"O_T_VTOL_02_vehicle_F",											350000,						"vehicle"],
+	["Y-32 Xi'an (Infrantry Transport)",										"O_T_VTOL_02_infantry_F",											350000,						"vehicle"]
 ];
 
 boatsArray = compileFinal str
