@@ -12,7 +12,8 @@
 // 4 - Territory category, currently unused. See territory/README.md for details.
 
 [
-	["TERRITORY_MilHillBase", "Military Hill", 5000, "CITY"],
-	["TERRITORY_MilHillFactory", "Military Hill Factory", 5000, "CITY"],
-	["TERRITORY_MILHIllSouth", "Military Hill Barracks", 5000, "CITY"]
+	["TERRITORY_MilHillBase", "Military Hill", 1000, "CITY"],
+	["TERRITORY_MilHillFactory", "Military Hill Factory", 1000, "CITY"],
+	["TERRITORY_MILHIllSouth", "Military Hill Barracks", 1000, "CITY"],
+	["FLAG_MILHILL"]
 ]

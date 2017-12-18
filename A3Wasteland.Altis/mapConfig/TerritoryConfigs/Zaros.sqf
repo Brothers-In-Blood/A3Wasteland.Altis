@@ -12,7 +12,8 @@
 // 4 - Territory category, currently unused. See territory/README.md for details.
 
 [
-	["TERRITORY_ZarosNorth", "Zaros North", 5000, "CITY"],
-	["TERRITORY_ZarosSouth", "Zaros South", 5000, "CITY"],
-	["TERRITORY_ZarosRiga", "Riga", 5000, "CITY"]
+	["TERRITORY_ZarosNorth", "Zaros North", 1000, "CITY"],
+	["TERRITORY_ZarosSouth", "Zaros South", 1000, "CITY"],
+	["TERRITORY_ZarosRiga", "Riga", 1000, "CITY"],
+	["FLAG_ZAROS"]
 ]

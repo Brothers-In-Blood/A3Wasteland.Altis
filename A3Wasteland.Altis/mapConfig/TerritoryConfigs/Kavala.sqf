@@ -12,7 +12,8 @@
 // 4 - Territory category, currently unused. See territory/README.md for details.
 
 [
-	["TERRITORY_KavalaCastle", "Kavala Castle", 5000, "CITY"],
-	["TERRITORY_KavalaPeir", "Kavala Peir", 5000, "CITY"],
-	["TERRITORY_KavalaSquare", "Kavala", 5000, "CITY"]
+	["TERRITORY_KavalaCastle", "Kavala Castle", 1000, "CITY"],
+	["TERRITORY_KavalaPeir", "Kavala Peir", 1000, "CITY"],
+	["TERRITORY_KavalaSquare", "Kavala", 1000, "CITY"],
+	["FLAG_KAVALA"]
 ]

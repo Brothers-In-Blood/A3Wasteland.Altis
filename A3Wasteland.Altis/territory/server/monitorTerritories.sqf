@@ -215,12 +215,12 @@ _teamCountsForPlayerArray =
 {
 	//diag_log format["_teamCountsForPlayerArray called with %1", _this];
 
-	private ["_players", "_teamCounts", "_contested", "_dominantTeam", "_added", "_playerTeam", "_team1", "_team1count", "_team2count"];
+	private ["_players", "_teamCounts", "_contested", "_dominantTeam", "_added", "_playerTeam", "_TopTeam", "_TopTeamcount", "_team2count"];
 	_players = _this select 0;
 
 	_teamCounts = [];
 
-	_contested = false; // true if there are more than one team present
+	_contested = false; 
 	_dominantTeam = sideUnknown;
 
 	if (count _players > 0) then
@@ -242,27 +242,54 @@ _teamCountsForPlayerArray =
 				[_teamCounts, [_playerTeam, 1]] call BIS_fnc_arrayPush;
 			};
 		} forEach _players;
-
+		_TeamCountNumbers = [];
+		_TeamCountNumbers2 = [];
+		_TopTeam = "";
+		_SecondCount = 0;
+		_CheckTie = 0;
+		if (count _teamcounts < 2) then
 		{
-			_team1 = _x select 0;
-			_team1count = _x select 1;
-
-			if (_team1count > 0) exitWith
 			{
-				_dominantTeam = _team1;
-
-				for "_i" from (_forEachIndex + 1) to (count _teamCounts - 1) do
+				_dominantTeam = _x select 0;
+			} foreach _teamcounts
+		};
+		if (count _teamcounts >= 2) then
+		{
+			{
+				private _teamcount = _x select 1;
+				_TeamCountNumbers pushback _teamcount;
+			} forEach _teamCounts;
+			_TopCount = selectmax _TeamCountNumbers;
+			_CheckTie = { _x == _TopCount} count _TeamCountNumbers;
+			{
+				private _teamcount = _x;
+				if (_teamcount != _TopCount) then
 				{
-					_team2count = (_teamCounts select _i) select 1;
-
-					if (_team2count > (_team1count*2)) exitWith
-					{
-						_contested = true;
-						_dominantTeam = sideUnknown;
-					};
+					_TeamCountNumbers2 pushback _teamcount;
 				};
+			} foreach _TeamCountNumbers;
+			_SecondCount = selectMax _TeamCountNumbers2;
+			{
+				private _team = _x select 0;
+				private _teamcount = _x select 1;
+				if (_teamcount == _TopCount) then
+				{
+					_TopTeam = _team;
+				};
+			} foreach _teamcounts;
+			if (_topcount >= (_SecondCount * 2) && _CheckTie < 2) then
+			{
+				_dominantTeam = _TopTeam;
+			} else
+			{
+				_contested = true;
 			};
-		} forEach _teamCounts;
+			if (_CheckTie >= 2) then
+			{
+				_contested = true;
+				_dominantTeam = sideUnknown;
+			};
+		};
 	};
 
 	//diag_log format["_teamCountsForPlayerArray returns %1", [_teamCounts, _contested, _dominantTeam]];
@@ -340,23 +367,47 @@ _updatePlayerTerritoryActivity =
 		// Set a variable on them to indicate blocked capping
 		if !(_currentTerritoryOwner isEqualTo _newDominantTeam) then
 		{
-			if (_action == "BLOCK") then
+			switch (_action) do
 			{
-				// We split a BLOCK state into defenders and attackers
-				if (_currentTerritoryOwner isEqualTo _playerTeam) then
+				case ("BLOCK"):
 				{
-					_territoryActivity set [0, "BLOCKEDDEFENDER"];
-				}
-				else
-				{
-					_territoryActivity set [0, "BLOCKEDATTACKER"];
+					// We split a BLOCK state into defenders and attackers
+					if (_currentTerritoryOwner isEqualTo _playerTeam) then
+					{
+						_territoryActivity set [0, "BLOCKEDDEFENDER"];
+					}
+					else
+					{
+						_territoryActivity set [0, "BLOCKEDATTACKER"];
+					};
 				};
-			}
-			else
-			{
-				_territoryActivity set [0, _action];
+				case ("CAPTURE"):
+				{
+					if (_newDominantTeam isEqualTo _playerTeam) then
+					{
+						_territoryActivity set [0, "CAPTURE"];
+					}
+					else
+					{
+						_territoryActivity set [0, "CaptureDefender"];
+					};
+				};
+				case ("RESET"):
+				{
+					if (_newDominantTeam isEqualTo _playerTeam) then
+					{
+						_territoryActivity set [0, "RESET"];
+					}
+					else
+					{
+						_territoryActivity set [0, "ResetDefender"];
+					};
+				};
+				default
+				{
+					_territoryActivity set [0, _action];
+				}
 			};
-
 			_territoryActivity set [1, _capturePeriod - _newCapPointTimer];
 			_newPlayersWithTerritoryActivity pushBack _playerUID;
 		};

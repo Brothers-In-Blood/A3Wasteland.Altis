@@ -12,5 +12,6 @@
 // 4 - Territory category, currently unused. See territory/README.md for details.
 
 [
-	["TERRITORY_MOUTVillage", "Mout Village", 5000, "CITY"]
+	["TERRITORY_MOUTVillage", "Mout Village", 5000, "CITY"],
+	["FLAG_MOUTVILLAGE"]
 ]

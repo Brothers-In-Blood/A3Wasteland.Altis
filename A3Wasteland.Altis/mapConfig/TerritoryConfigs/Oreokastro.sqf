@@ -12,6 +12,7 @@
 // 4 - Territory category, currently unused. See territory/README.md for details.
 
 [
-	["TERRITORY_OreoKastroTown", "Oreokastro Castle", 5000, "CITY"],
-	["TERRITORY_OreoKastroCastle", "Thonos", 5000, "CITY"]
+	["TERRITORY_OreoKastroTown", "Oreokastro Castle", 2500, "CITY"],
+	["TERRITORY_OreoKastroCastle", "Thonos", 2500, "CITY"],
+	["FLAG_OreoKastro"]
 ]

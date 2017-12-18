@@ -74,9 +74,34 @@ _displayTerritoryActivity =
 				};
 			};
 		};
+		case "CaptureDefender":
+		{
+			_territoryCaptureCountdown = round (_territoryActivity select 1);
+
+			if (_territoryCaptureCountdown > 60) then
+			{
+				_seconds = _territoryCaptureCountdown % 60;
+				_territoryCaptureCountdown = (_territoryCaptureCountdown - _seconds) / 60;
+				_minutes = _territoryCaptureCountdown % 60;
+
+				_territoryActionText = format["The Enemy will capture the territory in about <t font='%1'>%2 minutes</t>", _boldFont, _minutes + 1];
+			}
+			else
+			{
+				if (_territoryCaptureCountdown < 5) then
+				{
+					_territoryActionText = "Territory transition in progress...";
+				}
+				else
+				{
+					_territoryActionText = format["Enemy Capturing territory in <t font='%1'>%2 seconds</t>", _boldFont, _territoryCaptureCountdown];
+				};
+			};
+		};
 		case "BLOCKEDATTACKER": { _territoryActionText = "Territory capture blocked" };
 		case "BLOCKEDDEFENDER": { _territoryActionText = "Territory under attack" };
 		case "RESET":           { _territoryActionText = "Territory capture started" };
+		case "ResetDefender": { _territoryActionText = "Enemy Territory capture started" };
 	};
 
 	_activityMessage = format ["Location: <t font='%1'>%2</t><br/>%3", _boldFont, _descriptiveName, _territoryActionText];

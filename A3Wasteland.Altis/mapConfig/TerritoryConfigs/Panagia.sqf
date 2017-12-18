@@ -12,5 +12,6 @@
 // 4 - Territory category, currently unused. See territory/README.md for details.
 
 [
-	["TERRITORY_PANAGIA", "Panagia", 5000, "CITY"]
+	["TERRITORY_PANAGIA", "Panagia", 5000, "CITY"],
+	["FLAG_PANAGIA"]
 ]

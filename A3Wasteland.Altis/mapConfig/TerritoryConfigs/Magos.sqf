@@ -12,7 +12,8 @@
 // 4 - Territory category, currently unused. See territory/README.md for details.
 
 [
-	["TERRITORY_MagosRadioStation", "Magos Radio Station", 5000, "CITY"],
-	["TERRITORY_MagosStadium", "Magos Stadium", 5000, "CITY"],
-	["TERRITORY_MagosPowerPlant", "Magos Powerplant", 5000, "CITY"]
+	["TERRITORY_MagosRadioStation", "Magos Radio Station", 1000, "CITY"],
+	["TERRITORY_MagosStadium", "Magos Stadium", 1000, "CITY"],
+	["TERRITORY_MagosPowerPlant", "Magos Powerplant", 1000, "CITY"],
+	["FLAG_MAGOS"]
 ]

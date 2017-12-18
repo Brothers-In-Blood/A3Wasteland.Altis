@@ -12,6 +12,8 @@
 // 4 - Territory category, currently unused. See territory/README.md for details.
 
 [
-	["TERRITORY_GHOSTHOTEL", "Ghost Hotel", 5000, "CITY"],
-	["FLAG_GHOSTHOTEL"]
+	["TERRITORY_SofiaRadar", "Sofia Radar Station", 1000, "CITY"],
+	["TERRITORY_SofiaTown", "Sofia Town", 1000, "CITY"],
+	["TERRITORY_SofiaPowerPlant", "Sofia Powerplant", 1000, "CITY"],
+	["FLAG_SOFIA"]
 ]
