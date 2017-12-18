@@ -353,7 +353,7 @@ class AtmGUI
 	{
 		idc = AtmWithdrawButton_IDC;
 		text = "Withdraw";
-		action = "call mf_items_atm_withdraw";
+		action = "call mf_items_atm_withdraw; closeDialog 0";
 
 		#define AtmWithdrawButton_X (AtmDepositButton_X + AtmButton_W + Atm_INNER_MARGIN_X)
 

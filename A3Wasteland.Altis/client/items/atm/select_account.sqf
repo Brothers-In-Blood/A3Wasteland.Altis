@@ -25,13 +25,13 @@ if(!_bountyChecked)then{
 	if (!isNil "_selAcc" && {_selAcc != player}) then
 	{
 		_deposit ctrlSetText "Transfer";
-		_deposit buttonSetAction "call mf_items_atm_transfer";
+		_deposit buttonSetAction "call mf_items_atm_transfer; closeDialog 0";
 		if (ctrlShown _withdraw) then { _withdraw ctrlShow false };
 	}
 	else
 	{
 		_deposit ctrlSetText "Deposit";
-		_deposit buttonSetAction "call mf_items_atm_deposit";
+		_deposit buttonSetAction "call mf_items_atm_deposit; closeDialog 0";
 		if (!ctrlShown _withdraw) then { _withdraw ctrlShow true };
 	};
 };
