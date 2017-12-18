@@ -8,22 +8,22 @@ class EditorData
 	toggles=514;
 	class ItemIDProvider
 	{
-		nextID=5561;
+		nextID=5575;
 	};
 	class MarkerIDProvider
 	{
-		nextID=321;
+		nextID=322;
 	};
 	class LayerIndexProvider
 	{
-		nextID=112;
+		nextID=120;
 	};
 	class Camera
 	{
-		pos[]={6272.6538,613.08868,12268.322};
-		dir[]={-0.57125789,-0.40580663,0.71346265};
-		up[]={-0.25364879,0.91394615,0.31679031};
-		aside[]={0.78062403,3.1237141e-007,0.62503582};
+		pos[]={6181.9097,90.264587,16203.185};
+		dir[]={-0.016092582,-0.64350915,0.76527154};
+		up[]={-0.013529157,0.76543796,0.64336789};
+		aside[]={0.99978125,-5.3712938e-008,0.021024294};
 	};
 };
 binarizationWanted=0;
@@ -427,7 +427,7 @@ class Mission
 	};
 	class Entities
 	{
-		items=1684;
+		items=1698;
 		class Item0
 		{
 			dataType="Group";
@@ -44655,7 +44655,7 @@ class Mission
 			fillName="DiagGrid";
 			a=125;
 			b=80;
-			angle=134.71194;
+			angle=134.71199;
 			id=5531;
 			atlOffset=0.17238235;
 		};
@@ -44758,7 +44758,7 @@ class Mission
 			fillName="DiagGrid";
 			a=125;
 			b=80;
-			angle=216.53195;
+			angle=216.53194;
 			id=5538;
 			atlOffset=0.00027084351;
 		};
@@ -45073,6 +45073,159 @@ class Mission
 			colorName="ColorBlack";
 			id=5560;
 			atlOffset=13.194913;
+		};
+		class Item1684
+		{
+			dataType="Marker";
+			position[]={3450.9529,25.475,13093.512};
+			name="FLAG_KAVALA";
+			type="mil_objective";
+			colorName="ColorRed";
+			alpha=0.67714834;
+			id=5561;
+			atlOffset=19.74666;
+		};
+		class Item1685
+		{
+			dataType="Marker";
+			position[]={9240.2373,55.339001,11772.268};
+			name="FLAG_ZAROS";
+			type="mil_objective";
+			colorName="ColorRed";
+			alpha=0.67714834;
+			id=5562;
+			atlOffset=-0.00021362305;
+		};
+		class Item1686
+		{
+			dataType="Marker";
+			position[]={4783.147,171.711,15213.816};
+			name="FLAG_MAGOS";
+			type="mil_objective";
+			colorName="ColorRed";
+			alpha=0.67714834;
+			id=5563;
+			atlOffset=-0.00024414063;
+		};
+		class Item1687
+		{
+			dataType="Marker";
+			position[]={6181.5288,43,16245.23};
+			name="FLAG_KoreFactory";
+			type="mil_objective";
+			colorName="ColorRed";
+			alpha=0.67714834;
+			id=5564;
+		};
+		class Item1688
+		{
+			dataType="Marker";
+			position[]={4705.0908,274.849,21663.875};
+			name="FLAG_OreoKastro";
+			type="mil_objective";
+			colorName="ColorRed";
+			alpha=0.67714834;
+			id=5565;
+			atlOffset=0.0002746582;
+		};
+		class Item1689
+		{
+			dataType="Marker";
+			position[]={9433.624,125.152,20261.568};
+			name="FLAG_ABDERA";
+			type="mil_objective";
+			colorName="ColorRed";
+			alpha=0.67714834;
+			id=5566;
+			atlOffset=-9.1552734e-005;
+		};
+		class Item1690
+		{
+			dataType="Marker";
+			position[]={12922.396,42.671001,16477.689};
+			name="FLAG_MILHILL";
+			type="mil_objective";
+			colorName="ColorRed";
+			alpha=0.67714834;
+			id=5567;
+			atlOffset=0.00069046021;
+		};
+		class Item1691
+		{
+			dataType="Marker";
+			position[]={11397.049,20.872,14201.543};
+			name="FLAG_CONSTRUCTIONZONE";
+			type="mil_objective";
+			colorName="ColorRed";
+			alpha=0.67714834;
+			id=5568;
+			atlOffset=0.00032234192;
+		};
+		class Item1692
+		{
+			dataType="Marker";
+			position[]={10672.119,16.732,12264.183};
+			name="FLAG_THARISA";
+			type="mil_objective";
+			colorName="ColorRed";
+			alpha=0.67714834;
+			id=5569;
+			atlOffset=0.00026321411;
+		};
+		class Item1693
+		{
+			dataType="Marker";
+			position[]={21878.904,24.313,21006.688};
+			name="FLAG_GHOSTHOTEL";
+			type="mil_objective";
+			colorName="ColorRed";
+			alpha=0.67714834;
+			id=5570;
+			atlOffset=-0.00012779236;
+		};
+		class Item1694
+		{
+			dataType="Marker";
+			position[]={27028.77,20.639999,23211.625};
+			name="FLAG_MOLOS";
+			type="mil_objective";
+			colorName="ColorRed";
+			alpha=0.67714834;
+			id=5571;
+			atlOffset=-0.00048065186;
+		};
+		class Item1695
+		{
+			dataType="Marker";
+			position[]={20542.871,33.921001,8867.5801};
+			name="FLAG_PANAGIA";
+			type="mil_objective";
+			colorName="ColorRed";
+			alpha=0.67714834;
+			id=5572;
+			atlOffset=0.00016784668;
+		};
+		class Item1696
+		{
+			dataType="Marker";
+			position[]={23734.416,5.2550001,16224.34};
+			name="FLAG_MOUTVILLAGE";
+			type="mil_objective";
+			colorName="ColorRed";
+			alpha=0.67714834;
+			id=5573;
+			atlOffset=9.2983246e-005;
+		};
+		class Item1697
+		{
+			dataType="Marker";
+			position[]={25472.551,25.525999,21274.275};
+			name="FLAG_SOFIA";
+			type="mil_objective";
+			colorName="ColorRed";
+			alpha=0.67714834;
+			id=5574;
+			atlOffset=6.5026608;
 		};
 	};
 };
