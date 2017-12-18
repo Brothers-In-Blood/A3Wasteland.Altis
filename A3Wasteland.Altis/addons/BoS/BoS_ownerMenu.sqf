@@ -25,7 +25,8 @@ if (!isNil "_uid") then
 					"Release Lock Down", //7
 					"Relock Base Objects", //8
 					"Resupply", //9
-					"Change PIN" //10
+					"Change PIN", //10
+					"Upgrade Base Manager", //11
 	];
 
 	{

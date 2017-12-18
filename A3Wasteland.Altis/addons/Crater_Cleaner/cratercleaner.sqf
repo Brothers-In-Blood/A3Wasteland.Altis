@@ -2,7 +2,7 @@
 // Bobcat Crater Cleaner
 // Version 1.2
 // Date: 2014.11.04
-// Author: Lala14
+// Author: Lala14 Edited by: BIB_Monkey
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // //
 
 // init line:
@@ -103,7 +103,8 @@ Lala_fnc_Fix_Dead_Vehicle = {
 	if (_oldname isEqualTo "Error: No vehicle") then {_oldname = _oldveh};
 	deleteVehicle _nearestvehicle;
 	sleep 0.5;
-	_oldname =	_oldtype createVehicle _oldpos;
+	private _safepos = [_oldpos,5,50,10,0,0,0] call findSafePos
+	_oldname =	_oldtype createVehicle _safepos;
   _oldname allowdamage false;
 	if (!isNil {_oldvarname}) then { _oldname setVehicleVarName _oldvarname; };
 	_oldname setDamage 0.5;

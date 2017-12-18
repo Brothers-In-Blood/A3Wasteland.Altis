@@ -3,7 +3,7 @@
 // ******************************************************************************************
 /*********************************************************#
 # @@ScriptName: monitorTerritories.sqf
-# @@Author: Nick 'Bewilderbeest' Ludlam <bewilder@recoil.org>, AgentRev
+# @@Author: Nick 'Bewilderbeest' Ludlam <bewilder@recoil.org>, AgentRev Edited by: BIB_Monkey
 # @@Create Date: 2013-09-09 18:14:47
 # @@Modify Date: 2013-09-15 22:40:31
 # @@Function:
@@ -255,7 +255,7 @@ _teamCountsForPlayerArray =
 				{
 					_team2count = (_teamCounts select _i) select 1;
 
-					if (_team2count > 0) exitWith
+					if (_team2count > (_team1count*2)) exitWith
 					{
 						_contested = true;
 						_dominantTeam = sideUnknown;

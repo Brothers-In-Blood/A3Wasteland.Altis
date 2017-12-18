@@ -69,8 +69,12 @@ if (!isNil "_uid") then
 				case 10: //Change Password
 				{
 					closeDialog 0;
-					execVM "addons\Bos\password_change.sqf";
+					execVM "addons\BoS\password_change.sqf";
 				};
+				case 11: //Upgrade Base
+				{
+					execVM "addons\BoS\UpgradeBase.sqf";
+				}
 			};
 		};
 	};

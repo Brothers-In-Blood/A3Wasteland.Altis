@@ -1,29 +1,43 @@
 //	@file Version:
 //	@file Name:
-//	@file Author: Cael817 based on objectSearchinteraction.sqf from A3W
+//	@file Author: Cael817 based on objectSearchinteraction.sqf from A3W Edited by: BIB_Monkey
 //	@file Created:
 
-private ["_price", "_playerMoney"];
-
-#define RADIUS 35
-_maxLifetime = ["A3W_objectLifetime", 0] call getPublicVar;
-_objects = nearestObjects [position player, ["thingX", "Building", "ReammoBox_F"], RADIUS];
-_ownedObjects = {typeName _x == "OBJECT" && {!(isNil {_x getVariable "ownerUID"})} && {_x getVariable "objectLocked"}} count _objects;
-//_ownedObjects = {typeName _x == "OBJECT" && {_x getVariable ["ownerUID",""] == getPlayerUID player}} count _objects; // Use this if you want only owned objects to be relocked.
-
-_playerMoney = player getVariable "cmoney";
-_price = _ownedObjects * 500;
-_playerMoney = player getVariable "cmoney";
 
 
-/*
-if (isNIL "_relockedTime") exitWith
+private _maxLifetime = ["A3W_objectLifetime", 0] call getPublicVar;
+private _manager = nearestObject [player, "Land_SatellitePhone_F"];
+private _ManagerPosition = getpos _manager;
+private _objects = nearestObjects [_ManagerPosition, ["thingX", "Building", "ReammoBox_F"], _BaseRadius, true];
+private _ownedObjects = {typeName _x == "OBJECT" && {!(isNil {_x getVariable "ownerUID"})} && {_x getVariable "objectLocked"}} count _objects;
+private _playerMoney = player getVariable "cmoney";
+private _price = _ownedObjects * 500;
+private _playerMoney = player getVariable "cmoney";
+//Get manager level
+private _ManagerLevel = _manager getVariable ["ManagerLevel", 1];
+//set default base radius for level 1 manager
+private _BaseRadius = 10;
+//set base radius based on manager level
+switch (_ManagerLevel) do
 {
-	_confirmMsg = format ["Normally this action would lock all objects within %1 radius but something went wrong or the Re Locker was already used this session, please try again later / next restart.", RADIUS];
-	// Display confirm message
-	if ([parseText _confirmMsg, "Information", "OK", false] call BIS_fnc_guiMessage) then
-	{};
-};*/
+	case (2):
+	{
+		_BaseRadius = 20;
+	};
+	case (3):
+	{
+		_BaseRadius = 30;
+	};
+	case (4):
+	{
+		_BaseRadius = 40;
+	};
+	case (5):
+	{
+		_BaseRadius = 50;
+	};
+};
+
 
 if (isNil "reLockedObjectMapMarkers") then {
 	// This is the global we use to keep track of map markers
@@ -41,7 +55,7 @@ if (count reLockedObjectMapMarkers > 0) then {
 if (!isNil "_price") then 
 {
 	// Add total sell value to confirm message
-	_confirmMsg = format ["Re locking %1 baseparts/objects will cost you $%2<br/>Range is %3 meters, all relocked objects will be marked on map", _ownedObjects, _price, RADIUS, _maxLifetime];
+	_confirmMsg = format ["Re locking %1 baseparts/objects will cost you $%2<br/>Range is %3 meters, all relocked objects will be marked on map", _ownedObjects, _price, _BaseRadius, _maxLifetime];
 
 	// Display confirm message
 	if ([parseText _confirmMsg, "Confirm", "OK", true] call BIS_fnc_guiMessage) then
@@ -92,7 +106,7 @@ if (count reLockedObjectMapMarkers > 0) then {
 	
 	}else{
 	//["No owned objects found within the set radius", 5] call mf_notify_client;
-	[format ["No owned objects found within %1m",RADIUS], 5] call mf_notify_client;	
+	[format ["No owned objects found within %1m",_BaseRadius], 5] call mf_notify_client;	
 };
 	
 sleep 30;

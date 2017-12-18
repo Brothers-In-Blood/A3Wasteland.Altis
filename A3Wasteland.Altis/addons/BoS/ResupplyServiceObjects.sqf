@@ -8,12 +8,36 @@ Purpose: Allow player to resupply service objects through base management system
 	#define Fuel_Cost 8 //Price per liter of fuel
 	#define Repair_Cost 12 //Price per Kg of repair cargo
 	#define Ammo_Cost 60 //Price Per Kg of Ammo Cargo
-	#define BaseRadius 35 //
 //Define Variables
 	//Find closest base manager
 	private _Manager = nearestObject [player, "Land_SatellitePhone_F"];
 	//Get position of the closest base manager
 	private _ManagerPOS = getpos _manager;
+	//Get manager level
+	private _ManagerLevel = _manager getVariable ["ManagerLevel", 1];
+	//set default base radius for level 1 manager
+	private _BaseRadius = 10;
+	//set base radius based on manager level
+	switch (_ManagerLevel) do
+{
+	case (2):
+	{
+		_BaseRadius = 20;
+	};
+	case (3):
+	{
+		_BaseRadius = 30;
+	};
+	case (4):
+	{
+		_BaseRadius = 40;
+	};
+	case (5):
+	{
+		_BaseRadius = 50;
+	};
+};
+
 	//Array of Service Objects
 	private _ServiceObjectslist = 
 	[
@@ -49,7 +73,7 @@ Purpose: Allow player to resupply service objects through base management system
 		["Land_Pod_Heli_Transport_04_repair_F",		22000]
 	];
 	//Find all service objects within range
-	private _ServiceObjects = nearestObjects [_ManagerPOS, _ServiceObjectslist, BaseRadius, true];
+	private _ServiceObjects = nearestObjects [_ManagerPOS, _ServiceObjectslist, _BaseRadius, true];
 	//Define Player Money
 	private _money = player getvariable ["bmoney", 0];
 //Resupply stuff Below

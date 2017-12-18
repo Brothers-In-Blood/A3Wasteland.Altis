@@ -5,10 +5,36 @@ Purpose: unlock exterior doors of base objects within radius of base manager
 */
 
 private _manager = nearestObject [player, "Land_SatellitePhone_F"];
+private _managerposition = getpos _manager;
 private _lockdown = false;
+//Get manager level
+private _ManagerLevel = _manager getVariable ["ManagerLevel", 1];
+//set default base radius for level 1 manager
+private _BaseRadius = 10;
+//set base radius based on manager level
+switch (_ManagerLevel) do
+{
+	case (2):
+	{
+		_BaseRadius = 20;
+	};
+	case (3):
+	{
+		_BaseRadius = 30;
+	};
+	case (4):
+	{
+		_BaseRadius = 40;
+	};
+	case (5):
+	{
+		_BaseRadius = 50;
+	};
+};
 
 
-private _managers = nearestObjects [ _manager, ["Land_SatellitePhone_F"], 70, true];
+
+private _managers = nearestObjects [ _manager, ["Land_SatellitePhone_F"], (_BaseRadius * 2), true];
 if ( count _managers > 1) then 
 {
 	private _getmanagerstatus = [{_x getVariable ["Baselockenabled", false]} foreach _managers];
@@ -37,7 +63,7 @@ if (_lockdown) then
 				waitUntil {local _x || time > _setOwner_time + 1.5};
 			};
 			_x setVariable ['bis_disabled_Door_1',0,true];
-		} forEach nearestObjects [player,
+		} forEach nearestObjects [_managerposition,
 			[
 				"Land_Cargo_House_V3_F",
 				"Land_Cargo_House_V1_F",
@@ -59,7 +85,7 @@ if (_lockdown) then
 				"Land_i_Stone_Shed_V1_F",
 				"Land_i_Stone_Shed_V3_F",
 				"Wall"
-		], 35];
+		], _BaseRadius];
 
 	//Objects with Two Doors
 		{
@@ -71,7 +97,7 @@ if (_lockdown) then
 			};
 			_x setVariable ['bis_disabled_Door_1',0,true];
 			_x setVariable ['bis_disabled_Door_2',0,true];
-		} forEach nearestObjects [player,
+		} forEach nearestObjects [_managerposition,
 			[
 				"Land_i_House_Small_03_V1_F",
 				"Land_i_House_Big_01_V3_F",
@@ -94,7 +120,7 @@ if (_lockdown) then
 				"Land_i_Stone_HouseSmall_V3_F",
 				"Land_i_Stone_HouseSmall_V1_F",
 				"Land_i_Stone_HouseSmall_V2_F"
-			], 35];
+			], _BaseRadius];
 
 	//Objects with Three Doors
 		{
@@ -107,7 +133,7 @@ if (_lockdown) then
 			_x setVariable ['bis_disabled_Door_1',0,true];
 			_x setVariable ['bis_disabled_Door_2',0,true];
 			_x setVariable ['bis_disabled_Door_3',0,true];
-		} forEach nearestObjects [player,
+		} forEach nearestObjects [_managerposition,
 			[
 				"Land_Offices_01_V1_F",
 				"Land_i_Shop_02_V3_F",
@@ -125,7 +151,7 @@ if (_lockdown) then
 				"Land_Cargo_Tower_V2_F",
 				"Land_MilOffices_V1_F",
 				"Land_CarService_F"
-			], 35];
+			], _BaseRadius];
 
 	//Objects with 4 doors
 		{
@@ -139,7 +165,7 @@ if (_lockdown) then
 			_x setVariable ['bis_disabled_Door_2',0,true];
 			_x setVariable ['bis_disabled_Door_3',0,true];
 			_x setVariable ['bis_disabled_Door_4',0,true];
-		} forEach nearestObjects [player,
+		} forEach nearestObjects [_managerposition,
 			[
 				"Land_i_House_Big_02_V3_F",
 				"Land_i_House_Big_02_V1_F",
@@ -147,7 +173,7 @@ if (_lockdown) then
 				"Land_i_Shop_01_V3_F",
 				"Land_i_Shop_01_V1_F",
 				"Land_i_Shop_01_V2_F"
-			], 35];
+			], _BaseRadius];
 
 	//Industrial Sheds; because BIS is bad and lazy and it's the only building that doesn't conform to convention
 		{
@@ -165,8 +191,8 @@ if (_lockdown) then
 			_x setVariable ['bis_disabled_Door_6',0,true];
 			_x setVariable ['bis_disabled_Door_7',0,true];
 			_x setVariable ['bis_disabled_Door_8',0,true];
-		} forEach nearestObjects [player,
-			["Land_i_Shed_Ind_F"], 35];
+		} forEach nearestObjects [_managerposition,
+			["Land_i_Shed_Ind_F"], _BaseRadius];
 
 
 	//Objects with 8 Doors
@@ -186,12 +212,12 @@ if (_lockdown) then
 			_x setVariable ['bis_disabled_Door_7',0,true];
 			_x setVariable ['bis_disabled_Door_8',0,true];
 
-		} forEach nearestObjects [player,
+		} forEach nearestObjects [_managerposition,
 			[
 				"Land_i_Barracks_V1_F",
 				"Land_i_Barracks_V2_F",
 				"Land_u_Barracks_V2_F"
-			], 35];
+			], _BaseRadius];
 
 	hint "Doors unlocked";
 };
