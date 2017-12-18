@@ -103,7 +103,7 @@ Lala_fnc_Fix_Dead_Vehicle = {
 	if (_oldname isEqualTo "Error: No vehicle") then {_oldname = _oldveh};
 	deleteVehicle _nearestvehicle;
 	sleep 0.5;
-	private _safepos = [_oldpos,5,50,10,0,0,0] call findSafePos
+	private _safepos = [_oldpos,5,50,10,0,0,0] call findSafePos;
 	_oldname =	_oldtype createVehicle _safepos;
   _oldname allowdamage false;
 	if (!isNil {_oldvarname}) then { _oldname setVehicleVarName _oldvarname; };
