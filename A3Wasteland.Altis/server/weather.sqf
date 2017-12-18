@@ -24,14 +24,14 @@ WeatherSystemON = true;
 		//Set weather type based on random number
 		switch (true) do
 		{
-			case (_num <=25):
+			case (_num <=50):
 			{
 				_currentweather = "Clear";
 			};
-			case (_num >25 && _num <=50):
-			{
-				_currentweather = "Windy";
-			};
+			// case (_num >25 && _num <=50):
+			// {
+			// 	_currentweather = "Windy";
+			// };
 			case (_num >50 && _num <=70):
 			{
 				_currentweather = "LightRain";
