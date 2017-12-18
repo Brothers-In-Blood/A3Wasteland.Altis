@@ -79,6 +79,7 @@ if (isServer) then
 	//Execute Server Side Scripts.
 	call compile preprocessFileLineNumbers "server\antihack\setup.sqf";
 	[] execVM "server\admins.sqf";
+	[] execVM "server\backers.sqf";
 };
 
 [] execVM "server\functions\serverVars.sqf";
