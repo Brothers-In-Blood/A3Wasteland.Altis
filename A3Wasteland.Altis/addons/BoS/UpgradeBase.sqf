@@ -7,126 +7,159 @@ Purpos: Allow player to upgrade their base manager, for now just base radius
 //Find the players base manager
 private _Manager = nearestObject [player, "Land_SatellitePhone_F"];
 //Get the current level
-private _ManagerLevel = _manager getVariable ["ManagerLevel", 1];
+private _ManagerLevel = _Manager getVariable ["ManagerLevel", 1];
+//Get manager location
+private _ManagerPOS = getpos _Manager;
 //Get player money
 private _money = player getvariable ["cmoney", 0];
+//Get Player UID
+private _PlayerUID = [getPlayerUID player];
 //Initialize upgrade price variable
 private _UpgradePrice = 0;
-//Set upgrade price based on current manager level
+//Initialize base manager radius check value 
+private _ManagerRangeCheck = 0;
+//Set upgrade price and range based on current manager level
 switch (_ManagerLevel) do
 {
 	case (1):
 	{
 		_UpgradePrice = 1000000;
+		_ManagerRangeCheck = 20;
+		player globalChat format ["Range Check 1 = %1", _ManagerRangeCheck];
 	};
 	case (2):
 	{
 		_UpgradePrice = 2000000;
+		_ManagerRangeCheck = 30;
+		player globalChat format ["Range Check 1 = %1", _ManagerRangeCheck];
 	};
 	case (3):
 	{
 		_UpgradePrice = 4000000;
+		_ManagerRangeCheck = 40;
+		player globalChat format ["Range Check 1 = %1", _ManagerRangeCheck];
 	};
 	case (4):
 	{
 		_UpgradePrice = 8000000;
+		_ManagerRangeCheck = 50;
+		player globalChat format ["Range Check 1 = %1", _ManagerRangeCheck];
 	};
 };
-private _nearmanagers = nearestObjects [ _manager, ["Land_SatellitePhone_F"], 100, true];
+//Find near by base managers
+private _NearManagers = nearestObjects [ _Manager, ["Land_SatellitePhone_F"], 100, true];
+//Initialize upgrade flag
+_upgrade = true;
+// Determine if base has enough space to upgrade
 {
-	//Prompt player to confirm cost
-	_msg = format ["%1<br/><br/>%2", format ["It will cost you $%1 to the next level", _UpgradePrice], "Do you want to proceed?"];
-	if ([_msg, "Resupply Vehicle", true, true] call BIS_fnc_guiMessage) then
+	private _nearmanager = _x;
+	private _nearmanagerPOS = getpos _nearmanager;
+	private _NearManagerLevel = _nearmanager getVariable ["ManagerLevel", 1];
+	private _distance = _ManagerPOS distance2d _nearmanagerPOS;
+	private _NearManagerRangeCheck = 0;
+	// Set value based on manager manager level
+	switch (_NearManagerLevel) do
 	{
-		//Make sure the player has enough money
-		if (_money >= _UpgradePrice) then
+		case (1):
 		{
-			//Subtract cost from player money
-			player setVariable ["bmoney", (player getVariable ["bmoney",0]) - _UpgradePrice, true];
-			//Upgrade the manager to the next level and make sure another base isn't too close
-			switch (_ManagerLevel) do
-			{
-				case (1):
-				{
-					_upgrade = true;
-					{
-						_nearmanager = _x
-						private _distance = _manager distance2D _nearmanagers
-						if (_distance is < 40) then
-						{
-							_upgrage = false;
-						};
-					} foreach _nearmanagers;
-					if (_upgrade) then
-					{
-						_manager setVariable ["ManagerLevel", 2, true];
-					} else
-					{
-						titletext ["Another base is too close. Relocate to upgrade", "PLAIN DOWN"];
-					};
-				};
-				case (2):
-				{
-					_upgrade = true;
-					{
-						_nearmanager = _x
-						private _distance = _manager distance2D _nearmanagers
-						if (_distance is < 60) then
-						{
-							_upgrage = false;
-						};
-					} foreach _nearmanagers;
-					if (_upgrade) then
-					{
-						_manager setVariable ["ManagerLevel", 3, true];
-					} else
-					{
-						titletext ["Another base is too close. Relocate to upgrade", "PLAIN DOWN"];
-					};
-				};
-				case (3):
-				{
-					_upgrade = true;
-					{
-						_nearmanager = _x
-						private _distance = _manager distance2D _nearmanagers
-						if (_distance is < 80) then
-						{
-							_upgrage = false;
-						};
-					} foreach _nearmanagers;
-					if (_upgrade) then
-					{
-						_manager setVariable ["ManagerLevel", 4, true];
-					} else
-					{
-						titletext ["Another base is too close. Relocate to upgrade", "PLAIN DOWN"];
-					};
-				};
-				case (4):
-				{
-					_upgrade = true;
-					{
-						_nearmanager = _x
-						private _distance = _manager distance2D _nearmanagers
-						if (_distance is < 100) then
-						{
-							_upgrage = false;
-						};
-					} foreach _nearmanagers;
-					if (_upgrade) then
-					{
-						_manager setVariable ["ManagerLevel", 5, true];
-					} else
-					{
-						titletext ["Another base is too close. Relocate to upgrade", "PLAIN DOWN"];
-					};
-				};
-			};
-		} else
+			_NearManagerRangeCheck = 10;
+		};
+		case (2):
 		{
-			titleText ["You don't have enough money, %1 costs %2 to resupply", "PLAIN DOWN"];
+			_NearManagerRangeCheck = 20;
+		};
+		case (3):
+		{
+			_NearManagerRangeCheck = 30;
+		};
+		case (4):
+		{
+			_NearManagerRangeCheck = 40;
+		};
+		case (5):
+		{
+			_NearManagerRangeCheck = 50;
 		}
+	};
+	player globalChat format ["Range Check 2 = %1", _NearManagerRangeCheck];
+	//Set Range Check Value
+	private _RangeCheck = (_NearManagerRangeCheck + _ManagerRangeCheck);
+	player globalChat format ["Range Check Total = %1", _RangeCheck];
+	player globalChat format ["distance = %1", _distance];
+	if (_distance < _RangeCheck && _distance != 0) then
+	{
+		_upgrade = false;
+	};
+} foreach _NearManagers;
+//Start upgrade
+//Make Sure manager isn't already at max level
+if (_ManagerLevel < 5) then 
+{
+	//Initialize back variable
+	private _isbasebacker = false;
+	//Discover is player is backer with base upgrade reward
+	private _backercheck = _PlayerUID arrayIntersect BaseSystemBackers;
+	//Apply Backer reward
+	if (count _backercheck > 0 && _ManagerLevel < 3) then
+	{
+		if (_upgrade) then
+		{
+			_Manager setVariable ["ManagerLevel", 3, true];
+			_newlevel = _Manager getvariable "ManagerLevel";
+			titletext [ format ["Base Successfully upgraded to level %1", _newlevel], "PLAIN DOWN"];
+		} 
+		else
+		{
+			titletext ["Another base is too close. Relocate to upgrade", "PLAIN DOWN"];
+		};
+	} 
+	else
+	{
+		//create prompt friendly price number
+		private _promptprice = (_UpgradePrice / 1000000);
+		//Prompt player to confirm cost
+		_msg = format ["%1<br/><br/>%2", format ["It will cost you $%1 Million to upgrad to level %2.", _promptprice, (_ManagerLevel + 1)], "Do you want to proceed?"];
+		if ([_msg, "Resupply Vehicle", true, true] call BIS_fnc_guiMessage) then
+		{
+			//Make sure the player has enough money
+			if (_money >= _UpgradePrice) then
+			{
+				if (_upgrade) then
+				{
+					//Subtract cost from player money
+					player setVariable ["cmoney", (player getVariable ["cmoney",0]) - _UpgradePrice, true];
+					//Upgrade the manager to the next level and make sure another base isn't too close
+					switch (_ManagerLevel) do
+					{
+						case (1):
+						{
+							_Manager setVariable ["ManagerLevel", 2, true];
+						};
+						case (2):
+						{
+							_Manager setVariable ["ManagerLevel", 3, true];
+						};
+						case (3):
+						{
+							_Manager setVariable ["ManagerLevel", 4, true];
+						};
+						case (4):
+						{
+							_Manager setVariable ["ManagerLevel", 5, true];
+						};
+					};
+					_newlevel = _Manager getvariable "ManagerLevel";
+					titletext [ format ["Base Successfully upgraded to level %1", _newlevel], "PLAIN DOWN"];
+				}
+				else
+				{
+					titletext ["Another base is too close. Relocate to upgrade", "PLAIN DOWN"];
+				};
+			} else
+			{
+				titleText ["You don't have enough money",  "PLAIN DOWN"];
+			}
+		};
 	};
 } else
 {
