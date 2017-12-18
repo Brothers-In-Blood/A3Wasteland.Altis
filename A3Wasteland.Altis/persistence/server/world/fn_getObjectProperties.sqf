@@ -124,13 +124,14 @@ _repairCargo = getRepairCargo _obj;
 switch (true) do
 {
 
-	case ( {_obj isKindOf _x} count ["Land_Device_assembled_F","Land_SatellitePhone_F"]>0):
+	case ( {_obj isKindOf _x} count ["Land_SatellitePhone_F"]>0):
 	{
 		{ _variables pushBack [_x select 0, _obj getVariable _x] } forEach
 		[
 			["password", ""],
 			["lights", ""],
-			["lockDown", false]
+			["lockDown", false],
+			["ManagerLevel", 1]
 		];
 	};
 	case ({_obj isKindOf _x} count ["Box_NATO_AmmoVeh_F", "Box_EAST_AmmoVeh_F", "Box_IND_AmmoVeh_F", "B_Slingload_01_Ammo_F" ]>0):
