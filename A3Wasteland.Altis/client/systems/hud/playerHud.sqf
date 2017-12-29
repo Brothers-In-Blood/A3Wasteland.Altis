@@ -243,18 +243,23 @@ while {true} do
 	// Activity does not show when the map or Esc menu is open
 	if (!visibleMap && isNull findDisplay 49) then
 	{
-		// Determine activity. Currently this is territory cap only
+		// Determine activity.
 		_territoryActivity = player getVariable ["TERRITORY_ACTIVITY", []];
 		_territoryName = player getVariable ["TERRITORY_OCCUPATION", ""];
-
+		private _HackData = player getVariable ["Hacking", ""];
 		if (count _territoryActivity > 0 && _territoryName != "") then
 		{
 			_activityDetails = [] call _displayTerritoryActivity;
-
-			_activityIconStr = _activityDetails select 0;
-			_activityMessage = _activityDetails select 1;
+			_activityIconStr = _activityDetails select 1;
+			_activityMessage = _activityDetails select 2;
 		};
-
+		if (count _HackData > 0) then
+		{
+			_txt1 = _HackData select 0;
+			_txt2 = _HackData select 1;
+			_activityIconStr =  _txt1;
+			_activityMessage = _txt2;
+		};
 		// Show the UI if we have activity
 		if (_activityIconStr != "" && _activityMessage != "") then
 		{
