@@ -18,7 +18,6 @@ _methodDir = format ["%1\%2", _worldDir, call A3W_savingMethodDir];
 _objCount = 0;
 _objects = call compile preprocessFileLineNumbers format ["%1\getObjects.sqf", _methodDir];
 _objectsArray = [];
-
 _exclObjectIDs = [];
 
 {
@@ -26,9 +25,8 @@ _exclObjectIDs = [];
 
 	{ (_x select 1) call compile format ["%1 = _this", _x select 0]	} forEach _x;
 	if (isNil "_locked") then { _locked = 1 };
-	if (isNil "_hoursAlive") then { _hoursAlive = 0 };
 	_valid = false;
-	if (!isNil "_class" && !isNil "_pos" && {_maxLifetime <= 0 || _hoursAlive < _maxLifetime}) then
+	if (!isNil "_class" && !isNil "_pos") then
 	{
 		if (isNil "_variables") then { _variables = [] };
 		_allowed = switch (true) do
@@ -99,6 +97,7 @@ _exclObjectIDs = [];
 				case "lockDown": { _value }; // BASE LOCKER
 				case "Lights": { _value }; // BASE LOCKER
 				case "password": { _value }; // BASE LOCKER - SAFE - DOOR
+				case "ManagerLevel" : {_value};
 				case "moveable": {_value};
 				case "bis_disabled_Door_1": {_value};
 				case "bis_disabled_Door_2": {_value};
@@ -178,12 +177,7 @@ _exclObjectIDs = [];
 				if (!isNil "_backpacks") then
 				{
 					{
-						_bpack = _x select 0;
-
-						if (!(_bpack isKindOf "Weapon_Bag_Base") || {{_bpack isKindOf _x} count ["B_UAV_01_backpack_F", "B_Static_Designator_01_weapon_F", "O_Static_Designator_02_weapon_F"] > 0}) then
-						{
-							_obj addBackpackCargoGlobal _x;
-						};
+						_obj addBackpackCargoGlobal _x;
 					} forEach _backpacks;
 				};
 			};

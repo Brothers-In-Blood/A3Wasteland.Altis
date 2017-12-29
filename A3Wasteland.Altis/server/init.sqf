@@ -543,18 +543,6 @@ else
 	diag_log "[INFO] A3W territory capturing is DISABLED";
 };
 
-// Consolidate all store NPCs in a single group
-[] spawn
-{
-	_storeGroup = createGroup sideLogic;
-	{
-		if (!isPlayer _x && {(toLower ((vehicleVarName _x) select [0,8])) in ["genstore","gunstore","vehstore"]}) then
-		{
-			[_x] joinSilent _storeGroup;
-		};
-	} forEach entities "CAManBase";
-};
-
 //Execute Server Missions.
 if (["A3W_serverMissions"] call isConfigOn) then
 {

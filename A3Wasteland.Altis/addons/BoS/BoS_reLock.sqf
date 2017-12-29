@@ -8,10 +8,6 @@
 private _maxLifetime = ["A3W_objectLifetime", 0] call getPublicVar;
 private _manager = nearestObject [player, "Land_SatellitePhone_F"];
 private _ManagerPosition = getpos _manager;
-private _objects = nearestObjects [_ManagerPosition, ["thingX", "Building", "ReammoBox_F"], _BaseRadius, true];
-private _ownedObjects = {typeName _x == "OBJECT" && {!(isNil {_x getVariable "ownerUID"})} && {_x getVariable "objectLocked"}} count _objects;
-private _playerMoney = player getVariable "cmoney";
-private _price = _ownedObjects * 500;
 private _playerMoney = player getVariable "cmoney";
 //Get manager level
 private _ManagerLevel = _manager getVariable ["ManagerLevel", 1];
@@ -37,6 +33,10 @@ switch (_ManagerLevel) do
 		_BaseRadius = 50;
 	};
 };
+private _objects = nearestObjects [_ManagerPosition, ["thingX", "Building", "ReammoBox_F"], _BaseRadius, true];
+private _ownedObjects = {typeName _x == "OBJECT" && {!(isNil {_x getVariable "ownerUID"})} && {_x getVariable "objectLocked"}} count _objects;
+private _price = _ownedObjects * 500;
+
 
 
 if (isNil "reLockedObjectMapMarkers") then {

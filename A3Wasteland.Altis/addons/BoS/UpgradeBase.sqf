@@ -25,25 +25,21 @@ switch (_ManagerLevel) do
 	{
 		_UpgradePrice = 1000000;
 		_ManagerRangeCheck = 20;
-		player globalChat format ["Range Check 1 = %1", _ManagerRangeCheck];
 	};
 	case (2):
 	{
 		_UpgradePrice = 2000000;
 		_ManagerRangeCheck = 30;
-		player globalChat format ["Range Check 1 = %1", _ManagerRangeCheck];
 	};
 	case (3):
 	{
 		_UpgradePrice = 4000000;
 		_ManagerRangeCheck = 40;
-		player globalChat format ["Range Check 1 = %1", _ManagerRangeCheck];
 	};
 	case (4):
 	{
 		_UpgradePrice = 8000000;
 		_ManagerRangeCheck = 50;
-		player globalChat format ["Range Check 1 = %1", _ManagerRangeCheck];
 	};
 };
 //Find near by base managers
@@ -81,11 +77,8 @@ _upgrade = true;
 			_NearManagerRangeCheck = 50;
 		}
 	};
-	player globalChat format ["Range Check 2 = %1", _NearManagerRangeCheck];
 	//Set Range Check Value
 	private _RangeCheck = (_NearManagerRangeCheck + _ManagerRangeCheck);
-	player globalChat format ["Range Check Total = %1", _RangeCheck];
-	player globalChat format ["distance = %1", _distance];
 	if (_distance < _RangeCheck && _distance != 0) then
 	{
 		_upgrade = false;
@@ -134,18 +127,22 @@ if (_ManagerLevel < 5) then
 						case (1):
 						{
 							_Manager setVariable ["ManagerLevel", 2, true];
+							_Manager spawn fn_manualObjectSave;
 						};
 						case (2):
 						{
 							_Manager setVariable ["ManagerLevel", 3, true];
+							_Manager spawn fn_manualObjectSave;
 						};
 						case (3):
 						{
 							_Manager setVariable ["ManagerLevel", 4, true];
+							_Manager spawn fn_manualObjectSave;
 						};
 						case (4):
 						{
 							_Manager setVariable ["ManagerLevel", 5, true];
+							_Manager spawn fn_manualObjectSave;
 						};
 					};
 					_newlevel = _Manager getvariable "ManagerLevel";

@@ -5,9 +5,9 @@ Purpose: Allow player to resupply service objects through base management system
 */
 
 //Config Defines
-	#define Fuel_Cost 8 //Price per liter of fuel
-	#define Repair_Cost 12 //Price per Kg of repair cargo
-	#define Ammo_Cost 60 //Price Per Kg of Ammo Cargo
+	#define Fuel_Cost 0.5 //Price per liter of fuel
+	#define Repair_Cost 1 //Price per Kg of repair cargo
+	#define Ammo_Cost 5 //Price Per Kg of Ammo Cargo
 //Define Variables
 	//Find closest base manager
 	private _Manager = nearestObject [player, "Land_SatellitePhone_F"];

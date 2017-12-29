@@ -67,7 +67,6 @@ switch (_lockState) do
 			_object setVariable ["ownerUID", getPlayerUID player, true];
 			pvar_manualObjectSave = netId _object;
 			publicVariableServer "pvar_manualObjectSave";
-
 			["Object locked!", 5] call mf_notify_client;
 		};
 
@@ -108,13 +107,8 @@ switch (_lockState) do
 		if (_success) then
 		{
 			_object setVariable ["objectLocked", false, true];
-			_object setVariable ["ownerUID", nil, true];
-			_object setVariable ["baseSaving_hoursAlive", nil, true];
-			_object setVariable ["baseSaving_spawningTime", nil, true];
-
 			pvar_manualObjectSave = netId _object;
 			publicVariableServer "pvar_manualObjectSave";
-
 			["Object unlocked!", 5] call mf_notify_client;
 		};
 
