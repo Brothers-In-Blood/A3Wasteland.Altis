@@ -18,6 +18,7 @@ currentOwnerName = "";
 pistolArray = compileFinal str
 [
 	// Handguns
+	["Starter Pistol",														"hgun_Pistol_Signal_F",														25],
 	["PM Pistol",															"hgun_Pistol_01_F",															25],
 	["P07 Pistol",															"hgun_P07_F",																50],
 	["P07 Pistol (Khaki)",													"hgun_P07_khk_F",															50],
@@ -74,7 +75,13 @@ rifleArray = compileFinal str
 	["SPAR-16 GL Rifle (Sand)",												"arifle_SPAR_01_GL_snd_F",													250],
 
 	["CAR-95 Rifle",														"arifle_CTAR_blk_F",														200],
+	["CAR-95 Rifle (Hex)",													"arifle_CTAR_hex_F",														200],
+	["CAR-95 Rifle (G Hex)",												"arifle_CTAR_ghex_F",														200],
 	["CAR-95 GL Rifle",														"arifle_CTAR_GL_blk_F",														250],
+	["CAR-95 GL Rifle (Hex)",												"arifle_CTAR_GL_hex_F",														250],
+	["CAR-95 GL Rifle (G Hex)",												"arifle_CTAR_GL_ghex_F",													250],
+
+
 	["Type 115 Rifle",														"arifle_ARX_blk_F",															300],
 	["Type 115 Rifle (Hex)",												"arifle_ARX_hex_F",															300],
 	["Type 115 Rifle (G Hex)",												"arifle_ARX_ghex_F",														300],
@@ -137,6 +144,8 @@ lmgArray = compileFinal str
 	["SPAR-16S LMG (Khaki)",												"arifle_SPAR_02_khk_F",														300],
 	["SPAR-16S LMG (Sand)",													"arifle_SPAR_02_snd_F",														300],
 	["CAR-95-1 LMG",														"arifle_CTARS_blk_F",														300],
+	["CAR-95-1 LMG (Hex)",													"arifle_CTARS_hex_F",														300],
+	["CAR-95-1 LMG (G Hex)",												"arifle_CTARS_ghex_F",														300],
 	["LIM-85 LMG",															"LMG_03_F",																	350],
 
 	["SPMG MMG (Sand)",														"MMG_02_sand_F",															1500],
@@ -168,10 +177,10 @@ allGunStoreFirearms = compileFinal str (call pistolArray + call smgArray + call 
 
 staticGunsArray = compileFinal str
 [	
-	["Vehicle Ammo Crate (NATO)",											"Box_NATO_AmmoVeh_F",														300000],
-	["Vehicle Ammo Crate (NATO)",											"Box_EAST_AmmoVeh_F",														300000],
-	["Vehicle Ammo Crate (AAF)",											"Box_IND_AmmoVeh_F",														300000],
-	["Ammo Container",														"B_Slingload_01_Ammo_F",													787500],
+	["Vehicle Ammo Crate (NATO)",											"Box_NATO_AmmoVeh_F",														100000],
+	["Vehicle Ammo Crate (NATO)",											"Box_EAST_AmmoVeh_F",														100000],
+	["Vehicle Ammo Crate (AAF)",											"Box_IND_AmmoVeh_F",														100000],
+	["Ammo Container",														"B_Slingload_01_Ammo_F",													1000000],
 	["Explosives Crate(Empty)",												"Box_NATO_AmmoOrd_F",														100],
 	["Ammo Crate (Empty)",													"Box_NATO_Ammo_F",															100],
 	["Granade Crate (Empty)",												"Box_NATO_Grenades_F",														100],
@@ -233,6 +242,8 @@ throwputArray = compileFinal str
 //Text name,classname,buy cost
 ammoArray = compileFinal str
 [
+	["Signal Cylinder (Red)",												"6Rnd_RedSignal_F",															5],
+	["Signal Cylinder (Green)",												"6Rnd_GreenSignal_F",														5],
 	["9mm 10Rnd Mag",														"10Rnd_9x21_Mag",															10],
 	["9mm 16Rnd Mag",														"16Rnd_9x21_Mag",															10],
 	["9mm 30Rnd Mag",														"30Rnd_9x21_Mag",															15],
@@ -356,7 +367,8 @@ accessoriesArray = compileFinal str
 	["Bipod (Sand)",														"bipod_01_F_snd",															100,							"item",								"noDLC"],
 	["Bipod (Tan)",															"bipod_02_F_tan",															100,							"item",								"noDLC"],
 	["Bipod (Khaki)",														"bipod_01_F_khk",															100,							"item"],
-	["Flashlight",															"acc_flashlight",															25,								"item"],
+	["Rifle Flashlight",													"acc_flashlight",															25,								"item"],
+	["Pistol Flashlight",													"acc_flashlight_pistol",													25,								"item"],
 	["IR Laser Pointer",													"acc_pointer_IR",															25,								"item"],
 	["Yorris Sight (Zubr Revolver)",										"optic_Yorris",																50,								"item"],
 	["MRD Sight (4-Five Pistol)",											"optic_MRD",																50,								"item"],
@@ -491,11 +503,9 @@ headArray = compileFinal str
 	["Contstruction Helmet (Yellow Headset)",								"H_Construction_headset_yellow_F",											25,								"hat"],
 	["Contstruction Helmet (Yellow)",										"H_Construction_basic_yellow_F",											25,								"hat"],
 	["Crew Helmet (AAF)",													"H_HelmetCrew_I",															50,								"hat"],
-	["Crew Helmet (AAF)",													"H_HelmetCrew_I",															60,								"hat"],
 	["Crew Helmet (CSAT)",													"H_HelmetCrew_O",															50,								"hat"],
-	["Crew Helmet (CSAT)",													"H_HelmetCrew_O",															60,								"hat"],
+	["Crew Helmet (G Hex)",													"H_HelmetCrew_O_ghex_F",													50,								"hat"],
 	["Crew Helmet (NATO)",													"H_HelmetCrew_B",															50,								"hat"],
-	["Crew Helmet (NATO)",													"H_HelmetCrew_B",															60,								"hat"],
 	["Defender Helmet (G Hex)",												"H_HelmetLeaderO_ghex_F",													100,							"hat",								"noDLC"],
 	["Defender Helmet (Hex)",												"H_HelmetLeaderO_ocamo",													100,							"hat"],
 	["Defender Helmet (Urban)",												"H_HelmetLeaderO_oucamo",													100,							"hat"],
@@ -600,6 +610,8 @@ uniformArray = compileFinal str
 	["Construction Uniform (Vrana)",										"U_C_ConstructionCoverall_Vrana_F",										25,								"uni"],
 	["Default Uniform (AAF)",												"U_I_CombatUniform",													25,								"uni"],
 	["Default Uniform (CSAT)",												"U_O_OfficerUniform_ocamo",												25,								"uni"],
+	["Light Fatigues (CSAT)",												"U_O_officer_noInsignia_hex_F",											25,								"uni"],
+	["Default Uniform (G hex)",												"U_O_T_Officer_F",														25,								"uni"],
 	["Default Uniform (NATO)",												"U_B_CombatUniform_mcam",												25,								"uni"],
 	["Fatigues (G Hex)",													"U_O_T_Soldier_F",														50,								"uni","noDLC"],
 	["Fatigues (Hex)",														"U_O_CombatUniform_ocamo",												50,								"uni"],
@@ -800,6 +812,7 @@ backpackArray = compileFinal str
 	["Field Pack (Coyote)",														"B_FieldPack_cbr",													200,						"backpack"],
 	["Field Pack (Khaki)",														"B_FieldPack_khk",													200,						"backpack"],
 	["Field Pack (Urban)",														"B_FieldPack_oucamo",												200,						"backpack"],
+	["Field Pack (Hex)",														"B_FieldPack_ocamo",												200,						"backpack"],
 	["Field Pack (G Hex)",														"B_FieldPack_ghex_F",												200,						"backpack",						"noDLC"],
 
 	["Kitbag (Coyote)",															"B_Kitbag_cbr",														350,						"backpack"],
@@ -851,7 +864,9 @@ genItemArray = compileFinal str
 	["Compact NVG (Hex)",														"O_NVGoggles_hex_F",												1000,						"nvg"],
 	["Compact NVG (Urban)",														"O_NVGoggles_urb_F",												100,						"nvg"],
 	["Demining Drone",															"C_IDAP_UAV_06_antimine_backpack_F",								50000,						"backpack"],
-	["Diving Goggles",															"G_Diving",															100,						"gogg"],
+	["Diving Goggles (AAF)",													"G_Diving",															100,						"gogg"],
+	["Diving Goggles (Csat)",													"G_O_Diving",														100,						"gogg"],
+	["Diving Goggles (Nato)",													"G_B_Diving",														100,						"gogg"],
 	["First Aid Kit",															"FirstAidKit",														25,							"item"],
 	["GPS",																		"ItemGPS",															100,						"gps"],
 	["IR Grenade",																"B_IR_Grenade",														50,							"mag",						"WEST"],
@@ -943,7 +958,6 @@ genItemArray = compileFinal str
 	["Tinted Spectacles",														"G_Spectacles_Tinted",												10,							"gogg"],
 	["VR Goggles",																"G_Goggles_VR",														25,							"gogg"]
 ];
-
 gencratesArray = compilefinal str
 [
 	["Ammo Cache (AAF)",															"Box_FIA_Ammo_F",													50],
@@ -992,7 +1006,6 @@ gencratesArray = compilefinal str
 	["Uniforms Crate (NATO)",														"Box_NATO_Uniforms_F",												50],
 	["Weapons Cache (AAF)",															"Box_FIA_Wps_F",													50]
 ];
-
 allStoreMagazines = compileFinal str (call ammoArray + call throwputArray + call genItemArray);
 allRegularStoreItems = compileFinal str (call allGunStoreFirearms + call allStoreMagazines + call accessoriesArray);
 allStoreGear = compileFinal str (call headArray + call uniformArray + call vestArray + call backpackArray);
@@ -1447,16 +1460,11 @@ ServiceObjectsArray = compileFinal str
 	["Support Crate",																			"Box_NATO_Support_F",								100],
 	["Taru Pod (Transport)",																	"Land_Pod_Heli_Transport_04_box_F",					1000],
 	["Container,Cargo",																			"B_Slingload_01_Cargo_F",							5000],
-	["Container,Fuel",																			"B_Slingload_01_Fuel_F",							150000],
-	["Container,Medical",																		"B_Slingload_01_Medevac_F",							2000],
-	["Container,Repair",																		"B_Slingload_01_Repair_F",							300000],
-	// ["Fuel Bladder (Green)",																	"StorageBladder_01_fuel_forest_F",					800000],
-	// ["Fuel Bladder (Brown)",																	"StorageBladder_01_fuel_sand_F",					800000],
-	// ["Fuel Pump",																				"Land_fs_feed_F",									502500],
-	// ["Fuel Pump (Malden)",																		"Land_FuelStation_01_pump_malevil_F",				502500],
-	// ["Fuel Pump (Sun Oil)",																		"Land_FuelStation_Feed_F",							502500],
-	["Taru Pod (Fuel)",																			"Land_Pod_Heli_Transport_04_fuel_F",				115000],
-	["Taru Pod (Repair)",																		"Land_Pod_Heli_Transport_04_repair_F",				225000]
+	["Container,Fuel",																			"B_Slingload_01_Fuel_F",							20000],
+	["Container,Medical",																		"B_Slingload_01_Medevac_F",							20000],
+	["Container,Repair",																		"B_Slingload_01_Repair_F",							50000],
+	["Taru Pod (Fuel)",																			"Land_Pod_Heli_Transport_04_fuel_F",				10000],
+	["Taru Pod (Repair)",																		"Land_Pod_Heli_Transport_04_repair_F",				25000]
 ];
 TowersArray = compileFinal str
 [
@@ -1479,7 +1487,6 @@ TowersArray = compileFinal str
 	// ["Solar Collector",																							"Land_spp_Tower_F",																		100000],
 	// ["Water Reservoir",																							"Land_ReservoirTower_F",																25000]
 ];
-
 AllBaseParts =	compileFinal str ( call TowersArray + call ServiceObjectsArray + call ObjectsArray + call lightsArray + call FencesAndWallsArray + call BuildingsArray + call BaseManagementArray);
 //Text name,classname,buy cost,spawn type,sell price (selling not implemented) or spawning color
 landArray = compileFinal str
@@ -1526,7 +1533,7 @@ landArray = compileFinal str
 	["HEMTT Fuel",																"B_Truck_01_fuel_F",												130000,						"vehicle"],
 	["HEMTT Medical",															"B_Truck_01_medical_F",												10000,						"vehicle"],
 	["HEMTT Repair",															"B_Truck_01_Repair_F",												255000,						"vehicle"],
-	["HEMTT Ammo",																"B_Truck_01_ammo_F",												625000,					"vehicle"],
+	["HEMTT Ammo",																"B_Truck_01_ammo_F",												625000,						"vehicle"],
 	["Base Cracker",															"O_Truck_03_device_F",												1000000,					"vehicle"],
 	["Tempest Transport",														"O_Truck_03_transport_F",											6000,						"vehicle"],
 	["Tempest Covered",															"O_Truck_03_covered_F",												7500,						"vehicle"],
@@ -1555,7 +1562,6 @@ landArray = compileFinal str
 	["UGV Saif (CSAT)",															"O_UGV_01_F",														2500,						"vehicle"],
 	["UGV Saif RCWS (CSAT)",													"O_UGV_01_rcws_F",													45000,						"vehicle"]
 ];
-
 armoredArray = compileFinal str
 [
 	["Hunter",																	"B_MRAP_01_F",														4000,						"vehicle"],
@@ -1571,7 +1577,6 @@ armoredArray = compileFinal str
 	["AMV-7 Marshall",															"B_APC_Wheeled_01_cannon_F",										70000,						"vehicle"],
 	["AFV-4 Gorgon",															"I_APC_Wheeled_03_cannon_F",										95000,						"vehicle"]
 ];
-
 tanksArray = compileFinal str
 [
 	["IFV-6c Panther",															"B_APC_Tracked_01_rcws_F",											55000,						"vehicle"],
@@ -1587,8 +1592,6 @@ tanksArray = compileFinal str
 	["M4 Scorcher",																"B_MBT_01_arty_F",													1000000,					"vehicle"],
 	["M5 Sandstorm MLRS",														"B_MBT_01_mlrs_F",													1000000,					"vehicle"]
 ];
-
-
 helicoptersArray = compileFinal str
 [
 	["AH-9 Pawnee (Shrieker AP)",												"B_Heli_Light_01_dynamicLoadout_F",									70000,						"vehicle",						"variant_pawneeS-HE"],
@@ -1630,7 +1633,6 @@ helicoptersArray = compileFinal str
 	["WY-55 Hellcat (Guns)",													"I_Heli_light_03_dynamicLoadout_F",									10000,						"vehicle",						"variant_HellGun" ],
 	["WY-55 Hellcat (DAGR)",													"I_Heli_light_03_dynamicLoadout_F",									40000,						"vehicle",						"variant_HellDAGR" ]
 ];
-
 planesArray = compileFinal str
 [
 	["A-143 Buzzard",															"I_Plane_Fighter_03_dynamicLoadout_F",								390000,						"vehicle"],
@@ -1660,7 +1662,6 @@ planesArray = compileFinal str
 	["Y-32 Xi'an (Vehicle Transport)",											"O_T_VTOL_02_vehicle_F",											350000,						"vehicle"],
 	["Y-32 Xi'an (Infrantry Transport)",										"O_T_VTOL_02_infantry_F",											350000,						"vehicle"]
 ];
-
 boatsArray = compileFinal str
 [
 	["Water Scooter",															"C_Scooter_Transport_01_F",											500,						"boat"],

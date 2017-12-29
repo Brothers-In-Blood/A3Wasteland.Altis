@@ -5,9 +5,9 @@ Purpose: Allow players to rearm, repair, refuel, and resupply vehicles. Charges 
 */
 
 //Config Defines
-	#define Fuel_Cost 5 //Price per liter of fuel
-	#define Repair_Cost 10 //Price per Kg of repair cargo
-	#define Ammo_Cost 50 //Price Per Kg of Ammo Cargo
+	#define Fuel_Cost 0.5 //Price per liter of fuel
+	#define Repair_Cost 1 //Price per Kg of repair cargo
+	#define Ammo_Cost 5 //Price Per Kg of Ammo Cargo
 //Check if mutex lock is active.
 	if (mutexScriptInProgress) exitWith
 	{
