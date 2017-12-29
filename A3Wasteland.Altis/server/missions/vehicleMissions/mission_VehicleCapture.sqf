@@ -22,16 +22,6 @@ _setupObjects =
 
 	switch (true) do
 	{
-		// GMG MRAPs
-		/*case ({ _vehicle isKindOf _x } count ["MRAP_01_gmg_base_F","MRAP_02_gmg_base_F","MRAP_03_gmg_base_F"] > 0):
-		{
-			_vehicle setVehicleAmmoDef 1;
-
-			// Reduce grenades to 50
-			_vehicle removeMagazines "96Rnd_40mm_G_belt";
-			_vehicle addMagazine ["96Rnd_40mm_G_belt", 50];
-		};*/
-
 		// AMV-7 Marshall
 		case (_vehicle isKindOf "B_APC_Wheeled_01_cannon_F"):
 		{

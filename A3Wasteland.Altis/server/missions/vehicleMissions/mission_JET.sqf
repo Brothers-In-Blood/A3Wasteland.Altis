@@ -20,10 +20,10 @@ _setupVars =
 		"I_Plane_Fighter_03_CAS_dynamicLoadout_F",
 		"I_Plane_Fighter_03_AA_dynamicLoadout_F",
 		"I_Plane_Fighter_04_dynamicLoadout_F",
-    "O_Plane_Fighter_02_dynamicLoadout_F",
-    "O_Plane_Fighter_02_Stealth_dynamicLoadout_F",
-    "B_Plane_Fighter_01_dynamicLoadout_F",
-    "B_Plane_Fighter_01_Stealth_dynamicLoadout_F"
+		"O_Plane_Fighter_02_dynamicLoadout_F",
+		"O_Plane_Fighter_02_Stealth_dynamicLoadout_F",
+		"B_Plane_Fighter_01_dynamicLoadout_F",
+		"B_Plane_Fighter_01_Stealth_dynamicLoadout_F"
 
 	] call BIS_fnc_selectRandom;
 
@@ -31,10 +31,6 @@ _setupVars =
 	_locationsArray = JetSpawnMarkers;
 
 	_nbUnits = if (missionDifficultyHard) then { AI_GROUP_LARGE } else { AI_GROUP_MEDIUM };
-
-	_reinforceChance = 0; // Chance of reinforcements being called
-	_minReinforceGroups = 1; //minimum number of paradrop groups that will respond to call
-	_maxReinforceGroups = 3; //maximum number of paradrop groups that will respond to call
 };
 
 _this call mission_VehicleCapture;

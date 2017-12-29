@@ -37,7 +37,7 @@ _setupObjects =
 		_x setVariable ["R3F_LOG_disabled", true, true];
 	} forEach [_box1, _box2];
 
-	_vehicleClass = ["B_Boat_Armed_01_minigun_F", "O_Boat_Armed_01_hmg_F", "I_Boat_Armed_01_minigun_F"] call BIS_fnc_selectRandom;
+	_vehicleClass = selectrandom ["B_Boat_Armed_01_minigun_F", "O_Boat_Armed_01_hmg_F", "I_Boat_Armed_01_minigun_F"];
 
 	// Vehicle Class, Position, Fuel, Ammo, Damage, Special
 	_vehicle = [_vehicleClass, _missionPos] call createMissionVehicle2;
