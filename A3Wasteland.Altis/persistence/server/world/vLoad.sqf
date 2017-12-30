@@ -26,6 +26,8 @@ _exclVehicleIDs = [];
 	{ (_x select 1) call compile format ["%1 = _this", _x select 0]	} forEach _x;
 
 	if (isNil "_flying") then { _flying = 0 };
+	if (isNil "_hoursAlive") then { _hoursAlive = 0 }; 
+ 	if (isNil "_hoursUnused") then { _hoursUnused = 0 };
 	private _valid = false;
 
 	if (!isNil "_class" && !isNil "_pos" && {count _pos == 3}) then

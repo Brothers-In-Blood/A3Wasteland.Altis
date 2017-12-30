@@ -250,8 +250,8 @@ while {true} do
 		if (count _territoryActivity > 0 && _territoryName != "") then
 		{
 			_activityDetails = [] call _displayTerritoryActivity;
-			_activityIconStr = _activityDetails select 1;
-			_activityMessage = _activityDetails select 2;
+			_activityIconStr = _activityDetails select 0;
+			_activityMessage = _activityDetails select 1;
 		};
 		if (count _HackData > 0) then
 		{

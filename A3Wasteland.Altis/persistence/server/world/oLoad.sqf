@@ -25,6 +25,7 @@ _exclObjectIDs = [];
 
 	{ (_x select 1) call compile format ["%1 = _this", _x select 0]	} forEach _x;
 	if (isNil "_locked") then { _locked = 1 };
+	if (isNil "_hoursAlive") then { _hoursAlive = 0 }; 
 	_valid = false;
 	if (!isNil "_class" && !isNil "_pos") then
 	{
