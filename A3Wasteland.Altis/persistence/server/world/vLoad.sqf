@@ -50,5 +50,4 @@ _exclVehicleIDs = [];
 } forEach _vehicles;
 
 diag_log format ["A3Wasteland - world persistence loaded %1 vehicles from %2", _vehCount, call A3W_savingMethodName];
-diag_log format ["Server Deleted ]
 _exclVehicleIDs call fn_deleteVehicles;
