@@ -84,12 +84,6 @@ _successExec =
 	_box1 setVariable ["cmoney", 100000, true];
 	_vehicle lockDriver false;
 
-	// Give the rewards
-	// {
-	// 	_x setVariable ["cmoney", 10000, true];
-	// 	_x setVariable ["owner", "world", true];
-	// } forEach _cashObjects;
-
 	_successHintMessage = "The treasure has been captured, well done.";
 };
 
