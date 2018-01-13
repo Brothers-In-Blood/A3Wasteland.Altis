@@ -23,17 +23,17 @@ _setupObjects =
 	_baseToDelete = nearestObjects [_missionPos, ["All"], 25];
 	{ deleteVehicle _x } forEach _baseToDelete; 
 	
-	_camonet = createVehicle ["CamoNet_INDP_open_F", [_missionPos select 0, _missionPos select 1], [], 0, "CAN COLLIDE"];
+	_camonet = createVehicle ["CamoNet_INDP_open_F", [_missionPos select 0, _missionPos select 1], [], 0, "NONE"];
 	_camonet allowdamage false;
 	_camonet setDir random 360;
 	_camonet setVariable ["R3F_LOG_disabled", false];
 
 	_missionPos = getPosATL _camonet;
 
-	_chair = createVehicle ["Land_Slums02_pole", _missionPos, [], 0, "CAN COLLIDE"];
+	_chair = createVehicle ["Land_Slums02_pole", _missionPos, [], 0, "NONE"];
 	_chair setPosATL [_missionPos select 0, _missionPos select 1, _missionPos select 2];
 	
-	_hostage = createVehicle ["C_Nikos_aged", _missionPos, [], 0, "CAN COLLIDE"];
+	_hostage = createVehicle ["C_Nikos_aged", _missionPos, [], 0, "NONE"];
 	_hostage setPosATL [_missionPos select 0, _missionPos select 1, _missionPos select 2];
 	waitUntil {alive _hostage};
 	[_hostage, "Acts_AidlPsitMstpSsurWnonDnon_loop"] call switchMoveGlobal;

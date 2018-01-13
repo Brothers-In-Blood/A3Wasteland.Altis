@@ -37,7 +37,11 @@ va_player_exit = {
   if (_immediate) exitWith {
     moveOut _player;
   };
-
+  // ejection bug workaround 
+  if (!isNull objectParent _player) then 
+  { 
+    _player setPos (_player modelToWorldVisual [0,0,0]); 
+  };
   //leave engine in same state after exiting
   def(_engine_state);
   _engine_state =  isEngineOn _vehicle;

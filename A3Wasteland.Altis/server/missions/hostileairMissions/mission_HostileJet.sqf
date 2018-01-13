@@ -7,7 +7,7 @@
 if (!isServer) exitwith {};
 #include "hostileairMissionDefines.sqf";
 
-private ["_planeChoices", "_convoyVeh", "_veh1", "_createVehicle", "_vehicles", "_leader", "_speedMode", "_waypoint", "_vehicleName", "_numWaypoints", "_cash", "_boxes1", "_currBox1", "_boxes2", "_currBox2", "_box1", "_box2"];
+private ["_planeChoices", "_convoyVeh", "_veh1", "_createVehicle", "_vehicles", "_leader", "_speedMode", "_waypoint", "_vehicleName", "_numWaypoints", "_cash", "_Boxes1", "_currBox1", "_Boxes2", "_currBox2", "_Box1", "_Box2"];
 
 _setupVars =
 {
@@ -26,10 +26,10 @@ _setupObjects =
 		["I_Plane_Fighter_03_CAS_F"],
 		["O_Plane_CAS_02_F"],
 		["I_Plane_Fighter_04_F"],
-    ["O_Plane_Fighter_02_F"],
-    ["O_Plane_Fighter_02_Stealth_F"],
-    ["B_Plane_Fighter_01_F"],
-    ["B_Plane_Fighter_01_Stealth_F"]
+		["O_Plane_Fighter_02_F"],
+		["O_Plane_Fighter_02_Stealth_F"],
+		["B_Plane_Fighter_01_F"],
+		["B_Plane_Fighter_01_Stealth_F"]
 	];
 
 	_convoyVeh = _planeChoices call BIS_fnc_selectRandom;
@@ -116,32 +116,20 @@ _failedExec = nil;
 _successExec =
 {
 	// Mission completed
-
-	//Money
-	/*for "_i" from 1 to 10 do
-	{
-		_cash = createVehicle ["Land_Money_F", _lastPos, [], 5, "None"];
-		_cash setPos ([_lastPos, [[2 + random 3,0,0], random 360] call BIS_fnc_rotateVector2D] call BIS_fnc_vectorAdd);
-		_cash setDir random 360;
-		_cash setVariable ["cmoney", 7500, true];
-		_cash setVariable ["owner", "world", true];
-	};*/
-/*
-	_Boxes1 = ["Box_IND_Wps_F","Box_East_Wps_F","Box_NATO_Wps_F","Box_NATO_AmmoOrd_F","Box_NATO_Grenades_F","Box_East_WpsLaunch_F","Box_NATO_WpsLaunch_F","Box_East_WpsSpecial_F","Box_NATO_WpsSpecial_F"];
-	_currBox1 = _Boxes1 call BIS_fnc_selectRandom;
-	_box1 = createVehicle [_currBox1, _lastPos, [], 2, "None"];
-	_box1 setDir random 360;
-	_box1 allowDamage false;
-
-	_Boxes2 = ["Box_IND_Wps_F","Box_East_Wps_F","Box_NATO_Wps_F","Box_NATO_AmmoOrd_F","Box_NATO_Grenades_F","Box_East_WpsLaunch_F","Box_NATO_WpsLaunch_F","Box_East_WpsSpecial_F","Box_NATO_WpsSpecial_F"];
-	_currBox2 = _Boxes2 call BIS_fnc_selectRandom;
-	_box2 = createVehicle [_currBox2, _lastPos, [], 2, "None"];
-	_box2 setDir random 360;
-	_box2 allowDamage false;
-
-	{ _x setVariable ["R3F_LOG_disabled", false, true] } forEach [_box1, _box2];*/
-
 	_successHintMessage = "The sky is clear again, the enemy patrol was taken out!";
+
+	_Boxes = selectrandom ["Box_IND_Wps_F","Box_East_Wps_F","Box_NATO_Wps_F","Box_NATO_AmmoOrd_F","Box_NATO_Grenades_F","Box_East_WpsLaunch_F","Box_NATO_WpsLaunch_F","Box_East_WpsSpecial_F","Box_NATO_WpsSpecial_F"];
+	_lastPos set [2, 200];
+	_Box = createVehicle [_Boxes, _lastPos, [], 0, "None"];
+	_para = createVehicle ["B_Parachute_02_F", _lastPos, [], 0, "None"];
+	_Box attachTo [_para,[0,0,-1.5]];
+	_Box allowDamage false;
+	_Box setVariable ["cmoney", 100000, true];
+
+	WaitUntil {((((position _Box) select 2) < 1) || (isNil "_para"))};
+	detach _Box;
+	_smoke2= "SmokeShellGreen" createVehicle getPos _Box;
+	_flare2= "F_40mm_Green" createVehicle getPos _Box;
 };
 
 _this call hostileairMissionProcessor;

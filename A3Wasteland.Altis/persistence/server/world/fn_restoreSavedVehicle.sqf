@@ -97,6 +97,7 @@ if (!isNil "_dir") then
 };
 
 private _uavSide = if (isNil "_playerSide") then { sideUnknown } else { _playerSide };
+private _uavAuto = true; 
 
 {
 	_x params ["_var", "_val"];
@@ -111,6 +112,13 @@ private _uavSide = if (isNil "_playerSide") then { sideUnknown } else { _playerS
 		{
 			if (_uavSide isEqualTo sideUnknown) then { _uavSide = STR_TO_SIDE(_val) };
 		};
+		case "uavAuto": 
+		{ 
+			if (_val isEqualType true) then 
+			{ 
+				_uavAuto = _val; 
+			}; 
+		}; 
 	};
 
 	_veh setVariable [_var, _val, true];

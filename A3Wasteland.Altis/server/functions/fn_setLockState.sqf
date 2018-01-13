@@ -17,4 +17,5 @@ if (!local _veh) exitWith
 _state = round _state max 1 min 3;
 
 _veh lock _state;
+_veh enableRopeAttach (_state < 2); // slingload
 _veh setVariable ["R3F_LOG_disabled", _state > 1, true];

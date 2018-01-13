@@ -81,13 +81,14 @@ _successExec =
 {
 	// Mission complete
 	_box1 setVariable ["R3F_LOG_disabled", false, true];
+	_box1 setVariable ["cmoney", 100000, true];
 	_vehicle lockDriver false;
 
 	// Give the rewards
-	{
-		_x setVariable ["cmoney", 10000, true];
-		_x setVariable ["owner", "world", true];
-	} forEach _cashObjects;
+	// {
+	// 	_x setVariable ["cmoney", 10000, true];
+	// 	_x setVariable ["owner", "world", true];
+	// } forEach _cashObjects;
 
 	_successHintMessage = "The treasure has been captured, well done.";
 };
