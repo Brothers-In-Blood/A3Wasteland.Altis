@@ -7,4 +7,4 @@
 _this call playerSetupStart;
 _this call playerSetupGear;
 _this call playerSetupEnd;
-setterraingrid 1;
+setterraingrid 10;
