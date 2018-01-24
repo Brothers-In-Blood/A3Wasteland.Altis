@@ -80,16 +80,6 @@ _failedExec =
 
 _successExec =
 {
-	// Mission complete
-
-	/*for "_x" from 1 to 10 do
-	{
-		_cash = "Land_Money_F" createVehicle markerPos _marker;
-		_cash setPos ((markerPos _marker) vectorAdd ([[2 + random 2,0,0], random 360] call BIS_fnc_rotateVector2D));
-		_cash setDir random 360;
-		_cash setVariable["cmoney",5000,true];
-		_cash setVariable["owner","world",true];
-	};*/
 
 	{ _x setVariable ["R3F_LOG_disabled", false, true] } forEach [_box1, _box2];
 	{ deleteVehicle _x } forEach [_wreck];
@@ -119,8 +109,6 @@ _drop_item =
 	_obj setPos ([_pos, [[2 + random 3,0,0], random 360] call BIS_fnc_rotateVector2D] call BIS_fnc_vectorAdd);
 	_obj setVariable ["mf_item_id", _id, true];
 };
-
-
 	_successHintMessage = "The sunken loot and money has been captured, well done.";
 };
 

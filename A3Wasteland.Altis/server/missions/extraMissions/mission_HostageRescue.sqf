@@ -58,7 +58,7 @@ _setupObjects =
 	_aiGroup setBehaviour "COMBAT";	
 	
 	_vehicleName = "Hostage";
-	_missionHintText = format ["<br/>Mercenary soldiers have captured a merchant and claim ransom. <br/> Free the merchant, he will pay for this", _vehicleName, extraMissionColor];
+	_missionHintText = format ["<br/>Mercenary soldiers have captured a merchant and claim ransome. <br/> Free the merchant and collect your fee", _vehicleName, extraMissionColor];
 };
 
 _waitUntilMarkerPos = nil;
@@ -70,27 +70,27 @@ _failedExec =
 	// Mission failed
 	
 	{ deleteVehicle _x } forEach [_camonet, _obj1, _obj3, _obj4, _hostage, _chair];
-	_failedHintMessage = format ["The merchant is dead! What the hell have you not understood? Have you saved one Ghillie Suit at least?!"];
+	_failedHintMessage = format ["The merchant is dead. <br/> Mission Failure"];
 };
 
 _successExec =
 {
 	// Mission completed
-
+	private _DropLocation = _missionPos set [2, 200];
 	{ deleteVehicle _x } forEach [_camonet, _hostage, _chair];
 	{ _x setVariable ["R3F_LOG_disabled", false, true] } forEach [_obj1, _obj3, _obj4];
 
-	for "_x" from 1 to 5 do
-	{
-		_cash = createVehicle ["Land_Money_F", _lastPos, [], 5, "None"];
-		_cash setPos ([_lastPos, [[2 + random 3,0,0], random 360] call BIS_fnc_rotateVector2D] call BIS_fnc_vectorAdd);
-		_cash setDir random 360;
-		_cash setVariable["cmoney",10000,true];
-		_cash setVariable["owner","world",true];
-	};
+	private _Box = createVehicle ["Box_IND_Wps_F", _DropLocation, [], 0, "NONE" ];
+	private _Para = createVehicle ["B_Parachute_02_F", _DropLocation, [], 0, "None"];
+	_Box attachTo [_Para,[0,0,-1.5]];
+	_Box allowDamage false;
+	_Box setVariable ["cmoney", 50000, true];
+	WaitUntil {((((position _Box) select 2) < 1) || (isNil "_para"))};
+	detach _Box;
+	_smoke2= "SmokeShellGreen" createVehicle getPos _Box;
+	_flare2= "F_40mm_Green" createVehicle getPos _Box;
 	
-	
-	_successHintMessage = format ["Well done! The mercenary soldiers are dead and the merchant alive. He pays for this."];
+	_successHintMessage = format ["The mercenaries have been killed. Your fee is being delivered"];
 };
 
 _this call extraMissionProcessor;

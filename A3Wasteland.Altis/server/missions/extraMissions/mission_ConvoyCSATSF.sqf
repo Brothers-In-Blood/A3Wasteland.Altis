@@ -15,10 +15,6 @@ _setupVars =
 {
 	_missionType = "Rogue CSAT SF Team";
 	_locationsArray = LandConvoyPaths;
-
-	_reinforceChance = 0; // Chance of reinforcements being called
-	_minReinforceGroups = 1; //minimum number of paradrop groups that will respond to call
-	_maxReinforceGroups = 3; //maximum number of paradrop groups that will respond to call
 };
 
 _setupObjects =
