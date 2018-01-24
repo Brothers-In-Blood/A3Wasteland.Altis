@@ -123,6 +123,7 @@ if (isServer) then {
 
     if !(_saveFlag) then {
       _vehicle setVariable ["A3W_purchasedVehicle", true];
+      _vehicle setVariable ["A3W_missionVehicle", false];
     };
 
     [_this, _player, _vehicle, _uid, _vehOwner, _parked_vehicles, _saveFlag] spawn
@@ -148,7 +149,7 @@ if (isServer) then {
       def(_display_name);
       _display_name = [typeOf _vehicle] call generic_display_name;
 
-      if (!isNil "fn_untrackSavedVehicle") then { [netId _vehicle] call fn_untrackSavedVehicle };
+      if (!isNil "fn_untrackSavedVehicle") then { _vehicle call fn_untrackSavedVehicle };
       deleteVehicle _vehicle;
 
       _player setVariable ["parked_vehicles", _parked_vehicles]; //, true];
@@ -213,7 +214,7 @@ if (isServer) then {
     def(_create_array);
     //if (not([_player,_class,_position] call pp_is_safe_position)) then {
       //we don't have an exact safe position, let the game figure one out
-      _create_array = [_class, if (isNil "_pos") then { getPos _player } else { _pos }, [], [0,50] select (isNil "_pos"), ""];
+      _create_array = [_class, if (isNil "_pos") then { getPos _player } else { _pos }, [], [0,50] select (isNil "_pos"), "NONE"];
     //};
 
     def(_vehicle);

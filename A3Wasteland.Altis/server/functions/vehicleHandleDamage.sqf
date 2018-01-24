@@ -5,15 +5,19 @@
 //	@file Author: AgentRev
 
 #define COLLISION_DMG_SCALE 0.2
-#define PLANE_COLLISION_DMG_SCALE 0.5
+#define PLANE_COLLISION_DMG_SCALE 0.005
 #define WHEEL_COLLISION_DMG_SCALE 0.05
-#define MRAP_MISSILE_DMG_SCALE 4.0 // Temporary fix for http://feedback.arma3.com/view.php?id=21743
-#define HELI_MISSILE_DMG_SCALE 2.0
-#define PLANE_MISSILE_DMG_SCALE 1.5
-#define IFV_DMG_SCALE 1.5
-#define TANK_DMG_SCALE 2.0
+#define MRAP_MISSILE_DMG_SCALE 1.0 // Temporary fix for http://feedback.arma3.com/view.php?id=21743
+#define HELI_MISSILE_DMG_SCALE 0.75
+#define PLANE_MISSILE_DMG_SCALE 1
+#define IFV_DMG_SCALE 0.5
+#define TANK_DMG_SCALE 1.5
 
-params ["_vehicle", "_selection", "_damage", "_source", "_ammo", "", "_instigator"];
+_vehicle = _this select 0;
+_selection = _this select 1;
+_damage = _this select 2;
+_source = _this select 3;
+_ammo = _this select 4;
 
 if (_selection != "?") then
 {
@@ -24,7 +28,7 @@ if (_selection != "?") then
 		_damage = 0; // Block goddamn fuel leak
 	};
 
-	_oldDamage = [_vehicle getHit _selection, damage _vehicle] select (_selection isEqualTo "");
+	_oldDamage = if (_selection == "") then { damage _vehicle } else { _vehicle getHit _selection };
 
 	if (!isNil "_oldDamage") then
 	{
@@ -69,8 +73,13 @@ if (_selection != "?") then
 			{
 				//if (_isMissile) then
 				//{
-					#define TANKTYPE_DMG_SCALE ([TANK_DMG_SCALE, IFV_DMG_SCALE] select ({_vehicle isKindOf _x} count ["APC_Tracked_01_base_F","APC_Tracked_02_base_F","APC_Tracked_03_base_F"] > 0))
-					_damage = ((_damage - _oldDamage) * TANKTYPE_DMG_SCALE) + _oldDamage;
+					_scale = if ({_vehicle isKindOf _x} count ["APC_Tracked_01_base_F", "APC_Tracked_02_base_F", "APC_Tracked_03_base_F"] > 0) then {
+						IFV_DMG_SCALE
+					} else {
+						TANK_DMG_SCALE
+					};
+
+					_damage = ((_damage - _oldDamage) * _scale) + _oldDamage;
 				//};
 			};
 

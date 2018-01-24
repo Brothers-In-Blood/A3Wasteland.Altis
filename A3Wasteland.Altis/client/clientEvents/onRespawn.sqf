@@ -84,3 +84,4 @@ if !(pvar_PlayerTeamKiller isEqualTo []) then
 
 	[] execVM "client\functions\createTeamKillDialog.sqf";
 };
+setterraingrid 1;

@@ -66,3 +66,56 @@ class A3W_fnc_setVehicleAmmoDef {};
 class A3W_fnc_unflip {};
 class APOC_srv_startAirdrop { allowedTargets = 2; };
 class JTS_FNC_SENT {};
+
+//Advanced Ropes
+class AR_Client_Rappel_From_Heli { allowedTargets=0; };
+class AR_Hint { allowedTargets=1; };
+class AR_Hide_Object_Global { allowedTargets=2; };
+class AR_Enable_Rappelling_Animation { allowedTargets=2; };
+class AR_Rappel_From_Heli { allowedTargets=2; };
+class ASL_Pickup_Ropes { allowedTargets=0; };
+class ASL_Deploy_Ropes_Index { allowedTargets=0; };
+class ASL_Rope_Set_Mass { allowedTargets=0; };
+class ASL_Extend_Ropes { allowedTargets=0; };
+class ASL_Shorten_Ropes { allowedTargets=0; };
+class ASL_Release_Cargo { allowedTargets=0; };
+class ASL_Retract_Ropes { allowedTargets=0; };
+class ASL_Deploy_Ropes { allowedTargets=0; };
+class ASL_Attach_Ropes { allowedTargets=0; };
+class ASL_Drop_Ropes { allowedTargets=0; };
+class ASL_Hint { allowedTargets=1; };
+class ASL_Hide_Object_Global { allowedTargets=2; };
+class AUR_Hint { allowedTargets=1; };
+class AUR_Hide_Object_Global { allowedTargets=2; };
+class AUR_Enable_Rappelling_Animation_Global { allowedTargets=2; };
+class AUR_Play_Rappelling_Sounds_Global { allowedTargets=2; };
+
+//Taru Mod
+class Action_Accrochage{};
+class Action_Arrimage{};
+class Action_Gestion_Cordes{};
+class Action_Decrochage{};
+class Action_Desarrimage{};
+class Action_Parachutage{};
+class Choix_Lanceur_Action{};
+class Condition_UserActions_Ace_SelfActions{};
+class Configuration_Raccourcis_CBA{};
+class Module_Zeus_Arrimer{};
+class Module_Zeus_Gestion_Cordes{};
+class Module_Zeus_Choix_Lanceur_Accrocher{};
+class Module_Zeus_Choix_Lanceur_Arrimer{};
+class Module_Zeus_Choix_Lanceur_Allonger{};
+class Module_Zeus_Choix_Lanceur_Allonger_Max{};
+class Module_Zeus_Choix_Lanceur_Raccourcir{};
+class Module_Zeus_Choix_Lanceur_Raccourcir_Max{};
+class Module_Zeus_Choix_Lanceur_Decrocher_Parachuter{};
+class Module_Zeus_Choix_Lanceur_Desarrimer{};
+class Module_Zeus_Decrocher_Parachuter{};
+class Module_Zeus_Desarrimer{};
+class Transmission_Sons{};
+class Transmission_Messages{};
+class Veille_Arrimage{};
+class Verification_Ace_Activer{};
+class Verification_Objet_Accrocher_Compatible{};
+class Verification_Objet_Est_Attacher{};
+

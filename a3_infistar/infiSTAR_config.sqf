@@ -2,10 +2,10 @@
 	File: infiSTAR_config.sqf
 	Author: Chris(tian) "infiSTAR" Lorenzen
 	Contact: infiSTAR23@gmail.com
-
+	
 	Description:
 	Arma AntiHack & AdminTools - infiSTAR.de
-
+	
 	ON LINUX YOU NEED THIS PARAMETER: -profiles
 */
 
@@ -14,14 +14,14 @@
 	"serverCommandPassword" is serverCommandPassword - in your servers config.cfg
 	if your config.cfg does not have serverCommandPassword yet, simply add it in a new line:
 	serverCommandPassword = "changeme";
-
+	
 	This is   VERY IMPORTANT   as it is needed to KICK & BAN people.
 */
 _serverCommandPassword = 'ECHO2733';
 
 /*
 	"_passwordAdmin" is passwordAdmin - in your servers config.cfg, needed for servercommands from client
-
+	
 	This is used to be able to use the "login" function ingame. Will log you in as Arma "Admin".
 */
 _passwordAdmin = 'echo2733';
@@ -34,6 +34,8 @@ _passwordAdmin = 'echo2733';
 	You have to set the mod you run manually
 	e.g.
 	_MOD = 'KOTH';
+
+	(should be AltisLife for any "Life" Mod - if it doesn't work you can still change it to other / empty string)
 */
 _MOD = 'WASTELAND';
 
@@ -47,8 +49,8 @@ _MOD = 'WASTELAND';
 _OPEN_ADMIN_MENU_KEY = 0x3B;
 
 /* What ESCAPE Menu shows */
-_ESCMNUTOP = 'AntiHack & AdminTools';
-_ESCMNUBOT = 'by infiSTAR.de';
+_ESCMNUTOP = 'A3Wasteland by BIBGaming.com';
+_ESCMNUBOT = ' Protected by infiSTAR.de';
 _BRIEFING_MSG = false;	/* use mission briefing message: if   "_BRIEFING_MSG = false;"   then the message will be replaced by infiSTAR */
 
 /* shows RESTART IN X MINS */
@@ -80,23 +82,24 @@ _use_html_load_on_adminmenu = true;		/* default and recommended is TRUE. infiSTA
 
 _adminUIDandAccess =
 [
-	[
+		[
 		[// Admins with UIDs in this Array have their Access defined in the array below.
-		'76561198116851407', //Wilks
-		'76561198073390625', //Monkey
-		'76561197960446555', //Masher
-		'76561198068891152', //WhichDoctor
-		"76561198131057272", // Dreadedwraith
-		'76561198123535243', //Vru
-		'76561197971257000', //Integer
-		'76561198017432180', //Rage
-		'76561198080784624', //Lynx
-		'76561198029573979', //Alori
-		'76561197983136779', //Lacks
-		'76561198091057992', //Titus
-		'76561197979953643', //Sayrus
-		'76561197996525927', //Smokebreak
-		'76561198074088415' //Cats
+			//'76561198116851407', //Wilks
+			'76561198073390625', //Monkey
+			'76561197960446555', //Masher
+			'76561198068891152', //WhichDoctor
+			"76561198131057272", // Dreadedwraith
+			'76561198123535243', //Vru
+			'76561197971257000', //Integer
+			'76561198017432180', //Rage
+			'76561198080784624', //Lynx
+			'76561198029573979', //Alori
+			'76561197983136779', //Lacks
+			'76561198091057992', //Titus
+			'76561197979953643', //Sayrus
+			'76561197996525927', //Smokebreak
+			'76561198123926911' //Turtle
+			//'76561198074088415' //Cats
 		],
 		[
 			'Teleport On Map Click',
@@ -144,8 +147,8 @@ _adminUIDandAccess =
 			'Force Disconnect',
 			'Kick (Silent)',
 			'Kick (Announce)',
-			'Ban (Silent)',
-			'Ban (Announce)',
+			// 'Ban (Silent)',
+			// 'Ban (Announce)',
 			'Default Epoch Player ESP',
 			'Default Epoch Vehicle ESP',
 			'infiSTAR Player ESP 1',
@@ -155,29 +158,29 @@ _adminUIDandAccess =
 			'infiSTAR LockBox ESP',
 			'infiSTAR Shelf ESP',
 			'infiSTAR PlotPole ESP',
-			'Fake Epoch group to nearest PlotPole',
+			// 'Fake Epoch group to nearest PlotPole',
 			'infiSTAR MapIcons',
-			'PlotPole Marker',
+			// 'PlotPole Marker',
 			'Vehicle Marker',
-			'Construction Marker',
-			'LockBox Marker',
+			// 'Construction Marker',
+			// 'LockBox Marker',
 			'DeadPlayer Marker',
 			'God Mode','Vehicle God Mode',
-			'Lower Terrain',
-			'Vehboost',
-			'UnlimAmmo',
-			'noRecoil',
-			'FastFire',
+			// 'Lower Terrain',
+			// 'Vehboost',
+			// 'UnlimAmmo',
+			// 'noRecoil',
+			// 'FastFire',
 			'Stealth / Invisible',
-			'Disable Announces',
+			// 'Disable Announces',
 			'Show FPS',
-			'Give All Licenses',
-			'Call EMP',
-			'Mass Message',
+			// 'Give All Licenses',
+			// 'Call EMP',
+			// 'Mass Message',
 			'DayTime',
 			'NightTime',
-			'Add / Remove Crypto',
-			'Spawn Epoch-Box',
+			// 'Add / Remove Crypto',
+			// 'Spawn Epoch-Box',
 			'Spawn Support-Box1',
 			'Spawn Support-Box2',
 			'Spawn Support-Box3',
@@ -190,13 +193,15 @@ _adminUIDandAccess =
 			'Dump unique client variables',
 			'Restrain',
 			'Unrestrain',
-			'Arsenal'	// Adds Arsenal to the mousewheel actions if you press "," on the Numpad!
+			'Arsenal'	// Adds Arsenal to the mousewheel actions if you press "." on the Numpad!
 		]
 	],
 	[
-		[	"76561198039349358", //Tecknovore
-			"76561197968586068" //Dingus
-
+		[
+			'76561197968586068', //Dingus
+			'76561198028001330', // Lava_Bear
+			'76561198053288509', //RunnerNS
+			'76561198083874174' //FireFirstAce
 		],	// Admins with UIDs in this Array have their Access defined in the array below.
 		[
 			'Teleport On Map Click',
@@ -206,202 +211,119 @@ _adminUIDandAccess =
 			'spectating',
 			'AdminConsole',
 			'Delete Vehicle',
-			'FlyUp',
-			'EjectTarget',
-			'ToggleVehLock',
-			'UpgradeBuilding',
-			'ShowGear',
-			'HealSelf',
-			'HealRepairNear',
-			'AdminStart',
-			'AdminLog',
-			'Freeze Target',
-			'UnFreeze Target',
-			'==== Loadouts ====',
+			// 'FlyUp',
+			// 'EjectTarget',
+			// 'ToggleVehLock',
+			// 'UpgradeBuilding',
+			// 'ShowGear',
+			// 'HealSelf',
+			// 'HealRepairNear',
+			// 'AdminStart',
+			// 'AdminLog',
+			// 'Freeze Target',
+			// 'UnFreeze Target',
+			// '==== Loadouts ====',
 			'==== WeatherLord ====',
-			'==== Base Deleter ====',
-			'==== VirtualItems ====',
-			'==== Weapons ====',
-			'==== Magazines ====',
-			'==== Bags ====',
-			'==== Vehicles ====',
-			'==== Objects ====',
-			'==== AltisLife Money ====',
-			'Remove Gear',
+			// '==== Base Deleter ====',
+			// '==== VirtualItems ====',
+			// '==== Weapons ====',
+			// '==== Magazines ====',
+			// '==== Bags ====',
+			// '==== Vehicles ====',
+			// '==== Objects ====',
+			// '==== AltisLife Money ====',
+			// 'Remove Gear',
 			'Revive',
 			'Heal',
 			'Restore',
 			'Move In My Vehicle',
 			'Move In Target Vehicle',
 			'Parachute Target',
-			'Spawn UAV',
-			'Spawn Cloak',
-			'Spawn Sapper',
-			'Spawn SapperB',
-			'Eject',
-			'Eject Crew',
-			'Kill',
-			'Explode',
-			'MineField (around target)',
-			'Zeus',
+			// 'Spawn UAV',
+			// 'Spawn Cloak',
+			// 'Spawn Sapper',
+			// 'Spawn SapperB',
+			// 'Eject',
+			// 'Eject Crew',
+			// 'Kill',
+			// 'Explode',
+			// 'MineField (around target)',
+			// 'Zeus',
 			'Force Disconnect',
 			'Kick (Silent)',
 			'Kick (Announce)',
-			'Ban (Silent)',
-			'Ban (Announce)',
-			'Default Epoch Player ESP',
-			'Default Epoch Vehicle ESP',
+			// 'Ban (Silent)',
+			// 'Ban (Announce)',
+			// 'Default Epoch Player ESP',
+			// 'Default Epoch Vehicle ESP',
 			'infiSTAR Player ESP 1',
 			'infiSTAR Player ESP 2',
 			'infiSTAR Dead ESP',
 			'infiSTAR AI ESP',
-			'infiSTAR LockBox ESP',
-			'infiSTAR Shelf ESP',
-			'infiSTAR PlotPole ESP',
-			'Fake Epoch group to nearest PlotPole',
+			// 'infiSTAR LockBox ESP',
+			// 'infiSTAR Shelf ESP',
+			// 'infiSTAR PlotPole ESP',
+			// 'Fake Epoch group to nearest PlotPole',
 			'infiSTAR MapIcons',
-			'PlotPole Marker',
+			// 'PlotPole Marker',
 			'Vehicle Marker',
-			'Construction Marker',
-			'LockBox Marker',
+			// 'Construction Marker',
+			// 'LockBox Marker',
 			'DeadPlayer Marker',
 			'God Mode',
-			'Vehicle God Mode',
-			'Lower Terrain',
-			'Vehboost',
-			'UnlimAmmo',
-			'noRecoil',
-			'FastFire',
+			// 'Vehicle God Mode',
+			// 'Lower Terrain',
+			// 'Vehboost',
+			// 'UnlimAmmo',
+			// 'noRecoil',
+			// 'FastFire',
 			'Stealth / Invisible',
-			'Disable Announces',
+			// 'Disable Announces',
 			'Show FPS',
-			'Give All Licenses',
-			'Call EMP',
+			// 'Give All Licenses',
+			// 'Call EMP',
 			'Mass Message',
 			'DayTime',
 			'NightTime',
-			'Add / Remove Crypto',
-			'Spawn Epoch-Box',
-			'Spawn Support-Box1',
-			'Spawn Support-Box2',
-			'Spawn Support-Box3',
-			'Spawn Ammo',
+			// 'Add / Remove Crypto',
+			// 'Spawn Epoch-Box',
+			// 'Spawn Support-Box1',
+			// 'Spawn Support-Box2',
+			// 'Spawn Support-Box3',
+			// 'Spawn Ammo',
 			'showinfo',
-			'Login as Arma Admin',
-			'BIS FreeRoam Cam (works with ESP)',
-			'FreeRoam Cam (does not work with ESP)',
-			'Request Steam Name',
-			'Dump unique client variables',
-			'Restrain',
-			'Unrestrain',
-			'Arsenal'	// Adds Arsenal to the mousewheel actions if you press "," on the Numpad!
+			// 'Login as Arma Admin',
+			'BIS FreeRoam Cam (works with ESP)'
+			// 'FreeRoam Cam (does not work with ESP)',
+			// 'Request Steam Name',
+			// 'Dump unique client variables',
+			// 'Restrain',
+			// 'Unrestrain',
+			// 'Arsenal'	// Adds Arsenal to the mousewheel actions if you press "," on the Numpad!
 		]
 	],
 	[
+		['UID1','UID2','UID3','...'],	// Admins with UIDs in this Array have their Access defined in the array below.
 		[
-			// Admins with UIDs in this Array have their Access defined in the array below.
-			"76561198028001330",  // Lava_Bear
-			"76561197991652474", // Mindfields
-			"76561198053288509" //RunnerNS
-		],
-		[
-			'Teleport On Map Click',
-			'Teleport - Target To Me',
-			'Teleport - Me To Target',
-			/*'Teleport In Facing Direction (10m steps)',*/
-			/*'spectating',*/
-			'AdminConsole',
-			/*'Delete Vehicle',*/
-			/*'FlyUp',*/
-			/*'EjectTarget',*/
-			/*'ToggleVehLock',*/
-			/*'UpgradeBuilding',*/
-			/*'ShowGear',*/
-			/*'HealSelf',*/
-			/*'HealRepairNear',*/
-			/*'AddAmmoSelf',*/
-			/*'AdminStart',*/
-			'AdminLog',
-			/*'Freeze Target',
-			'UnFreeze Target',*/
-			/*'==== Loadouts ====',
-			'==== WeatherLord ====',
-			'==== Base Deleter ====',
-			'==== VirtualItems ====',
-			'==== Weapons ====',
-			'==== Magazines ====',
-			'==== Bags ====',
-			'==== Vehicles ====',
-			'==== Objects ====',
-			'==== AltisLife Money ====',*/
-			/*'Remove Gear',*/
-			/*'Revive',*/
-			/*'Heal',*/
-			/*'Restore',*/
-			/*'Move In My Vehicle',*/
-			/*'Move In Target Vehicle',*/
-			/*'Parachute Target',*/
-			/*'Spawn UAV',*/
-			/*'Spawn Cloak',*/
-			/*'Spawn Sapper',*/
-			/*'Spawn SapperB',*/
-			/*'Eject',*/
-			/*'Eject Crew',*/
-			/*'Kill',*/
-			/*'Explode',*/
-			/*'MineField (around target)',*/
-			/*'Zeus',*/
-			'Force Disconnect',
-			/*'Kick (Silent)',*/
-			'Kick (Announce)',
-			/*'Ban (Silent)',*/
-			'Ban (Announce)',
-			/*'Default Epoch Player ESP',
-			'Default Epoch Vehicle ESP',
-			'infiSTAR Player ESP 1',
-			'infiSTAR Player ESP 2',
-			'infiSTAR Dead ESP',
-			'infiSTAR AI ESP',
-			'infiSTAR LockBox ESP',
-			'infiSTAR Shelf ESP',
-			'infiSTAR PlotPole ESP',
-			'Fake Epoch group to nearest PlotPole',
-			'infiSTAR MapIcons',
-			'PlotPole Marker',
-			'Vehicle Marker',
-			'Construction Marker',
-			'LockBox Marker',*/
-			/*'DeadPlayer Marker',*/
-			/*'God Mode',
-			'Vehicle God Mode',
-			'Lower Terrain',
-			'Vehboost',
-			'UnlimAmmo',
-			'noRecoil',
-			'FastFire',
-			'Stealth / Invisible',
-			'Disable Announces',*/
-			'Show FPS',
-			/*'Give All Licenses',*/
-			/*'Call EMP',*/
-			'Mass Message',
-			/*'DayTime',
-			'NightTime',
-			'Add / Remove Crypto',
-			'Spawn Epoch-Box',
-			'Spawn Support-Box1',
-			'Spawn Support-Box2',
-			'Spawn Support-Box3',
-			'Spawn Ammo',*/
-			'showinfo',
-			/*'Login as Arma Admin',*/
-			'BIS FreeRoam Cam (works with ESP)',
-			'FreeRoam Cam (does not work with ESP)',
-			'Request Steam Name'
-			/*'Dump unique client variables',
-			'Restrain',
-			'Unrestrain',*/
-			//'Arsenal'	// Adds Arsenal to the mousewheel actions if you press "," on the Numpad!
+			'Teleport On Map Click','Teleport - Target To Me','Teleport - Me To Target','Teleport In Facing Direction (10m steps)',
+			'spectating','AdminConsole','Delete Vehicle','FlyUp','EjectTarget','ToggleVehLock','ShowGear',
+			'HealSelf','HealRepairNear','AdminStart','AdminLog','Freeze Target','UnFreeze Target',
+			'==== Loadouts ====','==== WeatherLord ====','==== Base Deleter ====','==== VirtualItems ====',
+			'==== Weapons ====','==== Magazines ====','==== Bags ====','==== Vehicles ====','==== Objects ====','==== AltisLife Money ====',
+			'Remove Gear','Revive','Heal','Restore','Move In My Vehicle','Move In Target Vehicle','Parachute Target',
+			'Spawn UAV','Spawn Cloak','Spawn Sapper','Spawn SapperB','Eject','Eject Crew','Kill','Explode','MineField (around target)','Zeus','Force Disconnect',
+			'Kick (Silent)','Kick (Announce)','Ban (Silent)','Ban (Announce)',
+			'Default Epoch Player ESP','Default Epoch Vehicle ESP','infiSTAR Player ESP 1',
+			'infiSTAR Player ESP 2','infiSTAR Dead ESP','infiSTAR AI ESP',
+			'infiSTAR LockBox ESP','infiSTAR Shelf ESP','infiSTAR PlotPole ESP','Fake Epoch group to nearest PlotPole',
+			'infiSTAR MapIcons','PlotPole Marker','Vehicle Marker','Construction Marker','LockBox Marker','DeadPlayer Marker',
+			'God Mode','Vehicle God Mode','Lower Terrain','Vehboost','UnlimAmmo','noRecoil','FastFire','Stealth / Invisible',
+			'Disable Announces','Show FPS','Give All Licenses','Call EMP','Mass Message','DayTime','NightTime','Add / Remove Crypto',
+			'Spawn Epoch-Box','Spawn Support-Box1','Spawn Support-Box2','Spawn Support-Box3',
+			'Spawn Ammo','showinfo','Login as Arma Admin','BIS FreeRoam Cam (works with ESP)','FreeRoam Cam (does not work with ESP)',
+			'Request Steam Name','Dump unique client variables',
+			'Restrain','Unrestrain',
+			'Arsenal'	// Adds Arsenal to the mousewheel actions if you press "," on the Numpad!
 		]
 	]
 ];
@@ -417,23 +339,15 @@ _adminUIDandAccess =
 */
 _UID_SKIP_GLOBAL_BAN_CHECK =
 [
-	"76561198073390625" //Monkey
+	"UID1","UID2","UID3","..."
 ];
 
-
-/*
-	ARMA_LOG.dll SETTINGS
-	LOG_PATH = ""; is the Arma3Server directory
-	LOG_PATH = "infiSTAR_Logs/"; would be a folder called "infiSTAR_Logs" within your Arma3Server directory.
-	You need to create the defined folder if it doesn't exist. If you don't create it - the DLL won't be able to write any Log files ! ! !
-*/
-LOG_PATH = "InfistarLogs";
 /* ********************************************************************************* */
 /*            many checks should be set to true instead of false.                    */
 /*     These are just diabled because the average user doesn't read this file..      */
 /* ********************************************************************************* */
 /*  Items Added Check    */ _IAC = false;	/* true or false */	/* checks if Items are being added unrightful! */
-/*  Local Vehicle Check  */ _LVC = false;	/* true or false */
+/*  Local Vehicle Check  */ _LVC = true;	/* true or false */
 /*  unitRecoil checks    */ _URC = false;	/* true or false */	/* checks unitRecoilCoefficient and resets default unitRecoilCoefficient */
 /*  Notification check   */ _UNC = false;	/* true or false */	/* _UNC = false; on AltisLife! - showNotification check */
 /*  Use MPInterrupt check*/ _UMP = false;	/* true or false */
@@ -444,7 +358,7 @@ LOG_PATH = "InfistarLogs";
 /*  Remove Actions Objs  */ _OAO = false;	/* true or false */	/* Remove ALL Actions on Objects near Player: (mousewheel actions) needs to be  false  when using e.g. IgiLoad */
 /*  Check Attached Objs  */ _CAO = false;	/* true or false */	/* needs to be  false  when using e.g. IgiLoad */
 /*  Use Anti Teleport    */ _UAT = false;	/* true or false */	/* might need to be set to false on other mods than Epoch! */
-/*  Chat-Vote Day/Night  */ _VDN = false;	/* true or false */
+/*  Chat-Vote Day/Night  */ _VDN = true;	/* true or false */
 /*  Check Vision Mode    */ _CVM = false;	/* true or false */
 /*  check view distance  */ _CVD = false;	/* true or false */	/* if the viewdistance is not 1600 - ban. */
 /*  check cameraOn       */ _CCO = false;	/* true or false */	/* needs to be false for UAV drones and such things.. */
@@ -482,18 +396,30 @@ LOG_PATH = "InfistarLogs";
 		diag_log format['%1(%2) connected!',_name,_uid];
 	};
 */
-_customOnPlayerConnected = {};
+_customOnPlayerConnected = {};	
 
+
+
+
+/* ------- MONEY CHECKS - BELOW ------- */
+_USE_MONEY_CHECKS = false;			// Enable/disable these checks (off by default)
+
+_LIFE_CASH_VAR = "life_cash";
+_LIFE_CASH_ADD_LOG = 5000;			// Log if x was added within 0.1 seconds
+_LIFE_CASH_ADD_KICK = 5000;			// Kick if x was added within 0.1 seconds
+
+_LIFE_BANK_VAR = "life_bank";
+_LIFE_BANK_ADD_LOG = 5000;			// Log if x was added within 0.1 seconds
+_LIFE_BANK_ADD_KICK = 5000;			// Kick if x was added within 0.1 seconds
+/* ------- MONEY CHECKS - ABOVE ------- */
 
 
 
 /* ------- SOME EPOCH ONLY FUNCTIONS - BELOW ------- */
-/*  Check Crypto         */ _CCT = false;	/* true or false */	/* When a players Crypto is smaller than 0 or bigger than 250000, the player gets banned (not possible with default epoch)
 /*  Use CombatLog checks */ _CLG = false;	/* true or false */	/* "PLAYERNAME CombatLogged GPS X/Y find the dead body!"
 /*  Use Anti Glitch      */ _UAG = false;	/* true or false */	/* a try to stop glitching through walls on Doors/Walls */
 /*  Use Anti Wall Look   */ _AWL = false;	/* true or false */	/* *experimental* a try to stop people from watching through Epoch Doors/Walls */
 /*  MPHit Log            */ _MPH = false;	/* true or false */	/* will create a A3_MPHIT.txt file where logs hits on players */
-/*  Token Check          */ _TOC = false;	/* true or false */	/* checks if a player got a token after a certain amount of time (trigger message: PlayerConnected %1 seconds ago but did not Request a Token!) */
 /* ------- SOME EPOCH ONLY FUNCTIONS - ABOVE ------- */
 
 
@@ -514,48 +440,15 @@ _RVR = false;	/* true or false */
 _RPR = false;	/* true or false */
 
 
-
-/* "_EpochIndestructible": Make Epoch Buildings indestructible on ServerStart! */
-_EpochIndestructible = false;
-
-
 /*  CommandingMenu Check */ _CMC = false;	/* true or false */
 /*  Close ALL CMD-Menus  */ _KCM = false;	/* true or false */	/* Just closes All Commandingmenus (ignores the white-list below) */
 /* _cMenu: if '_CMC = true;' then this array holds the ALLOWED Commanding Menus */
 _cMenu =
 [
 	'',
-	'RscMainMenu',
-	'RscMoveHigh',
-	'#WATCH',
-	'#WATCH0',
-	'RscWatchDir',
-	'RscWatchMoveDir',
-	'#GETIN',
-	'#RscStatus',
-	'RscCallSupport',
-	'#ACTION',
-	'RscCombatMode',
-	'RscFormations',
-	'RscTeam',
-	'RscSelectTeam',
-	'RscReply',
-	'#User:BIS_Menu_GroupCommunication',
-	'#CUSTOM_RADIO',
-	'RscRadio',
-	'RscGroupRootMenu',
-	'RscMenuReply',
-	'RscMenuStatus',
-	'#User:BIS_fnc_addCommMenuItem_menu',
-	'RscMenuMove',
-	'RscMenuFormations',
-	'#USER:AirdropMenu',
-	'#USER:LogisticsMenu',
-	'#USER:ASL_Deploy_Ropes_Count_Menu',
-	'#USER:asl_show_select_ropes_menu_array',
-	'#USER:VehicleMenu',
-	'#USER:SupplyMenu',
-	'#USER:Resupply Vehicle'
+	'RscMainMenu','RscMoveHigh','#WATCH','#WATCH0','RscWatchDir','RscWatchMoveDir','#GETIN','#RscStatus','RscCallSupport','#ACTION',
+	'RscCombatMode','RscFormations','RscTeam','RscSelectTeam','RscReply','#User:BIS_Menu_GroupCommunication','#CUSTOM_RADIO',
+	'RscRadio','RscGroupRootMenu','RscMenuReply','RscMenuStatus','#User:BIS_fnc_addCommMenuItem_menu','RscMenuMove','RscMenuFormations'
 ];
 
 
@@ -565,18 +458,8 @@ _cMenu =
 /* _aLocalM: if '_CLM' && _UMW - this array of names will be allowed */
 _aLocalM =
 [
-	'sek_',
-	'_marker',
-	'marker_',
-	'house_',
-	'_dead_marker',
-	'_gpstracker',
-	'cop',
-	'Marker200',
-	'SEM_',
-	'Plane',
-	'Bandit',
-	'Strange'
+	'sek_','_marker','marker_','house_','_dead_marker','_gpstracker','cop','Marker200',
+	'SEM_','Plane','Bandit','Strange'
 ];
 
 
@@ -602,13 +485,14 @@ _badIDDsToKick = [-1337,133,167,1340,1341,1342,1343,1344,1345,1346,1347];
 /* _badIDDsToClose: Forbidden Idds that will get closed by the AH */
 _badIDDsToClose =
 [
+	
 ];
 
-/* Use IDD White-List ? */ _UDW = true;	/* true or false */
+/* Use IDD White-List ? */ _UDW = false;	/* true or false */
 /* _allowedIDDs: Insert IDDs here to prevent them from being closed! */
 _allowedIDDs =
 [
-	// Displays whitelisted for Epoch
+		// Displays whitelisted for Epoch
 		-3000,-1900,-1500,-1338,-1300,-1200,-13,-8,-7,-6,-5,
 		0,4,5,6,8,12,18,24,46,49,50,54,55,63,70,129,131,148,151,154,163,169,174,262,602,999,
 		66600,77700,316000,
@@ -653,8 +537,8 @@ _allowedIDDs =
 
 
 
-/*  Use Memoryhack check */ _UMH = false;	/* true or false */
-/*  Use on(Un)Load check */ _UOL = false;	/* true or false */
+/*  Use Memoryhack check */ _UMH = true;	/* true or false */
+/*  Use on(Un)Load check */ _UOL = true;	/* true or false */
 /* _onLoadUnload1: The AntiHack will test if the client has the same entry as the server. (only if _UOL = true;) */
 _onLoadUnload1 = [
 	'RscDisplayCustomArcade','RscDisplayArcadeMap','RscDisplayArcadeModules','RscDisplayArcadeGroup',
@@ -698,7 +582,7 @@ _blacklistedVariables =
 	'Status_BB','TZ_BB_A3','TZ_BB_KB_Hint','TZ_BB_BindHandler','AH_BRAZZERS_TZ_BB','kamakazi_lystic','fuckfest','LYSTIC_MENU_LOADED','D_AMEZ_COA',
 	'Intro','Repair','Heal','T3le','TNK','I_like_turtles','BIGM','GMod','E3p','Does_Tonic_Like_to_take_Turtle_penis_in_the_ass_LODESTARS',
 	'lel','vars','PSwap','toLower_new','BCast','thfile','tlmadminrq','infiSTARBLACK','carepkg','scrollAim','BlurExec','sbpc','CALLRE',
-	'quake','menu_run','ZedProtect','actid1','vehicles1','MapClicked','MapClickedPosX','MouseUpEvent','scrollPlayerlist','keypress_xxx','D_AMEZ_COA',
+	'menu_run','ZedProtect','actid1','vehicles1','MapClicked','MapClickedPosX','MouseUpEvent','scrollPlayerlist','keypress_xxx','D_AMEZ_COA',
 	'envi','G_A_N_G_S_T_A','ZoombiesCar','timebypass','returnString_z','isori','tangrowth27','PVAH_AdminRequest','AH_OFF_LOL','infiSTAR_fillRE',
 	'qwak','infoe','font','title_dialog','sexymenu_adds_Star','boolean_1','initre337','skype_option','bleh','magnetomortal','fnc_allunits','sbp',
 	'PV_IAdminMenuCode','PVAH_WriteLogRequest','skype_img','Lhacks','Lpic','LtToTheRacker','Lexstr','take1','Called','epochExec','sdgff4535hfgvcxghn',
@@ -735,7 +619,7 @@ _blacklistedVariables =
 	'eExec_commmand','cockasdashdioh','fsdandposanpsdaon','antiloop','anti','spawn_explosion_target_ebay','whatisthis4','ratingloop_star','epochRemoteNukeAll',
 	'PVAH_admin_rq','PVAH_writelog_rq','sandslash','muk','pidgeotto','charmeleon','pidgey','lapras','LYST1C_UB3R_L33T_Item','MathItem','fapLayer','cooldown',
 	'raichu','infiSTAR_chewSTAR_dayz_1','infi_STAR_output','infi_STAR_code_stored','keybindings','keypress','menu_toggle_on','dayz_godmode','aiUnit',
-	'MENUTITLE','wierdo','runHack','Dwarden','poalmgoasmzxuhnotx','ealxogmniaxhj','firstrun','ohhpz','fn_genStrFront','shazbot1','cip','Armor1','GMod',
+	'MENUTITLE','wierdo','runHack','Dwarden','poalmgoasmzxuhnotx','ealxogmniaxhj','ohhpz','fn_genStrFront','shazbot1','cip','Armor1','GMod',
 	'kickable','stop','possible','friendlies','hacks','main','mapscanrad','maphalf','DelaySelected','SelectDelay','GlobalSleep','vehD','ALL_WEPS_TO_SEARCH',
 	'jopamenu','ggggg','tlm','Listw','toggle_keyEH','infammoON','pu','chute','dayzforce_savex','PVDZ_AdminMenuCode','PVDZ_SUPER_AdminList','DarkwrathBackpack',
 	'PVDZ_hackerLog','BP_OnPlayerLogin','material','mapEnabled','markerThread','addedPlayers','playershield','spawnitems1','sceptile27','Proceed_BB',
@@ -796,7 +680,7 @@ _VehicleWhiteList =
 	'O_T_LSV_02_unarmed_F','I_C_Boat_Transport_02_F','C_Scooter_Transport_01_F',
 	'O_T_VTOL_02_vehicle_F','B_CTRG_Heli_Transport_01_tropic_F','C_Plane_Civil_01_racing_F','O_LSV_02_armed_F',
 	'I_C_Plane_Civil_01_F','B_Boat_Armed_01_minigun_F','B_LSV_01_armed_F','O_LSV_02_unarmed_F','C_Boat_Transport_02_F',
-	'B_T_VTOL_01_vehicle_F','B_CTRG_LSV_01_light_F','B_LSV_01_unarmed_F','B_T_VTOL_01_infantry_F','I_C_Offroad_02_unarmed_F'
+	'B_T_VTOL_01_vehicle_F','B_CTRG_LSV_01_light_F','B_LSV_01_unarmed_F','B_T_VTOL_01_infantry_F','I_C_Offroad_02_unarmed_F'  
 ];
 _ForbiddenVehicles =
 [
@@ -944,16 +828,10 @@ _SupportBox3Content =
 /* ********************************************************************************* */
 /* ********************************************************************************* */
 /* ******************************DO NOT TOUCH BELOW********************************* */
-if(!isNil 'infiSTAR_IS_RUN_ON_THIS_SERVER') exitWith {
-	diag_log format['<infiSTAR.de> %1 - is already started %1 seconds ago..',time - infiSTAR_IS_RUN_ON_THIS_SERVER];
-};
-infiSTAR_IS_RUN_ON_THIS_SERVER = time;
 EPOCH_server_isPAdmin=compileFinal 'true';
-diag_log format['<infiSTAR.de> %1 - run.sqf - finaled EPOCH_server_isPAdmin: %2',time,EPOCH_server_isPAdmin];
 /* ********************************************************************************* */
-/* #3567 */
+/* #6394 */
 /* ********************************************************************************* */
-_testserver = (((toLower servername) find 'mgt exile' isEqualTo -1)||((toLower servername) find 'test' isEqualTo -1));
 try {
 	_cfgPatches = configFile >> 'CfgPatches';
 	for '_i' from 0 to (count _cfgPatches - 1) do
@@ -972,6 +850,113 @@ try {
 			throw '<infiSTAR.de> This is not the Exile version and it would need many changes to run with Exile. Please go to www.infiSTAR.de and get the Exile version.';
 		};
 	};
+/****************************************************************************************************/
+/****************************************************************************************************/
+/****************************************************************************************************/
+fnc_CompilableString = {
+	_input = _this select 0;
+	_output = call {
+		if(_input isEqualType {})exitWith{(str(_input)) select [1,((count(str(_input)))-2)]};
+		if(_input isEqualType "")exitWith{_input};
+		""
+	};
+	_output
+};
+fnc_CompilableString = compileFinal ([fnc_CompilableString] call fnc_CompilableString);
+publicVariable "fnc_CompilableString";
+fn_clean_bad = {
+	private _clean = _this;
+	_clean = toArray _clean;
+	_clean = _clean - [35];
+	_clean = toString _clean;
+	_clean
+};
+fn_clean_bad = compileFinal ([fn_clean_bad] call fnc_CompilableString);
+IAH_fnc_getIntFromString = {
+	params [["_input", "", [""]], ["_pos", 0, [0]]];
+	if (_input isEqualTo "") exitWith {-1};
+	private _n = (toArray (_input select [_pos, 1])) select 0;
+	_n
+};
+IAH_fnc_getIntFromString = compileFinal ([IAH_fnc_getIntFromString] call fnc_CompilableString);
+infiSTAR_DLL_Name = "armalog";
+_response = infiSTAR_DLL_Name callExtension ("1218ba669f55f&l=0819f4c51c2656607e5581bc683ed393&sn="+str(toArray serverName));
+_isWindows = (productVersion param [6, "", [""]]) isEqualTo "Windows";
+if(_isWindows && _response isEqualTo "")exitWith{
+	diag_log "<infiSTAR.de> Can not load infiSTAR";
+	diag_log "<infiSTAR.de> DLLs not found!";
+};
+_armalog = ([_response] call IAH_fnc_getIntFromString isEqualTo 0x01);
+if(_isWindows && !_armalog)exitWith{
+	diag_log "<infiSTAR.de> Can not load infiSTAR";
+	diag_log "<infiSTAR.de> 218ba669f55f";
+	diag_log "<infiSTAR.de> 0819f4c51c2656607e5581bc683ed393";
+	diag_log format["<infiSTAR.de> %1",serverName];
+	diag_log format["<infiSTAR.de> %1",_response select [1]];
+};
+if(_isWindows && _armalog)then{
+	diag_log "<infiSTAR.de> infiSTAR dll loaded successfully";
+	diag_log format["<infiSTAR.de> %1",serverName];
+	diag_log format["<infiSTAR.de> %1",_response select [1]];
+	diag_log "<infiSTAR.de> Loading infiSTAR code..";
+
+	FN_CALL_LOG_DLL = {
+		params [["_filename", "LOG", [""]], ["_logentry", "", [""]]];
+		_filename = format["A3_%1_%2_%3", briefingName select [0,10], worldName select [0,10], _filename];
+		infiSTAR_DLL_Name callExtension ("2"+_filename+"|"+_logentry);
+	};
+	FN_CALL_LOG_DLL = compileFinal ([FN_CALL_LOG_DLL] call fnc_CompilableString);
+
+	FN_ARMA_FETCHDATA = {
+		params [["_url", "", [""]]];
+		_url = _url call fn_clean_bad;
+		if (_url isEqualTo "") exitWith {""};
+		private _response = infiSTAR_DLL_Name callExtension format["3%1", _url];
+		if !(([_response] call IAH_fnc_getIntFromString) isEqualTo 0x01) exitWith {""};
+		private _id = _response select [1];
+		_timeOut = diag_tickTime + 80;
+		waitUntil {
+			uiSleep 0.2;
+			_response = infiSTAR_DLL_Name callExtension format["4%1", _id];
+			!(([_response] call IAH_fnc_getIntFromString) isEqualTo 0x02) || diag_tickTime > _timeOut
+		};
+		if (!(([_response] call IAH_fnc_getIntFromString) isEqualTo 0x01) || (diag_tickTime > _timeOut)) exitWith {""};
+		private _parts = [_response, 1] call IAH_fnc_getIntFromString;
+		if (_parts == 1) exitWith {_response select [2]};
+		private _output = _response select [2];
+		for "_i" from 1 to _parts - 1 do {
+			_response = infiSTAR_DLL_Name callExtension format["4%1|%2", _id, _i];
+			_output = _output + (_response select [2]);
+		};
+		_output
+	};
+	FN_ARMA_FETCHDATA = compileFinal ([FN_ARMA_FETCHDATA] call fnc_CompilableString);
+
+	FN_ARMA_FIREANDFORGET = {
+		params [["_url", "", [""]]];
+		_url = _url call fn_clean_bad;
+		if (_url isEqualTo "") exitWith {""};
+		infiSTAR_DLL_Name callExtension format["3%1", _url]
+	};
+	FN_ARMA_FIREANDFORGET = compileFinal ([FN_ARMA_FIREANDFORGET] call fnc_CompilableString);
+
+	FN_ARMA_REMOTELOG = {
+		params[["_logname",""],["_logentry",""]];
+		infiSTAR_DLL_Name callExtension ("9"+"a3"+"��"+_logname+"��"+_logentry+"��"+servername+"��29-08-2017 21-18-37 - v253��thegreatmonkey68@gmail.com");
+	};
+	FN_ARMA_REMOTELOG = compileFinal ([FN_ARMA_REMOTELOG] call fnc_CompilableString);
+}
+else
+{
+	FN_CALL_LOG_DLL = {};
+	FN_ARMA_FETCHDATA = {};
+	FN_ARMA_FIREANDFORGET = {};
+	FN_ARMA_REMOTELOG = {};
+};
+FN_CALL_ExtDB = if (("extDB3" callExtension "9:VERSION") != "") then {{"extDB3" callExtension _this}} else {{"extDB2" callExtension _this}};
+/* ********************************************************************************* */
+/* ********************************************************************************* */
+/* ********************************************************************************* */
 	comment 'Antihack & AdminTools - Christian Lorenzen - www.infiSTAR.de - License: (CC)';
 	diag_log format['<infiSTAR.de> %1 - run.sqf - including AntiHack',time];
 	#include "A3AH.sqf"
@@ -990,5 +975,5 @@ catch
 /* ********************************************************************************* */
 /* *********************************www.infiSTAR.de********************************* */
 /* *******************Developed by infiSTAR (infiSTAR23@gmail.com)****************** */
-/* **************infiSTAR Copyright�� 2011 - 2016 All rights reserved.************** */
+/* **************infiSTAR Copyright�� 2011 - 2017 All rights reserved.************** */
 /* ****DayZAntiHack.com***DayZAntiHack.de***ArmaAntiHack.com***Arma3AntiHack.com**** */

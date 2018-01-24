@@ -36,6 +36,11 @@ if !(playerSide in [BLUFOR,OPFOR]) then
 		{
 			moveOut player;
 			["You can't enter vehicles being used by enemy groups.", 5] call mf_notify_client;
+			// ejection bug workaround 
+			if (!isNull objectParent player) then 
+			{ 
+				player setPos (player modelToWorldVisual [0,0,0]); 
+			}; 
 			breakOut "getInVehicle";
 		};
 	} forEach crew _veh;

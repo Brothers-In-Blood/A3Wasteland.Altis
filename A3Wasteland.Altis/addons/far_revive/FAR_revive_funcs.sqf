@@ -106,39 +106,34 @@ FAR_HandleTreating =
 				private _progress = 0;
 				private _timeStart = diag_tickTime;
 				private "_complete";
-
 				waitUntil
 				{
 					_progress = (diag_tickTime - _timeStart) / FAR_Revive_Duration;
 					([_progress, _target, _revive] call _checks) params ["_failed", "_text"];
 					_complete = (_progress >= 1 || _failed);
-
 					(ReviveGUI_IDD + 9) cutText [format ["\n\n%1", _text], "PLAIN DOWN", [0.01, 0.5] select _complete]; // (FAR_cutTextLayer + 1)
-
 					_success = !_failed;
 					_complete
 				};
 			};
-
 			if (_success && CAN_PERFORM) then
 			{
 				if (_revive) then
 				{
 					_target setVariable ["FAR_isUnconscious", 0, true];
 					[player, "reviveCount", 1] call fn_addScore;
+					player removeitem "Medikit";
 				}
 				else
 				{
 					_target setVariable ["FAR_isStabilized", 1, true];
 					_target setVariable ["FAR_handleStabilize", true, true];
 				};
-
 				if (_healer == player && !("Medikit" in items player)) then
 				{
 					player removeItem "FirstAidKit";
 				};
 			};
-
 			if (TREATED_BY(_target) == _healer) then
 			{
 				_target setVariable ["FAR_treatedBy", nil, true];
@@ -280,6 +275,11 @@ FAR_Eject_Injured =
 		{
 			moveOut _x;
 			unassignVehicle _x;
+			// ejection bug workaround 
+			if (!isNull objectParent _x) then 
+			{ 
+				_x setPos (_x modelToWorldVisual [0,0,0]); 
+			};
 		};
 	} forEach crew _veh;
 }

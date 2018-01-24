@@ -7,10 +7,10 @@
 	Arma AntiHack & AdminTools - infiSTAR.de
 */
 /* *******************Developer : infiSTAR (infiSTAR23@gmail.com)******************* */
-/* **************infiSTAR Copyright®© 2011 - 2016 All rights reserved.************** */
+/* **************infiSTAR Copyright®© 2011 - 2017 All rights reserved.************** */
 /* *********************************www.infiSTAR.de********************************* */
 comment 'Antihack & AdminTools - Christian Lorenzen - www.infiSTAR.de - License: (CC)';
-VERSION_DATE_IS = '17-06-2017 08-21-59#6394';
+VERSION_DATE_IS = '29-08-2017 21-18-37';
 infiSTAR_MAIN_CODE = "
 fnc_admin_c = compileFinal 'compile _this';
 fnc_admin_cc = compileFinal 'call compile _this';
@@ -557,7 +557,7 @@ fnc_searchNfill = {
 						lbclear _ctrl;
 						{
 							_PUIDX = getPlayerUID _x;
-							_name = _x getVariable['realname',name _x];
+							_name = _x getVariable['playerName',name _x];
 							if((toLower _name) find _txt > -1)then
 							{
 								_side = side _x;
@@ -1194,11 +1194,32 @@ fnc_HTML_LOAD = {
 		}
 	] execFSM 'call.fsm';
 };
+fn_infiSTAR_addSaveButton = {
+	_display = findDisplay MAIN_DISPLAY_ID;
+	
+	_btn = [_display,'RscButton',1338001] call fnc_createctrl;
+	_btn ctrlSetText 'SAVE TOGGLE STATE';
+	_btn ctrlSetPosition [
+		0.39 * safezoneW + safezoneX + (0.15 * safezoneW),
+		0.0379694 * safezoneH + safezoneY,
+		0.12 * safezoneW,
+		0.02 * safezoneH
+	];
+	_btn buttonSetAction '
+		profileNamespace setVariable [''infiSTAR_saveToggle_A3'',infiSTAR_toggled_A];
+		saveprofileNamespace;
+		_log = ''Saved currently toggled/enabled admin functions. Next time you login as admin, they will automatically turn on.'';
+		_log call FN_SHOW_LOG;
+		systemChat (''<infiSTAR.de> ''+_log);
+	';
+	_btn ctrlCommit 0;
+};
 fnc_FULLinit = {
 	disableSerialization;
 	if(isNull findDisplay MAIN_DISPLAY_ID)then
 	{
 		createdialog 'infiSTAR_AdminMenu';
+		call fn_infiSTAR_addSaveButton;
 		if(infiSTAR_HTML_LOAD)then{call fnc_HTML_LOAD;};
 	};
 	call fnc_initMenu;
@@ -1798,7 +1819,7 @@ fnc_fill_infiSTAR_Player_REAL = {
 			if(isNull _x)exitWith{};
 			_PUIDX = getPlayerUID _x;
 			if(_PUIDX == '')exitWith{};
-			_name = _x getVariable['realname',name _x];
+			_name = _x getVariable['playerName',name _x];
 			_side = side _x;
 			_clr = _side call {
 				if(_this == civilian)exitWith{[0.67,0.97,0.97,1]};
@@ -1942,6 +1963,50 @@ fnc_LBSelChanged_LEFT = {
 	};
 	SELECTED_TARGET_PLAYER
 };
+fnc_toggleables = {
+	switch (_this) do {
+		case 'infiSTAR Player ESP 1':{call infiSTAR_fnc_infiESP_player1;};
+		case 'infiSTAR Player ESP 2':{call infiSTAR_fnc_infiESP_player2;};
+		case 'infiSTAR AI ESP':{call infiSTAR_fnc_infiESP_AI;};
+		case 'infiSTAR Dead ESP':{call infiSTAR_fnc_infiESP_DEAD;};
+		case 'infiSTAR LockBox ESP':{call infiSTAR_fnc_infiESP_LOCKBOX;};
+		case 'infiSTAR Shelf ESP':{call infiSTAR_fnc_infiESP_SHELF;};
+		case 'infiSTAR PlotPole ESP':{call infiSTAR_fnc_infiESP_PLOTPOLE;};
+		case 'infiSTAR MapIcons':{call infiSTAR_A3MAPICONS;};
+		case 'PlotPole Marker':{call adminPlotPole;};
+		case 'Vehicle Marker':{call adminVehicleMarker;};
+		case 'Construction Marker':{call adminConstructions;};
+		case 'LockBox Marker':{call adminLockBox;};
+		case 'Fake Epoch group to nearest PlotPole':{call fake_epoch_grp;};
+		case 'DeadPlayer Marker':{call adminDeadPlayer;};
+		case 'God Mode':{call infiSTAR_A3Invulnerability;};
+		case 'Vehicle God Mode':{call fnc_infiSTAR_A3cargod;};
+		case 'Lower Terrain':{call fnc_LowerTerrain;};
+		case 'Vehboost':{call infiSTAR_VehicleBoost;};
+		case 'UnlimAmmo':{[] spawn fnc_infiSTAR_A3UnlAmmo;};
+		case 'noRecoil':{[] spawn fnc_infiSTAR_A3noRecoil;};
+		case 'FastFire':{[] spawn fnc_infiSTAR_A3FF;};
+		case 'Stealth / Invisible':{call fnc_infiSTARHIDE;};
+		case 'Disable Announces':{call fnc_DisableAnnouncements;};
+		case 'Default Epoch Player ESP':{true spawn fnc_Epochs_ESP;};
+		case 'Default Epoch Vehicle ESP':{false spawn fnc_Epochs_ESP;};
+		case 'Teleport In Facing Direction (10m steps)':{if(isNil'infiSTAR_TpdirectionENABLED')then{infiSTAR_TpdirectionENABLED=true}else{infiSTAR_TpdirectionENABLED=nil;};};
+	};
+	if(_this in infiSTAR_toggled_A)then
+	{
+		lbSetColor [RIGHT_CTRL_ID,1,[1,0,0,1]];
+		infiSTAR_toggled_A = infiSTAR_toggled_A - [_this];
+		_log = format['%1 - 0',_this];
+		_log call fnc_adminLog;
+	}
+	else
+	{
+		lbSetColor [RIGHT_CTRL_ID,1,[0,1,0,1]];
+		infiSTAR_toggled_A pushBack _this;
+		_log = format['%1 - 1',_this];
+		_log call fnc_adminLog;
+	};
+};
 fnc_LBDblClick_RIGHT = {
 	_click = lbtext[RIGHT_CTRL_ID,(lbCurSel RIGHT_CTRL_ID)];
 	if(!isNil'VIRTUAL_ITEMSTHREAD')then{terminate VIRTUAL_ITEMSTHREAD;VIRTUAL_ITEMSTHREAD=nil;};
@@ -1955,51 +2020,7 @@ fnc_LBDblClick_RIGHT = {
 		_log call FN_SHOW_LOG;
 		[] call fnc_fill_HackLog;[] call fnc_setFocus;
 	};
-	if(_click in infiSTAR_Toggleable)then
-	{
-		switch (_click) do {
-			case 'infiSTAR Player ESP 1':{call infiSTAR_fnc_infiESP_player1;};
-			case 'infiSTAR Player ESP 2':{call infiSTAR_fnc_infiESP_player2;};
-			case 'infiSTAR AI ESP':{call infiSTAR_fnc_infiESP_AI;};
-			case 'infiSTAR Dead ESP':{call infiSTAR_fnc_infiESP_DEAD;};
-			case 'infiSTAR LockBox ESP':{call infiSTAR_fnc_infiESP_LOCKBOX;};
-			case 'infiSTAR Shelf ESP':{call infiSTAR_fnc_infiESP_SHELF;};
-			case 'infiSTAR PlotPole ESP':{call infiSTAR_fnc_infiESP_PLOTPOLE;};
-			case 'infiSTAR MapIcons':{call infiSTAR_A3MAPICONS;};
-			case 'PlotPole Marker':{call adminPlotPole;};
-			case 'Vehicle Marker':{call adminVehicleMarker;};
-			case 'Construction Marker':{call adminConstructions;};
-			case 'LockBox Marker':{call adminLockBox;};
-			case 'Fake Epoch group to nearest PlotPole':{call fake_epoch_grp;};
-			case 'DeadPlayer Marker':{call adminDeadPlayer;};
-			case 'God Mode':{call infiSTAR_A3Invulnerability;};
-			case 'Vehicle God Mode':{call fnc_infiSTAR_A3cargod;};
-			case 'Lower Terrain':{call fnc_LowerTerrain;};
-			case 'Vehboost':{call infiSTAR_VehicleBoost;};
-			case 'UnlimAmmo':{[] spawn fnc_infiSTAR_A3UnlAmmo;};
-			case 'noRecoil':{[] spawn fnc_infiSTAR_A3noRecoil;};
-			case 'FastFire':{[] spawn fnc_infiSTAR_A3FF;};
-			case 'Stealth / Invisible':{call fnc_infiSTARHIDE;};
-			case 'Disable Announces':{call fnc_DisableAnnouncements;};
-			case 'Default Epoch Player ESP':{true spawn fnc_Epochs_ESP;};
-			case 'Default Epoch Vehicle ESP':{false spawn fnc_Epochs_ESP;};
-			case 'Teleport In Facing Direction (10m steps)':{if(isNil'infiSTAR_TpdirectionENABLED')then{infiSTAR_TpdirectionENABLED=true}else{infiSTAR_TpdirectionENABLED=nil;};};
-		};
-		if(_click in infiSTAR_toggled_A)then
-		{
-			lbSetColor [RIGHT_CTRL_ID,1,[1,0,0,1]];
-			infiSTAR_toggled_A = infiSTAR_toggled_A - [_click];
-			_log = format['%1 - 0',_click];
-			_log call fnc_adminLog;
-		}
-		else
-		{
-			lbSetColor [RIGHT_CTRL_ID,1,[0,1,0,1]];
-			infiSTAR_toggled_A pushBack _click;
-			_log = format['%1 - 1',_click];
-			_log call fnc_adminLog;
-		};
-	};
+	if(_click in infiSTAR_Toggleable)then{_click call fnc_toggleables;};
 	if(_click in infiSTAR_OnTarget)then
 	{
 		_target = lbtext[LEFT_CTRL_ID,(lbCurSel LEFT_CTRL_ID)];
@@ -3989,25 +4010,6 @@ infiSTAR_A3Togglelock = {
 		cursorTarget animate [_x,if(_animationPhase > 0)then{0}else{1}];
 	} forEach ['DoorRotation','DoorRotationLeft','DoorRotationRight','open_left','open_right','lock_cGarage','Open_Door','lock_Door','raise','Open_top','Open_bot'];
 };
-infiSTAR_UpgradeBuilding = {
-	_object=cursorTarget;
-	if(isNull _object)exitWith{};
-	if(_object isKindOf 'Constructions_static_F')then
-	{
-		_upgrade = getArray(configFile >> 'CfgVehicles' >> (typeOf _object) >> 'upgradeBuilding');
-		if !(_upgrade isEqualTo [])then
-		{
-			[14,player,[_object,player,Epoch_personalToken]] call fnc_AdminReq;
-			_log = format['Upgraded   %1',typeOf _object];
-			_log call fnc_adminLog;
-		}
-		else
-		{
-			_log = format['Can not Upgrade typeOf building   %1',typeOf _object];
-			_log call fnc_adminLog;
-		};
-	};
-};
 infiSTAR_A3addAmmo = {
 	if(isNil'SELECTED_TARGET_PLAYER')then{SELECTED_TARGET_PLAYER=player;};
 	if(isNull SELECTED_TARGET_PLAYER)then{SELECTED_TARGET_PLAYER=player;};
@@ -4163,7 +4165,7 @@ fnc_Epochs_ESP = {
 	};
 };
 fn_xgetname = {
-	if(alive _x)then{name _x}else{_x getVariable['realname','unknown']}
+	if(alive _x)then{name _x}else{_x getVariable['playerName','unknown']}
 };
 fn_xgetclr = {
 	_side = side _this;
@@ -4279,7 +4281,7 @@ fnc_draw3dhandlerPLAYER2 = ""
 				{
 					_distance = round(cameraOn distance _x);
 					if(_distance > 1600)exitWith{};
-					_name = _x getVariable['realname',name _x];
+					_name = _x getVariable['playerName',name _x];
 					_txt = format['%1 (%2m) %3HP',_name,_distance,floor((1-(damage _x))*100)];
 					_clr = [1,0.17,0.17,1];
 					_crew = crew _veh;
@@ -4294,11 +4296,11 @@ fnc_draw3dhandlerPLAYER2 = ""
 						{
 							if(_forEachIndex == 0)then
 							{
-								_names = _names + (_x getVariable['realname',name _x]);
+								_names = _names + (_x getVariable['playerName',name _x]);
 							}
 							else
 							{
-								if(alive _x)then{_names = _names + format[', %1',_x getVariable['realname',name _x]];};
+								if(alive _x)then{_names = _names + format[', %1',_x getVariable['playerName',name _x]];};
 							};
 						} forEach _crew;
 						_txt = format['%1 - %2 (%3m)',_names,_typename,_distance];
@@ -4371,7 +4373,7 @@ fnc_draw3dhandlerDEAD = ""
 			_distance = cameraOn distance _x;
 			if(_distance < 500)then
 			{
-				_name = _x getVariable['realname',''];
+				_name = _x getVariable['playerName',''];
 				if(_name != '')then
 				{
 					_clr = [1,1,1,0.7];
@@ -4556,7 +4558,7 @@ fnc_draw_MapIcons = {
 					_PUIDX = getPlayerUID _x;
 					if(_PUIDX != '')then
 					{
-						_name = _x getVariable['realname',name _x];
+						_name = _x getVariable['playerName',name _x];
 						_type = typeOf _veh;
 						_dist = round(_veh distance player);
 						_txt = format['%1 (%2m) (DEAD, but still watching)',_name,_dist];
@@ -4572,11 +4574,11 @@ fnc_draw_MapIcons = {
 								{
 									if(_forEachIndex == 0)then
 									{
-										_names = _names + format['%1',_x getVariable['realname',name _x]];
+										_names = _names + format['%1',_x getVariable['playerName',name _x]];
 									}
 									else
 									{
-										_names = _names + format[', %1',_x getVariable['realname',name _x]];
+										_names = _names + format[', %1',_x getVariable['playerName',name _x]];
 									};
 								} forEach (crew _veh);
 								_typename = gettext (configFile >> 'CfgVehicles' >> _type >> 'displayName');
@@ -4661,7 +4663,7 @@ fnc_draw_MapIcons = {
 			{
 				if(!isNull _x)then
 				{
-					_name = _x getVariable['realname',''];
+					_name = _x getVariable['playerName',''];
 					if(_name != '')then
 					{
 						if(getPlayerUID _x != '')then
@@ -5043,7 +5045,7 @@ adminDeadPlayer = {
 				_c = ADMIN_DeadPlayer_LIST select _i;
 				if(!isNull _c)then
 				{
-					_txt = _c getVariable['realname','DEAD'];
+					_txt = _c getVariable['playerName','DEAD'];
 					if(_txt != 'DEAD')then
 					{
 						_txt = format['%1 (DEAD)',_txt];
@@ -5688,9 +5690,6 @@ infiSTAR_MAIN_CODE = infiSTAR_MAIN_CODE + "
 			case 0x08: {
 				if('ToggleVehLock' call ADMINLEVELACCESS)then{[] call infiSTAR_A3Togglelock;};
 			};
-			case 0x09: {
-				if('UpgradeBuilding' call ADMINLEVELACCESS)then{[] call infiSTAR_UpgradeBuilding;};
-			};
 			case 0x43: {
 				if(_shift)then
 				{
@@ -5783,6 +5782,19 @@ infiSTAR_MAIN_CODE = infiSTAR_MAIN_CODE + "
 		(uiNamespace getVariable 'A3MAPICONS_mainMap') ctrlRemoveAllEventHandlers 'MouseButtonDown';
 		(uiNamespace getVariable 'A3MAPICONS_mainMap') ctrlAddEventHandler['MouseButtonDown',{ call fnc_MouseButtonDown; }];
 	};
+	_oldValues = profileNamespace getVariable ['infiSTAR_saveToggle_A3',[]];
+	if!(_oldValues isEqualTo [])then
+	{
+		{
+			if(_x call ADMINLEVELACCESS)then
+			{
+				if!(_x in infiSTAR_toggled_A)then
+				{
+					_x call fnc_toggleables;
+				};
+			};
+		} forEach _oldValues;
+	};
 	while {true} do
 	{
 		_exit = false;
@@ -5804,5 +5816,5 @@ infiSTAR_MAIN_CODE = compile infiSTAR_MAIN_CODE;
 /* ********************************************************************************* */
 /* *********************************www.infiSTAR.de********************************* */
 /* *******************Developed by infiSTAR (infiSTAR23@gmail.com)****************** */
-/* **************infiSTAR Copyright®© 2011 - 2016 All rights reserved.************** */
+/* **************infiSTAR Copyright®© 2011 - 2017 All rights reserved.************** */
 /* ****DayZAntiHack.com***DayZAntiHack.de***ArmaAntiHack.com***Arma3AntiHack.com**** */

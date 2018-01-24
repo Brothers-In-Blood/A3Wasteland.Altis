@@ -1,2 +1,0 @@
-
-execVM "VehicleAugmentation.sqf";

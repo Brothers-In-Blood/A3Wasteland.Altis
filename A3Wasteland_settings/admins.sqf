@@ -18,7 +18,7 @@
 // Low Administrators: manage & spectate players, remove hacked vehicles
 lowAdmins =
 [
-	'76561198083874174' //FireFirstAce
+	"76561198083874174" //FireFirstAce
 ];
 
 // High Administrators: manage & spectate players, remove hacked vehicles, show player tags

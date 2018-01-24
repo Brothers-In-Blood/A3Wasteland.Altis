@@ -22,10 +22,10 @@ if (isNull findDisplay IDD_WARCHEST) then
 	//_fundsTitle ctrlSetText "Funds:";
 
 	_withdraw = _dialog displayCtrl IDC_WITHDRAWBUTTON;
-	_withdraw buttonSetAction "call mf_items_cratemoney_withdraw";
+	_withdraw buttonSetAction "call mf_items_cratemoney_withdraw; closeDialog 0";
 
 	_deposit = _dialog displayCtrl IDC_DEPOSITBUTTON;
-	_deposit buttonSetAction "call mf_items_cratemoney_deposit";
+	_deposit buttonSetAction "call mf_items_cratemoney_deposit; closeDialog 0";
 };
 
 [] spawn

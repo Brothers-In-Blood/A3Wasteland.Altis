@@ -1,0 +1,6 @@
+#include "defines.hpp"
+#include "dialog.hpp"
+
+class RscTitles {
+	#include "hud.hpp"
+};

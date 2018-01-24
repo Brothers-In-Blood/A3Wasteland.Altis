@@ -63,7 +63,9 @@
 	[21263.6, 16314.5, 1.38513],
 	[20937.5, 16964.4, 1.40488],
 	[25618.6, 21353.5, 1.52992],
-	[27030.1, 23282.8, 1.396]
+	[27030.1, 23282.8, 1.396],
+	[11525.6,9427.16,0],
+	[4578.25,21415.1,0]
 ]
 
 // The above array was built using the following code snippet called from the mission editor debug console:

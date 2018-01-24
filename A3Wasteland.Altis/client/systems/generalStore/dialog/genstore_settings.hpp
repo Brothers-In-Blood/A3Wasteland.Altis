@@ -241,7 +241,7 @@ class genstored
 		{
 			idc = -1;
 			action = "[6] call populateGeneralStore";
-			text = "Objects";
+			text = "Crates";
 			sizeEx = GenStoreButton_textSize;
 
 			x = GenStoreMainBG_X + (0.0167 * SZ_SCALE);
@@ -316,4 +316,3 @@ class genstored
 		};
 	};
 };
-

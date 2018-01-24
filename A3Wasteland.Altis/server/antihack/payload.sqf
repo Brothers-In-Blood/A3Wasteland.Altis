@@ -103,7 +103,7 @@ if (isNil "_cheatFlag") then
 				[3030, "RscConfigEditor_Main (ShadowyFaze)"]
 			];
 
-			_isAdmin = serverCommandAvailable "#kick";
+			_isAdmin = (getPlayerUID player) call isAdmin;
 
 			if (!isNull (findDisplay 49 displayCtrl 0)) exitWith { _cheatFlag = "RscDisplayInterruptEditorPreview" };
 			if (!isNull findDisplay 17 && !isServer && !_isAdmin) exitWith { _cheatFlag = "RscDisplayRemoteMissions (Wookie)" };

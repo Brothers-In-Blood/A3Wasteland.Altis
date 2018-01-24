@@ -2,7 +2,7 @@
 // * This project is licensed under the GNU Affero GPL v3. Copyright © 2014 A3Wasteland.com *
 // ******************************************************************************************
 //	@file Name: revive_gui.hpp
-//	@file Author: AgentRev
+//	@file Author: AgentRev Edited By: BIB_Monkey
 
 #include "gui_defines.hpp"
 
@@ -71,12 +71,13 @@ class ReviveGUI : IGUIBack
 		w = RevProgBar_W;
 		h = RevBarText_H;
 
-		class Attributes {
+		class Attributes 
+		{
 			align = "center";
 		};
 	};
 
-	/*class RevSuicideBtn : w_RscButton
+	class RevSuicideBtn : w_RscButton
 	{
 		idc = RevSuicideBtn_IDC;
 		text = "Give up";
@@ -97,15 +98,16 @@ class ReviveGUI : IGUIBack
 		y = RevSuicideBtn_Y;
 		w = RevSuicideBtn_W;
 		h = RevSuicideBtn_H;
-	};*/
+	};
 
 	class RevRespawnText : RscStructuredText
 	{
 		idc = -1;
-		text = "Press spacebar to respawn";
+		text = "Press enter to respawn";
 		size = 0.04 * TEXT_SCALE;
 
-		class Attributes {
+		class Attributes 
+		{
 			align = "center";
 		};
 
@@ -144,7 +146,8 @@ class ReviveGUI : IGUIBack
 		text = "";
 		size = 0.04 * TEXT_SCALE;
 
-		class Attributes {
+		class Attributes
+		{
 			align = "center";
 		};
 
@@ -160,7 +163,7 @@ class ReviveGUI : IGUIBack
 		h = RevText_H;
 	};
 
-	/*class RevLastResortBtn : w_RscButton // now Backspace key!
+	class RevLastResortBtn : w_RscButton // now Backspace key!
 	{
 		idc = RevLastResortBtn_IDC;
 		action = "execVM 'addons\far_revive\FAR_lastResort.sqf'";
@@ -180,5 +183,5 @@ class ReviveGUI : IGUIBack
 		y = RevLastResortBtn_Y;
 		w = RevLastResortBtn_W;
 		h = RevLastResortBtn_H;
-	};*/
+	};
 };

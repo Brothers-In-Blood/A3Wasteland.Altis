@@ -10,16 +10,27 @@
 
 #define ANIM "AinvPknlMstpSlayWrflDnon_medic"
 #define ERR_CANCELLED "Action Cancelled"
+#define ERR_TOO_CLOSE "Another owned beacon too close"
 #define ERR_IN_VEHICLE "Action Failed! You can't do this in a vehicle"
-private ["_hasFailed", "_success","_pos","_uid","_beacon"];
-_hasFailed = {
-	private ["_progress", "_failed", "_text"];
-	_progress = _this select 0;
-	_failed = true;
+
+private _PosPlayer = getPos player;
+private _uid = getPlayerUID player;
+private _CloseBeacons = nearestObjects [player, ["Land_PlasticCase_01_small_F"], 1000, true];
+private _TooClose = false;
+{
+	if (_x getvariable ["ownerUID", ""] == _uid) then {_TooClose = true};
+} foreach _CloseBeacons;
+
+
+private _hasFailed = 
+{
+	private _progress = _this select 0;
+	private _failed = true;
 	switch (true) do {
 		case (!alive player): {};
 		case (doCancelAction) :{doCancelAction = false; _text = ERR_CANCELLED;};
 		case (vehicle player != player): {_text = ERR_IN_VEHICLE};
+		case (_TooClose): {_text = ERR_TOO_CLOSE};
 		default {
 			_text = format["Spawn Beacon %1%2 Deployed", round(_progress*100), "%"];
 			_failed = false;
@@ -27,12 +38,12 @@ _hasFailed = {
 	};
 	[_failed, _text];
 };
-_success = [MF_ITEMS_SPAWN_BEACON_DURATION, ANIM, _hasFailed, []] call a3w_actions_start;
+private _success = [MF_ITEMS_SPAWN_BEACON_DURATION, ANIM, _hasFailed, []] call a3w_actions_start;
 
 if (_success) then {
-	_uid = getPlayerUID player;
+
 	// Spawn 2m in front of the player
-	_beacon = createVehicle [MF_ITEMS_SPAWN_BEACON_DEPLOYED_TYPE, [player, [0,2,0]] call relativePos, [], 0, "CAN_COLLIDE"];
+	private _beacon = createVehicle [MF_ITEMS_SPAWN_BEACON_DEPLOYED_TYPE, [player, [0,2,0]] call relativePos, [], 0, "NONE"];
 	_beacon setDir (getDir player + 270);
 	_beacon setVariable ["allowDamage", true, true];
 	_beacon setVariable ["a3w_spawnBeacon", true, true];
@@ -42,12 +53,6 @@ if (_success) then {
 	_beacon setVariable ["ownerUID", _uid, true];
 	_beacon setVariable ["packing", false, true];
 	_beacon setVariable ["groupOnly", (playerSide == INDEPENDENT), true];
-	/*{
-		if (_x getVariable ["ownerUID",""] == _uid) then {
-			pvar_spawn_beacons = pvar_spawn_beacons - [_x];
-		};
-	} forEach pvar_spawn_beacons;*/
-
 	pvar_spawn_beacons pushBack _beacon;
 	publicVariable "pvar_spawn_beacons";
 	pvar_manualObjectSave = netId _beacon;

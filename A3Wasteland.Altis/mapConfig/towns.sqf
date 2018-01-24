@@ -23,7 +23,7 @@
 	["Town_15", 200, "Charkia"],
 	["Town_16", 150, "Chalkeia"],
 	["Town_17", 150, "Oreokastro"],
-	["Town_18", 100, "Dump"],
+	// ["Town_18", 100, "Dump"],
 	["Town_19", 125, "Negades"],
 	["Town_20", 100, "Frini"],
 	["Town_21", 175, "Poliakko"],
@@ -32,7 +32,7 @@
 	["Town_24", 150, "Lakka"],
 	["Town_25", 125, "Dorida"],
 	["Town_26", 125, "Panagia"],
-	["Town_27", 150, "Kalochori"],
+	// ["Town_27", 150, "Kalochori"],
 	["Town_28", 175, "Feres"],
 	["Town_29", 175, "Molos"],
 	["Town_30", 175, "Rodopoli"]

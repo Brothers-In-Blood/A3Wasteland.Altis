@@ -247,7 +247,7 @@ storePurchaseHandle = _this spawn
 							};
 						};
 					};
-					// Crates transferred to genObjectsArray below
+					// Crates transferred to AllBaseParts below
 					/*case "ammocrate":
 					{
 						[currentOwnerID, currentOwnerName, PURCHASED_CRATE_TYPE_AMMO] execVM "client\functions\placePurchasedCrate.sqf";
@@ -280,17 +280,15 @@ storePurchaseHandle = _this spawn
 			{
 				_class = _x select 1;
 				_price = _x select 2;
-
 				// Ensure the player has enough money
 				if (_price > _playerMoney) exitWith
 				{
 					[_itemText] call _showInsufficientFundsError;
 				};
-
 				_requestKey = call A3W_fnc_generateKey;
 				_x call requestStoreObject;
 			};
-		} forEach (call genObjectsArray);
+		} forEach (call gencratesArray);
 	};
 
 	if (isNil "_price") then
@@ -299,13 +297,11 @@ storePurchaseHandle = _this spawn
 			if (_itemData == _x select 1) exitWith
 			{
 				_price = _x select 4;
-
 				// Ensure the player has enough money
 				if (_price > _playerMoney) exitWith
 				{
 					[_itemText] call _showInsufficientFundsError;
 				};
-
 				if !(_itemData call mf_inventory_is_full) then
 				{
 					[_itemData, 1] call mf_inventory_add;
@@ -314,7 +310,6 @@ storePurchaseHandle = _this spawn
 				{
 					[_itemText] call _showInsufficientSpaceError;
 				};
-
 				//populate the inventory items
 				[] execVM "client\systems\generalStore\getInventory.sqf";
 			};

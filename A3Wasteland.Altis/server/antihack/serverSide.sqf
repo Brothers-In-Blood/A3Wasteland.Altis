@@ -32,6 +32,16 @@ while { true } do
 
 			if (owner _unit > _serverID) then
 			{
+			
+			//disable unit creation checks for zeusAdmins
+			_checkedplayer = [owner _unit] call findClientPlayer;
+			_checkedplayerUID = getPlayerUID _checkedplayer;	
+			_belongstoZeusAdmin =  _checkedplayerUID in call zeusAdmins;
+			
+			//error handling if zeusAdmins isn't defined for whatever reason
+			 if (isNil "_belongstoZeusAdmin") then {_belongstoZeusAdmin = false;};
+					
+			//set cheatflag 
 				if (alive _unit && !isPlayer _unit && {getText (configFile >> "CfgVehicles" >> typeOf _unit >> "simulation") != "UAVPilot"}) then
 				{
 					_clientPlayer = [owner _unit] call findClientPlayer;

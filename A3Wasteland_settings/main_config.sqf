@@ -10,7 +10,7 @@
 // General settings
 A3W_teamPlayersMap = 1;											// Show all friendly players on the map at all times, regardless of difficulty level (0 = no, 1 = yes)
 A3W_disableGlobalVoice = 1;										// Auto-switch channel to Direct communication whenever broadcasting voice on global, unless being admin (0 = no, 1 = yes)
-A3W_disableSideVoice = 2;										// Auto-switch channel to Direct communication whenever broadcasting voice on side (0 = no, 1 = block Ind team, 2 = block all teams)
+A3W_disableSideVoice = 1;										// Auto-switch channel to Direct communication whenever broadcasting voice on side (0 = no, 1 = block Ind team, 2 = block all teams)
 A3W_uavControl = "owner";										// Restrict connection to UAVs based on ownership ("owner", "group", "side")
 A3W_disableUavFeed = 0;											// Force disable UAV PIP feed to prevent thermal camera abuse (0 = no, 1 = yes)
 //A3W_disableBuiltInThermal = 0;								// Display a black screen if the player tries to use thermal vision built-in a handheld weapon like Titan launcher or laser designator (0 = no, 1 = yes)
@@ -56,10 +56,12 @@ A3W_atmEditorPlacedOnly = 0;									// Only allow access via ATMs placed from t
 A3W_atmMapIcons = 1;											// Draw small icons on the map that indicate ATM locations (0 = no, 1 = yes)
 A3W_atmRemoveIfDisabled = 1;									// Remove all ATMs from map if A3W_atmEnabled is set to 0 (0 = no, 1 = yes)
 
+//Bounty Setting
+A3W_atmBounties = 1;											// Enable bounties
 A3W_bountyMax = 5000000;										// Maximum amount of money that can be set as a bounty on someone
 A3W_bountyMinStart = 25000;										// Minimum amount of money to start a bounty on someone
 A3W_bountyRewardPerc = 100;										// Percentage of cost that goes to bounty reward
-A3W_bountyLifetime = 7*24;										// Maximum lifetime in hours for bounty kills to store in DB (storing bounty kills is to prevent from forming groups with someone you collected bounty on)
+A3W_bountyLifetime = 3*24;										// Maximum lifetime in hours for bounty kills to store in DB (storing bounty kills is to prevent from forming groups with someone you collected bounty on)
 
 // Persistence settings
 A3W_savingMethod = "extDB";										// Method used for saving data ("profile", "iniDB", "extDB")
@@ -76,10 +78,10 @@ A3W_staticWeaponSaving = 1;										// Save locked static weapons and their mag
 A3W_warchestSaving = 1;											// Save warchest objects deployed by players between server restarts (0 = no, 1 = yes)
 A3W_warchestMoneySaving = 1;									// Save warchest team money between server restarts (0 = no, 1 = yes)
 A3W_spawnBeaconSaving = 1;										// Save spawn beacons between server restarts (0 = no, 1 = yes)
-A3W_objectLifetime = 10*24;										// Maximum lifetime in hours for saved objects (baseparts, crates, etc. except vehicles) across server restarts (0 = no time limit)
+A3W_objectLifetime = 3*24;										// Maximum lifetime in hours for saved objects (baseparts, crates, etc. except vehicles) across server restarts (0 = no time limit)
 A3W_vehicleLifetime = 0;										// Maximum lifetime in hours for saved vehicles across server restarts, regardless of usage (0 = no time limit)
-A3W_vehicleMaxUnusedTime = 10*24;								// Maximum parking time in hours after which unused saved vehicles will be marked for deletion (0 = no time limit)
-A3W_serverSavingInterval = 5*60;								// Interval in seconds between automatic vehicle & object saves; should be kept at 1 min for profileNamespace and iniDB, while for extDB it can be relaxed to 3-5 mins
+A3W_vehicleMaxUnusedTime = 3*24;								// Maximum parking time in hours after which unused saved vehicles will be marked for deletion (0 = no time limit)
+A3W_serverSavingInterval = 1*60;								// Interval in seconds between automatic vehicle & object saves; should be kept at 1 min for profileNamespace and iniDB, while for extDB it can be relaxed to 3-5 mins
 A3W_mineSaving = 1;												// Save placed mines between server restarts (0 = no, 1 = yes)
 A3W_mineLifetime = 12;											// Maximum lifetime in hours for saved mines across server restarts (0 = no time limit)
 A3W_privateStorage = 1;											// Enable persistent private storage locations across the map (0 = no, 1 = yes)
@@ -166,5 +168,5 @@ A3W_hostileairMissionDelay = 20*60;								// Time in seconds between hostile ai
 A3W_hostileairMissionTimeout = 30*60;							// Time in seconds that a hostile air will run for, unless completed
 A3W_aquaticMissionDelay = 5*60;									// Time in seconds between aquatic Missions
 A3W_aquaticMissionTimeout = 60*60;								// Time in seconds that a aquatic Mission will run for, unless completed
-A3W_PrimaryMissionDelay = 240*60;								// Time in seconds between Primary Missions
+A3W_PrimaryMissionDelay = 180*60;								// Time in seconds between Primary Missions  
 A3W_PrimaryMissionTimeout = 240*60;								// Time in seconds that a Primary Mission will run for, unless completed

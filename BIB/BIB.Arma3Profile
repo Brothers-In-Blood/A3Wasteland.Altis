@@ -1,0 +1,47 @@
+class DifficultyPresets
+{
+	class CustomDifficulty // only applies if difficulty="Custom" in server config.cfg
+	{
+		class Options
+		{
+			// Simulation
+			reducedDamage = 0;			// Reduced damage (0 = disabled, 1 = enabled)
+ 
+			// Situational awareness
+			groupIndicators = 2;		// Group indicators	(0 = never, 1 = limited distance, 2 = always)
+			friendlyTags = 0;			// Friendly name tags (0 = never, 1 = limited distance, 2 = always)
+			enemyTags = 0;				// Enemy name tags		(0 = never, 1 = limited distance, 2 = always)
+			detectedMines = 0;			// Detected mines		(0 = never, 1 = limited distance, 2 = always)
+			commands = 0;				// Commands					(0 = never, 1 = fade out, 2 = always)
+			waypoints = 2;				// Waypoints					(0 = never, 1 = fade out, 2 = always)
+			tacticalPing = 1;			//Tactical Ping (0 = disabled, 1 = enabled)
+
+			// Personal awareness
+			weaponInfo = 2;				// Weapon info				(0 = never, 1 = fade out, 2 = always)
+			stanceIndicator = 2;		// Stance indicator	(0 = never, 1 = fade out, 2 = always)
+			staminaBar = 0;				// Stamina bar (0 = disabled, 1 = enabled)
+			weaponCrosshair = 1;		// Weapon crosshair (0 = disabled, 1 = enabled)
+			visionAid = 0;				// Vision aid (0 = disabled, 1 = enabled)
+ 
+			// View
+			thirdPersonView = 1;		// 3rd person view (0 = disabled, 1 = enabled)
+			cameraShake = 1;			// Camera shake (0 = disabled, 1 = enabled)
+ 
+			// Multiplayer
+			scoreTable = 0;				// Score table (0 = disabled, 1 = enabled)
+			deathMessages = 0;			// Killed by (0 = disabled, 1 = enabled)
+			vonID = 1;					// VON ID (0 = disabled, 1 = enabled)
+ 
+			// Misc
+			mapContent = 0;				// Extended map content (0 = disabled, 1 = enabled)
+			autoReport = 0;				// Automatic reporting (0 = disabled, 1 = enabled)
+			multipleSaves = 0;			// Multiple saves (0 = disabled, 1 = enabled)
+		};
+		aiLevelPreset=3; // 0 = Novice, 1 = Normal, 2 = Expert, 3 = Custom
+	};
+	class CustomAILevel // only applies if aiLevelPreset=3
+	{
+		skillAI=0.7; // 0 to 1
+		precisionAI=0.6; // 0 to 1
+	};
+};
