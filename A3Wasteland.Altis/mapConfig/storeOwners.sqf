@@ -26,7 +26,10 @@ storeOwnerConfig = compileFinal str
 	["VehStore2", 6, 45, ["Boats"]],
 	["VehStore3", 4, 250, ["Boats"]],
 	["VehStore4", 1, 132, ["Boats"]],
-	["VehStore5", 0, 190, ["Planes"]],
+	["VehStore5", 0, 0, ["Planes", "Armored", "Tanks", "Helicopters"]],
+	["VehStore7", 0, 0, ["Planes", "Armored", "Tanks", "Helicopters"]],
+	["VehStore8", 0, 0, ["Planes", "Armored", "Tanks", "Helicopters"]],
+	["VehStore6", 0, 0, ["Planes", "Armored", "Tanks", "Helicopters"]],
 
 	["BaseStore1", 1, 30, []]
 	/*["BaseStore2", 1, 30, []]*/
@@ -51,6 +54,9 @@ storeOwnerConfigAppearance = compileFinal str
 	["VehStore3", [["weapon", ""], ["uniform", "U_Competitor"]]],
 	["VehStore4", [["weapon", ""], ["uniform", "U_Competitor"]]],
 	["VehStore5", [["weapon", ""], ["uniform", "U_Competitor"]]],
+	["VehStore6", [["weapon", ""], ["uniform", "U_Competitor"]]],
+	["VehStore7", [["weapon", ""], ["uniform", "U_Competitor"]]],
+	["VehStore8", [["weapon", ""], ["uniform", "U_Competitor"]]],
 
 	["BaseStore1", [["weapon", ""], ["uniform", "U_Competitor"]]],
 	["BaseStore2", [["weapon", ""], ["uniform", "U_Competitor"]]]
