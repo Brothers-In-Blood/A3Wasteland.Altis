@@ -12,9 +12,9 @@ if (!isServer) exitWith {};
 #define RANDOM_BETWEEN(START,END) (START + floor random ((END - START) + 1))
 
 
-private ["_box", "_boxType", "_boxItems", "_item", "_qty", "_mag"];
-_box = _this select 0;
-_boxType = _this select 1;
+private _box = _this select 0;
+private _boxType = _this select 1;
+private _boxItems = [];
 
 _box setVariable [call vChecksum, true];
 
