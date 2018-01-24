@@ -213,7 +213,7 @@ switch (true) do
 */
 
 
-/*
+
 	// A-143 Buzzard AA
 	case (_class isKindOf "Plane_Fighter_03_dynamicLoadout_base_F" && _variant == "buzzardAA"):
 	{
@@ -232,7 +232,7 @@ switch (true) do
 			_veh setAmmoOnPylon [4, 500]; // 20mm gun
 		};
 	};
-*/
+
 
 
 /*
