@@ -8,13 +8,14 @@
 //@file Description: Initialize Wasteland Items
 //@file Argument: the path to the directory holding this file.
 
+[_this, "survival"] call mf_init;
 [_this, "misc"] call mf_init;
 [_this, "jerrycan"] call mf_init;
 [_this, "beacon"] call mf_init;
 [_this, "camonet"] call mf_init;
 [_this, "warchest"] call mf_init;
 [_this, "cratemoney"] call mf_init;
-[_this, "vpin"] call mf_init;
+
 if (["A3W_atmEnabled"] call isConfigOn) then
 {
 	[_this, "atm"] call mf_init;

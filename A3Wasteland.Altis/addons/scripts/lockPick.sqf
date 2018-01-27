@@ -5,11 +5,11 @@
 //	@file Author: MercyfulFate, AgentRev, Gigatek
 //	@file Description: Lockpick the nearest vehicle
 
-#define DURATION 120
+#define DURATION 150
 #define ANIMATION "AinvPknlMstpSlayWrflDnon_medic"
 
 #define FORMAT2(STR1,STR2) format ["%1 %2", STR1, STR2]
-#define ERR_FAILED "Stealing failed!"
+#define ERR_FAILED "Lockpicking failed!"
 #define ERR_IN_VEHICLE "You can't do that in a vehicle."
 #define ERR_DISTANCE "You are too far away from the vehicle."
 #define ERR_MOVED "Somebody moved the vehicle."
@@ -17,7 +17,7 @@
 #define ERR_UNLOCKED "The vehicle is unlocked."
 #define ERR_CREW "Somebody is inside the vehicle."
 #define ERR_DESTROYED "The vehicle is destroyed."
-#define ERR_CANCELLED "Stealing cancelled!"
+#define ERR_CANCELLED "Lockpicking cancelled!"
 
 private _vehicle = ["LandVehicle", "Air", "Ship"] call mf_nearest_vehicle;
 private _checks =
@@ -32,14 +32,14 @@ private _checks =
 		case (vehicle player != player): { _text = FORMAT2(ERR_FAILED, ERR_IN_VEHICLE) };
 		case (!alive _vehicle): { _text = FORMAT2(ERR_FAILED, ERR_DESTROYED) };
 		case (locked _vehicle < 2): { _text = FORMAT2(ERR_FAILED, ERR_UNLOCKED) };
-		case ({alive _x} count crew _vehicle > 0): { _text = FORMAT2(ERR_FAILED, ERR_CREW) };
+		case ({alive _x && getText (configFile >> "CfgVehicles" >> typeOf _x >> "simulation") != "UAVPilot"} count crew _vehicle > 0): { _text = FORMAT2(ERR_FAILED, ERR_CREW) };
 		//case (!isNull (_vehicle getVariable ["R3F_LOG_est_deplace_par", objNull])): { _text = FORMAT2(ERR_FAILED, ERR_MOVED) };
 		//case (!isNull (_vehicle getVariable ["R3F_LOG_est_transporte_par", objNull])): { _text = FORMAT2(ERR_FAILED, ERR_TOWED) };
 		case (player distance _vehicle > (sizeOf typeOf _vehicle / 3) max 3): { _text = FORMAT2(ERR_FAILED, ERR_DISTANCE) };
 		case (doCancelAction): { _text = ERR_CANCELLED; doCancelAction = false };
 		default
 		{
-			_text = format ["Stealing %1%2 complete", round(100 * _progress), "%"];
+			_text = format ["Lockpicking %1%2 complete", round(100 * _progress), "%"];
 			_failed = false;
 		};
 	};
@@ -52,10 +52,8 @@ private _success = [DURATION, ANIMATION, _checks, [_vehicle]] call a3w_actions_s
 if (_success) then
 {
 	[_vehicle, 1] call A3W_fnc_setLockState; // Unlock
-	[_vehicle, player] call A3W_fnc_takeOwnership;
 	_vehicle call fn_forceSaveVehicle;
-	player removeItem "Toolkit";
-	["Vehicle Stolen!", 5] call mf_notify_client;
+	["Lockpicking complete!", 5] call mf_notify_client;
 };
 
 _success

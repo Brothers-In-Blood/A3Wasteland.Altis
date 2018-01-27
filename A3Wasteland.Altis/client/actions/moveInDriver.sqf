@@ -4,4 +4,4 @@
 //	@file Name: moveInDriver.sqf
 //	@file Author: AgentRev
 
-player moveInDriver cursorObject;
+player moveInDriver cursorTarget;

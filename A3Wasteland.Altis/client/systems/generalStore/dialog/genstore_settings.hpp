@@ -237,7 +237,7 @@ class genstored
 			h = 0.040 * SZ_SCALE;
 		};
 
-		/*class StoreButton6: w_RscButton
+		class StoreButton6: w_RscButton
 		{
 			idc = -1;
 			action = "[6] call populateGeneralStore";
@@ -248,7 +248,7 @@ class genstored
 			y = GenStoreMainBG_Y + (0.375 * SZ_SCALE);
 			w = 0.1173 * SZ_SCALE;
 			h = 0.040 * SZ_SCALE;
-		};*/
+		};
 
 		class SellWeapon: w_RscButton
 		{
@@ -316,3 +316,4 @@ class genstored
 		};
 	};
 };
+

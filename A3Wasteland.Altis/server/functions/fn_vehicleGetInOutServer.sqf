@@ -15,3 +15,15 @@ if (isPlayer _unit && owner _vehicle == owner _unit) then
 
 _vehicle setVariable ["vehSaving_hoursUnused", 0];
 _vehicle setVariable ["vehSaving_lastUse", diag_tickTime];
+
+{
+	if (isAgent teamMember _x && {(_x getVariable ["A3W_driverAssistOwner", objNull]) in [_unit,objNull]}) then
+	{
+		if (driver _vehicle == _x && lockedDriver _vehicle) then
+		{
+			["unlockDriver", netId _vehicle] call A3W_fnc_towingHelper;
+		};
+
+		deleteVehicle _x;
+	};
+} forEach crew _vehicle;

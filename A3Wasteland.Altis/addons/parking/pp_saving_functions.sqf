@@ -84,7 +84,7 @@ if (isServer) then {
         {
           deleteVehicle _x;
         };
-      } forEach nearestObjects [_markerPos, ["LandVehicle","Air","Ship"], 25];
+      } forEach nearestObjects [_markerPos, ["LandVehicle","Air","Ship"], 25 max sizeOf _class];
 
       call fn_restoreSavedVehicle;
 
@@ -123,7 +123,6 @@ if (isServer) then {
 
     if !(_saveFlag) then {
       _vehicle setVariable ["A3W_purchasedVehicle", true];
-      _vehicle setVariable ["A3W_missionVehicle", false];
     };
 
     [_this, _player, _vehicle, _uid, _vehOwner, _parked_vehicles, _saveFlag] spawn
@@ -135,7 +134,7 @@ if (isServer) then {
 
       if (isNil "_added") exitWith {
         if (_vehOwner isEqualTo "") then {
-          _vehicle setVariable ["ownerUID", _uid];
+          _vehicle setVariable ["ownerUID", nil];
         };
 
         if !(_saveFlag) then {
@@ -149,12 +148,12 @@ if (isServer) then {
       def(_display_name);
       _display_name = [typeOf _vehicle] call generic_display_name;
 
-      if (!isNil "fn_untrackSavedVehicle") then { [netId _vehicle] call fn_untrackSavedVehicle };
+      if (!isNil "fn_untrackSavedVehicle") then { _vehicle call fn_untrackSavedVehicle };
       deleteVehicle _vehicle;
 
       _player setVariable ["parked_vehicles", _parked_vehicles]; //, true];
       ["parked_vehicles", _parked_vehicles] remoteExecCall ["A3W_fnc_setVarPlayer", _player];
-      [_player] call fn_saveAccount;
+      //[_player] call fn_saveAccount;
       [_player, format["%1, your %2 has been parked.", (name _player), _display_name]] call pp_notify;
     };
   };
@@ -196,7 +195,7 @@ if (isServer) then {
       _markerPos = markerPos _marker;
       _dirAngle = markerDir _marker;
 
-	  if (surfaceIsWater _markerPos) then
+      if (surfaceIsWater _markerPos) then
       {
         _markerPos set [2, (getPosASL _player) select 2];
         _posAGL = ASLtoAGL _markerPos;
@@ -280,12 +279,12 @@ if (isClient) then {
     _marker setMarkerColorLocal "ColorBlue";
     //_marker setMarkerTextLocal _name;
 
-    player action ["VTOLVectoring", _vehicle]; // vertical takeoff mode
-	player action ["VectoringUp", _vehicle];
+    _vehicle setVariable ["was_parked", true];
 
     if (!alive getConnectedUAV player) then {
       player connectTerminalToUAV _vehicle; // attempt uav connect
     };
+
     [_marker] spawn {
       ARGVX3(0,_marker,"");
       sleep 60;

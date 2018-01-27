@@ -13,7 +13,15 @@ private _isUAV = (round getNumber (configFile >> "CfgVehicles" >> _class >> "isU
 private ([["_flying"],[]] select isNil "_flying");
 _flying = (!isNil "_flying" && {_flying > 0});
 
-_veh = createVehicle [_class, _pos, [], if (isNil "_safeDistance") then { 0 } else { _safeDistance }, ["","FLY"] select (_isUAV && _flying)];
+private _special = ["NONE","FLY"] select (_isUAV && _flying);
+private _tempPos = +_pos;
+
+if (isNil "_safeDistance" && _special in ["","NONE"]) then
+{
+	_tempPos set [2, 9000000 + random 999999];
+};
+
+_veh = createVehicle [_class, _tempPos, [], if (isNil "_safeDistance") then { 0 } else { _safeDistance }, _special];
 _veh allowDamage false;
 _veh hideObjectGlobal true;
 
@@ -21,6 +29,12 @@ private _velMag = vectorMagnitude velocity _veh;
 
 if (isNil "_safeDistance") then
 {
+	if (!isNil "_dir") then
+	{
+		_veh setVelocity [0,0,0];
+		_veh setVectorDirAndUp _dir;
+	};
+
 	_veh setPosWorld ATLtoASL _pos;
 };
 
@@ -35,6 +49,7 @@ if (!isNil "_dir") then
 };
 
 private _uavSide = if (isNil "_playerSide") then { sideUnknown } else { _playerSide };
+private _uavAuto = true;
 
 {
 	_x params ["_var", "_val"];
@@ -48,6 +63,13 @@ private _uavSide = if (isNil "_playerSide") then { sideUnknown } else { _playerS
 		case "uavSide":
 		{
 			if (_uavSide isEqualTo sideUnknown) then { _uavSide = STR_TO_SIDE(_val) };
+		};
+		case "uavAuto":
+		{
+			if (_val isEqualType true) then
+			{
+				_uavAuto = _val;
+			};
 		};
 	};
 
@@ -71,11 +93,11 @@ if (_isUAV) then
 	};
 
 	//assign AI to the vehicle so it can actually be used
-	[_veh, _flying, _uavSide] spawn
+	[_veh, _flying, _uavSide, _uavAuto] spawn
 	{
-		params ["_uav", "_flying", "_uavSide"];
+		params ["_uav", "_flying", "_uavSide", "_uavAuto"];
 
-		_grp = [_uav, _uavSide, true] call fn_createCrewUAV;
+		_grp = [_uav, _uavSide, true, _uavAuto] call fn_createCrewUAV;
 
 		if (_flying) then
 		{
@@ -168,7 +190,7 @@ if (!isNil "_backpacks") then
 	{
 		_x params ["_bpack"];
 
-		if (!(_bpack isKindOf "Weapon_Bag_Base") || {{_bpack isKindOf _x} count ["B_UAV_01_backpack_F", "B_Static_Designator_01_weapon_F", "O_Static_Designator_02_weapon_F"] > 0}) then
+		if (!(_bpack isKindOf "Weapon_Bag_Base") || {[["_UAV_","_Designator_"], _bpack] call fn_findString != -1}) then
 		{
 			_veh addBackpackCargoGlobal _x;
 		};

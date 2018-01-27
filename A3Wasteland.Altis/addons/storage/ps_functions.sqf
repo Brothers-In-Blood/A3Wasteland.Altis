@@ -81,7 +81,7 @@ ps_create_boxes = {
 
     _model = ps_box_models call BIS_fnc_selectRandom;
 
-    _box = createVehicle [_model, ASLtoATL _pos, [], 1, ""];
+    _box = createVehicle [_model, ASLtoATL _pos, [], 1, "NONE"];
     _pos = getPosASL _box;
     _pos set [2, (_pos select 2) - (getPos _box select 2)];
     _box setPosASL _pos;
@@ -99,12 +99,13 @@ if (["A3W_savingMethod", "profile"] call getPublicVar != "sock") then
   p_saveStorage = {
     params ["", "_obj"];
 
+    private _cargo = _obj call fn_containerCargoToPairs;
     private _storage =
     [
-      ["Weapons", (getWeaponCargo _obj) call cargoToPairs],
-      ["Magazines", _obj call fn_magazineAmmoCargo],
-      ["Items", (getItemCargo _obj) call cargoToPairs],
-      ["Backpacks", (getBackpackCargo _obj) call cargoToPairs]
+      ["Weapons", _cargo select 0],
+      ["Magazines", _cargo select 1],
+      ["Items", _cargo select 2],
+      ["Backpacks", _cargo select 3]
     ];
 
     player setVariable ["private_storage", _storage];

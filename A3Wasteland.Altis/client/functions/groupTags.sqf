@@ -19,7 +19,7 @@ while {true} do
 		}forEach units player;
 
 		//Player Tags
-		_target = cursorObject;
+		_target = cursorTarget;
 		if (_target isKindOf "Man" && player == vehicle player) then
 		{
 			if(player distance _target < 300)then

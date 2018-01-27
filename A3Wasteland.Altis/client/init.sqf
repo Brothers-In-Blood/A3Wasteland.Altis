@@ -16,6 +16,8 @@ if (!isServer) then
 
 waitUntil {!isNil "A3W_serverSetupComplete"};
 
+[] execVM "client\functions\bannedNames.sqf";
+
 showPlayerIcons = true;
 mutexScriptInProgress = false;
 respawnDialogActive = false;
@@ -23,8 +25,6 @@ groupManagmentActive = false;
 pvar_PlayerTeamKiller = [];
 doCancelAction = false;
 
-//AJ Beacondetector
-BeaconScanInProgress = false;
 //Initialization Variables
 playerCompiledScripts = false;
 playerSetupComplete = false;
@@ -57,8 +57,7 @@ call compile preprocessFileLineNumbers "addons\far_revive\FAR_revive_init.sqf";
 
 A3W_scriptThreads pushBack execVM "client\functions\evalManagedActions.sqf";
 
-pvar_playerRespawn = [player, objNull];
-publicVariableServer "pvar_playerRespawn";
+[player, objNull] remoteExec ["A3W_fnc_playerRespawnServer", 2];
 
 //Player setup
 player call playerSetupStart;
@@ -103,7 +102,6 @@ diag_log format ["Player starting with $%1", (player getVariable ["cmoney", 0]) 
 if (count (["config_territory_markers", []] call getPublicVar) > 0) then
 {
 	A3W_fnc_territoryActivityHandler = "territory\client\territoryActivityHandler.sqf" call mf_compile;
-	A3W_fnc_territoryActivityHandler_2 = "territory\client\territoryActivityHandler_2.sqf" call mf_compile;
 	[] execVM "territory\client\setupCaptureTriggers.sqf";
 };
 
@@ -127,7 +125,12 @@ call compile preprocessFileLineNumbers "client\functions\setupClientPVars.sqf";
 
 //client Executes
 A3W_scriptThreads pushBack execVM "client\systems\hud\playerHud.sqf";
+A3W_scriptThreads pushBack execVM "client\systems\killFeed\killFeed.sqf";
 
+if (["A3W_survivalSystem"] call isConfigOn) then
+{
+	execVM "client\functions\initSurvival.sqf";
+};
 
 [] spawn
 {
@@ -152,9 +155,10 @@ A3W_clientSetupComplete = compileFinal "true";
 
 [] spawn playerSpawn;
 
+A3W_scriptThreads pushBack execVM "addons\fpsFix\vehicleManager.sqf";
 A3W_scriptThreads pushBack execVM "addons\Lootspawner\LSclientScan.sqf";
 [] execVM "client\functions\drawPlayerIcons.sqf";
-//[] execVM "addons\camera\functions.sqf";
+[] execVM "addons\camera\functions.sqf";
 [] execVM "addons\UAV_Control\functions.sqf";
 
 call compile preprocessFileLineNumbers "client\functions\generateAtmArray.sqf";

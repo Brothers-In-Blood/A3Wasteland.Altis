@@ -5,6 +5,7 @@
 //	@file Author: AgentRev, JoSchaap, Austerror
 
 #include "functions.sqf"
+#define STR_TO_SIDE(VAL) ([sideUnknown,BLUFOR,OPFOR,INDEPENDENT,CIVILIAN,sideLogic] select ((["WEST","EAST","GUER","CIV","LOGIC"] find toUpper (VAL)) + 1))
 
 private ["_maxLifetime", "_isWarchestEntry", "_isBeaconEntry", "_worldDir", "_methodDir", "_objCount", "_objects", "_exclObjectIDs"];
 
@@ -90,6 +91,9 @@ _exclObjectIDs = [];
 			_obj setVariable ["ownerUID", _owner, true];
 		};
 
+		private _uavSide = if (isNil "_playerSide") then { sideUnknown } else { _playerSide };
+		private _uavAuto = true;
+
 		{
 			_var = _x select 0;
 			_value = _x select 1;
@@ -99,18 +103,6 @@ _exclObjectIDs = [];
 				case "side": { _value = _value call _strToSide };
 				case "cmoney": { if (_value isEqualType "") then { _value = parseNumber _value } };
 				case "R3F_Side": { _value = _value call _strToSide };
-				case "lockDown": { _value }; // BASE LOCKER
-				case "Lights": { _value }; // BASE LOCKER
-				case "password": { _value }; // BASE LOCKER - SAFE - DOOR
-				case "moveable": {_value};
-				case "bis_disabled_Door_1": {_value};
-				case "bis_disabled_Door_2": {_value};
-				case "bis_disabled_Door_3": {_value};
-				case "bis_disabled_Door_4": {_value};
-				case "bis_disabled_Door_5": {_value};
-				case "bis_disabled_Door_6": {_value};
-				case "bis_disabled_Door_7": {_value};
-				case "bis_disabled_Door_8": {_value};
 				case "ownerName":
 				{
 					switch (typeName _value) do
@@ -126,17 +118,26 @@ _exclObjectIDs = [];
 						default { _value = "[Beacon]" };
 					};
 				};
+				case "uavSide":
+				{
+					if (_uavSide isEqualTo sideUnknown) then { _uavSide = STR_TO_SIDE(_value) };
+				};
+				case "uavAuto":
+				{
+					if (_value isEqualType true) then
+					{
+						_uavAuto = _value;
+					};
+				};
 			};
+
 			_obj setVariable [_var, _value, true];
 		} forEach _variables;
-		//make sure existing objects are given moveable variable. Comment line after update.
-		_obj setVariable ["moveable", true, true];
 
-		// Base locker lights
-    if (_obj getVariable ["lights",""] == "off") then
-    {
-      _obj setHit ["light_1_hit", 0.97];
-    };
+		if (unitIsUAV _obj) then
+		{
+			[_obj, _uavSide, false, _uavAuto] spawn fn_createCrewUAV;
+		};
 
 		clearWeaponCargoGlobal _obj;
 		clearMagazineCargoGlobal _obj;
@@ -155,6 +156,7 @@ _exclObjectIDs = [];
 			case (_locked < 1): { true };
 			default { false };
 		};
+
 		if (_unlock) then
 		{
 			_obj setVariable ["objectLocked", false, true];
@@ -180,7 +182,7 @@ _exclObjectIDs = [];
 					{
 						_bpack = _x select 0;
 
-						if (!(_bpack isKindOf "Weapon_Bag_Base") || {{_bpack isKindOf _x} count ["B_UAV_01_backpack_F", "B_Static_Designator_01_weapon_F", "O_Static_Designator_02_weapon_F"] > 0}) then
+						if (!(_bpack isKindOf "Weapon_Bag_Base") || {[["_UAV_","_Designator_"], _bpack] call fn_findString != -1}) then
 						{
 							_obj addBackpackCargoGlobal _x;
 						};
@@ -214,25 +216,6 @@ _exclObjectIDs = [];
 
 		_exclVehicleIDs pushBack _vehicleID;
 		_exclObjectIDs pushBack _objectID;
-	};
-
-	//Restore Service Objects
-	if ({_obj iskindof _x} count [
-			"Box_NATO_AmmoVeh_F",
-			"B_Slingload_01_Ammo_F",
-			"B_Slingload_01_Fuel_F",
-			"B_Slingload_01_Medevac_F",
-			"B_Slingload_01_Repair_F",
-			"StorageBladder_01_fuel_forest_F",
-			"StorageBladder_01_fuel_sand_F",
-			"Land_fs_feed_F",
-			"Land_FuelStation_01_pump_malevil_F",
-			"Land_FuelStation_Feed_F",
-			"Land_Pod_Heli_Transport_04_fuel_F",
-			"Land_Pod_Heli_Transport_04_repair_F"
-		] > 0) then	{
-		_obj enableDynamicSimulation true;
-		[_obj] remoteExecCall ["GOM_fnc_addAircraftLoadout", 0, _obj];
 	};
 } forEach _objects;
 

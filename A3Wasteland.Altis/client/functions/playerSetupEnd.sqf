@@ -7,12 +7,10 @@
 private "_player";
 _player = _this;
 
-_player addRating 9999999;
+_player addRating 1e11;
 
 [objNull, _player] call mf_player_actions_refresh;
 [] execVM "client\functions\playerActions.sqf";
-[] execVM "addons\Bos\init.sqf";     // Baselocker script
-[] execVM "addons\vPin\init.sqf";    // Vehicle Pinlock script
 
 _player groupChat "Wasteland - Initialization Complete";
 playerSetupComplete = true;

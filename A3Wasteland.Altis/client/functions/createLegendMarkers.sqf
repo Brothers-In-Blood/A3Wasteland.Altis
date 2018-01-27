@@ -7,13 +7,9 @@
 _markers =
 [
 	["Legend:", "EmptyIcon", "ColorWhite", [1,1]],
-	["Website: bibgaming.com", "EmptyIcon", "ColorRed", [1,1]],
-	["TeamSpeak: ts3.bibgaming.net", "EmptyIcon", "ColorRed", [1,1]],
+
 	["GS - General Store", "mil_dot", "ColorBlue", [1,1]],
-	["VS - Vehicle Store", "mil_dot", "ColorOrange", [1,1]],
-	["SV - Supply Vehicle", "mil_dot", "ColorGreen", [1,1]],
-	["BS - Base Parts Store", "mil_dot", "ColorRed", [1,1]],
-	["CVN-83 - USS Freedom", "mil_dot", "ColorKhaki", [1,1]]
+	["VS - Vehicle Store", "mil_dot", "ColorOrange", [1,1]]
 ];
 
 
@@ -27,7 +23,7 @@ if (["A3W_privateStorage"] call isConfigOn) then
 	_markers pushBack ["Storage", "mil_dot", "ColorUNKNOWN", [1,1]];
 };
 
-_mapSize = getNumber (configFile >> "CfgWorlds" >> worldName >> "mapSize");
+_mapSize = worldSize;
 _markerSpacing = 0.025 * _mapSize;
 _legendMarginX = 0.035 * _mapSize;
 _legendMarginY = 0.035 * _mapSize;

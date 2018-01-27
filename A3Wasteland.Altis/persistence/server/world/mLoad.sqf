@@ -1,7 +1,7 @@
 // ******************************************************************************************
 // * This project is licensed under the GNU Affero GPL v3. Copyright © 2014 A3Wasteland.com *
 // ******************************************************************************************
-//	@file Name: oLoad.sqf
+//	@file Name: mLoad.sqf
 //	@file Author: AgentRev, JoSchaap, Austerror
 
 #include "functions.sqf"
@@ -39,10 +39,10 @@ _exclMineIDs = [];
 
 		if (!isNil "_dir") then
 		{
-			[_mine, _dir] remoteExecCall ["setVectorDirAndUp"];
+			[_mine, _dir] remoteExecCall ["setVectorDirAndUp", 0, _mine];
 		};
 
-		_dummy = createVehicle [STICKY_CHARGE_DUMMY_OBJ, [-1e6,-1e6,1e6], [], 0, ""];
+		_dummy = createVehicle [STICKY_CHARGE_DUMMY_OBJ, [-1e6,-1e6,1e6], [], 0, "NONE"];
 		_dummy setVariable ["A3W_stickyCharges_isDummy", true, true];
 		_dummy setObjectTextureGlobal [0,""];
 		_dummy attachTo [_mine, [0,0,0]];

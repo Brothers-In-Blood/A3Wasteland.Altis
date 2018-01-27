@@ -54,30 +54,19 @@ switch (true) do
 	};
 };
 
+if (unitIsUAV _obj) then
+{
+	if (side _obj in [BLUFOR,OPFOR,INDEPENDENT]) then
+	{
+		_variables pushBack ["uavSide", str side _obj];
+	};
+
+	_variables pushBack ["uavAuto", isAutonomous _obj];
+};
+
 _owner = _obj getVariable ["ownerUID", ""];
+
 _r3fSide = _obj getVariable "R3F_Side";
-
-if (_obj iskindof "Static") then {
-	{ _variables pushBack [_x select 0, _obj getVariable _x] } forEach
-		[
-			["bis_disabled_Door_1", 0],
-			["bis_disabled_Door_2", 0],
-			["bis_disabled_Door_3", 0],
-			["bis_disabled_Door_4", 0],
-			["bis_disabled_Door_5", 0],
-			["bis_disabled_Door_6", 0],
-			["bis_disabled_Door_7", 0],
-			["bis_disabled_Door_8", 0],
-			["moveable", false]
-		];
-};
-
-if (_obj iskindof "thing") then {
-	{ _variables pushBack [_x select 0, _obj getVariable _x] } forEach
-		[
-			["moveable", false]
-		];
-};
 
 if (!isNil "_r3fSide") then
 {
@@ -92,10 +81,16 @@ _backpacks = [];
 if (_class call fn_hasInventory) then
 {
 	// Save weapons & ammo
-	_weapons = (getWeaponCargo _obj) call cargoToPairs;
-	_magazines = (getMagazineCargo _obj) call cargoToPairs;
-	_items = (getItemCargo _obj) call cargoToPairs;
-	_backpacks = (getBackpackCargo _obj) call cargoToPairs;
+	//_weapons = (getWeaponCargo _obj) call cargoToPairs;
+	//_magazines = (getMagazineCargo _obj) call cargoToPairs;
+	//_items = (getItemCargo _obj) call cargoToPairs;
+	//_backpacks = (getBackpackCargo _obj) call cargoToPairs;
+
+	private _cargo = _obj call fn_containerCargoToPairs;
+	_weapons = _cargo select 0;
+	_magazines = _cargo select 1;
+	_items = _cargo select 2;
+	_backpacks = _cargo select 3;
 };
 
 _turretMags = [];
@@ -113,21 +108,6 @@ if (_staticWeaponSavingOn && {_class call _isStaticWeapon}) then
 _ammoCargo = getAmmoCargo _obj;
 _fuelCargo = getFuelCargo _obj;
 _repairCargo = getRepairCargo _obj;
-
-// BASE - SAFE LOCKING Start
-switch (true) do
-{
-  case ( {_obj isKindOf _x} count ["Land_Device_assembled_F","Land_SatellitePhone_F"]>0):
-  {
-    { _variables pushBack [_x select 0, _obj getVariable _x] } forEach
-    [
-      ["password", ""],
-      ["lights", ""],
-      ["lockDown", false]
-    ];
-  };
-};
-//BASE - SAFE LOCKING End
 
 // Fix for -1.#IND
 if (isNil "_ammoCargo" || {!finite _ammoCargo}) then { _ammoCargo = 0 };

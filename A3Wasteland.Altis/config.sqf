@@ -23,4 +23,17 @@ config_refuel_amounts = compileFinal str
 	["Tank", 0.1],
 	["Air", 0.1]
 ];
-config_territory_markers = compileFinal preprocessFileLineNumbers "mapConfig\territories.sqf";
+
+// NOTE: Player saving and money settings moved to external config (A3Wasteland_settings\main_config.sqf), default values are set in server\default_config.sqf
+
+// Is player saving enabled?
+// config_player_saving_enabled = compileFinal "0";
+
+// How much do players spawn with?
+// config_initial_spawn_money = compileFinal "100";
+
+if (isServer) then
+{
+	config_territory_markers = compileFinal preprocessFileLineNumbers "mapConfig\territories.sqf";
+	publicVariable "config_territory_markers";
+};

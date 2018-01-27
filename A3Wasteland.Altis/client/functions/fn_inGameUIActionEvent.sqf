@@ -56,12 +56,12 @@ if (_unit == player && (_showWindow || _menuOpen)) then
 		};
 
 		// now done via enableWeaponDisassembly in vehicleSetup.sqf
-		/*case (_action == "DisAssemble" && {{_target isKindOf _x} count ["StaticMGWeapon","StaticGrenadeLauncher","StaticMortar"] > 0}):
+		case (_action == "DisAssemble" && {{_target isKindOf _x} count ["StaticMGWeapon","StaticGrenadeLauncher","StaticMortar"] > 0}):
 		{
 			playSound "FD_CP_Not_Clear_F";
 			[format ['You are not allowed to disassemble weapons.\nUse the "%1" option instead.', ["STR_R3F_LOG_action_deplacer_objet", "Move"] call getPublicVar], 5] call mf_notify_client;
 			_handled = true;
-		};*/
+		};
 
 		case (_action == "ManualFire"): // use UAV AI to re-align attack heli turret with pilot crosshair when manual fire is enabled with no gunner (thx KK xoxoxo)
 		{
@@ -69,7 +69,7 @@ if (_unit == player && (_showWindow || _menuOpen)) then
 
 			if ({_veh isKindOf _x} count ["Heli_Attack_01_base_F","Heli_Attack_02_base_F","VTOL_02_base_F"] > 0 && isNull gunner _veh) then
 			{
-				_bob = createAgent ["B_UAV_AI", [0,0,0], [], 0, ""];
+				_bob = createAgent ["B_UAV_AI", [0,0,0], [], 0, "NONE"];
 				_bob setName ["","",""];
 				_bob moveInGunner _veh;
 

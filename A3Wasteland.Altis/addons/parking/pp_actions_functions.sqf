@@ -38,8 +38,8 @@ pp_setup_terminal = {
   if (_terminal getVariable ["A3W_parkingTerminalSetupDone",false]) exitWith {};
   private _garage = param [1, nearestBuilding _terminal];
 
-  if (local _terminal) then { _terminal allowDamage false };
-  if (local _garage) then { _garage allowDamage false };
+  _terminal allowDamage false;
+  _garage allowDamage false;
   _terminal setVariable ["R3F_LOG_disabled", true]; //don't allow players to move the table
   _garage setVariable ["R3F_LOG_disabled", true];
 
@@ -51,7 +51,7 @@ pp_setup_terminal = {
     }
     else // garage native to map, cannot attachTo so we use invisible dummy
     {
-      _dummy = createVehicle ["Sign_Sphere25cm_F", getPosATL _terminal, [], 0, ""];
+      _dummy = createVehicle ["Sign_Sphere25cm_F", getPosATL _terminal, [], 0, "NONE"];
       _dummy hideObjectGlobal true;
       _dummy allowDamage false;
       _dummy setPosWorld (getPosWorld _terminal vectorAdd [0,0,-0.1]); // vectorAdd to compensate for elevated shed floor
@@ -61,7 +61,7 @@ pp_setup_terminal = {
     };
 
     def(_laptop);
-    _laptop = createSimpleObject ["Land_Laptop_unfolded_F", getPosASL _terminal]; //createVehicle ["Land_Laptop_unfolded_F", getPosASL _terminal, [], 0, ""];
+    _laptop = createSimpleObject ["Land_Laptop_unfolded_F", getPosASL _terminal]; //createVehicle ["Land_Laptop_unfolded_F", getPosASL _terminal, [], 0, "NONE"];
     _laptop allowDamage false;
     _laptop attachTo [_terminal, [0,-0.1,0.55]];
     _laptop setVariable ["R3F_LOG_disabled", true, true]; //don't allow players to move the laptop
@@ -81,11 +81,11 @@ pp_create_terminal = {
     case (_garage isKindOf "Land_Carrier_01_base_F"): { [-28.663,108.289,23.9749] };
     default                                           { [0,0,0] };
   };
- 
+
   _pos = AGLtoASL (_garage modelToWorld _offset);
   _garage allowDamage false;
 
-  _terminal = createVehicle ["Land_CampingTable_small_F", ASLtoATL _pos, [], 0, ""];
+  _terminal = createVehicle ["Land_CampingTable_small_F", ASLtoATL _pos, [], 0, "NONE"];
   _terminal setPosASL _pos;
   _pos set [2, (_pos select 2) - (getPos _terminal select 2)];
   _terminal setPosASL _pos;
@@ -135,7 +135,7 @@ pp_get_near_vehicles = {
   ARGVX4(0,_player,objNull,[]);
 
   def(_vehicles);
-  _vehicles = (nearestObjects [_player, ["LandVehicle","Air","Ship"], 50]);
+  _vehicles = (nearestObjects [_player, ["LandVehicle","Air","Ship"], 50]) select {!(_x getVariable ["A3W_lockpickDisabled",false])};
 
   init(_filtered,[]);
   def(_uid);

@@ -27,10 +27,6 @@ _hasInvite = false;
 
 diag_log "Invite to group: Before the checks";
 
-//Prevent bounty hunters and bounty victims from being in the same group
-_bountyCheck = [player, _target] call bountyGroupCheck;
-if (!isNil "_bountyCheck") exitWith { [format ["Can't add new member to group because '%1' has collected bounty on '%2'", name (_bountyCheck select 0), name (_bountyCheck select 1)]] spawn BIS_fnc_guiMessage };
-
 //Checks
 if(isNil "_target") exitWith {player globalChat "you must select someone to invite first"};
 if(_target == player) exitWith {player globalChat "you can't invite yourself"};
@@ -40,8 +36,14 @@ if((count units group _target) > 1) exitWith {player globalChat "This player is 
 if(_hasInvite) exitWith {player globalChat "This player already has a pending invite"};
 
 diag_log "Invite to group: After the checks";
+
+//currentInvites pushBack [getPlayerUID player, getPlayerUID _target];
+//publicVariable "currentInvites";
+
 pvar_processGroupInvite = ["send", player, _target];
 publicVariableServer "pvar_processGroupInvite";
+
+//[format ["You have been invited to join %1's group", name player], "A3W_fnc_titleTextMessage", _target, false] call A3W_fnc_MP;
 
 player globalChat format["You have invited %1 to join the group", name _target];
 

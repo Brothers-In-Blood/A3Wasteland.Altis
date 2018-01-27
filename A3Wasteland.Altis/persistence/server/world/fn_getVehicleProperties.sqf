@@ -57,11 +57,16 @@ if (_resupplyTruck) then
 	_variables pushBack ["A3W_resupplyTruck", true];
 };
 
-private _isUav = (round getNumber (configFile >> "CfgVehicles" >> _class >> "isUav") > 0);
+private _isUav = unitIsUAV _veh;
 
-if (_isUav && side _veh in [BLUFOR,OPFOR,INDEPENDENT]) then
+if (_isUav) then
 {
-	_variables pushBack ["uavSide", str side _veh];
+	if (side _veh in [BLUFOR,OPFOR,INDEPENDENT]) then
+	{
+		_variables pushBack ["uavSide", str side _veh];
+	};
+
+	_variables pushBack ["uavAuto", isAutonomous _veh];
 };
 
 _owner = _veh getVariable ["ownerUID", ""];
@@ -84,14 +89,20 @@ if (_texturesVar isEqualTypeAll "") then // TextureSource
 else // texture paths
 {
 	_doubleBSlash = (call A3W_savingMethod == "extDB");
-
+	private _missionDir = [_veh getVariable "A3W_objectTextures_missionDir"] param [0, call currMissionDir, [""]];
+	private _missionDirLen = count _missionDir;
 	private _addTexture =
 	{
 		_tex = _x select 1;
 
+		if (_tex select [0, _missionDirLen] == _missionDir) then
+		{
+			_tex = _tex select [_missionDirLen]; // exclude mission dir from path
+		};
+
 		if (_doubleBSlash) then
 		{
-			_tex = (_tex splitString "\") joinString "\\";
+			_tex = (["","\\"] select (_tex select [0,1] == "\")) + (_tex splitString "\" joinString "\\");
 		};
 
 		[_textures, _tex, [_x select 0]] call fn_addToPairs;
@@ -116,10 +127,16 @@ _backpacks = [];
 if (_class call fn_hasInventory) then
 {
 	// Save weapons & ammo
-	_weapons = (getWeaponCargo _veh) call cargoToPairs;
-	_magazines = _veh call fn_magazineAmmoCargo;
-	_items = (getItemCargo _veh) call cargoToPairs;
-	_backpacks = (getBackpackCargo _veh) call cargoToPairs;
+	//_weapons = (getWeaponCargo _veh) call cargoToPairs;
+	//_magazines = _veh call fn_magazineAmmoCargo;
+	//_items = (getItemCargo _veh) call cargoToPairs;
+	//_backpacks = (getBackpackCargo _veh) call cargoToPairs;
+
+	private _cargo = _veh call fn_containerCargoToPairs;
+	_weapons = _cargo select 0;
+	_magazines = _cargo select 1;
+	_items = _cargo select 2;
+	_backpacks = _cargo select 3;
 };
 
 // _turretMags is deprecated, leave empty
@@ -177,15 +194,6 @@ _repairCargo = getRepairCargo _veh;
 if (isNil "_ammoCargo" || {!finite _ammoCargo}) then { _ammoCargo = 0 };
 if (isNil "_fuelCargo" || {!finite _fuelCargo}) then { _fuelCargo = 0 };
 if (isNil "_repairCargo" || {!finite _repairCargo}) then { _repairCargo = 0 };
-
-// Save vPin by LouD
-{ _variables pushBack [_x select 0, _veh getVariable _x] } forEach
-[
-  ["vPin", false],
-  ["password", ""]
-];
-
-_owner = _veh getVariable ["ownerUID", ""];
 
 _props =
 [

@@ -23,7 +23,11 @@ publicVariable "currentInvites";
 
 { (_x select 0) addPublicVariableEventHandler (_x select 1) } forEach
 [
+	["pvar_removeNegativeScore", { PVAL call removeNegativeScore }],
 	["pvar_convertTerritoryOwner", { PVAL call convertTerritoryOwner }],
+	["pvar_enableSimulationGlobal", { PVAL call fn_enableSimulationGlobal }],
+	["pvar_enableSimulationServer", { PVAL call fn_enableSimulationServer }],
+	["pvar_parachuteLiftedVehicle", { PVAL spawn parachuteLiftedVehicle }],
 	["pvar_spawnStoreObject", { PVAL call spawnStoreObject }],
 	["pvar_processGroupInvite", { PVAL call processGroupInvite }],
 	["pvar_processMoneyPickup", { PVAL call processMoneyPickup }],
@@ -36,7 +40,6 @@ publicVariable "currentInvites";
 	["pvar_manualObjectSave", { if (!isNil "fn_manualObjectSave") then { PVAL call fn_manualObjectSave } }],
 	["pvar_manualObjectDelete", { if (!isNil "fn_manualObjectDelete") then { PVAL call fn_manualObjectDelete } }],
 	["pvar_manualVehicleSave", { if (!isNil "fn_manualVehicleSave") then { PVAL call fn_manualVehicleSave } }],
-	["pvar_playerRespawn", { PVAL spawn playerRespawnServer }],
 	["pvar_waitUntilBagTaken", { PVAL spawn waitUntilBagTaken }],
 	["pvar_dropPlayerItems", { PVAL spawn dropPlayerItems }]
 ];

@@ -1,37 +1,40 @@
-private ["_updateType"];
-_updateType = [_this, 0, 0, [0]] call BIS_fnc_param; // 1 - view, 2 - obj, 3 - both, 4 - FOV, 0 - both and terrain
-
-switch (_updateType) do {
-	case 1: {
-		switch (CHVD_vehType) do {
-			case 0: {setViewDistance CHVD_foot};
-			case 1: {setViewDistance CHVD_car};
-			case 2: {setViewDistance CHVD_air};
-		};
+switch (true) do
+{
+	case (cameraOn isKindOf "LandVehicle" || cameraOn isKindOf "Ship"):
+	{
+		CHVD_targetView = CHVD_car;
+		CHVD_targetObj = CHVD_carObj;
+		CHVD_targetTerrain = CHVD_carTerrain;
 	};
-	case 2: {
-		switch (CHVD_vehType) do {
-			case 0: {setObjectViewDistance CHVD_footObj};
-			case 1: {setObjectViewDistance CHVD_carObj};
-			case 2: {setObjectViewDistance CHVD_airObj};
-		};
+	case (cameraOn isKindOf "Air" || (animationState cameraOn) select [0,12] == "halofreefall"):
+	{
+		CHVD_targetView = CHVD_air;
+		CHVD_targetObj = CHVD_airObj;
+		CHVD_targetTerrain = CHVD_airTerrain;
 	};
-	case 4: {
-		switch (CHVD_vehType) do {
-			case 0: {setObjectViewDistance ([CHVD_footObj] call CHVD_fnc_fovViewDistance)};
-			case 1: {setObjectViewDistance ([CHVD_carObj] call CHVD_fnc_fovViewDistance)};
-			case 2: {setObjectViewDistance ([CHVD_airObj] call CHVD_fnc_fovViewDistance)};
-		};
-	};
-	default {
-		switch (CHVD_vehType) do {
-			case 0: {setViewDistance CHVD_foot; setObjectViewDistance CHVD_footObj};
-			case 1: {setViewDistance CHVD_car; setObjectViewDistance CHVD_carObj};
-			case 2: {setViewDistance CHVD_air; setObjectViewDistance CHVD_airObj};
-		};
+	default
+	{
+		CHVD_targetView = CHVD_foot;
+		CHVD_targetObj = CHVD_footObj;
+		CHVD_targetTerrain = CHVD_footTerrain;
 	};
 };
 
-if (_updateType isEqualTo 0) then {
-	[] call CHVD_fnc_updateTerrain;
+if (viewDistance != CHVD_targetView) then
+{
+	setViewDistance CHVD_targetView;
 };
+
+if (getObjectViewDistance select 0 != CHVD_targetObj) then
+{
+	setObjectViewDistance CHVD_targetObj;
+};
+
+if (CHVD_allowTerrain && getTerrainGrid != CHVD_targetTerrain) then
+{
+	setTerrainGrid CHVD_targetTerrain;
+};
+
+if (canSuspend) then { uiSleep 0.1 };
+
+false

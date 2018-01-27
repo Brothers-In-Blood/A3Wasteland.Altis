@@ -48,7 +48,7 @@ if !(_unit isUniformAllowed _uniform) then
 		//["U_O_OfficerUniform_ocamo", "U_I_OfficerUniform"],
 		["U_B_HeliPilotCoveralls", "U_I_HeliPilotCoveralls"],
 
-		["U_B_Protagonist_VR", "U_O_Protagonist_VR", "U_I_Protagonist_VR"]
+		["U_O_Protagonist_VR", "U_B_Protagonist_VR", "U_I_Protagonist_VR"]
 	];
 
 	{
@@ -60,10 +60,9 @@ if !(_unit isUniformAllowed _uniform) then
 				_uniX = _x;
 
 				if (_unit isUniformAllowed _uniX || // indie exception for NATO jungle ghillie & thermal suit due to BIS not giving a damn
-				    (side group _unit == INDEPENDENT && {{_uniX == _x} count ["U_B_CTRG_Soldier_F","U_B_T_FullGhillie_tna_F", "U_O_T_FullGhillie_tna_F", "U_O_V_Soldier_Viper_hex_F", "U_O_V_Soldier_Viper_F", "U_B_survival_uniform", "U_B_CTRG_1", "U_B_CTRG_2", "U_B_CTRG_3", "U_C_WorkerCoveralls", "U_C_Poor_1", "U_C_Poloshirt_redwhite", "U_C_Poloshirt_salmon", "U_C_Poloshirt_tricolour", "U_C_Poloshirt_blue", "U_C_Poloshirt_burgundy", "U_C_Poloshirt_stripped", "U_Competitor", "U_Rangemaster", "U_C_Driver_1_black", "U_C_Driver_1_blue", "U_C_Driver_1_green", "U_C_Driver_1_yellow", "U_C_Driver_1_orange", "U_C_Driver_1_red", "U_C_Driver_1_white", "U_C_Driver_1", "U_C_Driver_2", "U_C_Driver_3", "U_C_Driver_4"] > 0})) exitWith
+				    (side group _unit == INDEPENDENT && {{_uniX == _x} count ["U_B_CTRG_Soldier_F","U_B_T_FullGhillie_tna_F"] > 0})) exitWith
 				{
 					_uniform = _uniX;
-					systemChat format ["_uniform: %1", _uniX];
 				};
 			} forEach _uniArray;
 		};

@@ -75,11 +75,11 @@ switch(_switch) do
 			_itemsArray = [_itemsArray, { !((_x select 1) in _excludedItems) }] call BIS_fnc_conditionalSelect;
 		};
 	};
-	/*case 6:
+	case 6:
 	{
-		_itemsArray = call AllBaseParts;
+		_itemsArray = call genObjectsArray;
 		_showPicture = false;
-	};*/
+	};
 	default
 	{
 		_itemsArray = [];
@@ -115,7 +115,7 @@ _playerSideNum = switch (playerSide) do
 		{
 			case "CfgVehicles":
 			{
-				if ({_weaponClass isKindOf _x} count ["B_Static_Designator_01_weapon_F","O_Static_Designator_02_weapon_F"] > 0) exitWith {}; // allow everyone to buy all static designators
+				if ({_weaponClass isKindOf _x} count ["C_IDAP_UAV_06_backpack_F","B_Static_Designator_01_weapon_F","O_Static_Designator_02_weapon_F"] > 0) exitWith {}; // allow everyone to buy these
 
 				{
 					_sideCfg = call _x;
