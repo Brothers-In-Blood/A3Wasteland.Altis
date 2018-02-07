@@ -76,7 +76,7 @@ class WarchestDialog {
 		class WithdrawButton: w_RscButton {
 			idc = IDC_WITHDRAWBUTTON;
 			text = "Withdraw";
-			action = "call mf_items_warchest_withdraw";
+			action = "call mf_items_warchest_withdraw; closeDialog 0";
 			x = 0.35;
 			y = 0.475;
 			w = 0.125;
@@ -85,7 +85,7 @@ class WarchestDialog {
 		class DepositButton: w_RscButton {
 			idc = IDC_DEPOSITBUTTON;
 			text = "Deposit";
-			action = "call mf_items_warchest_deposit";
+			action = "call mf_items_warchest_deposit; closeDialog 0";
 			x = 0.525;
 			y = 0.475;
 			w = 0.125;

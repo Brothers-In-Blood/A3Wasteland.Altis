@@ -79,6 +79,7 @@ if (isServer) then
 	//Execute Server Side Scripts.
 	call compile preprocessFileLineNumbers "server\antihack\setup.sqf";
 	[] execVM "server\admins.sqf";
+	[] execVM "server\backers.sqf";
 };
 
 [] execVM "server\functions\serverVars.sqf";
@@ -154,6 +155,7 @@ if (isServer) then
 		"A3W_uavControl",
 		"A3W_disableUavFeed",
 		"A3W_townSpawnCooldown",
+		"A3W_townSpawnSpawnHeight",
 		"A3W_survivalSystem",
 		"A3W_extDB_GhostingAdmins",
 		"A3W_extDB_SaveUnlockedObjects",
@@ -169,18 +171,28 @@ if (isServer) then
 		"A3W_privateParkingLimit",
 		"A3W_privateParkingCost",
 		"A3W_vehicleLocking",
+		"A3W_artilleryStrike",
+		"A3W_artilleryShells",
+		"A3W_artilleryRadius",
+		"A3W_artilleryCooldown",
+		"A3W_artilleryAmmo",
 		"A3W_disableBuiltInThermal",
+		"A3W_customDeathMessages",
+		"A3W_bountyMax",
+		"A3W_bountyMinStart",
+		"A3W_bountyRewardPerc",
+		"A3W_bountyLifetime",
+		"A3W_maxMoney",
+		"A3W_healthTime",
+		"A3W_hungerTime",
+		"A3W_thirstTime",
+		"BoS_coolDownTimer",
 		"A3W_headshotNoRevive"
 	];
 
 	addMissionEventHandler ["PlayerConnected", fn_onPlayerConnected];
 	addMissionEventHandler ["PlayerDisconnected", fn_onPlayerDisconnected];
-
-	// Temp fix for https://forums.bistudio.com/topic/190773-mission-event-handlers-playerconnected-and-playerdisconnected-do-not-work/
-	["A3W_missionEH_fix", "onPlayerConnected", {}] call BIS_fnc_addStackedEventHandler;
-	["A3W_missionEH_fix", "onPlayerDisconnected", {}] call BIS_fnc_addStackedEventHandler;
-	["A3W_missionEH_fix", "onPlayerConnected"] call BIS_fnc_removeStackedEventHandler;
-	["A3W_missionEH_fix", "onPlayerDisconnected"] call BIS_fnc_removeStackedEventHandler;
+	addMissionEventHandler ["EntityKilled", fn_entityKilled];
 };
 
 _playerSavingOn = ["A3W_playerSaving"] call isConfigOn;
@@ -190,11 +202,12 @@ _staticWeaponSavingOn = ["A3W_staticWeaponSaving"] call isConfigOn;
 _warchestSavingOn = ["A3W_warchestSaving"] call isConfigOn;
 _warchestMoneySavingOn = ["A3W_warchestMoneySaving"] call isConfigOn;
 _beaconSavingOn = ["A3W_spawnBeaconSaving"] call isConfigOn;
+_camonetSavingOn = ["A3W_camoNetSaving"] call isConfigOn;
 _timeSavingOn = ["A3W_timeSaving"] call isConfigOn;
 _weatherSavingOn = ["A3W_weatherSaving"] call isConfigOn;
 _mineSavingOn = ["A3W_mineSaving"] call isConfigOn;
 
-_objectSavingOn = (_baseSavingOn || _boxSavingOn || _staticWeaponSavingOn || _warchestSavingOn || _warchestMoneySavingOn || _beaconSavingOn);
+_objectSavingOn = (_baseSavingOn || _boxSavingOn || _staticWeaponSavingOn || _warchestSavingOn || _warchestMoneySavingOn || _beaconSavingOn || _camonetSavingOn);
 _vehicleSavingOn = ["A3W_vehicleSaving"] call isConfigOn;
 _hcObjSavingOn = ["A3W_hcObjSaving"] call isConfigOn;
 
@@ -210,7 +223,6 @@ if (_hcObjSavingOn) then
 		if (_timeSavingOn || _weatherSavingOn) then
 		{
 			"currentDate" addPublicVariableEventHandler ("client\functions\clientTimeSync.sqf" call mf_compile);
-			drn_DynamicWeather_MainThread = [] execVM "addons\scripts\DynamicWeatherEffects.sqf";
 		};
 	};
 };
@@ -426,6 +438,7 @@ if (_playerSavingOn || _objectSavingOn || _vehicleSavingOn || _mineSavingOn || _
 			["warchestSaving", _warchestSavingOn],
 			["warchestMoneySaving", _warchestMoneySavingOn],
 			["spawnBeaconSaving", _beaconSavingOn],
+			["camoNetSaving", _camonetSavingOn],
 			["timeSaving", _timeSavingOn],
 			["weatherSaving", _weatherSavingOn],
 			["hcObjSaving", _hcObjSavingOn]
@@ -530,7 +543,7 @@ else
 // Consolidate all store NPCs in a single group
 [] spawn
 {
-	_storeGroup = createGroup sideLogic;
+	_storeGroup = createGroup sideFriendly;
 	{
 		if (!isPlayer _x && {(toLower ((vehicleVarName _x) select [0,8])) in ["genstore","gunstore","vehstore"]}) then
 		{
@@ -551,3 +564,5 @@ if !(["A3W_hcObjCleanup"] call isConfigOn) then
 	// Start clean-up loop
 	execVM "server\WastelandServClean.sqf";
 };
+//Start Weather System
+execVM "server\weather.sqf";

@@ -19,6 +19,7 @@ _methodDir = format ["%1\%2", _worldDir, call A3W_savingMethodDir];
 
 _objCount = 0;
 _objects = call compile preprocessFileLineNumbers format ["%1\getObjects.sqf", _methodDir];
+_objectsArray = [];
 
 _exclObjectIDs = [];
 
@@ -52,8 +53,10 @@ _exclObjectIDs = [];
 		{ if (typeName _x == "STRING") then { _pos set [_forEachIndex, parseNumber _x] } } forEach _pos;
 
 		_obj = createVehicle [_class, _pos, [], 0, "None"];
+		_objectsArray pushBack _obj;
 		_obj allowDamage false;
 		_obj hideObjectGlobal true;
+		_obj enableSimulation false;
 		_obj setPosWorld ATLtoASL _pos;
 
 		if (!isNil "_dir") then
@@ -103,6 +106,22 @@ _exclObjectIDs = [];
 				case "side": { _value = _value call _strToSide };
 				case "cmoney": { if (_value isEqualType "") then { _value = parseNumber _value } };
 				case "R3F_Side": { _value = _value call _strToSide };
+				case "lockDown": { _value }; // BASE LOCKER
+				case "Lights": { _value }; // BASE LOCKER
+				case "password": { _value }; // BASE LOCKER - SAFE - DOOR
+				case "ManagerLevel" : {_value};
+				case "moveable": {_value};
+				case "bis_disabled_Door_1": {_value};
+				case "bis_disabled_Door_2": {_value};
+				case "bis_disabled_Door_3": {_value};
+				case "bis_disabled_Door_4": {_value};
+				case "bis_disabled_Door_5": {_value};
+				case "bis_disabled_Door_6": {_value};
+				case "bis_disabled_Door_7": {_value};
+				case "bis_disabled_Door_8": {_value};
+				case "GOM_fnc_fuelCargo" : {_value};
+				case "GOM_fnc_ammoCargo" : {_value};
+				case "GOM_fnc_repairCargo" : {_value};
 				case "ownerName":
 				{
 					switch (typeName _value) do
@@ -138,6 +157,15 @@ _exclObjectIDs = [];
 		{
 			[_obj, _uavSide, false, _uavAuto] spawn fn_createCrewUAV;
 		};
+				//make sure existing objects are given moveable variable. Comment line after update.
+		//_obj setVariable ["moveable", true, true];
+
+		// Base locker lights
+		if (_obj getVariable ["lights",""] == "off") then
+		{
+			_obj setHit ["light_1_hit", 0.97];
+		};
+
 
 		clearWeaponCargoGlobal _obj;
 		clearMagazineCargoGlobal _obj;
@@ -180,12 +208,7 @@ _exclObjectIDs = [];
 				if (!isNil "_backpacks") then
 				{
 					{
-						_bpack = _x select 0;
-
-						if (!(_bpack isKindOf "Weapon_Bag_Base") || {[["_UAV_","_Designator_"], _bpack] call fn_findString != -1}) then
-						{
-							_obj addBackpackCargoGlobal _x;
-						};
+						_obj addBackpackCargoGlobal _x;
 					} forEach _backpacks;
 				};
 			};
@@ -217,7 +240,53 @@ _exclObjectIDs = [];
 		_exclVehicleIDs pushBack _vehicleID;
 		_exclObjectIDs pushBack _objectID;
 	};
+
+	//Restore Service Objects
+	if ({_obj iskindof _x} count [
+			"Box_NATO_AmmoVeh_F",
+			"Box_EAST_AmmoVeh_F",
+			"Box_IND_AmmoVeh_F",
+			"B_Slingload_01_Ammo_F",
+			"B_Slingload_01_Fuel_F",
+			"B_Slingload_01_Medevac_F",
+			"B_Slingload_01_Repair_F",
+			"StorageBladder_01_fuel_forest_F",
+			"StorageBladder_01_fuel_sand_F",
+			"Land_fs_feed_F",
+			"Land_FuelStation_01_pump_malevil_F",
+			"Land_FuelStation_Feed_F",
+			"Land_Pod_Heli_Transport_04_fuel_F",
+			"Land_Pod_Heli_Transport_04_repair_F"
+		] > 0) then	{
+		_obj spawn GOM_fnc_addAircraftLoadoutToObject;
+	};
 } forEach _objects;
+
+{
+	//Restore building, towers, etc first
+	if (_x iskindof "NonStrategic") then
+	{
+		_x hideObjectGlobal false;
+		_x enableSimulation true;
+	};
+} foreach _objectsArray; // entities "NonStrategic";
+{
+	//Restore things that go in those buildings
+	if (_x iskindof "Thing") then
+	{
+		_x hideObjectGlobal false;
+		_x enableSimulation true;
+	};
+} foreach _objectsArray; // foreach entities "Thing";
+{
+	//Restore eerything else
+	if (_x iskindof "All") then
+	{
+		_x hideObjectGlobal false;
+		_x enableSimulation true;
+	};
+} foreach _objectsArray; // foreach entities "Thing";
+
 
 if (_warchestMoneySavingOn) then
 {

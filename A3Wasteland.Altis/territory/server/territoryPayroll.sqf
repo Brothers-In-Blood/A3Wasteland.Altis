@@ -4,8 +4,6 @@
 //	@file Name: territoryPayroll.sqf
 //	@file Author: AgentRev
 
-#define SLEEP_REALTIME(SECS) if (hasInterface) then { sleep SECS } else { uiSleep SECS }
-
 if (!isServer) exitWith {};
 
 _timeInterval = ["A3W_payrollInterval", 30*60] call getPublicVar;
@@ -17,11 +15,11 @@ while {true} do
 {
 	if (_territoryCapped) then
 	{
-		SLEEP_REALTIME(_timeInterval);
+		sleep _timeInterval;
 	}
 	else
 	{
-		SLEEP_REALTIME(60);
+		sleep 60;
 	};
 
 	_payouts = [];
@@ -61,6 +59,6 @@ while {true} do
 		_money = _count * _moneyAmount;
 		_message =  format ["Your team received a $%1 bonus for holding %2 territor%3 during the past %4 minutes", [_money] call fn_numbersText, _count, if (_count == 1) then { "y" } else { "ies" }, ceil (_timeInterval / 60)];
 
-		[[_message, _money], "A3W_fnc_territoryActivityHandler", _team, false] call A3W_fnc_MP;
+		[[_message, _money], "A3W_fnc_territoryActivityHandler_2", _team, false] call A3W_fnc_MP;
 	} forEach _payouts;
 };

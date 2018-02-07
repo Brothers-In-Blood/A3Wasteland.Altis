@@ -98,7 +98,8 @@ lootMagazine_list =
 			"30Rnd_45ACP_Mag_SMG_01_tracer_green",
 			"30Rnd_556x45_Stanag_Tracer_Yellow",
 			"30Rnd_65x39_caseless_mag_Tracer",
-			"30Rnd_65x39_caseless_green_mag_Tracer"/*,
+			"30Rnd_65x39_caseless_green_mag_Tracer"
+			/*,
 			"Chemlight_blue",
 			"Chemlight_green",
 			"Chemlight_red",
@@ -366,12 +367,6 @@ lootworldObject_list =
 	[ // CIVIL
 		0,
 		[
-			"Land_BakedBeans_F",                // food
-			"Land_BakedBeans_F",                // food
-			"Land_BottlePlastic_V2_F",          // water
-			"Land_BottlePlastic_V2_F",          // water
-			"Land_Can_V3_F",                    // energydrink
-			"Land_Suitcase_F",                  // repairkit
 			"Land_CanisterOil_F",               // syphon hose
 			"Land_CanisterFuel_F"               // jerrycan
 		]
@@ -379,10 +374,6 @@ lootworldObject_list =
 	[ // MILITARY
 		1,
 		[
-			"Land_BakedBeans_F",                // food
-			"Land_BottlePlastic_V2_F",          // water
-			"Land_Can_V3_F",                    // energydrink
-			"Land_Suitcase_F",                  // repairkit
 			"Land_CanisterOil_F",               // syphon hose
 			"Land_CanisterFuel_F"               // jerrycan
 		]
@@ -390,24 +381,13 @@ lootworldObject_list =
 	[ // INDUSTRIAL
 		2,
 		[
-			"Land_BakedBeans_F",                // food
-			"Land_BottlePlastic_V2_F",          // water
-			"Land_Can_V3_F",                    // energydrink
-			"Land_Suitcase_F",                  // repairkit
-			"Land_Suitcase_F",                  // repairkit
 			"Land_CanisterOil_F",               // syphon hose
-			"Land_CanisterOil_F",               // syphon hose
-			"Land_CanisterFuel_F",              // jerrycan
 			"Land_CanisterFuel_F"               // jerrycan
 		]
 	],
 	[ // RESEARCH
 		3,
 		[
-			"Land_BakedBeans_F",                // food
-			"Land_BottlePlastic_V2_F",          // water
-			"Land_Can_V3_F",                    // energydrink
-			"Land_Suitcase_F",                  // repairkit
 			"Land_CanisterOil_F",               // syphon hose
 			"Land_CanisterFuel_F"               // jerrycan
 		]

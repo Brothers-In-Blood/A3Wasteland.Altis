@@ -77,6 +77,12 @@ if (_ownerName != "") then
 	_variables pushBack ["ownerName", toArray _ownerName];
 };
 
+private _artiCount = [_veh getVariable "artillery"] param [0,0,[0]];
+if (_artiCount >= 1) then
+{
+	_variables pushBack ["artillery", 1]; // capped at 1 for safety
+};
+
 private _locked = 1 max locked _veh; // default vanilla state is always 1, so we ignore 0's
 
 _textures = [];
@@ -144,47 +150,7 @@ _turretMags = []; // magazinesAmmo _veh;
 _turretMags2 = (magazinesAllTurrets _veh) select {_x select 0 != "FakeWeapon" && (_x select 0) select [0,5] != "Pylon"} apply {_x select [0,3]};
 _turretMags3 = _veh call fn_getPylonsAmmo;
 
-// deprecated
-/*
-_hasDoorGuns = isClass (configFile >> "CfgVehicles" >> _class >> "Turrets" >> "RightDoorGun");
 
-_turrets = allTurrets [_veh, false];
-
-if !(_class isKindOf "B_Heli_Transport_03_unarmed_F") then
-{
-	_turrets = [[-1]] + _turrets; // only add driver turret if not unarmed Huron, otherwise flares get saved twice
-};
-
-if (_hasDoorGuns) then
-{
-	// remove left door turret, because its mags are already returned by magazinesAmmo
-	{
-		if (_x isEqualTo [1]) exitWith
-		{
-			_turrets set [_forEachIndex, 1];
-		};
-	} forEach _turrets;
-
-	_turrets = _turrets - [1];
-};
-
-{
-	_path = _x;
-
-	{
-		if ([_turretMags, _x, -1] call fn_getFromPairs == -1 || _hasDoorGuns) then
-		{
-			if (_veh currentMagazineTurret _path == _x && {count _turretMags3 == 0}) then
-			{
-				_turretMags3 pushBack [_x, _path, [_veh currentMagazineDetailTurret _path] call getMagazineDetailAmmo];
-			}
-			else
-			{
-				_turretMags2 pushBack [_x, _path];
-			};
-		};
-	} forEach (_veh magazinesTurret _path);
-} forEach _turrets;*/
 
 _ammoCargo = getAmmoCargo _veh;
 _fuelCargo = getFuelCargo _veh;
@@ -194,6 +160,56 @@ _repairCargo = getRepairCargo _veh;
 if (isNil "_ammoCargo" || {!finite _ammoCargo}) then { _ammoCargo = 0 };
 if (isNil "_fuelCargo" || {!finite _fuelCargo}) then { _fuelCargo = 0 };
 if (isNil "_repairCargo" || {!finite _repairCargo}) then { _repairCargo = 0 };
+
+// Save vPin by LouD
+{ _variables pushBack [_x select 0, _veh getVariable _x] } forEach
+[
+  ["vPin", false],
+  ["password", ""]
+];
+
+//Service system
+
+if ({_veh isKindOf _x} count 
+	[
+		"C_Van_01_fuel_F",
+		"B_G_Van_01_fuel_F",
+		"B_Truck_01_fuel_F",
+		"O_Truck_03_fuel_F",
+		"I_Truck_02_fuel_F",
+		"B_APC_Tracked_01_CRV_F",
+		"O_Heli_Transport_04_fuel_F"
+	]>0) then
+	{ 
+		{_variables pushBack [_x select 0, _veh getVariable _x]} forEach [["GOM_fnc_fuelCargo", 0]];
+	};
+if ({_veh isKindOf _x} count 
+	[
+		"B_Truck_01_ammo_F",
+		"O_Truck_03_ammo_F",
+		"I_Truck_02_ammo_F",
+		"B_APC_Tracked_01_CRV_F",
+		"O_Heli_Transport_04_ammo_F"
+	]>0) then
+	{ 
+		{_variables pushBack [_x select 0, _veh getVariable _x]} forEach [["GOM_fnc_ammoCargo", 0]];
+	};
+if ({_veh isKindOf _x} count 
+	[
+		"C_Offroad_01_repair_F",
+		"C_Van_02_service_F",
+		"B_Truck_01_Repair_F",
+		"O_Truck_03_repair_F",
+		"I_Truck_02_box_F",	
+		"B_APC_Tracked_01_CRV_F",
+		"O_Heli_Transport_04_repair_F"
+	]>0) then
+	{ 
+		{_variables pushBack [_x select 0, _veh getVariable _x]} forEach [["GOM_fnc_repairCargo", 0]];
+	};
+
+
+_owner = _veh getVariable ["ownerUID", ""];
 
 _props =
 [

@@ -3,7 +3,7 @@
 // ******************************************************************************************
 //@file Version: 1.0
 //@file Name: init.sqf
-//@file Author: MercyfulFate
+//@file Author: MercyfulFate, BIB_monkey
 //@file Created: 21/7/2013 16:00
 //@file Description: Initialize Spawn Beacon
 //@file Argument: the path of the directory holding this file
@@ -13,12 +13,12 @@
 
 MF_ITEMS_SPAWN_BEACON_PATH = _this;
 MF_ITEMS_SPAWN_BEACON = "spawnbeacon";
-MF_ITEMS_SPAWN_BEACON_DEPLOYED_TYPE = "Land_TentDome_F";
+MF_ITEMS_SPAWN_BEACON_DEPLOYED_TYPE = "Land_PlasticCase_01_small_F";
 MF_ITEMS_SPAWN_BEACON_STEAL_DURATION = 60;
 MF_ITEMS_SPAWN_BEACON_DURATION = 30;
 _deploy = build("deploy.sqf");
 _icon = "client\icons\spawnbeacon.paa";
-[MF_ITEMS_SPAWN_BEACON, "Spawn Beacon", _deploy, "Land_Sleeping_bag_folded_F", _icon, 1] call mf_inventory_create;
+[MF_ITEMS_SPAWN_BEACON, "Spawn Beacon", _deploy, "Land_PlasticCase_01_small_F", _icon, 1] call mf_inventory_create;
 
 mf_items_spawn_beacon_nearest = {
 	_beacon = objNull;

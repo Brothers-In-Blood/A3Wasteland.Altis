@@ -25,6 +25,52 @@ _veh = createVehicle [_class, _tempPos, [], if (isNil "_safeDistance") then { 0 
 _veh allowDamage false;
 _veh hideObjectGlobal true;
 
+//Make sure Blackwasp wings are folded
+if (_veh iskindof "Plane_Fighter_01_Base_F") then 
+{ 
+	_veh animate ['wing_fold_l',1];	
+	_veh animate ['wing_fold_r',1];	
+	_veh animate ['wing_fold_cover_l',1];	
+	_veh animate ['wing_fold_cover_r',1]; 
+}; 
+//Make sure Sentinal wings are folded
+if (_veh iskindof "B_UAV_05_F") then
+{
+	_veh animate ["wing_fold_l_arm",1];
+	_veh animate ["wing_fold_l",1];
+	_veh animate ["wing_fold_cover_l_arm",1];
+	_veh animate ["wing_fold_cover_l",1];
+	_veh animate ["wing_fold_r_arm",1];
+	_veh animate ["wing_fold_r",1];
+	_veh animate ["wing_fold_cover_r_arm",1];
+	_veh animate ["wing_fold_cover_r",1];
+};
+
+//Reload Service system
+if ({_veh iskindof _x} count
+	[
+		"C_Offroad_01_repair_F",
+		"C_Van_02_service_F",
+		"C_Van_01_fuel_F",
+		"B_G_Van_01_fuel_F",
+		"B_Truck_01_fuel_F",
+		"B_Truck_01_Repair_F",
+		"B_Truck_01_ammo_F",
+		"O_Truck_03_fuel_F",
+		"O_Truck_03_repair_F",
+		"O_Truck_03_ammo_F",
+		"I_Truck_02_fuel_F",
+		"I_Truck_02_ammo_F",
+		"I_Truck_02_box_F",	
+		"B_APC_Tracked_01_CRV_F",
+		"O_Heli_Transport_04_ammo_F",
+		"O_Heli_Transport_04_repair_F",
+		"O_Heli_Transport_04_fuel_F"
+	] >0)
+then
+{
+	_veh spawn GOM_fnc_addAircraftLoadoutToObject;
+};
 private _velMag = vectorMagnitude velocity _veh;
 
 if (isNil "_safeDistance") then

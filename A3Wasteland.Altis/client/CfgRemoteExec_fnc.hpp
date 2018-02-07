@@ -15,6 +15,7 @@ class BIS_fnc_objectVar {};
 
 // A3W vanilla
 class A3W_fnc_adminMenuLog { allowedTargets = 2; };
+class A3W_fnc_artilleryStrike { allowedTargets = 2; };
 class A3W_fnc_chatBroadcast {};
 class A3W_fnc_checkHackedVehicles { allowedTargets = 2; };
 class A3W_fnc_checkPlayerFlag { allowedTargets = 2; };
@@ -38,6 +39,7 @@ class A3W_fnc_setItemCleanup { allowedTargets = 2; };
 class A3W_fnc_setLockState {};
 class A3W_fnc_setName { jip = 1; };
 class A3W_fnc_setVarServer { allowedTargets = 2; };
+class A3W_fnc_takeArtilleryStrike { allowedTargets = 2; };
 class A3W_fnc_takeOwnership { allowedTargets = 2; };
 class A3W_fnc_titleTextMessage {};
 class A3W_fnc_towingHelper {};
@@ -67,3 +69,26 @@ class A3W_fnc_setVehicleAmmoDef {};
 class A3W_fnc_unflip {};
 class APOC_srv_startAirdrop { allowedTargets = 2; };
 class JTS_FNC_SENT {};
+
+//Advanced Ropes
+class AR_Client_Rappel_From_Heli { allowedTargets=0; };
+class AR_Hint { allowedTargets=1; };
+class AR_Hide_Object_Global { allowedTargets=2; };
+class AR_Enable_Rappelling_Animation { allowedTargets=2; };
+class AR_Rappel_From_Heli { allowedTargets=2; };
+class ASL_Pickup_Ropes { allowedTargets=0; };
+class ASL_Deploy_Ropes_Index { allowedTargets=0; };
+class ASL_Rope_Set_Mass { allowedTargets=0; };
+class ASL_Extend_Ropes { allowedTargets=0; };
+class ASL_Shorten_Ropes { allowedTargets=0; };
+class ASL_Release_Cargo { allowedTargets=0; };
+class ASL_Retract_Ropes { allowedTargets=0; };
+class ASL_Deploy_Ropes { allowedTargets=0; };
+class ASL_Attach_Ropes { allowedTargets=0; };
+class ASL_Drop_Ropes { allowedTargets=0; };
+class ASL_Hint { allowedTargets=1; };
+class ASL_Hide_Object_Global { allowedTargets=2; };
+class AUR_Hint { allowedTargets=1; };
+class AUR_Hide_Object_Global { allowedTargets=2; };
+class AUR_Enable_Rappelling_Animation_Global { allowedTargets=2; };
+class AUR_Play_Rappelling_Sounds_Global { allowedTargets=2; };

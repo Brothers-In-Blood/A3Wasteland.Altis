@@ -23,7 +23,7 @@ waitUntil
 if (isNull _corpse) exitWith {};
 
 private _targetPos = getPosWorld _veh;
-_targetPos set [2, (getPosATL _corpse) select 2];
+_targetPos set [2, ((getPosATL _corpse) select 2) + 0.3];
 
 if (_veh != _corpse && damage _veh > 0.99) then
 {
@@ -38,7 +38,7 @@ if (_money <= 0) then
 
 if (_money > 0) then
 {
-	_m = createVehicle ["Land_Money_F", _targetPos, [], 1, "CAN_COLLIDE"];
+	_m = createVehicle ["Land_Money_F", _targetPos, [], 1, "NONE"];
 	_m setDir random 360;
 	_m setVariable ["cmoney", _money, true];
 	_m setVariable ["owner", "world", true];
@@ -55,7 +55,7 @@ if (_items isEqualTo []) then
 
 	for "_i" from 1 to _qty do
 	{
-		_obj = createVehicle [_type, _targetPos, [], 1, "CAN_COLLIDE"];
+		_obj = createVehicle [_type, _targetPos, [], 1, "NONE"];
 		_obj setDir random 360;
 		_obj setVariable ["mf_item_id", _id, true];
 		_obj call A3W_fnc_setItemCleanup;

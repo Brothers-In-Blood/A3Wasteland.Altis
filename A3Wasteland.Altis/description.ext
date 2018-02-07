@@ -2,7 +2,7 @@ respawn="BASE";
 respawnDelay=15;
 disabledAI=1;
 disableChannels[] = {{0,false,true}, {2,true,true}}; // 0 = global, 1 = side, 2 = command // new syntax: {{channel<number>, disableText<bool>, disableVoice<bool>}, ...};
-// side chat is disabled for indies in client\preInit.sqf
+// side voice is disabled for indies in client\preInit.sqf
 joinUnassigned = 0;
 enableItemsDropping = 0;
 forceRotorLibSimulation = 0; // if you set this to 1, you deny freedom of choice to the players, which is the very principle this mission is built upon
@@ -16,14 +16,15 @@ wreckRemovalMaxTime = 10*60;
 enableDebugConsole = 1;
 respawnDialog = 0; // do not enable this, otherwise the default scoreboard will overlap with the new one
 onPauseScript = "client\clientEvents\onPause.sqf";
+showSquadRadar = 1;
 class Header
 {
 	gameType=Sandbox;
 	minPlayers=1;
 	maxPlayers=146; // 144 players, 2 headless clients
 };
-author="AgentRev - A3Wasteland.com"; // it would be great if you could keep "A3Wasteland.com" in the name, like "YourName and A3Wasteland.com" :)
-onLoadName = "A3Wasteland Altis"; // it would be great if you could keep "A3" in the name, like "ABC A3Wasteland" instead of "ABC Wasteland" :)
+author="BIB Monkey|BIBGaming.com - AgentRev|A3Wasteland.com"; // it would be great if you could keep "A3Wasteland.com" in the name, like "YourName and A3Wasteland.com" :)
+onLoadName = "BIBA3Wasteland Altis"; // it would be great if you could keep "A3" in the name, like "ABC A3Wasteland" instead of "ABC Wasteland" :)
 onLoadMission = "Wasteland is a harsh survival sandbox where two teams and independent players fight for survival.";
 overviewText = "Wasteland is a harsh survival sandbox where two teams and independent players fight for survival.";
 overviewTextLocked = "Wasteland is a harsh survival sandbox where two teams and independent players fight for survival.";
@@ -42,17 +43,19 @@ briefing = 0; // if 0, skip Continue button
 //Dialog includes
 
 #include "client\gui_base.hpp"
-#include "addons\R3F_ARTY_AND_LOG\desc_include.h"
+#include "addons\R3F_LOG\desc_include.h"
 #include "client\systems\ui_toolkit.hpp"
 #include "client\systems\common.hpp"
 #include "client\items\warchest\dialog.hpp"
 #include "client\items\atm\atm_gui.hpp"
+#include "client\items\artillery\artillery_gui.hpp"
 #include "client\actions\gui.hpp"
 #include "addons\far_revive\reviveBlank_gui.hpp"
 #include "client\systems\playerMenu\dialog\player_settings.hpp"
 #include "client\systems\groups\dialog\groupManagement.hpp"
 #include "client\systems\gunStore\dialog\gunshop_settings.hpp"
 #include "client\systems\generalStore\dialog\genstore_settings.hpp"
+#include "client\systems\BasePartsStore\dialog\BaseStore_settings.hpp"
 #include "client\systems\vehicleStore\dialog\vehiclestore_settings.hpp"
 #include "client\systems\adminPanel\dialog\adminMenu.hpp"
 #include "client\systems\adminPanel\dialog\modMenu.hpp"
@@ -67,13 +70,18 @@ briefing = 0; // if 0, skip Continue button
 #include "client\systems\killFeed\killFeedMenu_gui.hpp"
 #include "addons\proving_ground\PG_config.hpp"
 #include "addons\outlw_magrepack\config.hpp"
+#include "addons\BoS\dialog\BoS_mainMenu.hpp"
 #include "addons\gui\gui.hpp"
 #include "addons\parking\list_simple_menu.hpp"
+#include "addons\vPin\dialog\vPin_mainMenu.hpp"
+#include "addons\AF_Keypad\AF_KP_defines.hpp"
+#include "addons\AF_Keypad\AF_KP_dialogs.hpp"
 #include "addons\CHVD\dialog.hpp"
+#include "addons\GOM\dialogs\GOM_dialog_parents.hpp"
+#include "addons\GOM\dialogs\GOM_dialog_controls.hpp"
 
 class RscTitles
 {
-	#include "addons\proving_ground\PG_rsctitles.hpp"
 	#include "addons\lsd_nvg\RscTitles.hpp"
 	#include "client\systems\hud\dialog\hud.hpp"
 	#include "client\systems\playerMenu\dialog\welcome.hpp"
@@ -99,8 +107,12 @@ class CfgFunctions
 		#include "client\CfgFunctions.hpp"
 		#include "server\CfgFunctions.hpp"
 	};
-
+	class armajunkies
+	{
+		#include "addons\aj\aj_FunctionsDefinition.hpp"
+	};
 	#include "addons\CHVD\CfgFunctions.hpp"
+	#include "addons\GOM\functions\GOM_fnc_functions.hpp"
 };
 
 class CfgNotifications
@@ -108,6 +120,10 @@ class CfgNotifications
 	#include "client\CfgNotifications.hpp"
 };
 
+class CfgCommunicationMenu
+{
+	#include "addons\GOM\functions\GOM_fnc_aircraftLoadoutMenu.hpp"
+};
 class CfgRemoteExec // applies only to clients
 {
 	class Functions
@@ -127,5 +143,71 @@ class CfgRemoteExec // applies only to clients
 		#else
 		mode = 2; // debug mode, don't touch
 		#endif
+		//GOM
+		class SetPylonLoadout{ allowedTargets=0; };
+		class SetAmmoOnPylon{ allowedTargets=0; };
+		class removeWeaponGlobal{ allowedTargets=0; };
+		class setPylonsPriority{ allowedTargets=0; };
+		class GOM_fnc_handleResources{ allowedTargets=0; };
+		class setFuelCargo{ allowedTargets=0; };
+		class setAmmoCargo{ allowedTargets=0; };
+		class setRepairCargo{ allowedTargets=0; };
+		class setFuel{ allowedTargets=0; };
 	};
 };
+
+class CfgSounds
+{
+		sounds[] =
+	{
+		beep, beep2, beep3, beep4, beep5, beep6, beep7, beep8, beep9
+	};
+
+	class beep
+		{
+			sound[] = {"addons\beacondetector\sound\beep.wav", db-10, 0.5};
+			titles[] = {};
+		};
+	class beep2
+		{
+			sound[] = {"addons\beacondetector\sound\beep.wav", db-10, 0.6};
+			titles[] = {};
+		};
+	class beep3
+		{
+			sound[] = {"addons\beacondetector\sound\beep.wav", db-10, 0.7};
+			titles[] = {};
+		};
+	class beep4
+		{
+			sound[] = {"addons\beacondetector\sound\beep.wav", db-10, 0.8};
+			titles[] = {};
+		};
+	class beep5
+		{
+			sound[] = {"addons\beacondetector\sound\beep.wav", db-10, 0.9};
+			titles[] = {};
+		};
+	class beep6
+		{
+			sound[] = {"addons\beacondetector\sound\beep.wav", db-10, 1.0};
+			titles[] = {};
+		};
+	class beep7
+		{
+			sound[] = {"addons\beacondetector\sound\beep.wav", db-10, 1.2};
+			titles[] = {};
+		};
+	class beep8
+		{
+			sound[] = {"addons\beacondetector\sound\beep.wav", db-10, 1.4};
+			titles[] = {};
+		};
+	class beep9
+		{
+			sound[] = {"addons\beacondetector\sound\beep.wav", db-10, 0.1};
+			titles[] = {};
+		};
+};
+
+#include "infiSTAR_AdminMenu.hpp"

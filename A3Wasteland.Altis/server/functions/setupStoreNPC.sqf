@@ -47,6 +47,10 @@ if (hasInterface) then
 		{
 			_npc addAction ["<img image='client\icons\store.paa'/> Open Vehicle Store", "client\systems\vehicleStore\loadVehicleStore.sqf", [], 1, true, true, "", STORE_ACTION_CONDITION];
 		};
+		case (["BaseStore", _npcName] call _startsWith):
+		{
+			_npc addAction ["<img image='client\icons\store.paa'/> Open Base Store", "client\systems\BasePartsStore\loadBaseStore.sqf", [], 1, true, true, "", STORE_ACTION_CONDITION];
+		};
 	};
 
 	_npc addAction ["<img image='client\icons\money.paa'/> Sell crate", "client\systems\selling\sellCrateItems.sqf", [false, false, true], 0.99, false, true, "", STORE_ACTION_CONDITION + " && " + SELL_CRATE_CONDITION];

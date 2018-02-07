@@ -46,13 +46,34 @@ switch (true) do
 	{
 		if (soundVolume > 0.5) then
 		{
-			0.5 fadeSound 0.2;
+			0.5 fadeSound 0.01;
 			["You've inserted your earplugs.", 5] call mf_notify_client;
 		}
 		else
 		{
 			0.5 fadeSound 1;
 			["You've taken out your earplugs.", 5] call mf_notify_client;
+		};
+	};
+	// Z Key
+	case (_key in A3W_customKeys_AJZeus):
+	{
+		execVM "addons\aj\zeus\refreshzeus.sqf";
+	};
+	// Holster - unholster weapon (H key)
+	case (_key == 35):
+	{
+		if (vehicle player == player && currentWeapon player != "") then
+		{
+			curWep_h = currentWeapon player;
+			player action ["SwitchWeapon", player, player, 100];
+		}
+		else
+		{
+			if (curWep_h in [primaryWeapon player,secondaryWeapon player,handgunWeapon player]) then
+			{
+				player selectWeapon curWep_h;
+			};
 		};
 	};
 };
@@ -102,7 +123,7 @@ if (!_handled && _key in actionKeys "GetOut") then
 		{
 			[] spawn
 			{
-				if !(["Are you sure you want to eject?", "Confirm", true, true] call BIS_fnc_guiMessage) exitWith {};
+				//if !(["Are you sure you want to eject?", "Confirm", true, true] call BIS_fnc_guiMessage) exitWith {};
 				[[], fn_emergencyEject] execFSM "call.fsm";
 			};
 

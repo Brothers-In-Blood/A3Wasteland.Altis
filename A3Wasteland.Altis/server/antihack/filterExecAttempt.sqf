@@ -3,7 +3,7 @@
 // ******************************************************************************************
 //	@file Version: 1.0
 //	@file Name: filterExecAttempt.sqf
-//	@file Author: AgentRev
+//	@file Author: AgentRev, BIB_Monkey
 //	@file Created: 14/07/2013 13:10
 
 private "_packetName";
@@ -57,6 +57,30 @@ if (_packetName == "BIS_fnc_MP_packet") then
 			// NOTE: You also need to whitelist individual functions in client\CfgRemoteExec_fnc.hpp
 		];
 
+
+	//allow zeus functions
+	if (!_whitelisted) then
+	{
+		scopeName "zeusFunc";
+		private ["_zeusFuncCfg", "_zeusFuncPrefix", "_i", "_catCfg", "_j"];
+
+		_zeusFuncCfg = configfile >> "CfgFunctions" >> "A3_Functions_F_Curator";
+		_zeusFuncPrefix = getText (_zeusFuncCfg >> "tag") + "_fnc_";
+
+		for "_i" from 0 to (count _zeusFuncCfg - 1) do
+		{
+			_catCfg = _zeusFuncCfg select _i;
+			for "_j" from 0 to (count _catCfg - 1) do
+			{
+				if (_function == _zeusFuncPrefix + configName (_catCfg select _j)) then
+				{
+					_whitelisted = true;
+					breakOut "zeusFunc";
+				};
+			};
+		};
+	};
+
 		if (!_whitelisted) then
 		{
 			{
@@ -68,7 +92,8 @@ if (_packetName == "BIS_fnc_MP_packet") then
 			forEach
 			[
 				"A3W_fnc_",
-				"mf_remote_"
+				"mf_remote_",
+				"APOC_srv_"
 			];
 		};
 	};

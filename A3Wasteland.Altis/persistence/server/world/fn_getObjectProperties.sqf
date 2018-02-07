@@ -31,6 +31,12 @@ switch (true) do
 	};
 };
 
+private _artiCount = [_obj getVariable "artillery"] param [0,0,[0]];
+if (_artiCount >= 1) then
+{
+	_variables pushBack ["artillery", 1]; // capped at 1 for safety
+};
+
 switch (true) do
 {
 	case (_obj call _isBox):
@@ -65,6 +71,33 @@ if (unitIsUAV _obj) then
 };
 
 _owner = _obj getVariable ["ownerUID", ""];
+if (_obj iskindof "Static") then {
+	{ _variables pushBack [_x select 0, _obj getVariable _x] } forEach
+		[
+			["bis_disabled_Door_1", 0],
+			["bis_disabled_Door_2", 0],
+			["bis_disabled_Door_3", 0],
+			["bis_disabled_Door_4", 0],
+			["bis_disabled_Door_5", 0],
+			["bis_disabled_Door_6", 0],
+			["bis_disabled_Door_7", 0],
+			["bis_disabled_Door_8", 0],
+			["Moveable", false],
+			["Baselockenabled", false],
+			["LockedDown", false]
+		];
+};
+
+if (_obj iskindof "thing") then 
+{
+	{ _variables pushBack [_x select 0, _obj getVariable _x] } forEach
+		[
+			["Moveable", false],
+			["Baselockenabled", false],
+			["LockedDown", false]
+
+		];
+};
 
 _r3fSide = _obj getVariable "R3F_Side";
 
@@ -108,7 +141,32 @@ if (_staticWeaponSavingOn && {_class call _isStaticWeapon}) then
 _ammoCargo = getAmmoCargo _obj;
 _fuelCargo = getFuelCargo _obj;
 _repairCargo = getRepairCargo _obj;
+switch (true) do
+{
 
+	case ( {_obj isKindOf _x} count ["Land_SatellitePhone_F"]>0):
+	{
+		{ _variables pushBack [_x select 0, _obj getVariable _x] } forEach
+		[
+			["password", ""],
+			["lights", ""],
+			["lockDown", false],
+			["ManagerLevel", 1]
+		];
+	};
+	case ({_obj isKindOf _x} count ["Box_NATO_AmmoVeh_F", "Box_EAST_AmmoVeh_F", "Box_IND_AmmoVeh_F", "B_Slingload_01_Ammo_F" ]>0):
+	{
+		{ _variables pushBack [_x select 0, _obj getVariable _x] } forEach [["GOM_fnc_ammoCargo", 0]];
+	};
+	case ({_obj isKindOf _x} count  ["B_Slingload_01_Repair_F", "Land_Pod_Heli_Transport_04_repair_F"]>0):
+	{
+		{ _variables pushBack [_x select 0, _obj getVariable _x] } forEach [["GOM_fnc_repairCargo", 0]];
+	};
+	case ({_obj isKindOf _x} count ["StorageBladder_01_fuel_forest_F", "StorageBladder_01_fuel_sand_F", "Land_fs_feed_F", "Land_FuelStation_01_pump_malevil_F", "Land_FuelStation_Feed_F", "Land_Pod_Heli_Transport_04_fuel_F"]>0):
+	{
+		{ _variables pushBack [_x select 0, _obj getVariable _x] } forEach [["GOMfnc_fuelCargo", 0]];
+	};
+};
 // Fix for -1.#IND
 if (isNil "_ammoCargo" || {!finite _ammoCargo}) then { _ammoCargo = 0 };
 if (isNil "_fuelCargo" || {!finite _fuelCargo}) then { _fuelCargo = 0 };

@@ -20,7 +20,8 @@ _DEBUG = format ["%1", _this select 0];
 // you can also pass raw code to get it compileFinal'd
 // example: my_fnc_name = {diag_log "hey"} call mf_compile;
 mf_compile = compileFinal
-('
+(
+	'
 	private ["_path", "_isDebug", "_code"];
 	_path = "";
 	_isDebug = ' + _DEBUG + ';
@@ -52,7 +53,8 @@ mf_compile = compileFinal
 			compileFinal toString _code
 		};
 	};
-');
+'
+);
 
 // Simple command I use to make initialization scripts clean and simple.
 // uses mf_ namespace to avoid any issues.
@@ -70,6 +72,7 @@ mf_init =
 _clientFunc = "client\functions";
 _serverFunc = "server\functions";
 
+A3W_fnc_artilleryStrike = "client\items\artillery\fn_artilleryStrike.sqf" call mf_compile;
 A3W_fnc_deathMessage = [_serverFunc, "fn_deathMessage.sqf"] call mf_compile;
 A3W_fnc_getInFast = [_clientFunc, "fn_getInFast.sqf"] call mf_compile;
 A3W_fnc_isBleeding = [_serverFunc, "fn_isBleeding.sqf"] call mf_compile;
@@ -80,6 +83,7 @@ A3W_fnc_killFeedEntry = "client\systems\killFeed\fn_killFeedEntry.sqf" call mf_c
 A3W_fnc_pushVehicle = [_serverFunc, "pushVehicle.sqf"] call mf_compile;
 A3W_fnc_setVarServer = [_serverFunc, "fn_setVarServer.sqf"] call mf_compile;
 A3W_fnc_setVehicleLoadout = [_serverFunc, "fn_setVehicleLoadout.sqf"] call mf_compile;
+A3W_fnc_takeArtilleryStrike = "client\items\artillery\fn_takeArtilleryStrike.sqf" call mf_compile;
 A3W_fnc_towingHelper = [_serverFunc, "towingHelper.sqf"] call mf_compile;
 applyVehicleTexture = "client\systems\vehicleStore\applyVehicleTexture.sqf" call mf_compile;
 cargoToPairs = [_serverFunc, "cargoToPairs.sqf"] call mf_compile;
@@ -148,7 +152,7 @@ vehicleDammagedEvent = [_serverFunc, "vehicleDammagedEvent.sqf"] call mf_compile
 vehicleEngineEvent = [_serverFunc, "vehicleEngineEvent.sqf"] call mf_compile;
 vehicleHandleDamage = [_serverFunc, "vehicleHandleDamage.sqf"] call mf_compile;
 vehicleHitTracking = [_serverFunc, "vehicleHitTracking.sqf"] call mf_compile;
-
+A3W_fnc_aj_s_refreshZeus = "addons\aj\zeus\fn_aj_s_refreshZeus.sqf" call mf_compile;	//name has has to started with A3W_fnc_
 call compile preprocessFileLineNumbers "server\functions\mf_remote.sqf";
 
 "pvar_switchMoveGlobal" addPublicVariableEventHandler { ((_this select 1) select 0) switchMove ((_this select 1) select 1) };
