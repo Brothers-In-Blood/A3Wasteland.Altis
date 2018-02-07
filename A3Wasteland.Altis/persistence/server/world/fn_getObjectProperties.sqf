@@ -31,6 +31,12 @@ switch (true) do
 	};
 };
 
+private _artiCount = [_obj getVariable "artillery"] param [0,0,[0]];
+if (_artiCount >= 1) then
+{
+	_variables pushBack ["artillery", 1]; // capped at 1 for safety
+};
+
 switch (true) do
 {
 	case (_obj call _isBox):
@@ -53,18 +59,18 @@ switch (true) do
 		_variables pushBack ["ownerName", toArray (_obj getVariable ["ownerName", "[Beacon]"])];
 	};
 };
-if (unitIsUAV _obj) then 
-{ 
-	if (side _obj in [BLUFOR,OPFOR,INDEPENDENT]) then 
-	{ 
-		_variables pushBack ["uavSide", str side _obj]; 
-	}; 
-	_variables pushBack ["uavAuto", isAutonomous _obj]; 
-}; 
+
+if (unitIsUAV _obj) then
+{
+	if (side _obj in [BLUFOR,OPFOR,INDEPENDENT]) then
+	{
+		_variables pushBack ["uavSide", str side _obj];
+	};
+
+	_variables pushBack ["uavAuto", isAutonomous _obj];
+};
 
 _owner = _obj getVariable ["ownerUID", ""];
-_r3fSide = _obj getVariable "R3F_Side";
-
 if (_obj iskindof "Static") then {
 	{ _variables pushBack [_x select 0, _obj getVariable _x] } forEach
 		[
@@ -82,7 +88,8 @@ if (_obj iskindof "Static") then {
 		];
 };
 
-if (_obj iskindof "thing") then {
+if (_obj iskindof "thing") then 
+{
 	{ _variables pushBack [_x select 0, _obj getVariable _x] } forEach
 		[
 			["Moveable", false],
@@ -91,6 +98,7 @@ if (_obj iskindof "thing") then {
 
 		];
 };
+
 _r3fSide = _obj getVariable "R3F_Side";
 
 if (!isNil "_r3fSide") then
@@ -105,7 +113,6 @@ _backpacks = [];
 
 if (_class call fn_hasInventory) then
 {
-	// Save weapons & ammo
 	// Save weapons & ammo
 	//_weapons = (getWeaponCargo _obj) call cargoToPairs;
 	//_magazines = (getMagazineCargo _obj) call cargoToPairs;
@@ -134,8 +141,6 @@ if (_staticWeaponSavingOn && {_class call _isStaticWeapon}) then
 _ammoCargo = getAmmoCargo _obj;
 _fuelCargo = getFuelCargo _obj;
 _repairCargo = getRepairCargo _obj;
-
-
 switch (true) do
 {
 
@@ -162,8 +167,6 @@ switch (true) do
 		{ _variables pushBack [_x select 0, _obj getVariable _x] } forEach [["GOMfnc_fuelCargo", 0]];
 	};
 };
-
-
 // Fix for -1.#IND
 if (isNil "_ammoCargo" || {!finite _ammoCargo}) then { _ammoCargo = 0 };
 if (isNil "_fuelCargo" || {!finite _fuelCargo}) then { _fuelCargo = 0 };

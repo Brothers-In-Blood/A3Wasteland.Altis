@@ -36,12 +36,14 @@ va_player_exit = {
   _vehicle lock false;
   if (_immediate) exitWith {
     moveOut _player;
+
+    // ejection bug workaround
+    if (!isNull objectParent _player) then
+    {
+      _player setPos (_player modelToWorldVisual [0,0,0]);
+    };
   };
-  // ejection bug workaround 
-  if (!isNull objectParent _player) then 
-  { 
-    _player setPos (_player modelToWorldVisual [0,0,0]); 
-  };
+
   //leave engine in same state after exiting
   def(_engine_state);
   _engine_state =  isEngineOn _vehicle;
@@ -528,7 +530,7 @@ va_check_outside_actions = {
   init(_player,player);
 
 
-  _target_vehicle = [_player, 7] call va_outside_target;
+  _target_vehicle = [_player, 3.5] call va_outside_target;
   //player groupChat format["_target_vehicle = %1",_target_vehicle];
   if (!isOBJECT(_target_vehicle) || {insideAVehicle(_player) || {not(alive _player)}}) exitWith {
     [_player] call va_outside_remove_actions;

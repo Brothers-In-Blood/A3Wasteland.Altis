@@ -26,10 +26,10 @@ storeOwnerConfig = compileFinal str
 	["VehStore2", 6, 45, ["Boats"]],
 	["VehStore3", 4, 250, ["Boats"]],
 	["VehStore4", 1, 132, ["Boats"]],
-	["VehStore5", 0, 0, ["Planes", "Armored", "Tanks", "Helicopters"]],
-	["VehStore7", 0, 0, ["Planes", "Armored", "Tanks", "Helicopters"]],
-	["VehStore8", 0, 0, ["Planes", "Armored", "Tanks", "Helicopters"]],
-	["VehStore6", 0, 0, ["Planes", "Armored", "Tanks", "Helicopters"]],
+	["VehStore5", 0, 190, ["Planes"]],
+	["VehStore7", 0, 350, ["Planes", "Armored", "Tanks", "Helicopters"]],
+	["VehStore8", 1, 35, ["Planes", "Armored", "Tanks", "Helicopters"]],
+	["VehStore6", 1, 330, ["Planes", "Armored", "Tanks", "Helicopters"]],
 
 	["BaseStore1", 1, 30, []]
 	/*["BaseStore2", 1, 30, []]*/

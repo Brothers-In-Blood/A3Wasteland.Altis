@@ -10,7 +10,7 @@
 
 storeSellingHandle = _this spawn
 {
-	#define CHOPSHOP_PRICE_RELATIONSHIP 0.3
+	#define CHOPSHOP_PRICE_RELATIONSHIP 2
 	#define VEHICLE_MAX_SELLING_DISTANCE 50
 
 	private ["_vehicle", "_type", "_price", "_confirmMsg", "_text"];
@@ -40,7 +40,7 @@ storeSellingHandle = _this spawn
 	{
 		if (_type == _x select 1 && (_variant == "" || {_variant in _x})) exitWith
 		{
-			_price = (ceil ((_x select 2) * CHOPSHOP_PRICE_RELATIONSHIP));
+			_price = (ceil (((_x select 2) / CHOPSHOP_PRICE_RELATIONSHIP) / 5)) * 5;
 		};
 	} forEach (call allVehStoreVehicles);
 

@@ -7,10 +7,9 @@
 //	@file Created: 20/11/2012 05:19
 //	@file Args:
 
-private ["_marker", "_preload", "_height", "_pos", "_rad", "_townName", "_playerPos"];
+private ["_marker", "_preload", "_pos", "_rad", "_townName", "_playerPos"];
 _marker = _this select 0;
 _preload = param [1, false, [false]];
-
 _height = (["A3W_townSpawnSpawnHeight", 0] call getPublicVar) max 0;
 {
 	if (_x select 0 == _marker) exitWith

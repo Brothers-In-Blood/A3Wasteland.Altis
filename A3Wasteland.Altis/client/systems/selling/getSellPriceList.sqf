@@ -10,7 +10,7 @@
 // _x select 2 = Name
 // _x select 3 = Value
 
-#define GET_HALF_PRICE(PRICE) ((ceil ((PRICE) * 0.3)))
+#define GET_HALF_PRICE(PRICE) ((ceil (((PRICE) / 2) / 5)) * 5)
 
 private ["_obj", "_sellValue", "_objItems", "_objMags", "_objWeapons", "_weaponArray", "_class", "_container", "_allStoreMagazines", "_allGunStoreFirearms", "_allStoreItems", "_weaponEntry", "_weaponClass", "_weaponQty", "_weaponCfg", "_weaponCfgModel", "_masterCfg", "_found", "_cfgItems", "_allObjItems", "_item", "_itemClass", "_itemQty", "_itemValue", "_itemQtyArr", "_cfgCategory", "_magFullAmmo", "_magFullPrice", "_magValue", "_itemName"];
 
@@ -179,5 +179,14 @@ _allObjItems = [];
 		_item set [3, [_itemValue, _sellValue] select (_sellValue > 0)];
 	};
 } forEach _allObjItems;
+
+{
+	_x params ["_itemName", "_itemClass", "", "", "", "_sellValue"];
+	_itemQty = [_obj getVariable _itemClass] param [0,0,[0]];
+	if (_itemQty > 0) then
+	{
+		_allObjItems pushBack [_itemClass, _itemQty, _itemName, _sellValue];
+	};
+} forEach call customPlayerItems;
 
 _allObjItems

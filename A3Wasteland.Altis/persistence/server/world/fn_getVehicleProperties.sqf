@@ -57,24 +57,30 @@ if (_resupplyTruck) then
 	_variables pushBack ["A3W_resupplyTruck", true];
 };
 
-
-
 private _isUav = unitIsUAV _veh;
 
-if (_isUav) then 
+if (_isUav) then
 {
-	if (side _veh in [BLUFOR,OPFOR,INDEPENDENT]) then 
-	{ 
-		_variables pushBack ["uavSide", str side _veh]; 
-	}; 
+	if (side _veh in [BLUFOR,OPFOR,INDEPENDENT]) then
+	{
+		_variables pushBack ["uavSide", str side _veh];
+	};
+
 	_variables pushBack ["uavAuto", isAutonomous _veh];
 };
+
 _owner = _veh getVariable ["ownerUID", ""];
 private _ownerName = _veh getVariable ["ownerName", ""];
 
 if (_ownerName != "") then
 {
 	_variables pushBack ["ownerName", toArray _ownerName];
+};
+
+private _artiCount = [_veh getVariable "artillery"] param [0,0,[0]];
+if (_artiCount >= 1) then
+{
+	_variables pushBack ["artillery", 1]; // capped at 1 for safety
 };
 
 private _locked = 1 max locked _veh; // default vanilla state is always 1, so we ignore 0's
@@ -143,6 +149,8 @@ if (_class call fn_hasInventory) then
 _turretMags = []; // magazinesAmmo _veh;
 _turretMags2 = (magazinesAllTurrets _veh) select {_x select 0 != "FakeWeapon" && (_x select 0) select [0,5] != "Pylon"} apply {_x select [0,3]};
 _turretMags3 = _veh call fn_getPylonsAmmo;
+
+
 
 _ammoCargo = getAmmoCargo _veh;
 _fuelCargo = getFuelCargo _veh;

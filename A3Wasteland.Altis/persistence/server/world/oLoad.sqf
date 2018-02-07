@@ -6,6 +6,7 @@
 
 #include "functions.sqf"
 #define STR_TO_SIDE(VAL) ([sideUnknown,BLUFOR,OPFOR,INDEPENDENT,CIVILIAN,sideLogic] select ((["WEST","EAST","GUER","CIV","LOGIC"] find toUpper (VAL)) + 1))
+
 private ["_maxLifetime", "_isWarchestEntry", "_isBeaconEntry", "_worldDir", "_methodDir", "_objCount", "_objects", "_exclObjectIDs"];
 
 _maxLifetime = ["A3W_objectLifetime", 0] call getPublicVar;
@@ -15,21 +16,26 @@ _isBeaconEntry = { [_variables, "a3w_spawnBeacon", false] call fn_getFromPairs }
 
 _worldDir = "persistence\server\world";
 _methodDir = format ["%1\%2", _worldDir, call A3W_savingMethodDir];
+
 _objCount = 0;
 _objects = call compile preprocessFileLineNumbers format ["%1\getObjects.sqf", _methodDir];
 _objectsArray = [];
+
 _exclObjectIDs = [];
 
 {
 	private ["_allowed", "_obj", "_objectID", "_class", "_pos", "_dir", "_locked", "_damage", "_allowDamage", "_owner", "_variables", "_weapons", "_magazines", "_items", "_backpacks", "_turretMags", "_ammoCargo", "_fuelCargo", "_repairCargo", "_hoursAlive", "_valid"];
 
 	{ (_x select 1) call compile format ["%1 = _this", _x select 0]	} forEach _x;
+
 	if (isNil "_locked") then { _locked = 1 };
-	if (isNil "_hoursAlive") then { _hoursAlive = 0 }; 
+	if (isNil "_hoursAlive") then { _hoursAlive = 0 };
 	_valid = false;
-	if (!isNil "_class" && !isNil "_pos") then
+
+	if (!isNil "_class" && !isNil "_pos" && {_maxLifetime <= 0 || _hoursAlive < _maxLifetime}) then
 	{
 		if (isNil "_variables") then { _variables = [] };
+
 		_allowed = switch (true) do
 		{
 			case (call _isWarchestEntry):       { _warchestSavingOn };
@@ -38,7 +44,9 @@ _exclObjectIDs = [];
 			case (_class call _isStaticWeapon): { _staticWeaponSavingOn };
 			default                             { _baseSavingOn };
 		};
+
 		if (!_allowed) exitWith {};
+
 		_objCount = _objCount + 1;
 		_valid = true;
 
@@ -85,8 +93,10 @@ _exclObjectIDs = [];
 		{
 			_obj setVariable ["ownerUID", _owner, true];
 		};
+
 		private _uavSide = if (isNil "_playerSide") then { sideUnknown } else { _playerSide };
 		private _uavAuto = true;
+
 		{
 			_var = _x select 0;
 			_value = _x select 1;
@@ -127,25 +137,27 @@ _exclObjectIDs = [];
 						default { _value = "[Beacon]" };
 					};
 				};
-				case "uavSide": 
-				{ 
-					if (_uavSide isEqualTo sideUnknown) then { _uavSide = STR_TO_SIDE(_value) }; 
-				}; 
-				case "uavAuto": 
-				{ 
-					if (_value isEqualType true) then 
-					{ 
-						_uavAuto = _value; 
-					}; 
-				}; 
+				case "uavSide":
+				{
+					if (_uavSide isEqualTo sideUnknown) then { _uavSide = STR_TO_SIDE(_value) };
+				};
+				case "uavAuto":
+				{
+					if (_value isEqualType true) then
+					{
+						_uavAuto = _value;
+					};
+				};
 			};
+
 			_obj setVariable [_var, _value, true];
 		} forEach _variables;
-		if (unitIsUAV _obj) then 
-		{ 
-			[_obj, _uavSide, false, _uavAuto] spawn fn_createCrewUAV; 
+
+		if (unitIsUAV _obj) then
+		{
+			[_obj, _uavSide, false, _uavAuto] spawn fn_createCrewUAV;
 		};
-		//make sure existing objects are given moveable variable. Comment line after update.
+				//make sure existing objects are given moveable variable. Comment line after update.
 		//_obj setVariable ["moveable", true, true];
 
 		// Base locker lights
@@ -153,6 +165,7 @@ _exclObjectIDs = [];
 		{
 			_obj setHit ["light_1_hit", 0.97];
 		};
+
 
 		clearWeaponCargoGlobal _obj;
 		clearMagazineCargoGlobal _obj;
@@ -171,6 +184,7 @@ _exclObjectIDs = [];
 			case (_locked < 1): { true };
 			default { false };
 		};
+
 		if (_unlock) then
 		{
 			_obj setVariable ["objectLocked", false, true];
@@ -212,6 +226,8 @@ _exclObjectIDs = [];
 
 			reload _obj;
 		};
+
+		_obj hideObjectGlobal false;
 	};
 
 	if (!_valid && !isNil "_objectID") then
@@ -220,6 +236,7 @@ _exclObjectIDs = [];
 		{
 			_obj setVariable ["A3W_objectID", nil, true];
 		};
+
 		_exclVehicleIDs pushBack _vehicleID;
 		_exclObjectIDs pushBack _objectID;
 	};
@@ -274,6 +291,7 @@ _exclObjectIDs = [];
 if (_warchestMoneySavingOn) then
 {
 	_amounts = call compile preprocessFileLineNumbers format ["%1\getWarchestMoney.sqf", _methodDir];
+
 	pvar_warchest_funds_west = (_amounts select 0) max 0;
 	publicVariable "pvar_warchest_funds_west";
 	pvar_warchest_funds_east = (_amounts select 1) max 0;
@@ -281,4 +299,5 @@ if (_warchestMoneySavingOn) then
 };
 
 diag_log format ["A3Wasteland - world persistence loaded %1 objects from %2", _objCount, call A3W_savingMethodName];
+
 _exclObjectIDs call fn_deleteObjects;

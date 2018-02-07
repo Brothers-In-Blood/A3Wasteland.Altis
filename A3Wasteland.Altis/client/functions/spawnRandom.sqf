@@ -10,7 +10,6 @@ _preload = param [1, false, [false]];
 
 _randomLoc = (call cityList) call BIS_fnc_selectRandom;
 _height = (["A3W_townSpawnSpawnHeight", 0] call getPublicVar) max 0;
-
 _pos = getMarkerPos (_randomLoc select 0);
 _rad = _randomLoc select 1;
 _townName = _randomLoc select 2;

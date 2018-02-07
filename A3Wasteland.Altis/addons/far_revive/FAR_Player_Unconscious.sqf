@@ -125,14 +125,18 @@ if (!isPlayer _unit) then
 };
 
 // Injury message
-if (FAR_EnableDeathMessages && (isPlayer _unit || FAR_Debugging)) then
+if (isPlayer _unit || FAR_Debugging) then
 {
 	_unit spawn
 	{
 		waitUntil {!UNCONSCIOUS(_this) || !alive _this || _this getVariable ["FAR_headshotHitTimeout", false]};
-		if (!alive _this) exitWith {};
 
-		[_this, false] call A3W_fnc_killBroadcast;
+		[_this,
+		{
+			if (!alive _this) exitWith {};
+			_this setVariable ["FAR_injuryBroadcast", true];
+			[_this, false] call A3W_fnc_killBroadcast;
+		}] execFSM "call.fsm";
 	};
 };
 
@@ -462,10 +466,11 @@ if (alive _unit && !UNCONSCIOUS(_unit)) then // Player got revived
 		{ _unit enableAI _x } forEach ["MOVE","FSM","TARGET","AUTOTARGET"];
 	};
 
-	// prevent rocket launcher switch because of annoying position freeze 
-	if (_unitWeapon == secondaryWeapon _unit) then { _unitWeapon = primaryWeapon _unit }; 
-	if (_unitWeapon == "") then { _unitWeapon = handgunWeapon _unit }; 
-  _unit selectWeapon _unitWeapon;}
+	// prevent rocket launcher switch because of annoying position freeze
+	if (_unitWeapon == secondaryWeapon _unit) then { _unitWeapon = primaryWeapon _unit };
+	if (_unitWeapon == "") then { _unitWeapon = handgunWeapon _unit };
+	_unit selectWeapon _unitWeapon;
+}
 else // Player bled out
 {
 	if (damage _unit < 1) then // if check required to prevent "Killed" EH from getting triggered twice

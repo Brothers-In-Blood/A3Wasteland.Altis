@@ -46,19 +46,14 @@ mf_compile = compileFinal
 		} else {
 			compileFinal preProcessFileLineNumbers _path
 		};
-	} 
-	else 
-	{
-		if (_isDebug) then 
-		{
+	} else {
+		if (_isDebug) then {
 			compile toString _code
-		} 
-		else 
-		{
+		} else {
 			compileFinal toString _code
 		};
 	};
-	'
+'
 );
 
 // Simple command I use to make initialization scripts clean and simple.
@@ -77,6 +72,7 @@ mf_init =
 _clientFunc = "client\functions";
 _serverFunc = "server\functions";
 
+A3W_fnc_artilleryStrike = "client\items\artillery\fn_artilleryStrike.sqf" call mf_compile;
 A3W_fnc_deathMessage = [_serverFunc, "fn_deathMessage.sqf"] call mf_compile;
 A3W_fnc_getInFast = [_clientFunc, "fn_getInFast.sqf"] call mf_compile;
 A3W_fnc_isBleeding = [_serverFunc, "fn_isBleeding.sqf"] call mf_compile;
@@ -87,6 +83,7 @@ A3W_fnc_killFeedEntry = "client\systems\killFeed\fn_killFeedEntry.sqf" call mf_c
 A3W_fnc_pushVehicle = [_serverFunc, "pushVehicle.sqf"] call mf_compile;
 A3W_fnc_setVarServer = [_serverFunc, "fn_setVarServer.sqf"] call mf_compile;
 A3W_fnc_setVehicleLoadout = [_serverFunc, "fn_setVehicleLoadout.sqf"] call mf_compile;
+A3W_fnc_takeArtilleryStrike = "client\items\artillery\fn_takeArtilleryStrike.sqf" call mf_compile;
 A3W_fnc_towingHelper = [_serverFunc, "towingHelper.sqf"] call mf_compile;
 applyVehicleTexture = "client\systems\vehicleStore\applyVehicleTexture.sqf" call mf_compile;
 cargoToPairs = [_serverFunc, "cargoToPairs.sqf"] call mf_compile;
@@ -94,13 +91,13 @@ detachTowedObject = [_serverFunc, "detachTowedObject.sqf"] call mf_compile;
 FAR_setKillerInfo = "addons\far_revive\FAR_setKillerInfo.sqf" call mf_compile;
 findSafePos = [_serverFunc, "findSafePos.sqf"] call mf_compile;
 fn_addScore = [_serverFunc, "fn_addScore.sqf"] call mf_compile;
-fn_containerCargoToPairs = [_serverFunc, "fn_containerCargoToPairs.sqf"] call mf_compile;
 fn_addToPairs = [_serverFunc, "fn_addToPairs.sqf"] call mf_compile;
 fn_addTurretWeapons = [_serverFunc, "fn_addTurretWeapons.sqf"] call mf_compile;
 fn_allPlayers = [_serverFunc, "allPlayers.sqf"] call mf_compile;
 fn_boundingBoxReal = [_serverFunc, "fn_boundingBoxReal.sqf"] call mf_compile;
 fn_canGetIn = [_clientFunc, "fn_canGetIn.sqf"] call mf_compile;
 fn_compatibleWeapons = [_clientFunc, "fn_compatibleWeapons.sqf"] call mf_compile;
+fn_containerCargoToPairs = [_serverFunc, "fn_containerCargoToPairs.sqf"] call mf_compile;
 fn_createCrewUAV = [_serverFunc, "fn_createCrewUAV.sqf"] call mf_compile;
 fn_enableSimulationGlobal = [_serverFunc, "fn_enableSimulationGlobal.sqf"] call mf_compile;
 fn_enableSimulationServer = [_serverFunc, "fn_enableSimulationServer.sqf"] call mf_compile;
@@ -111,14 +108,15 @@ fn_findString = [_serverFunc, "fn_findString.sqf"] call mf_compile;
 fn_findTurretShooter = [_clientFunc, "fn_findTurretShooter.sqf"] call mf_compile;
 fn_forceAddItem = [_clientFunc, "fn_forceAddItem.sqf"] call mf_compile;
 fn_getFromPairs = [_serverFunc, "fn_getFromPairs.sqf"] call mf_compile;
-fn_getPos3D = [_serverFunc, "fn_getPos3D.sqf"] call mf_compile;
 fn_getParentWeapon = [_clientFunc, "fn_getParentWeapon.sqf"] call mf_compile;
+fn_getPos3D = [_serverFunc, "fn_getPos3D.sqf"] call mf_compile;
 fn_getPylonsAmmo = [_serverFunc, "fn_getPylonsAmmo.sqf"] call mf_compile;
 fn_getScore = [_serverFunc, "fn_getScore.sqf"] call mf_compile;
 fn_getTeamScore = [_serverFunc, "fn_getTeamScore.sqf"] call mf_compile;
 fn_hideObjectGlobal = [_serverFunc, "fn_hideObjectGlobal.sqf"] call mf_compile;
 fn_loopSpread = [_serverFunc, "fn_loopSpread.sqf"] call mf_compile;
 fn_magazineAmmoCargo = [_serverFunc, "fn_magazineAmmoCargo.sqf"] call mf_compile;
+fn_mergePairs = [_serverFunc, "fn_mergePairs.sqf"] call mf_compile;
 fn_numbersText = [_serverFunc, "fn_numbersText.sqf"] call mf_compile;
 fn_numToStr = [_serverFunc, "fn_numToStr.sqf"] call mf_compile;
 fn_remotePlayerSetup = [_clientFunc, "fn_remotePlayerSetup.sqf"] call mf_compile;
@@ -156,8 +154,6 @@ vehicleHandleDamage = [_serverFunc, "vehicleHandleDamage.sqf"] call mf_compile;
 vehicleHitTracking = [_serverFunc, "vehicleHitTracking.sqf"] call mf_compile;
 A3W_fnc_aj_s_refreshZeus = "addons\aj\zeus\fn_aj_s_refreshZeus.sqf" call mf_compile;	//name has has to started with A3W_fnc_
 call compile preprocessFileLineNumbers "server\functions\mf_remote.sqf";
-isAdmin = "client\systems\adminPanel\isAdmin.sqf" call mf_compile;
-fn_mergePairs = [_serverFunc, "fn_mergePairs.sqf"] call mf_compile;
 
 "pvar_switchMoveGlobal" addPublicVariableEventHandler { ((_this select 1) select 0) switchMove ((_this select 1) select 1) };
 "pvar_detachTowedObject" addPublicVariableEventHandler { (_this select 1) spawn detachTowedObject };

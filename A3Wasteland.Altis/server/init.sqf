@@ -139,7 +139,6 @@ if (isServer) then
 		"A3W_remoteBombStoreRadius",
 		"A3W_vehiclePurchaseCooldown",
 		"A3W_disableGlobalVoice",
-		"A3W_disableSideVoice",
 		"A3W_antiHackMinRecoil",
 		"A3W_spawnBeaconCooldown",
 		"A3W_spawnBeaconSpawnHeight",
@@ -162,7 +161,6 @@ if (isServer) then
 		"A3W_extDB_SaveUnlockedObjects",
 		"A3W_hcPrefix",
 		"A3W_hcObjCaching",
-		"A3W_territoryAllowed",
 		"A3W_hcObjCachingID",
 		"A3W_hcObjCleanup",
 		"A3W_hcObjCleanupID",
@@ -173,6 +171,11 @@ if (isServer) then
 		"A3W_privateParkingLimit",
 		"A3W_privateParkingCost",
 		"A3W_vehicleLocking",
+		"A3W_artilleryStrike",
+		"A3W_artilleryShells",
+		"A3W_artilleryRadius",
+		"A3W_artilleryCooldown",
+		"A3W_artilleryAmmo",
 		"A3W_disableBuiltInThermal",
 		"A3W_customDeathMessages",
 		"A3W_bountyMax",
@@ -189,12 +192,7 @@ if (isServer) then
 
 	addMissionEventHandler ["PlayerConnected", fn_onPlayerConnected];
 	addMissionEventHandler ["PlayerDisconnected", fn_onPlayerDisconnected];
-
-	// Temp fix for https://forums.bistudio.com/topic/190773-mission-event-handlers-playerconnected-and-playerdisconnected-do-not-work/
-	["A3W_missionEH_fix", "onPlayerConnected", {}] call BIS_fnc_addStackedEventHandler;
-	["A3W_missionEH_fix", "onPlayerDisconnected", {}] call BIS_fnc_addStackedEventHandler;
-	["A3W_missionEH_fix", "onPlayerConnected"] call BIS_fnc_removeStackedEventHandler;
-	["A3W_missionEH_fix", "onPlayerDisconnected"] call BIS_fnc_removeStackedEventHandler;
+	addMissionEventHandler ["EntityKilled", fn_entityKilled];
 };
 
 _playerSavingOn = ["A3W_playerSaving"] call isConfigOn;
@@ -225,7 +223,6 @@ if (_hcObjSavingOn) then
 		if (_timeSavingOn || _weatherSavingOn) then
 		{
 			"currentDate" addPublicVariableEventHandler ("client\functions\clientTimeSync.sqf" call mf_compile);
-			//drn_DynamicWeather_MainThread = [] execVM "addons\scripts\DynamicWeatherEffects.sqf";
 		};
 	};
 };
@@ -543,6 +540,18 @@ else
 	diag_log "[INFO] A3W territory capturing is DISABLED";
 };
 
+// Consolidate all store NPCs in a single group
+[] spawn
+{
+	_storeGroup = createGroup sideFriendly;
+	{
+		if (!isPlayer _x && {(toLower ((vehicleVarName _x) select [0,8])) in ["genstore","gunstore","vehstore"]}) then
+		{
+			[_x] joinSilent _storeGroup;
+		};
+	} forEach entities "CAManBase";
+};
+
 //Execute Server Missions.
 if (["A3W_serverMissions"] call isConfigOn) then
 {
@@ -555,6 +564,5 @@ if !(["A3W_hcObjCleanup"] call isConfigOn) then
 	// Start clean-up loop
 	execVM "server\WastelandServClean.sqf";
 };
-
 //Start Weather System
 execVM "server\weather.sqf";

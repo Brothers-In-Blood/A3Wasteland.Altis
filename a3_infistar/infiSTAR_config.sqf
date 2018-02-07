@@ -89,16 +89,24 @@ _adminUIDandAccess =
 			'76561197960446555', //Masher
 			'76561198068891152', //WhichDoctor
 			"76561198131057272", // Dreadedwraith
-			'76561198123535243', //Vru
-			'76561197971257000', //Integer
-			'76561198017432180', //Rage
-			'76561198080784624', //Lynx
-			'76561198029573979', //Alori
-			'76561197983136779', //Lacks
+			// '76561198123535243', //Vru
+			// '76561197971257000', //Integer
+			// '76561198017432180', //Rage
+			// '76561198080784624', //Lynx
+			// '76561198029573979', //Alori
+			// '76561197983136779', //Lacks
 			'76561198091057992', //Titus
 			'76561197979953643', //Sayrus
-			'76561197996525927', //Smokebreak
-			'76561198123926911' //Turtle
+			// '76561197996525927', //Smokebreak
+			'76561198123926911', //Turtle
+			'76561197968586068', //Dingus
+			'76561198028001330', // Lava_Bear
+			'76561198053288509', //RunnerNS
+			'76561197992118826', //Merc
+			'76561197968586068', //Dingus
+			'76561198028001330', // Lava_Bear
+			'76561198053288509', //RunnerNS
+			'76561198056978583'  //Coolbreeze
 			//'76561198074088415' //Cats
 		],
 		[
@@ -132,7 +140,8 @@ _adminUIDandAccess =
 			'==== AltisLife Money ====',
 			'Remove Gear',
 			'Revive',
-			'Heal','Restore',
+			'Heal',
+			'Restore',
 			'Move In My Vehicle',
 			'Move In Target Vehicle',
 			'Parachute Target',
@@ -140,8 +149,10 @@ _adminUIDandAccess =
 			'Spawn Cloak',
 			'Spawn Sapper',
 			'Spawn SapperB',
-			'Eject','Eject Crew',
-			'Kill','Explode',
+			'Eject',
+			'Eject Crew',
+			'Kill',
+			'Explode',
 			'MineField (around target)',
 			'Zeus',
 			'Force Disconnect',
@@ -165,7 +176,8 @@ _adminUIDandAccess =
 			// 'Construction Marker',
 			// 'LockBox Marker',
 			'DeadPlayer Marker',
-			'God Mode','Vehicle God Mode',
+			// 'God Mode',
+			'Vehicle God Mode',
 			// 'Lower Terrain',
 			// 'Vehboost',
 			// 'UnlimAmmo',
@@ -177,13 +189,13 @@ _adminUIDandAccess =
 			// 'Give All Licenses',
 			// 'Call EMP',
 			// 'Mass Message',
-			'DayTime',
-			'NightTime',
+			// 'DayTime',
+			// 'NightTime',
 			// 'Add / Remove Crypto',
 			// 'Spawn Epoch-Box',
-			'Spawn Support-Box1',
-			'Spawn Support-Box2',
-			'Spawn Support-Box3',
+			// 'Spawn Support-Box1',
+			// 'Spawn Support-Box2',
+			// 'Spawn Support-Box3',
 			'Spawn Ammo',
 			'showinfo',
 			'Login as Arma Admin',
@@ -191,16 +203,14 @@ _adminUIDandAccess =
 			'FreeRoam Cam (does not work with ESP)',
 			'Request Steam Name',
 			'Dump unique client variables',
-			'Restrain',
-			'Unrestrain',
+			// 'Restrain',
+			// 'Unrestrain',
 			'Arsenal'	// Adds Arsenal to the mousewheel actions if you press "." on the Numpad!
 		]
 	],
 	[
 		[
-			'76561197968586068', //Dingus
-			'76561198028001330', // Lava_Bear
-			'76561198053288509', //RunnerNS
+
 			'76561198083874174' //FireFirstAce
 		],	// Admins with UIDs in this Array have their Access defined in the array below.
 		[
@@ -527,6 +537,7 @@ _allowedIDDs =
 		55511, 55511, 55512, 55513, 55514, 55515, 55516, 55517, 55518, 55519, 55520,
 		55600, 55601, 55602, 55603, 55604, 55605,
 		56500, 56501,
+		57001,
 		63211,
 		65431,
 		66780, 66781, 66782, 66783, 66784, 66785, 66786

@@ -42,7 +42,6 @@ if (vehicle _unit != _unit) then
 };
 
 //if !(["G_Diving", goggles _unit] call fn_startsWith) then { removeGoggles _unit };
-
 // Make NPCs drop Cash
 if (!isPlayer _unit) then
 {

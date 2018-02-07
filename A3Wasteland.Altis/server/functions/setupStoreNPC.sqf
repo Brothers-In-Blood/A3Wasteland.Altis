@@ -51,7 +51,6 @@ if (hasInterface) then
 		{
 			_npc addAction ["<img image='client\icons\store.paa'/> Open Base Store", "client\systems\BasePartsStore\loadBaseStore.sqf", [], 1, true, true, "", STORE_ACTION_CONDITION];
 		};
-
 	};
 
 	_npc addAction ["<img image='client\icons\money.paa'/> Sell crate", "client\systems\selling\sellCrateItems.sqf", [false, false, true], 0.99, false, true, "", STORE_ACTION_CONDITION + " && " + SELL_CRATE_CONDITION];
@@ -127,7 +126,7 @@ if (isServer) then
 			_deskDirMod = _x select 2;
 
 			if (_npcPos < 0) then { _npcPos = 1e9 }; // fix for buildingPos Arma 3 v1.55 change
-
+			
 			if (_deskDirMod isEqualType []) then
 			{
 				if (_deskDirMod isEqualTo []) then

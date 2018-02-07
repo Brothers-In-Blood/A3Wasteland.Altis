@@ -9,26 +9,30 @@
 
 if (!isServer) exitWith {};
 
-#define RANDOM_BETWEEN(START,END) (START + floor random ((END - START) + 1))
+#define RANDOM_BETWEEN(START,END) ((START) + floor random ((END) - (START) + 1))
+#define RANDOM_ODDS(ODDS) ([0,1] select (random 1 < (ODDS))) // between 0.0 and 1.0
 
-
-private _box = _this select 0;
-private _boxType = _this select 1;
-private _boxItems = [];
+private ["_box", "_boxType", "_boxItems", "_item", "_qty", "_mag"];
+_box = _this select 0;
+_boxType = _this select 1;
 
 _box setVariable [call vChecksum, true];
 
 _box allowDamage false; // No more fucking busted crates
-
+_box setVariable ["allowDamage", false, true];
 _box setVariable ["A3W_inventoryLockR3F", true, true];
 
 // Clear pre-existing cargo first
-clearBackpackCargoGlobal _box;
+//clearBackpackCargoGlobal _box;
 clearMagazineCargoGlobal _box;
 clearWeaponCargoGlobal _box;
 clearItemCargoGlobal _box;
 
 if (_boxType == "mission_USSpecial2") then { _boxType = "mission_USSpecial" };
+
+switch (_boxType) do
+{
+	if (_boxType == "mission_USSpecial2") then { _boxType = "mission_USSpecial" };
 
 switch (_boxType) do
 {
@@ -422,3 +426,11 @@ switch (_boxType) do
 };
 
 [_box, _boxItems] call processItems;
+
+if (["A3W_artilleryStrike"] call isConfigOn) then
+{
+	if (random 1.0 < ["A3W_artilleryCrateOdds", 1/10] call getPublicVar) then
+	{
+		_box setVariable ["artillery", 1, true];
+	};
+};

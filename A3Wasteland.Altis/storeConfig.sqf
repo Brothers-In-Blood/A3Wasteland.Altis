@@ -3,7 +3,7 @@
 // ******************************************************************************************
 /*********************************************************#
 # @@ScriptName: storeConfig.sqf
-# @@Author: His_Shadow,AgentRev
+# @@Author: His_Shadow, AgentRev, BIB_Monkey
 # @@Create Date: 2013-09-16 20:40:58
 #*********************************************************/
 
@@ -11,7 +11,7 @@
 currentOwnerName = "";
 
 // Gunstore Weapon List - Gun Store Base List
-// Text name,classname,buy cost
+// Text name, classname, buy cost
 
 // empty name = name is extracted from class config
 
@@ -120,7 +120,7 @@ rifleArray = compileFinal str
 	["Cyrus Rifle (Hex)",													"srifle_DMR_05_hex_F",														750],
 	["Cyrus Rifle (Tan)",													"srifle_DMR_05_tan_f",														750],
 
-	// Sniper Rifles
+	//Sniper Rifles
 	["M320 LRR Sniper",														"srifle_LRR_LRPS_F",														1000],
 	["M320 LRR Sniper (Camo)",												"srifle_LRR_camo_LRPS_F",													1200],
 	["M320 LRR Sniper (Tropic)",											"srifle_LRR_tna_LRPS_F",													1200],
@@ -221,13 +221,13 @@ throwputArray = compileFinal str
 	["Claymore Charge",														"ClaymoreDirectionalMine_Remote_Mag",										350],
 	["Explosive Charge",													"DemoCharge_Remote_Mag",													450],
 	["Explosive Satchel",													"SatchelCharge_Remote_Mag",													500],
-	["Large IED(Dug-In)",													"IEDLandBig_Remote_Mag",													500],
-	["Large IED(Urban)",													"IEDUrbanBig_Remote_Mag",													500],
+	// ["Large IED(Dug-In)",													"IEDLandBig_Remote_Mag",													500],
+	// ["Large IED(Urban)",													"IEDUrbanBig_Remote_Mag",													500],
 	["M6 SLAM Mine",														"SLAMDirectionalMine_Wire_Mag",												350],
 	["RGN Mini Grenade",													"MiniGrenade",																50],
 	["RGO Frag Grenade",													"HandGrenade",																100],
-	["Small IED(Dug-In)",													"IEDLandSmall_Remote_Mag",													250],
-	["Small IED(Urban)",													"IEDUrbanSmall_Remote_Mag",													250],
+	// ["Small IED(Dug-In)",													"IEDLandSmall_Remote_Mag",													250],
+	// ["Small IED(Urban)",													"IEDUrbanSmall_Remote_Mag",													250],
 	["Smoke Grenade (Blue)",												"SmokeShellBlue",															50],
 	["Smoke Grenade (Green)",												"SmokeShellGreen",															50],
 	["Smoke Grenade (Orange)",												"SmokeShellOrange",															50],
@@ -598,8 +598,7 @@ headArray = compileFinal str
 	["Shemag mask (Tan)",													"H_Shemag_tan",																25,								"hat"],
 	["Special Purposes Hemet (Green Hex)",									"H_HelmetO_ViperSP_ghex_F",													8000],
 	["Special Purposes Hemet (Hex)",										"H_HelmetO_ViperSP_hex_F",													8000],
-	["Stealth Combat Helmet",												"H_HelmetB_TI_tna_F",														500],
-	["Stealth Combat Helmet",												"H_HelmetB_TI_tna_F",														75,								"hat"]
+	["Stealth Combat Helmet",												"H_HelmetB_TI_tna_F",														500]
 ];
 
 uniformArray = compileFinal str
@@ -715,11 +714,9 @@ uniformArray = compileFinal str
 	["Survival Fatigues (NATO)",											"U_B_survival_uniform",													200,							"uni"],
 	["Syndikat Uniform",													"U_I_C_Soldier_Camo_F",													25],
 	["T-Shirt (Blue)",														"U_C_Poor_1",															25,								"uni"],
-	/*
 	["Tron Light Suit (Blue)",												"U_B_Protagonist_VR",													5000,							"uni"],
 	["Tron Light Suit (Green)",												"U_I_Protagonist_VR",													5000,							"uni"],
 	["Tron Light Suit (Red)",												"U_O_Protagonist_VR",													5000,							"uni"],
-	*/
 	["Wetsuit",																"U_B_Wetsuit",															200,							"uni"],
 	["Wetsuit",																"U_I_Wetsuit",															200,							"uni"],
 	["Wetsuit",																"U_O_Wetsuit",															200,							"uni"],
@@ -979,51 +976,51 @@ genItemArray = compileFinal str
 ];
 gencratesArray = compilefinal str
 [
-	["Ammo Cache (AAF)",															"Box_FIA_Ammo_F",													50],
-	["Basic Ammo Crate (CSAT Pacific)",												"Box_T_East_Ammo_F",												50],
-	["Basic Ammo Crate (CSAT)",														"Box_East_Ammo_F",													50],
-	["Basic Ammo Crate (IND)",														"Box_IND_Ammo_F",													50],
-	["Basic Ammo Crate (NATO)",														"Box_NATO_Ammo_F",													50],
-	["Basic Ammo Crate (SYN)",														"Box_Syndicate_Ammo_F",												50],
-	["Basic Weapons Crate (CSAT Pacific)",											"Box_T_East_Wps_F",													50],
-	["Basic Weapons Crate (CSAT)",													"Box_East_Wps_F",													50],
-	["Basic Weapons Crate (IND)",													"Box_IND_Wps_F",													50],
-	["Basic Weapons Crate (NATO Pacific)",											"Box_T_NATO_Wps_F",													50],
-	["Basic Weapons Crate (NATO)",													"Box_NATO_Wps_F",													50],
-	["Basic Weapons Crate (SYN)",													"Box_Syndicate_Wps_F",												50],
-	["Equipment Cache (AAF)",														"Box_FIA_Support_F",												50],
-	["Equipment Case (CSAT)",														"Box_CSAT_Equip_F",													50],
-	["Equipment Case (IDAP)",														"Box_IDAP_Equip_F",													50],
-	["Equipment Case (IND)",														"Box_AAF_Equip_F",													50],
-	["Equipment Case (NATO)",														"Box_NATO_Equip_F",													50],
-	["Explosives Crate (CSAT)",														"Box_East_AmmoOrd_F",												50],
-	["Explosives Crate (IDAP)",														"Box_IDAP_AmmoOrd_F",												50],
-	["Explosives Crate (IND)",														"Box_IND_AmmoOrd_F",												50],
-	["Explosives Crate (NATO)",														"Box_NATO_AmmoOrd_F",												50],
-	["Explosives Crate (SYN)",														"Box_IED_Exp_F",													50],
-	["Grenade Crate (CSAT)",														"Box_East_Grenades_F",												50],
-	["Grenade Crate (IND)",															"Box_IND_Grenades_F",												50],
-	["Grenade Crate (NATO)",														"Box_NATO_Grenades_F",												50],
-	["Launchers Crate (CSAT)",														"Box_East_WpsLaunch_F",												50],
-	["Launchers Crate (IND)",														"Box_IND_WpsLaunch_F",												50],
-	["Launchers Crate (NATO)",														"Box_NATO_WpsLaunch_F",												50],
-	["Launchers Crate (SYN)",														"Box_Syndicate_WpsLaunch_F",										50],
-	["Special Weapons Crate (CSAT Pacific)",										"Box_T_East_WpsSpecial_F",											50],
-	["Special Weapons Crate (CSAT)",												"Box_East_WpsSpecial_F",											50],
-	["Special Weapons Crate (IND)",													"Box_IND_WpsSpecial_F",												50],
-	["Special Weapons Crate (NATO Pacific)",										"Box_T_NATO_WpsSpecial_F",											50],
-	["Special Weapons Crate (NATO)",												"Box_NATO_WpsSpecial_F",											50],
-	["Supply Crate (GEN)",															"Box_GEN_Equip_F",													50],
-	["Supply Crate (IDAP)",															"C_IDAP_supplyCrate_F",												50],
-	["Supply Crate",																"I_supplyCrate_F",													50],
-	["Support Crate (CSAT)",														"Box_East_Support_F",												50],
-	["Support Crate (IND)",															"Box_IND_Support_F",												50],
-	["Support Crate (NATO)",														"Box_NATO_Support_F",												50],
-	["Uniforms Crate (CSAT)",														"Box_CSAT_Uniforms_F",												50],
-	["Uniforms Crate (IDAP)",														"Box_IDAP_Uniforms_F",												50],
-	["Uniforms Crate (IND)",														"Box_AAF_Uniforms_F",												50],
-	["Uniforms Crate (NATO)",														"Box_NATO_Uniforms_F",												50],
-	["Weapons Cache (AAF)",															"Box_FIA_Wps_F",													50]
+	["Ammo Cache (AAF)",														"Box_FIA_Ammo_F",													50],
+	["Basic Ammo Crate (CSAT Pacific)",											"Box_T_East_Ammo_F",												50],
+	["Basic Ammo Crate (CSAT)",													"Box_East_Ammo_F",													50],
+	["Basic Ammo Crate (IND)",													"Box_IND_Ammo_F",													50],
+	["Basic Ammo Crate (NATO)",													"Box_NATO_Ammo_F",													50],
+	["Basic Ammo Crate (SYN)",													"Box_Syndicate_Ammo_F",												50],
+	["Basic Weapons Crate (CSAT Pacific)",										"Box_T_East_Wps_F",													50],
+	["Basic Weapons Crate (CSAT)",												"Box_East_Wps_F",													50],
+	["Basic Weapons Crate (IND)",												"Box_IND_Wps_F",													50],
+	["Basic Weapons Crate (NATO Pacific)",										"Box_T_NATO_Wps_F",													50],
+	["Basic Weapons Crate (NATO)",												"Box_NATO_Wps_F",													50],
+	["Basic Weapons Crate (SYN)",												"Box_Syndicate_Wps_F",												50],
+	["Equipment Cache (AAF)",													"Box_FIA_Support_F",												50],
+	["Equipment Case (CSAT)",													"Box_CSAT_Equip_F",													50],
+	["Equipment Case (IDAP)",													"Box_IDAP_Equip_F",													50],
+	["Equipment Case (IND)",													"Box_AAF_Equip_F",													50],
+	["Equipment Case (NATO)",													"Box_NATO_Equip_F",													50],
+	["Explosives Crate (CSAT)",													"Box_East_AmmoOrd_F",												50],
+	["Explosives Crate (IDAP)",													"Box_IDAP_AmmoOrd_F",												50],
+	["Explosives Crate (IND)",													"Box_IND_AmmoOrd_F",												50],
+	["Explosives Crate (NATO)",													"Box_NATO_AmmoOrd_F",												50],
+	["Explosives Crate (SYN)",													"Box_IED_Exp_F",													50],
+	["Grenade Crate (CSAT)",													"Box_East_Grenades_F",												50],
+	["Grenade Crate (IND)",														"Box_IND_Grenades_F",												50],
+	["Grenade Crate (NATO)",													"Box_NATO_Grenades_F",												50],
+	["Launchers Crate (CSAT)",													"Box_East_WpsLaunch_F",												50],
+	["Launchers Crate (IND)",													"Box_IND_WpsLaunch_F",												50],
+	["Launchers Crate (NATO)",													"Box_NATO_WpsLaunch_F",												50],
+	["Launchers Crate (SYN)",													"Box_Syndicate_WpsLaunch_F",										50],
+	["Special Weapons Crate (CSAT Pacific)",									"Box_T_East_WpsSpecial_F",											50],
+	["Special Weapons Crate (CSAT)",											"Box_East_WpsSpecial_F",											50],
+	["Special Weapons Crate (IND)",												"Box_IND_WpsSpecial_F",												50],
+	["Special Weapons Crate (NATO Pacific)",									"Box_T_NATO_WpsSpecial_F",											50],
+	["Special Weapons Crate (NATO)",											"Box_NATO_WpsSpecial_F",											50],
+	["Supply Crate (GEN)",														"Box_GEN_Equip_F",													50],
+	["Supply Crate (IDAP)",														"C_IDAP_supplyCrate_F",												50],
+	["Supply Crate",															"I_supplyCrate_F",													50],
+	["Support Crate (CSAT)",													"Box_East_Support_F",												50],
+	["Support Crate (IND)",														"Box_IND_Support_F",												50],
+	["Support Crate (NATO)",													"Box_NATO_Support_F",												50],
+	["Uniforms Crate (CSAT)",													"Box_CSAT_Uniforms_F",												50],
+	["Uniforms Crate (IDAP)",													"Box_IDAP_Uniforms_F",												50],
+	["Uniforms Crate (IND)",													"Box_AAF_Uniforms_F",												50],
+	["Uniforms Crate (NATO)",													"Box_NATO_Uniforms_F",												50],
+	["Weapons Cache (AAF)",														"Box_FIA_Wps_F",													50]
 ];
 allStoreMagazines = compileFinal str (call ammoArray + call throwputArray + call genItemArray);
 allRegularStoreItems = compileFinal str (call allGunStoreFirearms + call allStoreMagazines + call accessoriesArray);
@@ -1570,7 +1567,6 @@ helicoptersArray = compileFinal str
 	["PO-30 Orca (6.5mm + DAR)",												"O_Heli_Light_02_dynamicLoadout_F",									40000,						"vehicle",						"variant_orcaGUNDAR"],
 	["PO-30 Orca (6.5mm)",														"O_Heli_Light_02_dynamicLoadout_F",									10000,						"vehicle",						"variant_orcaGUN"],
 	["UH-80 Ghost Hawk",														"B_Heli_Transport_01_F",											25000,						"vehicle"],
-	["WY-55 Hellcat (Armed)",													"I_Heli_light_03_dynamicLoadout_F",									40000,						"vehicle",						"variant_HellGun" ],
 	["WY-55 Hellcat (Unarmed)",													"I_Heli_light_03_unarmed_F",										7000,						"vehicle"],
 	["WY-55 Hellcat (Bombs)",													"I_Heli_light_03_dynamicLoadout_F",									40000,						"vehicle",						"variant_HellBOMB" ],
 	["WY-55 Hellcat (DAR)",														"I_Heli_light_03_dynamicLoadout_F",									40000,						"vehicle",						"variant_HellDAR" ],
@@ -1580,27 +1576,27 @@ helicoptersArray = compileFinal str
 ];
 planesArray = compileFinal str
 [
-	["A-143 Buzzard AA",														"I_Plane_Fighter_03_dynamicLoadout_F",								150000,						"vehicle"						"variant_buzzardAA"],
-	["A-143 Buzzard CAS",														"I_Plane_Fighter_03_dynamicLoadout_F",								390000,						"vehicle"						"variant_buzzardCAS"],
+	["A-143 Buzzard AA",														"I_Plane_Fighter_03_dynamicLoadout_F",								150000,						"vehicle",						"variant_buzzardAA"],
+	["A-143 Buzzard CAS",														"I_Plane_Fighter_03_dynamicLoadout_F",								390000,						"vehicle",						"variant_buzzardCAS"],
 	["A-149 Gryphon",															"I_Plane_Fighter_04_F",												400000,						"vehicle"],
-	["A-164 Wipeout",															"B_Plane_CAS_01_dynamicLoadout_F",									450000,					"vehicle"],
+	["A-164 Wipeout",															"B_Plane_CAS_01_dynamicLoadout_F",									450000,						"vehicle"],
 	["Caesar BTT",																"C_Plane_Civil_01_F",												3000,						"vehicle"],
 	["Ceasar BTT (racing)",														"C_Plane_Civil_01_Racing_F",										3000,						"vehicle"],
-	["F/A-181 Black Wasp II (Stealth)",											"B_Plane_Fighter_01_Stealth_F",										500000,					"vehicle"],
-	["F/A-181 Black Wasp II",													"B_Plane_Fighter_01_F",												550000,					"vehicle"],
+	["F/A-181 Black Wasp II (Stealth)",											"B_Plane_Fighter_01_Stealth_F",										500000,						"vehicle"],
+	["F/A-181 Black Wasp II",													"B_Plane_Fighter_01_F",												550000,						"vehicle"],
 	["K40 Ababil-3 UAV (Unarmed)",												"O_UAV_02_F",														25000,						"vehicle"],
 	["K40 Ababil-3 UAV (Bomber)",												"I_UAV_02_dynamicLoadout_F",										250000,						"vehicle",						"variant_greyhawkBomber"],
-	["K40 Ababil-3 UAV (Missiles)",												"O_UAV_02_dynamicLoadout_F",										450000,					"vehicle",						"variant_greyhawkMissile"],
+	["K40 Ababil-3 UAV (Missiles)",												"O_UAV_02_dynamicLoadout_F",										450000,						"vehicle",						"variant_greyhawkMissile"],
 	["K40 Ababil-3 UAV (Unarmed)",												"I_UAV_02_F",														25000,						"vehicle"],
 	["K40 Ababil-3 UAV (Bomber)",												"O_UAV_02_dynamicLoadout_F",										250000,						"vehicle",						"variant_greyhawkBomber"],
-	["K40 Ababil-3 UAV (Missiles)",												"I_UAV_02_dynamicLoadout_F",										425000,					"vehicle",						"variant_greyhawkMissile"],
+	["K40 Ababil-3 UAV (Missiles)",												"I_UAV_02_dynamicLoadout_F",										425000,						"vehicle",						"variant_greyhawkMissile"],
 	["KH-3A Fenghuang",															"O_T_UAV_04_CAS_F",													375000,						"vehicle"],
 	["MQ4A Greyhawk UAV (Unarmed)",												"B_UAV_02_F",														25000,						"vehicle"],
 	["MQ4A Greyhawk UAV (Bomber)",												"B_UAV_02_dynamicLoadout_F",										250000,						"vehicle",						"variant_greyhawkBomber"],// Bomber UAVs are a lot harder to use,hence why they are cheaper than Missile ones
-	["MQ4A Greyhawk UAV (Missiles)",											"B_UAV_02_dynamicLoadout_F",										425000,					"vehicle",						"variant_greyhawkMissile"],
-	["To-199 Neophron CAS",														"O_Plane_CAS_02_dynamicLoadout_F",									450000,					"vehicle"],
-	["To-201 Shikra",															"O_Plane_Fighter_02_F",												550000,					"vehicle"],
-	["To-201 Shikra (Stealth)",													"O_Plane_Fighter_02_Stealth_F",										500000,					"vehicle"],
+	["MQ4A Greyhawk UAV (Missiles)",											"B_UAV_02_dynamicLoadout_F",										425000,						"vehicle",						"variant_greyhawkMissile"],
+	["To-199 Neophron CAS",														"O_Plane_CAS_02_dynamicLoadout_F",									450000,						"vehicle"],
+	["To-201 Shikra",															"O_Plane_Fighter_02_F",												550000,						"vehicle"],
+	["To-201 Shikra (Stealth)",													"O_Plane_Fighter_02_Stealth_F",										500000,						"vehicle"],
 	["UCAV Sentinel",															"B_UAV_05_F",														400000,						"vehicle"],
 	["V-44 X Blackfish (Vehicle Transport)",									"B_T_VTOL_01_vehicle_F",											30000,						"vehicle"],
 	["V-44 X Blackfish (Infrantry Transport)",									"B_T_VTOL_01_infantry_F",											20000,						"vehicle"],
@@ -1644,54 +1640,6 @@ AutonomousArray = compileFinal str
 
 
 
-	//Bad: Needs retesting after R3F overhaul
-	/*
-	["BAD NO GRAB C-Wire","Land_Razorwire_F",1],
-	["BAD NO GRAB Construction Crane","Land_Crane_F",1],
-	["BAD NO GRAB Pier","Land_nav_pier_m_F",1],
-	["BAD NO GRAB Mobile Landing Platform","Land_MobileLandingPlatform_01_F",100],
-	["BAD NO GRAB Test89","CamoNet_INDP_F",1],
-	["BAD NO GRAB Test90","CamoNet_BLUFOR_F",1],
-	["BAD NO GRAB Test91","CamoNet_OPFOR_F",1],
-	["BAD NO GRAB Test92","CamoNet_INDP_open_F",1],
-	["BAD NO GRAB Test93","CamoNet_BLUFOR_open_F",1],
-	["BAD NO GRAB Test94","CamoNet_OPFOR_open_F",1],
-	["BAD NO GRAB Test95","CamoNet_INDP_big_F",1],
-	["BAD NO GRAB Test96","CamoNet_BLUFOR_big_F",1],
-	["BAD NO GRAB Test97","CamoNet_OPFOR_big_F",1],
-	["BAD NO GRAB Test48","Land_Graffiti_01_F",1],
-	["BAD NO GRAB Test49","Land_HelipadCircle_F",1],
-	["BAD NO GRAB Test50","Land_HelipadCivil_F",1],
-	["BAD NO GRAB Test51","Land_HelipadRescue_F",1],
-	["BAD NO GRAB Test52","Land_HelipadSquare_F",1],
-	["BAD NO GRAB Test53","Land_JumpTarget_F",1],
-	["BAD NO FUNCTIONING GATE OPEN","Land_Mil_WallBig_Gate_F",1],
-	["Concrete Mixing Tower",															 "Land_cmp_Tower_F",										 2000],
-	["Pier,Cement Box (Tall)",															"Land_Pier_Box_F",											10000],
-	["Molon Labe Monument",																 "Land_MolonLabe_F",										 1],
-
-
-	//For future fun
-	/*
-	["Rock,Tall (Black)", "Land_W_sharpRock_wallV", 1000000],
-	["Rock,Tall (Brown)", "Land_BluntRock_wallV", 1000000],
-	["Rock,Tall (Grey)", "Land_SharpRock_wallV", 1000000],
-	["Rock,Tall (White)", "Land_Limestone_01_wallV_F", 1000000],
-	["Rock,Long (Black)", "Land_W_sharpRock_wallH", 500000],
-	["Rock,Long (Brown)", "Land_BluntRock_wallH", 500000],
-	["Rock,Long (Grey)", "Land_SharpRock_wallH", 500000],
-	["Rock,Long (White)", "Land_Limestone_01_wallH_F", 500000],
-	["Radio,Survival (Camo)","Land_SurvivalRadio_F",40],
-	["Device,Disassembled (Lighted)","Land_Device_disassembled_F",500],
-	["Device,Slingable (Lighted)","Land_Device_slingloadable_F",500],//Bad
-	["Shed,Concrete Mixing",																"Land_cmp_Shed_F",											1000],
-	["Rocks, Wavebreakers",																 "Land_Sea_Wall_F",											25000],
-	["Bag Bunker Tower (Green)", "Land_HBarrier_01_tower_green_F", 1000, "object"]
-
-	*/
-
-
-
 allVehStoreVehicles = compileFinal str (call landArray + call armoredArray + call tanksArray + call helicoptersArray + call planesArray + call boatsArray + call AutonomousArray);
 
 
@@ -1705,291 +1653,371 @@ _gorgonDir = "\A3\armor_f_gamma\APC_Wheeled_03\data\";
 
 colorsArray = compileFinal str
 [
-	[// Main colors
+	[ // Main colors
 		"All",
 		[
-			["Black",_color + "(0.01,0.01,0.01,1)"],// #(argb,8,8,3)color(0.1,0.1,0.1,0.1)
-			["Gray",_color + "(0.15,0.151,0.152,1)"],// #(argb,8,8,3)color(0.5,0.51,0.512,0.3)
-			["White",_color + "(0.75,0.75,0.75,1)"],// #(argb,8,8,3)color(1,1,1,0.5)
-			["Dark Blue",_color + "(0,0.05,0.15,1)"],// #(argb,8,8,3)color(0,0.3,0.6,0.05)
-			["Blue",_color + "(0,0.03,0.5,1)"],// #(argb,8,8,3)color(0,0.2,1,0.75)
-			["Teal",_color + "(0,0.3,0.3,1)"],// #(argb,8,8,3)color(0,1,1,0.15)
-			["Green",_color + "(0,0.5,0,1)"],// #(argb,8,8,3)color(0,1,0,0.15)
-			["Yellow",_color + "(0.5,0.4,0,1)"],// #(argb,8,8,3)color(1,0.8,0,0.4)
-			["Orange",_color + "(0.4,0.09,0,1)"],// #(argb,8,8,3)color(1,0.5,0,0.4)
-			["Red",_color + "(0.45,0.005,0,1)"],// #(argb,8,8,3)color(1,0.1,0,0.3)
-			["Pink",_color + "(0.5,0.03,0.3,1)"],// #(argb,8,8,3)color(1,0.06,0.6,0.5)
-			["Purple",_color + "(0.1,0,0.3,1)"],// #(argb,8,8,3)color(0.8,0,1,0.1)
-			["NATO Tan",_texDir + "nato.paa"],// #(argb,8,8,3)color(0.584,0.565,0.515,0.3)
-			["CSAT Brown",_texDir + "csat.paa"],// #(argb,8,8,3)color(0.624,0.512,0.368,0.3)
-			["AAF Green",_texDir + "aaf.paa"],// #(argb,8,8,3)color(0.546,0.59,0.363,0.2)
-			["Bloodshot",_texDir + "bloodshot.paa"],
-			["Carbon",_texDir + "carbon.paa"],
-			["Confederate",_texDir + "confederate.paa"],
-			["Denim",_texDir + "denim.paa"],
-			["Digital",_texDir + "digi.paa"],
-			["Digital Black",_texDir + "digi_black.paa"],
-			["Digital Desert",_texDir + "digi_desert.paa"],
-			["Digital Woodland",_texDir + "digi_wood.paa"],
-			["Doritos",_texDir + "doritos.paa"],
-			["Drylands",_texDir + "drylands.paa"],
-			["Hello Kitty",_texDir + "hellokitty.paa"],
-			["Hex",_texDir + "hex.paa"],
-			["Hippie",_texDir + "hippie.paa"],
-			//["ISIS",_texDir + "isis.paa"],
-			["Leopard",_texDir + "leopard.paa"],
-			["Mountain Dew",_texDir + "mtndew.paa"],
-			["'Murica",_texDir + "murica.paa"],
-			// ["Nazi",_texDir + "nazi.paa"],
-			["Orange Camo",_texDir + "camo_orange.paa"],
-			["Pink Camo",_texDir + "camo_pink.paa"],
-			["Pride",_texDir + "pride.paa"],
-			["Psych",_texDir + "psych.paa"],
-			["Red Camo",_texDir + "camo_red.paa"],
-			["Rusty",_texDir + "rusty.paa"],
-			["Sand",_texDir + "sand.paa"],
-			["Snake",_texDir + "snake.paa"],
-			["Stripes",_texDir + "stripes.paa"],
-			["Stripes 2",_texDir + "stripes2.paa"],
-			["Stripes 3",_texDir + "stripes3.paa"],
-			["Swamp",_texDir + "swamp.paa"],
-			["Tiger",_texDir + "tiger.paa"],
-			["Trippy",_texDir + "rainbow.paa"],
-			["Union Jack",_texDir + "unionjack.paa"],
-			["Urban",_texDir + "urban.paa"],
-			["Weed",_texDir + "weed.paa"],
-			["Woodland",_texDir + "woodland.paa"],
-			["Woodland Dark",_texDir + "wooddark.paa"],
-			["Woodland Tiger",_texDir + "woodtiger.paa"]
+			["Black", _color + "(0.01,0.01,0.01,1)"], // #(argb,8,8,3)color(0.1,0.1,0.1,0.1)
+			["Gray", _color + "(0.15,0.151,0.152,1)"], // #(argb,8,8,3)color(0.5,0.51,0.512,0.3)
+			["White", _color + "(0.75,0.75,0.75,1)"], // #(argb,8,8,3)color(1,1,1,0.5)
+			["Dark Blue", _color + "(0,0.05,0.15,1)"], // #(argb,8,8,3)color(0,0.3,0.6,0.05)
+			["Blue", _color + "(0,0.03,0.5,1)"], // #(argb,8,8,3)color(0,0.2,1,0.75)
+			["Teal", _color + "(0,0.3,0.3,1)"], // #(argb,8,8,3)color(0,1,1,0.15)
+			["Green", _color + "(0,0.5,0,1)"], // #(argb,8,8,3)color(0,1,0,0.15)
+			["Yellow", _color + "(0.5,0.4,0,1)"], // #(argb,8,8,3)color(1,0.8,0,0.4)
+			["Orange", _color + "(0.4,0.09,0,1)"], // #(argb,8,8,3)color(1,0.5,0,0.4)
+			["Red", _color + "(0.45,0.005,0,1)"], // #(argb,8,8,3)color(1,0.1,0,0.3)
+			["Pink", _color + "(0.5,0.03,0.3,1)"], // #(argb,8,8,3)color(1,0.06,0.6,0.5)
+			["Purple", _color + "(0.1,0,0.3,1)"], // #(argb,8,8,3)color(0.8,0,1,0.1)
+			["NATO Tan", _texDir + "nato.paa"], // #(argb,8,8,3)color(0.584,0.565,0.515,0.3)
+			["CSAT Brown", _texDir + "csat.paa"], // #(argb,8,8,3)color(0.624,0.512,0.368,0.3)
+			["AAF Green", _texDir + "aaf.paa"], // #(argb,8,8,3)color(0.546,0.59,0.363,0.2)
+			["Bloodshot", _texDir + "bloodshot.paa"],
+			["Carbon", _texDir + "carbon.paa"],
+			//["Confederate", _texDir + "confederate.paa"],
+			["Denim", _texDir + "denim.paa"],
+			["Digital", _texDir + "digi.paa"],
+			["Digital Black", _texDir + "digi_black.paa"],
+			["Digital Desert", _texDir + "digi_desert.paa"],
+			["Digital Woodland", _texDir + "digi_wood.paa"],
+			["Doritos", _texDir + "doritos.paa"],
+			["Drylands", _texDir + "drylands.paa"],
+			["Hello Kitty", _texDir + "hellokitty.paa"],
+			["Hex", _texDir + "hex.paa"],
+			["Hippie", _texDir + "hippie.paa"],
+			//["ISIS", _texDir + "isis.paa"],
+			["Leopard", _texDir + "leopard.paa"],
+			["Mountain Dew", _texDir + "mtndew.paa"],
+			["'Murica", _texDir + "murica.paa"],
+			//["Nazi", _texDir + "nazi.paa"],
+			["Orange Camo", _texDir + "camo_orange.paa"],
+			["Pink Camo", _texDir + "camo_pink.paa"],
+			["Pride", _texDir + "pride.paa"],
+			["Psych", _texDir + "psych.paa"],
+			["Red Camo", _texDir + "camo_red.paa"],
+			["Rusty", _texDir + "rusty.paa"],
+			["Sand", _texDir + "sand.paa"],
+			["Snake", _texDir + "snake.paa"],
+			["Stripes", _texDir + "stripes.paa"],
+			["Stripes 2", _texDir + "stripes2.paa"],
+			["Stripes 3", _texDir + "stripes3.paa"],
+			["Swamp", _texDir + "swamp.paa"],
+			["Tiger", _texDir + "tiger.paa"],
+			["Trippy", _texDir + "rainbow.paa"],
+			["Union Jack", _texDir + "unionjack.paa"],
+			["Urban", _texDir + "urban.paa"],
+			["Weed", _texDir + "weed.paa"],
+			["Woodland", _texDir + "woodland.paa"],
+			["Woodland Dark", _texDir + "wooddark.paa"],
+			["Woodland Tiger", _texDir + "woodtiger.paa"]
 		]
 	],
-	[// Kart colors
+	[ // Kart colors
 		"Kart_01_Base_F",
 		[
-			["Black (Kart)",["Black"]],// ["Black (Kart)",[configName (configFile >> "CfgVehicles" >> "C_Kart_01_F" >> "TextureSources" >> "Black")]],
-			["White (Kart)",["White"]],
-			["Blue (Kart)",["Blue"]],
-			["Green (Kart)",["Green"]],
-			["Yellow (Kart)",["Yellow"]],
-			["Orange (Kart)",["Orange"]],
-			["Red (Kart)",[[0,_kartDir + "kart_01_base_red_co.paa"]]]// no red TextureSource :(
+			["Bluking (Kart)", ["Bluking"]],
+			["Fuel (Kart)", ["Fuel"]],
+			["Redstone (Kart)", ["Redstone"]],
+			["Vrana (Kart)", ["Vrana"]],
+			["Black (Kart)", ["Black"]], // ["Black (Kart)", [configName (configFile >> "CfgVehicles" >> "C_Kart_01_F" >> "TextureSources" >> "Black")]],
+			["White (Kart)", ["White"]],
+			["Blue (Kart)", ["Blue"]],
+			["Green (Kart)", ["Green"]],
+			["Yellow (Kart)", ["Yellow"]],
+			["Orange (Kart)", ["Orange"]],
+			["Red (Kart)", [[0, _kartDir + "kart_01_base_red_co.paa"]]] // no red TextureSource :(
 		]
 	],
-	[// MH-9 colors
+	[ // Ambulance color
+		"Van_02_medevac_base_F",
+		[
+			["IDAP Ambulance (Van)", ["IdapAmbulance"]]
+		]
+	],
+	[ // Van colors
+		"Van_02_base_F",
+		[
+			["AAN News (Van)", ["AAN"]],
+			["Battle Bus (Van)", ["BattleBus"]],
+			["Black (Van)", ["Black"]],
+			["Blue (Van)", ["Blue"]],
+			["Blue Pearl (Van)", ["BluePearl"]],
+			["Daltgreen (Van)", ["Daltgreen"]],
+			["Dazzle (Van)", ["Masked"]],
+			["Guerilla 1 (Van)", ["FIA1"]],
+			["Guerilla 2 (Van)", ["FIA2"]],
+			["Guerilla 3 (Van)", ["FIA3"]],
+			["Fuel (Van)", ["Fuel"]],
+			["Green (Van)", ["Green"]],
+			["IDAP (Van)", ["IDAP"]],
+			["Orange (Van)", ["Orange"]],
+			["Port Authority (Van)", ["CivService"]],
+			["Red (Van)", ["Red"]],
+			["Redstone (Van)", ["Redstone"]],
+			["Swifd (Van)", ["Swifd"]],
+			["Syndikat (Van)", ["Syndikat"]],
+			["Vrana (Van)", ["Vrana"]],
+			["White (Van)", ["White"]]
+		]
+	],
+	[ // MH-9 colors
 		"Heli_Light_01_base_F",
 		[
-			["AAF Camo (MH-9)",[[0,_mh9Dir + "heli_light_01_ext_indp_co.paa"]]],
-			["Blue 'n White (MH-9)",[[0,_mh9Dir + "heli_light_01_ext_blue_co.paa"]]],
-			["Blueline (MH-9)",[[0,_mh9Dir + "Skins\heli_light_01_ext_blueline_co.paa"]]],
-			["Cream Gravy (MH-9)",[[0,_mh9Dir + "heli_light_01_ext_co.paa"]]],
-			["Digital (MH-9)",[[0,_mh9Dir + "Skins\heli_light_01_ext_digital_co.paa"]]],
-			["Elliptical (MH-9)",[[0,_mh9Dir + "Skins\heli_light_01_ext_elliptical_co.paa"]]],
-			["Furious (MH-9)",[[0,_mh9Dir + "Skins\heli_light_01_ext_furious_co.paa"]]],
-			["Graywatcher (MH-9)",[[0,_mh9Dir + "Skins\heli_light_01_ext_graywatcher_co.paa"]]],
-			["ION (MH-9)",[[0,_mh9Dir + "heli_light_01_ext_ion_co.paa"]]],
-			["Jeans (MH-9)",[[0,_mh9Dir + "Skins\heli_light_01_ext_jeans_co.paa"]]],
-			["Light (MH-9)",[[0,_mh9Dir + "Skins\heli_light_01_ext_light_co.paa"]]],
-			["Shadow (MH-9)",[[0,_mh9Dir + "Skins\heli_light_01_ext_shadow_co.paa"]]],
-			["Sheriff (MH-9)",[[0,_mh9Dir + "Skins\heli_light_01_ext_sheriff_co.paa"]]],
-			["Speedy (MH-9)",[[0,_mh9Dir + "Skins\heli_light_01_ext_speedy_co.paa"]]],
-			["Sunset (MH-9)",[[0,_mh9Dir + "Skins\heli_light_01_ext_sunset_co.paa"]]],
-			["Vrana (MH-9)",[[0,_mh9Dir + "Skins\heli_light_01_ext_vrana_co.paa"]]],
-			["Wasp (MH-9)",[[0,_mh9Dir + "Skins\heli_light_01_ext_wasp_co.paa"]]],
-			["Wave (MH-9)",[[0,_mh9Dir + "Skins\heli_light_01_ext_wave_co.paa"]]]
+			["AAF Camo (MH-9)", [[0, _mh9Dir + "heli_light_01_ext_indp_co.paa"]]],
+			["Blue 'n White (MH-9)", [[0, _mh9Dir + "heli_light_01_ext_blue_co.paa"]]],
+			["Blueline (MH-9)", [[0, _mh9Dir + "Skins\heli_light_01_ext_blueline_co.paa"]]],
+			["Cream Gravy (MH-9)", [[0, _mh9Dir + "heli_light_01_ext_co.paa"]]],
+			["Digital (MH-9)", [[0, _mh9Dir + "Skins\heli_light_01_ext_digital_co.paa"]]],
+			["Elliptical (MH-9)", [[0, _mh9Dir + "Skins\heli_light_01_ext_elliptical_co.paa"]]],
+			["Furious (MH-9)", [[0, _mh9Dir + "Skins\heli_light_01_ext_furious_co.paa"]]],
+			["Graywatcher (MH-9)", [[0, _mh9Dir + "Skins\heli_light_01_ext_graywatcher_co.paa"]]],
+			["ION (MH-9)", [[0, _mh9Dir + "heli_light_01_ext_ion_co.paa"]]],
+			["Jeans (MH-9)", [[0, _mh9Dir + "Skins\heli_light_01_ext_jeans_co.paa"]]],
+			["Light (MH-9)", [[0, _mh9Dir + "Skins\heli_light_01_ext_light_co.paa"]]],
+			["Shadow (MH-9)", [[0, _mh9Dir + "Skins\heli_light_01_ext_shadow_co.paa"]]],
+			["Sheriff (MH-9)", [[0, _mh9Dir + "Skins\heli_light_01_ext_sheriff_co.paa"]]],
+			["Speedy (MH-9)", [[0, _mh9Dir + "Skins\heli_light_01_ext_speedy_co.paa"]]],
+			["Sunset (MH-9)", [[0, _mh9Dir + "Skins\heli_light_01_ext_sunset_co.paa"]]],
+			["Vrana (MH-9)", [[0, _mh9Dir + "Skins\heli_light_01_ext_vrana_co.paa"]]],
+			["Wasp (MH-9)", [[0, _mh9Dir + "Skins\heli_light_01_ext_wasp_co.paa"]]],
+			["Wave (MH-9)", [[0, _mh9Dir + "Skins\heli_light_01_ext_wave_co.paa"]]]
 		]
 	],
-	[// Mohawk colors
+	[ // Mohawk colors
 		"Heli_Transport_02_base_F",
 		[
-			["Dahoman (Mohawk)",[
-				[0,_mohawkDir + "Skins\heli_transport_02_1_dahoman_co.paa"],
-				[1,_mohawkDir + "Skins\heli_transport_02_2_dahoman_co.paa"],
-				[2,_mohawkDir + "Skins\heli_transport_02_3_dahoman_co.paa"]
+			["Dahoman (Mohawk)", [
+				[0, _mohawkDir + "Skins\heli_transport_02_1_dahoman_co.paa"],
+				[1, _mohawkDir + "Skins\heli_transport_02_2_dahoman_co.paa"],
+				[2, _mohawkDir + "Skins\heli_transport_02_3_dahoman_co.paa"]
 			]],
-			["ION (Mohawk)",[
-				[0,_mohawkDir + "Skins\heli_transport_02_1_ion_co.paa"],
-				[1,_mohawkDir + "Skins\heli_transport_02_2_ion_co.paa"],
-				[2,_mohawkDir + "Skins\heli_transport_02_3_ion_co.paa"]
+			["ION (Mohawk)", [
+				[0, _mohawkDir + "Skins\heli_transport_02_1_ion_co.paa"],
+				[1, _mohawkDir + "Skins\heli_transport_02_2_ion_co.paa"],
+				[2, _mohawkDir + "Skins\heli_transport_02_3_ion_co.paa"]
+			]],
+			["IDAP (Mohawk)", [
+				[0, "\A3\air_f_orange\heli_transport_02\data\heli_transport_02_1_idap_co.paa"],
+				[1, "\A3\air_f_orange\heli_transport_02\data\heli_transport_02_2_idap_co.paa"],
+				[2, "\A3\air_f_orange\heli_transport_02\data\heli_transport_02_3_idap_co.paa"],
+				[3, "\A3\air_f_orange\heli_transport_02\data\heli_transport_02_int_02_idap_co.paa"]
 			]]
 		]
 	],
-	[// Taru paintjob
+	[ // Armed Orca paintjob
+		"Heli_Light_02_dynamicLoadout_base_F",
+		[
+			["Orca (Orca)", ["Blackcustom"]]
+		]
+	],
+	[ // Orca paintjob
+		"Heli_Light_02_base_F",
+		[
+			["Blue (Orca)", ["Blue"]]
+		]
+	],
+	[ // Taru paintjob
 		"Heli_Transport_04_base_F",
 		[
-			["Black (Taru)",["Black"]]
+			["Black (Taru)", ["Black"]]
 		]
 	],
-	[// Kajman paintjobs
+	[ // Blackfoot paintjob
+		"Heli_Attack_01_base_F",
+		[
+			["Rusty (Blackfoot)", [[0, _wreckDir + "wreck_heli_attack_01_co.paa"]]]
+		]
+	],
+	[ // Kajman paintjobs
 		"Heli_Attack_02_base_F",
 		[
-			["Black (Kajman)",["Black"]],
-			["Rusty (Kajman)",[
-				[0,_wreckDir + "wreck_heli_attack_02_body1_co.paa"],
-				[1,_wreckDir + "wreck_heli_attack_02_body2_co.paa"]
+			["Black (Kajman)", ["Black"]],
+			["Rusty (Kajman)", [
+				[0, _wreckDir + "wreck_heli_attack_02_body1_co.paa"],
+				[1, _wreckDir + "wreck_heli_attack_02_body2_co.paa"]
 			]],
-			["Mossy (Kajman)",[
-				[0,_wreckDir + "uwreck_heli_attack_02_body1_co.paa"],
-				[1,_wreckDir + "uwreck_heli_attack_02_body2_co.paa"]
+			["Mossy (Kajman)", [
+				[0, _wreckDir + "uwreck_heli_attack_02_body1_co.paa"],
+				[1, _wreckDir + "uwreck_heli_attack_02_body2_co.paa"]
 			]]
 		]
 	],
-	[// Ghost Hawk camo
+	[ // Ghost Hawk camo
 		"Heli_Transport_01_base_F",
 		[
-			//["Black (Ghost Hawk)",["Black"]],// default
-			["Olive (Ghost Hawk)",["Green"]],
-			["Dazzle Black (Ghost Hawk)",["Olive"]],
-			["Dazzle Tan (Ghost Hawk)",["Sand"]]
+			//["Black (Ghost Hawk)", ["Black"]], // default
+			["Olive (Ghost Hawk)", ["Green"]],
+			["Dazzle Black (Ghost Hawk)", ["Olive"]],
+			["Dazzle Tan (Ghost Hawk)", ["Sand"]]
 		]
 	],
-	[// Zamak paintjobs
+	[ // Zamak paintjobs
 		"Truck_02_base_F",
 		[
-			["Hex (Zamak)",["Opfor"]],
-			["Orange (Zamak)",["Orange"]]
+			//["AAF (Zamak)", ["Indep"]], // default
+			["Hex (Zamak)", ["Opfor"]],
+			["Orange (Zamak)", ["Orange"]]
 		]
 	],
-	[// Strider NATO color
+	[ // Strider NATO color
 		"MRAP_03_base_F",
 		[
-			["Tan (Strider)",["Blufor"]]
+			["Tan (Strider)", ["Blufor"]]
 		]
 	],
-	[// Gorgon NATO color
+	[ // Gorgon paintjobs
 		"APC_Wheeled_03_base_F",
 		[
-			["Tan (Gorgon)",[
-				[0,_gorgonDir + "apc_wheeled_03_ext_co.paa"],
-				[1,_gorgonDir + "apc_wheeled_03_ext2_co.paa"],
-				[2,_gorgonDir + "rcws30_co.paa"],
-				[3,_gorgonDir + "apc_wheeled_03_ext_alpha_co.paa"]
+			["Guerilla 1 (Gorgon)", ["Guerilla_01"]],
+			["Guerilla 2 (Gorgon)", ["Guerilla_02"]],
+			["Guerilla 3 (Gorgon)", ["Guerilla_03"]],
+			["Tan (Gorgon)", [
+				[0, _gorgonDir + "apc_wheeled_03_ext_co.paa"],
+				[1, _gorgonDir + "apc_wheeled_03_ext2_co.paa"],
+				[2, _gorgonDir + "rcws30_co.paa"],
+				[3, _gorgonDir + "apc_wheeled_03_ext_alpha_co.paa"]
 			]]
 		]
 	],
-	[// Hatchback wreck paintjob
+	[ // Hatchback wreck paintjob
 		"Hatchback_01_base_F",
 		[
-			["Rusty (Hatchback)",[[0,_wreckDir + "civilcar_extwreck_co.paa"]]]
+			["Rusty (Hatchback)", [[0, _wreckDir + "civilcar_extwreck_co.paa"]]]
 		]
 	],
-	[// Prowler paintjobs
-		"LSV_01_base_F",
+	[ // GOD EMPEROR
+		"B_MBT_01_cannon_F",
 		[
-			["Olive (Prowler)",["Olive"]],
-			["Dazzle (Prowler)",["Dazzle"]],
-			["Black (Prowler)",["Black"]],
-			["Tan (Prowler)",["Sand"]]
+			["Trump (Slammer)", [
+				[0, _texDir + "slammer_trump_0.paa"],
+				[1, _texDir + "slammer_trump_1.paa"]
+			]]
 		]
 	],
-	[// Qilin paintjobs
-		"LSV_02_base_F",
+	[
+		"B_MBT_01_TUSK_F",
 		[
-			//["Green Hex (Qilin)",["GreenHex"]],// default
-			["Hex (Qilin)",["Arid"]],
-			["Black (Qilin)",["Black"]]
+			["Trump (Slammer)", [[2, _texDir + "slammer_trump_2.paa"]]]
 		]
 	],
-	[// Blackfish paintjobs
-		"VTOL_01_base_F",
-		[
-			//["Olive (Blackfish)",["Olive"]],// default
-			["Blue (Blackfish)",["Blue"]]
-		]
-	],
-	[// Xi'an paintjobs
-		"VTOL_02_base_F",
-		[
-			//["Green Hex (Xi'an)",["GreenHex"]],// default
-			["Hex (Xi'an)",["Hex"]],
-			["Gray Hex (Xi'an)",["Grey"]]
-		]
-	],
-	[// UGV paintjobs
-		"UGV_01_base_F",
-		[
-			["Tan (UGV)",["Blufor"]],
-			["Hex (UGV)",["Opfor"]],
-			["Digital (UGV)",["Indep"]],
-			["Green Hex (UGV)",["GreenHex"]]
-		]
-	],
-	[// Ifrit GreenHex
-		"MRAP_02_base_F",
-		[
-			["Green Hex (Ifrit)",["GreenHex"]]
-		]
-	],
-	[// Tempest GreenHex
-		"Truck_03_base_F",
-		[
-			["Green Hex (Tempest)",["GreenHex"]]
-		]
-	],
-	[// Marid GreenHex
-		"APC_Wheeled_02_base_F",
-		[
-			["Green Hex (Marid)",["GreenHex"]]
-		]
-	],
-	[// Kamysh & Tigris GreenHex
-		"APC_Tracked_02_base_F",
-		[
-			["Green Hex (Kamysh)",["GreenHex"]]
-		]
-	],
-	[// Varsuk & Sochor GreenHex
-		"MBT_02_base_F",
-		[
-			["Green Hex (Varsuk)",["GreenHex"]]
-		]
-	],
-	[// RHIB paintjob
+	[ // RHIB paintjob
 		"Boat_Transport_02_base_F",
 		[
-			["Civilian (RHIB)",["Civilian"]]
+			["Civilian (RHIB)", ["Civilian"]]
 		]
 	],
-	[// F/A-181 Black Wasp
+	[ // Prowler paintjobs
+		"LSV_01_base_F",
+		[
+			["Olive (Prowler)", ["Olive"]],
+			["Dazzle (Prowler)", ["Dazzle"]],
+			["Black (Prowler)", ["Black"]],
+			["Tan (Prowler)", ["Sand"]]
+		]
+	],
+	[ // Qilin paintjobs
+		"LSV_02_base_F",
+		[
+			//["Green Hex (Qilin)", ["GreenHex"]], // default
+			["Hex (Qilin)", ["Arid"]],
+			["Black (Qilin)", ["Black"]]
+		]
+	],
+	[ // Blackfish paintjobs
+		"VTOL_01_base_F",
+		[
+			//["Olive (Blackfish)", ["Olive"]], // default
+			["Blue (Blackfish)", ["Blue"]]
+		]
+	],
+	[ // Xi'an paintjobs
+		"VTOL_02_base_F",
+		[
+			//["Green Hex (Xi'an)", ["GreenHex"]], // default
+			["Hex (Xi'an)", ["Hex"]],
+			["Gray Hex (Xi'an)", ["Grey"]]
+		]
+	],
+	[ // Black Wasp paintjob
 		"Plane_Fighter_01_Base_F",
 		[
-			//["Dark Grey (F/A-181 Black Wasp)",["DarkGrey"]],// default
-			["Dark Grey Camo (F/A-181 Black Wasp)",["DarkGreyCamo"]]
+			["Grey Camo (Black Wasp)", ["DarkGreyCamo"]]
 		]
 	],
-	[// UCAV Sentinel
-		"UAV_05_Base_F",
-		[
-			//["Dark Grey (UCAV Sentinel)",["DarkGrey"]],// default
-			["Dark Grey Camo (UCAV Sentinel)",["DarkGreyCamo"]]
-		]
-	],
-	[//	To-201 Shikra
+	[ // Shikra paintjobs
 		"Plane_Fighter_02_Base_F",
 		[
-			//["Arid Hex Camo (To-201 Shikra)",["CamoAridHex"]],// default
-			["Grey Hex Camo (To-201 Shikra)",["CamoGreyHex"]],
-			["Blue (To-201 Shikra)",["CamoBlue"]]
+			["Grey Hex (Shikra)", ["CamoGreyHex"]],
+			["Russian Blue (Shikra)", ["CamoBlue"]]
 		]
 	],
-	[// A-149 Gryphon
+	[ // Gryphon paintjobs
 		"Plane_Fighter_04_Base_F",
 		[
-			//["Digital Green Camo (A-149 Gryphon)",["DigitalCamoGreen"]],// default
-			["Digital Grey Camo (A-149 Gryphon)",["DigitalCamoGrey"]],
-			["Grey (A-149 Gryphon)",["CamoGrey"]]
+			["Grey (Gryphon)", ["CamoGrey"]],
+			["Digital Grey (Gryphon)", ["DigitalCamoGrey"]]
+		]
+	],
+	[ // Sentinel paintjob
+		"UAV_05_Base_F",
+		[
+			["Grey Camo (Sentinel)", ["DarkGreyCamo"]]
+		]
+	],
+	[ // UGV paintjobs
+		"UGV_01_base_F",
+		[
+			["Tan (UGV)", ["Blufor"]],
+			["Hex (UGV)", ["Opfor"]],
+			["Digital (UGV)", ["Indep"]],
+			["Green Hex (UGV)", ["GreenHex"]]
+		]
+	],
+	[ // Ifrit GreenHex
+		"MRAP_02_base_F",
+		[
+			["Green Hex (Ifrit)", ["GreenHex"]]
+		]
+	],
+	[ // Tempest GreenHex
+		"Truck_03_base_F",
+		[
+			["Green Hex (Tempest)", ["GreenHex"]]
+		]
+	],
+	[ // Marid GreenHex
+		"APC_Wheeled_02_base_F",
+		[
+			["Green Hex (Marid)", ["GreenHex"]]
+		]
+	],
+	[ // Kamysh & Tigris GreenHex
+		"APC_Tracked_02_base_F",
+		[
+			["Green Hex (Kamysh)", ["GreenHex"]]
+		]
+	],
+	[ // Varsuk & Sochor GreenHex
+		"MBT_02_base_F",
+		[
+			["Green Hex (Varsuk)", ["GreenHex"]]
 		]
 	]
 ];
 
 //General Store Item List
-//Display Name,Class Name,Description,Picture,Buy Price,Sell Price.
+//Display Name, Class Name, Description, Picture, Buy Price, Sell Price.
+// ["Medical Kit", "medkits", localize "STR_WL_ShopDescriptions_MedKit", "client\icons\medkit.paa", 400, 200],  // not needed since there are First Ait Kits
 customPlayerItems = compileFinal str
 [
-	["Jerry Can (Full)","jerrycanfull",localize "STR_WL_ShopDescriptions_fuelFull","client\icons\jerrycan.paa",150,75],
-	["Jerry Can (Empty)","jerrycanempty",localize "STR_WL_ShopDescriptions_fuelEmpty","client\icons\jerrycan.paa",50,25],
-	["Camo Net","camonet",localize "STR_WL_ShopDescriptions_Camo","client\icons\camonet.paa",200,100],
-	["Syphon Hose","syphonhose",localize "STR_WL_ShopDescriptions_SyphonHose","client\icons\syphonhose.paa",200,100],
-	["Spawn Beacon","spawnbeacon",localize "STR_WL_ShopDescriptions_spawnBeacon","client\icons\spawnbeacon.paa",15000,7500]
+	["Artillery Strike", "artillery", "", "client\icons\tablet.paa", 500000, 100000, "HIDDEN"],
+	["Water Bottle", "water", localize "STR_WL_ShopDescriptions_Water", "client\icons\waterbottle.paa", 30, 15],
+	["Canned Food", "cannedfood", localize "STR_WL_ShopDescriptions_CanFood", "client\icons\cannedfood.paa", 30, 15],
+	["Jerry Can (Full)", "jerrycanfull", localize "STR_WL_ShopDescriptions_fuelFull", "client\icons\jerrycan.paa", 150, 75],
+	["Jerry Can (Empty)", "jerrycanempty", localize "STR_WL_ShopDescriptions_fuelEmpty", "client\icons\jerrycan.paa", 50, 25],
+	["Spawn Beacon", "spawnbeacon", localize "STR_WL_ShopDescriptions_spawnBeacon", "client\icons\spawnbeacon.paa", 1500, 750],
+	["Camo Net", "camonet", localize "STR_WL_ShopDescriptions_Camo", "client\icons\camonet.paa", 200, 100],
+	["Syphon Hose", "syphonhose", localize "STR_WL_ShopDescriptions_SyphonHose", "client\icons\syphonhose.paa", 200, 100],
+	["Energy Drink", "energydrink", localize "STR_WL_ShopDescriptions_Energy_Drink", "client\icons\energydrink.paa", 100, 50]
 ];
 
 call compile preprocessFileLineNumbers "mapConfig\storeOwners.sqf";

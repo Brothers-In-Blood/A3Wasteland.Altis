@@ -55,10 +55,29 @@
 	[format ["<img image='\a3\Ui_f\data\GUI\Cfg\CommunicationMenu\supplydrop_ca.paa' color='%1'/> <t color='%1'>[</t>Airdrop Menu<t color='%1'>]</t>", "#FF0000"],"addons\APOC_Airdrop_Assistance\APOC_cli_menu.sqf",[], 1, false, false],
 	//Detect Beacons
 	["Track Beacons", "addons\beacondetector\beacondetector.sqf",0,-10,false,false,"","('MineDetector' in (items player)) && !BeaconScanInProgress"],
-	["<img image='\a3\Ui_f\data\GUI\Cfg\CommunicationMenu\transport_ca.paa'/> <t color='#FFFFFF'>Cancel tracking.</t>", "Beaconscanstop = true",0,-10,false,false,"","BeaconScanInProgress"],
-	//Force Save Vehicle
-	["<img image='client\icons\save.paa'/> Force Save Vehicle", { cursorObject call fn_forceSaveVehicle }, [], -99, false, true, "", "call canForceSaveVehicle"],
-	//Pick Vehicle Lock
-	["<img image='client\icons\r3f_unlock.paa'/> Pick Lock", "addons\scripts\lockPick.sqf", [cursorObject], 99, false, false, "", "alive cursorObject && player distance cursorObject <= (sizeOf typeOf cursorObject / 3) max 3 && {{cursorObject isKindOf _x} count ['LandVehicle','Ship','Air'] > 0 && {locked cursorObject == 2 && !(cursorObject getVariable ['A3W_lockpickDisabled',false]) && cursorObject getVariable ['ownerUID','0'] != getPlayerUID player && 'ToolKit' in items player}}"]
+	["<img image='\a3\Ui_f\data\GUI\Cfg\CommunicationMenu\transport_ca.paa'/> <t color='#FFFFFF'>Cancel tracking.</t>", "Beaconscanstop = true",0,-10,false,false,"","BeaconScanInProgress"]
 ];
 
+if (["A3W_vehicleLocking"] call isConfigOn) then
+{
+	[player, ["<img image='client\icons\r3f_unlock.paa'/> Pick Lock", "addons\scripts\lockPick.sqf", [cursorTarget], 1, false, false, "", "alive cursorTarget && player distance cursorTarget <= (sizeOf typeOf cursorTarget / 3) max 3 && {{cursorTarget isKindOf _x} count ['LandVehicle','Ship','Air'] > 0 && {locked cursorTarget == 2 && !(cursorTarget getVariable ['A3W_lockpickDisabled',false]) && cursorTarget getVariable ['ownerUID','0'] != getPlayerUID player && 'ToolKit' in items player}}"]] call fn_addManagedAction;
+};
+
+// Hehehe...
+if !(288520 in getDLCs 1) then
+{
+	[player, ["<t color='#00FFFF'>Get in as Driver</t>", "client\actions\moveInDriver.sqf", [], 6, true, true, "", "cursorTarget isKindOf 'Kart_01_Base_F' && player distance cursorTarget < 3.4 && isNull driver cursorTarget"]] call fn_addManagedAction;
+};
+
+if (["A3W_savingMethod", "profile"] call getPublicVar == "extDB") then
+{
+	if (["A3W_vehicleSaving"] call isConfigOn) then
+	{
+		[player, ["<img image='client\icons\save.paa'/> Force Save Vehicle", { cursorTarget call fn_forceSaveVehicle }, [], -9.5, false, true, "", "call canForceSaveVehicle"]] call fn_addManagedAction;
+	};
+
+	if (["A3W_staticWeaponSaving"] call isConfigOn) then
+	{
+		[player, ["<img image='client\icons\save.paa'/> Force Save Turret", { cursorTarget call fn_forceSaveObject }, [], -9.5, false, true, "", "call canForceSaveStaticWeapon"]] call fn_addManagedAction;
+	};
+};

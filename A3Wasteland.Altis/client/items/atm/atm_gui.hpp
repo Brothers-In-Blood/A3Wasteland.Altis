@@ -180,10 +180,8 @@ class AtmGUI
 		x = AtmInput_X;
 		y = AtmAmountInput_Y;
 		w = AtmAmountInput_W;
-
 		h = AtmInput_H;
 	};
-
 	class AtmBountyCheckbox
 	{
 	  idc = AtmBountyCheckbox_IDC;
@@ -230,6 +228,8 @@ class AtmGUI
 	  w = AtmBountyLabel_W;
 	  h = AtmLabel_H;
 	};
+
+
 
 	#define AtmAccountDropdown_Y (AtmAmountInput_Y + AtmInput_Y_MARGIN)
 
@@ -294,7 +294,6 @@ class AtmGUI
 	class AtmTotalLabel : AtmLabelText
 	{
 		idc = AtmTotalLabel_IDC;
-
 		text = "Total:";
 
 		#define AtmTotalLabel_Y (AtmTotalText_Y + AtmLabel_Y_OFFSET)

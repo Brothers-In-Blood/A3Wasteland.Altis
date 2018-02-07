@@ -3,7 +3,7 @@
 // ******************************************************************************************
 //	@file Version: 1.0
 //	@file Name: filterExecAttempt.sqf
-//	@file Author: AgentRev
+//	@file Author: AgentRev, BIB_Monkey
 //	@file Created: 14/07/2013 13:10
 
 private "_packetName";
