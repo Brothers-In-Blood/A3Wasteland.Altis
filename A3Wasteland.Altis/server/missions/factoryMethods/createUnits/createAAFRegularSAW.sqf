@@ -36,8 +36,8 @@ private _soldierTypes = selectrandom ["C_man_polo_1_F", "C_man_polo_2_F", "C_man
 	];
 	private _weaponTypesRifle = selectrandom 
 	[
-		"arifle_MXC_F", 
-		"arifle_MX_F"
+		"Mk200 LMG"
+
 	];
 	private _weaponTypesLauncher = selectrandom 
 	[
@@ -52,7 +52,9 @@ private _soldierTypes = selectrandom ["C_man_polo_1_F", "C_man_polo_2_F", "C_man
 		"", 
 		"optic_Aco",
 		"optic_Aco_grn",
-		"optic_Holosight",
+		"optic_Holosight"
+		"RCO",
+		"ERCO"
 	];
 	private _weaponsRail = selectrandom 
 	[
@@ -65,6 +67,7 @@ private _soldierTypes = selectrandom ["C_man_polo_1_F", "C_man_polo_2_F", "C_man
 	private _weaponsMuzzle = selectrandom 
 	[
 		""
+		"Suppressor 6.5mm"
 	];
 	private _BinocularTypes = selectrandom 
 	[
