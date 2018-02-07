@@ -82,7 +82,8 @@ switch (_boxType) do
 			["wep", "launch_Titan_short_F", RANDOM_BETWEEN(2,3), RANDOM_BETWEEN(3,4)],
 			["wep", "launch_Titan_F", RANDOM_BETWEEN(1,2), RANDOM_BETWEEN(3,4)],
 			//Items
-			["bac", ["B_Carryall_cbr", "B_Carryall_khk", "B_Carryall_oli", "B_Carryall_mcamo", "B_Carryall_oucamo"], RANDOM_BETWEEN(3,4)]
+			["bac", ["B_Carryall_cbr", "B_Carryall_khk", "B_Carryall_oli", "B_Carryall_mcamo", "B_Carryall_oucamo"], RANDOM_BETWEEN(1,3)]
+			//["bac", ["B_Bergen_dgtl_F", "B_Bergen_hex_F", "B_Bergen_mcamo_F", "B_Bergen_tna_F"], RANDOM_BETWEEN(0,3)]
 
 		];
 
@@ -124,6 +125,10 @@ switch (_boxType) do
 			["itm", ["H_CrewHelmetHeli_B","H_CrewHelmetHeli_O", "H_CrewHelmetHeli_I"], RANDOM_BETWEEN(2,4)],
 			["bac", ["B_Kitbag_mcamo", "B_Bergen_sgg", "B_FieldPack_khk", "B_Carryall_mcamo"], RANDOM_BETWEEN(3,5)],
 			["itm", ["V_PlateCarrierIAGL_dgtl", "V_TacVest_camo", "V_PlateCarrierGL_rgr"], RANDOM_BETWEEN(2,4)],
+			//["itm", ["V_PlateCarrierGL_blk", "V_PlateCarrierGL_rgr", "V_PlateCarrierGL_mtp", "V_PlateCarrierGL_tna_F"], RANDOM_BETWEEN(1,4)],
+			//["itm", ["V_PlateCarrier1_blk", "V_PlateCarrierL_CTRG", "V_PlateCarrier1_rgr_noflag_F", "V_PlateCarrier1_rgr", "V_PlateCarrier1_tna_F"], RANDOM_BETWEEN(1,4)],
+			//["itm", ["V_PlateCarrier2_blk", "V_PlateCarrierH_CTRG", "V_PlateCarrier2_rgr", "V_PlateCarrier2_tna_F"], RANDOM_BETWEEN(1,4)],
+			//["itm", ["V_PlateCarrierSpec_blk", "V_PlateCarrierSpec_rgr", "V_PlateCarrierSpec_mtp", "V_PlateCarrierSpec_tna_F"], RANDOM_BETWEEN(1,4)],
 			["itm", ["Chemlight_red", "Chemlight_green", "Chemlight_yellow", "Chemlight_blue"], RANDOM_BETWEEN(6,9)],
 			["mag", ["SmokeShell", "SmokeShellRed", "SmokeShellgreen"], RANDOM_BETWEEN(5,9)]
 		];
@@ -148,14 +153,26 @@ switch (_boxType) do
             ["wep", ["launch_B_Titan_F", "launch_I_Titan_F", "launch_O_Titan_F", "launch_Titan_F"], RANDOM_BETWEEN(2,2), RANDOM_BETWEEN(2,4)],
             ["wep", ["srifle_LRR_SOS_F"], RANDOM_BETWEEN(2,3), RANDOM_BETWEEN(8,14)],
 			//Items
+			//["itm", ["H_HelmetSpecO_blk", "H_HelmetSpecO_ocamo", "H_HelmetSpecO_ghex_F"], RANDOM_BETWEEN(0,2)],
+			//["itm", ["H_HelmetLeaderO_ghex_F", "H_HelmetLeaderO_ocamo", "H_HelmetLeaderO_oucamo"], RANDOM_BETWEEN(0,2)],
+			//["itm", ["H_CrewHelmetHeli_I", "H_CrewHelmetHeli_O", "H_HelmetCrew_O_ghex_F","H_CrewHelmetHeli_B"], RANDOM_BETWEEN(0,2)],
+			//["itm", ["H_PilotHelmetHeli_I", "H_PilotHelmetHeli_O", "H_PilotHelmetHeli_B",], RANDOM_BETWEEN(0,2)],
+			//["itm", ["H_PilotHelmetFighter_I","H_PilotHelmetFighter_O", "H_PilotHelmetFighter_B"], RANDOM_BETWEEN(0,2)],
+			//["itm", ["H_HelmetO_ocamo","H_HelmetO_ghex_F","H_HelmetO_oucamo"], RANDOM_BETWEEN(0,2)],
+			//["itm", ["H_HelmetB_TI_tna_F", "H_HelmetB_TI_tna_F"], RANDOM_BETWEEN(0,2)],
             ["itm", ["H_HelmetB_light_sand", "H_HelmetB_light_desert", "H_HelmetB_light_grass"], RANDOM_BETWEEN(3,5)],
             ["itm", ["H_HelmetB_camo", "H_HelmetB"], RANDOM_BETWEEN(4,6)],
 			["itm", ["H_Shemag_khk", "H_Shemag_olive_hs"], RANDOM_BETWEEN(0,1)],
             ["bac", ["B_Carryall_cbr", "B_Carryall_khk", "B_Carryall_oli", "B_Carryall_mcamo", "B_Carryall_oucamo"], RANDOM_BETWEEN(3,4)],
-			["itm",	["V_PlateCarrierIAGL_dgtl", "V_PlateCarrierIA2_dgtl", "V_PlateCarrierGL_rgr"], RANDOM_BETWEEN(4,4)],
-			["itm", ["V_TacVest_brn", "V_TacVest_blk_POLICE", "V_TacVest_blk", "V_TacVest_brn", "V_TacVest_brn", "V_TacVest_khk", "V_TacVest_oli"], RANDOM_BETWEEN(3,6)],
+			["bac", ["B_Bergen_dgtl_F", "B_Bergen_hex_F", "B_Bergen_mcamo_F", "B_Bergen_tna_F"], RANDOM_BETWEEN(1,3)]
+			["itm",	["V_PlateCarrierIAGL_dgtl", "V_PlateCarrierIA2_dgtl", "V_PlateCarrierGL_rgr"], RANDOM_BETWEEN(1,4)],
+			["itm", ["V_TacVest_brn", "V_TacVest_blk_POLICE", "V_TacVest_blk", "V_TacVest_brn", "V_TacVest_brn", "V_TacVest_khk", "V_TacVest_oli"], RANDOM_BETWEEN(1,4)],
+			//["itm", ["V_PlateCarrierGL_blk", "V_PlateCarrierGL_rgr", "V_PlateCarrierGL_mtp", "V_PlateCarrierGL_tna_F"], RANDOM_BETWEEN(1,4)],
+			//["itm", ["V_PlateCarrier1_blk", "V_PlateCarrierL_CTRG", "V_PlateCarrier1_rgr_noflag_F", "V_PlateCarrier1_rgr", "V_PlateCarrier1_tna_F"], RANDOM_BETWEEN(1,4)],
+			//["itm", ["V_PlateCarrier2_blk", "V_PlateCarrierH_CTRG", "V_PlateCarrier2_rgr", "V_PlateCarrier2_tna_F"], RANDOM_BETWEEN(1,4)],
+			//["itm", ["V_PlateCarrierSpec_blk", "V_PlateCarrierSpec_rgr", "V_PlateCarrierSpec_mtp", "V_PlateCarrierSpec_tna_F"], RANDOM_BETWEEN(1,4)],
 			["itm", ["optic_LRPS", "optic_SOS"], RANDOM_BETWEEN(2,3)],
-			["itm", ["optic_Nightstalker", "optic_tws"], RANDOM_BETWEEN(3,5)],
+			//["itm", ["optic_Nightstalker", "optic_tws"], RANDOM_BETWEEN(0,2)],
 			["itm", ["muzzle_snds_H_MG"], RANDOM_BETWEEN(1,2)],
 			["itm", ["muzzle_snds_B"], RANDOM_BETWEEN(1,3)],
 			["itm", ["bipod_01_F_snd", "bipod_01_F_blk", "bipod_01_F_mtp"], RANDOM_BETWEEN(2,4)],
@@ -211,7 +228,7 @@ switch (_boxType) do
 		[
 			// Item type, Item class(es), # of items, # of magazines per weapon
 			["wep", ["launch_Titan_short_F", "launch_O_Titan_short_F", "launch_I_Titan_short_F"], RANDOM_BETWEEN(1,5), RANDOM_BETWEEN(10,20)],
-			["mag", "Titan_AP", RANDOM_BETWEEN(8,12)]
+			//["mag", "Titan_AP", RANDOM_BETWEEN(0,2)]
 		];
 	};
 	case "mission_snipers":
@@ -223,18 +240,25 @@ switch (_boxType) do
 			["wep", ["srifle_EBR_F", "srifle_DMR_01_F", "srifle_DMR_03_F", "srifle_DMR_06_camo_F"], RANDOM_BETWEEN(1,3), RANDOM_BETWEEN(4,6)],
 			["wep", ["srifle_DMR_02_F", "srifle_DMR_02_camo_F", "srifle_DMR_02_sniper_F"], RANDOM_BETWEEN(1,3), RANDOM_BETWEEN(4,6)],
 			["wep", ["srifle_DMR_05_blk_F", "srifle_DMR_05_hex_F", "srifle_DMR_05_tan_f"], RANDOM_BETWEEN(1,3), RANDOM_BETWEEN(4,6)],
-			["mag", "5Rnd_127x108_APDS_Mag", RANDOM_BETWEEN(3,10)],
+			["wep", ["srifle_DMR_04_F", "srifle_DMR_04_tan_F"], RANDOM_BETWEEN(1,2), RANDOM_BETWEEN(10,12)],
+			["mag", "5Rnd_127x108_APDS_Mag", RANDOM_BETWEEN(12,20)],
 			["wep", "Rangefinder", RANDOM_BETWEEN(1,3)],
+			//["wep", "Laserdesignator", "Laserdesignator_01_khk_F", "Laserdesignator_02_ghex_F", "Laserdesignator_02", "Laserdesignator_03",  RANDOM_BETWEEN(0,1)],
 			["itm", "optic_DMS", RANDOM_BETWEEN(1,2)],
 			["itm", "optic_SOS", RANDOM_BETWEEN(1,2)],
 			["itm", "optic_AMS", RANDOM_BETWEEN(1,2)],
 			["itm", "optic_KHS_blk", RANDOM_BETWEEN(1,2)],
 			["itm", "optic_LRPS", RANDOM_BETWEEN(1,2)],
-			["itm", "optic_tws", RANDOM_BETWEEN(1,2)],
-			["itm", "optic_Nightstalker", RANDOM_BETWEEN(1,2)],
-			["itm", "muzzle_snds_338_black", RANDOM_BETWEEN(1,2)],
-			["itm", "muzzle_snds_93mmg", RANDOM_BETWEEN(1,2)],
-			["itm", "bipod_01_F_blk", RANDOM_BETWEEN(2,4)]
+			//["itm", "optic_tws", RANDOM_BETWEEN(0,1)],
+			//["itm", "optic_Nightstalker", RANDOM_BETWEEN(0,1)],
+			["itm", "muzzle_snds_338_black", "muzzle_snds_338_green", "muzzle_snds_338_sand", RANDOM_BETWEEN(1,2)],
+			["itm", "muzzle_snds_93mmg","muzzle_snds_93mmg_tan", RANDOM_BETWEEN(1,2)],
+			["itm", "bipod_01_F_blk", "bipod_02_F_hex", "bipod_03_F_oli","bipod_01_F_snd","bipod_02_F_tan","bipod_01_F_khk", RANDOM_BETWEEN(2,4)]
+			//["itm", "U_B_CTRG_Soldier_F", "U_O_V_Soldier_Viper_F", "U_O_V_Soldier_Viper_hex_F", RANDOM_BETWEEN(0,2)]
+			//["itm", "U_B_FullGhillie_ard", "U_B_FullGhillie_lsh", "U_B_FullGhillie_sard", RANDOM_BETWEEN(0,2)]
+			//["itm", "U_I_FullGhillie_ard", "U_I_FullGhillie_lsh", "U_I_FullGhillie_sard", RANDOM_BETWEEN(0,2)]
+			//["itm", "U_O_FullGhillie_ard", "U_O_FullGhillie_lsh", "U_O_FullGhillie_sard", RANDOM_BETWEEN(0,2)]
+			//["itm", "G_Balaclava_TI_blk_F", 0"G_Balaclava_TI_G_blk_F", "G_Balaclava_TI_tna_F", "G_Balaclava_TI_G_tna_F", RANDOM_BETWEEN(1,4)]
 		];
 	};
 	case "mission_RPG":
@@ -308,7 +332,7 @@ switch (_boxType) do
 			["wep", ["arifle_MX_SW_F", "arifle_MX_SW_Black_F"], RANDOM_BETWEEN(2,5), RANDOM_BETWEEN(5,10)],
 			["wep", "LMG_Mk200_F", RANDOM_BETWEEN(2,5), RANDOM_BETWEEN(5,10)],
 			["wep", "LMG_Zafir_F", RANDOM_BETWEEN(2,5), RANDOM_BETWEEN(5,10)],
-			["wep", ["MMG_02_sand_F", "MMG_02_camo_F", "MMG_02_black_F"], RANDOM_BETWEEN(2,5), RANDOM_BETWEEN(5,10)]
+			["wep", ["MMG_02_sand_F", "MMG_02_camo_F","MMG_02_black_F","MMG_01_tan_F", "MMG_01_hex_F"], RANDOM_BETWEEN(2,4), RANDOM_BETWEEN(4,8)]
 		];
 	};
 	case "Medical":
