@@ -58,13 +58,10 @@ extraMissions =
 	["mission_HostageRescue", 1]
 ];
 
-aquaticMissions =
+AAFMissions =
 [
-	["mission_ArmedDiversquad", 1],
-	["mission_Coastal_Convoy", 1],
-	["mission_SunkenSupplies", 1],
-	["mission_SunkenTreasure", 1],
-	["mission_Jaws", 1]
+	["mission_AirWreck", 1],
+	["mission_altisPatrol", 1]
 ];
 
 hostileairMissions =
@@ -95,7 +92,7 @@ MoneyMissions = [MoneyMissions, [["A3W_underWaterMissions", ["mission_SunkenTrea
 { _x set [2, false] } forEach PatrolMissions;
 { _x set [2, false] } forEach vehicleMissions;
 { _x set [2, false] } forEach extraMissions;
-{ _x set [2, false] } forEach aquaticMissions;
+{ _x set [2, false] } forEach AAFMissions;
 { _x set [2, false] } forEach hostileairMissions;
 { _x set [2, false] } forEach PrimaryMissions;
 

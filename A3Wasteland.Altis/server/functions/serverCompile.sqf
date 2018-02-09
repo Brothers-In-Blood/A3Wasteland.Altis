@@ -65,6 +65,9 @@ createRandomSyndikatLauncher = [_path, "createUnits\createRandomSyndikatLauncher
 createRandomSyndikatPilot = [_path, "createUnits\createRandomSyndikatPilot.sqf"] call mf_compile;
 // createLargeSyndikatroup = [_path, "createUnits\createLargeSyndikatroup.sqf"] call mf_compile;
 
+//New AI templates
+createAAFRegularRiflemant = [_path, "createUnits\createAAFRegular.sqf"] call mf_compile;
+
 //Function Compiles
 _path = "server\functions";
 A3W_fnc_checkHackedVehicles = [_path, "checkHackedVehicles.sqf"] call mf_compile;

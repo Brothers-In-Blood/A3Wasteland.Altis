@@ -30,7 +30,7 @@ private _soldierTypes = selectrandom ["C_man_polo_1_F", "C_man_polo_2_F", "C_man
 		"V_Chestrig_oli",
 		"V_Chestrig_rgr"
 	];
-	private _BackpackTypes = 
+	private _BackpackTypes = selectrandom
 	[
 		""
 	];
@@ -52,7 +52,7 @@ private _soldierTypes = selectrandom ["C_man_polo_1_F", "C_man_polo_2_F", "C_man
 		"", 
 		"optic_Aco",
 		"optic_Aco_grn",
-		"optic_Holosight",
+		"optic_Holosight"
 	];
 	private _weaponsRail = selectrandom 
 	[
@@ -125,7 +125,7 @@ private _soldierTypes = selectrandom ["C_man_polo_1_F", "C_man_polo_2_F", "C_man
 /**************************************************************************************************************************************************************************************************************/
 
 
-private _soldier = _group createUnit [_soldierTypes, _position, [], 0, "NONE"];
+private _soldier = _group createUnit [_soldierTypes, _position, [], 20, "NONE"];
 
 //Give soldier a uniform
 	_soldier addUniform (_uniformTypes);
@@ -207,7 +207,7 @@ private _soldier = _group createUnit [_soldierTypes, _position, [], 0, "NONE"];
 	_soldier setskill ["spotDistance", _spotDistance];
 	_soldier setskill ["spotTime", _spotTime];
 	_soldier setskill ["commanding", _commanding];
-	_soldier setskill ["reloadSpeed" _reloadSpeed];
+	_soldier setskill ["reloadSpeed", _reloadSpeed];
 
 
 

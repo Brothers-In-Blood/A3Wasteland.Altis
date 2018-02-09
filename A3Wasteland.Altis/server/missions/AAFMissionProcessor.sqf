@@ -4,9 +4,9 @@
 //	@file Name: mainMissionProcessor.sqf
 //	@file Author: AgentRev
 
-#define MISSION_PROC_TYPE_NAME "Aquatic"
+#define MISSION_PROC_TYPE_NAME "AAF"
 #define MISSION_PROC_TIMEOUT (["A3W_mainMissionTimeout", 60*60] call getPublicVar)
-#define MISSION_PROC_COLOR_DEFINE aquaticMissionColor
+#define MISSION_PROC_COLOR_DEFINE AAFMissionColor
 
-#include "aquaticMissions\aquaticMissionDefines.sqf"
+#include "AAFMissions\AAFMissionDefines.sqf"
 #include "missionProcessor.sqf";

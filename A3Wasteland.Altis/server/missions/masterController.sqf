@@ -12,7 +12,7 @@ _ctrlTypes =
 	"extraMission",
 	"patrolMission",
 	"vehicleMission",
-	"aquaticMission",
+	"AAFMission",
 	"hostileairMission",
 	"PrimaryMission"
 ];
