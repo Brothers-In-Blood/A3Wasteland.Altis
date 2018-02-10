@@ -47,17 +47,17 @@ _setupObjects =
 	_wreckPos = _missionPos vectorAdd ([[25 + random 20, 0, 0], random 360] call BIS_fnc_rotateVector2D);
 
 	// Class, Position, Fuel, Ammo, Damage, Special
-	_wreck = ["I_Heli_light_03_dynamicLoadout_F", _wreckPos, 0, 0, 1] call createMissionVehicle;
+	_wreckTypes = selectrandom ["I_Heli_light_03_dynamicLoadout_F","I_Heli_Transport_02_F","I_Heli_light_03_unarmed_F"]
+	_wreck = [_wreckTypes, _wreckPos, 0, 0, 1] call createMissionVehicle;
 
 	_box1 = createVehicle ["Box_NATO_WpsSpecial_F", _missionPos, [], 5, "None"];
 	_box1 setDir random 360;
-	_box1 setVariable ["moveable", true, true];
 	private _box1Loot = selectrandom _loottypes;
 	[_box1, _box1Loot] call fn_refillbox;
+	
 
 	_box2 = createVehicle ["Box_East_WpsSpecial_F", _missionPos, [], 5, "None"];
 	_box2 setDir random 360;
-	_box2 setVariable ["moveable", true, true];
 	private _box2Loot = selectrandom _loottypes;
 	[_box2, _box2Loot] call fn_refillbox;
 
@@ -89,7 +89,8 @@ _successExec =
 	// Mission completed
 	{ _x setVariable ["R3F_LOG_disabled", false, true] } forEach [_box1, _box2];
 	{ _x setVariable ["Moveable", true, true] } forEach [_box1, _box2];
-	deleteVehicle _wreck;
+	private _money = ceil (random 10000);
+	_box1 setVariable ["cmoney", _money, true];
 
 	_successHintMessage = "The airwreck supplies have been collected, well done.";
 };

@@ -76,7 +76,24 @@ private _soldierTypes = selectrandom ["C_man_polo_1_F", "C_man_polo_2_F", "C_man
 	];
 	private _itemsList = 
 	[
-		""
+		"",
+		"SmokeShellBlue",
+		"SmokeShellGreen",
+		"SmokeShellOrange",	
+		"SmokeShellPurple",
+		"SmokeShellRed",
+		"SmokeShell",
+		"SmokeShellYellow",	
+		"Chemlight_blue",
+		"Chemlight_green",
+		"Chemlight_red",
+		"Chemlight_yellow",
+		"FirstAidKit",
+		"B_IR_Grenade",
+		"I_IR_Grenade",	
+		"O_IR_Grenade",	
+		"Medikit",
+		"ToolKit"	
 	];
 	private _headgear = selectrandom 
 	[
