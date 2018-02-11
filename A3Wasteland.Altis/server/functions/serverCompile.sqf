@@ -66,7 +66,7 @@ createRandomSyndikatPilot = [_path, "createUnits\createRandomSyndikatPilot.sqf"]
 // createLargeSyndikatroup = [_path, "createUnits\createLargeSyndikatroup.sqf"] call mf_compile;
 
 //New AI templates
-createAAFRegularRiflemant = [_path, "createUnits\createAAFRegular.sqf"] call mf_compile;
+createAAFRegularRifleman = [_path, "createUnits\createAAFRegular.sqf"] call mf_compile;
 
 //Function Compiles
 _path = "server\functions";

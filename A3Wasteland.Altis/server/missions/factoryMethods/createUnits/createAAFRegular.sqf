@@ -169,9 +169,9 @@ private _soldier = _group createUnit [_soldierTypes, _position, [], 20, "NONE"];
 		[_soldier, _weaponTypesPistor, 3] call BIS_fnc_addWeapon;
 	};
 //Maybe give the soldier some gun bling
-	if (_weaponsSight != "") then
+	if (_weaponSight != "") then
 	{
-		_soldier addPrimaryWeaponItem _weaponsSight;
+		_soldier addPrimaryWeaponItem _weaponSight;
 	};
 	if (_weaponsRail != "") then
 	{

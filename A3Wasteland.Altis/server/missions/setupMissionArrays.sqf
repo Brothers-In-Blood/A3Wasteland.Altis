@@ -9,75 +9,75 @@ if (!isServer) exitWith {};
 MainMissions =
 [
 	// Mission filename, weight
-	["mission_Outpost", 1],
-	["mission_Sniper", 1],
-	["mission_SupplyDrop", 1],
-	["mission_TownInvasion", 1]
+	// ["mission_Outpost", 1],
+	// ["mission_Sniper", 1],
+	// ["mission_SupplyDrop", 1],
+	// ["mission_TownInvasion", 1]
 ];
 
 SideMissions =
 [
-	["mission_SmugglerPlane", 1],
-	["mission_Roadblock", 1],
-	["mission_AirWreck", 1],
-	["mission_ConvoyAmbushers", 1],
-	["mission_Smugglers", 1],
-	["mission_Truck", 1]
+	// ["mission_SmugglerPlane", 1],
+	// ["mission_Roadblock", 1],
+	// ["mission_AirWreck", 1],
+	// ["mission_ConvoyAmbushers", 1],
+	// ["mission_Smugglers", 1],
+	// ["mission_Truck", 1]
 ];
 
 MoneyMissions =
 [
-	["mission_MoneyShipment", 1]
+	// ["mission_MoneyShipment", 1]
 ];
 
 PatrolMissions =
 [
-	["mission_militaryPatrol", 1],
-	["mission_altisPatrol", 1]
+	// ["mission_militaryPatrol", 1],
+	// ["mission_altisPatrol", 1]
 	
 ];
 
 vehicleMissions =
 [
-	["mission_APC", 1],
-	["mission_MBT", 1],
-	["mission_LightArmVeh", 1],
-	["mission_ArmedHeli", 1],
-	["mission_CivHeli", 1],
-	["mission_LSV", 1],
-	["mission_VTOL", 1],
-	["mission_jet", 1]
+	// ["mission_APC", 1],
+	// ["mission_MBT", 1],
+	// ["mission_LightArmVeh", 1],
+	// ["mission_ArmedHeli", 1],
+	// ["mission_CivHeli", 1],
+	// ["mission_LSV", 1],
+	// ["mission_VTOL", 1],
+	// ["mission_jet", 1]
 ];
 
 extraMissions =
 [
-	["mission_Convoy", 1],
-	["mission_ConvoyCSATSF", 1],
-	["mission_ConvoyNATOSF", 1],
-	["mission_MiniConvoy", 1],
-	["mission_HostageRescue", 1]
+	// ["mission_Convoy", 1],
+	// ["mission_ConvoyCSATSF", 1],
+	// ["mission_ConvoyNATOSF", 1],
+	// ["mission_MiniConvoy", 1],
+	// ["mission_HostageRescue", 1]
 ];
 
 AAFMissions =
 [
 	["mission_AirWreck", 1],
-	["mission_altisPatrol", 1]
+	["mission_MediumPatrol", 1]
 ];
 
 hostileairMissions =
 [
-	["mission_Gunship", 1],
-	["mission_HostileHelicopter", 1],
-	["mission_HostileHeliFormation", 1],
-	["mission_HostileJet", 1],
-	["mission_HostileVTOL", 1],
-	["mission_transportheli", 1]
+	// ["mission_Gunship", 1],
+	// ["mission_HostileHelicopter", 1],
+	// ["mission_HostileHeliFormation", 1],
+	// ["mission_HostileJet", 1],
+	// ["mission_HostileVTOL", 1],
+	// ["mission_transportheli", 1]
 	
 ];
 
 PrimaryMissions =
 [
-	["mission_artypatrol", 1]
+	// ["mission_artypatrol", 1]
 ];
 
 MainMissions = [MainMissions, [["A3W_heliPatrolMissions", ["mission_Coastal_Convoy", "mission_HostileHeliFormation"]], ["A3W_underWaterMissions", ["mission_ArmedDiversquad"]]]] call removeDisabledMissions;

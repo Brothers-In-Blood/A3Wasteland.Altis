@@ -47,7 +47,7 @@ _setupObjects =
 	_wreckPos = _missionPos vectorAdd ([[25 + random 20, 0, 0], random 360] call BIS_fnc_rotateVector2D);
 
 	// Class, Position, Fuel, Ammo, Damage, Special
-	_wreckTypes = selectrandom ["I_Heli_light_03_dynamicLoadout_F","I_Heli_Transport_02_F","I_Heli_light_03_unarmed_F"]
+	_wreckTypes = selectrandom ["I_Heli_light_03_dynamicLoadout_F","I_Heli_Transport_02_F","I_Heli_light_03_unarmed_F"];
 	_wreck = [_wreckTypes, _wreckPos, 0, 0, 1] call createMissionVehicle;
 
 	_box1 = createVehicle ["Box_NATO_WpsSpecial_F", _missionPos, [], 5, "None"];
@@ -66,7 +66,7 @@ _setupObjects =
 	_aiGroup = createGroup CIVILIAN;
 	for "_i" from 1 to 10 do
 	{
-		[_aiGroup, _missionPos] call createAAFRegularRiflemant;
+		[_aiGroup, _missionPos] call createAAFRegularRifleman;
 	};
 	
 
@@ -95,4 +95,4 @@ _successExec =
 	_successHintMessage = "The airwreck supplies have been collected, well done.";
 };
 
-_this call sideMissionProcessor;
+_this call AAFMissionProcessor;
