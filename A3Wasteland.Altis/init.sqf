@@ -100,4 +100,5 @@ if (hasInterface || isServer) then
 	[] execVM "addons\stickyCharges\init.sqf";
 	[] execVM "addons\bounty\init.sqf";
 	[] execVM "addons\Crater_Cleaner\cratercleaner.sqf";
+	[] execVM "addons\VCOMAI\init.sqf";
 };
