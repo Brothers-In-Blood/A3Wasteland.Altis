@@ -7,8 +7,9 @@
 if (!isServer) exitWith {};
 
 _timeInterval = ["A3W_payrollInterval", 30*60] call getPublicVar;
-_moneyAmount = ["A3W_payrollAmount", 100] call getPublicVar;
-
+_moneyMultiplier = ["A3W_payrollAmount", 100] call getPublicVar;
+_justPlayers = count (allPlayers - entities "HeadlessClient_F");
+_moneyAmount = _justPlayers * _moneyMultiplier;
 _territoryCapped = false;
 
 while {true} do
