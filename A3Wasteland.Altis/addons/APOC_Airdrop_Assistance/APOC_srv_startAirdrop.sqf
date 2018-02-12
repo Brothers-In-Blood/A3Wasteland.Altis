@@ -227,20 +227,6 @@ playSound3D ["a3\sounds_f\sfx\radio\ambient_radio22.wss",_player,false,getPosASL
 	deleteVehicle _heli;
 };
 
-//Time based deletion of the heli, in case it gets distracted
-[_heli,_grp] spawn
-{
-	private ["_heli","_grp"];
-	_heli = _this select 0;
-	_grp = _this select 1;
-	sleep 30;
-	if (alive _heli) then
-	{
-		{ deleteVehicle _x; } forEach units _grp;
-		deleteVehicle _heli;
-		diag_log "AIRDROP SYSTEM - Deleted Heli after Drop";
-	};
-};
 
 WaitUntil {(((position _object) select 2) < (_flyHeight-20))};
 _heli fire "CMFlareLauncher";
@@ -255,10 +241,24 @@ _flare1 attachto [_object,[0,0,-0.5]];
 
 if (_type == "vehicle") then {_object allowDamage true;}; //Turn on damage for vehicles once they're in the 'chute.  Could move this until they hit the ground.  Admins choice.
 
-WaitUntil {((((position _object) select 2) < 1) || (isNil "_para"))};
+WaitUntil {((((position _object) select 2) < 1))};
 detach _object;
 _smoke2= "SmokeShellGreen" createVehicle getPos _object;
 //_smoke2 attachto [_object,[0,0,-0.5]];
 _flare2= "F_40mm_Green" createVehicle getPos _object;
 //_flare2 attachto [_object,[0,0,-0.5]];
+//Time based deletion of the heli, in case it gets distracted
+[_heli,_grp] spawn
+{
+	private ["_heli","_grp"];
+	_heli = _this select 0;
+	_grp = _this select 1;
+	sleep 30;
+	if (alive _heli) then
+	{
+		{ deleteVehicle _x; } forEach units _grp;
+		deleteVehicle _heli;
+		diag_log "AIRDROP SYSTEM - Deleted Heli after Drop";
+	};
+};
 
