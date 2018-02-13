@@ -2,30 +2,106 @@
 // * This project is licensed under the GNU Affero GPL v3. Copyright © 2014 A3Wasteland.com *
 // ******************************************************************************************
 //	@file Name: mission_Sniper.sqf
-//	@file Author: JoSchaap, AgentRev, LouD
+//	@file Author: JoSchaap, AgentRev, LouD, BIB_Monkey
 
 if (!isServer) exitwith {};
-#include "mainMissionDefines.sqf";
-
-private ["_positions", "_boxes1", "_currBox1", "_box1"];
+#include "AAFMissionDefines.sqf";
+private _box1 = "";
+private _box2 = "";
+private _box3 = "";
+private _box4 = "";
 
 _setupVars =
 {
 	_missionType = "Sniper Nest";
-	_positions = [[17651.5,11707.6,0], [4864.88,21900.6,0], [9544.29,15727.7,0], [24815.3,21781.2,0], [20683.7,6003.94,0], [14212.9,21211.5,0], [11209.7,8723.37,0], [3171.24,13162.5,0]];
-
-	_missionPos = _positions call BIS_fnc_SelectRandom;
+	_missionPos = selectRandom [[17651.5,11707.6,0], [4864.88,21900.6,0], [9544.29,15727.7,0], [24815.3,21781.2,0], [20683.7,6003.94,0], [14212.9,21211.5,0], [11209.7,8723.37,0], [3171.24,13162.5,0]];
 };
 
 _setupObjects =
 {
-	_aiGroup = createGroup CIVILIAN;
-	[_aiGroup,_missionPos] spawn createsniperGroup;
+	private _BoxTypes = 
+	[
+		"Box_FIA_Ammo_F",
+		"Box_IND_Ammo_F",
+		"Box_IND_Wps_F",
+		"Box_AAF_Equip_F",
+		"Box_IND_AmmoOrd_F",
+		"Box_IND_Grenades_F",
+		"Box_IND_WpsLaunch_F",
+		"Box_IND_WpsSpecial_F",
+		"Box_IND_Support_F",
+		"Box_AAF_Uniforms_F",
+		"Box_FIA_Wps_F"
+	];
+	private _loottypes = 
+	[
+		"mission_USLaunchers",
+		"mission_USSpecial",
+		"Launchers_Tier_2",
+		"Diving_Gear",
+		"General_supplies",
+		"GEVP",
+		"Ammo_Drop",
+		"mission_AALauncher",
+		"mission_CompactLauncher",
+		"mission_snipers",
+		"mission_RPG",
+		"mission_Pistols",
+		"mission_AssRifles",
+		"mission_SMGs",
+		"mission_LMGs",
+		"Medical",
+		"mission_Field_Engineer"
+	];
 
+	private _box1type = selectrandom _BoxTypes;
+	private _box1Loot = selectrandom _loottypes;
+	_box1 = createVehicle [_box1type, _missionPos, [], 0, "None"];
+	_box1 setVariable ["R3F_LOG_disabled", true, true];
+	_box1 setVariable ["moveable", false, true];
+	_box1 setDir random 360;
+	[_box1, _box1Loot] call fn_refillbox;
+
+	private _box2type = selectrandom _BoxTypes;
+	private _box2Loot = selectrandom _loottypes;
+	_box2 = createVehicle [_box2type, _missionPos, [], 0, "None"];
+	_box2 setVariable ["R3F_LOG_disabled", true, true];
+	_box2 setVariable ["moveable", false, true];
+	_box2 setDir random 360;
+	[_box2, _box2Loot] call fn_refillbox;
+
+	private _box3type = selectrandom _BoxTypes;
+	private _box3Loot = selectrandom _loottypes;
+	_box3 = createVehicle [_box3type, _missionPos, [], 0, "None"];
+	_box3 setVariable ["R3F_LOG_disabled", true, true];
+	_box3 setVariable ["moveable", false, true];
+	_box3 setDir random 360;
+	[_box3, _box3Loot] call fn_refillbox;
+
+	private _box4type = selectrandom _BoxTypes;
+	private _box4Loot = selectrandom _loottypes;
+	_box4 = createVehicle [_box4type, _missionPos, [], 0, "None"];
+	_box4 setVariable ["R3F_LOG_disabled", true, true];
+	_box4 setVariable ["moveable", false, true];
+	_box4 setDir random 360;
+	[_box4, _box4Loot] call fn_refillbox;
+	private _aiGroup = createGroup CIVILIAN;
+	for "_i" from 1 to 10 do
+	{
+		[_aiGroup, _missionPos] call createAAFRegularSniper;
+	};
+	for "_i" from 1 to 3 do
+	{
+		[_aiGroup, _missionPos] call createAAFRegularAA;
+	};
+	for "_i" from 1 to 3 do
+	{
+		[_aiGroup, _missionPos] call createAAFRegularAT;
+	};
 	_aiGroup setCombatMode "RED";
-	_aiGroup setBehaviour "COMBAT";
+	_aiGroup setBehaviour "STEALTH";
 
-	_missionHintText = format ["A Sniper Nest has been spotted. Head to the marked area and Take them out! Be careful they are fully armed and dangerous!", mainMissionColor];
+	_missionHintText = format ["A Sniper Nest has been spotted. Head to the marked area and Take them out! Be careful they are fully armed and dangerous!", AAFMissionColor];
 };
 
 _waitUntilMarkerPos = nil;
@@ -40,15 +116,8 @@ _failedExec =
 _successExec =
 {
 	// Mission completed
-
-	_boxes1 = ["Box_East_WpsSpecial_F","Box_IND_WpsSpecial_F"];
-	_currBox1 = _boxes1 call BIS_fnc_selectRandom;
-	_box1 = createVehicle [_currBox1, _lastPos, [], 2, "None"];
-	_box1 allowDamage false;
-	_box1 setVariable ["moveable", true, true];
-	_box1 setVariable ["R3F_LOG_disabled", false, true];
-
+	{ _x setVariable ["R3F_LOG_disabled", false, true] } forEach [_box1, _box2, _box3, _box4];
 	_successHintMessage = format ["The snipers are dead! Well Done!"];
 };
 
-_this call mainMissionProcessor;
+_this call AAFMissionProcessor;

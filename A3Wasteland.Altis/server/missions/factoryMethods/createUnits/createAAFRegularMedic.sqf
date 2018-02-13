@@ -30,14 +30,16 @@ private _soldierTypes = selectrandom ["C_man_polo_1_F", "C_man_polo_2_F", "C_man
 		"V_Chestrig_oli",
 		"V_Chestrig_rgr"
 	];
-	private _BackpackTypes = 
+	private _BackpackTypes = selectrandom
 	[
-		""
+		"B_Kitbag_rgr",
+		"B_TacticalPack_rgr",
+		"B_TacticalPack_oli",
+		"B_Carryall_oli"
 	];
 	private _weaponTypesRifle = selectrandom 
 	[
-		"arifle_MXC_F", 
-		"arifle_MX_F"
+		""	
 	];
 	private _weaponTypesLauncher = selectrandom 
 	[
@@ -45,14 +47,11 @@ private _soldierTypes = selectrandom ["C_man_polo_1_F", "C_man_polo_2_F", "C_man
 	];
 	private _weaponTypesPistor = selectrandom 
 	[
-		""
+		"hgun_Rook40_F"
 	];
 	private _weaponSight = selectrandom 
 	[
-		"", 
-		"optic_Aco",
-		"optic_Aco_grn",
-		"optic_Holosight",
+		""
 	];
 	private _weaponsRail = selectrandom 
 	[
@@ -68,19 +67,23 @@ private _soldierTypes = selectrandom ["C_man_polo_1_F", "C_man_polo_2_F", "C_man
 	];
 	private _BinocularTypes = selectrandom 
 	[
-		""
+		"",
+		"Binocular"
 	];
 	private _TerminalTypes = selectRandom 
 	[
-		""
+		"ItemGPS"
+
 	];
 	private _itemsList = 
 	[
-		""
+		"FirstAidKit",	
+		"Medikit"	
 	];
 	private _headgear = selectrandom 
 	[
-		"H_MilCap_dgtl"
+		"H_MilCap_dgtl",
+		"H_HelmetIA"
 	];
 	private _faceItems = selectRandom 
 	[
@@ -112,16 +115,16 @@ private _soldierTypes = selectrandom ["C_man_polo_1_F", "C_man_polo_2_F", "C_man
 	];
 //Soldier Skill and Attributes
 	private _allowFleeing = 1; // can the unit flee? 0 = no 1 = yes
-	private _rank = "PRIVATE"; //  PRIVATE, CORPORAL, SERGEANT, LIEUTENANT, CAPTAIN, MAJOR or COLONEL
+	private _rank = "CORPORAL"; //  PRIVATE, CORPORAL, SERGEANT, LIEUTENANT, CAPTAIN, MAJOR or COLONEL
 	//Soldier Skills are set from 0 to 1; 
-	private _Accuracy = 0.2; //Soldier accuracy;
-	private _Courage = 0.2; //Affects unit's subordinates' morale (Higher value = more courage)
-	private _aimingShake = 0.2; //Affects how steadily the AI can hold a weapon (Higher value = less weapon sway)
-	private _aimingSpeed = 0.2; //Affects how quickly the AI can rotate and stabilize its aim (Higher value = faster, less error)
-	private _spotDistance = 0.2; //Affects the AI ability to spot targets within it's visual or audible range (Higher value = more likely to spot)
-	private _spotTime = 0.2; //Affects how quick the AI react to death, damage or observing an enemy (Higher value = quicker reaction)
-	private _reloadSpeed = 0.2; //Affects the delay between switching or reloading a weapon (Higher value = less delay)
-	private _commanding = 0.2; //Affects how quickly recognized targets are shared with the group (Higher value = faster reporting)	
+	private _Accuracy = 0.4; //Soldier accuracy;
+	private _Courage = 0.4; //Affects unit's subordinates' morale (Higher value = more courage)
+	private _aimingShake = 0.4; //Affects how steadily the AI can hold a weapon (Higher value = less weapon sway)
+	private _aimingSpeed = 0.4; //Affects how quickly the AI can rotate and stabilize its aim (Higher value = faster, less error)
+	private _spotDistance = 0.4; //Affects the AI ability to spot targets within it's visual or audible range (Higher value = more likely to spot)
+	private _spotTime = 0.4; //Affects how quick the AI react to death, damage or observing an enemy (Higher value = quicker reaction)
+	private _reloadSpeed = 0.4; //Affects the delay between switching or reloading a weapon (Higher value = less delay)
+	private _commanding = 0.4; //Affects how quickly recognized targets are shared with the group (Higher value = faster reporting)	
 /**************************************************************************************************************************************************************************************************************/
 
 
@@ -152,9 +155,9 @@ private _soldier = _group createUnit [_soldierTypes, _position, [], 0, "NONE"];
 		[_soldier, _weaponTypesPistor, 3] call BIS_fnc_addWeapon;
 	};
 //Maybe give the soldier some gun bling
-	if (_weaponsSight != "") then
+	if (_weaponSight != "") then
 	{
-		_soldier addPrimaryWeaponItem _weaponsSight;
+		_soldier addPrimaryWeaponItem _weaponSight;
 	};
 	if (_weaponsRail != "") then
 	{
@@ -207,7 +210,7 @@ private _soldier = _group createUnit [_soldierTypes, _position, [], 0, "NONE"];
 	_soldier setskill ["spotDistance", _spotDistance];
 	_soldier setskill ["spotTime", _spotTime];
 	_soldier setskill ["commanding", _commanding];
-	_soldier setskill ["reloadSpeed" _reloadSpeed];
+	_soldier setskill ["reloadSpeed", _reloadSpeed];
 
 
 

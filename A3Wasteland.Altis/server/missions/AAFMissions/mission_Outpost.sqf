@@ -7,18 +7,14 @@
 //	@file Created: 08/12/2012 15:19
 
 if (!isServer) exitwith {};
-#include "mainMissionDefines.sqf";
+#include "AAFMissionDefines.sqf";
 
 private ["_nbUnits", "_outpost", "_objects"];
 
 _setupVars =
 {
-	_missionType = "Enemy Outpost";
+	_missionType = "AAF Outpost";
 	_locationsArray = MissionSpawnMarkers;
-	_nbUnits = AI_GROUP_MEDIUM;
-	_reinforceChance = 0; // Chance of reinforcements being called
-	_minReinforceGroups = 1; //minimum number of paradrop groups that will respond to call
-	_maxReinforceGroups = 5; //maximum number of paradrop groups that will respond to call
 };
 
 _setupObjects =
@@ -29,9 +25,23 @@ _setupObjects =
 	_objects = [_outpost, _missionPos, 0] call createOutpost;
 
 	_aiGroup = createGroup CIVILIAN;
-	[_aiGroup, _missionPos, _nbUnits, 5] call createCustomGroup;
-
-	_missionHintText = format ["An armed <t color='%1'>outpost</t> containing weapon crates has been spotted near the marker, go capture it!", mainMissionColor]
+	for "_i" from 1 to 20 do
+	{
+		private _soldierType = selectrandom ["Rifleman","Rifleman","Rifleman","Rifleman","Rifleman","Rifleman","Rifleman","Rifleman","Rifleman","Rifleman","AT","AA","SAW","SAW","SAW","Engineer","Medic","Grenedier","Engineer","Medic","Grenedier","Marksman","Marksman","Marksman"];
+		switch (_soldierType) do
+		{
+			case "Rifleman": {[_aiGroup, _missionPos] call createAAFRegularRifleman};
+			case "AT": {[_aiGroup, _missionPos] call createAAFRegularAT};
+			case "AA": {[_aiGroup, _missionPos] call createAAFRegularAA};
+			case "SAW": {[_aiGroup, _missionPos] call createAAFRegularSAW};
+			case "Engineer": {[_aiGroup, _missionPos] call createAAFRegularEngineer};
+			case "Medic": {[_aiGroup, _missionPos] call createAAFRegularMedic};
+			case "Grenedier": {[_aiGroup, _missionPos] call createAAFRegularGrenedier};
+			case "Marksman": {[_aiGroup, _missionPos] call createAAFRegularMarksman};
+		};
+	};
+	_aiGroup setCombatMode "RED";
+	_missionHintText = format ["An armed <t color='%1'>outpost</t> containing weapon crates has been spotted near the marker, go capture it!", AAFMissionColor]
 };
 
 _waitUntilMarkerPos = nil;
@@ -53,4 +63,4 @@ _successExec =
 	_successHintMessage = "The outpost has been captured, good work.";
 };
 
-_this call mainMissionProcessor;
+_this call AAFMissionProcessor;

@@ -48,6 +48,7 @@ _setupObjects =
 
 	// Class, Position, Fuel, Ammo, Damage, Special
 	_wreckTypes = selectrandom ["I_Heli_light_03_dynamicLoadout_F","I_Heli_Transport_02_F","I_Heli_light_03_unarmed_F"];
+	_wreckName = getText (configFile >> "CfgVehicles" >> _wreckTypes >> "displayName");
 	_wreck = [_wreckTypes, _wreckPos, 0, 0, 1] call createMissionVehicle;
 
 	_box1 = createVehicle ["Box_NATO_WpsSpecial_F", _missionPos, [], 5, "None"];
@@ -64,14 +65,25 @@ _setupObjects =
 	{ _x setVariable ["R3F_LOG_disabled", true, true] } forEach [_box1, _box2];
 
 	_aiGroup = createGroup CIVILIAN;
-	for "_i" from 1 to 10 do
+	for "_i" from 1 to 12 do
 	{
-		[_aiGroup, _missionPos] call createAAFRegularRifleman;
+		private _soldierType = selectrandom ["Rifleman","Rifleman","Rifleman","Rifleman","Rifleman","Rifleman","Rifleman","Rifleman","Rifleman","Rifleman","AT","AA","SAW","SAW","SAW","Engineer","Medic","Grenedier","Engineer","Medic","Grenedier","Marksman","Marksman","Marksman"];
+		switch (_soldierType) do
+		{
+			case "Rifleman": {[_aiGroup, _missionPos] call createAAFRegularRifleman};
+			case "AT": {[_aiGroup, _missionPos] call createAAFRegularAT};
+			case "AA": {[_aiGroup, _missionPos] call createAAFRegularAA};
+			case "SAW": {[_aiGroup, _missionPos] call createAAFRegularSAW};
+			case "Engineer": {[_aiGroup, _missionPos] call createAAFRegularEngineer};
+			case "Medic": {[_aiGroup, _missionPos] call createAAFRegularMedic};
+			case "Grenedier": {[_aiGroup, _missionPos] call createAAFRegularGrenedier};
+			case "Marksman": {[_aiGroup, _missionPos] call createAAFRegularMarksman};
+		};
 	};
-	
+	_aiGroup setCombatMode 	"RED";
 
 	_missionPicture = getText (configFile >> "CfgVehicles" >> typeOf _wreck >> "picture");
-	_missionHintText = "A helicopter has come down under enemy fire!";
+	_missionHintText = format ["A %1 has been shot down. Hurry and recover the cargo!", _wreckName];
 };
 
 _waitUntilMarkerPos = nil;

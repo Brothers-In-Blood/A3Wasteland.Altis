@@ -61,7 +61,16 @@ extraMissions =
 AAFMissions =
 [
 	["mission_AirWreck", 1],
-	["mission_MediumPatrol", 1]
+	["mission_MediumPatrol", 1],
+	["mission_Vehicle", 1],
+	["mission_Outpost", 1],
+	["mission_Sniper", 1],
+	["mission_TownInvasion", 1],
+	["mission_Roadblock", 1],
+	["mission_Jaws", 1],
+	["mission_SunkenSupplies", 1],
+	["mission_SunkenTreasure", 1],
+	["mission_Coastal_Convoy", 1]
 ];
 
 hostileairMissions =

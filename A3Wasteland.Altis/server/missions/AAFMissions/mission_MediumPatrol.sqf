@@ -50,7 +50,7 @@ _setupObjects =
 		{
 			for "_i" from 1 to _drivers do
 			{
-				private _Driver = [_aiGroup, _position] call createAAFRegularRifleman;
+				private _Driver = [_aiGroup, _position] call createAAFRegularCrew;
 				_Driver moveInDriver _vehicle;
 			};
 		};
@@ -58,20 +58,32 @@ _setupObjects =
 		{
 			for "_i" from 1 to _Commanders do
 			{
-				private _Commander = [_aiGroup, _position] call createAAFRegularRifleman;
+				private _Commander = [_aiGroup, _position] call createAAFRegularCrew;
 				_Commander moveInCommander _vehicle;
 			};
 		};
 		if (_Gunners > 0) then
 		{
-			private _gunner = [_aiGroup, _position] call createAAFRegularRifleman;
+			private _gunner = [_aiGroup, _position] call createAAFRegularCrew;
 			_gunner moveInGunner _vehicle;
 		};
 		if (_Passangers > 0) then
 		{
 			for "_i" from 1 to _Passangers do
 			{
-				private _soldier = [_aiGroup, _position] call createAAFRegularRifleman;
+				private _soldierType = selectrandom ["Rifleman","Rifleman","Rifleman","Rifleman","Rifleman","Rifleman","Rifleman","Rifleman","Rifleman","Rifleman","AT","AA","SAW","SAW","SAW","Engineer","Medic","Grenedier","Engineer","Medic","Grenedier","Marksman","Marksman","Marksman"];
+				private _soldier = "";
+				switch (_soldierType) do
+				{
+					case "Rifleman": {_soldier = [_aiGroup, _missionPos] call createAAFRegularRifleman};
+					case "AT": {_soldier =[_aiGroup, _missionPos] call createAAFRegularAT};
+					case "AA": {_soldier =[_aiGroup, _missionPos] call createAAFRegularAA};
+					case "SAW": {_soldier =[_aiGroup, _missionPos] call createAAFRegularSAW};
+					case "Engineer": {_soldier =[_aiGroup, _missionPos] call createAAFRegularEngineer};
+					case "Medic": {_soldier =[_aiGroup, _missionPos] call createAAFRegularMedic};
+					case "Grenedier": {_soldier =[_aiGroup, _missionPos] call createAAFRegularGrenedier};
+					case "Marksman": {_soldier =[_aiGroup, _missionPos] call createAAFRegularMarksman};
+				};
 				_soldier moveInCargo _vehicle;
 			};
 		};
@@ -98,7 +110,7 @@ _setupObjects =
 	_aiGroup selectLeader _leader;
 	_leader setRank "LIEUTENANT";
 
-	_aiGroup setCombatMode "YELLOW"; // Will fire on enemies
+	_aiGroup setCombatMode "GREEN"; // Will fire on enemies
 	_aiGroup setBehaviour "SAFE"; // units feel safe until they spot an enemy or get into contact
 	_aiGroup setFormation "FILE";
 
@@ -109,7 +121,7 @@ _setupObjects =
 		_waypoint = _aiGroup addWaypoint [markerPos (_x select 0), 0];
 		_waypoint setWaypointType "MOVE";
 		_waypoint setWaypointCompletionRadius 50;
-		_waypoint setWaypointCombatMode "YELLOW";
+		_waypoint setWaypointCombatMode "GREEN";
 		_waypoint setWaypointBehaviour "SAFE"; // safe is the best behaviour to make AI follow roads, as soon as they spot an enemy or go into combat they WILL leave the road for cover though!
 		_waypoint setWaypointFormation "FILE";
 		_waypoint setWaypointSpeed _speedMode;

@@ -28,7 +28,7 @@ createRandomSoldier = [_path, "createUnits\createRandomSoldier.sqf"] call mf_com
 createRandomSoldierC = [_path, "createUnits\createRandomSoldierC.sqf"] call mf_compile;
 createSmallDivers = [_path, "createUnits\smallDivers.sqf"] call mf_compile;
 generateMissionWeights = [_path, "generateMissionWeights.sqf"] call mf_compile;
-mission_VehicleCapture = "server\missions\mainMissions\mission_VehicleCapture.sqf" call mf_compile;
+mission_AAFVehicleCapture = "server\missions\AAFMissions\mission_VehicleCapture.sqf" call mf_compile;
 missionHint = [_path, "missionHint.sqf"] call mf_compile;
 moveIntoBuildings = [_path, "moveIntoBuildings.sqf"] call mf_compile;
 removeDisabledMissions = [_path, "removeDisabledMissions.sqf"] call mf_compile;
@@ -67,6 +67,19 @@ createRandomSyndikatPilot = [_path, "createUnits\createRandomSyndikatPilot.sqf"]
 
 //New AI templates
 createAAFRegularRifleman = [_path, "createUnits\createAAFRegular.sqf"] call mf_compile;
+createAAFRegularAT = [_path, "createUnits\createAAFRegularAT.sqf"] call mf_compile;
+createAAFRegularAA = [_path, "createUnits\createAAFRegularAA.sqf"] call mf_compile;
+createAAFRegularSAW = [_path, "createUnits\createAAFRegularSAW.sqf"] call mf_compile;
+createAAFRegularEngineer = [_path, "createUnits\createAAFRegularEngineer.sqf"] call mf_compile;
+createAAFRegularMedic = [_path, "createUnits\createAAFRegularMedic.sqf"] call mf_compile;
+createAAFRegularCrew = [_path, "createUnits\createAAFRegularCrew.sqf"] call mf_compile;
+createAAFRegularDiver = [_path, "createUnits\createAAFRegularDiver.sqf"] call mf_compile;
+createAAFRegularGrenedier = [_path, "createUnits\createAAFRegularGrenedier.sqf"] call mf_compile;
+createAAFRegularHeliCrew = [_path, "createUnits\createAAFRegularHeliCrew.sqf"] call mf_compile;
+createAAFRegularHeliPilot = [_path, "createUnits\createAAFRegularHeliPilot.sqf"] call mf_compile;
+createAAFRegularJetPilot = [_path, "createUnits\createAAFRegularJetPilot.sqf"] call mf_compile;
+createAAFRegularMarksman = [_path, "createUnits\createAAFRegularMarksman.sqf"] call mf_compile;
+createAAFRegularSniper = [_path, "createUnits\createAAFRegularSniper.sqf"] call mf_compile;
 
 //Function Compiles
 _path = "server\functions";
