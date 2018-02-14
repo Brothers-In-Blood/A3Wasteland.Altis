@@ -27,12 +27,7 @@ _box setVariable ["A3W_inventoryLockR3F", true, true];
 clearMagazineCargoGlobal _box;
 clearWeaponCargoGlobal _box;
 clearItemCargoGlobal _box;
-
 if (_boxType == "mission_USSpecial2") then { _boxType = "mission_USSpecial" };
-
-switch (_boxType) do
-{
-	if (_boxType == "mission_USSpecial2") then { _boxType = "mission_USSpecial" };
 
 switch (_boxType) do
 {

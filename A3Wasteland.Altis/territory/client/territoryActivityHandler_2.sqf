@@ -2,7 +2,7 @@
 // * This project is licensed under the GNU Affero GPL v3. Copyright © 2014 A3Wasteland.com *
 // ******************************************************************************************
 /*********************************************************#
-# @@ScriptName: territoryActivityHandler.sqf
+# @@ScriptName: territoryActivityHandler_2.sqf
 # @@Author: Nick 'Bewilderbeest' Ludlam <bewilder@recoil.org>
 # @@Create Date: 2013-09-15 19:33:17
 # @@Modify Date: 2013-09-15 20:15:37

@@ -49,7 +49,7 @@ _setupObjects =
 
 		_soldier = [_aiGroup, _position] call createRandomSoldier;
 		_soldier moveInDriver _vehicle;
- _soldier triggerDynamicSimulation true;
+ 		_soldier triggerDynamicSimulation true;
 		_soldier = [_aiGroup, _position] call createRandomSoldier;
 		_soldier moveInCommander _vehicle;
 		_soldier = [_aiGroup, _position] call createRandomSoldier;
@@ -147,15 +147,6 @@ _drop_item =
 _successExec =
 {
 	// Mission completed
-
-	/*for "_x" from 1 to 10 do
-	{
-		_cash = "Land_Money_F" createVehicle markerPos _marker;
-		_cash setPos ((markerPos _marker) vectorAdd ([[2 + random 2,0,0], random 360] call BIS_fnc_rotateVector2D));
-		_cash setDir random 360;
-		_cash setVariable["cmoney",15000,true];
-		_cash setVariable["owner","world",true];
-	};*/
 
 	_box1 = "Box_NATO_Support_F" createVehicle getMarkerPos _marker;
     [_box1,"Ammo_Drop"] call fn_refillbox;

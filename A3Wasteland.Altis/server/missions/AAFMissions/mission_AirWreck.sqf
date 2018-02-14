@@ -3,19 +3,42 @@
 // ******************************************************************************************
 //	@file Version: 1.0
 //	@file Name: mission_AirWreck.sqf
-//	@file Author: [404] Deadbeat, [404] Costlyy, AgentRev
+//	@file Author: [404] Deadbeat, [404] Costlyy, AgentRev, BIB_Monkey
 //	@file Created: 08/12/2012 15:19
 
 if (!isServer) exitwith {};
-#include "sideMissionDefines.sqf"
+#include "AAFMissionDefines.sqf"
 
-private ["_nbUnits", "_wreckPos", "_wreck", "_box1", "_box2"];
+private _wreckPos = "";
+private _wreck = "";
+private _box1 = "" ;
+private _box2 = "" ;
+private _MissionDifficulty = selectrandom ["Regular"]; // "Veteran", "SpecialForces"
+private _loottypes = 
+[
+	"mission_USLaunchers",
+	"mission_USSpecial",
+	"Launchers_Tier_2",
+	"Diving_Gear",
+	"General_supplies",
+	"GEVP",
+	"Ammo_Drop",
+	"mission_AALauncher",
+	"mission_CompactLauncher",
+	"mission_snipers",
+	"mission_RPG",
+	"mission_Pistols",
+	"mission_AssRifles",
+	"mission_SMGs",
+	"mission_LMGs",
+	"Medical",
+	"mission_Field_Engineer"
+];
 
 _setupVars =
 {
-	_missionType = "Aircraft Wreck";
+	_missionType = "AAF Aircraft Wreck";
 	_locationsArray = MissionSpawnMarkers;
-	_nbUnits = if (missionDifficultyHard) then { AI_GROUP_LARGE } else { AI_GROUP_MEDIUM };
 };
 
 _setupObjects =
@@ -24,25 +47,43 @@ _setupObjects =
 	_wreckPos = _missionPos vectorAdd ([[25 + random 20, 0, 0], random 360] call BIS_fnc_rotateVector2D);
 
 	// Class, Position, Fuel, Ammo, Damage, Special
-	_wreck = ["O_Heli_Light_02_unarmed_F", _wreckPos, 0, 0, 1] call createMissionVehicle;
+	_wreckTypes = selectrandom ["I_Heli_light_03_dynamicLoadout_F","I_Heli_Transport_02_F","I_Heli_light_03_unarmed_F"];
+	_wreckName = getText (configFile >> "CfgVehicles" >> _wreckTypes >> "displayName");
+	_wreck = [_wreckTypes, _wreckPos, 0, 0, 1] call createMissionVehicle;
 
 	_box1 = createVehicle ["Box_NATO_WpsSpecial_F", _missionPos, [], 5, "None"];
 	_box1 setDir random 360;
-	_box1 setVariable ["moveable", true, true];
-	[_box1, "mission_USSpecial"] call fn_refillbox;
+	private _box1Loot = selectrandom _loottypes;
+	[_box1, _box1Loot] call fn_refillbox;
+	
 
 	_box2 = createVehicle ["Box_East_WpsSpecial_F", _missionPos, [], 5, "None"];
 	_box2 setDir random 360;
-	_box2 setVariable ["moveable", true, true];
-	[_box2, "mission_USLaunchers"] call fn_refillbox;
+	private _box2Loot = selectrandom _loottypes;
+	[_box2, _box2Loot] call fn_refillbox;
 
 	{ _x setVariable ["R3F_LOG_disabled", true, true] } forEach [_box1, _box2];
 
 	_aiGroup = createGroup CIVILIAN;
-	[_aiGroup, _missionPos, _nbUnits] call createCustomGroup;
+	for "_i" from 1 to 12 do
+	{
+		private _soldierType = selectrandom ["Rifleman","Rifleman","Rifleman","Rifleman","Rifleman","Rifleman","Rifleman","Rifleman","Rifleman","Rifleman","AT","AA","SAW","SAW","SAW","Engineer","Medic","Grenedier","Engineer","Medic","Grenedier","Marksman","Marksman","Marksman"];
+		switch (_soldierType) do
+		{
+			case "Rifleman": {[_aiGroup, _missionPos] call createAAFRegularRifleman};
+			case "AT": {[_aiGroup, _missionPos] call createAAFRegularAT};
+			case "AA": {[_aiGroup, _missionPos] call createAAFRegularAA};
+			case "SAW": {[_aiGroup, _missionPos] call createAAFRegularSAW};
+			case "Engineer": {[_aiGroup, _missionPos] call createAAFRegularEngineer};
+			case "Medic": {[_aiGroup, _missionPos] call createAAFRegularMedic};
+			case "Grenedier": {[_aiGroup, _missionPos] call createAAFRegularGrenedier};
+			case "Marksman": {[_aiGroup, _missionPos] call createAAFRegularMarksman};
+		};
+	};
+	_aiGroup setCombatMode 	"RED";
 
 	_missionPicture = getText (configFile >> "CfgVehicles" >> typeOf _wreck >> "picture");
-	_missionHintText = "A helicopter has come down under enemy fire!";
+	_missionHintText = format ["A %1 has been shot down. Hurry and recover the cargo!", _wreckName];
 };
 
 _waitUntilMarkerPos = nil;
@@ -59,9 +100,11 @@ _successExec =
 {
 	// Mission completed
 	{ _x setVariable ["R3F_LOG_disabled", false, true] } forEach [_box1, _box2];
-	deleteVehicle _wreck;
+	{ _x setVariable ["Moveable", true, true] } forEach [_box1, _box2];
+	private _money = ceil (random 10000);
+	_box1 setVariable ["cmoney", _money, true];
 
 	_successHintMessage = "The airwreck supplies have been collected, well done.";
 };
 
-_this call sideMissionProcessor;
+_this call AAFMissionProcessor;
