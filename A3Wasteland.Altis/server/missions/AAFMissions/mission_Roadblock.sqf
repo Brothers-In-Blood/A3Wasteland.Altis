@@ -11,15 +11,12 @@ private [ "_box1", "_barGate", "_bunker1","_bunker2","_obj1","_obj2"];
 
 _setupVars =
 {
-	_missionType = "Roadblock";
-	_reinforceChance = 0; // Chance of reinforcements being called
-	_minReinforceGroups = 1; //minimum number of paradrop groups that will respond to call
-	_maxReinforceGroups = 3; //maximum number of paradrop groups that will respond to call
+	_missionType = "AAF Roadblock";
+	_locationsArray = RoadblockMissionmarkers;
 };
 
 _setupObjects =
 {
-	_missionLocation = ["RoadBlock_1","RoadBlock_2","RoadBlock_3","RoadBlock_4","RoadBlock_5","RoadBlock_6","RoadBlock_7","RoadBlock_8","RoadBlock_9","RoadBlock_10"] call BIS_fnc_selectRandom;
 	_missionPos = markerPos _missionLocation;
 	_markerDir = markerDir _missionLocation;
 

@@ -61,16 +61,16 @@ extraMissions =
 AAFMissions =
 [
 	["mission_AirWreck", 1],
-	["mission_MediumPatrol", 1],
+	// ["mission_MediumPatrol", 1],
 	["mission_Vehicle", 1],
 	["mission_Outpost", 1],
-	["mission_Sniper", 1],
+	["mission_Sniper", 1]
 	["mission_TownInvasion", 1],
-	["mission_Roadblock", 1],
+	// ["mission_Roadblock", 1],
 	["mission_Jaws", 1],
 	["mission_SunkenSupplies", 1],
-	["mission_SunkenTreasure", 1],
-	["mission_Coastal_Convoy", 1]
+	["mission_SunkenTreasure", 1]
+	// ["mission_Coastal_Convoy", 1]
 ];
 
 hostileairMissions =
@@ -108,6 +108,9 @@ MoneyMissions = [MoneyMissions, [["A3W_underWaterMissions", ["mission_SunkenTrea
 MissionSpawnMarkers = [];
 JetSpawnMarkers = [];
 SunkenMissionMarkers = [];
+SniperMissionMarkers = [];
+RoadblockMissionmarkers = [];
+PatrolMissionsMarkers = [];
 {
 	switch (true) do
 	{
@@ -122,6 +125,22 @@ SunkenMissionMarkers = [];
 		case (["Jet_", _x] call fn_startsWith):
 		{
 			JetSpawnMarkers pushBack [_x, false];
+		};
+		case (["Sniper_", _x] call fn_startsWith):
+		{
+			SniperMissionMarkers pushBack [_x, false];
+		};
+		case (["Sniper_", _x] call fn_startsWith):
+		{
+			SniperMissionMarkers pushBack [_x, false];
+		};
+		case (["RoadBlock_", _x] call fn_startsWith):
+		{
+			RoadblockMissionmarkers pushBack [_x, false];
+		};
+		case (["Patrol_", _x] call fn_startsWith):
+		{
+			PatrolMissionsMarkers pushBack [_x, false];
 		};
 	};
 } forEach allMapMarkers;

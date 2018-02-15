@@ -5,7 +5,7 @@
 //	@file Author: AgentRev
 
 #define MISSION_PROC_TYPE_NAME "AAF"
-#define MISSION_PROC_TIMEOUT (["A3W_mainMissionTimeout", 60*60] call getPublicVar)
+#define MISSION_PROC_TIMEOUT (["A3W_AAFMissionTimeout", 60*60] call getPublicVar)
 #define MISSION_PROC_COLOR_DEFINE AAFMissionColor
 
 #include "AAFMissions\AAFMissionDefines.sqf"

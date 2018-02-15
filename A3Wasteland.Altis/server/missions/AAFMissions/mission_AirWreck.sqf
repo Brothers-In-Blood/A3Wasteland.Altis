@@ -14,26 +14,6 @@ private _wreck = "";
 private _box1 = "" ;
 private _box2 = "" ;
 private _MissionDifficulty = selectrandom ["Regular"]; // "Veteran", "SpecialForces"
-private _loottypes = 
-[
-	"mission_USLaunchers",
-	"mission_USSpecial",
-	"Launchers_Tier_2",
-	"Diving_Gear",
-	"General_supplies",
-	"GEVP",
-	"Ammo_Drop",
-	"mission_AALauncher",
-	"mission_CompactLauncher",
-	"mission_snipers",
-	"mission_RPG",
-	"mission_Pistols",
-	"mission_AssRifles",
-	"mission_SMGs",
-	"mission_LMGs",
-	"Medical",
-	"mission_Field_Engineer"
-];
 
 _setupVars =
 {
@@ -51,16 +31,12 @@ _setupObjects =
 	_wreckName = getText (configFile >> "CfgVehicles" >> _wreckTypes >> "displayName");
 	_wreck = [_wreckTypes, _wreckPos, 0, 0, 1] call createMissionVehicle;
 
-	_box1 = createVehicle ["Box_NATO_WpsSpecial_F", _missionPos, [], 5, "None"];
-	_box1 setDir random 360;
-	private _box1Loot = selectrandom _loottypes;
-	[_box1, _box1Loot] call fn_refillbox;
 	
+	private _BoxPos1 = [_missionPos, 3, 10,1,0,0,0] call findSafePos;
+	_box1 = [_BoxPos1, "AAF", "1", 0, 0] call createrandomlootcrate;
+	private _BoxPos2 = [_missionPos, 3, 10,1,0,0,0] call findSafePos;
+	_box2 = [_BoxPos2, "AAF", "1", 0, 10000] call createrandomlootcrate;
 
-	_box2 = createVehicle ["Box_East_WpsSpecial_F", _missionPos, [], 5, "None"];
-	_box2 setDir random 360;
-	private _box2Loot = selectrandom _loottypes;
-	[_box2, _box2Loot] call fn_refillbox;
 
 	{ _x setVariable ["R3F_LOG_disabled", true, true] } forEach [_box1, _box2];
 

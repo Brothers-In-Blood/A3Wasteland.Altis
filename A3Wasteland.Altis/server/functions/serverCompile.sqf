@@ -81,6 +81,9 @@ createAAFRegularJetPilot = [_path, "createUnits\createAAFRegularJetPilot.sqf"] c
 createAAFRegularMarksman = [_path, "createUnits\createAAFRegularMarksman.sqf"] call mf_compile;
 createAAFRegularSniper = [_path, "createUnits\createAAFRegularSniper.sqf"] call mf_compile;
 
+//Mission Loot
+createrandomlootcrate = [_path, "createrandomlootcrate.sqf"] call mf_compile;
+
 //Function Compiles
 _path = "server\functions";
 A3W_fnc_checkHackedVehicles = [_path, "checkHackedVehicles.sqf"] call mf_compile;

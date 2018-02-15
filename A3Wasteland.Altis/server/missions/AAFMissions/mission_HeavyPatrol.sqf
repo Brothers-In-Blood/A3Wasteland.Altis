@@ -23,8 +23,12 @@ _setupObjects =
 	_veh1 = selectrandom ["I_MRAP_03_F","I_MRAP_03_hmg_F","I_MRAP_03_gmg_F"];
 	_veh2 = "I_APC_Wheeled_03_cannon_F";
 	_veh3 = "I_APC_tracked_03_cannon_F";
-	_veh4 = "I_APC_Wheeled_03_cannon_F";
-	_veh5 = selectrandom ["I_MRAP_03_F","I_MRAP_03_hmg_F","I_MRAP_03_gmg_F"];
+	_veh4 = 
+	_veh5 = 
+	_veh6 = 
+	_veh7 = "I_APC_tracked_03_cannon_F";
+	_veh8 = "I_APC_Wheeled_03_cannon_F";
+	_veh9 = selectrandom ["I_MRAP_03_F","I_MRAP_03_hmg_F","I_MRAP_03_gmg_F"];
 
 	_createVehicle = 
 	{
@@ -99,7 +103,11 @@ _setupObjects =
 		[_veh2, _missionPos, 0] call _createVehicle,
 		[_veh3, _missionPos, 0] call _createVehicle,
 		[_veh4, _missionPos, 0] call _createVehicle,
-		[_veh5, _missionPos, 0] call _createVehicle
+		[_veh5, _missionPos, 0] call _createVehicle,
+		[_veh6, _missionPos, 0] call _createVehicle,
+		[_veh7, _missionPos, 0] call _createVehicle,
+		[_veh8, _missionPos, 0] call _createVehicle,
+		[_veh9, _missionPos, 0] call _createVehicle
 	];
 
 	_leader = effectiveCommander (_vehicles select 0);
@@ -161,8 +169,6 @@ _drop_item =
 _successExec =
 {
 	// Mission completed
-
-	// Mission completed
 	private _BoxTypes = 
 	[
 		"Box_FIA_Ammo_F",
@@ -198,7 +204,7 @@ _successExec =
 		"mission_Field_Engineer"
 	];
 	//Normal Loot Crate
-	for "_i" from 1 to 5 do
+	for "_i" from 1 to 7 do
 	{
 		private _boxtype = selectrandom _BoxTypes;
 		private _boxLoot = selectrandom _loottypes;
@@ -214,7 +220,7 @@ _successExec =
     [_moneybox,_moneyboxLoot] call fn_refillbox;
 	_moneybox setVariable ["moveable", true, true];
 	_moneybox allowDamage false;
-	_money = ceil random [50000, 75000, 100000];
+	_money = ceil random [100000, 150000, 200000];
 	_moneybox setVariable ["cmoney", _money, true];
 	_successHintMessage = "The patrol has been stopped, the money and crates and vehicles are yours to take.";
 };

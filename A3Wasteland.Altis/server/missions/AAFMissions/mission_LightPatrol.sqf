@@ -21,10 +21,7 @@ _setupObjects =
 	_missionPos = markerPos _missionLocation;
 
 	_veh1 = selectrandom ["I_MRAP_03_F","I_MRAP_03_hmg_F","I_MRAP_03_gmg_F"];
-	_veh2 = "I_APC_Wheeled_03_cannon_F";
-	_veh3 = "I_APC_tracked_03_cannon_F";
-	_veh4 = "I_APC_Wheeled_03_cannon_F";
-	_veh5 = selectrandom ["I_MRAP_03_F","I_MRAP_03_hmg_F","I_MRAP_03_gmg_F"];
+	_veh2 = selectrandom ["I_MRAP_03_F","I_MRAP_03_hmg_F","I_MRAP_03_gmg_F"];
 
 	_createVehicle = 
 	{
@@ -93,13 +90,14 @@ _setupObjects =
 	};
 
 	_aiGroup = createGroup CIVILIAN;
+
+	_rad = _town select 1;
+	_missionPos = [_missionPos,_rad,_rad + 50,5,0,0,0] call findSafePos;
+
 	_vehicles =
 	[
 		[_veh1, _missionPos, 0] call _createVehicle,
-		[_veh2, _missionPos, 0] call _createVehicle,
-		[_veh3, _missionPos, 0] call _createVehicle,
-		[_veh4, _missionPos, 0] call _createVehicle,
-		[_veh5, _missionPos, 0] call _createVehicle
+		[_veh2, _missionPos, 0] call _createVehicle
 	];
 
 	_leader = effectiveCommander (_vehicles select 0);
@@ -198,7 +196,7 @@ _successExec =
 		"mission_Field_Engineer"
 	];
 	//Normal Loot Crate
-	for "_i" from 1 to 5 do
+	for "_i" from 1 to 3 do
 	{
 		private _boxtype = selectrandom _BoxTypes;
 		private _boxLoot = selectrandom _loottypes;
@@ -214,7 +212,7 @@ _successExec =
     [_moneybox,_moneyboxLoot] call fn_refillbox;
 	_moneybox setVariable ["moveable", true, true];
 	_moneybox allowDamage false;
-	_money = ceil random [50000, 75000, 100000];
+	_money = ceil random [0, 25000, 50000];
 	_moneybox setVariable ["cmoney", _money, true];
 	_successHintMessage = "The patrol has been stopped, the money and crates and vehicles are yours to take.";
 };

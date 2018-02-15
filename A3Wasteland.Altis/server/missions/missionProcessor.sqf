@@ -16,7 +16,6 @@ private ["_missionType", "_locationsArray", "_aiGroup", "_missionPos", "_mission
 
 _controllerSuffix = param [0, "", [""]];
 _aiGroup = grpNull;
-_aiGroup2 = grpNull;
 
 if (!isNil "_setupVars") then { call _setupVars };
 
@@ -62,21 +61,6 @@ _failed = false;
 _complete = false;
 _startTime = diag_tickTime;
 _oldAiCount = 0;
-
-//Logic and Variables for AI Reinforcements///////////////////////////////////////////////
-_reinforcementsCalled = false;
-_startAiCount = 0;
-_startAiCount = count units _aiGroup;
-_reinforceChanceRoll = floor (random 99); //When processor gets called for a mission exe, what did fate say for reinforcements?
-if (isNil "_minReinforceGroups") then { _minReinforceGroups = 1};
-if (isNil "_maxReinforceGroups") then { _maxReinforceGroups = 1};
-if (isNil "_reinforceChance") then { _reinforceChance = 0};
-if (_minReinforceGroups > _maxReinforceGroups) then {_maxReinforceGroups = _minReinforceGroups};//Prevents errors later on if a typo is in mission config
-_reinforcementsToCall = 0; //initialize variable
-_reinforcementsToCall = ceil (random _maxReinforceGroups); //Find random number of reinforcements to be sent, up to max
-if (_minReinforceGroups > _reinforcementsToCall) then {_reinforcementsToCall = _minReinforceGroups}; //Make sure we call for at least the minimum number of groups
-//End of reinforcement Block///////////////////////////////////////////////////////////////
-
 
 if (isNil "_ignoreAiDeaths") then { _ignoreAiDeaths = false };
 
@@ -129,11 +113,6 @@ if (_failed) then
 	// Mission failed
 
 	{ moveOut _x; deleteVehicle _x } forEach units _aiGroup;
-
-	if (count units _aiGroup2 > 0) then
-	{
-		{ moveOut _x; deleteVehicle _x } forEach units _aiGroup2; //This group only exists if attack heli reinforcement is called upon
-	};
 
 	if (!isNil "_failedExec") then { call _failedExec };
 
@@ -217,16 +196,9 @@ else
 	call missionHint;
 
 	diag_log format ["WASTELAND SERVER - %1 Mission%2 complete: %3", MISSION_PROC_TYPE_NAME, _controllerSuffix, _missionType];
-
-	if (count units _aiGroup2 > 0) then
-	{
-		sleep 60; //delay to give heli a chance to track down the victors
-		{ moveOut _x; deleteVehicle _x } forEach units _aiGroup2; //This group only exists if attack heli reinforcement is called upon
-	};
 };
 
 deleteGroup _aiGroup;
-deleteGroup _aiGroup2;
 deleteMarker _marker;
 
 if (!isNil "_locationsArray") then

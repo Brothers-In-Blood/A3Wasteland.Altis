@@ -213,16 +213,16 @@ private _soldier = _group createUnit [_soldierTypes, _position, [], 20, "NONE"];
 		_soldier linkitem _TerminalTypes;
 	};
 //Set the Soldiers rank and Skills
-	// _soldier setRank _rank;
-	// _soldier allowFleeing 1;
-	// _soldier setSkill ["aimingAccuracy", _Accuracy];
-	// _soldier setSkill ["courage", _Courage];
-	// _soldier setskill ["aimingShake", _aimingShake];
-	// _soldier setskill ["aimingSpeed", _aimingSpeed];
-	// _soldier setskill ["spotDistance", _spotDistance];
-	// _soldier setskill ["spotTime", _spotTime];
-	// _soldier setskill ["commanding", _commanding];
-	// _soldier setskill ["reloadSpeed", _reloadSpeed];
+	_soldier setRank _rank;
+	_soldier allowFleeing 1;
+	_soldier setSkill ["aimingAccuracy", _Accuracy];
+	_soldier setSkill ["courage", _Courage];
+	_soldier setskill ["aimingShake", _aimingShake];
+	_soldier setskill ["aimingSpeed", _aimingSpeed];
+	_soldier setskill ["spotDistance", _spotDistance];
+	_soldier setskill ["spotTime", _spotTime];
+	_soldier setskill ["commanding", _commanding];
+	_soldier setskill ["reloadSpeed", _reloadSpeed];
 
 
 

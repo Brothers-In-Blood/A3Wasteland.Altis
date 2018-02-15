@@ -8,11 +8,11 @@
 if (!isServer) exitwith {};
 #include "AAFMissionDefines.sqf";
 
-private ["_box1", "_box2", "_boxPos", "_vehicleClass", "_vehicle", "_wreck","_explosive"];
+private ["_box1", "_box2", "_box3", "_box4", "_boxPos", "_vehicleClass", "_vehicle", "_wreck","_explosive"];
 
 _setupVars =
 {
-	_missionType = "Ship Wreck";
+	_missionType = "AAF Ship Wreck";
 	_locationsArray = SunkenMissionMarkers;
 };
 
@@ -120,23 +120,29 @@ _setupObjects =
 		{
 			for "_i" from 1 to _drivers do
 			{
-				private _Driver = [_aiGroup, _position] call createAAFRegularCrew;
-				_Driver moveInDriver _vehicle;
+				private _Driver = [_aiGroup, _position] call createAAFRegularRifleman;
+				_Driver moveInAny _vehicle;
 			};
 		};
 		if (_Commanders > 0) then
 		{
 			for "_i" from 1 to _Commanders do
 			{
-				private _Commander = [_aiGroup, _position] call createAAFRegularCrew;
+				private _Commander = [_aiGroup, _position] call createAAFRegularRifleman;
 				_Commander moveInCommander _vehicle;
 			};
 		};
 		if (_Gunners > 0) then
 		{
-			private _gunner = [_aiGroup, _position] call createAAFRegularCrew;
+			private _gunner = [_aiGroup, _position] call createAAFRegularRifleman;
 			_gunner moveInGunner _vehicle;
 		};
+		_vehicle addItemCargoGlobal ["U_I_Wetsuit", 2];
+		_vehicle addItemCargoGlobal ["V_RebreatherIA", 2];
+		_vehicle addItemCargoGlobal ["G_Diving", 2];
+		_vehicle addWeaponCargoGlobal ["arifle_SDAR_F", 2];
+		_vehicle addMagazineCargoGlobal ["20Rnd_556x45_UW_mag", 8];
+
 		_vehicle setVariable ["R3F_LOG_disabled", true, true]; // force vehicles to be locked
 		[_vehicle, _aiGroup] spawn checkMissionVehicleLock; // force vehicles to be locked
 		_vehicle
@@ -144,15 +150,8 @@ _setupObjects =
 	_vehclass1 ="I_Boat_Armed_01_minigun_F";
 	_vehclass2 ="I_Boat_Armed_01_minigun_F";
 	_aiGroup = createGroup CIVILIAN;
-	veh1 = [_vehclass1, _missionPos, random 360] call _createVehicle;
-	veh2 = [_vehclass2, _missionPos, random 360] call _createVehicle;
-	{
-		_x addItemCargoGlobal ["U_I_Wetsuit", 2];
-		_x addItemCargoGlobal ["V_RebreatherIA", 2];
-		_x addItemCargoGlobal ["G_Diving", 2];
-		_x addWeaponCargoGlobal ["arifle_SDAR_F", 2];
-		_x addMagazineCargoGlobal ["20Rnd_556x45_UW_mag", 8];
-	} foreach [_veh1, _veh2];
+	_veh1 = [_vehclass1, _missionPos, random 360] call _createVehicle;
+	_veh2 = [_vehclass2, _missionPos, random 360] call _createVehicle;
 	private _Passangers1 = _veh1 emptyPositions "Cargo";
 	private _Passangers2 = _veh2 emptyPositions "Cargo";
 	for "_i" from 1 to (_Passangers1 + _Passangers2) do
@@ -160,8 +159,7 @@ _setupObjects =
 		[_aiGroup, _missionPos] call createAAFRegularDiver;
 	};
 	_aiGroup setCombatMode "RED";
-	[_vehicle, _aiGroup] spawn checkMissionVehicleLock;
-	_missionPicture = getText (configFile >> "CfgVehicles" >> _vehicleClass >> "picture");
+	_missionPicture = getText (configFile >> "CfgVehicles" >> _vehclass1 >> "picture");
 	_missionHintText = "We are going to need a Bigger Boat.<br/>Enemy divers are trying to recover arms and loot, go kill them and claim the loot.";
 };
 

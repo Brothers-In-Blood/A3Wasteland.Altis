@@ -13,12 +13,13 @@ private _box4 = "";
 
 _setupVars =
 {
-	_missionType = "Sniper Nest";
-	_missionPos = selectRandom [[17651.5,11707.6,0], [4864.88,21900.6,0], [9544.29,15727.7,0], [24815.3,21781.2,0], [20683.7,6003.94,0], [14212.9,21211.5,0], [11209.7,8723.37,0], [3171.24,13162.5,0]];
+	_missionType = "AAF Sniper Nest";
+	_locationsArray = SniperMissionMarkers;
 };
 
 _setupObjects =
 {
+	_missionPos = markerPos _missionLocation;
 	private _BoxTypes = 
 	[
 		"Box_FIA_Ammo_F",
@@ -85,7 +86,7 @@ _setupObjects =
 	_box4 setVariable ["moveable", false, true];
 	_box4 setDir random 360;
 	[_box4, _box4Loot] call fn_refillbox;
-	private _aiGroup = createGroup CIVILIAN;
+	_aiGroup = createGroup CIVILIAN;
 	for "_i" from 1 to 10 do
 	{
 		[_aiGroup, _missionPos] call createAAFRegularSniper;
@@ -99,7 +100,8 @@ _setupObjects =
 		[_aiGroup, _missionPos] call createAAFRegularAT;
 	};
 	_aiGroup setCombatMode "RED";
-	_aiGroup setBehaviour "STEALTH";
+	_aiGroup setBehaviour "COMBAT";
+	[_aiGroup, _missionPos] call defendArea;
 
 	_missionHintText = format ["A Sniper Nest has been spotted. Head to the marked area and Take them out! Be careful they are fully armed and dangerous!", AAFMissionColor];
 };
@@ -111,6 +113,7 @@ _waitUntilCondition = nil;
 _failedExec =
 {
 	// Mission failed
+	{ deleteVehicle _x } forEach [_box1, _box2, _box3, _box4];
 };
 
 _successExec =

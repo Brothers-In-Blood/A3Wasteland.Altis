@@ -84,48 +84,42 @@ _setupObjects =
 		private _Gunners = _vehicle emptyPositions "Gunner";
 		_vehicle setDir _direction;
 		_aiGroup addVehicle _vehicle;
+		_vehicle lockDriver true;
+
 		if (_drivers > 0) then
 		{
 			for "_i" from 1 to _drivers do
 			{
-				private _Driver = [_aiGroup, _position] call createAAFRegularCrew;
-				_Driver moveInDriver _vehicle;
+				private _Driver = [_aiGroup, _position] call createAAFRegularRifleman;
+				_Driver moveInAny _vehicle; //The boat doesn't like moveindriver for some reason 
 			};
 		};
 		if (_Commanders > 0) then
 		{
 			for "_i" from 1 to _Commanders do
 			{
-				private _Commander = [_aiGroup, _position] call createAAFRegularCrew;
+				private _Commander = [_aiGroup, _position] call createAAFRegularRifleman;
 				_Commander moveInCommander _vehicle;
 			};
 		};
 		if (_Gunners > 0) then
 		{
-			private _gunner = [_aiGroup, _position] call createAAFRegularCrew;
+			private _gunner = [_aiGroup, _position] call createAAFRegularRifleman;
 			_gunner moveInGunner _vehicle;
 		};	
 		_vehicle setVariable ["R3F_LOG_disabled", true, true]; // force vehicles to be locked
 		[_vehicle, _aiGroup] spawn checkMissionVehicleLock; // force vehicles to be locked
+		_vehicle addItemCargoGlobal ["U_I_Wetsuit", 2];
+		_vehicle addItemCargoGlobal ["V_RebreatherIA", 2];
+		_vehicle addItemCargoGlobal ["G_Diving", 2];
+		_vehicle addWeaponCargoGlobal ["arifle_SDAR_F", 2];
+		_vehicle addMagazineCargoGlobal ["20Rnd_556x45_UW_mag", 8];
+
 		_vehicle
 	};
 	// Vehicle Class, Position, Fuel, Ammo, Damage, Special
-	_vehicle = [_vehicleClass, _missionPos, random 360] call _createVehicle;
-	_vehicle setPosASL _missionPos;
-	_vehicle setVehicleReportRemoteTargets true;
-	_vehicle setVehicleReceiveRemoteTargets true;
-	_vehicle setVehicleRadar 1;
-	_vehicle confirmSensorTarget [west, true];
-	_vehicle confirmSensorTarget [east, true];
-	_vehicle confirmSensorTarget [resistance, true];
-	_vehicle lockDriver true;
 	_aiGroup = createGroup CIVILIAN;
-	_vehicle addItemCargoGlobal ["U_I_Wetsuit", 2];
-	_vehicle addItemCargoGlobal ["V_RebreatherIA", 2];
-	_vehicle addItemCargoGlobal ["G_Diving", 2];
-	_vehicle addWeaponCargoGlobal ["arifle_SDAR_F", 2];
-	_vehicle addMagazineCargoGlobal ["20Rnd_556x45_UW_mag", 8];
-
+	_vehicle = [_vehicleClass, _missionPos, random 360] call _createVehicle;
 	private _Passangers = _vehicle emptyPositions "Cargo";
 
 	if (_Passangers > 0) then
