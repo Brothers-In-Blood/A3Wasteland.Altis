@@ -246,7 +246,7 @@ _teamCountsForPlayerArray =
 		_TeamCountNumbers2 = [];
 		_TopTeam = "";
 		_SecondCount = 0;
-		_CheckTie = 0;
+		_Tie = false;
 		if (count _teamcounts < 2) then
 		{
 			{
@@ -260,7 +260,12 @@ _teamCountsForPlayerArray =
 				_TeamCountNumbers pushback _teamcount;
 			} forEach _teamCounts;
 			_TopCount = selectmax _TeamCountNumbers;
-			_CheckTie = { _x == _TopCount} count _TeamCountNumbers;
+			{ 
+				if (_x == _TopCount) then
+				{
+					_Tie = true
+				}
+			} foreach _TeamCountNumbers;
 			{
 				private _teamcount = _x;
 				if (_teamcount != _TopCount) then
@@ -277,14 +282,14 @@ _teamCountsForPlayerArray =
 					_TopTeam = _team;
 				};
 			} foreach _teamcounts;
-			if (_topcount >= (_SecondCount * 2) && _CheckTie < 2) then
+			if (_topcount >= (_SecondCount * 2) && !_Tie) then
 			{
 				_dominantTeam = _TopTeam;
 			} else
 			{
 				_contested = true;
 			};
-			if (_CheckTie >= 2) then
+			if (_Tie) then
 			{
 				_contested = true;
 				_dominantTeam = sideUnknown;
