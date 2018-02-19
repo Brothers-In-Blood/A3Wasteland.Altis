@@ -84,20 +84,13 @@ _adminUIDandAccess =
 [
 		[
 		[// Admins with UIDs in this Array have their Access defined in the array below.
-			//'76561198116851407', //Wilks
 			'76561198073390625', //Monkey
 			'76561197960446555', //Masher
 			'76561198068891152', //WhichDoctor
-			"76561198131057272", // Dreadedwraith
-			// '76561198123535243', //Vru
-			// '76561197971257000', //Integer
-			// '76561198017432180', //Rage
-			// '76561198080784624', //Lynx
-			// '76561198029573979', //Alori
-			// '76561197983136779', //Lacks
+			'76561198131057272', //Dreadedwraith
+			'76561198031148718',  //SuicideKats
 			'76561198091057992', //Titus
 			'76561197979953643', //Sayrus
-			// '76561197996525927', //Smokebreak
 			'76561198123926911', //Turtle
 			'76561197968586068', //Dingus
 			'76561198028001330', // Lava_Bear
@@ -107,7 +100,8 @@ _adminUIDandAccess =
 			'76561198028001330', // Lava_Bear
 			'76561198053288509', //RunnerNS
 			'76561198056978583'  //Coolbreeze
-			//'76561198074088415' //Cats
+
+
 		],
 		[
 			'Teleport On Map Click',
@@ -210,16 +204,15 @@ _adminUIDandAccess =
 	],
 	[
 		[
-
-			'76561198083874174' //FireFirstAce
+			""
 		],	// Admins with UIDs in this Array have their Access defined in the array below.
 		[
 			'Teleport On Map Click',
 			'Teleport - Target To Me',
 			'Teleport - Me To Target',
-			'Teleport In Facing Direction (10m steps)',
+			// 'Teleport In Facing Direction (10m steps)',
 			'spectating',
-			'AdminConsole',
+			// 'AdminConsole',
 			'Delete Vehicle',
 			// 'FlyUp',
 			// 'EjectTarget',
@@ -229,11 +222,113 @@ _adminUIDandAccess =
 			// 'HealSelf',
 			// 'HealRepairNear',
 			// 'AdminStart',
-			// 'AdminLog',
+			'AdminLog',
 			// 'Freeze Target',
 			// 'UnFreeze Target',
 			// '==== Loadouts ====',
-			'==== WeatherLord ====',
+			// '==== WeatherLord ====',
+			// '==== Base Deleter ====',
+			// '==== VirtualItems ====',
+			'==== Weapons ====',
+			'==== Magazines ====',
+			'==== Bags ====',
+			'==== Vehicles ====',
+			'==== Objects ====',
+			// '==== AltisLife Money ====',
+			// 'Remove Gear',
+			'Revive',
+			'Heal',
+			'Restore',
+			// 'Move In My Vehicle',
+			// 'Move In Target Vehicle',
+			'Parachute Target',
+			// 'Spawn UAV',
+			// 'Spawn Cloak',
+			// 'Spawn Sapper',
+			// 'Spawn SapperB',
+			'Eject',
+			'Eject Crew',
+			// 'Kill',
+			// 'Explode',
+			// 'MineField (around target)',
+			// 'Zeus',
+			// 'Force Disconnect',
+			// 'Kick (Silent)',
+			// 'Kick (Announce)',
+			// 'Ban (Silent)',
+			// 'Ban (Announce)',
+			// 'Default Epoch Player ESP',
+			// 'Default Epoch Vehicle ESP',
+			// 'infiSTAR Player ESP 1',
+			// 'infiSTAR Player ESP 2',
+			// 'infiSTAR Dead ESP',
+			// 'infiSTAR AI ESP',
+			// 'infiSTAR LockBox ESP',
+			// 'infiSTAR Shelf ESP',
+			// 'infiSTAR PlotPole ESP',
+			// 'Fake Epoch group to nearest PlotPole',
+			// 'infiSTAR MapIcons',
+			// 'PlotPole Marker',
+			// 'Vehicle Marker',
+			// 'Construction Marker',
+			// 'LockBox Marker',
+			// 'DeadPlayer Marker',
+			// 'God Mode',
+			// 'Vehicle God Mode',
+			// 'Lower Terrain',
+			// 'Vehboost',
+			// 'UnlimAmmo',
+			// 'noRecoil',
+			// 'FastFire',
+			// 'Stealth / Invisible',
+			// 'Disable Announces',
+			'Show FPS',
+			// 'Give All Licenses',
+			// 'Call EMP',
+			// 'Mass Message',
+			// 'DayTime',
+			// 'NightTime',
+			// 'Add / Remove Crypto',
+			// 'Spawn Epoch-Box',
+			// 'Spawn Support-Box1',
+			// 'Spawn Support-Box2',
+			// 'Spawn Support-Box3',
+			// 'Spawn Ammo',
+			// 'showinfo',
+			// 'Login as Arma Admin',
+			// 'BIS FreeRoam Cam (works with ESP)'
+			// 'FreeRoam Cam (does not work with ESP)',
+			'Request Steam Name'
+			// 'Dump unique client variables',
+			// 'Restrain',
+			// 'Unrestrain',
+			// 'Arsenal'	// Adds Arsenal to the mousewheel actions if you press "," on the Numpad!
+		]
+	],
+	[
+		[
+			""
+		],	// Admins with UIDs in this Array have their Access defined in the array below.
+		[
+			// 'Teleport On Map Click',
+			// 'Teleport - Target To Me',
+			// 'Teleport - Me To Target',
+			// 'Teleport In Facing Direction (10m steps)',
+			'spectating',
+			// 'AdminConsole',
+			// 'Delete Vehicle',
+			// 'FlyUp',
+			// 'EjectTarget',
+			// 'ToggleVehLock',
+			// 'ShowGear',
+			// 'HealSelf',
+			// 'HealRepairNear',
+			// 'AdminStart',
+			'AdminLog',
+			// 'Freeze Target',
+			// 'UnFreeze Target',
+			// '==== Loadouts ====',
+			// '==== WeatherLord ====',
 			// '==== Base Deleter ====',
 			// '==== VirtualItems ====',
 			// '==== Weapons ====',
@@ -243,12 +338,12 @@ _adminUIDandAccess =
 			// '==== Objects ====',
 			// '==== AltisLife Money ====',
 			// 'Remove Gear',
-			'Revive',
-			'Heal',
-			'Restore',
-			'Move In My Vehicle',
-			'Move In Target Vehicle',
-			'Parachute Target',
+			// 'Revive',
+			// 'Heal',
+			// 'Restore',
+			// 'Move In My Vehicle',
+			// 'Move In Target Vehicle',
+			// 'Parachute Target',
 			// 'Spawn UAV',
 			// 'Spawn Cloak',
 			// 'Spawn Sapper',
@@ -259,81 +354,57 @@ _adminUIDandAccess =
 			// 'Explode',
 			// 'MineField (around target)',
 			// 'Zeus',
-			'Force Disconnect',
-			'Kick (Silent)',
-			'Kick (Announce)',
+			// 'Force Disconnect',
+			// 'Kick (Silent)',
+			// 'Kick (Announce)',
 			// 'Ban (Silent)',
 			// 'Ban (Announce)',
 			// 'Default Epoch Player ESP',
 			// 'Default Epoch Vehicle ESP',
-			'infiSTAR Player ESP 1',
-			'infiSTAR Player ESP 2',
-			'infiSTAR Dead ESP',
-			'infiSTAR AI ESP',
+			// 'infiSTAR Player ESP 1',
+			// 'infiSTAR Player ESP 2',
+			// 'infiSTAR Dead ESP',
+			// 'infiSTAR AI ESP',
 			// 'infiSTAR LockBox ESP',
 			// 'infiSTAR Shelf ESP',
 			// 'infiSTAR PlotPole ESP',
 			// 'Fake Epoch group to nearest PlotPole',
-			'infiSTAR MapIcons',
+			// 'infiSTAR MapIcons',
 			// 'PlotPole Marker',
-			'Vehicle Marker',
+			// 'Vehicle Marker',
 			// 'Construction Marker',
 			// 'LockBox Marker',
-			'DeadPlayer Marker',
-			'God Mode',
+			// 'DeadPlayer Marker',
+			// 'God Mode',
 			// 'Vehicle God Mode',
 			// 'Lower Terrain',
 			// 'Vehboost',
 			// 'UnlimAmmo',
 			// 'noRecoil',
 			// 'FastFire',
-			'Stealth / Invisible',
+			// 'Stealth / Invisible',
 			// 'Disable Announces',
-			'Show FPS',
+			// 'Show FPS',
 			// 'Give All Licenses',
 			// 'Call EMP',
-			'Mass Message',
-			'DayTime',
-			'NightTime',
+			// 'Mass Message',
+			// 'DayTime',
+			// 'NightTime',
 			// 'Add / Remove Crypto',
 			// 'Spawn Epoch-Box',
 			// 'Spawn Support-Box1',
 			// 'Spawn Support-Box2',
 			// 'Spawn Support-Box3',
 			// 'Spawn Ammo',
-			'showinfo',
+			// 'showinfo',
 			// 'Login as Arma Admin',
-			'BIS FreeRoam Cam (works with ESP)'
+			// 'BIS FreeRoam Cam (works with ESP)',
 			// 'FreeRoam Cam (does not work with ESP)',
-			// 'Request Steam Name',
+			'Request Steam Name'
 			// 'Dump unique client variables',
 			// 'Restrain',
 			// 'Unrestrain',
-			// 'Arsenal'	// Adds Arsenal to the mousewheel actions if you press "," on the Numpad!
-		]
-	],
-	[
-		['UID1','UID2','UID3','...'],	// Admins with UIDs in this Array have their Access defined in the array below.
-		[
-			'Teleport On Map Click','Teleport - Target To Me','Teleport - Me To Target','Teleport In Facing Direction (10m steps)',
-			'spectating','AdminConsole','Delete Vehicle','FlyUp','EjectTarget','ToggleVehLock','ShowGear',
-			'HealSelf','HealRepairNear','AdminStart','AdminLog','Freeze Target','UnFreeze Target',
-			'==== Loadouts ====','==== WeatherLord ====','==== Base Deleter ====','==== VirtualItems ====',
-			'==== Weapons ====','==== Magazines ====','==== Bags ====','==== Vehicles ====','==== Objects ====','==== AltisLife Money ====',
-			'Remove Gear','Revive','Heal','Restore','Move In My Vehicle','Move In Target Vehicle','Parachute Target',
-			'Spawn UAV','Spawn Cloak','Spawn Sapper','Spawn SapperB','Eject','Eject Crew','Kill','Explode','MineField (around target)','Zeus','Force Disconnect',
-			'Kick (Silent)','Kick (Announce)','Ban (Silent)','Ban (Announce)',
-			'Default Epoch Player ESP','Default Epoch Vehicle ESP','infiSTAR Player ESP 1',
-			'infiSTAR Player ESP 2','infiSTAR Dead ESP','infiSTAR AI ESP',
-			'infiSTAR LockBox ESP','infiSTAR Shelf ESP','infiSTAR PlotPole ESP','Fake Epoch group to nearest PlotPole',
-			'infiSTAR MapIcons','PlotPole Marker','Vehicle Marker','Construction Marker','LockBox Marker','DeadPlayer Marker',
-			'God Mode','Vehicle God Mode','Lower Terrain','Vehboost','UnlimAmmo','noRecoil','FastFire','Stealth / Invisible',
-			'Disable Announces','Show FPS','Give All Licenses','Call EMP','Mass Message','DayTime','NightTime','Add / Remove Crypto',
-			'Spawn Epoch-Box','Spawn Support-Box1','Spawn Support-Box2','Spawn Support-Box3',
-			'Spawn Ammo','showinfo','Login as Arma Admin','BIS FreeRoam Cam (works with ESP)','FreeRoam Cam (does not work with ESP)',
-			'Request Steam Name','Dump unique client variables',
-			'Restrain','Unrestrain',
-			'Arsenal'	// Adds Arsenal to the mousewheel actions if you press "," on the Numpad!
+			// 'Arsenal'	// Adds Arsenal to the mousewheel actions if you press ",$" on the Numpad!
 		]
 	]
 ];
