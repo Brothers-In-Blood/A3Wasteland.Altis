@@ -12,33 +12,28 @@ if (_perm == "side" && !(playerSide in [BLUFOR,OPFOR])) then
 while {true} do
 {
 	waitUntil {_uav = getConnectedUAV player; !isNull _uav};
+	
+	_ownerUID = _uav getVariable ["ownerUID", "0"];
 
-	// ignore remote designators and autoturrets unless indie
-	if (!(_uav isKindOf "StaticWeapon") || !(playerSide in [BLUFOR,OPFOR])) then
+	if (_ownerUID in ["","0"]) exitWith {}; // UAV not owned by anyone
+
+	_ownerGroup = _uav getVariable ["ownerGroupUAV", grpNull];
+
+	if (getPlayerUID player isEqualTo _ownerUID) exitWith
 	{
-		_ownerUID = _uav getVariable ["ownerUID", "0"];
-
-		if (_ownerUID in ["","0"]) exitWith {}; // UAV not owned by anyone
-
-		_ownerGroup = _uav getVariable ["ownerGroupUAV", grpNull];
-
-		if (getPlayerUID player isEqualTo _ownerUID) exitWith
+		if (_ownerGroup != group player) then
 		{
-			if (_ownerGroup != group player) then
-			{
-				_ownerGroup = group player;
-				_uav setVariable ["ownerGroupUAV", _ownerGroup, true]; // not currently used
-			};
+			_ownerGroup = group player;
+			_uav setVariable ["ownerGroupUAV", _ownerGroup, true]; // not currently used
 		};
-
-		if (_perm == "group" && {_ownerUID in ((units player) apply {getPlayerUID _x})}) exitWith {};
-
-		_uav = objNull;
-		player connectTerminalToUAV objNull;
-		playSound "FD_CP_Not_Clear_F";
-		["You are not allowed to connect to this unmanned vehicle.", 5] call mf_notify_client;
 	};
 
+	if (_perm == "group" && {_ownerUID in ((units player) apply {getPlayerUID _x})}) exitWith {};
+
+	_uav = objNull;
+	player connectTerminalToUAV objNull;
+	playSound "FD_CP_Not_Clear_F";
+	["You are not allowed to connect to this unmanned vehicle.", 5] call mf_notify_client;
 	if (alive _uav && _uav == getConnectedUAV player) then
 	{
 		/*if (group _currUav != group player) then
