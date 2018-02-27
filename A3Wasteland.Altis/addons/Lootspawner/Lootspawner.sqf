@@ -15,7 +15,7 @@ swSpZadjust = false;                //needed for ArmA 2 and older Maps/Buildings
 //-------------------------------------------------------------------------------------
 //Variables
 //local
-#define LOOT_SPAWN_INTERVAL 30*60   //Time (in sec.) to pass before an building spawns new loot (must also change in LSclientScan.sqf)
+#define LOOT_SPAWN_INTERVAL 200*60   //Time (in sec.) to pass before an building spawns new loot (must also change in LSclientScan.sqf)
 #define CHANCES_FULL_FUEL_CAN 35    //Chance (in %) of a spawned fuelcan to be full instead of empty
 #define LOOT_Z_ADJUST -0.1          //High adjustment thats generally added to every spawnpoint
 
@@ -30,10 +30,10 @@ _tmpTstPlace = [14730, 16276, 0];   //Coord's, in [x,y,z] of a preferably flat a
 //-------------- A VALUE OF '0' RESULTS IN NO LOOT FOR THIS CLASS AND TYPE ----------------
 spawnClassChance_list =
 [
-	[1.0, 1.5, 2.0, 0.25, 5.0], // civil
-	[1.5, 2.0, 1.5, 0.5, 1.5],  // military
-	[0.5, 1.0, 3.0, 0.25, 5.0], // industrial
-	[1.0, 1.5, 3.0, 0, 0]       // research
+	[1.0, 1.5, 2.0, 0.25, 0.25], 	// civil
+	[1.5, 2.0, 1.5, 0.5, 0.5],  	// military
+	[0.5, 1.0, 3.0, 0.25, 1], 		// industrial
+	[1.0, 1.5, 3.0, 0, 0.1]       	// research
 ];
 
 if (["A3W_buildingLootWeapons", 1] call getPublicVar == 0) then
