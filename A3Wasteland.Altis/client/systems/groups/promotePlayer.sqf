@@ -34,18 +34,6 @@ if (_target == player) exitWith { player globalChat "You can't promote yourself.
 
 _inCombat = false;
 
-if (alive _target) then
-{
-	//_isIndie = !((side group _target) in [BLUFOR,OPFOR]);
-
-	//check to see how close to the enemy the target leader is
-	{
-		if (_x distance _target < 100 && {[_x, _target] call A3W_fnc_isFriendly}) exitWith
-		{
-			_inCombat = true;
-		};
-	} forEach allUnits;
-};
 
 if (!_inCombat) then
 {
