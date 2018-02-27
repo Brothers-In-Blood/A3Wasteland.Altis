@@ -3,7 +3,7 @@
 // ******************************************************************************************
 //	@file Version: 1.0
 //	@file Name: mission_WepCache.sqf
-//	@file Author: [404] Deadbeat, [404] Costlyy
+//	@file Author: [404] Deadbeat, [404] Costlyy, BIB_Monkey
 //	@file Created: 08/12/2012 15:19
 //	@file Args:
 
@@ -21,48 +21,9 @@ _setupVars =
 _setupObjects =
 {
 	_missionPos = markerPos _missionLocation;
-	private _BoxTypes = 
-	[
-		"Box_FIA_Ammo_F",
-		"Box_IND_Ammo_F",
-		"Box_IND_Wps_F",
-		"Box_AAF_Equip_F",
-		"Box_IND_AmmoOrd_F",
-		"Box_IND_Grenades_F",
-		"Box_IND_WpsLaunch_F",
-		"Box_IND_WpsSpecial_F",
-		"Box_IND_Support_F",
-		"Box_AAF_Uniforms_F",
-		"Box_FIA_Wps_F"
-	];
-	private _loottypes = 
-	[
-		"mission_USLaunchers",
-		"mission_USSpecial",
-		"Launchers_Tier_2",
-		"Diving_Gear",
-		"General_supplies",
-		"GEVP",
-		"Ammo_Drop",
-		"mission_AALauncher",
-		"mission_CompactLauncher",
-		"mission_snipers",
-		"mission_RPG",
-		"mission_Pistols",
-		"mission_AssRifles",
-		"mission_SMGs",
-		"mission_LMGs",
-		"Medical",
-		"mission_Field_Engineer"
-	];
-
-	_box1type = selectrandom _BoxTypes;
-	_box1Loot = selectrandom _loottypes;
-	_box1 = createVehicle [_box1type, _missionPos, [], 0, "None"];
-	_box1 setVariable ["R3F_LOG_disabled", true, true];
-	_box1 setVariable ["moveable", false, true];
-	_box1 setDir random 360;
-	[_box1, _box1Loot] call fn_refillbox;
+	private _BoxPos1 = [_missionPos, 3, 10,1,0,0,0] call findSafePos;
+	_box1 = [_BoxPos1, "AAF", "1", 0, 50000] call createrandomlootcrate;
+	{ _x setVariable ["R3F_LOG_disabled", true, true] } forEach [_box1];
 
 	_vehicleClass = "I_Boat_Armed_01_minigun_F";
 	_createVehicle = 
@@ -70,7 +31,7 @@ _setupObjects =
 		private _type = _this select 0;
 		private _position = _this select 1;
 		private _direction = _this select 2;
-		private _vehiclePos = [_position, 10, 50,5,0,0,0] call findSafePos;
+		private _vehiclePos = [_position, 10, 50,5,2,0,0] call findSafePos;
 		private _vehicle = createVehicle [_type, _vehiclePos, [], 0, "None"];
 		_vehicle setVehicleReportRemoteTargets true;
 		_vehicle setVehicleReceiveRemoteTargets true;
@@ -90,7 +51,7 @@ _setupObjects =
 		{
 			for "_i" from 1 to _drivers do
 			{
-				private _Driver = [_aiGroup, _position] call createAAFRegularRifleman;
+				private _Driver = [_aiGroup, _position, "AAF", "Rifleman"] call createsoldier;
 				_Driver moveInAny _vehicle; //The boat doesn't like moveindriver for some reason 
 			};
 		};
@@ -98,13 +59,13 @@ _setupObjects =
 		{
 			for "_i" from 1 to _Commanders do
 			{
-				private _Commander = [_aiGroup, _position] call createAAFRegularRifleman;
+				private _Commander = [_aiGroup, _position, "AAF", "Rifleman"] call createsoldier;
 				_Commander moveInCommander _vehicle;
 			};
 		};
 		if (_Gunners > 0) then
 		{
-			private _gunner = [_aiGroup, _position] call createAAFRegularRifleman;
+			private _gunner = [_aiGroup, _position, "AAF", "Rifleman"] call createsoldier;
 			_gunner moveInGunner _vehicle;
 		};	
 		_vehicle setVariable ["R3F_LOG_disabled", true, true]; // force vehicles to be locked
@@ -126,14 +87,14 @@ _setupObjects =
 	{
 		for "_i" from 1 to _Passangers do
 		{
-			[_aiGroup, _missionPos] call createAAFRegularDiver;
+			[_aiGroup, _missionPos, "AAF", "Diver"] call createsoldier;
 		};
 	};
 	_aiGroup setCombatMode "RED";
 	[_vehicle, _aiGroup] spawn checkMissionVehicleLock;
 
 	_missionPicture = getText (configFile >> "CfgVehicles" >> _vehicleClass >> "picture");
-	_missionHintText = format ["A treasure containing <t color='%1'>$100,000</t> and weapons is being recovered.<br/>If you want to capture it, you will need diving gear and an underwater weapon."];
+	_missionHintText = format ["A treasure containing money and weapons is being recovered.<br/>If you want to capture it, you will need diving gear and an underwater weapon."];
 };
 
 _waitUntilMarkerPos = nil;
@@ -152,7 +113,6 @@ _successExec =
 {
 	// Mission complete
 	_box1 setVariable ["R3F_LOG_disabled", false, true];
-	_box1 setVariable ["cmoney", 100000, true];
 	_box1 setVariable ["moveable", true, true];
 	_vehicle lockDriver false;
 

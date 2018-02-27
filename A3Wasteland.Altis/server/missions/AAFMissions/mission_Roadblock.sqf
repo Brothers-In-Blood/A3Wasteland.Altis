@@ -2,7 +2,7 @@
 // * This project is licensed under the GNU Affero GPL v3. Copyright © 2014 A3Wasteland.com *
 // ******************************************************************************************
 //	@file Name: mission_Roadblock.sqf
-//	@file Author: JoSchaap, AgentRev, LouD
+//	@file Author: JoSchaap, AgentRev, LouD, BIB_Monkey
 
 if (!isServer) exitwith {};
 #include "AAFMissionDefines.sqf";
@@ -40,17 +40,8 @@ _setupObjects =
 	for "_i" from 1 to 7 do
 	{
 		private _soldierType = selectrandom ["Rifleman","Rifleman","Rifleman","Rifleman","Rifleman","Rifleman","Rifleman","Rifleman","Rifleman","Rifleman","AT","AA","SAW","SAW","SAW","Engineer","Medic","Grenedier","Engineer","Medic","Grenedier","Marksman","Marksman","Marksman"];
-		switch (_soldierType) do
-		{
-			case "Rifleman": {[_aiGroup, _missionPos] call createAAFRegularRifleman};
-			case "AT": {[_aiGroup, _missionPos] call createAAFRegularAT};
-			case "AA": {[_aiGroup, _missionPos] call createAAFRegularAA};
-			case "SAW": {[_aiGroup, _missionPos] call createAAFRegularSAW};
-			case "Engineer": {[_aiGroup, _missionPos] call createAAFRegularEngineer};
-			case "Medic": {[_aiGroup, _missionPos] call createAAFRegularMedic};
-			case "Grenedier": {[_aiGroup, _missionPos] call createAAFRegularGrenedier};
-			case "Marksman": {[_aiGroup, _missionPos] call createAAFRegularMarksman};
-		};
+		[[_aiGroup, _missionPos, "AAF", _soldierType] call createsoldier;
+
 		_aiGroup setCombatMode "RED";
 	_missionHintText = format ["Enemies have set up an illegal roadblock and are searching vehicles! They need to be stopped!", AAFMissionColor];
 };
@@ -70,13 +61,15 @@ _failedExec =
 _successExec =
 {
 	// Mission completed
-	_randomBox = selectrandom ["mission_USLaunchers","mission_USSpecial","mission_snipers","Ammo_Drop","mission_RPG","mission_PCML", "mission_Pistols", "mission_AssRifles", "mission_SMGs", "Medical"];
-	_randomCase = selectrandom ["Box_FIA_Support_F","Box_FIA_Wps_F","Box_FIA_Ammo_F","Box_NATO_Wps_F","Box_East_WpsSpecial_F","Box_IND_WpsSpecial_F"];
-	_box1 = createVehicle [_randomCase, _missionPos, [], 5, "None"];
-	_box1 setDir random 360;
-	_box1 setVariable ["moveable", true, true];
-	[_box1, _randomBox] call fn_refillbox;
-	{ _x setVariable ["R3F_LOG_disabled", false, true]} forEach [_box1];
+	_lootPos = getMarkerPos _marker;
+	for "_i" from 1 to 1 do
+	{
+		private _tier = selectrandom ["1","2","3"];
+		private _maxmoney = random 10000;
+		private _box = [_lootPos, "AAF", _tier, 0, _maxmoney] call createrandomlootcrate;
+		_box setVariable ["moveable", true, true];
+	};
+	{ _x setVariable ["R3F_LOG_disabled", false, true]} forEach [_barGate, _bunker1, _bunker2];
 	{_x setVariable ["Moveable", true, true]} forEach [_barGate, _bunker1, _bunker2];
 	{ _x setVariable ["allowDamage", true, true]} forEach [_obj1, _obj2];
 	_successHintMessage = format ["The roadblock has been dismantled."];

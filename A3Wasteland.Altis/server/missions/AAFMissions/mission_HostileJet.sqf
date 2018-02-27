@@ -2,16 +2,16 @@
 // * This project is licensed under the GNU Affero GPL v3. Copyright © 2014 A3Wasteland.com *
 // ******************************************************************************************
 //	@file Name: mission_HostileJet.sqf
-//	@file Author: JoSchaap, AgentRev, LouD
+//	@file Author: JoSchaap, AgentRev, LouD, BIB_Monkey
 
 if (!isServer) exitwith {};
-#include "hostileairMissionDefines.sqf";
+#include "AAFMissionDefines.sqf";
 
 private ["_planeChoices", "_convoyVeh", "_veh1", "_createVehicle", "_vehicles", "_leader", "_speedMode", "_waypoint", "_vehicleName", "_numWaypoints", "_cash", "_Boxes1", "_currBox1", "_Boxes2", "_currBox2", "_Box1", "_Box2"];
 
 _setupVars =
 {
-	_missionType = "AAF Hostile Jet";
+	_missionType = "AAF Jet Patrol";
 	_locationsArray = nil; // locations are generated on the fly from towns
 };
 
@@ -19,16 +19,12 @@ _setupObjects =
 {
 	_missionPos = markerPos (((call cityList) call BIS_fnc_selectRandom) select 0);
 
-	_planeChoices =
+	_veh1 = selectrandom
 	[
 		["I_Plane_Fighter_03_dynamicLoadout_F"],
 		["I_Plane_Fighter_04_F"]
 	];
-
-	_convoyVeh = _planeChoices call BIS_fnc_selectRandom;
-
-	_veh1 = _convoyVeh select 0;
-
+	
 	_createVehicle =
 	{
 		private ["_type","_position","_direction","_vehicle","_soldier"];
@@ -53,7 +49,7 @@ _setupObjects =
 		_aiGroup addVehicle _vehicle;
 
 		// add pilot
-		_soldier = [_aiGroup, _position] call createRandomPilot;
+		_soldier =[_aiGroup, _position, "AAF", "JetPilot"] call createsoldier;
 		_soldier moveInDriver _vehicle;
 		_soldier triggerDynamicSimulation true;
 		// lock the vehicle untill the mission is finished and initialize cleanup on it
@@ -76,7 +72,7 @@ _setupObjects =
 	_aiGroup setBehaviour "COMBAT";
 	_aiGroup setFormation "STAG COLUMN";
 
-	_speedMode = if (missionDifficultyHard) then { "NORMAL" } else { "LIMITED" };
+	_speedMode ="NORMAL";
 
 	// behaviour on waypoints
 	{
@@ -93,7 +89,7 @@ _setupObjects =
 
 	_missionPicture = getText (configFile >> "CfgVehicles" >> _veh1 >> "picture");
 	_vehicleName = getText (configFile >> "CfgVehicles" >> _veh1 >> "displayName");
-	_missionHintText = format ["An armed <t color='%2'>%1</t> is patrolling the island. Shoot it down and kill the pilot to recover the money and weapons!", _vehicleName, hostileairMissionColor];
+	_missionHintText = format ["An armed <t color='%2'>%1</t> is patrolling the island. Shoot it down and kill the pilot to recover the money and weapons!", _vehicleName, AAFMissionColor];
 
 	_numWaypoints = count waypoints _aiGroup;
 };
@@ -111,13 +107,11 @@ _successExec =
 	// Mission completed
 	_successHintMessage = "The sky is clear again, the enemy patrol was taken out!";
 
-	_Boxes = selectrandom ["Box_IND_Wps_F","Box_East_Wps_F","Box_NATO_Wps_F","Box_NATO_AmmoOrd_F","Box_NATO_Grenades_F","Box_East_WpsLaunch_F","Box_NATO_WpsLaunch_F","Box_East_WpsSpecial_F","Box_NATO_WpsSpecial_F"];
-	_lastPos set [2, 200];
-	_Box = createVehicle [_Boxes, _lastPos, [], 0, "None"];
+	_lastPos set [2, 400];
+	_box = [_lastPos, "AAF", "3", 25000, 100000] call createrandomlootcrate;
 	_para = createVehicle ["B_Parachute_02_F", _lastPos, [], 0, "None"];
 	_Box attachTo [_para,[0,0,-1.5]];
 	_Box allowDamage false;
-	_Box setVariable ["cmoney", 100000, true];
 
 	WaitUntil {((((position _Box) select 2) < 1) || (isNil "_para"))};
 	detach _Box;
@@ -125,4 +119,4 @@ _successExec =
 	_flare2= "F_40mm_Green" createVehicle getPos _Box;
 };
 
-_this call hostileairMissionProcessor;
+_this call AAFMissionProcessor;

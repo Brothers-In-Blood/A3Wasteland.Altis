@@ -36,25 +36,13 @@ _setupObjects =
 	_box1 = [_BoxPos1, "AAF", "1", 0, 0] call createrandomlootcrate;
 	private _BoxPos2 = [_missionPos, 3, 10,1,0,0,0] call findSafePos;
 	_box2 = [_BoxPos2, "AAF", "1", 0, 10000] call createrandomlootcrate;
-
-
 	{ _x setVariable ["R3F_LOG_disabled", true, true] } forEach [_box1, _box2];
 
 	_aiGroup = createGroup CIVILIAN;
 	for "_i" from 1 to 12 do
 	{
 		private _soldierType = selectrandom ["Rifleman","Rifleman","Rifleman","Rifleman","Rifleman","Rifleman","Rifleman","Rifleman","Rifleman","Rifleman","AT","AA","SAW","SAW","SAW","Engineer","Medic","Grenedier","Engineer","Medic","Grenedier","Marksman","Marksman","Marksman"];
-		switch (_soldierType) do
-		{
-			case "Rifleman": {[_aiGroup, _missionPos] call createAAFRegularRifleman};
-			case "AT": {[_aiGroup, _missionPos] call createAAFRegularAT};
-			case "AA": {[_aiGroup, _missionPos] call createAAFRegularAA};
-			case "SAW": {[_aiGroup, _missionPos] call createAAFRegularSAW};
-			case "Engineer": {[_aiGroup, _missionPos] call createAAFRegularEngineer};
-			case "Medic": {[_aiGroup, _missionPos] call createAAFRegularMedic};
-			case "Grenedier": {[_aiGroup, _missionPos] call createAAFRegularGrenedier};
-			case "Marksman": {[_aiGroup, _missionPos] call createAAFRegularMarksman};
-		};
+		[_aiGroup, _missionPos, "AAF", _soldierType] call createsoldier;
 	};
 	_aiGroup setCombatMode 	"RED";
 
@@ -77,8 +65,6 @@ _successExec =
 	// Mission completed
 	{ _x setVariable ["R3F_LOG_disabled", false, true] } forEach [_box1, _box2];
 	{ _x setVariable ["Moveable", true, true] } forEach [_box1, _box2];
-	private _money = ceil (random 10000);
-	_box1 setVariable ["cmoney", _money, true];
 
 	_successHintMessage = "The airwreck supplies have been collected, well done.";
 };
