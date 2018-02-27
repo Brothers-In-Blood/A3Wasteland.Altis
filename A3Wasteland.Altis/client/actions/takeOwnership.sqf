@@ -29,6 +29,7 @@ private _success = [[DURATION, 5] select (_vehicle getVariable ["ownerUID","0"] 
 if (_success) then
 {
 	[_vehicle, player] call A3W_fnc_takeOwnership;
+	player removeItem "toolkit";
 	["Acquiring complete!", 5] call mf_notify_client;
 };
 
