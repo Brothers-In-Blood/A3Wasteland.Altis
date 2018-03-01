@@ -40,20 +40,16 @@ _setupObjects =
 		_x setVariable ["R3F_LOG_disabled", true, true];
 	} forEach [_box1, _box2, _wreck];
 
-	createMissionVehicle = 
+	_vehclass1 ="I_Boat_Armed_01_minigun_F";
+	_vehclass2 ="I_Boat_Armed_01_minigun_F";
+	_aiGroup1 = createGroup CIVILIAN;
+	_aiGroup2 = createGroup CIVILIAN;
+	_aiGroup3 = createGroup CIVILIAN;
+	_veh1 = [_vehclass1, _missionPos] call createMissionVehicle;
+	_veh2 = [_vehclass2, _missionPos] call createMissionVehicle;
+	_vehicles = [_veh1,_veh2];
 	{
-		private _type = _this select 0;
-		private _position = _this select 1;
-		private _direction = _this select 2;
-		private _vehiclePos = [_position, 10, 50,5,2,0,0] call findSafePos;
-		private _vehicle = createVehicle [_type, _vehiclePos, [], 0, "None"];
-		_vehicle setVehicleReportRemoteTargets true;
-		_vehicle setVehicleReceiveRemoteTargets true;
-		_vehicle setVehicleRadar 1;
-		_vehicle confirmSensorTarget [west, true];
-		_vehicle confirmSensorTarget [east, true];
-		_vehicle confirmSensorTarget [resistance, true];
-		[_vehicle] call vehicleSetup;
+		private_vehicle = _x;
 		private _drivers = _vehicle emptyPositions "Driver";
 		private _Commanders =  _vehicle emptyPositions "Commander";
 		private _Gunners = _vehicle emptyPositions "Gunner";
@@ -85,23 +81,20 @@ _setupObjects =
 		_vehicle addItemCargoGlobal ["G_Diving", 2];
 		_vehicle addWeaponCargoGlobal ["arifle_SDAR_F", 2];
 		_vehicle addMagazineCargoGlobal ["20Rnd_556x45_UW_mag", 8];
-
-		_vehicle setVariable ["R3F_LOG_disabled", true, true]; // force vehicles to be locked
-		[_vehicle, _aiGroup1] spawn checkMissionVehicleLock; // force vehicles to be locked
-		_vehicle
-	};
-	_vehclass1 ="I_Boat_Armed_01_minigun_F";
-	_vehclass2 ="I_Boat_Armed_01_minigun_F";
-	_aiGroup1 = createGroup CIVILIAN;
-	_veh1 = [_vehclass1, _missionPos, random 360] call createMissionVehicle;
-	_veh2 = [_vehclass2, _missionPos, random 360] call createMissionVehicle;
+	} foreach _vehicle;
 	private _Passangers1 = _veh1 emptyPositions "Cargo";
 	private _Passangers2 = _veh2 emptyPositions "Cargo";
-	for "_i" from 1 to (_Passangers1 + _Passangers2) do
+	for "_i" from 1 to _Passangers1 do
 	{
-		[_aiGroup1, _missionPos, "AAF", "Diver"] call createsoldier;
+		[_aiGroup2, _missionPos, "AAF", "Diver"] call createsoldier;
+	};
+	for "_i" from 1 to _Passangers2 do
+	{
+		[_aiGroup3, _missionPos, "AAF", "Diver"] call createsoldier;
 	};
 	_aiGroup1 setCombatMode "RED";
+	_aiGroup2 setCombatMode "RED";
+	_aiGroup3 setCombatMode "RED";
 	_missionPicture = getText (configFile >> "CfgVehicles" >> _vehclass1 >> "picture");
 	_missionHintText = "We are going to need a Bigger Boat.<br/>Enemy divers are trying to recover arms and loot, go kill them and claim the loot.";
 };

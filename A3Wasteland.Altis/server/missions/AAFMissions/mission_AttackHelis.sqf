@@ -23,11 +23,8 @@ _setupObjects =
 	_veh1types = "I_Heli_light_03_dynamicLoadout_F";
 	_veh2types = "I_Heli_light_03_dynamicLoadout_F";
 
-	
-
 	_rad = _town select 1;
 	_missionPos = [_missionPos,_rad,_rad + 50,5,0,0,0] call findSafePos;
-
 
 	_veh1 = [_veh1types, _missionPos] call createMissionVehicle;
 	_veh2 = [_veh2types, _missionPos] call createMissionVehicle;
@@ -44,29 +41,23 @@ _setupObjects =
 		{
 			for "_i" from 1 to _drivers do
 			{
-				private _Driver = [_aiGroup1, _position, "AAF", "Rifleman"] call createsoldier;
+				private _Driver = [_aiGroup1, _position, "AAF", "HeliPilot"] call createsoldier;
 				_Driver moveInDriver _vehicle;
 			};
 		};
-		if (_Commanders > 0) then
-		{
-			for "_i" from 1 to _Commanders do
-			{
-				private _Commander = [_aiGroup1, _position, "AAF", "Rifleman"] call createsoldier;
-				_Commander moveInCommander _vehicle;
-			};
-		};
+		private _Copilot = [_aiGroup1, _position, "AAF", "HeliPilot"] call createsoldier;
+		_Copilot moveInAny _vehicle;
 		if (_Gunners > 0) then
 		{
-			private _gunner = [_aiGroup1, _position, "AAF", "Rifleman"] call createsoldier;
+			private _gunner = [_aiGroup1, _position, "AAF", "HeliCrew"] call createsoldier;
 			_gunner moveInGunner _vehicle;
 		};
 		if (_Passangers > 0) then
 		{
 			for "_i" from 1 to _Passangers do
 			{
-				_soldier = [_aiGroup1, _position, "AAF", "Rifleman"] call createsoldier;
-
+				private _soldierType = selectrandom ["Rifleman","Rifleman","Rifleman","Rifleman","Rifleman","Rifleman","Rifleman","Rifleman","Rifleman","Rifleman","AT","AA","SAW","SAW","SAW","Engineer","Medic","Grenedier","Engineer","Medic","Grenedier","Marksman","Marksman","Marksman"];
+				_soldier = [_aiGroup1, _missionPos, "AAF", _soldierType] call createsoldier;
 				_soldier moveInCargo _vehicle;
 			};
 		};

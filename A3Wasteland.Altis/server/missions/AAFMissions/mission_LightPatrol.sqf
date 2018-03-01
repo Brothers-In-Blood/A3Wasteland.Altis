@@ -20,28 +20,23 @@ _setupObjects =
 	_town = (call cityList) call BIS_fnc_selectRandom;
 	_missionPos = markerPos _missionLocation;
 
-	_veh1 = selectrandom ["I_MRAP_03_F","I_MRAP_03_hmg_F","I_MRAP_03_gmg_F", "I_APC_Wheeled_03_cannon_F", "I_APC_tracked_03_cannon_F", "I_MBT_03_cannon_F","I_Truck_02_transport_F","I_Truck_02_covered_F","I_Truck_02_fuel_F","I_Truck_02_medical_F","I_Truck_02_box_F","I_Truck_02_ammo_F"];
-	_veh2 = selectrandom ["I_MRAP_03_F","I_MRAP_03_hmg_F","I_MRAP_03_gmg_F", "I_APC_Wheeled_03_cannon_F", "I_APC_tracked_03_cannon_F", "I_MBT_03_cannon_F","I_Truck_02_transport_F","I_Truck_02_covered_F","I_Truck_02_fuel_F","I_Truck_02_medical_F","I_Truck_02_box_F","I_Truck_02_ammo_F"];
+	_veh1types = selectrandom ["I_MRAP_03_F","I_MRAP_03_hmg_F","I_MRAP_03_gmg_F", "I_APC_Wheeled_03_cannon_F", "I_APC_tracked_03_cannon_F", "I_MBT_03_cannon_F","I_Truck_02_transport_F","I_Truck_02_covered_F","I_Truck_02_fuel_F","I_Truck_02_medical_F","I_Truck_02_box_F","I_Truck_02_ammo_F"];
+	_veh2types = selectrandom ["I_MRAP_03_F","I_MRAP_03_hmg_F","I_MRAP_03_gmg_F", "I_APC_Wheeled_03_cannon_F", "I_APC_tracked_03_cannon_F", "I_MBT_03_cannon_F","I_Truck_02_transport_F","I_Truck_02_covered_F","I_Truck_02_fuel_F","I_Truck_02_medical_F","I_Truck_02_box_F","I_Truck_02_ammo_F"];
 
-	createMissionVehicle = 
+	_aiGroup1 = createGroup CIVILIAN;
+
+	_rad = _town select 1;
+	_missionPos = [_missionPos,_rad,_rad + 50,5,0,0,0] call findSafePos;
+
+	_veh1 = [_veh1types, _missionPos, 0] call createMissionVehicle,
+	_veh2 = [_veh2types, _missionPos, 0] call createMissionVehicle
+	_vehicles = [_veh1, _veh2];
 	{
-		private _type = _this select 0;
-		private _position = _this select 1;
-		private _direction = _this select 2;
-		private _vehiclePos = [_position, 10, 50,5,0,0,0] call findSafePos;
-		private _vehicle = createVehicle [_type, _vehiclePos, [], 0, "None"];
-		_vehicle setVehicleReportRemoteTargets true;
-		_vehicle setVehicleReceiveRemoteTargets true;
-		_vehicle setVehicleRadar 1;
-		_vehicle confirmSensorTarget [west, true];
-		_vehicle confirmSensorTarget [east, true];
-		_vehicle confirmSensorTarget [resistance, true];
-		[_vehicle] call vehicleSetup;
+		private _vehicle = _x;
 		private _drivers = _vehicle emptyPositions "Driver";
 		private _Commanders =  _vehicle emptyPositions "Commander";
 		private _Gunners = _vehicle emptyPositions "Gunner";
 		private _Passangers = _vehicle emptyPositions "Cargo";
-		_vehicle setDir _direction;
 		_aiGroup1 addVehicle _vehicle;
 		if (_drivers > 0) then
 		{
@@ -74,24 +69,7 @@ _setupObjects =
 				_soldier moveInCargo _vehicle;
 			};
 		};
-		_vehicle setVariable ["R3F_LOG_disabled", true, true]; // force vehicles to be locked
-		[_vehicle, _aiGroup1] spawn checkMissionVehicleLock; // force vehicles to be locked
-		_vehicle
-	};
-
-	_aiGroup1 = createGroup CIVILIAN;
-
-	_rad = _town select 1;
-	_missionPos = [_missionPos,_rad,_rad + 50,5,0,0,0] call findSafePos;
-
-	_vehicles =
-	[
-		[_veh1, _missionPos, 0] call createMissionVehicle,
-		[_veh2, _missionPos, 0] call createMissionVehicle
-	];
-
-	_leader = effectiveCommander (_vehicles select 0);
-	_aiGroup1 selectLeader _leader;
+	} foreach _vehicles;
 	_leader setRank "LIEUTENANT";
 
 	_aiGroup1 setCombatMode "GREEN"; // Will fire on enemies

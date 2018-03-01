@@ -19,50 +19,18 @@ _setupObjects =
 {
 	_missionPos = markerPos (((call cityList) call BIS_fnc_selectRandom) select 0);
 
-	_veh1 = selectrandom
-	[
-		["I_Plane_Fighter_03_dynamicLoadout_F"],
-		["I_Plane_Fighter_04_F"]
-	];
+	_veh1types = selectrandom ["I_Plane_Fighter_03_dynamicLoadout_F","I_Plane_Fighter_04_F"];
+	veh1 = _veh1 = [_veh1, _missionPos,1,1,0,"Fly"] call createMissionVehicle;
+	_aiGroup1 = createGroup CIVILIAN;
 	
-	createMissionVehicle =
+	_soldier =[_aiGroup1, _position, "AAF", "JetPilot"] call createsoldier;
+	_soldier moveInDriver _veh1;
+	_vehicles = [_veh1];
 	{
-		private ["_type","_position","_direction","_vehicle","_soldier"];
-
-		_type = _this select 0;
-		_position = _this select 1;
-		_direction = _this select 2;
-
-
-		_vehicle = createVehicle [_type, _position, [], 0, "FLY"]; // Added to make it fly
-		_vehicle setVehicleReportRemoteTargets true;
-		_vehicle setVehicleReceiveRemoteTargets true;
-		_vehicle setVehicleRadar 1;
-		_vehicle confirmSensorTarget [west, true];
-		_vehicle confirmSensorTarget [east, true];
-		_vehicle confirmSensorTarget [resistance, true];
-		_vehicle setVariable ["R3F_LOG_disabled", true, true];
-		_vel = [velocity _vehicle, -(_direction)] call BIS_fnc_rotateVector2D; // Added to make it fly
-		_vehicle setDir _direction;
-		_vehicle setVelocity _vel; // Added to make it fly
-		_vehicle setVariable [call vChecksum, true, false];
-		_aiGroup1 addVehicle _vehicle;
-
-		// add pilot
+		_vehicle = _x;
 		_soldier =[_aiGroup1, _position, "AAF", "JetPilot"] call createsoldier;
 		_soldier moveInDriver _vehicle;
-		_soldier triggerDynamicSimulation true;
-		// lock the vehicle untill the mission is finished and initialize cleanup on it
-
-
-		[_vehicle, _aiGroup1] spawn checkMissionVehicleLock;
-		_vehicle
-	};
-
-	_aiGroup1 = createGroup CIVILIAN;
-
-	_vehicles = [];
-	_vehicles set [0, [_veh1,[14574.7,31859.3,0], 14, _aiGroup1] call createMissionVehicle]; // static value update when porting to different maps
+	} foreach _vehicles;
 
 	_leader = effectiveCommander (_vehicles select 0);
 	_aiGroup1 selectLeader _leader;

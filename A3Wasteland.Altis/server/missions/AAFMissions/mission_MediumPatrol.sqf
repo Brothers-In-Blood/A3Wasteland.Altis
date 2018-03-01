@@ -20,11 +20,11 @@ _setupObjects =
 	_town = (call cityList) call BIS_fnc_selectRandom;
 	_missionPos = markerPos _missionLocation;
 
-	_veh1 = selectrandom ["I_MRAP_03_F","I_MRAP_03_hmg_F","I_MRAP_03_gmg_F", "I_APC_Wheeled_03_cannon_F", "I_APC_tracked_03_cannon_F", "I_MBT_03_cannon_F","I_Truck_02_transport_F","I_Truck_02_covered_F","I_Truck_02_fuel_F","I_Truck_02_medical_F","I_Truck_02_box_F","I_Truck_02_ammo_F"];
-	_veh2 = selectrandom ["I_MRAP_03_F","I_MRAP_03_hmg_F","I_MRAP_03_gmg_F", "I_APC_Wheeled_03_cannon_F", "I_APC_tracked_03_cannon_F", "I_MBT_03_cannon_F","I_Truck_02_transport_F","I_Truck_02_covered_F","I_Truck_02_fuel_F","I_Truck_02_medical_F","I_Truck_02_box_F","I_Truck_02_ammo_F"];
-	_veh3 = selectrandom ["I_MRAP_03_F","I_MRAP_03_hmg_F","I_MRAP_03_gmg_F", "I_APC_Wheeled_03_cannon_F", "I_APC_tracked_03_cannon_F", "I_MBT_03_cannon_F","I_Truck_02_transport_F","I_Truck_02_covered_F","I_Truck_02_fuel_F","I_Truck_02_medical_F","I_Truck_02_box_F","I_Truck_02_ammo_F"];
-	_veh4 = selectrandom ["I_MRAP_03_F","I_MRAP_03_hmg_F","I_MRAP_03_gmg_F", "I_APC_Wheeled_03_cannon_F", "I_APC_tracked_03_cannon_F", "I_MBT_03_cannon_F","I_Truck_02_transport_F","I_Truck_02_covered_F","I_Truck_02_fuel_F","I_Truck_02_medical_F","I_Truck_02_box_F","I_Truck_02_ammo_F"];
-	_veh5 = selectrandom ["I_MRAP_03_F","I_MRAP_03_hmg_F","I_MRAP_03_gmg_F", "I_APC_Wheeled_03_cannon_F", "I_APC_tracked_03_cannon_F", "I_MBT_03_cannon_F","I_Truck_02_transport_F","I_Truck_02_covered_F","I_Truck_02_fuel_F","I_Truck_02_medical_F","I_Truck_02_box_F","I_Truck_02_ammo_F"];
+	_veh1types = selectrandom ["I_MRAP_03_F","I_MRAP_03_hmg_F","I_MRAP_03_gmg_F", "I_APC_Wheeled_03_cannon_F", "I_APC_tracked_03_cannon_F", "I_MBT_03_cannon_F","I_Truck_02_transport_F","I_Truck_02_covered_F","I_Truck_02_fuel_F","I_Truck_02_medical_F","I_Truck_02_box_F","I_Truck_02_ammo_F"];
+	_veh2types = selectrandom ["I_MRAP_03_F","I_MRAP_03_hmg_F","I_MRAP_03_gmg_F", "I_APC_Wheeled_03_cannon_F", "I_APC_tracked_03_cannon_F", "I_MBT_03_cannon_F","I_Truck_02_transport_F","I_Truck_02_covered_F","I_Truck_02_fuel_F","I_Truck_02_medical_F","I_Truck_02_box_F","I_Truck_02_ammo_F"];
+	_veh3types = selectrandom ["I_MRAP_03_F","I_MRAP_03_hmg_F","I_MRAP_03_gmg_F", "I_APC_Wheeled_03_cannon_F", "I_APC_tracked_03_cannon_F", "I_MBT_03_cannon_F","I_Truck_02_transport_F","I_Truck_02_covered_F","I_Truck_02_fuel_F","I_Truck_02_medical_F","I_Truck_02_box_F","I_Truck_02_ammo_F"];
+	_veh4types = selectrandom ["I_MRAP_03_F","I_MRAP_03_hmg_F","I_MRAP_03_gmg_F", "I_APC_Wheeled_03_cannon_F", "I_APC_tracked_03_cannon_F", "I_MBT_03_cannon_F","I_Truck_02_transport_F","I_Truck_02_covered_F","I_Truck_02_fuel_F","I_Truck_02_medical_F","I_Truck_02_box_F","I_Truck_02_ammo_F"];
+	_veh5types = selectrandom ["I_MRAP_03_F","I_MRAP_03_hmg_F","I_MRAP_03_gmg_F", "I_APC_Wheeled_03_cannon_F", "I_APC_tracked_03_cannon_F", "I_MBT_03_cannon_F","I_Truck_02_transport_F","I_Truck_02_covered_F","I_Truck_02_fuel_F","I_Truck_02_medical_F","I_Truck_02_box_F","I_Truck_02_ammo_F"];
 
 	createMissionVehicle = 
 	{
@@ -83,15 +83,51 @@ _setupObjects =
 	};
 
 	_aiGroup1 = createGroup CIVILIAN;
-	_vehicles =
-	[
-		[_veh1, _missionPos, 0] call createMissionVehicle,
-		[_veh2, _missionPos, 0] call createMissionVehicle,
-		[_veh3, _missionPos, 0] call createMissionVehicle,
-		[_veh4, _missionPos, 0] call createMissionVehicle,
-		[_veh5, _missionPos, 0] call createMissionVehicle
-	];
+	_veh1 = [_veh1types, _missionPos] call createMissionVehicle;
+	_veh2 = [_veh2types, _missionPos] call createMissionVehicle;
+	_veh3 = [_veh3types, _missionPos] call createMissionVehicle;
+	_veh4 = [_veh4types, _missionPos] call createMissionVehicle;
+	_veh5 = [_veh5types, _missionPos] call createMissionVehicle;
+	_vehicles = [_veh1,_veh2,_veh3,_veh4,_veh5];
+	{
+		private _vehicle = _x;
+		private _drivers = _vehicle emptyPositions "Driver";
+		private _Commanders =  _vehicle emptyPositions "Commander";
+		private _Gunners = _vehicle emptyPositions "Gunner";
+		private _Passangers = _vehicle emptyPositions "Cargo";
+		_aiGroup1 addVehicle _vehicle;
+		if (_drivers > 0) then
+		{
+			for "_i" from 1 to _drivers do
+			{
+				private _Driver = [_aiGroup1, _position, "AAF", "Crew"] call createsoldier;
+				_Driver moveInDriver _vehicle;
+			};
+		};
+		if (_Commanders > 0) then
+		{
+			for "_i" from 1 to _Commanders do
+			{
+				private _Commander = [_aiGroup1, _position, "AAF", "Crew"] call createsoldier;
+				_Commander moveInCommander _vehicle;
+			};
+		};
+		if (_Gunners > 0) then
+		{
+			private _gunner = [_aiGroup1, _position, "AAF", "Crew"] call createsoldier;
+			_gunner moveInGunner _vehicle;
+		};
+		if (_Passangers > 0) then
+		{
+			for "_i" from 1 to _Passangers do
+			{
+				private _soldierType = selectrandom ["Rifleman","Rifleman","Rifleman","Rifleman","Rifleman","Rifleman","Rifleman","Rifleman","Rifleman","Rifleman","AT","AA","SAW","SAW","SAW","Engineer","Medic","Grenedier","Engineer","Medic","Grenedier","Marksman","Marksman","Marksman"];
+				_soldier = [_aiGroup1, _position, "AAF", _soldierType] call createsoldier;
 
+				_soldier moveInCargo _vehicle;
+			};
+		};
+	} foreach _vehicles;
 	_leader = effectiveCommander (_vehicles select 0);
 	_aiGroup1 selectLeader _leader;
 	_leader setRank "LIEUTENANT";
