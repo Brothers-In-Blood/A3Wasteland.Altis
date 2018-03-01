@@ -38,13 +38,13 @@ _setupObjects =
 	_box2 = [_BoxPos2, "NATO", "1", 0, 10000] call createrandomlootcrate;
 	{ _x setVariable ["R3F_LOG_disabled", true, true] } forEach [_box1, _box2];
 
-	_aiGroup = createGroup CIVILIAN;
+	_aiGroup1 = createGroup CIVILIAN;
 	for "_i" from 1 to 12 do
 	{
 		private _soldierType = selectrandom ["Rifleman","Rifleman","Rifleman","Rifleman","Rifleman","Rifleman","Rifleman","Rifleman","Rifleman","Rifleman","AT","AA","SAW","SAW","SAW","Engineer","Medic","Grenedier","Engineer","Medic","Grenedier","Marksman","Marksman","Marksman"];
-		[_aiGroup, _missionPos, "NATO", _soldierType] call createsoldier;
+		[_aiGroup1, _missionPos, "NATO", _soldierType] call createsoldier;
 	};
-	_aiGroup setCombatMode 	"RED";
+	_aiGroup1 setCombatMode 	"RED";
 
 	_missionPicture = getText (configFile >> "CfgVehicles" >> typeOf _wreck >> "picture");
 	_missionHintText = format ["A %1 has been shot down. Hurry and recover the cargo!", _wreckName];

@@ -24,13 +24,13 @@ _setupObjects =
 	_outpost = (call compile preprocessFileLineNumbers "server\missions\outposts\outpostsList.sqf") call BIS_fnc_selectRandom;
 	_objects = [_outpost, _missionPos, 0] call createOutpost;
 
-	_aiGroup = createGroup CIVILIAN;
+	_aiGroup1 = createGroup CIVILIAN;
 	for "_i" from 1 to 20 do
 	{
-		[_aiGroup, _missionPos, "IDAP", "Rifleman"] call createsoldier;
+		[_aiGroup1, _missionPos, "IDAP", "Rifleman"] call createsoldier;
 
 	};
-	_aiGroup setCombatMode "RED";
+	_aiGroup1 setCombatMode "RED";
 	_missionHintText = format ["An armed <t color='%1'>outpost</t> containing weapon crates has been spotted near the marker, go capture it!", IDAPMissionColor]
 };
 

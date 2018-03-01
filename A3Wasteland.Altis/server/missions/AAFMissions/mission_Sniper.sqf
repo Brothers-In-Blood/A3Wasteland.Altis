@@ -29,22 +29,22 @@ _setupObjects =
 	private _BoxPos4 = [_missionPos, 3, 10,1,0,0,0] call findSafePos;
 	_box4 = [_BoxPos4, "AAF", "1", 0, 10000] call createrandomlootcrate;
 	{ _x setVariable ["R3F_LOG_disabled", true, true] } forEach [_box1, _box2, _box3, _box4];
-	_aiGroup = createGroup CIVILIAN;
+	_aiGroup1 = createGroup CIVILIAN;
 	for "_i" from 1 to 10 do
 	{
-		[_aiGroup, _missionPos, "AAF", "Sniper"] call createsoldier;
+		[_aiGroup1, _missionPos, "AAF", "Sniper"] call createsoldier;
 	};
 	for "_i" from 1 to 3 do
 	{
-		[_aiGroup, _missionPos, "AAF", "AA"] call createsoldier;
+		[_aiGroup1, _missionPos, "AAF", "AA"] call createsoldier;
 	};
 	for "_i" from 1 to 3 do
 	{
-		[_aiGroup, _missionPos, "AAF", "AT"] call createsoldier;
+		[_aiGroup1, _missionPos, "AAF", "AT"] call createsoldier;
 	};
-	_aiGroup setCombatMode "RED";
-	_aiGroup setBehaviour "COMBAT";
-	[_aiGroup, _missionPos] call defendArea;
+	_aiGroup1 setCombatMode "RED";
+	_aiGroup1 setBehaviour "COMBAT";
+	[_aiGroup1, _missionPos] call defendArea;
 
 	_missionHintText = format ["A Sniper Nest has been spotted. Head to the marked area and Take them out! Be careful they are fully armed and dangerous!", AAFMissionColor];
 };

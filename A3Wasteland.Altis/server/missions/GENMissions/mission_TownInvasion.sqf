@@ -51,15 +51,15 @@ _setupObjects =
 	// { _x setVariable ["R3F_LOG_disabled", true, true] } forEach [_box1, _box2, _box3, _box4];
 
 	// spawn some rebels/enemies :)
-	_aiGroup = createGroup CIVILIAN;
+	_aiGroup1 = createGroup CIVILIAN;
 	for "_i" from 1 to 30 do
 	{
-		[_aiGroup, _missionPos, "GEN", "Rifleman"] call createsoldier;
+		[_aiGroup1, _missionPos, "GEN", "Rifleman"] call createsoldier;
 
 	};
 	// move them into buildings
-	[_aiGroup, _missionPos, _buildingRadius, _fillEvenly, _putOnRoof] call moveIntoBuildings;
-	_aiGroup setCombatMode "RED";
+	[_aiGroup1, _missionPos, _buildingRadius, _fillEvenly, _putOnRoof] call moveIntoBuildings;
+	_aiGroup1 setCombatMode "RED";
 	_missionHintText = format ["Hostiles have taken over <br/><t size='1.25' color='%1'>%2</t><br/><br/>There seem to be <t color='%1'>30 enemies</t> hiding inside or on top of buildings. Get rid of them all, and take their supplies!<br/>Watch out for those windows!", GENMissionColor, _townName];
 };
 

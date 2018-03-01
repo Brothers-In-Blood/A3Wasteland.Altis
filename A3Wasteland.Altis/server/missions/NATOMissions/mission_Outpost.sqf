@@ -24,14 +24,14 @@ _setupObjects =
 	_outpost = (call compile preprocessFileLineNumbers "server\missions\outposts\outpostsList.sqf") call BIS_fnc_selectRandom;
 	_objects = [_outpost, _missionPos, 0] call createOutpost;
 
-	_aiGroup = createGroup CIVILIAN;
+	_aiGroup1 = createGroup CIVILIAN;
 	for "_i" from 1 to 20 do
 	{
 		private _soldierType = selectrandom ["Rifleman","Rifleman","Rifleman","Rifleman","Rifleman","Rifleman","Rifleman","Rifleman","Rifleman","Rifleman","AT","AA","SAW","SAW","SAW","Engineer","Medic","Grenedier","Engineer","Medic","Grenedier","Marksman","Marksman","Marksman"];
-		[_aiGroup, _missionPos, "NATO", _soldierType] call createsoldier;
+		[_aiGroup1, _missionPos, "NATO", _soldierType] call createsoldier;
 
 	};
-	_aiGroup setCombatMode "RED";
+	_aiGroup1 setCombatMode "RED";
 	_missionHintText = format ["An armed <t color='%1'>outpost</t> containing weapon crates has been spotted near the marker, go capture it!", NATOMissionColor]
 };
 

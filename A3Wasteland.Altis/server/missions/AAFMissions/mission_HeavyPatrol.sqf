@@ -7,7 +7,7 @@
 if (!isServer) exitwith {};
 #include "AAFMissionDefines.sqf";
 
-private ["_convoyVeh","_veh1","_veh2","_veh3","_veh4","_veh5","_createVehicle","_pos","_rad","_vPos1","_vPos2","_vPos3","_vehiclePos1","_vehiclePos2","_vehiclePos3","_vehiclePos4","_vehicles","_leader","_speedMode","_waypoint","_vehicleName","_numWaypoints","_box1","_box2","_box3","_box4"];
+private ["_convoyVeh","_veh1","_veh2","_veh3","_veh4","_veh5","createMissionVehicle","_pos","_rad","_vPos1","_vPos2","_vPos3","_vehiclePos1","_vehiclePos2","_vehiclePos3","_vehiclePos4","_vehicles","_leader","_speedMode","_waypoint","_vehicleName","_numWaypoints","_box1","_box2","_box3","_box4"];
 
 _setupVars =
 {
@@ -19,41 +19,39 @@ _setupObjects =
 {
 	_town = (call cityList) call BIS_fnc_selectRandom;
 	_missionPos = markerPos _missionLocation;
-	_veh1 = selectrandom ["I_MRAP_03_F","I_MRAP_03_hmg_F","I_MRAP_03_gmg_F", "I_APC_Wheeled_03_cannon_F", "I_APC_tracked_03_cannon_F", "I_MBT_03_cannon_F"];
-	_veh2 = selectrandom ["I_MRAP_03_F","I_MRAP_03_hmg_F","I_MRAP_03_gmg_F", "I_APC_Wheeled_03_cannon_F", "I_APC_tracked_03_cannon_F", "I_MBT_03_cannon_F"];
-	_veh3 = selectrandom ["I_MRAP_03_F","I_MRAP_03_hmg_F","I_MRAP_03_gmg_F", "I_APC_Wheeled_03_cannon_F", "I_APC_tracked_03_cannon_F", "I_MBT_03_cannon_F"];
-	_veh4 = selectrandom ["I_MRAP_03_F","I_MRAP_03_hmg_F","I_MRAP_03_gmg_F", "I_APC_Wheeled_03_cannon_F", "I_APC_tracked_03_cannon_F", "I_MBT_03_cannon_F"];
-	_veh5 = selectRandom ["I_MRAP_03_F","I_MRAP_03_hmg_F","I_MRAP_03_gmg_F", "I_APC_Wheeled_03_cannon_F", "I_APC_tracked_03_cannon_F", "I_MBT_03_cannon_F","I_Truck_02_transport_F","I_Truck_02_covered_F","I_Truck_02_fuel_F","I_Truck_02_medical_F","I_Truck_02_box_F","I_Truck_02_ammo_F"];
-	_veh6 = selectrandom ["I_MRAP_03_F","I_MRAP_03_hmg_F","I_MRAP_03_gmg_F", "I_APC_Wheeled_03_cannon_F", "I_APC_tracked_03_cannon_F", "I_MBT_03_cannon_F","I_Truck_02_transport_F","I_Truck_02_covered_F","I_Truck_02_fuel_F","I_Truck_02_medical_F","I_Truck_02_box_F","I_Truck_02_ammo_F"];
-	_veh7 = selectrandom ["I_MRAP_03_F","I_MRAP_03_hmg_F","I_MRAP_03_gmg_F", "I_APC_Wheeled_03_cannon_F", "I_APC_tracked_03_cannon_F", "I_MBT_03_cannon_F"];
-	_veh8 = selectrandom ["I_MRAP_03_F","I_MRAP_03_hmg_F","I_MRAP_03_gmg_F", "I_APC_Wheeled_03_cannon_F", "I_APC_tracked_03_cannon_F", "I_MBT_03_cannon_F"];
-	_veh9 = selectrandom ["I_MRAP_03_F","I_MRAP_03_hmg_F","I_MRAP_03_gmg_F", "I_APC_Wheeled_03_cannon_F", "I_APC_tracked_03_cannon_F", "I_MBT_03_cannon_F"];
+	_veh1types = selectrandom ["I_MRAP_03_F","I_MRAP_03_hmg_F","I_MRAP_03_gmg_F", "I_APC_Wheeled_03_cannon_F", "I_APC_tracked_03_cannon_F", "I_MBT_03_cannon_F"];
+	_veh2types = selectrandom ["I_MRAP_03_F","I_MRAP_03_hmg_F","I_MRAP_03_gmg_F", "I_APC_Wheeled_03_cannon_F", "I_APC_tracked_03_cannon_F", "I_MBT_03_cannon_F"];
+	_veh3types = selectrandom ["I_MRAP_03_F","I_MRAP_03_hmg_F","I_MRAP_03_gmg_F", "I_APC_Wheeled_03_cannon_F", "I_APC_tracked_03_cannon_F", "I_MBT_03_cannon_F"];
+	_veh4types = selectrandom ["I_MRAP_03_F","I_MRAP_03_hmg_F","I_MRAP_03_gmg_F", "I_APC_Wheeled_03_cannon_F", "I_APC_tracked_03_cannon_F", "I_MBT_03_cannon_F"];
+	_veh5types = selectRandom ["I_MRAP_03_F","I_MRAP_03_hmg_F","I_MRAP_03_gmg_F", "I_APC_Wheeled_03_cannon_F", "I_APC_tracked_03_cannon_F", "I_MBT_03_cannon_F","I_Truck_02_transport_F","I_Truck_02_covered_F","I_Truck_02_fuel_F","I_Truck_02_medical_F","I_Truck_02_box_F","I_Truck_02_ammo_F"];
+	_veh6types = selectrandom ["I_MRAP_03_F","I_MRAP_03_hmg_F","I_MRAP_03_gmg_F", "I_APC_Wheeled_03_cannon_F", "I_APC_tracked_03_cannon_F", "I_MBT_03_cannon_F","I_Truck_02_transport_F","I_Truck_02_covered_F","I_Truck_02_fuel_F","I_Truck_02_medical_F","I_Truck_02_box_F","I_Truck_02_ammo_F"];
+	_veh7types = selectrandom ["I_MRAP_03_F","I_MRAP_03_hmg_F","I_MRAP_03_gmg_F", "I_APC_Wheeled_03_cannon_F", "I_APC_tracked_03_cannon_F", "I_MBT_03_cannon_F"];
+	_veh8types = selectrandom ["I_MRAP_03_F","I_MRAP_03_hmg_F","I_MRAP_03_gmg_F", "I_APC_Wheeled_03_cannon_F", "I_APC_tracked_03_cannon_F", "I_MBT_03_cannon_F"];
+	_veh9types = selectrandom ["I_MRAP_03_F","I_MRAP_03_hmg_F","I_MRAP_03_gmg_F", "I_APC_Wheeled_03_cannon_F", "I_APC_tracked_03_cannon_F", "I_MBT_03_cannon_F"];
 
-	_createVehicle = 
+	_aiGroup1 = createGroup CIVILIAN;
+	_aiGroup2 = createGroup CIVILIAN;
+
+	_veh1 = [_veh1, _missionPos] call createMissionVehicle,
+	_veh2 = [_veh2, _missionPos] call createMissionVehicle,
+	_veh3 = [_veh3, _missionPos] call createMissionVehicle,
+	_veh4 = [_veh4, _missionPos] call createMissionVehicle,
+	_veh5 = [_veh5, _missionPos] call createMissionVehicle,
+	_veh6 = [_veh6, _missionPos] call createMissionVehicle,
+	_veh7 = [_veh7, _missionPos] call createMissionVehicle,
+	_veh8 = [_veh8, _missionPos] call createMissionVehicle,
+	_veh9 = [_veh9, _missionPos] call createMissionVehicle
+	_vehicles = [_veh1,_veh2,_veh3,_veh4,_veh5,_veh6,_veh7,_veh8,_veh9];
 	{
-		private _type = _this select 0;
-		private _position = _this select 1;
-		private _direction = _this select 2;
-		private _vehiclePos = [_position, 10, 50,5,0,0,0] call findSafePos;
-		private _vehicle = createVehicle [_type, _vehiclePos, [], 0, "None"];
-		_vehicle setVehicleReportRemoteTargets true;
-		_vehicle setVehicleReceiveRemoteTargets true;
-		_vehicle setVehicleRadar 1;
-		_vehicle confirmSensorTarget [west, true];
-		_vehicle confirmSensorTarget [east, true];
-		_vehicle confirmSensorTarget [resistance, true];
-		[_vehicle] call vehicleSetup;
+		_vehicle = _x;
 		private _drivers = _vehicle emptyPositions "Driver";
 		private _Commanders =  _vehicle emptyPositions "Commander";
 		private _Gunners = _vehicle emptyPositions "Gunner";
-		private _Passangers = _vehicle emptyPositions "Cargo";
-		_vehicle setDir _direction;
-		_aiGroup addVehicle _vehicle;
 		if (_drivers > 0) then
 		{
 			for "_i" from 1 to _drivers do
 			{
-				private _Driver = [_aiGroup, _position, "AAF", "Crew"] call createsoldier;
+				private _Driver = [_aiGroup1, _position, "AAF", "Rifleman"] call createsoldier;
 				_Driver moveInDriver _vehicle;
 			};
 		};
@@ -61,56 +59,42 @@ _setupObjects =
 		{
 			for "_i" from 1 to _Commanders do
 			{
-				private _Commander = [_aiGroup, _position, "AAF", "Crew"] call createsoldier;
+				private _Commander = [_aiGroup1, _position, "AAF", "Rifleman"] call createsoldier;
 				_Commander moveInCommander _vehicle;
 			};
 		};
 		if (_Gunners > 0) then
 		{
-			private _gunner = [_aiGroup, _position, "AAF", "Crew"] call createsoldier;
+			private _gunner = [_aiGroup1, _position, "AAF", "Rifleman"] call createsoldier;
 			_gunner moveInGunner _vehicle;
 		};
+	} foreach _vehicles;
+	{
+		_vehicle = _x;
 		if (_Passangers > 0) then
 		{
 			for "_i" from 1 to _Passangers do
 			{
-				private _soldierType = selectrandom ["Rifleman","Rifleman","Rifleman","Rifleman","Rifleman","Rifleman","Rifleman","Rifleman","Rifleman","Rifleman","AT","AA","SAW","SAW","SAW","Engineer","Medic","Grenedier","Engineer","Medic","Grenedier","Marksman","Marksman","Marksman"];
-				_soldier = [_aiGroup, _missionPos, "AAF", _soldierType] call createsoldier;
+				_soldier = [_aiGroup2, _position, "AAF", "Rifleman"] call createsoldier;
+
 				_soldier moveInCargo _vehicle;
 			};
 		};
-		_vehicle setVariable ["R3F_LOG_disabled", true, true]; // force vehicles to be locked
-		[_vehicle, _aiGroup] spawn checkMissionVehicleLock; // force vehicles to be locked
-		_vehicle
-	};
-
-	_aiGroup = createGroup CIVILIAN;
-	_vehicles =
-	[
-		[_veh1, _missionPos, 0] call _createVehicle,
-		[_veh2, _missionPos, 0] call _createVehicle,
-		[_veh3, _missionPos, 0] call _createVehicle,
-		[_veh4, _missionPos, 0] call _createVehicle,
-		[_veh5, _missionPos, 0] call _createVehicle,
-		[_veh6, _missionPos, 0] call _createVehicle,
-		[_veh7, _missionPos, 0] call _createVehicle,
-		[_veh8, _missionPos, 0] call _createVehicle,
-		[_veh9, _missionPos, 0] call _createVehicle
-	];
+	} foreach _vehicles;
 
 	_leader = effectiveCommander (_vehicles select 0);
-	_aiGroup selectLeader _leader;
+	_aiGroup1 selectLeader _leader;
 	_leader setRank "LIEUTENANT";
 
-	_aiGroup setCombatMode "GREEN"; // Will defend themselves
-	_aiGroup setBehaviour "SAFE"; // units feel safe until they spot an enemy or get into contact
-	_aiGroup setFormation "FILE";
+	_aiGroup1 setCombatMode "GREEN"; // Will defend themselves
+	_aiGroup1 setBehaviour "SAFE"; // units feel safe until they spot an enemy or get into contact
+	_aiGroup1 setFormation "FILE";
 
 	_speedMode = "LIMITED";
-	_aiGroup setSpeedMode _speedMode;
+	_aiGroup1 setSpeedMode _speedMode;
 
 	{
-		_waypoint = _aiGroup addWaypoint [markerPos (_x select 0), 0];
+		_waypoint = _aiGroup1 addWaypoint [markerPos (_x select 0), 0];
 		_waypoint setWaypointType "MOVE";
 		_waypoint setWaypointCompletionRadius 50;
 		_waypoint setWaypointCombatMode "GREEN";
@@ -119,7 +103,7 @@ _setupObjects =
 		_waypoint setWaypointSpeed _speedMode;
 	} forEach ((call cityList) call BIS_fnc_arrayShuffle);
 
-	_missionPos = getPosATL leader _aiGroup;
+	_missionPos = getPosATL leader _aiGroup1;
 
 	_missionPicture = getText (configFile >> "CfgVehicles" >> _veh2 >> "picture");
 	_vehicleName = getText (configFile >> "CfgVehicles" >> _veh2 >> "displayName");
@@ -128,12 +112,12 @@ _setupObjects =
 
 	_missionHintText = format ["A convoy containing at least a <t color='%4'>%1</t>, a <t color='%4'>%2</t> and a <t color='%4'>%3</t> is patrolling Altis! Stop the patrol and capture the goods and money!", _vehicleName, _vehicleName2, _vehicleName3, AAFMissionColor];
 
-	_numWaypoints = count waypoints _aiGroup;
+	_numWaypoints = count waypoints _aiGroup1;
 };
 
 _waitUntilMarkerPos = {getPosATL _leader};
 _waitUntilExec = nil;
-_waitUntilCondition = {currentWaypoint _aiGroup >= _numWaypoints};
+_waitUntilCondition = {currentWaypoint _aiGroup1 >= _numWaypoints};
 
 _failedExec = nil;
 

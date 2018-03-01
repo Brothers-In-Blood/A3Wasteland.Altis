@@ -48,16 +48,16 @@ _setupObjects =
 	_cFire1	= createVehicle ["Campfire_burning_F", _missionPos, [], 2, "None"];
 
 	// spawn some rebels/enemies :)
-	_aiGroup = createGroup CIVILIAN;
+	_aiGroup1 = createGroup CIVILIAN;
 	for "_i" from 1 to 30 do
 	{
 		private _soldierType = selectrandom ["Rifleman","Rifleman","Rifleman","Rifleman","Rifleman","Rifleman","Rifleman","Rifleman","Rifleman","Rifleman","AT"];
-		[_aiGroup, _missionPos, "SYN", _soldierType] call createsoldier;
+		[_aiGroup1, _missionPos, "SYN", _soldierType] call createsoldier;
 
 	};
 	// move them into buildings
-	[_aiGroup, _missionPos, _buildingRadius, _fillEvenly, _putOnRoof] call moveIntoBuildings;
-	_aiGroup setCombatMode "RED";
+	[_aiGroup1, _missionPos, _buildingRadius, _fillEvenly, _putOnRoof] call moveIntoBuildings;
+	_aiGroup1 setCombatMode "RED";
 	_missionHintText = format ["Hostiles have taken over <br/><t size='1.25' color='%1'>%2</t><br/><br/>There seem to be <t color='%1'>30 enemies</t> hiding inside or on top of buildings. Get rid of them all, and take their supplies!<br/>Watch out for those windows!", SYNMissionColor, _townName];
 };
 

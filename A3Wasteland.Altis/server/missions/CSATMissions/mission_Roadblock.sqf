@@ -36,13 +36,13 @@ _setupObjects =
 	_bunker2 setDir _markerDir;
 
 		// NPC Randomizer
-	_aiGroup  = createGroup CIVILIAN;
+	_aiGroup1  = createGroup CIVILIAN;
 	for "_i" from 1 to 7 do
 	{
 		private _soldierType = selectrandom ["Rifleman","Rifleman","Rifleman","Rifleman","Rifleman","Rifleman","Rifleman","Rifleman","Rifleman","Rifleman","AT","AA","SAW","SAW","SAW","Engineer","Medic","Grenedier","Engineer","Medic","Grenedier","Marksman","Marksman","Marksman"];
-		[[_aiGroup, _missionPos, "CSAT", _soldierType] call createsoldier;
+		[[_aiGroup1, _missionPos, "CSAT", _soldierType] call createsoldier;
 
-		_aiGroup setCombatMode "RED";
+		_aiGroup1 setCombatMode "RED";
 	_missionHintText = format ["Enemies have set up an illegal roadblock and are searching vehicles! They need to be stopped!", CSATMissionColor];
 };
 

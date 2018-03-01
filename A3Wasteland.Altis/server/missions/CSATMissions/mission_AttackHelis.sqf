@@ -7,7 +7,7 @@
 if (!isServer) exitwith {};
 #include "CSATMissionDefines.sqf";
 
-private ["_convoyVeh","_veh1","_veh2","_veh3","_veh4","_veh5","_createVehicle","_pos","_rad","_vPos1","_vPos2","_vPos3","_vehiclePos1","_vehiclePos2","_vehiclePos3","_vehiclePos4","_vehicles","_leader","_speedMode","_waypoint","_vehicleName","_numWaypoints","_box1","_box2","_box3","_box4"];
+private ["_convoyVeh","_veh1","_veh2","_veh3","_veh4","_veh5","createMissionVehicle","_pos","_rad","_vPos1","_vPos2","_vPos3","_vehiclePos1","_vehiclePos2","_vehiclePos3","_vehiclePos4","_vehicles","_leader","_speedMode","_waypoint","_vehicleName","_numWaypoints","_box1","_box2","_box3","_box4"];
 
 _setupVars =
 {
@@ -22,7 +22,7 @@ _setupObjects =
 
 	_veh1 = selectrandom ["O_Heli_Light_02_dynamicLoadout_F","O_Heli_Attack_02_dynamicLoadout_F"];
 	_veh2 = selectrandom ["O_Heli_Light_02_dynamicLoadout_F","O_Heli_Attack_02_dynamicLoadout_F"];
-	_createVehicle = 
+	createMissionVehicle = 
 	{
 		private _type = _this select 0;
 		private _position = _this select 1;
@@ -41,20 +41,20 @@ _setupObjects =
 		private _Gunners = _vehicle emptyPositions "Gunner";
 		private _Passangers = _vehicle emptyPositions "Cargo";
 		_vehicle setDir _direction;
-		_aiGroup addVehicle _vehicle;
+		_aiGroup1 addVehicle _vehicle;
 		if (_drivers > 0) then
 		{
 			for "_i" from 1 to _drivers do
 			{
-				private _Driver = [_aiGroup, _position, "CSAT", "HeliPilot"] call createsoldier;
+				private _Driver = [_aiGroup1, _position, "CSAT", "HeliPilot"] call createsoldier;
 				_Driver moveInDriver _vehicle;
 			};
 		};
-		private _Copilot = [_aiGroup, _position, "CSAT", "HeliPilot"] call createsoldier;
+		private _Copilot = [_aiGroup1, _position, "CSAT", "HeliPilot"] call createsoldier;
 		_Copilot moveInAny _vehicle;
 		if (_Gunners > 0) then
 		{
-			private _gunner = [_aiGroup, _position, "CSAT", "HeliCrew"] call createsoldier;
+			private _gunner = [_aiGroup1, _position, "CSAT", "HeliCrew"] call createsoldier;
 			_gunner moveInGunner _vehicle;
 		};
 		if (_Passangers > 0) then
@@ -62,39 +62,39 @@ _setupObjects =
 			for "_i" from 1 to _Passangers do
 			{
 				private _soldierType = selectrandom ["Rifleman","Rifleman","Rifleman","Rifleman","Rifleman","Rifleman","Rifleman","Rifleman","Rifleman","Rifleman","AT","AA","SAW","SAW","SAW","Engineer","Medic","Grenedier","Engineer","Medic","Grenedier","Marksman","Marksman","Marksman"];
-				_soldier = [_aiGroup, _missionPos, "CSAT", _soldierType] call createsoldier;
+				_soldier = [_aiGroup1, _missionPos, "CSAT", _soldierType] call createsoldier;
 				_soldier moveInCargo _vehicle;
 			};
 		};
 		_vehicle setVariable ["R3F_LOG_disabled", true, true]; // force vehicles to be locked
-		[_vehicle, _aiGroup] spawn checkMissionVehicleLock; // force vehicles to be locked
+		[_vehicle, _aiGroup1] spawn checkMissionVehicleLock; // force vehicles to be locked
 		_vehicle
 	};
 
-	_aiGroup = createGroup CIVILIAN;
+	_aiGroup1 = createGroup CIVILIAN;
 
 	_rad = _town select 1;
 	_missionPos = [_missionPos,_rad,_rad + 50,5,0,0,0] call findSafePos;
 
 	_vehicles =
 	[
-		[_veh1, _missionPos, 0] call _createVehicle,
-		[_veh2, _missionPos, 0] call _createVehicle
+		[_veh1, _missionPos, 0] call createMissionVehicle,
+		[_veh2, _missionPos, 0] call createMissionVehicle
 	];
 
 	_leader = effectiveCommander (_vehicles select 0);
-	_aiGroup selectLeader _leader;
+	_aiGroup1 selectLeader _leader;
 	_leader setRank "LIEUTENANT";
 
-	_aiGroup setCombatMode "RED"; // Will fire on enemies
-	_aiGroup setBehaviour "COMBAT"; // units feel safe until they spot an enemy or get into contact
-	_aiGroup setFormation "FILE";
+	_aiGroup1 setCombatMode "RED"; // Will fire on enemies
+	_aiGroup1 setBehaviour "COMBAT"; // units feel safe until they spot an enemy or get into contact
+	_aiGroup1 setFormation "FILE";
 
 	_speedMode = "LIMITED";
-	_aiGroup setSpeedMode _speedMode;
+	_aiGroup1 setSpeedMode _speedMode;
 
 	{
-		_waypoint = _aiGroup addWaypoint [markerPos (_x select 0), 0];
+		_waypoint = _aiGroup1 addWaypoint [markerPos (_x select 0), 0];
 		_waypoint setWaypointType "MOVE";
 		_waypoint setWaypointCompletionRadius 50;
 		_waypoint setWaypointCombatMode "RED";
@@ -103,19 +103,19 @@ _setupObjects =
 		_waypoint setWaypointSpeed _speedMode;
 	} forEach ((call cityList) call BIS_fnc_arrayShuffle);
 
-	_missionPos = getPosATL leader _aiGroup;
+	_missionPos = getPosATL leader _aiGroup1;
 
 	_missionPicture = getText (configFile >> "CfgVehicles" >> _veh2 >> "picture");
 	_vehicleName = getText (configFile >> "CfgVehicles" >> _veh2 >> "displayName");
 
-	_missionHintText = format ["A convoy containing at least a <t color='%3'>%1</t> and a <t color='%3'>%2</t> is patrolling Altis! Stop the patrol and capture the goods and money!", _vehicleName, _vehicleName2, CSATMissionColor];
+	_missionHintText = format ["A convoy containing at least a <t color='%2'>%1</t> is patrolling Altis! Stop the patrol and capture the goods and money!", _vehicleName, CSATMissionColor];
 
-	_numWaypoints = count waypoints _aiGroup;
+	_numWaypoints = count waypoints _aiGroup1;
 };
 
 _waitUntilMarkerPos = {getPosATL _leader};
 _waitUntilExec = nil;
-_waitUntilCondition = {currentWaypoint _aiGroup >= _numWaypoints};
+_waitUntilCondition = {currentWaypoint _aiGroup1 >= _numWaypoints};
 
 _failedExec = nil;
 

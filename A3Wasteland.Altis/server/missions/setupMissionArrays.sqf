@@ -11,90 +11,90 @@ if (!isServer) exitWith {};
 AAFMissions =
 [
 	["mission_AirWreck", 1],
-	["mission_MediumPatrol", 1],
-	["mission_Vehicle", 1],
-	["mission_Outpost", 1],
-	["mission_Sniper", 1],
-	["mission_TownInvasion", 1],
-	["mission_Roadblock", 1],
-	["mission_Jaws", 1],
-	["mission_SunkenSupplies", 1],
-	["mission_SunkenTreasure", 1],
-	["mission_Coastal_Convoy", 1],
-	["mission_HeavyPatrol", 1],
-	["mission_HostileJet", 1],
-	["mission_InfantryPatrol", 1],
-	["mission_LightPatrol", 1],
-	["mission_AttackHelis", 1],
-	["mission_HeliFormation", 1]
+	// ["mission_MediumPatrol", 1],
+	// ["mission_Vehicle", 1],
+	// ["mission_Outpost", 1],
+	// ["mission_Sniper", 1],
+	["mission_TownInvasion", 1]
+	// ["mission_Roadblock", 1],
+	// ["mission_Jaws", 1],
+	// ["mission_SunkenSupplies", 1],
+	// ["mission_SunkenTreasure", 1],
+	// ["mission_Coastal_Convoy", 1],
+	// ["mission_HeavyPatrol", 1],
+	// ["mission_HostileJet", 1],
+	// ["mission_InfantryPatrol", 1],
+	// ["mission_LightPatrol", 1],
+	// ["mission_AttackHelis", 1],
+	// ["mission_HeliFormation", 1]
 ];
 NATOMissions =
 [
-	["mission_AirWreck", 1],
-	["mission_MediumPatrol", 1],
-	["mission_Vehicle", 1],
-	["mission_Outpost", 1],
-	["mission_Sniper", 1],
-	["mission_TownInvasion", 1],
-	["mission_Roadblock", 1],
-	["mission_Jaws", 1],
-	["mission_SunkenSupplies", 1],
-	["mission_SunkenTreasure", 1],
-	["mission_Coastal_Convoy", 1],
-	["mission_HeavyPatrol", 1],
-	["mission_HostileJet", 1],
-	["mission_InfantryPatrol", 1],
-	["mission_LightPatrol", 1],
-	["mission_AttackHelis", 1],
-	["mission_HeliFormation", 1]
+	// ["mission_AirWreck", 1],
+	// ["mission_MediumPatrol", 1],
+	// ["mission_Vehicle", 1],
+	// ["mission_Outpost", 1],
+	// ["mission_Sniper", 1],
+	// ["mission_TownInvasion", 1],
+	// ["mission_Roadblock", 1],
+	// ["mission_Jaws", 1],
+	// ["mission_SunkenSupplies", 1],
+	// ["mission_SunkenTreasure", 1],
+	// ["mission_Coastal_Convoy", 1],
+	// ["mission_HeavyPatrol", 1],
+	// ["mission_HostileJet", 1],
+	// ["mission_InfantryPatrol", 1],
+	// ["mission_LightPatrol", 1],
+	// ["mission_AttackHelis", 1],
+	// ["mission_HeliFormation", 1]
 ];
 CSATMissions =
 [
-	["mission_AirWreck", 1],
-	["mission_MediumPatrol", 1],
-	["mission_Vehicle", 1],
-	["mission_Outpost", 1],
-	["mission_Sniper", 1],
-	["mission_TownInvasion", 1],
-	["mission_Roadblock", 1],
-	["mission_Jaws", 1],
-	["mission_SunkenSupplies", 1],
-	["mission_SunkenTreasure", 1],
-	["mission_Coastal_Convoy", 1],
-	["mission_HeavyPatrol", 1],
-	["mission_HostileJet", 1],
-	["mission_InfantryPatrol", 1],
-	["mission_LightPatrol", 1],
-	["mission_AttackHelis", 1],
-	["mission_HeliFormation", 1]
+	// ["mission_AirWreck", 1],
+	// ["mission_MediumPatrol", 1],
+	// ["mission_Vehicle", 1],
+	// ["mission_Outpost", 1],
+	// ["mission_Sniper", 1],
+	// ["mission_TownInvasion", 1],
+	// ["mission_Roadblock", 1],
+	// ["mission_Jaws", 1],
+	// ["mission_SunkenSupplies", 1],
+	// ["mission_SunkenTreasure", 1],
+	// ["mission_Coastal_Convoy", 1],
+	// ["mission_HeavyPatrol", 1],
+	// ["mission_HostileJet", 1],
+	// ["mission_InfantryPatrol", 1],
+	// ["mission_LightPatrol", 1],
+	// ["mission_AttackHelis", 1],
+	// ["mission_HeliFormation", 1]
 ];
 IDAPMissions =
 [
-	["mission_AirWreck", 1],
-	["mission_MediumPatrol", 1],
-	["mission_Outpost", 1],
-	["mission_HeavyPatrol", 1],
-	["mission_LightPatrol", 1],
-	["mission_HeliFormation", 1]
+	// ["mission_AirWreck", 1],
+	// ["mission_MediumPatrol", 1],
+	// ["mission_Outpost", 1],
+	// ["mission_HeavyPatrol", 1],
+	// ["mission_LightPatrol", 1],
+	// ["mission_HeliFormation", 1]
 ];
 GENMissions =
 [
-	["mission_MediumPatrol", 1],
-	["mission_Outpost", 1],
-	["mission_TownInvasion", 1],
-	["mission_Roadblock", 1],
-	["mission_HeavyPatrol", 1],
-	["mission_LightPatrol", 1]
+	// ["mission_MediumPatrol", 1],
+	// ["mission_Outpost", 1],
+	// ["mission_TownInvasion", 1],
+	// ["mission_Roadblock", 1],
+	// ["mission_HeavyPatrol", 1],
+	// ["mission_LightPatrol", 1]
 ];
 SYNMissions =
 [
-	["mission_Outpost", 1],
-	["mission_TownInvasion", 1],
-	["mission_Roadblock", 1],
-	["mission_Coastal_Convoy", 1],
-	["mission_HeavyPatrol", 1],
-	["mission_InfantryPatrol", 1],
-	["mission_LightPatrol", 1]
+	// ["mission_Outpost", 1],
+	// ["mission_TownInvasion", 1],
+	// ["mission_Roadblock", 1],
+	// ["mission_Coastal_Convoy", 1],
+	// ["mission_HeavyPatrol", 1],
+	// ["mission_InfantryPatrol", 1],
+	// ["mission_LightPatrol", 1]
 ];
 
 { _x set [2, false] } forEach NATOMissions;

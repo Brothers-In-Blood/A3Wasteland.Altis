@@ -51,16 +51,50 @@ _setupObjects =
 	// { _x setVariable ["R3F_LOG_disabled", true, true] } forEach [_box1, _box2, _box3, _box4];
 
 	// spawn some rebels/enemies :)
-	_aiGroup = createGroup CIVILIAN;
-	for "_i" from 1 to 30 do
+	_aiGroup1 = createGroup CIVILIAN;
+	for "_i" from 1 to 10 do
 	{
 		private _soldierType = selectrandom ["Rifleman","Rifleman","Rifleman","Rifleman","Rifleman","Rifleman","Rifleman","Rifleman","Rifleman","Rifleman","AT","AA","SAW","SAW","SAW","Engineer","Medic","Grenedier","Engineer","Medic","Grenedier","Marksman","Marksman","Marksman"];
-		[_aiGroup, _missionPos, "AAF", _soldierType] call createsoldier;
+		[_aiGroup1, _missionPos, "AAF", _soldierType] call createsoldier;
 
 	};
 	// move them into buildings
-	[_aiGroup, _missionPos, _buildingRadius, _fillEvenly, _putOnRoof] call moveIntoBuildings;
-	_aiGroup setCombatMode "RED";
+	[_aiGroup1, _missionPos, _buildingRadius, _fillEvenly, _putOnRoof] call moveIntoBuildings;
+	_aiGroup1 setCombatMode "RED";
+	
+	_aiGroup2 = createGroup CIVILIAN;
+	for "_i" from 1 to 10 do
+	{
+		private _soldierType = selectrandom ["Rifleman","Rifleman","Rifleman","Rifleman","Rifleman","Rifleman","Rifleman","Rifleman","Rifleman","Rifleman","AT","AA","SAW","SAW","SAW","Engineer","Medic","Grenedier","Engineer","Medic","Grenedier","Marksman","Marksman","Marksman"];
+		[_aiGroup2, _missionPos, "AAF", _soldierType] call createsoldier;
+
+	};
+	// move them into buildings
+	[_aiGroup2, _missionPos, _buildingRadius, _fillEvenly, _putOnRoof] call moveIntoBuildings;
+	_aiGroup2 setCombatMode "RED";
+	
+	_aiGroup3 = createGroup CIVILIAN;
+	for "_i" from 1 to 10 do
+	{
+		private _soldierType = selectrandom ["Rifleman","Rifleman","Rifleman","Rifleman","Rifleman","Rifleman","Rifleman","Rifleman","Rifleman","Rifleman","AT","AA","SAW","SAW","SAW","Engineer","Medic","Grenedier","Engineer","Medic","Grenedier","Marksman","Marksman","Marksman"];
+		[_aiGroup3, _missionPos, "AAF", _soldierType] call createsoldier;
+
+	};
+	// move them into buildings
+	[_aiGroup3, _missionPos, _buildingRadius, _fillEvenly, _putOnRoof] call moveIntoBuildings;
+	_aiGroup3 setCombatMode "RED";
+	
+	_aiGroup4 = createGroup CIVILIAN;
+	for "_i" from 1 to 10 do
+	{
+		private _soldierType = selectrandom ["Rifleman","Rifleman","Rifleman","Rifleman","Rifleman","Rifleman","Rifleman","Rifleman","Rifleman","Rifleman","AT","AA","SAW","SAW","SAW","Engineer","Medic","Grenedier","Engineer","Medic","Grenedier","Marksman","Marksman","Marksman"];
+		[_aiGroup4, _missionPos, "AAF", _soldierType] call createsoldier;
+
+	};
+	// move them into buildings
+	[_aiGroup4, _missionPos, _buildingRadius, _fillEvenly, _putOnRoof] call moveIntoBuildings;
+	_aiGroup4 setCombatMode "RED";
+
 	_missionHintText = format ["Hostiles have taken over <br/><t size='1.25' color='%1'>%2</t><br/><br/>There seem to be <t color='%1'>30 enemies</t> hiding inside or on top of buildings. Get rid of them all, and take their supplies!<br/>Watch out for those windows!", AAFMissionColor, _townName];
 };
 

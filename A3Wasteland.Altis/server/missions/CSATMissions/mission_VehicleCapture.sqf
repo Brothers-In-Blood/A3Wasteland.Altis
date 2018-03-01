@@ -27,234 +27,234 @@ _setupObjects =
 
 	//reload _vehicle;
 
-	_aiGroup = createGroup CIVILIAN;
+	_aiGroup1 = createGroup CIVILIAN;
 	switch (true) do
 	{
 		case ({_vehicleClass isKindOf _x} count ["O_MRAP_02_hmg_F","O_MRAP_02_gmg_F"] > 0):
 		{
 			for "_i" from 1 to 5 do
 			{
-				[_aiGroup, _missionPos, "CSAT", "Rifleman"] call createsoldier;
+				[_aiGroup1, _missionPos, "CSAT", "Rifleman"] call createsoldier;
 			};
 			for "_i" from 1 to 2 do
 			{
-				[_aiGroup, _missionPos, "CSAT", "SAW"] call createsoldier;
+				[_aiGroup1, _missionPos, "CSAT", "SAW"] call createsoldier;
 			};
 			for "_i" from 1 to 2 do
 			{
-				[_aiGroup, _missionPos, "CSAT", "Genedier"] call createsoldier;
+				[_aiGroup1, _missionPos, "CSAT", "Genedier"] call createsoldier;
 			};
 			for "_i" from 1 to 2 do
 			{
-				[_aiGroup, _missionPos, "CSAT", "Medic"] call createsoldier;
+				[_aiGroup1, _missionPos, "CSAT", "Medic"] call createsoldier;
 			};
 			for "_i" from 1 to 2 do
 			{
-				[_aiGroup, _missionPos, "CSAT", "Marksman"] call createsoldier;
+				[_aiGroup1, _missionPos, "CSAT", "Marksman"] call createsoldier;
 			};
-			[_aiGroup, _missionPos, "CSAT", "AT"] call createsoldier;
-			[_aiGroup, _missionPos, "CSAT", "AA"] call createsoldier;
-			[_aiGroup, _missionPos, "CSAT", "Engineer"] call createsoldier;
+			[_aiGroup1, _missionPos, "CSAT", "AT"] call createsoldier;
+			[_aiGroup1, _missionPos, "CSAT", "AA"] call createsoldier;
+			[_aiGroup1, _missionPos, "CSAT", "Engineer"] call createsoldier;
 		};
 		case ({_vehicleClass isKindOf _x} count ["B_APC_Tracked_01_AA_F", "O_APC_Tracked_02_AA_F"] > 0):
 		{
 			for "_i" from 1 to 7 do
 			{
-				[_aiGroup, _missionPos, "CSAT", "Rifleman"] call createsoldier;
+				[_aiGroup1, _missionPos, "CSAT", "Rifleman"] call createsoldier;
 			};
 			for "_i" from 1 to 3 do
 			{
-				[_aiGroup, _missionPos, "CSAT", "SAW"] call createsoldier;
+				[_aiGroup1, _missionPos, "CSAT", "SAW"] call createsoldier;
 			};
 			for "_i" from 1 to 2 do
 			{
-				[_aiGroup, _missionPos, "CSAT", "Genedier"] call createsoldier;
+				[_aiGroup1, _missionPos, "CSAT", "Genedier"] call createsoldier;
 			};
 			for "_i" from 1 to 2 do
 			{
-				[_aiGroup, _missionPos, "CSAT", "Medic"] call createsoldier;
+				[_aiGroup1, _missionPos, "CSAT", "Medic"] call createsoldier;
 			};
 			for "_i" from 1 to 3 do
 			{
-				[_aiGroup, _missionPos, "CSAT", "Marksman"] call createsoldier;
+				[_aiGroup1, _missionPos, "CSAT", "Marksman"] call createsoldier;
 			};
 			for "_i" from 1 to 2 do
 			{
-				[_aiGroup, _missionPos, "CSAT", "AT"] call createsoldier;
+				[_aiGroup1, _missionPos, "CSAT", "AT"] call createsoldier;
 			};
-			[_aiGroup, _missionPos, "CSAT", "AA"] call createsoldier;
-			[_aiGroup, _missionPos, "CSAT", "Engineer"] call createsoldier;
+			[_aiGroup1, _missionPos, "CSAT", "AA"] call createsoldier;
+			[_aiGroup1, _missionPos, "CSAT", "Engineer"] call createsoldier;
 		};
 		case (_vehicleClass isKindOf "O_APC_Wheeled_02_rcws_F"):
 		{
 			for "_i" from 1 to 7 do
 			{
-				[_aiGroup, _missionPos, "CSAT", "Rifleman"] call createsoldier;
+				[_aiGroup1, _missionPos, "CSAT", "Rifleman"] call createsoldier;
 			};
 			for "_i" from 1 to 3 do
 			{
-				[_aiGroup, _missionPos, "CSAT", "SAW"] call createsoldier;
+				[_aiGroup1, _missionPos, "CSAT", "SAW"] call createsoldier;
 			};
 			for "_i" from 1 to 2 do
 			{
-				[_aiGroup, _missionPos, "CSAT", "Genedier"] call createsoldier;
+				[_aiGroup1, _missionPos, "CSAT", "Genedier"] call createsoldier;
 			};
 			for "_i" from 1 to 2 do
 			{
-				[_aiGroup, _missionPos, "CSAT", "Medic"] call createsoldier;
+				[_aiGroup1, _missionPos, "CSAT", "Medic"] call createsoldier;
 			};
 			for "_i" from 1 to 2 do
 			{
-				[_aiGroup, _missionPos, "CSAT", "Marksman"] call createsoldier;
+				[_aiGroup1, _missionPos, "CSAT", "Marksman"] call createsoldier;
 			};
 			for "_i" from 1 to 2 do
 			{
-				[_aiGroup, _missionPos, "CSAT", "AT"] call createsoldier;
+				[_aiGroup1, _missionPos, "CSAT", "AT"] call createsoldier;
 			};
 			for "_i" from 1 to 2 do
 			{
-				[_aiGroup, _missionPos, "CSAT", "AA"] call createsoldier;
+				[_aiGroup1, _missionPos, "CSAT", "AA"] call createsoldier;
 			};
-			[_aiGroup, _missionPos, "CSAT", "Engineer"] call createsoldier;
+			[_aiGroup1, _missionPos, "CSAT", "Engineer"] call createsoldier;
 		};
 		case ({_vehicleClass isKindOf _x} count ["O_UGV_01_rcws_F","O_APC_Tracked_02_cannon_F"]>0):
 		{
 			for "_i" from 1 to 7 do
 			{
-				[_aiGroup, _missionPos, "CSAT", "Rifleman"] call createsoldier;
+				[_aiGroup1, _missionPos, "CSAT", "Rifleman"] call createsoldier;
 			};
 			for "_i" from 1 to 3 do
 			{
-				[_aiGroup, _missionPos, "CSAT", "SAW"] call createsoldier;
+				[_aiGroup1, _missionPos, "CSAT", "SAW"] call createsoldier;
 			};
 			for "_i" from 1 to 2 do
 			{
-				[_aiGroup, _missionPos, "CSAT", "Genedier"] call createsoldier;
+				[_aiGroup1, _missionPos, "CSAT", "Genedier"] call createsoldier;
 			};
 			for "_i" from 1 to 2 do
 			{
-				[_aiGroup, _missionPos, "CSAT", "Medic"] call createsoldier;
+				[_aiGroup1, _missionPos, "CSAT", "Medic"] call createsoldier;
 			};
 			for "_i" from 1 to 2 do
 			{
-				[_aiGroup, _missionPos, "CSAT", "Marksman"] call createsoldier;
+				[_aiGroup1, _missionPos, "CSAT", "Marksman"] call createsoldier;
 			};
 			for "_i" from 1 to 2 do
 			{
-				[_aiGroup, _missionPos, "CSAT", "AT"] call createsoldier;
+				[_aiGroup1, _missionPos, "CSAT", "AT"] call createsoldier;
 			};
 			for "_i" from 1 to 2 do
 			{
-				[_aiGroup, _missionPos, "CSAT", "AA"] call createsoldier;
+				[_aiGroup1, _missionPos, "CSAT", "AA"] call createsoldier;
 			};
 			for "_i" from 1 to 2 do
 			{
-				[_aiGroup, _missionPos, "CSAT", "Engineer"] call createsoldier;
+				[_aiGroup1, _missionPos, "CSAT", "Engineer"] call createsoldier;
 			};
 		};
 		case (_vehicleClass isKindOf "O_MBT_02_cannon_F"):
 		{
 			for "_i" from 1 to 10 do
 			{
-				[_aiGroup, _missionPos, "CSAT", "Rifleman"] call createsoldier;
+				[_aiGroup1, _missionPos, "CSAT", "Rifleman"] call createsoldier;
 			};
 			for "_i" from 1 to 3 do
 			{
-				[_aiGroup, _missionPos, "CSAT", "SAW"] call createsoldier;
+				[_aiGroup1, _missionPos, "CSAT", "SAW"] call createsoldier;
 			};
 			for "_i" from 1 to 3 do
 			{
-				[_aiGroup, _missionPos, "CSAT", "Genedier"] call createsoldier;
+				[_aiGroup1, _missionPos, "CSAT", "Genedier"] call createsoldier;
 			};
 			for "_i" from 1 to 2 do
 			{
-				[_aiGroup, _missionPos, "CSAT", "Medic"] call createsoldier;
+				[_aiGroup1, _missionPos, "CSAT", "Medic"] call createsoldier;
 			};
 			for "_i" from 1 to 3 do
 			{
-				[_aiGroup, _missionPos, "CSAT", "Marksman"] call createsoldier;
+				[_aiGroup1, _missionPos, "CSAT", "Marksman"] call createsoldier;
 			};
 			for "_i" from 1 to 3 do
 			{
-				[_aiGroup, _missionPos, "CSAT", "AT"] call createsoldier;
+				[_aiGroup1, _missionPos, "CSAT", "AT"] call createsoldier;
 			};
 			for "_i" from 1 to 3 do
 			{
-				[_aiGroup, _missionPos, "CSAT", "AA"] call createsoldier;
+				[_aiGroup1, _missionPos, "CSAT", "AA"] call createsoldier;
 			};
 			for "_i" from 1 to 2 do
 			{
-				[_aiGroup, _missionPos, "CSAT", "Engineer"] call createsoldier;
+				[_aiGroup1, _missionPos, "CSAT", "Engineer"] call createsoldier;
 			};
 		};	
 		case ({_vehicleClass isKindOf _x} count ["O_Plane_CAS_02_dynamicLoadout_F","O_Plane_Fighter_02_F","O_Plane_Fighter_02_Stealth_F","O_T_VTOL_02_infantry_dynamicLoadout_F","O_T_VTOL_02_vehicle_dynamicLoadout_F"] > 0):
 		{
 			for "_i" from 1 to 10 do
 			{
-				[_aiGroup, _missionPos, "CSAT", "Rifleman"] call createsoldier;
+				[_aiGroup1, _missionPos, "CSAT", "Rifleman"] call createsoldier;
 			};
 			for "_i" from 1 to 4 do
 			{
-				[_aiGroup, _missionPos, "CSAT", "SAW"] call createsoldier;
+				[_aiGroup1, _missionPos, "CSAT", "SAW"] call createsoldier;
 			};
 			for "_i" from 1 to 4 do
 			{
-				[_aiGroup, _missionPos, "CSAT", "Genedier"] call createsoldier;
+				[_aiGroup1, _missionPos, "CSAT", "Genedier"] call createsoldier;
 			};
 			for "_i" from 1 to 3 do
 			{
-				[_aiGroup, _missionPos, "CSAT", "Medic"] call createsoldier;
+				[_aiGroup1, _missionPos, "CSAT", "Medic"] call createsoldier;
 			};
 			for "_i" from 1 to 4 do
 			{
-				[_aiGroup, _missionPos, "CSAT", "Marksman"] call createsoldier;
+				[_aiGroup1, _missionPos, "CSAT", "Marksman"] call createsoldier;
 			};
 			for "_i" from 1 to 4 do
 			{
-				[_aiGroup, _missionPos, "CSAT", "AT"] call createsoldier;
+				[_aiGroup1, _missionPos, "CSAT", "AT"] call createsoldier;
 			};
 			for "_i" from 1 to 4 do
 			{
-				[_aiGroup, _missionPos, "CSAT", "AA"] call createsoldier;
+				[_aiGroup1, _missionPos, "CSAT", "AA"] call createsoldier;
 			};
 			for "_i" from 1 to 3 do
 			{
-				[_aiGroup, _missionPos, "CSAT", "Engineer"] call createsoldier;
+				[_aiGroup1, _missionPos, "CSAT", "Engineer"] call createsoldier;
 			};
 		};
 		case ({_vehicleClass isKindOf _x} count ["O_UAV_02_dynamicLoadout_F","O_T_UAV_04_CAS_F"]>0):
 		{
 			for "_i" from 1 to 10 do
 			{
-				[_aiGroup, _missionPos, "CSAT", "Rifleman"] call createsoldier;
+				[_aiGroup1, _missionPos, "CSAT", "Rifleman"] call createsoldier;
 			};
 			for "_i" from 1 to 4 do
 			{
-				[_aiGroup, _missionPos, "CSAT", "SAW"] call createsoldier;
+				[_aiGroup1, _missionPos, "CSAT", "SAW"] call createsoldier;
 			};
 			for "_i" from 1 to 4 do
 			{
-				[_aiGroup, _missionPos, "CSAT", "Genedier"] call createsoldier;
+				[_aiGroup1, _missionPos, "CSAT", "Genedier"] call createsoldier;
 			};
 			for "_i" from 1 to 3 do
 			{
-				[_aiGroup, _missionPos, "CSAT", "Medic"] call createsoldier;
+				[_aiGroup1, _missionPos, "CSAT", "Medic"] call createsoldier;
 			};
 			for "_i" from 1 to 4 do
 			{
-				[_aiGroup, _missionPos, "CSAT", "Marksman"] call createsoldier;
+				[_aiGroup1, _missionPos, "CSAT", "Marksman"] call createsoldier;
 			};
 			for "_i" from 1 to 4 do
 			{
-				[_aiGroup, _missionPos, "CSAT", "AT"] call createsoldier;
+				[_aiGroup1, _missionPos, "CSAT", "AT"] call createsoldier;
 			};
 			for "_i" from 1 to 4 do
 			{
-				[_aiGroup, _missionPos, "CSAT", "AA"] call createsoldier;
+				[_aiGroup1, _missionPos, "CSAT", "AA"] call createsoldier;
 			};
 			for "_i" from 1 to 3 do
 			{
-				[_aiGroup, _missionPos, "CSAT", "Engineer"] call createsoldier;
+				[_aiGroup1, _missionPos, "CSAT", "Engineer"] call createsoldier;
 			};
 		};
 		case ({_vehicleClass isKindOf _x} count 
@@ -272,39 +272,39 @@ _setupObjects =
 		{
 			for "_i" from 1 to 10 do
 			{
-				[_aiGroup, _missionPos, "CSAT", "Rifleman"] call createsoldier;
+				[_aiGroup1, _missionPos, "CSAT", "Rifleman"] call createsoldier;
 			};
 			for "_i" from 1 to 4 do
 			{
-				[_aiGroup, _missionPos, "CSAT", "SAW"] call createsoldier;
+				[_aiGroup1, _missionPos, "CSAT", "SAW"] call createsoldier;
 			};
 			for "_i" from 1 to 4 do
 			{
-				[_aiGroup, _missionPos, "CSAT", "Genedier"] call createsoldier;
+				[_aiGroup1, _missionPos, "CSAT", "Genedier"] call createsoldier;
 			};
 			for "_i" from 1 to 3 do
 			{
-				[_aiGroup, _missionPos, "CSAT", "Medic"] call createsoldier;
+				[_aiGroup1, _missionPos, "CSAT", "Medic"] call createsoldier;
 			};
 			for "_i" from 1 to 4 do
 			{
-				[_aiGroup, _missionPos, "CSAT", "Marksman"] call createsoldier;
+				[_aiGroup1, _missionPos, "CSAT", "Marksman"] call createsoldier;
 			};
 			for "_i" from 1 to 4 do
 			{
-				[_aiGroup, _missionPos, "CSAT", "AT"] call createsoldier;
+				[_aiGroup1, _missionPos, "CSAT", "AT"] call createsoldier;
 			};
 			for "_i" from 1 to 4 do
 			{
-				[_aiGroup, _missionPos, "CSAT", "AA"] call createsoldier;
+				[_aiGroup1, _missionPos, "CSAT", "AA"] call createsoldier;
 			};
 			for "_i" from 1 to 3 do
 			{
-				[_aiGroup, _missionPos, "CSAT", "Engineer"] call createsoldier;
+				[_aiGroup1, _missionPos, "CSAT", "Engineer"] call createsoldier;
 			};
 		};
 	};
-	_aiGroup setCombatMode "RED";
+	_aiGroup1 setCombatMode "RED";
 	_missionPicture = getText (configFile >> "CfgVehicles" >> _vehicleClass >> "picture");
 	_vehicleName = getText (configFile >> "CfgVehicles" >> _vehicleClass >> "displayName");
 	

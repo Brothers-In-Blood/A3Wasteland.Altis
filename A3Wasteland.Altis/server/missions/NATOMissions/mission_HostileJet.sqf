@@ -7,7 +7,7 @@
 if (!isServer) exitwith {};
 #include "NATOMissionDefines.sqf";
 
-private ["_planeChoices", "_convoyVeh", "_veh1", "_createVehicle", "_vehicles", "_leader", "_speedMode", "_waypoint", "_vehicleName", "_numWaypoints", "_cash", "_Boxes1", "_currBox1", "_Boxes2", "_currBox2", "_Box1", "_Box2"];
+private ["_planeChoices", "_convoyVeh", "_veh1", "createMissionVehicle", "_vehicles", "_leader", "_speedMode", "_waypoint", "_vehicleName", "_numWaypoints", "_cash", "_Boxes1", "_currBox1", "_Boxes2", "_currBox2", "_Box1", "_Box2"];
 
 _setupVars =
 {
@@ -21,7 +21,7 @@ _setupObjects =
 
 	_veh1 = selectrandom ["B_Plane_CAS_01_dynamicLoadout_F","B_Plane_Fighter_01_F","B_Plane_Fighter_01_Stealth_F"];
 	
-	_createVehicle =
+	createMissionVehicle =
 	{
 		private ["_type","_position","_direction","_vehicle","_soldier"];
 
@@ -42,37 +42,37 @@ _setupObjects =
 		_vehicle setDir _direction;
 		_vehicle setVelocity _vel; // Added to make it fly
 		_vehicle setVariable [call vChecksum, true, false];
-		_aiGroup addVehicle _vehicle;
+		_aiGroup1 addVehicle _vehicle;
 
 		// add pilot
-		_soldier =[_aiGroup, _position, "NATO", "JetPilot"] call createsoldier;
+		_soldier =[_aiGroup1, _position, "NATO", "JetPilot"] call createsoldier;
 		_soldier moveInDriver _vehicle;
 		_soldier triggerDynamicSimulation true;
 		// lock the vehicle untill the mission is finished and initialize cleanup on it
 
 
-		[_vehicle, _aiGroup] spawn checkMissionVehicleLock;
+		[_vehicle, _aiGroup1] spawn checkMissionVehicleLock;
 		_vehicle
 	};
 
-	_aiGroup = createGroup CIVILIAN;
+	_aiGroup1 = createGroup CIVILIAN;
 
 	_vehicles = [];
-	_vehicles set [0, [_veh1,[14574.7,31859.3,0], 14, _aiGroup] call _createVehicle]; // static value update when porting to different maps
+	_vehicles set [0, [_veh1,[14574.7,31859.3,0], 14, _aiGroup1] call createMissionVehicle]; // static value update when porting to different maps
 
 	_leader = effectiveCommander (_vehicles select 0);
-	_aiGroup selectLeader _leader;
+	_aiGroup1 selectLeader _leader;
 	_leader setRank "LIEUTENANT";
 
-	_aiGroup setCombatMode "RED";
-	_aiGroup setBehaviour "COMBAT";
-	_aiGroup setFormation "STAG COLUMN";
+	_aiGroup1 setCombatMode "RED";
+	_aiGroup1 setBehaviour "COMBAT";
+	_aiGroup1 setFormation "STAG COLUMN";
 
 	_speedMode ="NORMAL";
 
 	// behaviour on waypoints
 	{
-		_waypoint = _aiGroup addWaypoint [markerPos (_x select 0), 0];
+		_waypoint = _aiGroup1 addWaypoint [markerPos (_x select 0), 0];
 		_waypoint setWaypointType "MOVE";
 		_waypoint setWaypointCompletionRadius 55;
 		_waypoint setWaypointCombatMode "RED";
@@ -81,18 +81,18 @@ _setupObjects =
 		_waypoint setWaypointSpeed _speedMode;
 	} forEach ((call cityList) call BIS_fnc_arrayShuffle);
 
-	_missionPos = getPosATL leader _aiGroup;
+	_missionPos = getPosATL leader _aiGroup1;
 
 	_missionPicture = getText (configFile >> "CfgVehicles" >> _veh1 >> "picture");
 	_vehicleName = getText (configFile >> "CfgVehicles" >> _veh1 >> "displayName");
 	_missionHintText = format ["An armed <t color='%2'>%1</t> is patrolling the island. Shoot it down and kill the pilot to recover the money and weapons!", _vehicleName, NATOMissionColor];
 
-	_numWaypoints = count waypoints _aiGroup;
+	_numWaypoints = count waypoints _aiGroup1;
 };
 
 _waitUntilMarkerPos = {getPosATL _leader};
 _waitUntilExec = nil;
-_waitUntilCondition = {currentWaypoint _aiGroup >= _numWaypoints};
+_waitUntilCondition = {currentWaypoint _aiGroup1 >= _numWaypoints};
 
 _failedExec = nil;
 

@@ -26,7 +26,7 @@ _setupObjects =
 	{ _x setVariable ["R3F_LOG_disabled", true, true] } forEach [_box1];
 
 	_vehicleClass = "O_Boat_Armed_01_hmg_F";
-	_createVehicle = 
+	createMissionVehicle = 
 	{
 		private _type = _this select 0;
 		private _position = _this select 1;
@@ -44,14 +44,14 @@ _setupObjects =
 		private _Commanders =  _vehicle emptyPositions "Commander";
 		private _Gunners = _vehicle emptyPositions "Gunner";
 		_vehicle setDir _direction;
-		_aiGroup addVehicle _vehicle;
+		_aiGroup1 addVehicle _vehicle;
 		_vehicle lockDriver true;
 
 		if (_drivers > 0) then
 		{
 			for "_i" from 1 to _drivers do
 			{
-				private _Driver = [_aiGroup, _position, "CSAT", "Rifleman"] call createsoldier;
+				private _Driver = [_aiGroup1, _position, "CSAT", "Rifleman"] call createsoldier;
 				_Driver moveInAny _vehicle; //The boat doesn't like moveindriver for some reason 
 			};
 		};
@@ -59,17 +59,17 @@ _setupObjects =
 		{
 			for "_i" from 1 to _Commanders do
 			{
-				private _Commander = [_aiGroup, _position, "CSAT", "Rifleman"] call createsoldier;
+				private _Commander = [_aiGroup1, _position, "CSAT", "Rifleman"] call createsoldier;
 				_Commander moveInCommander _vehicle;
 			};
 		};
 		if (_Gunners > 0) then
 		{
-			private _gunner = [_aiGroup, _position, "CSAT", "Rifleman"] call createsoldier;
+			private _gunner = [_aiGroup1, _position, "CSAT", "Rifleman"] call createsoldier;
 			_gunner moveInGunner _vehicle;
 		};	
 		_vehicle setVariable ["R3F_LOG_disabled", true, true]; // force vehicles to be locked
-		[_vehicle, _aiGroup] spawn checkMissionVehicleLock; // force vehicles to be locked
+		[_vehicle, _aiGroup1] spawn checkMissionVehicleLock; // force vehicles to be locked
 		_vehicle addItemCargoGlobal ["U_I_Wetsuit", 2];
 		_vehicle addItemCargoGlobal ["V_RebreatherIA", 2];
 		_vehicle addItemCargoGlobal ["G_Diving", 2];
@@ -79,19 +79,19 @@ _setupObjects =
 		_vehicle
 	};
 	// Vehicle Class, Position, Fuel, Ammo, Damage, Special
-	_aiGroup = createGroup CIVILIAN;
-	_vehicle = [_vehicleClass, _missionPos, random 360] call _createVehicle;
+	_aiGroup1 = createGroup CIVILIAN;
+	_vehicle = [_vehicleClass, _missionPos, random 360] call createMissionVehicle;
 	private _Passangers = _vehicle emptyPositions "Cargo";
 
 	if (_Passangers > 0) then
 	{
 		for "_i" from 1 to _Passangers do
 		{
-			[_aiGroup, _missionPos, "CSAT", "Diver"] call createsoldier;
+			[_aiGroup1, _missionPos, "CSAT", "Diver"] call createsoldier;
 		};
 	};
-	_aiGroup setCombatMode "RED";
-	[_vehicle, _aiGroup] spawn checkMissionVehicleLock;
+	_aiGroup1 setCombatMode "RED";
+	[_vehicle, _aiGroup1] spawn checkMissionVehicleLock;
 
 	_missionPicture = getText (configFile >> "CfgVehicles" >> _vehicleClass >> "picture");
 	_missionHintText = format ["A treasure containing money and weapons is being recovered.<br/>If you want to capture it, you will need diving gear and an underwater weapon."];

@@ -33,12 +33,12 @@ _setupObjects =
 		_x setVariable ["R3F_LOG_disabled", true, true];
 	} forEach [_box1, _box2];
 
-	_aiGroup = createGroup CIVILIAN;
+	_aiGroup1 = createGroup CIVILIAN;
 	for "_i" from 1 to 10 do
 	{
-		[_aiGroup, _missionPos, "NATO", "Diver"] call createsoldier;
+		[_aiGroup1, _missionPos, "NATO", "Diver"] call createsoldier;
 	};
-	_aiGroup setCombatMode "RED";
+	_aiGroup1 setCombatMode "RED";
 	_missionHintText = "Sunken supplies have been spotted in the ocean near the marker, and are heavily guarded. Diving gear and an underwater weapon are recommended.";
 };
 

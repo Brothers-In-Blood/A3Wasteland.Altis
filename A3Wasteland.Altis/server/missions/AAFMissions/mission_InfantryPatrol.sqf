@@ -7,7 +7,7 @@
 if (!isServer) exitwith {};
 #include "AAFMissionDefines.sqf";
 
-private ["_convoyVeh","_veh1","_veh2","_veh3","_veh4","_veh5","_createVehicle","_pos","_rad","_vehiclePosArray","_vPos1","_vPos2","_vPos3","_vehiclePos1","_vehiclePos2","_vehiclePos3","_vehiclePos4","_vehicles","_leader","_speedMode","_waypoint","_vehicleName","_numWaypoints","_box1","_box2","_box3","_box4"];
+private ["_convoyVeh","_veh1","_veh2","_veh3","_veh4","_veh5","createMissionVehicle","_pos","_rad","_vehiclePosArray","_vPos1","_vPos2","_vPos3","_vehiclePos1","_vehiclePos2","_vehiclePos3","_vehiclePos4","_vehicles","_leader","_speedMode","_waypoint","_vehicleName","_numWaypoints","_box1","_box2","_box3","_box4"];
 
 _setupVars =
 {
@@ -19,31 +19,31 @@ _setupObjects =
 {
 	_town = (call cityList) call BIS_fnc_selectRandom;
 	_missionPos =markerPos _missionLocation;
-	_aiGroup = createGroup CIVILIAN;
+	_aiGroup1 = createGroup CIVILIAN;
 	for "_i" from 1 to 4 do
 	{
-		[_aiGroup, _missionPos, "AAF", "Rifleman"] call createsoldier;
+		[_aiGroup1, _missionPos, "AAF", "Rifleman"] call createsoldier;
 	};
 	for "_i" from 1 to 2 do
 	{
-		[_aiGroup, _missionPos, "AAF", "SAW"] call createsoldier;
+		[_aiGroup1, _missionPos, "AAF", "SAW"] call createsoldier;
 	};
 	for "_i" from 1 to 2 do
 	{
-		[_aiGroup, _missionPos, "AAF", "Grenedier"] call createsoldier;
+		[_aiGroup1, _missionPos, "AAF", "Grenedier"] call createsoldier;
 	};
-	_Leader =[_aiGroup, _missionPos, "AAF", "Marksman"] call createsoldier;
+	_Leader =[_aiGroup1, _missionPos, "AAF", "Marksman"] call createsoldier;
 	_Leader setrank "LIEUTENANT";
 
-	_aiGroup setCombatMode "RED"; // Will fire on enemies
-	_aiGroup setBehaviour "AWARE"; // units feel safe until they spot an enemy or get into contact
-	_aiGroup setFormation "WEDGE";
+	_aiGroup1 setCombatMode "RED"; // Will fire on enemies
+	_aiGroup1 setBehaviour "AWARE"; // units feel safe until they spot an enemy or get into contact
+	_aiGroup1 setFormation "WEDGE";
 
 	_speedMode = "LIMITED";
-	_aiGroup setSpeedMode _speedMode;
+	_aiGroup1 setSpeedMode _speedMode;
 
 	{
-		_waypoint = _aiGroup addWaypoint [markerPos (_x select 0), 0];
+		_waypoint = _aiGroup1 addWaypoint [markerPos (_x select 0), 0];
 		_waypoint setWaypointType "MOVE";
 		_waypoint setWaypointCompletionRadius 50;
 		_waypoint setWaypointCombatMode "RED";
@@ -52,17 +52,17 @@ _setupObjects =
 		_waypoint setWaypointSpeed _speedMode;
 	} forEach ((call cityList) call BIS_fnc_arrayShuffle);
 
-	_missionPos = getPosATL leader _aiGroup;
+	_missionPos = getPosATL leader _aiGroup1;
 
 
 	_missionHintText = "An infantry squad is patrolling Altis! Stop the patrol and capture the goods and money!";
 
-	_numWaypoints = count waypoints _aiGroup;
+	_numWaypoints = count waypoints _aiGroup1;
 };
 
 _waitUntilMarkerPos = {getPosATL _leader};
 _waitUntilExec = nil;
-_waitUntilCondition = {currentWaypoint _aiGroup >= _numWaypoints};
+_waitUntilCondition = {currentWaypoint _aiGroup1 >= _numWaypoints};
 
 _failedExec = nil;
 

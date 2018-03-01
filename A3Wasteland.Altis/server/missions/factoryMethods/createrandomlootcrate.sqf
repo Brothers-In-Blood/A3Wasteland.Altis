@@ -277,10 +277,16 @@ private _LootSelect = "";
 		case "4":
 		{
 			_LootSelect = selectRandom
-					[
-						"Container",
-						"VehicleAmmo"
-					];
+			[
+				"VehicleAmmo"
+			];
+		};
+		case "5":
+		{
+			_LootSelect = selectRandom
+			[
+				"Container"
+			];
 		};
 	};
 //Choose the box
@@ -750,4 +756,64 @@ private _Money = RANDOM_BETWEEN(_MinMoney,_MaxMoney);
 _crate = createVehicle [_CrateSelect, _location, [], 0, "NONE"];
 [_crate, _LootSelect] call fn_refillbox;
 _crate setVariable ["cmoney", _Money, true];
+if ({_crate iskindof _x} count 
+[
+	"Box_NATO_AmmoVeh_F",
+	"Box_EAST_AmmoVeh_F",
+	"Box_IND_AmmoVeh_F",
+	"B_Slingload_01_Ammo_F",
+	"B_Slingload_01_Fuel_F",
+	"B_Slingload_01_Repair_F",
+	"Land_Pod_Heli_Transport_04_fuel_F",
+	"Land_Pod_Heli_Transport_04_repair_F",
+	"Land_Pod_Heli_Transport_04_ammo_F"
+] > 0) then	
+{
+	private _AmmoResourcesMax =
+	[
+		["Box_NATO_AmmoVeh_F",						5000],
+		["Box_EAST_AmmoVeh_F",						5000],
+		["Box_IND_AmmoVeh_F",						5000],
+		["B_Slingload_01_Ammo_F",					30000],
+		["Land_Pod_Heli_Transport_04_ammo_F",		22000]
+	];
+	private _FuelResourcesMax =
+	[
+		["B_Slingload_01_Fuel_F",					20000],
+		["Land_Pod_Heli_Transport_04_fuel_F",		22000]
+	];
+	private _RepairResourcesMax =
+	[
+		["B_Slingload_01_Repair_F",					25000],
+		["Land_Pod_Heli_Transport_04_repair_F",		22000]
+	];
+	_crate setAmmoCargo 0;
+	_crate setFuelCargo 0;
+	_crate setRepairCargo 0;
+	_crate spawn GOM_fnc_addAircraftLoadoutToObject;
+	{
+		private _check = _x select 0;
+		private _value = _x select 1;
+		if (_crate iskindof _check) then
+		{
+			_crate setVariable ["GOM_fnc_ammoCargo", _value, true];
+		};
+	} foreach _AmmoResourcesMax;
+	{
+		private _check = _x select 0;
+		private _value = _x select 1;
+		if (_crate iskindof _check) then
+		{
+			_crate setVariable ["GOM_fnc_fuelCargo", _value, true];
+		};
+	} foreach _FuelResourcesMax;
+	{
+		private _check = _x select 0;
+		private _value = _x select 1;
+		if (_crate iskindof _check) then
+		{
+			_crate setVariable ["GOM_fnc_repairCargo", _value, true];
+		};
+	} foreach _RepairResourcesMax;
+};
 _crate
