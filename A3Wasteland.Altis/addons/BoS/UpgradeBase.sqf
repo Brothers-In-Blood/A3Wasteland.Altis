@@ -127,22 +127,18 @@ if (_ManagerLevel < 5) then
 						case (1):
 						{
 							_Manager setVariable ["ManagerLevel", 2, true];
-							_Manager spawn fn_manualObjectSave;
 						};
 						case (2):
 						{
 							_Manager setVariable ["ManagerLevel", 3, true];
-							_Manager spawn fn_manualObjectSave;
 						};
 						case (3):
 						{
 							_Manager setVariable ["ManagerLevel", 4, true];
-							_Manager spawn fn_manualObjectSave;
 						};
 						case (4):
 						{
 							_Manager setVariable ["ManagerLevel", 5, true];
-							_Manager spawn fn_manualObjectSave;
 						};
 					};
 					_newlevel = _Manager getvariable "ManagerLevel";

@@ -2,13 +2,12 @@
 // * This project is licensed under the GNU Affero GPL v3. Copyright © 2014 A3Wasteland.com *
 // ******************************************************************************************
 //	@file Version: 1.0
-//	@file Name: salvage.sqf
-//	@file Author: Wiking, AgentRev
+//	@file Name: hide.sqf
+//	@file Author: Wiking, AgentRev,
 //	@file Created: 27/07/2014 13:04
 
-// Salvaging of vehicle wrecks
+// hiding dead bodies
 
-#define GET_ONE_TENTH_PRICE(PRICE) ((ceil (((PRICE) / 10) / 5)) * 5)
 
 // Check if mutex lock is active.
 if (mutexScriptInProgress) exitWith
@@ -57,7 +56,7 @@ if (_firstCheck select 0) exitWith
 
 mutexScriptInProgress = true;
 
-// Salvage time and default money reward according to vehicle type
+// Hiding time and default money reward according to vehicle type
 switch (true) do
 {
 	case (_vehClass isKindOf "Man"):
@@ -82,5 +81,5 @@ if (_success) then
 {
 	deleteVehicle _vehicle;
 	player setVariable ["cmoney", (player getVariable ["cmoney", 0]) + _money, true];
-	[format ["You have received a $%1 reward for hiding the body", [_money] call fn_numbersText], 5] call mf_notify_client;
+	[format ["Kill Confirmed: $%1 reward", [_money] call fn_numbersText], 5] call mf_notify_client;
 };

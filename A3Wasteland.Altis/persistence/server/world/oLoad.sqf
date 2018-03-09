@@ -2,10 +2,11 @@
 // * This project is licensed under the GNU Affero GPL v3. Copyright © 2014 A3Wasteland.com *
 // ******************************************************************************************
 //	@file Name: oLoad.sqf
-//	@file Author: AgentRev, JoSchaap, Austerror
+//	@file Author: AgentRev, JoSchaap, Austerror, BIB_Monkey
 
 #include "functions.sqf"
 #define STR_TO_SIDE(VAL) ([sideUnknown,BLUFOR,OPFOR,INDEPENDENT,CIVILIAN,sideLogic] select ((["WEST","EAST","GUER","CIV","LOGIC"] find toUpper (VAL)) + 1))
+
 private ["_maxLifetime", "_isWarchestEntry", "_isBeaconEntry", "_worldDir", "_methodDir", "_objCount", "_objects", "_exclObjectIDs"];
 
 _maxLifetime = ["A3W_objectLifetime", 0] call getPublicVar;
@@ -15,21 +16,26 @@ _isBeaconEntry = { [_variables, "a3w_spawnBeacon", false] call fn_getFromPairs }
 
 _worldDir = "persistence\server\world";
 _methodDir = format ["%1\%2", _worldDir, call A3W_savingMethodDir];
+
 _objCount = 0;
 _objects = call compile preprocessFileLineNumbers format ["%1\getObjects.sqf", _methodDir];
 _objectsArray = [];
+
 _exclObjectIDs = [];
 
 {
 	private ["_allowed", "_obj", "_objectID", "_class", "_pos", "_dir", "_locked", "_damage", "_allowDamage", "_owner", "_variables", "_weapons", "_magazines", "_items", "_backpacks", "_turretMags", "_ammoCargo", "_fuelCargo", "_repairCargo", "_hoursAlive", "_valid"];
 
 	{ (_x select 1) call compile format ["%1 = _this", _x select 0]	} forEach _x;
+
 	if (isNil "_locked") then { _locked = 1 };
-	if (isNil "_hoursAlive") then { _hoursAlive = 0 }; 
+	if (isNil "_hoursAlive") then { _hoursAlive = 0 };
 	_valid = false;
-	if (!isNil "_class" && !isNil "_pos") then
+
+	if (!isNil "_class" && !isNil "_pos" && {_maxLifetime <= 0 || _hoursAlive < _maxLifetime}) then
 	{
 		if (isNil "_variables") then { _variables = [] };
+
 		_allowed = switch (true) do
 		{
 			case (call _isWarchestEntry):       { _warchestSavingOn };
@@ -38,7 +44,9 @@ _exclObjectIDs = [];
 			case (_class call _isStaticWeapon): { _staticWeaponSavingOn };
 			default                             { _baseSavingOn };
 		};
+
 		if (!_allowed) exitWith {};
+
 		_objCount = _objCount + 1;
 		_valid = true;
 
@@ -85,8 +93,10 @@ _exclObjectIDs = [];
 		{
 			_obj setVariable ["ownerUID", _owner, true];
 		};
+
 		private _uavSide = if (isNil "_playerSide") then { sideUnknown } else { _playerSide };
 		private _uavAuto = true;
+
 		{
 			_var = _x select 0;
 			_value = _x select 1;
@@ -127,25 +137,27 @@ _exclObjectIDs = [];
 						default { _value = "[Beacon]" };
 					};
 				};
-				case "uavSide": 
-				{ 
-					if (_uavSide isEqualTo sideUnknown) then { _uavSide = STR_TO_SIDE(_value) }; 
-				}; 
-				case "uavAuto": 
-				{ 
-					if (_value isEqualType true) then 
-					{ 
-						_uavAuto = _value; 
-					}; 
-				}; 
+				case "uavSide":
+				{
+					if (_uavSide isEqualTo sideUnknown) then { _uavSide = STR_TO_SIDE(_value) };
+				};
+				case "uavAuto":
+				{
+					if (_value isEqualType true) then
+					{
+						_uavAuto = _value;
+					};
+				};
 			};
+
 			_obj setVariable [_var, _value, true];
 		} forEach _variables;
-		if (unitIsUAV _obj) then 
-		{ 
-			[_obj, _uavSide, false, _uavAuto] spawn fn_createCrewUAV; 
+
+		if (unitIsUAV _obj) then
+		{
+			[_obj, _uavSide, false, _uavAuto] spawn fn_createCrewUAV;
 		};
-		//make sure existing objects are given moveable variable. Comment line after update.
+				//make sure existing objects are given moveable variable. Comment line after update.
 		//_obj setVariable ["moveable", true, true];
 
 		// Base locker lights
@@ -153,6 +165,7 @@ _exclObjectIDs = [];
 		{
 			_obj setHit ["light_1_hit", 0.97];
 		};
+
 
 		clearWeaponCargoGlobal _obj;
 		clearMagazineCargoGlobal _obj;
@@ -171,6 +184,7 @@ _exclObjectIDs = [];
 			case (_locked < 1): { true };
 			default { false };
 		};
+
 		if (_unlock) then
 		{
 			_obj setVariable ["objectLocked", false, true];
@@ -212,6 +226,8 @@ _exclObjectIDs = [];
 
 			reload _obj;
 		};
+
+		_obj hideObjectGlobal false;
 	};
 
 	if (!_valid && !isNil "_objectID") then
@@ -220,31 +236,81 @@ _exclObjectIDs = [];
 		{
 			_obj setVariable ["A3W_objectID", nil, true];
 		};
+
 		_exclVehicleIDs pushBack _vehicleID;
 		_exclObjectIDs pushBack _objectID;
 	};
 
 	//Restore Service Objects
-	if ({_obj iskindof _x} count [
-			"Box_NATO_AmmoVeh_F",
-			"Box_EAST_AmmoVeh_F",
-			"Box_IND_AmmoVeh_F",
-			"B_Slingload_01_Ammo_F",
-			"B_Slingload_01_Fuel_F",
-			"B_Slingload_01_Medevac_F",
-			"B_Slingload_01_Repair_F",
-			"StorageBladder_01_fuel_forest_F",
-			"StorageBladder_01_fuel_sand_F",
-			"Land_fs_feed_F",
-			"Land_FuelStation_01_pump_malevil_F",
-			"Land_FuelStation_Feed_F",
-			"Land_Pod_Heli_Transport_04_fuel_F",
-			"Land_Pod_Heli_Transport_04_repair_F"
-		] > 0) then	{
+	if ({_obj iskindof _x} count 
+	[
+		"Box_NATO_AmmoVeh_F",
+		"Box_EAST_AmmoVeh_F",
+		"Box_IND_AmmoVeh_F",
+		"B_Slingload_01_Ammo_F",
+		"B_Slingload_01_Fuel_F",
+		"B_Slingload_01_Medevac_F",
+		"B_Slingload_01_Repair_F",
+		"StorageBladder_01_fuel_forest_F",
+		"StorageBladder_01_fuel_sand_F",
+		"Land_fs_feed_F",
+		"Land_FuelStation_01_pump_malevil_F",
+		"Land_FuelStation_Feed_F",
+		"Land_Pod_Heli_Transport_04_fuel_F",
+		"Land_Pod_Heli_Transport_04_repair_F"
+	] > 0) then	
+	{
 		_obj spawn GOM_fnc_addAircraftLoadoutToObject;
 	};
+	// //Re-enable door locking/unlocking for owned objects
+	// if (_obj iskindof "Static") then
+	// {
+	// 	[_obj, ["Lock Door", {(_this select 0) setVariable ['bis_disabled_Door_1',1,true]}, nil, -99, false, true, "", "(_target  getVariable ['bis_disabled_Door_1', 0]) == 0 && (_target getVariable 'ownerUID') == (getPlayerUID _this)", 50, false, "door_1"]] remoteExec ["addAction", -2, _obj];
+	// 	[_obj, ["Unlock Door", {(_this select 0) setVariable ['bis_disabled_Door_1',0,true]}, nil, -99, false, true, "", "(_target getVariable ['bis_disabled_Door_1', 0]) == 1 && (_target getVariable 'ownerUID') == (getPlayerUID _this)", 50, false, "door_1"]] remoteExec ["addAction", -2, _obj];
+	// 	[_obj, ["Lock Door", {(_this select 0) setVariable ['bis_disabled_Door_2',1,true]}, nil, -99, false, true, "", "(_target  getVariable ['bis_disabled_Door_2', 0]) == 0 && (_target getVariable 'ownerUID') == (getPlayerUID _this)", 50, false, "door_2"]] remoteExec ["addAction", -2, _obj];
+	// 	[_obj, ["Unlock Door", {(_this select 0) setVariable ['bis_disabled_Door_2',0,true]}, nil, -99, false, true, "", "(_target getVariable ['bis_disabled_Door_2', 0]) == 1 && (_target getVariable 'ownerUID') == (getPlayerUID _this)", 50, false, "door_2"]] remoteExec ["addAction", -2, _obj];
+	// 	[_obj, ["Lock Door", {(_this select 0) setVariable ['bis_disabled_Door_3',1,true]}, nil, -99, false, true, "", "(_target  getVariable ['bis_disabled_Door_3', 0]) == 0 && (_target getVariable 'ownerUID') == (getPlayerUID _this)", 50, false, "door_3"]] remoteExec ["addAction", -2, _obj];
+	// 	[_obj, ["Unlock Door", {(_this select 0) setVariable ['bis_disabled_Door_3',0,true]}, nil, -99, false, true, "", "(_target getVariable ['bis_disabled_Door_3', 0]) == 1 && (_target getVariable 'ownerUID') == (getPlayerUID _this)", 50, false, "door_3"]] remoteExec ["addAction", -2, _obj];
+	// 	[_obj, ["Lock Door", {(_this select 0) setVariable ['bis_disabled_Door_4',1,true]}, nil, -99, false, true, "", "(_target  getVariable ['bis_disabled_Door_4', 0]) == 0 && (_target getVariable 'ownerUID') == (getPlayerUID _this)", 50, false, "door_4"]] remoteExec ["addAction", -2, _obj];
+	// 	[_obj, ["Unlock Door", {(_this select 0) setVariable ['bis_disabled_Door_4',0,true]}, nil, -99, false, true, "", "(_target getVariable ['bis_disabled_Door_4', 0]) == 1 && (_target getVariable 'ownerUID') == (getPlayerUID _this)", 50, false, "door_4"]] remoteExec ["addAction", -2, _obj];
+	// 	[_obj, ["Lock Door", {(_this select 0) setVariable ['bis_disabled_Door_5',1,true]}, nil, -99, false, true, "", "(_target  getVariable ['bis_disabled_Door_5', 0]) == 0 && (_target getVariable 'ownerUID') == (getPlayerUID _this)", 50, false, "door_5"]] remoteExec ["addAction", -2, _obj];
+	// 	[_obj, ["Unlock Door", {(_this select 0) setVariable ['bis_disabled_Door_5',0,true]}, nil, -99, false, true, "", "(_target getVariable ['bis_disabled_Door_5', 0]) == 1 && (_target getVariable 'ownerUID') == (getPlayerUID _this)", 50, false, "door_5"]] remoteExec ["addAction", -2, _obj];
+	// 	[_obj, ["Lock Door", {(_this select 0) setVariable ['bis_disabled_Door_6',1,true]}, nil, -99, false, true, "", "(_target  getVariable ['bis_disabled_Door_6', 0]) == 0 && (_target getVariable 'ownerUID') == (getPlayerUID _this)", 50, false, "door_6"]] remoteExec ["addAction", -2, _obj];
+	// 	[_obj, ["Unlock Door", {(_this select 0) setVariable ['bis_disabled_Door_6',0,true]}, nil, -99, false, true, "", "(_target getVariable ['bis_disabled_Door_6', 0]) == 1 && (_target getVariable 'ownerUID') == (getPlayerUID _this)", 50, false, "door_6"]] remoteExec ["addAction", -2, _obj];
+	// 	[_obj, ["Lock Door", {(_this select 0) setVariable ['bis_disabled_Door_7',1,true]}, nil, -99, false, true, "", "(_target  getVariable ['bis_disabled_Door_7', 0]) == 0 && (_target getVariable 'ownerUID') == (getPlayerUID _this)", 50, false, "door_7"]] remoteExec ["addAction", -2, _obj];
+	// 	[_obj, ["Unlock Door", {(_this select 0) setVariable ['bis_disabled_Door_7',0,true]}, nil, -99, false, true, "", "(_target getVariable ['bis_disabled_Door_7', 0]) == 1 && (_target getVariable 'ownerUID') == (getPlayerUID _this)", 50, false, "door_7"]] remoteExec ["addAction", -2, _obj];
+	// 	[_obj, ["Lock Door", {(_this select 0) setVariable ['bis_disabled_Door_8',1,true]}, nil, -99, false, true, "", "(_target  getVariable ['bis_disabled_Door_8', 0]) == 0 && (_target getVariable 'ownerUID') == (getPlayerUID _this)", 50, false, "door_8"]] remoteExec ["addAction", -2, _obj];
+	// 	[_obj, ["Unlock Door", {(_this select 0) setVariable ['bis_disabled_Door_8',0,true]}, nil, -99, false, true, "", "(_target getVariable ['bis_disabled_Door_8', 0]) == 1 && (_target getVariable 'ownerUID') == (getPlayerUID _this)", 50, false, "door_8"]] remoteExec ["addAction", -2, _obj];
+	// 	[_obj, ["Lock Door", {(_this select 0) setVariable ['bis_disabled_Door_9',1,true]}, nil, -99, false, true, "", "(_target  getVariable ['bis_disabled_Door_9', 0]) == 0 && (_target getVariable 'ownerUID') == (getPlayerUID _this)", 50, false, "door_9"]] remoteExec ["addAction", -2, _obj];
+	// 	[_obj, ["Unlock Door", {(_this select 0) setVariable ['bis_disabled_Door_9',0,true]}, nil, -99, false, true, "", "(_target getVariable ['bis_disabled_Door_9', 0]) == 1 && (_target getVariable 'ownerUID') == (getPlayerUID _this)", 50, false, "door_9"]] remoteExec ["addAction", -2, _obj];
+	// 	[_obj, ["Lock Door", {(_this select 0) setVariable ['bis_disabled_Door_10',1,true]}, nil, -99, false, true, "", "(_target  getVariable ['bis_disabled_Door_10', 0]) == 0 && (_target getVariable 'ownerUID') == (getPlayerUID _this)", 50, false, "door_10"]] remoteExec ["addAction", -2, _obj];
+	// 	[_obj, ["Unlock Door", {(_this select 0) setVariable ['bis_disabled_Door_10',0,true]}, nil, -99, false, true, "", "(_target getVariable ['bis_disabled_Door_10', 0]) == 1 && (_target getVariable 'ownerUID') == (getPlayerUID _this)", 50, false, "door_10"]] remoteExec ["addAction", -2, _obj];
+	// 	[_obj, ["Lock Door", {(_this select 0) setVariable ['bis_disabled_Door_11',1,true]}, nil, -99, false, true, "", "(_target  getVariable ['bis_disabled_Door_11', 0]) == 0 && (_target getVariable 'ownerUID') == (getPlayerUID _this)", 50, false, "door_11"]] remoteExec ["addAction", -2, _obj];
+	// 	[_obj, ["Unlock Door", {(_this select 0) setVariable ['bis_disabled_Door_11',0,true]}, nil, -99, false, true, "", "(_target getVariable ['bis_disabled_Door_11', 0]) == 1 && (_target getVariable 'ownerUID') == (getPlayerUID _this)", 50, false, "door_11"]] remoteExec ["addAction", -2, _obj];
+	// 	[_obj, ["Lock Door", {(_this select 0) setVariable ['bis_disabled_Door_12',1,true]}, nil, -99, false, true, "", "(_target  getVariable ['bis_disabled_Door_12', 0]) == 0 && (_target getVariable 'ownerUID') == (getPlayerUID _this)", 50, false, "door_12"]] remoteExec ["addAction", -2, _obj];
+	// 	[_obj, ["Unlock Door", {(_this select 0) setVariable ['bis_disabled_Door_12',0,true]}, nil, -99, false, true, "", "(_target getVariable ['bis_disabled_Door_12', 0]) == 1 && (_target getVariable 'ownerUID') == (getPlayerUID _this)", 50, false, "door_12"]] remoteExec ["addAction", -2, _obj];
+	// 	[_obj, ["Lock Door", {(_this select 0) setVariable ['bis_disabled_Door_13',1,true]}, nil, -99, false, true, "", "(_target  getVariable ['bis_disabled_Door_13', 0]) == 0 && (_target getVariable 'ownerUID') == (getPlayerUID _this)", 50, false, "door_13"]] remoteExec ["addAction", -2, _obj];
+	// 	[_obj, ["Unlock Door", {(_this select 0) setVariable ['bis_disabled_Door_13',0,true]}, nil, -99, false, true, "", "(_target getVariable ['bis_disabled_Door_13', 0]) == 1 && (_target getVariable 'ownerUID') == (getPlayerUID _this)", 50, false, "door_13"]] remoteExec ["addAction", -2, _obj];
+	// 	[_obj, ["Lock Door", {(_this select 0) setVariable ['bis_disabled_Door_14',1,true]}, nil, -99, false, true, "", "(_target  getVariable ['bis_disabled_Door_14', 0]) == 0 && (_target getVariable 'ownerUID') == (getPlayerUID _this)", 50, false, "door_14"]] remoteExec ["addAction", -2, _obj];
+	// 	[_obj, ["Unlock Door", {(_this select 0) setVariable ['bis_disabled_Door_14',0,true]}, nil, -99, false, true, "", "(_target getVariable ['bis_disabled_Door_14', 0]) == 1 && (_target getVariable 'ownerUID') == (getPlayerUID _this)", 50, false, "door_14"]] remoteExec ["addAction", -2, _obj];
+	// 	[_obj, ["Lock Door", {(_this select 0) setVariable ['bis_disabled_Door_15',1,true]}, nil, -99, false, true, "", "(_target  getVariable ['bis_disabled_Door_15', 0]) == 0 && (_target getVariable 'ownerUID') == (getPlayerUID _this)", 50, false, "door_15"]] remoteExec ["addAction", -2, _obj];
+	// 	[_obj, ["Unlock Door", {(_this select 0) setVariable ['bis_disabled_Door_15',0,true]}, nil, -99, false, true, "", "(_target getVariable ['bis_disabled_Door_15', 0]) == 1 && (_target getVariable 'ownerUID') == (getPlayerUID _this)", 50, false, "door_15"]] remoteExec ["addAction", -2, _obj];
+	// 	[_obj, ["Lock Door", {(_this select 0) setVariable ['bis_disabled_Door_16',1,true]}, nil, -99, false, true, "", "(_target  getVariable ['bis_disabled_Door_16', 0]) == 0 && (_target getVariable 'ownerUID') == (getPlayerUID _this)", 50, false, "door_16"]] remoteExec ["addAction", -2, _obj];
+	// 	[_obj, ["Unlock Door", {(_this select 0) setVariable ['bis_disabled_Door_16',0,true]}, nil, -99, false, true, "", "(_target getVariable ['bis_disabled_Door_16', 0]) == 1 && (_target getVariable 'ownerUID') == (getPlayerUID _this)", 50, false, "door_16"]] remoteExec ["addAction", -2, _obj];
+	// 	[_obj, ["Lock Door", {(_this select 0) setVariable ['bis_disabled_Door_17',1,true]}, nil, -99, false, true, "", "(_target  getVariable ['bis_disabled_Door_17', 0]) == 0 && (_target getVariable 'ownerUID') == (getPlayerUID _this)", 50, false, "door_17"]] remoteExec ["addAction", -2, _obj];
+	// 	[_obj, ["Unlock Door", {(_this select 0) setVariable ['bis_disabled_Door_17',0,true]}, nil, -99, false, true, "", "(_target getVariable ['bis_disabled_Door_17', 0]) == 1 && (_target getVariable 'ownerUID') == (getPlayerUID _this)", 50, false, "door_17"]] remoteExec ["addAction", -2, _obj];
+	// 	[_obj, ["Lock Door", {(_this select 0) setVariable ['bis_disabled_Door_18',1,true]}, nil, -99, false, true, "", "(_target  getVariable ['bis_disabled_Door_18', 0]) == 0 && (_target getVariable 'ownerUID') == (getPlayerUID _this)", 50, false, "door_18"]] remoteExec ["addAction", -2, _obj];
+	// 	[_obj, ["Unlock Door", {(_this select 0) setVariable ['bis_disabled_Door_18',0,true]}, nil, -99, false, true, "", "(_target getVariable ['bis_disabled_Door_18', 0]) == 1 && (_target getVariable 'ownerUID') == (getPlayerUID _this)", 50, false, "door_18"]] remoteExec ["addAction", -2, _obj];
+	// 	[_obj, ["Lock Door", {(_this select 0) setVariable ['bis_disabled_Door_19',1,true]}, nil, -99, false, true, "", "(_target  getVariable ['bis_disabled_Door_19', 0]) == 0 && (_target getVariable 'ownerUID') == (getPlayerUID _this)", 50, false, "door_19"]] remoteExec ["addAction", -2, _obj];
+	// 	[_obj, ["Unlock Door", {(_this select 0) setVariable ['bis_disabled_Door_19',0,true]}, nil, -99, false, true, "", "(_target getVariable ['bis_disabled_Door_19', 0]) == 1 && (_target getVariable 'ownerUID') == (getPlayerUID _this)", 50, false, "door1_9"]] remoteExec ["addAction", -2, _obj];
+	// 	[_obj, ["Lock Door", {(_this select 0) setVariable ['bis_disabled_Door_20',1,true]}, nil, -99, false, true, "", "(_target  getVariable ['bis_disabled_Door_20', 0]) == 0 && (_target getVariable 'ownerUID') == (getPlayerUID _this)", 50, false, "door_20"]] remoteExec ["addAction", -2, _obj];
+	// 	[_obj, ["Unlock Door", {(_this select 0) setVariable ['bis_disabled_Door_20',0,true]}, nil, -99, false, true, "", "(_target getVariable ['bis_disabled_Door_20', 0]) == 1 && (_target getVariable 'ownerUID') == (getPlayerUID _this)", 50, false, "door_20"]] remoteExec ["addAction", -2, _obj];
+	// 	[_obj, ["Lock Door", {(_this select 0) setVariable ['bis_disabled_Door_21',1,true]}, nil, -99, false, true, "", "(_target  getVariable ['bis_disabled_Door_21', 0]) == 0 && (_target getVariable 'ownerUID') == (getPlayerUID _this)", 50, false, "door_21"]] remoteExec ["addAction", -2, _obj];
+	// 	[_obj, ["Unlock Door", {(_this select 0) setVariable ['bis_disabled_Door_21',0,true]}, nil, -99, false, true, "", "(_target getVariable ['bis_disabled_Door_21', 0]) == 1 && (_target getVariable 'ownerUID') == (getPlayerUID _this)", 50, false, "door_21"]] remoteExec ["addAction", -2, _obj];
+	// 	[_obj, ["Lock Door", {(_this select 0) setVariable ['bis_disabled_Door_22',1,true]}, nil, -99, false, true, "", "(_target  getVariable ['bis_disabled_Door_22', 0]) == 0 && (_target getVariable 'ownerUID') == (getPlayerUID _this)", 50, false, "door_22"]] remoteExec ["addAction", -2, _obj];
+	// 	[_obj, ["Unlock Door", {(_this select 0) setVariable ['bis_disabled_Door_22',0,true]}, nil, -99, false, true, "", "(_target getVariable ['bis_disabled_Door_22', 0]) == 1 && (_target getVariable 'ownerUID') == (getPlayerUID _this)", 50, false, "door_22"]] remoteExec ["addAction", -2, _obj];
+	// };
 } forEach _objects;
-
 {
 	//Restore building, towers, etc first
 	if (_x iskindof "NonStrategic") then
@@ -274,6 +340,7 @@ _exclObjectIDs = [];
 if (_warchestMoneySavingOn) then
 {
 	_amounts = call compile preprocessFileLineNumbers format ["%1\getWarchestMoney.sqf", _methodDir];
+
 	pvar_warchest_funds_west = (_amounts select 0) max 0;
 	publicVariable "pvar_warchest_funds_west";
 	pvar_warchest_funds_east = (_amounts select 1) max 0;
@@ -281,4 +348,5 @@ if (_warchestMoneySavingOn) then
 };
 
 diag_log format ["A3Wasteland - world persistence loaded %1 objects from %2", _objCount, call A3W_savingMethodName];
+
 _exclObjectIDs call fn_deleteObjects;

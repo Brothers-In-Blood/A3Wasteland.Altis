@@ -15,6 +15,7 @@ class BIS_fnc_objectVar {};
 
 // A3W vanilla
 class A3W_fnc_adminMenuLog { allowedTargets = 2; };
+class A3W_fnc_artilleryStrike { allowedTargets = 2; };
 class A3W_fnc_chatBroadcast {};
 class A3W_fnc_checkHackedVehicles { allowedTargets = 2; };
 class A3W_fnc_checkPlayerFlag { allowedTargets = 2; };
@@ -27,6 +28,7 @@ class A3W_fnc_getInFast {};
 class A3W_fnc_initPlayerServer { allowedTargets = 2; };
 class A3W_fnc_killBroadcast { allowedTargets = 2; };
 class A3W_fnc_logMemAnomaly { allowedTargets = 2; };
+class A3W_fnc_playerRespawnServer { allowedTargets = 2; };
 class A3W_fnc_pushVehicle {};
 //class A3W_fnc_registerKillScore { allowedTargets = 2; }; // only needed for injury kill points, not currently enabled due to point farming concerns
 class A3W_fnc_requestPlayerData { allowedTargets = 2; };
@@ -37,6 +39,7 @@ class A3W_fnc_setItemCleanup { allowedTargets = 2; };
 class A3W_fnc_setLockState {};
 class A3W_fnc_setName { jip = 1; };
 class A3W_fnc_setVarServer { allowedTargets = 2; };
+class A3W_fnc_takeArtilleryStrike { allowedTargets = 2; };
 class A3W_fnc_takeOwnership { allowedTargets = 2; };
 class A3W_fnc_titleTextMessage {};
 class A3W_fnc_towingHelper {};
@@ -89,33 +92,3 @@ class AUR_Hint { allowedTargets=1; };
 class AUR_Hide_Object_Global { allowedTargets=2; };
 class AUR_Enable_Rappelling_Animation_Global { allowedTargets=2; };
 class AUR_Play_Rappelling_Sounds_Global { allowedTargets=2; };
-
-//Taru Mod
-class Action_Accrochage{};
-class Action_Arrimage{};
-class Action_Gestion_Cordes{};
-class Action_Decrochage{};
-class Action_Desarrimage{};
-class Action_Parachutage{};
-class Choix_Lanceur_Action{};
-class Condition_UserActions_Ace_SelfActions{};
-class Configuration_Raccourcis_CBA{};
-class Module_Zeus_Arrimer{};
-class Module_Zeus_Gestion_Cordes{};
-class Module_Zeus_Choix_Lanceur_Accrocher{};
-class Module_Zeus_Choix_Lanceur_Arrimer{};
-class Module_Zeus_Choix_Lanceur_Allonger{};
-class Module_Zeus_Choix_Lanceur_Allonger_Max{};
-class Module_Zeus_Choix_Lanceur_Raccourcir{};
-class Module_Zeus_Choix_Lanceur_Raccourcir_Max{};
-class Module_Zeus_Choix_Lanceur_Decrocher_Parachuter{};
-class Module_Zeus_Choix_Lanceur_Desarrimer{};
-class Module_Zeus_Decrocher_Parachuter{};
-class Module_Zeus_Desarrimer{};
-class Transmission_Sons{};
-class Transmission_Messages{};
-class Veille_Arrimage{};
-class Verification_Ace_Activer{};
-class Verification_Objet_Accrocher_Compatible{};
-class Verification_Objet_Est_Attacher{};
-

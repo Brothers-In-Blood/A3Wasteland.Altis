@@ -19,10 +19,8 @@ _amountInput = _dialog displayCtrl AtmAmountInput_IDC;
 _accDropdown = _dialog displayCtrl AtmAccountDropdown_IDC;
 _feeText = _dialog displayCtrl AtmFeeText_IDC;
 _totalText = _dialog displayCtrl AtmTotalText_IDC;
-
 _bountyCheckbox = _dialog displayCtrl AtmBountyCheckbox_IDC;
 _bountyChecked = cbChecked _bountyCheckbox;
-
 _bmoney = player getVariable ["bmoney", 0];
 _balanceText = format ["$%1", [player getVariable ["bmoney", 0]] call fn_numbersText];
 if (_bmoney >= ["A3W_atmMaxBalance", 1000000] call getPublicVar) then { _balanceText = format ["<t color='#FFA080'>%1</t>", _balanceText] };
@@ -37,7 +35,6 @@ _reward = (["A3W_bountyRewardPerc", 10] call getPublicVar) max 0 min 100;
 _feeAmount = 0;
 _rewardAmount = 0;
 _selAcc = call compile (_accDropdown lbData lbCurSel _accDropdown);
-
 if (_bountyChecked) then
 
 {

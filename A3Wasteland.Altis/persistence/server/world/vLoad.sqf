@@ -26,11 +26,12 @@ _exclVehicleIDs = [];
 	{ (_x select 1) call compile format ["%1 = _this", _x select 0]	} forEach _x;
 
 	if (isNil "_flying") then { _flying = 0 };
-	if (isNil "_hoursAlive") then { _hoursAlive = 0 }; 
- 	if (isNil "_hoursUnused") then { _hoursUnused = 0 };
+	if (isNil "_hoursAlive") then { _hoursAlive = 0 };
+	if (isNil "_hoursUnused") then { _hoursUnused = 0 };
+
 	private _valid = false;
 
-	if (!isNil "_class" && !isNil "_pos" && {count _pos == 3}) then
+	if (!isNil "_class" && !isNil "_pos" && {count _pos == 3 && (_maxLifetime <= 0 || _hoursAlive < _maxLifetime) && (_maxUnusedTime <= 0 || _hoursUnused < _maxUnusedTime)}) then
 	{
 		_vehCount = _vehCount + 1;
 		_valid = true;
@@ -50,4 +51,5 @@ _exclVehicleIDs = [];
 } forEach _vehicles;
 
 diag_log format ["A3Wasteland - world persistence loaded %1 vehicles from %2", _vehCount, call A3W_savingMethodName];
+
 _exclVehicleIDs call fn_deleteVehicles;

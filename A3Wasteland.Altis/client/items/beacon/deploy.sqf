@@ -3,7 +3,7 @@
 // ******************************************************************************************
 //@file Version: 1.0
 //@file Name: deploy.sqf
-//@file Author: MercyfulFate
+//@file Author: MercyfulFate, BIB_Monkey
 //@file Created: 21/7/2013 16:00
 //@file Description: Deploy a Spawn Beacon
 //@file Argument: [player, player, _action, []] the standard "called by an action" values

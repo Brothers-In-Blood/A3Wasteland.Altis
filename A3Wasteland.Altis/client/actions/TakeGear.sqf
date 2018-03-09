@@ -71,13 +71,22 @@ if (_Lootable) then
 	removeAllAssignedItems _target;
 	removeAllWeapons _target;
 	sleep 1;
+	_additems = [];
+	{
+		_item = _x;
+		if (_item != _binoculars) then
+		{
+			_additems pushBack _item;
+		};
+	} foreach _items;
+
 
 	titletext ["Trading clothes with a deadman ", "PLAIN DOWN"];
 	player forceAddUniform _uniform;
 	sleep 1;
-	if (count _items > 0) then
+	if (count _additems > 0) then
 	{
-		{player additem _x; Player assignitem _x} foreach _items;
+		{player additem _x; Player assignitem _x} foreach _additems;
 	};
 	sleep 1;
 	if (count _uniformItems > 0) then

@@ -8,11 +8,14 @@
 //	@file Args:
 
 #define UNCONSCIOUS (player call A3W_fnc_isUnconscious)
+
 private ["_key", "_shift", "_ctrl", "_alt", "_handled"];
+
 _key = _this select 1;
 _shift = _this select 2;
 _ctrl = _this select 3;
 _alt = _this select 4;
+
 _handled = false;
 
 // ********** Hardcoded keys **********
@@ -24,17 +27,20 @@ switch (true) do
 	{
 		execVM "client\systems\adminPanel\checkAdmin.sqf";
 	};
+
 	// Tilde (key above Tab)
 	case (_key in A3W_customKeys_playerMenu):
 	{
 		if (alive player && !UNCONSCIOUS) then { [] spawn loadPlayerMenu } else { [] call A3W_fnc_killFeedMenu };
 		_handled = true;
 	};
+
 	// Home & Windows keys
 	case (_key in A3W_customKeys_playerNames):
 	{
 		showPlayerNames = if (isNil "showPlayerNames") then { true } else { !showPlayerNames };
 	};
+
 	// Earplugs - End Key
 	case (_key in A3W_customKeys_earPlugs):
 	{
@@ -73,11 +79,17 @@ switch (true) do
 };
 
 // ********** Action keys **********
+
+if (!UNCONSCIOUS) then // ####################
+{
+
 // Parachute
 if (!_handled && _key in actionKeys "GetOver") then
 {
 	if (!alive player) exitWith {};
+
 	_veh = vehicle player;
+
 	if (_veh == player) exitWith
 	{
 		// allow opening parachute only above 2.5m
@@ -87,6 +99,7 @@ if (!_handled && _key in actionKeys "GetOver") then
 			_handled = true;
 		};
 	};
+
 	// 1 sec cooldown after parachute is deployed so you don't start falling again if you double-tap the key
 	if (_veh isKindOf "ParachuteBase" && (isNil "A3W_openParachuteTimestamp" || {diag_tickTime - A3W_openParachuteTimestamp >= 1})) then
 	{
@@ -98,6 +111,7 @@ if (!_handled && _key in actionKeys "GetOver") then
 		};
 	};
 };
+
 // Eject
 if (!_handled && _key in actionKeys "GetOut") then
 {
@@ -109,7 +123,7 @@ if (!_handled && _key in actionKeys "GetOut") then
 		{
 			[] spawn
 			{
-				// if !(["Are you sure you want to eject?", "Confirm", true, true] call BIS_fnc_guiMessage) exitWith {};
+				//if !(["Are you sure you want to eject?", "Confirm", true, true] call BIS_fnc_guiMessage) exitWith {};
 				[[], fn_emergencyEject] execFSM "call.fsm";
 			};
 
@@ -117,6 +131,7 @@ if (!_handled && _key in actionKeys "GetOut") then
 		};
 	};
 };
+
 // Override prone reload freeze (ffs BIS)
 if (!_handled && _key in (actionKeys "MoveDown" + actionKeys "MoveUp")) then
 {
@@ -125,10 +140,12 @@ if (!_handled && _key in (actionKeys "MoveDown" + actionKeys "MoveUp")) then
 		[player, format ["AmovPknlMstpSrasW%1Dnon", [player, true] call getMoveWeapon]] call switchMoveGlobal;
 		reload player;
 	};
-}
+};
+
+} // ####################
 else // UNCONSCIOUS
 {
-	if (_key == 28) then // enter
+	if (_key == 57) then // spacebar
 	{
 		execVM "client\functions\confirmSuicide.sqf";
 		_handled = true;
@@ -140,6 +157,7 @@ else // UNCONSCIOUS
 		_handled = true;
 	};
 };
+
 // Scoreboard
 if (!_handled && _key in actionKeys "NetworkStats") then
 {
@@ -151,14 +169,17 @@ if (!_handled && _key in actionKeys "NetworkStats") then
 		{
 			call loadScoreboard;
 		};
+
 		_handled = true;
 	};
 };
+
 // Push-to-talk
 if (!_handled && _key in call A3W_allVoiceChatKeys) then
 {
 	[true] call fn_voiceChatControl;
 };
+
 // UAV feed
 if (!_handled && _key in (actionKeys "UavView" + actionKeys "UavViewToggle")) then
 {
@@ -167,6 +188,7 @@ if (!_handled && _key in (actionKeys "UavView" + actionKeys "UavViewToggle")) th
 		_handled = true;
 	};
 };
+
 // Block 3rd person and group cam while injured
 if (!_handled && _key in (actionKeys "PersonView" + actionKeys "TacticalView")) then
 {
@@ -175,4 +197,5 @@ if (!_handled && _key in (actionKeys "PersonView" + actionKeys "TacticalView")) 
 		_handled = true;
 	};
 };
+
 _handled

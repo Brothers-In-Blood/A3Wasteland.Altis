@@ -24,11 +24,12 @@ private _checks =
 	[_failed, _text]
 };
 
-_success = [[DURATION, 5] select (_vehicle getVariable ["ownerUID","0"] isEqualTo getPlayerUID player), ANIMATION, _checks, [_vehicle]] call a3w_actions_start;
+private _success = [[DURATION, 5] select (_vehicle getVariable ["ownerUID","0"] isEqualTo getPlayerUID player), ANIMATION, _checks, [_vehicle]] call a3w_actions_start;
+
 if (_success) then
 {
-    player removeItem "Toolkit";
 	[_vehicle, player] call A3W_fnc_takeOwnership;
+	player removeItem "toolkit";
 	["Acquiring complete!", 5] call mf_notify_client;
 };
 

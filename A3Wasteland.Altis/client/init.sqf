@@ -60,8 +60,7 @@ call compile preprocessFileLineNumbers "addons\far_revive\FAR_revive_init.sqf";
 
 A3W_scriptThreads pushBack execVM "client\functions\evalManagedActions.sqf";
 
-pvar_playerRespawn = [player, objNull];
-publicVariableServer "pvar_playerRespawn";
+[player, objNull] remoteExec ["A3W_fnc_playerRespawnServer", 2];
 
 //Player setup
 player call playerSetupStart;
@@ -110,6 +109,9 @@ if (count (["config_territory_markers", []] call getPublicVar) > 0) then
 	[] execVM "territory\client\setupCaptureTriggers.sqf";
 };
 
+//Setup player menu scroll action.
+//[] execVM "client\clientEvents\onMouseWheel.sqf";
+
 // Load custom keys from profile
 call compile preprocessFileLineNumbers "client\clientEvents\customKeys.sqf";
 
@@ -127,6 +129,7 @@ call compile preprocessFileLineNumbers "client\functions\setupClientPVars.sqf";
 
 //client Executes
 A3W_scriptThreads pushBack execVM "client\systems\hud\playerHud.sqf";
+A3W_scriptThreads pushBack execVM "client\systems\killFeed\killFeed.sqf";
 
 if (["A3W_survivalSystem"] call isConfigOn) then
 {
@@ -159,11 +162,11 @@ A3W_clientSetupComplete = compileFinal "true";
 A3W_scriptThreads pushBack execVM "addons\fpsFix\vehicleManager.sqf";
 A3W_scriptThreads pushBack execVM "addons\Lootspawner\LSclientScan.sqf";
 [] execVM "client\functions\drawPlayerIcons.sqf";
-// [] execVM "addons\camera\functions.sqf";
 [] execVM "addons\UAV_Control\functions.sqf";
 
 call compile preprocessFileLineNumbers "client\functions\generateAtmArray.sqf";
 [] execVM "client\functions\drawPlayerMarkers.sqf";
+[] execVM "addons\aj\antiglitch\aj_c_checkloop.sqf";
 
 inGameUISetEventHandler ["Action", "_this call A3W_fnc_inGameUIActionEvent"];
 
@@ -177,5 +180,3 @@ inGameUISetEventHandler ["Action", "_this call A3W_fnc_inGameUIActionEvent"];
 		_x setVariable ["side", playerSide, true];
 	};
 } forEach pvar_spawn_beacons;
-
-setTerrainGrid 1;

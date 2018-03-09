@@ -1,3 +1,4 @@
+
 //List of cities where private storage boxes are available (empty or unset means all cities)
 ps_cities_whitelist = [];
 
@@ -21,4 +22,4 @@ ps_markers_properties = ["ICON", "mil_dot", "ColorUNKNOWN", [1,1], "Storage"];
 	"ReammoBox_F" (maximumLoad = 2000)
 	"ContainerSupply" (maximumLoad = 9999)
  */
-ps_container_class = "ContainerSupply";
+ps_container_class = "ReammoBox_F";

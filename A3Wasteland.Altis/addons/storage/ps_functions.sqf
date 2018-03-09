@@ -98,12 +98,13 @@ if (["A3W_savingMethod", "profile"] call getPublicVar != "sock") then
 {
   p_saveStorage = {
     params ["", "_obj"];
-    private _cargo = _obj call fn_containerCargoToPairs; 
+
+    private _cargo = _obj call fn_containerCargoToPairs;
     private _storage =
     [
-      ["Weapons", _cargo select 0], 
-      ["Magazines", _cargo select 1], 
-      ["Items", _cargo select 2], 
+      ["Weapons", _cargo select 0],
+      ["Magazines", _cargo select 1],
+      ["Items", _cargo select 2],
       ["Backpacks", _cargo select 3]
     ];
 

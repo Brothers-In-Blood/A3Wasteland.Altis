@@ -16,7 +16,7 @@
 
 enableSaving [false, false];
 enableEnvironment [false, true];
-
+A3W_sessionTimeStart = diag_tickTime;
 
 _descExtPath = str missionConfigFile;
 currMissionDir = compileFinal str (_descExtPath select [0, count _descExtPath - 15]);
@@ -98,8 +98,7 @@ if (hasInterface || isServer) then
 	[] execVM "addons\outlw_magrepack\MagRepack_init.sqf";
 	[] execVM "addons\lsd_nvg\init.sqf";
 	[] execVM "addons\stickyCharges\init.sqf";
-	[] execVM "addons\laptop\init.sqf";
 	[] execVM "addons\bounty\init.sqf";
 	[] execVM "addons\Crater_Cleaner\cratercleaner.sqf";
+	[] execVM "addons\VCOMAI\init.sqf";
 };
-

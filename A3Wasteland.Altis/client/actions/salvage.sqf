@@ -3,12 +3,12 @@
 // ******************************************************************************************
 //	@file Version: 1.0
 //	@file Name: salvage.sqf
-//	@file Author: Wiking, AgentRev
+//	@file Author: Wiking, AgentRev, BIB_Monkey
 //	@file Created: 27/07/2014 13:04
 
 // Salvaging of vehicle wrecks
 
-#define GET_ONE_TENTH_PRICE(PRICE) ((ceil ((PRICE) * 0.05)))
+#define GET_ONE_TENTH_PRICE(PRICE) (ceil ((PRICE) * 0.01))
 
 // Check if mutex lock is active.
 if (mutexScriptInProgress) exitWith
