@@ -180,3 +180,22 @@ inGameUISetEventHandler ["Action", "_this call A3W_fnc_inGameUIActionEvent"];
 		_x setVariable ["side", playerSide, true];
 	};
 } forEach pvar_spawn_beacons;
+
+
+//Mapstuff
+private _playerside = side player;
+switch (_playerside) do
+{
+	case "WEST":
+	{
+		disableMapIndicators [false,true,true,false];
+	};
+	case "EAST":
+	{
+		disableMapIndicators [false,true,true,false];
+	};
+	case "GUER":
+	{
+		disableMapIndicators [true,true,true,false];
+	};
+};
