@@ -57,8 +57,10 @@
 	[format ["<img image='\a3\Ui_f\data\GUI\Cfg\CommunicationMenu\supplydrop_ca.paa' color='%1'/> <t color='%1'>[</t>Airdrop Menu<t color='%1'>]</t>", "#FF0000"],"addons\APOC_Airdrop_Assistance\APOC_cli_menu.sqf",[], 1, false, false],
 	//Detect Beacons
 	["Track Beacons", "addons\beacondetector\beacondetector.sqf",0,-10,false,false,"","('MineDetector' in (items player)) && !BeaconScanInProgress"],
-	["<img image='\a3\Ui_f\data\GUI\Cfg\CommunicationMenu\transport_ca.paa'/> <t color='#FFFFFF'>Cancel tracking.</t>", "Beaconscanstop = true",0,-10,false,false,"","BeaconScanInProgress"]
-	
+	["<img image='\a3\Ui_f\data\GUI\Cfg\CommunicationMenu\transport_ca.paa'/> <t color='#FFFFFF'>Cancel tracking.</t>", "Beaconscanstop = true",0,-10,false,false,"","BeaconScanInProgress"],
+	//Camo Nets
+	["Deploy Camo Nets", "client\actions\CustomizeVehicle.sqf",["DeployCamo"], -99, false, true, "", "{cursorObject isKindOf _x} count ['Tank_F', 'Wheeled_APC_F']>0 && !(cursorObject getvariable ['CamoDeployed', false])"],
+	["Stow Camo Nets", "client\actions\CustomizeVehicle.sqf",["StowCamo"], -99, false, true, "", "{cursorObject isKindOf _x} count ['Tank_F', 'Wheeled_APC_F']>0 && (cursorObject getvariable ['CamoDeployed', false])"]
 ];
 //Door Locking
 // For some reason this diesn't work with add managed action.
