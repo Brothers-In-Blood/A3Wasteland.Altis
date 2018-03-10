@@ -1525,7 +1525,7 @@ armoredArray = compileFinal str
 	["MSE-3 Marid",																"O_APC_Wheeled_02_rcws_F",											250000,						"vehicle"],
 	["MSE-3 Marid Slat",														"O_APC_Wheeled_02_rcws_F",											250000,						"vehicle",						"variant_Slats"],
 	["AMV-7 Marshall",															"B_APC_Wheeled_01_cannon_F",										370000,						"vehicle"],
-	["AMV-7 Marshall Slat",														"B_APC_Wheeled_01_cannon_F",										370000,						"vehicle"						"variant_Slats"],
+	["AMV-7 Marshall Slat",														"B_APC_Wheeled_01_cannon_F",										370000,						"vehicle",						"variant_Slats"],
 	["AFV-4 Gorgon",															"I_APC_Wheeled_03_cannon_F",										495000,						"vehicle"],
 	["AFV-4 Gorgon Slat",														"I_APC_Wheeled_03_cannon_F",										495000,						"vehicle",						"variant_Slats"],
 	["Rhino MGS",																"B_AFV_Wheeled_01_cannon_F",										600000,						"vehicle"],
