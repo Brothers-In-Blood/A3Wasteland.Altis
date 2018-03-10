@@ -1447,6 +1447,8 @@ landArray = compileFinal str
 	["SUV",																		"C_SUV_01_F",														1100,						"vehicle"],
 
 	["MB 4WD",																	"I_C_Offroad_02_unarmed_F",											1100,						"vehicle"],
+	["MB 4WD (LMG)",															"I_C_Offroad_02_LMG_F",												2500,						"vehicle"],
+	["MB 4WD (AT)",																"I_C_Offroad_02_AT_F",												6500,						"vehicle"],	
 	["MB 4WD (Rollcage)",														"C_Offroad_02_unarmed_F",											1100,						"vehicle"],
 
 	["Offroad",																	"C_Offroad_01_F",													1100,						"vehicle"],
@@ -1454,6 +1456,8 @@ landArray = compileFinal str
 	["Offroad Camo",															"B_G_Offroad_01_F",													1250,						"vehicle"],
 	["Offroad Repair",															"C_Offroad_01_repair_F",											6100,						"vehicle"],
 	["Offroad HMG",																"B_G_Offroad_01_armed_F",											2500,						"vehicle"],
+	["Offroad AT",																"B_G_Offroad_01_AT_F",												6500,						"vehicle"],
+
 
 	["Truck",																	"C_Van_01_transport_F",												700,						"vehicle"],
 	["Truck (Camo)",															"B_G_Van_01_transport_F",											800,						"vehicle"],
@@ -1491,11 +1495,14 @@ landArray = compileFinal str
 	["Zamak Medical",															"I_Truck_02_medical_F",												9000,						"vehicle"],
 	["Zamak Repair",															"I_Truck_02_box_F",													152500,						"vehicle"],
 	["Zamak Ammo",																"I_Truck_02_ammo_F",												505000,						"vehicle"],
+	["Zamak MRL",																"I_Truck_02_MRL_F",													905000,						"vehicle"],
 
 	["Prowler (Unarmed)",														"B_T_LSV_01_unarmed_F",												900,						"vehicle"],
 	["Prowler (Armed)",															"B_T_LSV_01_armed_F",												15000,						"vehicle"],
+	["Prowler (AT)",															"B_LSV_01_AT_F",													40000,						"vehicle"],
 	["Qilin (Unarmed)",															"O_T_LSV_02_unarmed_F",												900,						"vehicle"],
 	["Qilin (Armed)",															"O_T_LSV_02_armed_F",												15000,						"vehicle"],
+	["Qilin (AT)",																"O_LSV_02_AT_F",													35000,						"vehicle"],
 
 	["UGV Stomper (NATO)",														"B_UGV_01_F",														2500,						"vehicle"],
 	["UGV Stomper RCWS (NATO)",													"B_UGV_01_rcws_F",													245000,						"vehicle"],
@@ -1516,22 +1523,42 @@ armoredArray = compileFinal str
 	["Strider HMG",																"I_MRAP_03_hmg_F",													35000,						"vehicle"],
 	["Strider GMG",																"I_MRAP_03_gmg_F",													37500,						"vehicle"],
 	["MSE-3 Marid",																"O_APC_Wheeled_02_rcws_F",											250000,						"vehicle"],
+	["MSE-3 Marid Slat",														"O_APC_Wheeled_02_rcws_F",											250000,						"vehicle",						"variant_Slats"],
 	["AMV-7 Marshall",															"B_APC_Wheeled_01_cannon_F",										370000,						"vehicle"],
-	["AFV-4 Gorgon",															"I_APC_Wheeled_03_cannon_F",										495000,						"vehicle"]
+	["AMV-7 Marshall Slat",														"B_APC_Wheeled_01_cannon_F",										370000,						"vehicle"						"variant_Slats"],
+	["AFV-4 Gorgon",															"I_APC_Wheeled_03_cannon_F",										495000,						"vehicle"],
+	["AFV-4 Gorgon Slat",														"I_APC_Wheeled_03_cannon_F",										495000,						"vehicle",						"variant_Slats"],
+	["Rhino MGS",																"B_AFV_Wheeled_01_cannon_F",										600000,						"vehicle"],
+	["Rhino MGS Slat",															"B_AFV_Wheeled_01_cannon_F",										600000,						"vehicle",						"variant_Slats"],
+	["Rhino MGS Up",															"B_AFV_Wheeled_01_up_cannon_F",										600000,						"vehicle"],
+	["Rhino MGS Up Slat",														"B_AFV_Wheeled_01_up_cannon_F",										600000,						"vehicle",						"variant_Slats"]
 ];
 tanksArray = compileFinal str
 [
 	["IFV-6c Panther",															"B_APC_Tracked_01_rcws_F",											355000,						"vehicle"],
 	["FV-720 Mora",																"I_APC_tracked_03_cannon_F",										375000,						"vehicle"],
+	["FV-720 Mora Slat",														"I_APC_tracked_03_cannon_F",										375000,						"vehicle",						"variant_Slats"],
 	["BTR-K Kamysh",															"O_APC_Tracked_02_cannon_F",										400000,						"vehicle"],
+	["BTR-K Kamysh Slat",														"O_APC_Tracked_02_cannon_F",										400000,						"vehicle",						"variant_Slats"],
 	["IFV-6a Cheetah AA",														"B_APC_Tracked_01_AA_F",											510000,						"vehicle"],
 	["ZSU-39 Tigris AA",														"O_APC_Tracked_02_AA_F",											510000,						"vehicle"],
+	["ZSU-39 Tigris AA Slat",													"O_APC_Tracked_02_AA_F",											510000,						"vehicle",						"variant_Slats"],
 	["M2A1 Slammer",															"B_MBT_01_cannon_F",												600000,						"vehicle"],
 	["M2A4 Slammer HMG",														"B_MBT_01_TUSK_F",													650000,						"vehicle"],						// Commander gun variant
 	["T-100 Varsuk",															"O_MBT_02_cannon_F",												700000,						"vehicle"],
 	["MBT-52 Kuma",																"I_MBT_03_cannon_F",												750000,						"vehicle"],
 	["CRV-6e Bobcat",															"B_APC_Tracked_01_CRV_F",											1000000,					"vehicle"],
 	["M4 Scorcher",																"B_MBT_01_arty_F",													1000000,					"vehicle"],
+	["T-140 Angara",															"O_MBT_04_cannon_F",												800000,						"vehicle"],
+	["T-140K Angara",															"O_MBT_04_command_F",												900000,						"vehicle"],
+	["AWC 301 NYX (AT)",														"I_LT_01_AT_F",														400000,						"vehicle"],
+	["AWC 301 NYX Slat (AT)",													"I_LT_01_AT_F",														400000,						"vehicle",						"variant_Slats"],
+	["AWC 302 NYX (AA)",														"I_LT_01_AA_F",														600000,						"vehicle"],
+	["AWC 302 NYX Slat (AA)",													"I_LT_01_AA_F",														600000,						"vehicle",						"variant_Slats"],
+	["AWC 303 NYX (Recon)",														"I_LT_01_scout_F",													60000,						"vehicle"],
+	["AWC 303 NYX Slat (Recon)",												"I_LT_01_scout_F",													60000,						"vehicle",						"variant_Slats"],
+	["AWC 304 NYX",																"I_LT_01_cannon_F",													350000,						"vehicle"],
+	["AWC 304 NYX Slat",														"I_LT_01_cannon_F",													350000,						"vehicle",						"variant_Slats"],
 	["M5 Sandstorm MLRS",														"B_MBT_01_mlrs_F",													1000000,					"vehicle"]
 ];
 helicoptersArray = compileFinal str

@@ -183,37 +183,6 @@ switch (true) do
 		_pylons = ["PylonRack_Bomb_GBU12_x2","PylonRack_Bomb_GBU12_x2"];
 	};
 
-
-
-
-/*
-	// AH-99 Blackfoot
-	case (_class isKindOf "Heli_Attack_01_dynamicLoadout_base_F"):
-	{
-		_pylons = ["PylonMissile_1Rnd_AAA_missiles","PylonMissile_1Rnd_LG_scalpel","PylonRack_12Rnd_missiles","PylonRack_12Rnd_missiles","PylonMissile_1Rnd_LG_scalpel","PylonMissile_1Rnd_AAA_missiles"];
-	};
-*/
-
-
-/*
-	// Mi-48 Kajman
-	case (_class isKindOf "Heli_Attack_02_dynamicLoadout_base_F"):
-	{
-		_pylons = ["PylonMissile_1Rnd_LG_scalpel","PylonRack_19Rnd_Rocket_Skyfire","PylonRack_19Rnd_Rocket_Skyfire","PylonMissile_1Rnd_LG_scalpel"];
-	};
-*/
-
-
-/*
-	// Y-32 Xi'an
-	case ({_class isKindOf _x} count ["VTOL_02_infantry_dynamicLoadout_base_F", "VTOL_02_vehicle_dynamicLoadout_base_F"] > 0):
-	{
-		_pylons = ["PylonRack_1Rnd_Missile_AGM_01_F","PylonRack_19Rnd_Rocket_Skyfire","PylonRack_19Rnd_Rocket_Skyfire","PylonRack_1Rnd_Missile_AGM_01_F"];
-	};
-*/
-
-
-
 	// A-143 Buzzard AA
 	case (_class isKindOf "Plane_Fighter_03_dynamicLoadout_base_F" && _variant == "buzzardAA"):
 	{
@@ -233,114 +202,6 @@ switch (true) do
 		};
 	};
 
-
-
-/*
-	// A-149 Gryphon
-	case (_class isKindOf "Plane_Fighter_04_Base_F"):
-	{
-		_mags =
-		[
-			["magazine_Fighter04_Gun20mm_AA_x250", [-1]],
-			["magazine_Fighter04_Gun20mm_AA_x250", [-1]],
-			["magazine_Fighter04_Gun20mm_AA_x250", [-1]],
-			["magazine_Fighter04_Gun20mm_AA_x250", [-1]], // extra gun mags (non-explosive ammo)
-			["Laserbatteries", [-1]],
-			["240Rnd_CMFlare_Chaff_Magazine", [-1]]
-		];
-		_pylons = ["PylonMissile_Missile_BIM9X_x1","PylonMissile_Missile_BIM9X_x1","PylonRack_Missile_AGM_02_x1","PylonRack_Missile_AGM_02_x1","PylonRack_Missile_AMRAAM_C_x1","PylonRack_Missile_AMRAAM_C_x1"];
-	};
-*/
-
-
-/*
-	// F/A-181 Black Wasp
-	case (_class isKindOf "B_Plane_Fighter_01_F"):
-	{
-		_mags =
-		[
-			["magazine_Fighter01_Gun20mm_AA_x450", [-1]],
-			["magazine_Fighter01_Gun20mm_AA_x450", [-1]], // extra gun mag (non-explosive ammo)
-			["Laserbatteries", [-1]],
-			["240Rnd_CMFlare_Chaff_Magazine", [-1]]
-		];
-		_pylons = ["PylonRack_Missile_AGM_02_x1","PylonRack_Missile_AGM_02_x1","PylonRack_7Rnd_Rocket_04_HE_F","PylonRack_7Rnd_Rocket_04_AP_F","PylonMissile_Missile_BIM9X_x1","PylonMissile_Missile_BIM9X_x1","PylonMissile_Missile_BIM9X_x1","PylonMissile_Missile_BIM9X_x1","PylonMissile_Missile_AMRAAM_D_INT_x1","PylonMissile_Missile_AMRAAM_D_INT_x1","PylonMissile_Bomb_GBU12_x1","PylonMissile_Bomb_GBU12_x1"];
-	};
-*/
-
-
-/*
-	// F/A-181 Black Wasp (Stealth)
-	case (_class isKindOf "B_Plane_Fighter_01_Stealth_F"):
-	{
-		_mags =
-		[
-			["magazine_Fighter01_Gun20mm_AA_x450", [-1]],
-			["magazine_Fighter01_Gun20mm_AA_x450", [-1]],
-			["magazine_Fighter01_Gun20mm_AA_x450", [-1]],
-			["magazine_Fighter01_Gun20mm_AA_x450", [-1]],
-			["magazine_Fighter01_Gun20mm_AA_x450", [-1]], // extra gun mags to make up for lack of pylons (non-explosive ammo)
-			["Laserbatteries", [-1]],
-			["240Rnd_CMFlare_Chaff_Magazine", [-1]]
-		];
-		_pylons = ["","","","","","","","","","","",""];
-	};
-*/
-
-
-/*
-	// To-201 Shikra
-	case (_class isKindOf "O_Plane_Fighter_02_F"):
-	{
-		_mags =
-		[
-			["magazine_Fighter02_Gun30mm_AA_x180", [-1]],
-			["magazine_Fighter02_Gun30mm_AA_x180", [-1]], // extra gun mag (non-explosive ammo)
-			["Laserbatteries", [-1]],
-			["240Rnd_CMFlare_Chaff_Magazine", [-1]]
-		];
-		_pylons = ["PylonMissile_Missile_AGM_KH25_x1","PylonMissile_Missile_AGM_KH25_x1","PylonMissile_Bomb_KAB250_x1","PylonMissile_Bomb_KAB250_x1","PylonRack_20Rnd_Rocket_03_HE_F","PylonRack_20Rnd_Rocket_03_AP_F","PylonMissile_Missile_AA_R73_x1","PylonMissile_Missile_AA_R73_x1","PylonMissile_Missile_AA_R77_x1","PylonMissile_Missile_AA_R77_x1","PylonMissile_Missile_AA_R77_INT_x1","PylonMissile_Missile_AA_R77_INT_x1","PylonMissile_Bomb_KAB250_x1"];
-	};
-*/
-
-
-/*
-	// To-201 Shikra (Stealth)
-	case (_class isKindOf "O_Plane_Fighter_02_Stealth_F"):
-	{
-		_mags =
-		[
-			["magazine_Fighter02_Gun30mm_AA_x180", [-1]],
-			["magazine_Fighter02_Gun30mm_AA_x180", [-1]],
-			["magazine_Fighter02_Gun30mm_AA_x180", [-1]],
-			["magazine_Fighter02_Gun30mm_AA_x180", [-1]],
-			["magazine_Fighter02_Gun30mm_AA_x180", [-1]], // extra gun mags to make up for lack of pylons (non-explosive ammo)
-			["Laserbatteries", [-1]],
-			["240Rnd_CMFlare_Chaff_Magazine", [-1]]
-		];
-		_pylons = ["","","","","","","","","","","","",""];
-	};
-*/
-
-
-
-	/*// A-164 Wipeout CAS
-	case (_class isKindOf "Plane_CAS_01_dynamicLoadout_base_F"):
-	{
-		_pylons = ["PylonRack_1Rnd_Missile_AA_04_F","PylonRack_1Rnd_Missile_AGM_02_F","PylonMissile_1Rnd_Bomb_04_F","PylonMissile_1Rnd_Bomb_04_F","PylonRack_7Rnd_Rocket_04_HE_F","PylonRack_7Rnd_Rocket_04_AP_F","PylonMissile_1Rnd_Bomb_04_F","PylonMissile_1Rnd_Bomb_04_F","PylonRack_1Rnd_Missile_AGM_02_F","PylonRack_1Rnd_Missile_AA_04_F"];
-	};*/
-
-
-
-
-	/*// To-199 Neophron CAS
-	case (_class isKindOf "Plane_CAS_02_dynamicLoadout_base_F"):
-	{
-		_pylons = ["PylonRack_1Rnd_Missile_AA_03_F","PylonRack_1Rnd_Missile_AA_03_F","PylonRack_1Rnd_Missile_AGM_01_F","PylonMissile_1Rnd_Bomb_03_F","PylonRack_20Rnd_Rocket_03_HE_F","PylonRack_20Rnd_Rocket_03_AP_F","PylonMissile_1Rnd_Bomb_03_F","PylonRack_1Rnd_Missile_AGM_01_F","PylonRack_1Rnd_Missile_AA_03_F","PylonRack_1Rnd_Missile_AA_03_F"];
-	};*/
-
-
-
 	// Greyhawk/Ababil Missile UAVs
 	case (_class isKindOf "UAV_02_dynamicLoadout_base_F" && _variant == "greyhawkRecon"):
 	{
@@ -355,11 +216,7 @@ switch (true) do
 	case (_class isKindOf "UAV_02_dynamicLoadout_base_F" && _variant == "greyhawkBomber"):
 	{
 		_pylons = ["PylonMissile_1Rnd_Bomb_04_F","PylonMissile_1Rnd_Bomb_04_F"];
-
 	};
-
-
-
 
 	// UCAV Sentinel Missile
 	case (_class isKindOf "B_UAV_05_F" && _variant == "sentinelMissile"):
@@ -373,29 +230,20 @@ switch (true) do
 		_pylons = ["PylonMissile_Bomb_GBU12_x1","PylonMissile_Bomb_GBU12_x1"];
 	};
 
-
-
-
-	/*// MQ-12 Falcon UAV (non-dynamicLoadout)
-	case (_class isKindOf "B_T_UAV_03_F"):
+	//Slat Armor
+	case ({_class isKindOf _x} count  ["B_AFV_Wheeled_01_up_cannon_F", "B_AFV_Wheeled_01_up_cannon_F", "I_LT_01_AT_F", "I_LT_01_AA_F", "I_LT_01_scout_F", "I_LT_01_cannon_F","O_APC_Tracked_02_cannon_F","I_APC_Wheeled_03_cannon_F","O_APC_Tracked_02_AA_F"] > 0 && _variant == "Slats"):
 	{
-		_mags =
-		[
-			["120Rnd_CMFlare_Chaff_Magazine", [-1]],
-			["1000Rnd_65x39_Belt_Green", [0]],
-			["24Rnd_missiles", [0]],
-			["2Rnd_LG_scalpel", [0]],
-			["2Rnd_AAA_missiles", [0]],
-			["Laserbatteries", [0]]
-		];
-		_weapons =
-		[
-			["CMFlareLauncher", [-1]],
-			["LMG_M200", [0]],
-			["missiles_DAR", [0]],
-			["missiles_SCALPEL", [0]],
-			["missiles_ASRAAM", [0]],
-			["Laserdesignator_mounted", [0]]
-		];
-	};*/
+		_customCode =
+		{
+			_veh animate ["showSLATHull",1];
+		};
+	};
+	case ({_class isKindOf _x} count  ["B_APC_Wheeled_01_cannon_F","I_APC_tracked_03_cannon_F"] > 0 && _variant == "Slats"):
+	{
+		_customCode =
+		{
+			_veh animate ["showSLATHull",1];
+			_veh animate ["showSLATTurret",1];
+		};
+	};
 };
