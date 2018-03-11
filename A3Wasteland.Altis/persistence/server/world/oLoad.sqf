@@ -2,7 +2,7 @@
 // * This project is licensed under the GNU Affero GPL v3. Copyright © 2014 A3Wasteland.com *
 // ******************************************************************************************
 //	@file Name: oLoad.sqf
-//	@file Author: AgentRev, JoSchaap, Austerror
+//	@file Author: AgentRev, JoSchaap, Austerror, BIB_Monkey
 
 #include "functions.sqf"
 #define STR_TO_SIDE(VAL) ([sideUnknown,BLUFOR,OPFOR,INDEPENDENT,CIVILIAN,sideLogic] select ((["WEST","EAST","GUER","CIV","LOGIC"] find toUpper (VAL)) + 1))
@@ -264,26 +264,27 @@ _exclObjectIDs = [];
 	};
 
 	//Restore Service Objects
-	if ({_obj iskindof _x} count [
-			"Box_NATO_AmmoVeh_F",
-			"Box_EAST_AmmoVeh_F",
-			"Box_IND_AmmoVeh_F",
-			"B_Slingload_01_Ammo_F",
-			"B_Slingload_01_Fuel_F",
-			"B_Slingload_01_Medevac_F",
-			"B_Slingload_01_Repair_F",
-			"StorageBladder_01_fuel_forest_F",
-			"StorageBladder_01_fuel_sand_F",
-			"Land_fs_feed_F",
-			"Land_FuelStation_01_pump_malevil_F",
-			"Land_FuelStation_Feed_F",
-			"Land_Pod_Heli_Transport_04_fuel_F",
-			"Land_Pod_Heli_Transport_04_repair_F"
-		] > 0) then	{
+	if ({_obj iskindof _x} count 
+	[
+		"Box_NATO_AmmoVeh_F",
+		"Box_EAST_AmmoVeh_F",
+		"Box_IND_AmmoVeh_F",
+		"B_Slingload_01_Ammo_F",
+		"B_Slingload_01_Fuel_F",
+		"B_Slingload_01_Medevac_F",
+		"B_Slingload_01_Repair_F",
+		"StorageBladder_01_fuel_forest_F",
+		"StorageBladder_01_fuel_sand_F",
+		"Land_fs_feed_F",
+		"Land_FuelStation_01_pump_malevil_F",
+		"Land_FuelStation_Feed_F",
+		"Land_Pod_Heli_Transport_04_fuel_F",
+		"Land_Pod_Heli_Transport_04_repair_F"
+	] > 0) then	
+	{
 		_obj spawn GOM_fnc_addAircraftLoadoutToObject;
 	};
 } forEach _objects;
-
 {
 	//Restore building, towers, etc first
 	if (_x iskindof "NonStrategic") then
