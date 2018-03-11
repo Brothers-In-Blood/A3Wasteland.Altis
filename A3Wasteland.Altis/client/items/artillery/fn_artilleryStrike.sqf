@@ -38,6 +38,7 @@ if (isServer && isNil "_success") then // server process
 		]
 		spawn
 		{
+			sleep 30;
 			params ["_player", "_pos", "_ammo", "_count", "_radius"];
 			for "_i" from 1 to _count do
 			{
