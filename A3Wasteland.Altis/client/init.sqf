@@ -3,7 +3,7 @@
 // ******************************************************************************************
 //@file Version: 1.1
 //@file Name: init.sqf
-//@file Author: [404] Deadbeat, [GoT] JoSchaap, AgentRev, [KoS] Bewilderbeest
+//@file Author: [404] Deadbeat, [GoT] JoSchaap, AgentRev, [KoS] Bewilderbeest, BIB_Monkey
 //@file Created: 20/11/2012 05:19
 //@file Description: The client init.
 
@@ -183,7 +183,7 @@ inGameUISetEventHandler ["Action", "_this call A3W_fnc_inGameUIActionEvent"];
 
 
 //Mapstuff
-private _playerside = side player;
+private _playerside = str (side player);
 switch (_playerside) do
 {
 	case "WEST":
