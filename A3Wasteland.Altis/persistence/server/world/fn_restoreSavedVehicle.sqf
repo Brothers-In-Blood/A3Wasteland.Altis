@@ -309,6 +309,47 @@ if (!isNil "_turretMags2") then
 if (!isNil "_ammoCargo") then { _veh setAmmoCargo _ammoCargo };
 if (!isNil "_fuelCargo") then { _veh setFuelCargo _fuelCargo };
 if (!isNil "_repairCargo") then { _veh setRepairCargo _repairCargo };
+//Restore Vehicle Camo nets
+if (_veh getvariable ["CamoDeployed", false]) then
+{
+	if ({_veh isKindOf _x} count 
+	[
+		"B_APC_Tracked_01_CRV_F",
+		"B_APC_Tracked_01_rcws_F",
+		"O_APC_Tracked_02_cannon_F",
+		"O_APC_Wheeled_02_rcws_v2_F",
+		"I_APC_Wheeled_03_cannon_F",
+		"I_LT_01_AA_F",
+		"I_LT_01_AT_F",
+		"I_LT_01_scout_F",
+		"I_LT_01_cannon_F"
+	]>0) then 
+	{
+		_veh animate ["showCamonetHull",1];
+	};
+	if ({_veh isKindOf _x} count 
+	[
+		"B_APC_Tracked_01_AA_F",
+		"B_APC_Wheeled_01_cannon_F",
+		"B_AFV_Wheeled_01_cannon_F",
+		"B_AFV_Wheeled_01_up_cannon_F",
+		"B_MBT_01_arty_F",
+		"B_MBT_01_mlrs_F",
+		"B_MBT_01_cannon_F",
+		"B_MBT_01_TUSK_F",
+		"O_APC_Tracked_02_AA_F",
+		"O_MBT_02_arty_F",
+		"O_MBT_02_cannon_F",
+		"O_MBT_04_cannon_F",
+		"O_MBT_04_command_F",
+		"I_APC_tracked_03_cannon_F",
+		"I_MBT_03_cannon_F"
+	]>0) then
+	{
+		_veh animate ["showCamonetHull",1];
+		_veh animate ["showCamonetTurret",1];
+	};
+};
 
 reload _veh;
 _veh hideObjectGlobal false;
