@@ -208,16 +208,16 @@ switch (_boxType) do
 				_boxItems =
 				[
 					// Item type, Item class(es), # of items, # of magazines per weapon
-					["itm", "Medikit", RANDOM_BETWEEN(10,20)],
-					["itm", "FirstAidKit", RANDOM_BETWEEN(10,20)]
+					["itm", "Medikit", RANDOM_BETWEEN(10,40)],
+					["itm", "FirstAidKit", RANDOM_BETWEEN(10,40)]
 				];
 			};
 			case "mission_Field_Engineer": 
 			{	
 				_boxItems = 
 				[
-					["itm", "Toolkit", 30],
-					["itm", "MineDetector", 20]
+					["itm", "Toolkit", RANDOM_BETWEEN(10,40)],
+					["itm", "MineDetector", RANDOM_BETWEEN(10,40)]
 				];
 			};
 			case "Mission_Ammo_45":
@@ -579,91 +579,91 @@ switch (_boxType) do
 			{
 				_boxItems =
 				[
-					["bac", ["C_UAV_06_medical_backpack_F","C_IDAP_UAV_06_medical_backpack_F"], RANDOM_BETWEEN(1,4)]
+					["itm", ["C_UAV_06_medical_backpack_F","C_IDAP_UAV_06_medical_backpack_F"], RANDOM_BETWEEN(1,4)]
 				];
 			};
 			case "Mission_IDAP_DeMineDrone":
 			{
 				_boxItems =
 				[
-					["bac", ["C_IDAP_UAV_06_antimine_backpack_F"], RANDOM_BETWEEN(1,4)]
+					["itm", ["C_IDAP_UAV_06_antimine_backpack_F"], RANDOM_BETWEEN(1,4)]
 				];
 			};
 			case "Mission_IDAP_UtilityDrone":
 			{
 				_boxItems =
 				[
-					["bac", ["C_UAV_06_backpack_F","C_IDAP_UAV_06_backpack_F"], RANDOM_BETWEEN(1,4)]
+					["itm", ["C_UAV_06_backpack_F","C_IDAP_UAV_06_backpack_F"], RANDOM_BETWEEN(1,4)]
 				];
 			};
 			case "Mission_AAF_MedDrone":
 			{
 				_boxItems =
 				[
-					["bac", "I_UAV_06_medical_backpack_F", RANDOM_BETWEEN(1,4)]
+					["itm", "I_UAV_06_medical_backpack_F", RANDOM_BETWEEN(1,4)]
 				];
 			};
 			case "Mission_AAF_UtilityDrone":
 			{
 				_boxItems =
 				[
-					["bac", "I_UAV_06_backpack_F", RANDOM_BETWEEN(1,4)]
+					["itm", "I_UAV_06_backpack_F", RANDOM_BETWEEN(1,4)]
 				];
 			};
 			case "Mission_NATO_MedDrone":
 			{
 				_boxItems =
 				[
-					["bac", "B_UAV_06_medical_backpack_F", RANDOM_BETWEEN(1,4)]
+					["itm", "B_UAV_06_medical_backpack_F", RANDOM_BETWEEN(1,4)]
 				];
 			};
 			case "Mission_NATO_UtilityDrone":
 			{
 				_boxItems =
 				[
-					["bac", "B_UAV_06_backpack_F", RANDOM_BETWEEN(1,4)]
+					["itm", "B_UAV_06_backpack_F", RANDOM_BETWEEN(1,4)]
 				];
 			};
 			case "Mission_CSAT_MedDrone":
 			{
 				_boxItems =
 				[
-					["bac", "O_UAV_06_medical_backpack_F", RANDOM_BETWEEN(1,4)]
+					["itm", "O_UAV_06_medical_backpack_F", RANDOM_BETWEEN(1,4)]
 				];
 			};
 			case "Mission_CSAT_UtilityDrone":
 			{
 				_boxItems =
 				[
-					["bac", "O_UAV_06_backpack_F", RANDOM_BETWEEN(1,4)]
+					["itm", "O_UAV_06_backpack_F", RANDOM_BETWEEN(1,4)]
 				];
 			};
 			case "Mission_AAF_Darter":
 			{
 				_boxItems =
 				[
-					["bac", "I_UAV_06_medical_backpack_F", RANDOM_BETWEEN(1,4)]
+					["itm", "I_UAV_06_medical_backpack_F", RANDOM_BETWEEN(1,4)]
 				];
 			};
 			case "Mission_CSAT_Darter":
 			{
 				_boxItems =
 				[
-					["bac", "O_UAV_06_medical_backpack_F", RANDOM_BETWEEN(1,4)]
+					["itm", "O_UAV_06_medical_backpack_F", RANDOM_BETWEEN(1,4)]
 				];
 			};
 			case "Mission_NATO_Darter":
 			{
 				_boxItems =
 				[
-					["bac", "B_UAV_06_medical_backpack_F", RANDOM_BETWEEN(1,4)]
+					["itm", "B_UAV_06_medical_backpack_F", RANDOM_BETWEEN(1,4)]
 				];
 			};
 			case "Mission_IDAP_Darter":
 			{
 				_boxItems =
 				[
-					["bac", ["C_UAV_06_medical_backpack_F","C_IDAP_UAV_06_medical_backpack_F"], RANDOM_BETWEEN(1,4)]
+					["itm", ["C_UAV_06_medical_backpack_F","C_IDAP_UAV_06_medical_backpack_F"], RANDOM_BETWEEN(1,4)]
 				];
 			};
 		//Tier 3 crates
@@ -673,13 +673,13 @@ switch (_boxType) do
 				[
 					// Item type, Item class(es), # of items, # of magazines per weapon
 					//Weapons
-					["wep", "arifle_SDAR_F", 2, RANDOM_BETWEEN(4,6)],
+					["wep", "arifle_SDAR_F", 4, RANDOM_BETWEEN(4,6)],
 					//Items
-					["itm", "V_RebreatherIA", 2],
-					["itm", "G_Diving", 2],
-					["itm", "U_B_Wetsuit", 2],
+					["itm", "V_RebreatherIA", 4],
+					["itm", "G_Diving", 4],
+					["itm", "U_I_Wetsuit", 4],
 					["itm", ["Chemlight_red", "Chemlight_green", "Chemlight_yellow", "Chemlight_blue"], RANDOM_BETWEEN(6,9)],
-					["bac", ["B_Carryall_cbr", "B_Carryall_khk", "B_Carryall_oli"], RANDOM_BETWEEN(3,5)],
+					["itm", ["B_Carryall_cbr", "B_Carryall_khk", "B_Carryall_oli"], RANDOM_BETWEEN(3,5)],
 					//Mags
 					["mag", ["SmokeShell", "SmokeShellRed", "SmokeShellgreen"], RANDOM_BETWEEN(5,9)]
 				];
@@ -690,14 +690,13 @@ switch (_boxType) do
 				[
 					// Item type, Item class(es), # of items, # of magazines per weapon
 					//Weapons
-					["wep", "arifle_SDAR_F", 2, RANDOM_BETWEEN(4,6)],
+					["wep", "arifle_SDAR_F", 4, RANDOM_BETWEEN(4,6)],
 					//Items
-					["itm", "V_RebreatherB", 2],
-					["itm", "G_Diving", 2],
-					["itm", "U_B_Wetsuit", 2],
-					["itm", "U_O_Wetsuit", 2],
+					["itm", "V_RebreatherB", 4],
+					["itm", "G_Diving", 4],
+					["itm", ["U_B_Wetsuit","U_B_Wetsuit","U_B_Wetsuit","U_B_Wetsuit","U_B_survival_uniform"], 4],
 					["itm", ["Chemlight_red", "Chemlight_green", "Chemlight_yellow", "Chemlight_blue"], RANDOM_BETWEEN(6,9)],
-					["bac", ["B_Carryall_mcamo"], RANDOM_BETWEEN(3,5)],
+					["itm", ["B_Carryall_mcamo"], RANDOM_BETWEEN(3,5)],
 					//Mags
 					["mag", ["SmokeShell", "SmokeShellRed", "SmokeShellgreen"], RANDOM_BETWEEN(5,9)]
 				];
@@ -708,17 +707,97 @@ switch (_boxType) do
 				[
 					// Item type, Item class(es), # of items, # of magazines per weapon
 					//Weapons
-					["wep", "arifle_SDAR_F", 2, RANDOM_BETWEEN(4,6)],
+					["wep", "arifle_SDAR_F", 4, RANDOM_BETWEEN(4,6)],
 					//Items
-					["itm", "V_RebreatherIR", 2],
-					["itm", "G_Diving", 2],
-					["itm", "U_O_Wetsuit", 2],
+					["itm", "V_RebreatherIR", 4],
+					["itm", "G_Diving", 4],
+					["itm", "U_O_Wetsuit", 4],
 					["itm", ["Chemlight_red", "Chemlight_green", "Chemlight_yellow", "Chemlight_blue"], RANDOM_BETWEEN(6,9)],
-					["bac", "B_Carryall_oucamo", RANDOM_BETWEEN(3,5)],
+					["itm", "B_Carryall_oucamo", RANDOM_BETWEEN(3,5)],
 					//Mags
 					["mag", ["SmokeShell", "SmokeShellRed", "SmokeShellgreen"], RANDOM_BETWEEN(5,9)]
 
 				];
+			};
+			case "SniperGear_NATO":
+			{
+				_boxItems = 
+				[
+					["wep", ["srifle_LRR_LRPS_F","srifle_LRR_camo_LRPS_F","srifle_LRR_tna_LRPS_F"], 4, RANDOM_BETWEEN(1,6)],
+					["itm", ["U_B_FullGhillie_ard","U_B_T_FullGhillie_tna_F","U_B_FullGhillie_lsh","U_B_FullGhillie_sard"], 4],
+					["itm", ["B_Kitbag_cbr","B_Kitbag_rgr","B_Kitbag_mcamo","B_Kitbag_sgg","B_TacticalPack_blk","B_TacticalPack_rgr","B_TacticalPack_mcamo","B_TacticalPack_oli","B_Carryall_khk","B_Carryall_cbr","B_Carryall_mcamo","B_Carryall_oli"],4]
+				];
+			};
+			case "SniperGear_CSAT":
+			{
+				_boxItems = 
+				[
+					["wep", ["srifle_GM6_LRPS_F","srifle_GM6_camo_LRPS_F","srifle_GM6_ghex_LRPS_F"], 4, RANDOM_BETWEEN(1,6)],
+					["itm", ["U_O_FullGhillie_ard","U_O_T_FullGhillie_tna_F","U_O_FullGhillie_lsh","U_O_FullGhillie_sard"], 4],
+					["itm", ["B_FieldPack_blk","B_FieldPack_cbr","B_FieldPack_khk","B_FieldPack_oucamo","B_FieldPack_ocamo","B_FieldPack_ghex_F","B_TacticalPack_ocamo","B_Carryall_khk","B_Carryall_cbr","B_Carryall_oli","B_Carryall_oucamo","B_Carryall_ghex_F"],4]
+				];
+			};
+			case "SniperGear_AAF":
+			{
+				_boxItems = 
+				[
+					["wep", ["srifle_GM6_LRPS_F","srifle_GM6_camo_LRPS_F","srifle_GM6_ghex_LRPS_F"], 4, RANDOM_BETWEEN(1,6)],
+					["itm", ["U_I_FullGhillie_ard","U_I_FullGhillie_lsh","U_I_FullGhillie_sard"], 4],
+					["itm", ["B_Kitbag_cbr","B_Kitbag_rgr","B_Kitbag_sgg","B_TacticalPack_blk","B_TacticalPack_rgr","B_TacticalPack_oli","B_Carryall_khk","B_Carryall_cbr","B_Carryall_oli"],4]
+				];
+			};
+			case "Launchers_NATO":
+			{
+				_boxItems = 
+				[
+					["wep", ["launch_Titan_short_F","launch_B_Titan_short_tna_F","launch_Titan_F","launch_B_Titan_tna_F"], 4, RANDOM_BETWEEN(2,4)],
+					["mag", "Titan_AP", RANDOM_BETWEEN(0,2)],
+					["itm", ["B_Kitbag_cbr","B_Kitbag_rgr","B_Kitbag_mcamo","B_Kitbag_sgg","B_TacticalPack_blk","B_TacticalPack_rgr","B_TacticalPack_mcamo","B_TacticalPack_oli","B_Carryall_khk","B_Carryall_cbr","B_Carryall_mcamo","B_Carryall_oli"],4]
+				];			
+			};
+			case "Launchers_CSAT":
+			{
+				_boxItems = 
+				[
+					["wep", ["launch_O_Titan_short_F","launch_O_Titan_short_ghex_F","launch_O_Titan_F","launch_O_Titan_ghex_F"], 4, RANDOM_BETWEEN(2,4)],
+					["mag", "Titan_AP", RANDOM_BETWEEN(0,2)],
+					["itm", ["B_FieldPack_blk","B_FieldPack_cbr","B_FieldPack_khk","B_FieldPack_oucamo","B_FieldPack_ocamo","B_FieldPack_ghex_F","B_TacticalPack_ocamo","B_Carryall_khk","B_Carryall_cbr","B_Carryall_oli","B_Carryall_oucamo","B_Carryall_ghex_F"],4]
+				];			
+			};
+			case "Launchers_AAF":
+			{
+				_boxItems = 
+				[
+					["wep", ["launch_Titan_short_F","launch_I_Titan_short_F","launch_Titan_F","launch_I_Titan_F"], 4, RANDOM_BETWEEN(2,4)],
+					["mag", "Titan_AP", RANDOM_BETWEEN(0,2)],
+					["itm", ["B_Kitbag_cbr","B_Kitbag_rgr","B_Kitbag_mcamo","B_Kitbag_sgg","B_TacticalPack_blk","B_TacticalPack_rgr","B_TacticalPack_mcamo","B_TacticalPack_oli","B_Carryall_khk","B_Carryall_cbr","B_Carryall_mcamo","B_Carryall_oli"],4]
+				];			
+			};
+			case "Viper":
+			{
+				_boxItems = 
+				[
+					["itm", ["U_O_V_Soldier_Viper_F","U_O_V_Soldier_Viper_hex_F"], 4],
+					["itm", ["B_ViperLightHarness_blk_F","B_ViperLightHarness_hex_F","B_ViperLightHarness_ghex_F","B_ViperLightHarness_khk_F","B_ViperLightHarness_oli_F","B_ViperHarness_blk_F","B_ViperHarness_hex_F","B_ViperHarness_ghex_F","B_ViperHarness_khk_F","B_ViperHarness_oli_F"], 4],
+					["itm", ["H_HelmetO_ViperSP_ghex_F","H_HelmetO_ViperSP_hex_F"], 4]
+				];
+			};
+			case "CTRG":
+			{
+				_boxItems = 
+				[
+					["itm", "U_B_CTRG_Soldier_F", 4],
+					["itm", ["G_Balaclava_TI_blk_F","G_Balaclava_TI_G_blk_F","G_Balaclava_TI_tna_F","G_Balaclava_TI_G_tna_F"], 4],
+					["itm", "H_HelmetB_TI_tna_F", 4]
+				];
+			};
+			case "VehicleAmmo":
+			{
+				_boxItems = [["itm", "objNull", 1]];
+			};
+			case "Container":
+			{
+				_boxItems = [["itm", "objNull", 1]];
 			};
 	//Airdrop Crates
 		case "airdrop_Rifles":
@@ -805,7 +884,7 @@ switch (_boxType) do
 				["itm", "U_B_Wetsuit", 2],
 				["itm", "U_O_Wetsuit", 2],
 				["itm", "U_I_Wetsuit", 2],
-				["bac", ["B_Carryall_cbr", "B_Carryall_khk", "B_Carryall_oli", "B_Carryall_mcamo"], 2]
+				["itm", ["B_Carryall_cbr", "B_Carryall_khk", "B_Carryall_oli", "B_Carryall_mcamo"], 2]
 			];
 		};
 		case "airdrop_Field_Engineer": 
