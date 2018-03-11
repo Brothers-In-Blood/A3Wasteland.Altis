@@ -64,8 +64,10 @@
 ];
 //Door Locking
 // For some reason this diesn't work with add managed action.
-player addaction ["Lock Door",{cursorObject setVariable [format ["bis_disabled_%1",getCursorObjectParams select 1 select 0], 1, true]}, [], -99, false, true, "", "(cursorObject getVariable [format ['bis_disabled_%1',getCursorObjectParams select 1 select 0], 0]) == 0 && (cursorObject getVariable 'ownerUID') == (getPlayerUID player) && {[['door_'],getCursorObjectParams select 1 select 0] call fn_startsWith}"];
-player addaction ["Unlock Door", {cursorObject setVariable [format ["bis_disabled_%1",getCursorObjectParams select 1 select 0], 0, true]}, [], -99, false, true, "", "(cursorObject getVariable [format ['bis_disabled_%1',getCursorObjectParams select 1 select 0], 0]) == 1 && (cursorObject getVariable 'ownerUID') == (getPlayerUID player) && {[['door_'],getCursorObjectParams select 1 select 0] call fn_startsWith}"];
+player addaction ["Lock Door","client\actions\DoorLocking.sqf", ["lock"], -99, false, true, "", "(cursorObject getVariable [format ['bis_disabled_%1',getCursorObjectParams select 1 select 0], 0]) == 0 && (cursorObject getVariable 'ownerUID') == (getPlayerUID player) && {[['door_'],getCursorObjectParams select 1 select 0] call fn_startsWith}"];
+player addaction ["Unlock Door","client\actions\DoorLocking.sqf", ["unlock"], -99, false, true, "", "(cursorObject getVariable [format ['bis_disabled_%1',getCursorObjectParams select 1 select 0], 0]) == 1 && (cursorObject getVariable 'ownerUID') == (getPlayerUID player) && {[['door_'],getCursorObjectParams select 1 select 0] call fn_startsWith}"];
+player addaction ["Set Building PIN","client\actions\DoorLocking.sqf", ["ChangePin"], -99, false, true, "", "(cursorObject getVariable 'ownerUID') == (getPlayerUID player) && {[['door_'],getCursorObjectParams select 1 select 0] call fn_startsWith}"];
+
 
 
 
