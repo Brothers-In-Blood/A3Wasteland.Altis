@@ -170,7 +170,15 @@ launcherArray = compileFinal str
 	["Titan MPRL AA (Hex)",													"launch_O_Titan_F",															85000],
 	["Titan MPRL AA (Digi)",												"launch_I_Titan_F",															85000],
 	["Titan MPRL AA (Tropic)",												"launch_B_Titan_tna_F",														85000,					"noDLC"],
-	["Titan MPRL AA (G Hex)",												"launch_O_Titan_ghex_F",													85000,					"noDLC"]
+	["Titan MPRL AA (G Hex)",												"launch_O_Titan_ghex_F",													85000,					"noDLC"],
+	["Vorona (Brown)",														"launch_O_Vorona_brown_F",													45000,					"noDLC"],
+	["Vorona (Green)",														"launch_O_Vorona_green_F",													45000,					"noDLC"],
+	["MAAWS Mod-0 (green)",													"launch_MRAWS_green_rail_F",												20000,					"noDLC"],
+	["MAAWS Mod-0 (olive)",													"launch_MRAWS_olive_rail_F",												20000,					"noDLC"],
+	["MAAWS Mod-0 (sand)",													"launch_MRAWS_sand_rail_F",													20000,					"noDLC"],
+	["MAAWS Mod-1 (green)",													"launch_MRAWS_green_F",														30000,					"noDLC"],
+	["MAAWS Mod-1 (olive)",													"launch_MRAWS_olive_F",														30000,					"noDLC"],
+	["MAAWS Mod-1 (sand)",													"launch_MRAWS_sand_F",														30000,					"noDLC"]
 ];
 
 allGunStoreFirearms = compileFinal str (call pistolArray + call smgArray + call rifleArray + call lmgArray + call launcherArray);
@@ -295,13 +303,17 @@ ammoArray = compileFinal str
 	["12.7mm 5Rnd Armor-Piercing Mag",										"5Rnd_127x108_APDS_Mag",													160],
 	["12.7mm 10Rnd Subsonic Mag",											"10Rnd_127x54_Mag",															75],
 	[".50 BW 10Rnd Mag",													"10Rnd_50BW_Mag_F",															50],
-	["PG-7VM HEAT Grenade",													"RPG7_F",																	750],		// Direct damage: medium		| Splash damage: low		| Guidance: none
-	["RPG-42 Anti-Tank Rocket",												"RPG32_F",																	750],		// Direct damage: high			| Splash damage: low		| Guidance: none
-	["RPG-42 High-Explosive Rocket",										"RPG32_HE_F",																750],		// Direct damage: medium		| Splash damage: medium | Guidance: none
+	["PG-7VM HEAT Grenade",													"RPG7_F",																	4500],		// Direct damage: medium		| Splash damage: low		| Guidance: none
+	["RPG-42 Anti-Tank Rocket",												"RPG32_F",																	7000],		// Direct damage: high			| Splash damage: low		| Guidance: none
+	["RPG-42 High-Explosive Rocket",										"RPG32_HE_F",																7500],		// Direct damage: medium		| Splash damage: medium | Guidance: none
 	["PCML Anti-Tank Missile",												"NLAW_F",																	10200],		// Direct damage: very high | Splash damage: low		| Guidance: laser,ground vehicles
 	["Titan Anti-Tank Missile",												"Titan_AT",																	22500],		// Direct damage: high			| Splash damage: low		| Guidance: mouse,laser,ground vehicles
 	["Titan Anti-Personnel Missile",										"Titan_AP",																	30000],		// Direct damage: low			 | Splash damage: high	 | Guidance: mouse,laser
 	["Titan Anti-Air Missile",												"Titan_AA",																	35000],		// Direct damage: low			 | Splash damage: medium | Guidance: aircraft
+	["Vorona HE Missile",													"Vorona_HE",																12500],
+	["Vorona HEAT Missile",													"Vorona_HEAT",																15500],
+	["MAAWS HE Rocket",														"MRAWS_HE_F",																8000],
+	["MAAWS HEAT Rocket",													"MRAWS_HEAT_F",																8500],
 	["40mm HE Grenade Round",												"1Rnd_HE_Grenade_shell",													250],
 	["40mm 3Rnd HE Grenades",												"3Rnd_HE_Grenade_shell",													500],
 	["40mm Smoke Round (White)",											"1Rnd_Smoke_Grenade_shell",													50],
@@ -598,7 +610,8 @@ headArray = compileFinal str
 	["Shemag mask (Tan)",													"H_Shemag_tan",																25,								"hat"],
 	["Special Purposes Hemet (Green Hex)",									"H_HelmetO_ViperSP_ghex_F",													38000],
 	["Special Purposes Hemet (Hex)",										"H_HelmetO_ViperSP_hex_F",													38000],
-	["Stealth Combat Helmet",												"H_HelmetB_TI_tna_F",														1500]
+	["Stealth Combat Helmet",												"H_HelmetB_TI_tna_F",														1500],
+	["Tankers Helmet (CSAT)",												"H_Tank_black_F",															150,							"hat"]
 ];
 
 uniformArray = compileFinal str
@@ -714,6 +727,7 @@ uniformArray = compileFinal str
 	["Survival Fatigues (NATO)",											"U_B_survival_uniform",													200,							"uni"],
 	["Syndikat Uniform",													"U_I_C_Soldier_Camo_F",													25],
 	["T-Shirt (Blue)",														"U_C_Poor_1",															25,								"uni"],
+	["Tanker Coveralls (AAF)",												"H_Tank_black_F",														150,							"uni"],
 	["Tron Light Suit (Blue)",												"U_B_Protagonist_VR",													155000,							"uni"],
 	["Tron Light Suit (Green)",												"U_I_Protagonist_VR",													155000,							"uni"],
 	["Tron Light Suit (Red)",												"U_O_Protagonist_VR",													155000,							"uni"],
