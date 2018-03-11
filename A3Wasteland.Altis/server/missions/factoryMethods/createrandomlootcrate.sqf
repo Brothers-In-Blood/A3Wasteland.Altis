@@ -501,7 +501,6 @@ private _LootSelect = "";
 			_LootSelect == "SniperGear_CSAT"||
 			_LootSelect == "Viper"||
 			_LootSelect == "SniperGear_AAF"
-			
 		) then
 		{
 			switch (_faction) do
