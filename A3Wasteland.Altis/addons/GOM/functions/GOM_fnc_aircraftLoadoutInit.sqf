@@ -569,10 +569,11 @@ GOM_fnc_handleAmmoCost =
 	{
 		if (_mag == _x select 0) then
 		{
-			_ammoweight = _x select 1;
+			_ammoweight = _ammoweight + (_x select 1);
 		};
 	} foreach _magtypes;
 	_ammocargo = _ammocargo - _ammoweight;
+
 	_source setVariable ["GOM_fnc_ammoCargo",(_ammocargo max 0),true];
 };
 
