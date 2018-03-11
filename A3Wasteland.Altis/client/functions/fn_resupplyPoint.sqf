@@ -15,7 +15,7 @@ Purpose: Allow players to rearm, repair, refuel, and resupply vehicles. Charges 
 	};
 //Input Parameters
 	params ["", ["_unit",objNull,[objNull]]];
-	private _vehicle = vehicle _unit;
+	private _vehicle = vehicle player;
 //Array of all possible weapons magazines
 	private _magprices =
 	[
@@ -55,12 +55,12 @@ Purpose: Allow players to rearm, repair, refuel, and resupply vehicles. Charges 
 		["PylonRack_Bomb_GBU12_x2",					2,				2500],		//GBU-12 LASER GUIDED BOMB X2
 		["PylonMissile_Bomb_KAB250_x1",				1,				2500],		//KAB250 GUIDED BOMB X1
 		["PylonMissile_1Rnd_Mk82_F",				1,				500],		//MK-82 DUMB BOMB X1
-		["PylonWeapon_300Rnd_20mm_shells",			300,			5],		//20mm TWIN CANNON
-		["PylonWeapon_2000Rnd_65x39_belt",			2000,			1],		//6.5mm GATTLING GUN (RIGHT SIDE)
+		["PylonWeapon_300Rnd_20mm_shells",			300,			5],			//20mm TWIN CANNON
+		["PylonWeapon_2000Rnd_65x39_belt",			2000,			1],			//6.5mm GATTLING GUN (RIGHT SIDE)
 		["PylonRack_4Rnd_BombDemine_01_F",			4,				1250],		//Demining Drone Charges
 		//Non Dynamic magazines
 		["1000Rnd_20mm_shells",						1000,			35],		//Blackfoot cannon ammo
-		["1000Rnd_65x39_Belt_Green",				1000,			1],		//6.5 coax ammo
+		["1000Rnd_65x39_Belt_Green",				1000,			1],			//6.5 coax ammo
 		["1000Rnd_65x39_Belt_Yellow",				1000,			1],
 		["1000Rnd_762x51_Belt_Yellow",				1000,			3],
 		["1000Rnd_Gatling_30mm_Plane_CAS_01_F", 	1000,			50],		//Wipeout cannon ammo
