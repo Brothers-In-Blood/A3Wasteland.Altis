@@ -7,7 +7,7 @@
 if (!isServer) exitwith {};
 #include "GENMissionDefines.sqf";
 
-private ["_convoyVeh","_veh1","_veh2","_veh3","_veh4","_veh5","createMissionVehicle","_pos","_rad","_vPos1","_vPos2","_vPos3","_vehiclePos1","_vehiclePos2","_vehiclePos3","_vehiclePos4","_vehicles","_leader","_speedMode","_waypoint","_vehicleName","_numWaypoints","_box1","_box2","_box3","_box4"];
+private ["_convoyVeh","_veh1","_veh2","_veh3","_veh4","_veh5","_pos","_rad","_vPos1","_vPos2","_vPos3","_vehiclePos1","_vehiclePos2","_vehiclePos3","_vehiclePos4","_vehicles","_leader","_speedMode","_waypoint","_vehicleName","_numWaypoints","_box1","_box2","_box3","_box4"];
 
 _setupVars =
 {
@@ -20,37 +20,31 @@ _setupObjects =
 	_town = (call cityList) call BIS_fnc_selectRandom;
 	_missionPos = markerPos _missionLocation;
 
-	_veh1 = selectrandom ["B_GEN_Offroad_01_gen_F","B_GEN_Van_02_vehicle_F","B_GEN_Van_02_transport_F"];
-	_veh2 = selectrandom ["B_GEN_Offroad_01_gen_F","B_GEN_Van_02_vehicle_F","B_GEN_Van_02_transport_F"];
-	_veh3 = selectrandom ["B_GEN_Offroad_01_gen_F","B_GEN_Van_02_vehicle_F","B_GEN_Van_02_transport_F"];
-	_veh4 = selectrandom ["B_GEN_Offroad_01_gen_F","B_GEN_Van_02_vehicle_F","B_GEN_Van_02_transport_F"];
-	_veh5 = selectrandom ["B_GEN_Offroad_01_gen_F","B_GEN_Van_02_vehicle_F","B_GEN_Van_02_transport_F"];
+	_veh1types = selectrandom ["B_GEN_Offroad_01_gen_F","B_GEN_Van_02_vehicle_F","B_GEN_Van_02_transport_F"];
+	_veh2types = selectrandom ["B_GEN_Offroad_01_gen_F","B_GEN_Van_02_vehicle_F","B_GEN_Van_02_transport_F"];
+	_veh3types = selectrandom ["B_GEN_Offroad_01_gen_F","B_GEN_Van_02_vehicle_F","B_GEN_Van_02_transport_F"];
+	_veh4types = selectrandom ["B_GEN_Offroad_01_gen_F","B_GEN_Van_02_vehicle_F","B_GEN_Van_02_transport_F"];
+	_veh5types = selectrandom ["B_GEN_Offroad_01_gen_F","B_GEN_Van_02_vehicle_F","B_GEN_Van_02_transport_F"];
 
-	createMissionVehicle = 
+	_aiGroup1 = createGroup CIVILIAN;
+	_veh1 = [_veh1types, _missionPos] call createMissionVehicle;
+	_veh2 = [_veh2types, _missionPos] call createMissionVehicle;
+	_veh3 = [_veh3types, _missionPos] call createMissionVehicle;
+	_veh4 = [_veh4types, _missionPos] call createMissionVehicle;
+	_veh5 = [_veh5types, _missionPos] call createMissionVehicle;
+	_vehicles = [_veh1,_veh2,_veh3,_veh4,_veh5];
 	{
-		private _type = _this select 0;
-		private _position = _this select 1;
-		private _direction = _this select 2;
-		private _vehiclePos = [_position, 10, 50,5,0,0,0] call findSafePos;
-		private _vehicle = createVehicle [_type, _vehiclePos, [], 0, "None"];
-		_vehicle setVehicleReportRemoteTargets true;
-		_vehicle setVehicleReceiveRemoteTargets true;
-		_vehicle setVehicleRadar 1;
-		_vehicle confirmSensorTarget [west, true];
-		_vehicle confirmSensorTarget [east, true];
-		_vehicle confirmSensorTarget [resistance, true];
-		[_vehicle] call vehicleSetup;
+		private _vehicle = _x;
 		private _drivers = _vehicle emptyPositions "Driver";
 		private _Commanders =  _vehicle emptyPositions "Commander";
 		private _Gunners = _vehicle emptyPositions "Gunner";
 		private _Passangers = _vehicle emptyPositions "Cargo";
-		_vehicle setDir _direction;
 		_aiGroup1 addVehicle _vehicle;
 		if (_drivers > 0) then
 		{
 			for "_i" from 1 to _drivers do
 			{
-				private _Driver = [_aiGroup1, _position, "GEN", "Rifleman"] call createsoldier;
+				private _Driver = [_aiGroup1, _missionPos, "GEN", "Rifleman"] call createsoldier;
 				_Driver moveInDriver _vehicle;
 			};
 		};
@@ -58,39 +52,25 @@ _setupObjects =
 		{
 			for "_i" from 1 to _Commanders do
 			{
-				private _Commander = [_aiGroup1, _position, "GEN", "Rifleman"] call createsoldier;
+				private _Commander = [_aiGroup1, _missionPos, "GEN", "Rifleman"] call createsoldier;
 				_Commander moveInCommander _vehicle;
 			};
 		};
 		if (_Gunners > 0) then
 		{
-			private _gunner = [_aiGroup1, _position, "GEN", "Rifleman"] call createsoldier;
+			private _gunner = [_aiGroup1, _missionPos, "GEN", "Rifleman"] call createsoldier;
 			_gunner moveInGunner _vehicle;
 		};
 		if (_Passangers > 0) then
 		{
 			for "_i" from 1 to _Passangers do
 			{
-				_soldier = [_aiGroup1, _position, "GEN", "Rifleman"] call createsoldier;
+				_soldier = [_aiGroup1, _missionPos, "GEN", "Rifleman"] call createsoldier;
 
 				_soldier moveInCargo _vehicle;
 			};
 		};
-		_vehicle setVariable ["R3F_LOG_disabled", true, true]; // force vehicles to be locked
-		[_vehicle, _aiGroup1] spawn checkMissionVehicleLock; // force vehicles to be locked
-		_vehicle
-	};
-
-	_aiGroup1 = createGroup CIVILIAN;
-	_vehicles =
-	[
-		[_veh1, _missionPos, 0] call createMissionVehicle,
-		[_veh2, _missionPos, 0] call createMissionVehicle,
-		[_veh3, _missionPos, 0] call createMissionVehicle,
-		[_veh4, _missionPos, 0] call createMissionVehicle,
-		[_veh5, _missionPos, 0] call createMissionVehicle
-	];
-
+	} foreach _vehicles;
 	_leader = effectiveCommander (_vehicles select 0);
 	_aiGroup1 selectLeader _leader;
 	_leader setRank "LIEUTENANT";
@@ -114,10 +94,10 @@ _setupObjects =
 
 	_missionPos = getPosATL leader _aiGroup1;
 
-	_missionPicture = getText (configFile >> "CfgVehicles" >> _veh2 >> "picture");
-	_vehicleName = getText (configFile >> "CfgVehicles" >> _veh2 >> "displayName");
-	_vehicleName2 = getText (configFile >> "CfgVehicles" >> _veh3 >> "displayName");
-	_vehicleName3 = getText (configFile >> "CfgVehicles" >> _veh4 >> "displayName");
+	_missionPicture = getText (configFile >> "CfgVehicles" >> _veh2types >> "picture");
+	_vehicleName = getText (configFile >> "CfgVehicles" >> _veh2types >> "displayName");
+	_vehicleName2 = getText (configFile >> "CfgVehicles" >> _veh3types >> "displayName");
+	_vehicleName3 = getText (configFile >> "CfgVehicles" >> _veh4types >> "displayName");
 
 	_missionHintText = format ["A convoy containing at least a <t color='%4'>%1</t>, a <t color='%4'>%2</t> and a <t color='%4'>%3</t> is patrolling Altis! Stop the patrol and capture the goods and money!", _vehicleName, _vehicleName2, _vehicleName3, GENMissionColor];
 
@@ -150,7 +130,7 @@ _drop_item =
 _successExec =
 {
 	_lootPos = getMarkerPos _marker;
-	for "_i" from 1 to 4 do
+	for "_i" from 1 to 5 do
 	{
 		private _tier = selectrandom ["1","2"];
 		private _maxmoney = random 10000;

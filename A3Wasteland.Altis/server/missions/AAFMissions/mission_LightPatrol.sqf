@@ -7,7 +7,7 @@
 if (!isServer) exitwith {};
 #include "AAFMissionDefines.sqf";
 
-private ["_convoyVeh","_veh1","_veh2","_veh3","_veh4","_veh5","createMissionVehicle","_pos","_rad","_vPos1","_vPos2","_vPos3","_vehiclePos1","_vehiclePos2","_vehiclePos3","_vehiclePos4","_vehicles","_leader","_speedMode","_waypoint","_vehicleName","_numWaypoints","_box1","_box2","_box3","_box4"];
+private ["_convoyVeh","_veh1","_veh2","_veh3","_veh4","_veh5","_pos","_rad","_vPos1","_vPos2","_vPos3","_vehiclePos1","_vehiclePos2","_vehiclePos3","_vehiclePos4","_vehicles","_leader","_speedMode","_waypoint","_vehicleName","_numWaypoints","_box1","_box2","_box3","_box4"];
 
 _setupVars =
 {
@@ -28,8 +28,8 @@ _setupObjects =
 	_rad = _town select 1;
 	_missionPos = [_missionPos,_rad,_rad + 50,5,0,0,0] call findSafePos;
 
-	_veh1 = [_veh1types, _missionPos, 0] call createMissionVehicle,
-	_veh2 = [_veh2types, _missionPos, 0] call createMissionVehicle
+	_veh1 = [_veh1types, _missionPos] call createMissionVehicle;
+	_veh2 = [_veh2types, _missionPos] call createMissionVehicle;
 	_vehicles = [_veh1, _veh2];
 	{
 		private _vehicle = _x;
@@ -42,7 +42,7 @@ _setupObjects =
 		{
 			for "_i" from 1 to _drivers do
 			{
-				private _Driver = [_aiGroup1, _position, "AAF", "Crew"] call createsoldier;
+				private _Driver = [_aiGroup1, _missionPos, "AAF", "Crew"] call createsoldier;
 				_Driver moveInDriver _vehicle;
 			};
 		};
@@ -50,13 +50,13 @@ _setupObjects =
 		{
 			for "_i" from 1 to _Commanders do
 			{
-				private _Commander = [_aiGroup1, _position, "AAF", "Crew"] call createsoldier;
+				private _Commander = [_aiGroup1, _missionPos, "AAF", "Crew"] call createsoldier;
 				_Commander moveInCommander _vehicle;
 			};
 		};
 		if (_Gunners > 0) then
 		{
-			private _gunner = [_aiGroup1, _position, "AAF", "Crew"] call createsoldier;
+			private _gunner = [_aiGroup1, _missionPos, "AAF", "Crew"] call createsoldier;
 			_gunner moveInGunner _vehicle;
 		};
 		if (_Passangers > 0) then
@@ -64,13 +64,17 @@ _setupObjects =
 			for "_i" from 1 to _Passangers do
 			{
 				private _soldierType = selectrandom ["Rifleman","Rifleman","Rifleman","Rifleman","Rifleman","Rifleman","Rifleman","Rifleman","Rifleman","Rifleman","AT","AA","SAW","SAW","SAW","Engineer","Medic","Grenedier","Engineer","Medic","Grenedier","Marksman","Marksman","Marksman"];
-				_soldier = [_aiGroup1, _position, "AAF", _soldierType] call createsoldier;
+				_soldier = [_aiGroup1, _missionPos, "AAF", _soldierType] call createsoldier;
 
 				_soldier moveInCargo _vehicle;
 			};
 		};
 	} foreach _vehicles;
+
+	_leader = effectiveCommander (_vehicles select 0);
+	_aiGroup1 selectLeader _leader;
 	_leader setRank "LIEUTENANT";
+
 
 	_aiGroup1 setCombatMode "GREEN"; // Will fire on enemies
 	_aiGroup1 setBehaviour "SAFE"; // units feel safe until they spot an enemy or get into contact
@@ -91,10 +95,10 @@ _setupObjects =
 
 	_missionPos = getPosATL leader _aiGroup1;
 
-	_missionPicture = getText (configFile >> "CfgVehicles" >> _veh2 >> "picture");
-	_vehicleName = getText (configFile >> "CfgVehicles" >> _veh2 >> "displayName");
+	_missionPicture = getText (configFile >> "CfgVehicles" >> _veh2types >> "picture");
+	_vehicleName = getText (configFile >> "CfgVehicles" >> _veh2types >> "displayName");
 
-	_missionHintText = format ["A convoy containing at least a <t color='%4'>%1</t> and a <t color='%4'>%2</t> is patrolling Altis! Stop the patrol and capture the goods and money!", _vehicleName, _vehicleName2, AAFMissionColor];
+	_missionHintText = format ["A convoy containing at least a <t color='%2'>%1</t> is patrolling Altis! Stop the patrol and capture the goods and money!", _vehicleName, AAFMissionColor];
 
 	_numWaypoints = count waypoints _aiGroup1;
 };

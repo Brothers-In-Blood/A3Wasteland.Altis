@@ -5,13 +5,13 @@
 //	@file Author: JoSchaap, AgentRev, LouD, BIB_Monkey
 
 if (!isServer) exitwith {};
-#include "SYNMissionDefines.sqf";
+#include "CSATMissionDefines.sqf";
 
 private ["_convoyVeh","_veh1","_veh2","_veh3","_veh4","_veh5","_pos","_rad","_vehiclePosArray","_vPos1","_vPos2","_vPos3","_vehiclePos1","_vehiclePos2","_vehiclePos3","_vehiclePos4","_vehicles","_leader","_speedMode","_waypoint","_vehicleName","_numWaypoints","_box1","_box2","_box3","_box4"];
 
 _setupVars =
 {
-	_missionType = "SYN Foot Patrol";
+	_missionType = "Viper Squad";
 	_locationsArray = PatrolMissionsMarkers; //Mission spawns at random town
 };
 
@@ -20,17 +20,9 @@ _setupObjects =
 	_town = (call cityList) call BIS_fnc_selectRandom;
 	_missionPos =markerPos _missionLocation;
 	_aiGroup1 = createGroup CIVILIAN;
-	for "_i" from 1 to 5 do
+	for "_i" from 1 to 12 do
 	{
-		[_aiGroup1, _missionPos, "SYN", "Rifleman"] call createsoldier;
-	};
-	for "_i" from 1 to 2 do
-	{
-		[_aiGroup1, _missionPos, "SYN", "SAW"] call createsoldier;
-	};
-	for "_i" from 1 to 2 do
-	{
-		[_aiGroup1, _missionPos, "SYN", "Grenedier"] call createsoldier;
+		[_aiGroup1, _missionPos, "CSAT", "Rifleman"] call createsoldier;
 	};
 
 	_aiGroup1 setCombatMode "RED"; // Will fire on enemies
@@ -69,11 +61,11 @@ _failedExec = nil;
 _successExec =
 {
 	_lootPos = getMarkerPos _marker;
-	for "_i" from 1 to 1 do
+	for "_i" from 1 to 2 do
 	{
-		private _tier = selectrandom ["1","2"];
+		private _tier = selectrandom ["1","2","3"];
 		private _maxmoney = random 10000;
-		private _box = [_lootPos, "SYN", _tier, 0, _maxmoney] call createrandomlootcrate;
+		private _box = [_lootPos, "CSAT", _tier, 0, _maxmoney] call createrandomlootcrate;
 		_box setVariable ["moveable", true, true];
 	};
 
@@ -81,4 +73,4 @@ _successExec =
 	_successHintMessage = "The patrol has been stopped, the money and crates and vehicles are yours to take.";
 };
 
-_this call SYNMissionProcessor;
+_this call CSATMissionProcessor;

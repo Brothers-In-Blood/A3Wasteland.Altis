@@ -16,7 +16,14 @@ _fuel = param [2, 1, [0]];
 _ammo = param [3, 1, [0]];
 _damage = param [4, 0, [0]];
 _special = param [5, "None", [""]];
-_vehPos = [_pos, 10, 50,5,0,0,0] call findSafePos;
+_water = param [6 ,0, [0]];
+_vehPos = [_pos, 0, 50, 5,_water,0,0] call findSafePos;
+_vehheight = (_vehPos select 2) + 0.5;
+if (_specail == "FLY") then
+{
+	_vehheight = (_vehPos select 2) + 500;
+};
+_vehPos set [2, _vehheight];
 _variant = _class param [1,"",[""]];
 
 if (_class isEqualType []) then
@@ -39,7 +46,6 @@ _veh confirmSensorTarget [west, true];
 _veh confirmSensorTarget [east, true];
 _veh confirmSensorTarget [resistance, true];
 
-_veh setPosATL [_vehPos select 0, _pos select 1, 0.3];
 _veh setVelocity [0,0,0.01];
 _veh setdir (random 360);
 if (_fuel != 1) then { _veh setFuel _fuel };

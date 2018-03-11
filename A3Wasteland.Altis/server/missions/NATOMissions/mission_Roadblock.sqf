@@ -40,10 +40,15 @@ _setupObjects =
 	for "_i" from 1 to 7 do
 	{
 		private _soldierType = selectrandom ["Rifleman","Rifleman","Rifleman","Rifleman","Rifleman","Rifleman","Rifleman","Rifleman","Rifleman","Rifleman","AT","AA","SAW","SAW","SAW","Engineer","Medic","Grenedier","Engineer","Medic","Grenedier","Marksman","Marksman","Marksman"];
-		[[_aiGroup1, _missionPos, "NATO", _soldierType] call createsoldier;
-
-		_aiGroup1 setCombatMode "RED";
+		[_aiGroup1, _missionPos, "NATO", _soldierType] call createsoldier;
+	};
+	_aiGroup1 setCombatMode "RED";
 	_missionHintText = format ["Enemies have set up an illegal roadblock and are searching vehicles! They need to be stopped!", NATOMissionColor];
+	_soldiers = units _aiGroup1;
+	_gunner1 = _soldiers select 0;
+	_gunner2 = _soldiers select 1;
+	_gunner1 moveInGunner _obj1;
+	_gunner2 moveInGunner _obj2;
 };
 
 _waitUntilMarkerPos = nil;

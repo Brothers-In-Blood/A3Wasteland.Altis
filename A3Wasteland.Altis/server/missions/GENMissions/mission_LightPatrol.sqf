@@ -7,7 +7,7 @@
 if (!isServer) exitwith {};
 #include "GENMissionDefines.sqf";
 
-private ["_veh1types","_veh2types","_veh1","_veh2","_veh3","_veh4","_veh5","_pos","_rad","_vPos1","_vPos2","_vPos3","_vehiclePos1","_vehiclePos2","_vehiclePos3","_vehiclePos4","_vehicles","_leader","_speedMode","_waypoint","_vehicleName","_numWaypoints","_box1","_box2","_box3","_box4"];
+private ["_convoyVeh","_veh1","_veh2","_veh3","_veh4","_veh5","_pos","_rad","_vPos1","_vPos2","_vPos3","_vehiclePos1","_vehiclePos2","_vehiclePos3","_vehiclePos4","_vehicles","_leader","_speedMode","_waypoint","_vehicleName","_numWaypoints","_box1","_box2","_box3","_box4"];
 
 _setupVars =
 {
@@ -31,19 +31,18 @@ _setupObjects =
 	_veh1 = [_veh1types, _missionPos] call createMissionVehicle;
 	_veh2 = [_veh2types, _missionPos] call createMissionVehicle;
 	_vehicles = [_veh1, _veh2];
-
-	_aiGroup1 addVehicle _vehicle;
 	{
-		_vehicle = _x;
+		private _vehicle = _x;
 		private _drivers = _vehicle emptyPositions "Driver";
 		private _Commanders =  _vehicle emptyPositions "Commander";
 		private _Gunners = _vehicle emptyPositions "Gunner";
 		private _Passangers = _vehicle emptyPositions "Cargo";
+		_aiGroup1 addVehicle _vehicle;
 		if (_drivers > 0) then
 		{
 			for "_i" from 1 to _drivers do
 			{
-				private _Driver = [_aiGroup1, _position, "GEN", "Rifleman"] call createsoldier;
+				private _Driver = [_aiGroup1, _missionPos, "GEN", "Rifleman"] call createsoldier;
 				_Driver moveInDriver _vehicle;
 			};
 		};
@@ -51,31 +50,25 @@ _setupObjects =
 		{
 			for "_i" from 1 to _Commanders do
 			{
-				private _Commander = [_aiGroup1, _position, "GEN", "Rifleman"] call createsoldier;
+				private _Commander = [_aiGroup1, _missionPos, "GEN", "Rifleman"] call createsoldier;
 				_Commander moveInCommander _vehicle;
 			};
 		};
 		if (_Gunners > 0) then
 		{
-			private _gunner = [_aiGroup1, _position, "GEN", "Rifleman"] call createsoldier;
+			private _gunner = [_aiGroup1, _missionPos, "GEN", "Rifleman"] call createsoldier;
 			_gunner moveInGunner _vehicle;
 		};
 		if (_Passangers > 0) then
 		{
 			for "_i" from 1 to _Passangers do
 			{
-				_soldier = [_aiGroup1, _position, "GEN", "Rifleman"] call createsoldier;
+				_soldier = [_aiGroup1, _missionPos, "GEN", "Rifleman"] call createsoldier;
 
 				_soldier moveInCargo _vehicle;
 			};
 		};
 	} foreach _vehicles;
-
-
-
-	_leader = effectiveCommander (_vehicles select 0);
-	_aiGroup1 selectLeader _leader;
-	_leader setRank "LIEUTENANT";
 
 	_aiGroup1 setCombatMode "GREEN"; // Will fire on enemies
 	_aiGroup1 setBehaviour "SAFE"; // units feel safe until they spot an enemy or get into contact

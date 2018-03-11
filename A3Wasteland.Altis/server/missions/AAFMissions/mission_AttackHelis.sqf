@@ -7,7 +7,7 @@
 if (!isServer) exitwith {};
 #include "AAFMissionDefines.sqf";
 
-private ["_convoyVeh","_veh1","_veh2","_veh3","_veh4","_veh5","createMissionVehicle","_pos","_rad","_vPos1","_vPos2","_vPos3","_vehiclePos1","_vehiclePos2","_vehiclePos3","_vehiclePos4","_vehicles","_leader","_speedMode","_waypoint","_vehicleName","_numWaypoints","_box1","_box2","_box3","_box4"];
+private ["_convoyVeh","_veh1","_veh2","_veh3","_veh4","_veh5","_pos","_rad","_vPos1","_vPos2","_vPos3","_vehiclePos1","_vehiclePos2","_vehiclePos3","_vehiclePos4","_vehicles","_leader","_speedMode","_waypoint","_vehicleName","_numWaypoints","_box1","_box2","_box3","_box4"];
 
 _setupVars =
 {
@@ -33,6 +33,7 @@ _setupObjects =
 	_aiGroup1 = createGroup CIVILIAN;
 	{
 		_vehicle = _x;
+		
 		private _drivers = _vehicle emptyPositions "Driver";
 		private _Commanders =  _vehicle emptyPositions "Commander";
 		private _Gunners = _vehicle emptyPositions "Gunner";
@@ -41,15 +42,15 @@ _setupObjects =
 		{
 			for "_i" from 1 to _drivers do
 			{
-				private _Driver = [_aiGroup1, _position, "AAF", "HeliPilot"] call createsoldier;
+				private _Driver = [_aiGroup1, _missionPos, "AAF", "HeliPilot"] call createsoldier;
 				_Driver moveInDriver _vehicle;
 			};
 		};
-		private _Copilot = [_aiGroup1, _position, "AAF", "HeliPilot"] call createsoldier;
+		private _Copilot = [_aiGroup1, _missionPos, "AAF", "HeliPilot"] call createsoldier;
 		_Copilot moveInAny _vehicle;
 		if (_Gunners > 0) then
 		{
-			private _gunner = [_aiGroup1, _position, "AAF", "HeliCrew"] call createsoldier;
+			private _gunner = [_aiGroup1, _missionPos, "AAF", "HeliCrew"] call createsoldier;
 			_gunner moveInGunner _vehicle;
 		};
 		if (_Passangers > 0) then
@@ -87,8 +88,8 @@ _setupObjects =
 
 	_missionPos = getPosATL leader _aiGroup1;
 
-	_missionPicture = getText (configFile >> "CfgVehicles" >> _veh2 >> "picture");
-	_vehicleName = getText (configFile >> "CfgVehicles" >> _veh2 >> "displayName");
+	_missionPicture = getText (configFile >> "CfgVehicles" >> _veh2types >> "picture");
+	_vehicleName = getText (configFile >> "CfgVehicles" >> _veh2types >> "displayName");
 
 	_missionHintText = format ["A convoy containing at least a <t color='%2'>%1</t> is patrolling Altis! Stop the patrol and capture the goods and money!", _vehicleName, AAFMissionColor];
 
@@ -128,6 +129,8 @@ _lootPos = getMarkerPos _marker;
 		private _box = [_lootPos, "AAF", _tier, 0, _maxmoney] call createrandomlootcrate;
 		_box setVariable ["moveable", true, true];
 	};
+	_smoke= "SmokeShellGreen" createVehicle _lootPos;
+	_flare= "F_40mm_Green" createVehicle _lootPos;
 	_successHintMessage = "The patrol has been stopped, the money and crates and vehicles are yours to take.";
 };
 

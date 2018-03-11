@@ -7,7 +7,7 @@
 if (!isServer) exitwith {};
 #include "CSATMissionDefines.sqf";
 
-private ["_convoyVeh","_veh1","_veh2","_veh3","_veh4","_veh5","createMissionVehicle","_pos","_rad","_vehiclePosArray","_vPos1","_vPos2","_vPos3","_vehiclePos1","_vehiclePos2","_vehiclePos3","_vehiclePos4","_vehicles","_leader","_speedMode","_waypoint","_vehicleName","_numWaypoints","_box1","_box2","_box3","_box4"];
+private ["_convoyVeh","_veh1","_veh2","_veh3","_veh4","_veh5","_pos","_rad","_vehiclePosArray","_vPos1","_vPos2","_vPos3","_vehiclePos1","_vehiclePos2","_vehiclePos3","_vehiclePos4","_vehicles","_leader","_speedMode","_waypoint","_vehicleName","_numWaypoints","_box1","_box2","_box3","_box4"];
 
 _setupVars =
 {
@@ -20,7 +20,7 @@ _setupObjects =
 	_town = (call cityList) call BIS_fnc_selectRandom;
 	_missionPos =markerPos _missionLocation;
 	_aiGroup1 = createGroup CIVILIAN;
-	for "_i" from 1 to 4 do
+	for "_i" from 1 to 5 do
 	{
 		[_aiGroup1, _missionPos, "CSAT", "Rifleman"] call createsoldier;
 	};
@@ -32,11 +32,9 @@ _setupObjects =
 	{
 		[_aiGroup1, _missionPos, "CSAT", "Grenedier"] call createsoldier;
 	};
-	_Leader =[_aiGroup1, _missionPos, "CSAT", "Marksman"] call createsoldier;
-	_Leader setrank "LIEUTENANT";
 
 	_aiGroup1 setCombatMode "RED"; // Will fire on enemies
-	_aiGroup1 setBehaviour "AWARE"; // units feel safe until they spot an enemy or get into contact
+	_aiGroup1 setBehaviour "AWARE";  
 	_aiGroup1 setFormation "WEDGE";
 
 	_speedMode = "LIMITED";

@@ -10,7 +10,7 @@
 if (!isServer) exitwith {};
 #include "AAFMissionDefines.sqf"
 
-private [ "_veh1", "_veh2", "_veh3", "createMissionVehicle", "_vehicles", "_leader", "_speedMode", "_waypoint", "_vehicleName", "_vehicleName2", "_numWaypoints", "_box1", "_box2", "_box3"];
+private [ "_veh1", "_veh2", "_veh3", "_vehicles", "_leader", "_speedMode", "_waypoint", "_vehicleName", "_vehicleName2", "_numWaypoints", "_box1", "_box2", "_box3"];
 
 _setupVars =
 {
@@ -27,14 +27,15 @@ _setupObjects =
 	_veh2types = "I_C_Boat_Transport_02_F";
 	_veh3types = "I_Boat_Armed_01_minigun_F";
 
-	_veh1 = [_veh1types, _starts select 0] call createMissionVehicle,
-	_veh2 = [_veh2types, _starts select 0] call createMissionVehicle,
-	_veh3 = [_veh3types, _starts select 0] call createMissionVehicle
+	_veh1 = [_veh1types, _starts select 0,1,1,0,"NONE",1] call createMissionVehicle;
+	_veh2 = [_veh2types, _starts select 0,1,1,0,"NONE",1] call createMissionVehicle;
+	_veh3 = [_veh3types, _starts select 0,1,1,0,"NONE",1] call createMissionVehicle;
 	_vehicles = [_veh1, _veh2, _veh3];
 
 	_aiGroup1 = createGroup CIVILIAN;
 	{
 		_vehicle = _x;
+		_position = getPos _vehicle;
 		private _drivers = _vehicle emptyPositions "Driver";
 		private _Commanders =  _vehicle emptyPositions "Commander";
 		private _Gunners = _vehicle emptyPositions "Gunner";
@@ -64,8 +65,8 @@ _setupObjects =
 		{
 			for "_i" from 1 to _Passangers do
 			{
-				_soldier = [_aiGroup1, _position, "AAF", "Rifleman"] call createsoldier;
-
+				private _soldierType = selectrandom ["Rifleman","Rifleman","Rifleman","Rifleman","Rifleman","Rifleman","Rifleman","Rifleman","Rifleman","Rifleman","AT","AA","SAW","SAW","SAW","Engineer","Medic","Grenedier","Engineer","Medic","Grenedier","Marksman","Marksman","Marksman"];
+				_soldier = [_aiGroup1, _position, "AAF", _soldierType] call createsoldier;
 				_soldier moveInCargo _vehicle;
 			};
 		};
@@ -94,13 +95,10 @@ _setupObjects =
 	} forEach _waypoints;
 
 	_missionPos = getPosATL leader _aiGroup1;
-
-	_missionPicture = getText (configFile >> "CfgVehicles" >> (_veh1 param [0,""]) >> "picture");
-	_vehicleName = getText (configFile >> "CfgVehicles" >> (_veh1 param [0,""]) >> "displayName");
-	_vehicleName2 = getText (configFile >> "CfgVehicles" >> (_veh2 param [0,""]) >> "displayName");
-
+	_missionPicture = getText (configFile >> "CfgVehicles" >> (_veh1types param [0,""]) >> "picture");
+	_vehicleName = getText (configFile >> "CfgVehicles" >> (_veh1types param [0,""]) >> "displayName");
+	_vehicleName2 = getText (configFile >> "CfgVehicles" >> (_veh2types param [0,""]) >> "displayName");
 	_missionHintText = format ["Two <t color='%3'>%1</t> are patrolling the coasts.<br/>Intercept them and recover their cargo!", _vehicleName, _vehicleName2, AAFMissionColor];
-
 	_numWaypoints = count waypoints _aiGroup1;
 };
 

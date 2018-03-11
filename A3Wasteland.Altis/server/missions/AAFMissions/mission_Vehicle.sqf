@@ -16,8 +16,8 @@ _setupVars =
 		//MBT
 		"I_MBT_03_cannon_F",
 		//APCs
-		"I_APC_Wheeled_03_cannon_F", //Gorgan
-		"I_APC_tracked_03_cannon_F", //Mora
+		"I_APC_Wheeled_03_cannon_F",
+		"I_APC_tracked_03_cannon_F",
 		//LAV
 		"I_MRAP_03_hmg_F",
 		"I_MRAP_03_gmg_F",
@@ -40,7 +40,7 @@ _setupVars =
 		case ({_vehicleClass isKindOf _x} count ["I_Plane_Fighter_03_dynamicLoadout_F", "I_Plane_Fighter_04_F"] > 0): 																{ "AAF Jet" };
 		case (_vehicleClass isKindOf "I_UAV_02_dynamicLoadout_F"):                                                          														{ "AAF Unmanned Air Vehicle" };
 		case ({_vehicleClass isKindOf _x} count ["I_Heli_Transport_02_F", "I_Heli_light_03_dynamicLoadout_F", "I_Heli_light_03_unarmed_F"] > 0):									{ "AAF Light Armored Vehicle" };
-		case ({_vehicleClass isKindOf _x} count ["I_MRAP_03_hmg_F","I_MRAP_03_gmg_F"] > 0):																							{ "AAF Light Armored Vehicle" };
+		case ({_vehicleClass isKindOf _x} count ["I_MRAP_03_hmg_F","I_MRAP_03_gmg_F"] > 0):																							{ "AAF helicopter" };
 		default 																																									{ "AAF Vehicle" };
 	};
 	If (_vehicleClass iskindof "Air") then

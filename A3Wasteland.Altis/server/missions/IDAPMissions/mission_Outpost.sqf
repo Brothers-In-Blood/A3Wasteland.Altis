@@ -22,16 +22,43 @@ _setupObjects =
 	_missionPos = markerPos _missionLocation;
 
 	_outpost = (call compile preprocessFileLineNumbers "server\missions\outposts\outpostsList.sqf") call BIS_fnc_selectRandom;
-	_objects = [_outpost, _missionPos, 0] call createOutpost;
+	private _faction = "IDAP";
+	_objects = [_outpost, _missionPos, 0, _faction] call createOutpost;
 
 	_aiGroup1 = createGroup CIVILIAN;
-	for "_i" from 1 to 20 do
-	{
-		[_aiGroup1, _missionPos, "IDAP", "Rifleman"] call createsoldier;
+	_aiGroup2 = createGroup CIVILIAN;
+	_aiGroup3 = createGroup CIVILIAN;
+	_aiGroup4 = createGroup CIVILIAN;
 
+	for "_i" from 1 to 5 do
+	{
+		private _faction = selectrandom ["IDAP","IDAP","IDAP","IDAP","IDAP","IDAP","IDAP","IDAP","IDAP","NATO"];
+		[_aiGroup1, _missionPos, _faction, "Rifleman"] call createsoldier;
 	};
 	_aiGroup1 setCombatMode "RED";
-	_missionHintText = format ["An armed <t color='%1'>outpost</t> containing weapon crates has been spotted near the marker, go capture it!", IDAPMissionColor]
+	for "_i" from 1 to 5 do
+	{
+		private _faction = selectrandom ["IDAP","IDAP","IDAP","IDAP","IDAP","IDAP","IDAP","IDAP","IDAP","NATO"];
+		[_aiGroup1, _missionPos, _faction, "Rifleman"] call createsoldier;
+	};
+	_aiGroup2 setCombatMode "RED";
+	for "_i" from 1 to 5 do
+	{
+		private _faction = selectrandom ["IDAP","IDAP","IDAP","IDAP","IDAP","IDAP","IDAP","IDAP","IDAP","NATO"];
+		[_aiGroup1, _missionPos, _faction, "Rifleman"] call createsoldier;
+	};
+	_aiGroup3 setCombatMode "RED";
+	for "_i" from 1 to 5 do
+	{
+		private _faction = selectrandom ["IDAP","IDAP","IDAP","IDAP","IDAP","IDAP","IDAP","IDAP","IDAP","NATO"];
+		[_aiGroup1, _missionPos, _faction, "Rifleman"] call createsoldier;
+	};
+	_aiGroup4 setCombatMode "RED";
+	_missionHintText = format ["An armed <t color='%1'>outpost</t> containing weapon crates has been spotted near the marker, go capture it!", IDAPMissionColor];
+	_turrets = nearestObjects [_missionPos, ["I_HMG_01_high_F"], 50, true];
+	{
+		deleteVehicle _x
+	} foreach _turrets;
 };
 
 _waitUntilMarkerPos = nil;
@@ -49,6 +76,13 @@ _successExec =
 	// Mission complete
 	{ _x setVariable ["R3F_LOG_disabled", false, true] } forEach _objects;
 	[_locationsArray, _missionLocation, _objects] call setLocationObjects;
+	{
+		 private _obj = _x;
+		 if (_obj isKindOf "ReammoBox_F") then
+		 {
+			_obj setvariable ["cmoney", (random 10000), true];
+		 };
+	} forEach _objects;
 
 	_successHintMessage = "The outpost has been captured, good work.";
 };

@@ -39,10 +39,15 @@ _setupObjects =
 	_aiGroup1  = createGroup CIVILIAN;
 	for "_i" from 1 to 7 do
 	{
-		[[_aiGroup1, _missionPos, "GEN", "Rifleman"] call createsoldier;
-
-		_aiGroup1 setCombatMode "RED";
+		[_aiGroup1, _missionPos, "GEN", "Rifleman"] call createsoldier;
+	};
+	_aiGroup1 setCombatMode "RED";
 	_missionHintText = format ["Enemies have set up an illegal roadblock and are searching vehicles! They need to be stopped!", GENMissionColor];
+	_soldiers = units _aiGroup1;
+	_gunner1 = _soldiers select 0;
+	_gunner2 = _soldiers select 1;
+	_gunner1 moveInGunner _obj1;
+	_gunner2 moveInGunner _obj2;
 };
 
 _waitUntilMarkerPos = nil;

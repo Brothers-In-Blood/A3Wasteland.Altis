@@ -25,272 +25,159 @@ _setupObjects =
 	_vehicle setDamage _randomDamage;
 	_vehicle setFuel _randomFuel;
 
-	//reload _vehicle;
-
+	_createsquad1 =
+	{
+		for "_i" from 1 to 5 do
+		{
+			[_aiGroup1, _missionPos, "AAF", "Rifleman"] call createsoldier;
+		};
+		for "_i" from 1 to 2 do
+		{
+			[_aiGroup1, _missionPos, "AAF", "SAW"] call createsoldier;
+		};
+		for "_i" from 1 to 2 do
+		{
+			[_aiGroup1, _missionPos, "AAF", "Genedier"] call createsoldier;
+		};
+		for "_i" from 1 to 2 do
+		{
+			[_aiGroup1, _missionPos, "AAF", "Medic"] call createsoldier;
+		};
+		for "_i" from 1 to 2 do
+		{
+			[_aiGroup1, _missionPos, "AAF", "Marksman"] call createsoldier;
+		};
+		[_aiGroup1, _missionPos, "AAF", "AT"] call createsoldier;
+		[_aiGroup1, _missionPos, "AAF", "AA"] call createsoldier;
+		[_aiGroup1, _missionPos, "AAF", "Engineer"] call createsoldier;
+	};
+	_createsquad2 =
+	{
+		for "_i" from 1 to 5 do
+		{
+			[_aiGroup2, _missionPos, "AAF", "Rifleman"] call createsoldier;
+		};
+		for "_i" from 1 to 2 do
+		{
+			[_aiGroup2, _missionPos, "AAF", "SAW"] call createsoldier;
+		};
+		for "_i" from 1 to 2 do
+		{
+			[_aiGroup2, _missionPos, "AAF", "Genedier"] call createsoldier;
+		};
+		for "_i" from 1 to 2 do
+		{
+			[_aiGroup2, _missionPos, "AAF", "Medic"] call createsoldier;
+		};
+		for "_i" from 1 to 2 do
+		{
+			[_aiGroup2, _missionPos, "AAF", "Marksman"] call createsoldier;
+		};
+		[_aiGroup2, _missionPos, "AAF", "AT"] call createsoldier;
+		[_aiGroup2, _missionPos, "AAF", "AA"] call createsoldier;
+		[_aiGroup2, _missionPos, "AAF", "Engineer"] call createsoldier;
+	};
+	_createsquad3 =
+	{
+		for "_i" from 1 to 5 do
+		{
+			[_aiGroup3, _missionPos, "AAF", "Rifleman"] call createsoldier;
+		};
+		for "_i" from 1 to 2 do
+		{
+			[_aiGroup3, _missionPos, "AAF", "SAW"] call createsoldier;
+		};
+		for "_i" from 1 to 2 do
+		{
+			[_aiGroup3, _missionPos, "AAF", "Genedier"] call createsoldier;
+		};
+		for "_i" from 1 to 2 do
+		{
+			[_aiGroup3, _missionPos, "AAF", "Medic"] call createsoldier;
+		};
+		for "_i" from 1 to 2 do
+		{
+			[_aiGroup3, _missionPos, "AAF", "Marksman"] call createsoldier;
+		};
+		[_aiGroup3, _missionPos, "AAF", "AT"] call createsoldier;
+		[_aiGroup3, _missionPos, "AAF", "AA"] call createsoldier;
+		[_aiGroup3, _missionPos, "AAF", "Engineer"] call createsoldier;
+	};
+	_createsquad4 =
+	{
+		for "_i" from 1 to 5 do
+		{
+			[_aiGroup1, _missionPos, "AAF", "Rifleman"] call createsoldier;
+		};
+		for "_i" from 1 to 2 do
+		{
+			[_aiGroup1, _missionPos, "AAF", "SAW"] call createsoldier;
+		};
+		for "_i" from 1 to 2 do
+		{
+			[_aiGroup1, _missionPos, "AAF", "Genedier"] call createsoldier;
+		};
+		for "_i" from 1 to 2 do
+		{
+			[_aiGroup1, _missionPos, "AAF", "Medic"] call createsoldier;
+		};
+		for "_i" from 1 to 2 do
+		{
+			[_aiGroup1, _missionPos, "AAF", "Marksman"] call createsoldier;
+		};
+		[_aiGroup1, _missionPos, "AAF", "AT"] call createsoldier;
+		[_aiGroup1, _missionPos, "AAF", "AA"] call createsoldier;
+		[_aiGroup1, _missionPos, "AAF", "Engineer"] call createsoldier;
+	};
 	_aiGroup1 = createGroup CIVILIAN;
+	_aiGroup2 = createGroup CIVILIAN;
+	_aiGroup3 = createGroup CIVILIAN;
+	_aiGroup4 = createGroup CIVILIAN;
 	switch (true) do
 	{
 		case ({_vehicleClass isKindOf _x} count ["I_MRAP_03_hmg_F","I_MRAP_03_gmg_F"] > 0):
 		{
-			for "_i" from 1 to 5 do
-			{
-				[_aiGroup1, _missionPos, "AAF", "Rifleman"] call createsoldier;
-			};
-			for "_i" from 1 to 2 do
-			{
-				[_aiGroup1, _missionPos, "AAF", "SAW"] call createsoldier;
-			};
-			for "_i" from 1 to 2 do
-			{
-				[_aiGroup1, _missionPos, "AAF", "Genedier"] call createsoldier;
-			};
-			for "_i" from 1 to 2 do
-			{
-				[_aiGroup1, _missionPos, "AAF", "Medic"] call createsoldier;
-			};
-			for "_i" from 1 to 2 do
-			{
-				[_aiGroup1, _missionPos, "AAF", "Marksman"] call createsoldier;
-			};
-			[_aiGroup1, _missionPos, "AAF", "AT"] call createsoldier;
-			[_aiGroup1, _missionPos, "AAF", "AA"] call createsoldier;
-			[_aiGroup1, _missionPos, "AAF", "Engineer"] call createsoldier;
+			_squad1 = call _createsquad1;
 		};
 		case ({_vehicleClass isKindOf _x} count ["B_APC_Tracked_01_AA_F", "O_APC_Tracked_02_AA_F"] > 0):
 		{
-			for "_i" from 1 to 7 do
-			{
-				[_aiGroup1, _missionPos, "AAF", "Rifleman"] call createsoldier;
-			};
-			for "_i" from 1 to 3 do
-			{
-				[_aiGroup1, _missionPos, "AAF", "SAW"] call createsoldier;
-			};
-			for "_i" from 1 to 2 do
-			{
-				[_aiGroup1, _missionPos, "AAF", "Genedier"] call createsoldier;
-			};
-			for "_i" from 1 to 2 do
-			{
-				[_aiGroup1, _missionPos, "AAF", "Medic"] call createsoldier;
-			};
-			for "_i" from 1 to 3 do
-			{
-				[_aiGroup1, _missionPos, "AAF", "Marksman"] call createsoldier;
-			};
-			for "_i" from 1 to 2 do
-			{
-				[_aiGroup1, _missionPos, "AAF", "AT"] call createsoldier;
-			};
-			[_aiGroup1, _missionPos, "AAF", "AA"] call createsoldier;
-			[_aiGroup1, _missionPos, "AAF", "Engineer"] call createsoldier;
+			_squad1 = call _createsquad1;
 		};
 		case (_vehicleClass isKindOf "I_APC_Wheeled_03_cannon_F"):
 		{
-			for "_i" from 1 to 7 do
-			{
-				[_aiGroup1, _missionPos, "AAF", "Rifleman"] call createsoldier;
-			};
-			for "_i" from 1 to 3 do
-			{
-				[_aiGroup1, _missionPos, "AAF", "SAW"] call createsoldier;
-			};
-			for "_i" from 1 to 2 do
-			{
-				[_aiGroup1, _missionPos, "AAF", "Genedier"] call createsoldier;
-			};
-			for "_i" from 1 to 2 do
-			{
-				[_aiGroup1, _missionPos, "AAF", "Medic"] call createsoldier;
-			};
-			for "_i" from 1 to 2 do
-			{
-				[_aiGroup1, _missionPos, "AAF", "Marksman"] call createsoldier;
-			};
-			for "_i" from 1 to 2 do
-			{
-				[_aiGroup1, _missionPos, "AAF", "AT"] call createsoldier;
-			};
-			for "_i" from 1 to 2 do
-			{
-				[_aiGroup1, _missionPos, "AAF", "AA"] call createsoldier;
-			};
-			[_aiGroup1, _missionPos, "AAF", "Engineer"] call createsoldier;
+			_squad1 = call _createsquad1;
+			_squad2 = call _createsquad2;
 		};
 		case (_vehicleClass isKindOf "I_APC_tracked_03_cannon_F"):
 		{
-			for "_i" from 1 to 7 do
-			{
-				[_aiGroup1, _missionPos, "AAF", "Rifleman"] call createsoldier;
-			};
-			for "_i" from 1 to 3 do
-			{
-				[_aiGroup1, _missionPos, "AAF", "SAW"] call createsoldier;
-			};
-			for "_i" from 1 to 2 do
-			{
-				[_aiGroup1, _missionPos, "AAF", "Genedier"] call createsoldier;
-			};
-			for "_i" from 1 to 2 do
-			{
-				[_aiGroup1, _missionPos, "AAF", "Medic"] call createsoldier;
-			};
-			for "_i" from 1 to 2 do
-			{
-				[_aiGroup1, _missionPos, "AAF", "Marksman"] call createsoldier;
-			};
-			for "_i" from 1 to 2 do
-			{
-				[_aiGroup1, _missionPos, "AAF", "AT"] call createsoldier;
-			};
-			for "_i" from 1 to 2 do
-			{
-				[_aiGroup1, _missionPos, "AAF", "AA"] call createsoldier;
-			};
-			for "_i" from 1 to 2 do
-			{
-				[_aiGroup1, _missionPos, "AAF", "Engineer"] call createsoldier;
-			};
+			_squad1 = call _createsquad1;
+			_squad2 = call _createsquad2;
 		};
 		case (_vehicleClass isKindOf "I_MBT_03_cannon_F"):
 		{
-			for "_i" from 1 to 10 do
-			{
-				[_aiGroup1, _missionPos, "AAF", "Rifleman"] call createsoldier;
-			};
-			for "_i" from 1 to 3 do
-			{
-				[_aiGroup1, _missionPos, "AAF", "SAW"] call createsoldier;
-			};
-			for "_i" from 1 to 3 do
-			{
-				[_aiGroup1, _missionPos, "AAF", "Genedier"] call createsoldier;
-			};
-			for "_i" from 1 to 2 do
-			{
-				[_aiGroup1, _missionPos, "AAF", "Medic"] call createsoldier;
-			};
-			for "_i" from 1 to 3 do
-			{
-				[_aiGroup1, _missionPos, "AAF", "Marksman"] call createsoldier;
-			};
-			for "_i" from 1 to 3 do
-			{
-				[_aiGroup1, _missionPos, "AAF", "AT"] call createsoldier;
-			};
-			for "_i" from 1 to 3 do
-			{
-				[_aiGroup1, _missionPos, "AAF", "AA"] call createsoldier;
-			};
-			for "_i" from 1 to 2 do
-			{
-				[_aiGroup1, _missionPos, "AAF", "Engineer"] call createsoldier;
-			};
+			_squad1 = call _createsquad1;
+			_squad2 = call _createsquad2;
+			_squad3 = call _createsquad3;
 		};	
 		case ({_vehicleClass isKindOf _x} count ["I_Plane_Fighter_03_dynamicLoadout_F", "I_Plane_Fighter_04_F"] > 0):
 		{
-			for "_i" from 1 to 10 do
-			{
-				[_aiGroup1, _missionPos, "AAF", "Rifleman"] call createsoldier;
-			};
-			for "_i" from 1 to 4 do
-			{
-				[_aiGroup1, _missionPos, "AAF", "SAW"] call createsoldier;
-			};
-			for "_i" from 1 to 4 do
-			{
-				[_aiGroup1, _missionPos, "AAF", "Genedier"] call createsoldier;
-			};
-			for "_i" from 1 to 3 do
-			{
-				[_aiGroup1, _missionPos, "AAF", "Medic"] call createsoldier;
-			};
-			for "_i" from 1 to 4 do
-			{
-				[_aiGroup1, _missionPos, "AAF", "Marksman"] call createsoldier;
-			};
-			for "_i" from 1 to 4 do
-			{
-				[_aiGroup1, _missionPos, "AAF", "AT"] call createsoldier;
-			};
-			for "_i" from 1 to 4 do
-			{
-				[_aiGroup1, _missionPos, "AAF", "AA"] call createsoldier;
-			};
-			for "_i" from 1 to 3 do
-			{
-				[_aiGroup1, _missionPos, "AAF", "Engineer"] call createsoldier;
-			};
+			_squad1 = call _createsquad1;
+			_squad2 = call _createsquad2;
+			_squad3 = call _createsquad3;
+			_squad4 = call _createsquad4;
 		};
 		case (_vehicleClass isKindOf "I_UAV_02_dynamicLoadout_F"):
 		{
-			for "_i" from 1 to 10 do
-			{
-				[_aiGroup1, _missionPos, "AAF", "Rifleman"] call createsoldier;
-			};
-			for "_i" from 1 to 4 do
-			{
-				[_aiGroup1, _missionPos, "AAF", "SAW"] call createsoldier;
-			};
-			for "_i" from 1 to 4 do
-			{
-				[_aiGroup1, _missionPos, "AAF", "Genedier"] call createsoldier;
-			};
-			for "_i" from 1 to 3 do
-			{
-				[_aiGroup1, _missionPos, "AAF", "Medic"] call createsoldier;
-			};
-			for "_i" from 1 to 4 do
-			{
-				[_aiGroup1, _missionPos, "AAF", "Marksman"] call createsoldier;
-			};
-			for "_i" from 1 to 4 do
-			{
-				[_aiGroup1, _missionPos, "AAF", "AT"] call createsoldier;
-			};
-			for "_i" from 1 to 4 do
-			{
-				[_aiGroup1, _missionPos, "AAF", "AA"] call createsoldier;
-			};
-			for "_i" from 1 to 3 do
-			{
-				[_aiGroup1, _missionPos, "AAF", "Engineer"] call createsoldier;
-			};
+			_squad1 = call _createsquad1;
+			_squad2 = call _createsquad2;
+			_squad3 = call _createsquad3;
+			_squad4 = call _createsquad4;
 		};
 		case ({_vehicleClass isKindOf _x} count ["I_Heli_Transport_02_F", "I_Heli_light_03_dynamicLoadout_F", "I_Heli_light_03_unarmed_F"] > 0):
 		{
-			for "_i" from 1 to 10 do
-			{
-				[_aiGroup1, _missionPos, "AAF", "Rifleman"] call createsoldier;
-			};
-			for "_i" from 1 to 4 do
-			{
-				[_aiGroup1, _missionPos, "AAF", "SAW"] call createsoldier;
-			};
-			for "_i" from 1 to 4 do
-			{
-				[_aiGroup1, _missionPos, "AAF", "Genedier"] call createsoldier;
-			};
-			for "_i" from 1 to 3 do
-			{
-				[_aiGroup1, _missionPos, "AAF", "Medic"] call createsoldier;
-			};
-			for "_i" from 1 to 4 do
-			{
-				[_aiGroup1, _missionPos, "AAF", "Marksman"] call createsoldier;
-			};
-			for "_i" from 1 to 4 do
-			{
-				[_aiGroup1, _missionPos, "AAF", "AT"] call createsoldier;
-			};
-			for "_i" from 1 to 4 do
-			{
-				[_aiGroup1, _missionPos, "AAF", "AA"] call createsoldier;
-			};
-			for "_i" from 1 to 3 do
-			{
-				[_aiGroup1, _missionPos, "AAF", "Engineer"] call createsoldier;
-			};
+			_squad1 = call _createsquad1;
+			_squad2 = call _createsquad2;
+			_squad3 = call _createsquad3;
 		};
 	};
 	_aiGroup1 setCombatMode "RED";

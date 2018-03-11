@@ -28,6 +28,17 @@ private _TerminalTypes = [];
 private _itemsList = [];
 private _headgear = [];
 private _faceItems = [];
+private _allowFleeing = 1; // can the unit flee? 0 = no 1 = yes
+private _rank = "PRIVATE"; //  PRIVATE, CORPORAL, SERGEANT, LIEUTENANT, CAPTAIN, MAJOR or COLONEL
+//Soldier Skills are set from 0 to 1; 
+private _Accuracy = 1; //Soldier accuracy;
+private _Courage = 1; //Affects unit's subordinates' morale (Higher value = more courage)
+private _aimingShake = 1; //Affects how steadily the AI can hold a weapon (Higher value = less weapon sway)
+private _aimingSpeed = 1; //Affects how quickly the AI can rotate and stabilize its aim (Higher value = faster, less error)
+private _spotDistance = 1; //Affects the AI ability to spot targets within it's visual or audible range (Higher value = more likely to spot)
+private _spotTime = 1; //Affects how quick the AI react to death, damage or observing an enemy (Higher value = quicker reaction)
+private _reloadSpeed = 1; //Affects the delay between switching or reloading a weapon (Higher value = less delay)
+private _commanding = 1; //Affects how quickly recognized targets are shared with the group (Higher value = faster reporting)	
 
 //Uniform
 	switch (_faction) do
@@ -557,17 +568,244 @@ private _faceItems = [];
 		default {_faceItems = ["G_Aviator","G_Combat","G_Lady_Red","G_Lady_Mirror","G_Lady_Dark","G_Lady_Blue","G_Lowprofile","G_Shades_Black","G_Shades_Blue","G_Shades_Green","G_Shades_Red","G_Spectacles","G_Sport_Red","G_Sport_Blackyellow","G_Sport_BlackWhite","G_Sport_Checkered","G_Sport_Blackred","G_Sport_Greenblack","G_Squares_Tinted","G_Squares","G_Tactical_Clear","G_Tactical_Clear","G_Tactical_Black","G_Spectacles_Tinted"]};
 	};
 //Soldier Skill and Attributes
-	private _allowFleeing = 1; // can the unit flee? 0 = no 1 = yes
-	private _rank = "PRIVATE"; //  PRIVATE, CORPORAL, SERGEANT, LIEUTENANT, CAPTAIN, MAJOR or COLONEL
+	Switch (_type) do
+	{
+		case "Sniper":
+		{
+			_allowFleeing = 1; // can the unit flee? 0 = no 1 = yes
+			_rank = "SERGEANT"; //  PRIVATE, CORPORAL, SERGEANT, LIEUTENANT, CAPTAIN, MAJOR or COLONEL
+			//Soldier Skills are set from 0 to 1; 
+			_Accuracy = 1; //Soldier accuracy;
+			_Courage = 1; //Affects unit's subordinates' morale (Higher value = more courage)
+			_aimingShake = 1; //Affects how steadily the AI can hold a weapon (Higher value = less weapon sway)
+			_aimingSpeed = 1; //Affects how quickly the AI can rotate and stabilize its aim (Higher value = faster, less error)
+			_spotDistance = 1; //Affects the AI ability to spot targets within it's visual or audible range (Higher value = more likely to spot)
+			_spotTime = 1; //Affects how quick the AI react to death, damage or observing an enemy (Higher value = quicker reaction)
+			_reloadSpeed = 1; //Affects the delay between switching or reloading a weapon (Higher value = less delay)
+			_commanding = 1; //Affects how quickly recognized targets are shared with the group (Higher value = faster reporting)	
+		};
+		case "Diver":
+		{
+			_allowFleeing = 1; // can the unit flee? 0 = no 1 = yes
+			_rank = "LIEUTENANT"; //  PRIVATE, CORPORAL, SERGEANT, LIEUTENANT, CAPTAIN, MAJOR or COLONEL
+			//Soldier Skills are set from 0 to 1; 
+			_Accuracy = 0.1; //Soldier accuracy;
+			_Courage = 1; //Affects unit's subordinates' morale (Higher value = more courage)
+			_aimingShake = 1; //Affects how steadily the AI can hold a weapon (Higher value = less weapon sway)
+			_aimingSpeed = 1; //Affects how quickly the AI can rotate and stabilize its aim (Higher value = faster, less error)
+			_spotDistance = 1; //Affects the AI ability to spot targets within it's visual or audible range (Higher value = more likely to spot)
+			_spotTime = 1; //Affects how quick the AI react to death, damage or observing an enemy (Higher value = quicker reaction)
+			_reloadSpeed = 1; //Affects the delay between switching or reloading a weapon (Higher value = less delay)
+			_commanding = 1; //Affects how quickly recognized targets are shared with the group (Higher value = faster reporting)	
+		};
+		case "HeliCrew":
+		{
+			_allowFleeing = 1; // can the unit flee? 0 = no 1 = yes
+			_rank = "SERGEANT"; //  PRIVATE, CORPORAL, SERGEANT, LIEUTENANT, CAPTAIN, MAJOR or COLONEL
+			//Soldier Skills are set from 0 to 1; 
+			_Accuracy = 1; //Soldier accuracy;
+			_Courage = 1; //Affects unit's subordinates' morale (Higher value = more courage)
+			_aimingShake = 1; //Affects how steadily the AI can hold a weapon (Higher value = less weapon sway)
+			_aimingSpeed = 1; //Affects how quickly the AI can rotate and stabilize its aim (Higher value = faster, less error)
+			_spotDistance = 1; //Affects the AI ability to spot targets within it's visual or audible range (Higher value = more likely to spot)
+			_spotTime = 1; //Affects how quick the AI react to death, damage or observing an enemy (Higher value = quicker reaction)
+			_reloadSpeed = 1; //Affects the delay between switching or reloading a weapon (Higher value = less delay)
+			_commanding = 1; //Affects how quickly recognized targets are shared with the group (Higher value = faster reporting)	
+		};
+		case "Helipilot":
+		{
+			_allowFleeing = 1; // can the unit flee? 0 = no 1 = yes
+			_rank = "CAPTAIN"; //  PRIVATE, CORPORAL, SERGEANT, LIEUTENANT, CAPTAIN, MAJOR or COLONEL
+			//Soldier Skills are set from 0 to 1; 
+			_Accuracy = 1; //Soldier accuracy;
+			_Courage = 1; //Affects unit's subordinates' morale (Higher value = more courage)
+			_aimingShake = 1; //Affects how steadily the AI can hold a weapon (Higher value = less weapon sway)
+			_aimingSpeed = 1; //Affects how quickly the AI can rotate and stabilize its aim (Higher value = faster, less error)
+			_spotDistance = 1; //Affects the AI ability to spot targets within it's visual or audible range (Higher value = more likely to spot)
+			_spotTime = 1; //Affects how quick the AI react to death, damage or observing an enemy (Higher value = quicker reaction)
+			_reloadSpeed = 1; //Affects the delay between switching or reloading a weapon (Higher value = less delay)
+			_commanding = 1; //Affects how quickly recognized targets are shared with the group (Higher value = faster reporting)	
+		};
+		case "JetPilot":
+		{
+			_allowFleeing = 1; // can the unit flee? 0 = no 1 = yes
+			_rank = "MAJOR"; //  PRIVATE, CORPORAL, SERGEANT, LIEUTENANT, CAPTAIN, MAJOR or COLONEL
+			//Soldier Skills are set from 0 to 1; 
+			_Accuracy = 1; //Soldier accuracy;
+			_Courage = 1; //Affects unit's subordinates' morale (Higher value = more courage)
+			_aimingShake = 1; //Affects how steadily the AI can hold a weapon (Higher value = less weapon sway)
+			_aimingSpeed = 1; //Affects how quickly the AI can rotate and stabilize its aim (Higher value = faster, less error)
+			_spotDistance = 1; //Affects the AI ability to spot targets within it's visual or audible range (Higher value = more likely to spot)
+			_spotTime = 1; //Affects how quick the AI react to death, damage or observing an enemy (Higher value = quicker reaction)
+			_reloadSpeed = 1; //Affects the delay between switching or reloading a weapon (Higher value = less delay)
+			_commanding = 1; //Affects how quickly recognized targets are shared with the group (Higher value = faster reporting)	
+		};
+		case "CTRG":
+		{
+			_allowFleeing = 1; // can the unit flee? 0 = no 1 = yes
+			_rank = "CAPTAIN"; //  PRIVATE, CORPORAL, SERGEANT, LIEUTENANT, CAPTAIN, MAJOR or COLONEL
+			//Soldier Skills are set from 0 to 1; 
+			_Accuracy = 1; //Soldier accuracy;
+			_Courage = 1; //Affects unit's subordinates' morale (Higher value = more courage)
+			_aimingShake = 1; //Affects how steadily the AI can hold a weapon (Higher value = less weapon sway)
+			_aimingSpeed = 1; //Affects how quickly the AI can rotate and stabilize its aim (Higher value = faster, less error)
+			_spotDistance = 1; //Affects the AI ability to spot targets within it's visual or audible range (Higher value = more likely to spot)
+			_spotTime = 1; //Affects how quick the AI react to death, damage or observing an enemy (Higher value = quicker reaction)
+			_reloadSpeed = 1; //Affects the delay between switching or reloading a weapon (Higher value = less delay)
+			_commanding = 1; //Affects how quickly recognized targets are shared with the group (Higher value = faster reporting)	
+		};
+		case "Viper":
+		{
+			_allowFleeing = 1; // can the unit flee? 0 = no 1 = yes
+			_rank = "CAPTAIN"; //  PRIVATE, CORPORAL, SERGEANT, LIEUTENANT, CAPTAIN, MAJOR or COLONEL
+			//Soldier Skills are set from 0 to 1; 
+			_Accuracy = 1; //Soldier accuracy;
+			_Courage = 1; //Affects unit's subordinates' morale (Higher value = more courage)
+			_aimingShake = 1; //Affects how steadily the AI can hold a weapon (Higher value = less weapon sway)
+			_aimingSpeed = 1; //Affects how quickly the AI can rotate and stabilize its aim (Higher value = faster, less error)
+			_spotDistance = 1; //Affects the AI ability to spot targets within it's visual or audible range (Higher value = more likely to spot)
+			_spotTime = 1; //Affects how quick the AI react to death, damage or observing an enemy (Higher value = quicker reaction)
+			_reloadSpeed = 1; //Affects the delay between switching or reloading a weapon (Higher value = less delay)
+			_commanding = 1; //Affects how quickly recognized targets are shared with the group (Higher value = faster reporting)	
+		};
+		case "Commander":
+		{
+			_allowFleeing = 1; // can the unit flee? 0 = no 1 = yes
+			_rank = "LIEUTENANT"; //  PRIVATE, CORPORAL, SERGEANT, LIEUTENANT, CAPTAIN, MAJOR or COLONEL
+			//Soldier Skills are set from 0 to 1; 
+			_Accuracy = 0.6; //Soldier accuracy;
+			_Courage = 1; //Affects unit's subordinates' morale (Higher value = more courage)
+			_aimingShake = 1; //Affects how steadily the AI can hold a weapon (Higher value = less weapon sway)
+			_aimingSpeed = 1; //Affects how quickly the AI can rotate and stabilize its aim (Higher value = faster, less error)
+			_spotDistance = 1; //Affects the AI ability to spot targets within it's visual or audible range (Higher value = more likely to spot)
+			_spotTime = 1; //Affects how quick the AI react to death, damage or observing an enemy (Higher value = quicker reaction)
+			_reloadSpeed = 1; //Affects the delay between switching or reloading a weapon (Higher value = less delay)
+			_commanding = 1; //Affects how quickly recognized targets are shared with the group (Higher value = faster reporting)	
+		};
+		case "AT":
+		{
+			_allowFleeing = 1; // can the unit flee? 0 = no 1 = yes
+			_rank = "LIEUTENANT"; //  PRIVATE, CORPORAL, SERGEANT, LIEUTENANT, CAPTAIN, MAJOR or COLONEL
+			//Soldier Skills are set from 0 to 1; 
+			_Accuracy = 0.7; //Soldier accuracy;
+			_Courage = 1; //Affects unit's subordinates' morale (Higher value = more courage)
+			_aimingShake = 1; //Affects how steadily the AI can hold a weapon (Higher value = less weapon sway)
+			_aimingSpeed = 1; //Affects how quickly the AI can rotate and stabilize its aim (Higher value = faster, less error)
+			_spotDistance = 1; //Affects the AI ability to spot targets within it's visual or audible range (Higher value = more likely to spot)
+			_spotTime = 1; //Affects how quick the AI react to death, damage or observing an enemy (Higher value = quicker reaction)
+			_reloadSpeed = 1; //Affects the delay between switching or reloading a weapon (Higher value = less delay)
+			_commanding = 1; //Affects how quickly recognized targets are shared with the group (Higher value = faster reporting)	
+		};
+		case "AA":
+		{
+			_allowFleeing = 1; // can the unit flee? 0 = no 1 = yes
+			_rank = "LIEUTENANT"; //  PRIVATE, CORPORAL, SERGEANT, LIEUTENANT, CAPTAIN, MAJOR or COLONEL
+			//Soldier Skills are set from 0 to 1; 
+			_Accuracy = 0.5; //Soldier accuracy;
+			_Courage = 1; //Affects unit's subordinates' morale (Higher value = more courage)
+			_aimingShake = 1; //Affects how steadily the AI can hold a weapon (Higher value = less weapon sway)
+			_aimingSpeed = 1; //Affects how quickly the AI can rotate and stabilize its aim (Higher value = faster, less error)
+			_spotDistance = 1; //Affects the AI ability to spot targets within it's visual or audible range (Higher value = more likely to spot)
+			_spotTime = 1; //Affects how quick the AI react to death, damage or observing an enemy (Higher value = quicker reaction)
+			_reloadSpeed = 1; //Affects the delay between switching or reloading a weapon (Higher value = less delay)
+			_commanding = 1; //Affects how quickly recognized targets are shared with the group (Higher value = faster reporting)	
+		};
+		case "Crew":
+		{
+			_allowFleeing = 1; // can the unit flee? 0 = no 1 = yes
+			_rank = "LIEUTENANT"; //  PRIVATE, CORPORAL, SERGEANT, LIEUTENANT, CAPTAIN, MAJOR or COLONEL
+			//Soldier Skills are set from 0 to 1; 
+			_Accuracy = 0.1; //Soldier accuracy;
+			_Courage = 1; //Affects unit's subordinates' morale (Higher value = more courage)
+			_aimingShake = 1; //Affects how steadily the AI can hold a weapon (Higher value = less weapon sway)
+			_aimingSpeed = 1; //Affects how quickly the AI can rotate and stabilize its aim (Higher value = faster, less error)
+			_spotDistance = 1; //Affects the AI ability to spot targets within it's visual or audible range (Higher value = more likely to spot)
+			_spotTime = 1; //Affects how quick the AI react to death, damage or observing an enemy (Higher value = quicker reaction)
+			_reloadSpeed = 1; //Affects the delay between switching or reloading a weapon (Higher value = less delay)
+			_commanding = 1; //Affects how quickly recognized targets are shared with the group (Higher value = faster reporting)	
+		};
+		case "Medic":
+		{
+			_allowFleeing = 1; // can the unit flee? 0 = no 1 = yes
+			_rank = "LIEUTENANT"; //  PRIVATE, CORPORAL, SERGEANT, LIEUTENANT, CAPTAIN, MAJOR or COLONEL
+			//Soldier Skills are set from 0 to 1; 
+			_Accuracy = 0.1; //Soldier accuracy;
+			_Courage = 1; //Affects unit's subordinates' morale (Higher value = more courage)
+			_aimingShake = 1; //Affects how steadily the AI can hold a weapon (Higher value = less weapon sway)
+			_aimingSpeed = 1; //Affects how quickly the AI can rotate and stabilize its aim (Higher value = faster, less error)
+			_spotDistance = 1; //Affects the AI ability to spot targets within it's visual or audible range (Higher value = more likely to spot)
+			_spotTime = 1; //Affects how quick the AI react to death, damage or observing an enemy (Higher value = quicker reaction)
+			_reloadSpeed = 1; //Affects the delay between switching or reloading a weapon (Higher value = less delay)
+			_commanding = 1; //Affects how quickly recognized targets are shared with the group (Higher value = faster reporting)	
+		};
+		case "Grenedier":
+		{
+			_allowFleeing = 1; // can the unit flee? 0 = no 1 = yes
+			_rank = "LIEUTENANT"; //  PRIVATE, CORPORAL, SERGEANT, LIEUTENANT, CAPTAIN, MAJOR or COLONEL
+			//Soldier Skills are set from 0 to 1; 
+			_Accuracy = 0.4; //Soldier accuracy;
+			_Courage = 1; //Affects unit's subordinates' morale (Higher value = more courage)
+			_aimingShake = 1; //Affects how steadily the AI can hold a weapon (Higher value = less weapon sway)
+			_aimingSpeed = 1; //Affects how quickly the AI can rotate and stabilize its aim (Higher value = faster, less error)
+			_spotDistance = 1; //Affects the AI ability to spot targets within it's visual or audible range (Higher value = more likely to spot)
+			_spotTime = 1; //Affects how quick the AI react to death, damage or observing an enemy (Higher value = quicker reaction)
+			_reloadSpeed = 1; //Affects the delay between switching or reloading a weapon (Higher value = less delay)
+			_commanding = 1; //Affects how quickly recognized targets are shared with the group (Higher value = faster reporting)	
+		};
+		case "Marksman":
+		{
+			_allowFleeing = 1; // can the unit flee? 0 = no 1 = yes
+			_rank = "LIEUTENANT"; //  PRIVATE, CORPORAL, SERGEANT, LIEUTENANT, CAPTAIN, MAJOR or COLONEL
+			//Soldier Skills are set from 0 to 1; 
+			_Accuracy = 0.8; //Soldier accuracy;
+			_Courage = 1; //Affects unit's subordinates' morale (Higher value = more courage)
+			_aimingShake = 1; //Affects how steadily the AI can hold a weapon (Higher value = less weapon sway)
+			_aimingSpeed = 1; //Affects how quickly the AI can rotate and stabilize its aim (Higher value = faster, less error)
+			_spotDistance = 1; //Affects the AI ability to spot targets within it's visual or audible range (Higher value = more likely to spot)
+			_spotTime = 1; //Affects how quick the AI react to death, damage or observing an enemy (Higher value = quicker reaction)
+			_reloadSpeed = 1; //Affects the delay between switching or reloading a weapon (Higher value = less delay)
+			_commanding = 1; //Affects how quickly recognized targets are shared with the group (Higher value = faster reporting)	
+		};
+		case "SAW":
+		{
+			_allowFleeing = 1; // can the unit flee? 0 = no 1 = yes
+			_rank = "LIEUTENANT"; //  PRIVATE, CORPORAL, SERGEANT, LIEUTENANT, CAPTAIN, MAJOR or COLONEL
+			//Soldier Skills are set from 0 to 1; 
+			_Accuracy = 0.2; //Soldier accuracy;
+			_Courage = 1; //Affects unit's subordinates' morale (Higher value = more courage)
+			_aimingShake = 1; //Affects how steadily the AI can hold a weapon (Higher value = less weapon sway)
+			_aimingSpeed = 1; //Affects how quickly the AI can rotate and stabilize its aim (Higher value = faster, less error)
+			_spotDistance = 1; //Affects the AI ability to spot targets within it's visual or audible range (Higher value = more likely to spot)
+			_spotTime = 1; //Affects how quick the AI react to death, damage or observing an enemy (Higher value = quicker reaction)
+			_reloadSpeed = 1; //Affects the delay between switching or reloading a weapon (Higher value = less delay)
+			_commanding = 1; //Affects how quickly recognized targets are shared with the group (Higher value = faster reporting)	
+		};
+		default
+		{
+			_allowFleeing = 1; // can the unit flee? 0 = no 1 = yes
+			_rank = "PRIVATE"; //  PRIVATE, CORPORAL, SERGEANT, LIEUTENANT, CAPTAIN, MAJOR or COLONEL
+			//Soldier Skills are set from 0 to 1; 
+			_Accuracy = 0.3; //Soldier accuracy;
+			_Courage = 1; //Affects unit's subordinates' morale (Higher value = more courage)
+			_aimingShake = 1; //Affects how steadily the AI can hold a weapon (Higher value = less weapon sway)
+			_aimingSpeed = 0.4; //Affects how quickly the AI can rotate and stabilize its aim (Higher value = faster, less error)
+			_spotDistance = 1; //Affects the AI ability to spot targets within it's visual or audible range (Higher value = more likely to spot)
+			_spotTime = 1; //Affects how quick the AI react to death, damage or observing an enemy (Higher value = quicker reaction)
+			_reloadSpeed = 0.4; //Affects the delay between switching or reloading a weapon (Higher value = less delay)
+			_commanding = 0.2; //Affects how quickly recognized targets are shared with the group (Higher value = faster reporting)	
+		};
+	};
+	_allowFleeing = 1; // can the unit flee? 0 = no 1 = yes
+	_rank = "PRIVATE"; //  PRIVATE, CORPORAL, SERGEANT, LIEUTENANT, CAPTAIN, MAJOR or COLONEL
 	//Soldier Skills are set from 0 to 1; 
-	private _Accuracy = 1; //Soldier accuracy;
-	private _Courage = 1; //Affects unit's subordinates' morale (Higher value = more courage)
-	private _aimingShake = 1; //Affects how steadily the AI can hold a weapon (Higher value = less weapon sway)
-	private _aimingSpeed = 1; //Affects how quickly the AI can rotate and stabilize its aim (Higher value = faster, less error)
-	private _spotDistance = 1; //Affects the AI ability to spot targets within it's visual or audible range (Higher value = more likely to spot)
-	private _spotTime = 1; //Affects how quick the AI react to death, damage or observing an enemy (Higher value = quicker reaction)
-	private _reloadSpeed = 1; //Affects the delay between switching or reloading a weapon (Higher value = less delay)
-	private _commanding = 1; //Affects how quickly recognized targets are shared with the group (Higher value = faster reporting)	
+	_Accuracy = 1; //Soldier accuracy;
+	_Courage = 1; //Affects unit's subordinates' morale (Higher value = more courage)
+	_aimingShake = 1; //Affects how steadily the AI can hold a weapon (Higher value = less weapon sway)
+	_aimingSpeed = 1; //Affects how quickly the AI can rotate and stabilize its aim (Higher value = faster, less error)
+	_spotDistance = 1; //Affects the AI ability to spot targets within it's visual or audible range (Higher value = more likely to spot)
+	_spotTime = 1; //Affects how quick the AI react to death, damage or observing an enemy (Higher value = quicker reaction)
+	_reloadSpeed = 1; //Affects the delay between switching or reloading a weapon (Higher value = less delay)
+	_commanding = 1; //Affects how quickly recognized targets are shared with the group (Higher value = faster reporting)	
 //Spawn the Soldier
 	private _soldier = _group createUnit [_soldierTypes, _position, [], 20, "NONE"];
 //Give soldier a uniform
@@ -608,7 +846,7 @@ private _faceItems = [];
 	_soldier linkitem _terminal;
 //Set the Soldiers rank and Skills
 	_soldier setRank _rank;
-	_soldier allowFleeing 1;
+	_soldier allowFleeing 0;
 	_soldier setSkill ["aimingAccuracy", _Accuracy];
 	_soldier setSkill ["courage", _Courage];
 	_soldier setskill ["aimingShake", _aimingShake];

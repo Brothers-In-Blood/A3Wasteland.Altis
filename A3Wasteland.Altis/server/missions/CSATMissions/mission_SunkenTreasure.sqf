@@ -22,76 +22,43 @@ _setupObjects =
 {
 	_missionPos = markerPos _missionLocation;
 	private _BoxPos1 = [_missionPos, 3, 10,1,0,0,0] call findSafePos;
-	_box1 = [_BoxPos1, "CSAT", "1", 0, 50000] call createrandomlootcrate;
+	_box1 = [_BoxPos1, "CSAT", "2", 0, 50000] call createrandomlootcrate;
 	{ _x setVariable ["R3F_LOG_disabled", true, true] } forEach [_box1];
 
 	_vehicleClass = "O_Boat_Armed_01_hmg_F";
-	createMissionVehicle = 
+	// Vehicle Class, Position, Fuel, Ammo, Damage, Special
+	_aiGroup1 = createGroup CIVILIAN;
+	_aiGroup2 = createGroup CIVILIAN;
+	_veh1 = [_vehicleClass, _missionPos,1,1,0,"NONE",1] call createMissionVehicle;
+	_vehicles = [_veh1];
 	{
-		private _type = _this select 0;
-		private _position = _this select 1;
-		private _direction = _this select 2;
-		private _vehiclePos = [_position, 10, 50,5,2,0,0] call findSafePos;
-		private _vehicle = createVehicle [_type, _vehiclePos, [], 0, "None"];
-		_vehicle setVehicleReportRemoteTargets true;
-		_vehicle setVehicleReceiveRemoteTargets true;
-		_vehicle setVehicleRadar 1;
-		_vehicle confirmSensorTarget [west, true];
-		_vehicle confirmSensorTarget [east, true];
-		_vehicle confirmSensorTarget [resistance, true];
-		[_vehicle] call vehicleSetup;
+		private _vehicle = _x;
 		private _drivers = _vehicle emptyPositions "Driver";
 		private _Commanders =  _vehicle emptyPositions "Commander";
 		private _Gunners = _vehicle emptyPositions "Gunner";
-		_vehicle setDir _direction;
+		private _Passangers = _vehicle emptyPositions "Cargo";
 		_aiGroup1 addVehicle _vehicle;
 		_vehicle lockDriver true;
-
-		if (_drivers > 0) then
+		for "_i" from 1 to _drivers do
 		{
-			for "_i" from 1 to _drivers do
-			{
-				private _Driver = [_aiGroup1, _position, "CSAT", "Rifleman"] call createsoldier;
-				_Driver moveInAny _vehicle; //The boat doesn't like moveindriver for some reason 
-			};
+			private _Driver = [_aiGroup1, _missionPos, "CSAT", "Rifleman"] call createsoldier;
+			_Driver moveInAny _vehicle; //The boat doesn't like moveindriver for some reason 
 		};
-		if (_Commanders > 0) then
+		for "_i" from 1 to _Commanders do
 		{
-			for "_i" from 1 to _Commanders do
-			{
-				private _Commander = [_aiGroup1, _position, "CSAT", "Rifleman"] call createsoldier;
-				_Commander moveInCommander _vehicle;
-			};
+			private _Commander = [_aiGroup1, _missionPos, "CSAT", "Rifleman"] call createsoldier;
+			_Commander moveInCommander _vehicle;
 		};
-		if (_Gunners > 0) then
-		{
-			private _gunner = [_aiGroup1, _position, "CSAT", "Rifleman"] call createsoldier;
-			_gunner moveInGunner _vehicle;
-		};	
-		_vehicle setVariable ["R3F_LOG_disabled", true, true]; // force vehicles to be locked
-		[_vehicle, _aiGroup1] spawn checkMissionVehicleLock; // force vehicles to be locked
-		_vehicle addItemCargoGlobal ["U_I_Wetsuit", 2];
-		_vehicle addItemCargoGlobal ["V_RebreatherIA", 2];
-		_vehicle addItemCargoGlobal ["G_Diving", 2];
-		_vehicle addWeaponCargoGlobal ["arifle_SDAR_F", 2];
-		_vehicle addMagazineCargoGlobal ["20Rnd_556x45_UW_mag", 8];
-
-		_vehicle
-	};
-	// Vehicle Class, Position, Fuel, Ammo, Damage, Special
-	_aiGroup1 = createGroup CIVILIAN;
-	_vehicle = [_vehicleClass, _missionPos, random 360] call createMissionVehicle;
-	private _Passangers = _vehicle emptyPositions "Cargo";
-
-	if (_Passangers > 0) then
-	{
+		private _gunner = [_aiGroup1, _missionPos, "CSAT", "Rifleman"] call createsoldier;
+		_gunner moveInGunner _vehicle;
 		for "_i" from 1 to _Passangers do
 		{
-			[_aiGroup1, _missionPos, "CSAT", "Diver"] call createsoldier;
+			[_aiGroup2, _missionPos, "CSAT", "Diver"] call createsoldier;
 		};
-	};
+	} foreach _vehicles;
 	_aiGroup1 setCombatMode "RED";
-	[_vehicle, _aiGroup1] spawn checkMissionVehicleLock;
+	_aiGroup2 setCombatMode "RED";
+	[_veh1, _aiGroup1] spawn checkMissionVehicleLock;
 
 	_missionPicture = getText (configFile >> "CfgVehicles" >> _vehicleClass >> "picture");
 	_missionHintText = format ["A treasure containing money and weapons is being recovered.<br/>If you want to capture it, you will need diving gear and an underwater weapon."];
@@ -114,7 +81,7 @@ _successExec =
 	// Mission complete
 	_box1 setVariable ["R3F_LOG_disabled", false, true];
 	_box1 setVariable ["moveable", true, true];
-	_vehicle lockDriver false;
+	_box1 setVariable ["cmoney", (random 100000), true];
 
 	_successHintMessage = "The treasure has been captured, well done.";
 };

@@ -80,7 +80,9 @@ private _LootSelect = "";
 						"Mission_Ammo_127",
 						"Mission_Ammo_50",
 						"Mission_Ammo_3GL",
-						"Mission_Ammo_UGL"
+						"Mission_Ammo_UGL",
+						"Medical",
+						"mission_Field_Engineer"
 					];
 				};
 			};
@@ -246,21 +248,29 @@ private _LootSelect = "";
 				{
 					_LootSelect = selectRandom
 					[
-						"Diving_Gear_NATO"
+						"Diving_Gear_NATO",
+						"SniperGear_NATO",
+						"Launchers_NATO",
+						"CTRG"
 					];
 				};
 				case "CSAT":
 				{
 					_LootSelect = selectRandom
 					[
-						"Diving_Gear_CSAT"
+						"Diving_Gear_CSAT",
+						"SniperGear_CSAT",
+						"Launchers_CSAT",
+						"Viper"
 					];
 				};
 				case "AAF":
 				{
 					_LootSelect = selectRandom
 					[
-						"Diving_Gear_AAF"
+						"Diving_Gear_AAF",
+						"SniperGear_AAF",
+						"Launchers_AAF"
 					];
 				};
 				default 
@@ -269,7 +279,15 @@ private _LootSelect = "";
 					[
 						"Diving_Gear_AAF",
 						"Diving_Gear_NATO",
-						"Diving_Gear_CSAT"
+						"Diving_Gear_CSAT",
+						"SniperGear_NATO",
+						"Launchers_NATO",
+						"CTRG",
+						"SniperGear_CSAT",
+						"Launchers_CSAT",
+						"Viper",
+						"SniperGear_AAF",
+						"Launchers_AAF"
 					];
 				};
 			};
@@ -477,7 +495,13 @@ private _LootSelect = "";
 			_LootSelect == "Mission_NATO_Darter"||
 			_LootSelect == "Mission_CSAT_MedDrone"||
 			_LootSelect == "Mission_CSAT_UtilityDrone"||
-			_LootSelect == "Mission_CSAT_Darter"
+			_LootSelect == "Mission_CSAT_Darter"||
+			_LootSelect == "SniperGear_NATO"||
+			_LootSelect == "CTRG"||
+			_LootSelect == "SniperGear_CSAT"||
+			_LootSelect == "Viper"||
+			_LootSelect == "SniperGear_AAF"
+			
 		) then
 		{
 			switch (_faction) do
@@ -608,7 +632,8 @@ private _LootSelect = "";
 	//SupplyCrate
 		if 
 		(
-			_LootSelect == ""
+			_LootSelect == "Medical"||
+			_LootSelect == "mission_Field_Engineer"
 		) then
 		{
 			switch (_faction) do
@@ -693,7 +718,10 @@ private _LootSelect = "";
 	//Cargo Net
 		if 
 		(
-			_LootSelect == ""
+			_LootSelect == "Launchers_NATO"||
+			_LootSelect == "Launchers_CSAT"||
+			_LootSelect == "Launchers_AAF"
+
 		) then
 		{
 			switch (_faction) do

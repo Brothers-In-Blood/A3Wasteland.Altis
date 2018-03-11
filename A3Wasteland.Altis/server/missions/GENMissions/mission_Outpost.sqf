@@ -20,18 +20,43 @@ _setupVars =
 _setupObjects =
 {
 	_missionPos = markerPos _missionLocation;
-
 	_outpost = (call compile preprocessFileLineNumbers "server\missions\outposts\outpostsList.sqf") call BIS_fnc_selectRandom;
-	_objects = [_outpost, _missionPos, 0] call createOutpost;
-
+	private _faction = "GEN";
+	_objects = [_outpost, _missionPos, 0, _faction] call createOutpost;
 	_aiGroup1 = createGroup CIVILIAN;
-	for "_i" from 1 to 20 do
+	_aiGroup2 = createGroup CIVILIAN;
+	_aiGroup3 = createGroup CIVILIAN;
+	_aiGroup4 = createGroup CIVILIAN;
+
+	for "_i" from 1 to 5 do
 	{
 		[_aiGroup1, _missionPos, "GEN", "Rifleman"] call createsoldier;
-
 	};
 	_aiGroup1 setCombatMode "RED";
-	_missionHintText = format ["An armed <t color='%1'>outpost</t> containing weapon crates has been spotted near the marker, go capture it!", GENMissionColor]
+	for "_i" from 1 to 5 do
+	{
+		[_aiGroup2, _missionPos, "GEN", "Rifleman"] call createsoldier;
+	};
+	_aiGroup2 setCombatMode "RED";
+	for "_i" from 1 to 5 do
+	{
+		[_aiGroup3, _missionPos, "GEN", "Rifleman"] call createsoldier;
+	};
+	_aiGroup3 setCombatMode "RED";
+	for "_i" from 1 to 5 do
+	{
+		[_aiGroup4, _missionPos, "GEN", "Rifleman"] call createsoldier;
+	};
+	_aiGroup4 setCombatMode "RED";
+	_missionHintText = format ["An armed <t color='%1'>outpost</t> containing weapon crates has been spotted near the marker, go capture it!", GENMissionColor];
+	_turrets = nearestObjects [_missionPos, ["I_HMG_01_high_F"], 50, true];
+	{
+		private _turret = _x;
+		private _group = selectRandom [_aiGroup1, _aiGroup2, _aiGroup3, _aiGroup4];
+		private _troops = units _group;
+		private _gunner = _troops select _foreachindex;
+		_gunner moveingunner _turret;
+	} foreach _turrets;
 };
 
 _waitUntilMarkerPos = nil;
@@ -49,6 +74,13 @@ _successExec =
 	// Mission complete
 	{ _x setVariable ["R3F_LOG_disabled", false, true] } forEach _objects;
 	[_locationsArray, _missionLocation, _objects] call setLocationObjects;
+	{
+		 private _obj = _x;
+		 if (_obj isKindOf "ReammoBox_F") then
+		 {
+			_obj setvariable ["cmoney", (random 10000), true];
+		 };
+	} forEach _objects;
 
 	_successHintMessage = "The outpost has been captured, good work.";
 };

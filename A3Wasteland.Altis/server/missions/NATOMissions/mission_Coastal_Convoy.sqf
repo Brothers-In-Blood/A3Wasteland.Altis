@@ -10,7 +10,7 @@
 if (!isServer) exitwith {};
 #include "NATOMissionDefines.sqf"
 
-private [ "_veh1", "_veh2", "_veh3", "createMissionVehicle", "_vehicles", "_leader", "_speedMode", "_waypoint", "_vehicleName", "_vehicleName2", "_numWaypoints", "_box1", "_box2", "_box3"];
+private [ "_veh1", "_veh2", "_veh3", "_vehicles", "_leader", "_speedMode", "_waypoint", "_vehicleName", "_vehicleName2", "_numWaypoints", "_box1", "_box2", "_box3"];
 
 _setupVars =
 {
@@ -23,34 +23,19 @@ _setupObjects =
 	private ["_starts", "_startDirs", "_waypoints"];
 	call compile preprocessFileLineNumbers format ["mapConfig\convoys\%1.sqf", _missionLocation];
 
-	_veh1 = "B_Boat_Armed_01_minigun_F";
-	_veh2 = "B_Boat_Armed_01_minigun_F";
-	_veh3 = "B_Boat_Armed_01_minigun_F";
+	_veh1types = "B_Boat_Armed_01_minigun_F";
+	_veh2types = "B_Boat_Armed_01_minigun_F";
+	_veh3types = "B_Boat_Armed_01_minigun_F";
 
-	createMissionVehicle =
+	_veh1 = [_veh1types, _starts select 0,1,1,0,"NONE",1] call createMissionVehicle;
+	_veh2 = [_veh2types, _starts select 0,1,1,0,"NONE",1] call createMissionVehicle;
+	_veh3 = [_veh3types, _starts select 0,1,1,0,"NONE",1] call createMissionVehicle;
+	_vehicles = [_veh1, _veh2, _veh3];
+
+	_aiGroup1 = createGroup CIVILIAN;
 	{
-		private ["_type", "_position", "_direction", "_variant", "_special", "_vehicle", "_soldier"];
-
-		_type = _this select 0;
-		_position = _this select 1;
-		_direction = _this select 2;
-		_SpawnPos = [_position, 0, 10,10,2,0,0] call findSafePos;
-		if (_type isEqualType []) then
-		{
-			_type = _type select 0;
-		};
-
-		_vehicle = createVehicle [_type, _position, [], 0, "NONE"];
-		_vehicle setVariable ["R3F_LOG_disabled", true, true];
-		_vehicle setVehicleReportRemoteTargets true;
-		_vehicle setVehicleReceiveRemoteTargets true;
-		_vehicle setVehicleRadar 1;
-		_vehicle confirmSensorTarget [west, true];
-		_vehicle confirmSensorTarget [east, true];
-		_vehicle confirmSensorTarget [resistance, true];
-		[_vehicle] call vehicleSetup;
-		_vehicle setDir _direction;
-		_aiGroup1 addVehicle _vehicle;
+		_vehicle = _x;
+		_position = getPos _vehicle;
 		private _drivers = _vehicle emptyPositions "Driver";
 		private _Commanders =  _vehicle emptyPositions "Commander";
 		private _Gunners = _vehicle emptyPositions "Gunner";
@@ -60,7 +45,7 @@ _setupObjects =
 			for "_i" from 1 to _drivers do
 			{
 				private _Driver = [_aiGroup1, _position, "NATO", "Rifleman"] call createsoldier;
-				_Driver moveInAny _vehicle; //Boats don't like moveInDriver for some reason
+				_Driver moveInDriver _vehicle;
 			};
 		};
 		if (_Commanders > 0) then
@@ -82,21 +67,10 @@ _setupObjects =
 			{
 				private _soldierType = selectrandom ["Rifleman","Rifleman","Rifleman","Rifleman","Rifleman","Rifleman","Rifleman","Rifleman","Rifleman","Rifleman","AT","AA","SAW","SAW","SAW","Engineer","Medic","Grenedier","Engineer","Medic","Grenedier","Marksman","Marksman","Marksman"];
 				_soldier = [_aiGroup1, _position, "NATO", _soldierType] call createsoldier;
-				_soldier moveInAny _vehicle;
+				_soldier moveInCargo _vehicle;
 			};
 		};
-		[_vehicle, _aiGroup1] spawn checkMissionVehicleLock;
-		_vehicle
-	};
-
-	_aiGroup1 = createGroup CIVILIAN;
-
-	_vehicles =
-	[
-		[_veh1, _starts select 0, _startdirs select 0] call createMissionVehicle,
-		[_veh2, _starts select 0, _startdirs select 0] call createMissionVehicle,
-		[_veh3, _starts select 0, _startdirs select 0] call createMissionVehicle
-	];
+	} foreach _vehicles;
 
 	_leader = effectiveCommander (_vehicles select 0);
 	_aiGroup1 selectLeader _leader;
@@ -121,13 +95,10 @@ _setupObjects =
 	} forEach _waypoints;
 
 	_missionPos = getPosATL leader _aiGroup1;
-
-	_missionPicture = getText (configFile >> "CfgVehicles" >> (_veh1 param [0,""]) >> "picture");
-	_vehicleName = getText (configFile >> "CfgVehicles" >> (_veh1 param [0,""]) >> "displayName");
-	_vehicleName2 = getText (configFile >> "CfgVehicles" >> (_veh2 param [0,""]) >> "displayName");
-
+	_missionPicture = getText (configFile >> "CfgVehicles" >> (_veh1types param [0,""]) >> "picture");
+	_vehicleName = getText (configFile >> "CfgVehicles" >> (_veh1types param [0,""]) >> "displayName");
+	_vehicleName2 = getText (configFile >> "CfgVehicles" >> (_veh2types param [0,""]) >> "displayName");
 	_missionHintText = format ["Two <t color='%3'>%1</t> are patrolling the coasts.<br/>Intercept them and recover their cargo!", _vehicleName, _vehicleName2, NATOMissionColor];
-
 	_numWaypoints = count waypoints _aiGroup1;
 };
 

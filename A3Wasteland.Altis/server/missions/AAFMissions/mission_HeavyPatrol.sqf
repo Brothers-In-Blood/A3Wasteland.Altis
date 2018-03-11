@@ -7,7 +7,7 @@
 if (!isServer) exitwith {};
 #include "AAFMissionDefines.sqf";
 
-private ["_convoyVeh","_veh1","_veh2","_veh3","_veh4","_veh5","createMissionVehicle","_pos","_rad","_vPos1","_vPos2","_vPos3","_vehiclePos1","_vehiclePos2","_vehiclePos3","_vehiclePos4","_vehicles","_leader","_speedMode","_waypoint","_vehicleName","_numWaypoints","_box1","_box2","_box3","_box4"];
+private ["_convoyVeh","_veh1","_veh2","_veh3","_veh4","_veh5","_pos","_rad","_vPos1","_vPos2","_vPos3","_vehiclePos1","_vehiclePos2","_vehiclePos3","_vehiclePos4","_vehicles","_leader","_speedMode","_waypoint","_vehicleName","_numWaypoints","_box1","_box2","_box3","_box4"];
 
 _setupVars =
 {
@@ -32,18 +32,19 @@ _setupObjects =
 	_aiGroup1 = createGroup CIVILIAN;
 	_aiGroup2 = createGroup CIVILIAN;
 
-	_veh1 = [_veh1, _missionPos] call createMissionVehicle,
-	_veh2 = [_veh2, _missionPos] call createMissionVehicle,
-	_veh3 = [_veh3, _missionPos] call createMissionVehicle,
-	_veh4 = [_veh4, _missionPos] call createMissionVehicle,
-	_veh5 = [_veh5, _missionPos] call createMissionVehicle,
-	_veh6 = [_veh6, _missionPos] call createMissionVehicle,
-	_veh7 = [_veh7, _missionPos] call createMissionVehicle,
-	_veh8 = [_veh8, _missionPos] call createMissionVehicle,
-	_veh9 = [_veh9, _missionPos] call createMissionVehicle
+	_veh1 = [_veh1types, _missionPos] call createMissionVehicle;
+	_veh2 = [_veh2types, _missionPos] call createMissionVehicle;
+	_veh3 = [_veh3types, _missionPos] call createMissionVehicle;
+	_veh4 = [_veh4types, _missionPos] call createMissionVehicle;
+	_veh5 = [_veh5types, _missionPos] call createMissionVehicle;
+	_veh6 = [_veh6types, _missionPos] call createMissionVehicle;
+	_veh7 = [_veh7types, _missionPos] call createMissionVehicle;
+	_veh8 = [_veh8types, _missionPos] call createMissionVehicle;
+	_veh9 = [_veh9types, _missionPos] call createMissionVehicle;
 	_vehicles = [_veh1,_veh2,_veh3,_veh4,_veh5,_veh6,_veh7,_veh8,_veh9];
 	{
 		_vehicle = _x;
+		_position = getPos _vehicle;
 		private _drivers = _vehicle emptyPositions "Driver";
 		private _Commanders =  _vehicle emptyPositions "Commander";
 		private _Gunners = _vehicle emptyPositions "Gunner";
@@ -103,10 +104,10 @@ _setupObjects =
 
 	_missionPos = getPosATL leader _aiGroup1;
 
-	_missionPicture = getText (configFile >> "CfgVehicles" >> _veh2 >> "picture");
-	_vehicleName = getText (configFile >> "CfgVehicles" >> _veh2 >> "displayName");
-	_vehicleName2 = getText (configFile >> "CfgVehicles" >> _veh3 >> "displayName");
-	_vehicleName3 = getText (configFile >> "CfgVehicles" >> _veh4 >> "displayName");
+	_missionPicture = getText (configFile >> "CfgVehicles" >> _veh2types >> "picture");
+	_vehicleName = getText (configFile >> "CfgVehicles" >> _veh2types >> "displayName");
+	_vehicleName2 = getText (configFile >> "CfgVehicles" >> _veh3types >> "displayName");
+	_vehicleName3 = getText (configFile >> "CfgVehicles" >> _veh4types >> "displayName");
 
 	_missionHintText = format ["A convoy containing at least a <t color='%4'>%1</t>, a <t color='%4'>%2</t> and a <t color='%4'>%3</t> is patrolling Altis! Stop the patrol and capture the goods and money!", _vehicleName, _vehicleName2, _vehicleName3, AAFMissionColor];
 
@@ -139,9 +140,9 @@ _drop_item =
 _successExec =
 {
 _lootPos = getMarkerPos _marker;
-	for "_i" from 1 to 6 do
+	for "_i" from 1 to 9 do
 	{
-		private _tier = selectrandom ["1","2","3"];
+		private _tier = selectrandom ["1","2","3""4"];
 		private _maxmoney = random 20000;
 		private _box = [_lootPos, "AAF", _tier, 0, _maxmoney] call createrandomlootcrate;
 		_box setVariable ["moveable", true, true];
