@@ -11,29 +11,34 @@ private _ManagerPosition = getpos _manager;
 private _playerMoney = player getVariable "cmoney";
 //Get manager level
 private _ManagerLevel = _manager getVariable ["ManagerLevel", 1];
-//set default base radius for level 1 manager
+//set default base radius and maximum objects for level 1 manager
 private _BaseRadius = 10;
-//set base radius based on manager level
+private _MaxObjects = 10;
+//set base radius and max objects based on manager level
 switch (_ManagerLevel) do
 {
 	case (2):
 	{
 		_BaseRadius = 20;
+		_MaxObjects = 20;
 	};
 	case (3):
 	{
 		_BaseRadius = 30;
+		_MaxObjects = 30;
 	};
 	case (4):
 	{
 		_BaseRadius = 40;
+		_MaxObjects = 40;
 	};
 	case (5):
 	{
 		_BaseRadius = 50;
+		_MaxObjects = 50;
 	};
 };
-private _objects = nearestObjects [_ManagerPosition, ["thingX", "Building", "ReammoBox_F"], _BaseRadius, true];
+private _objects = nearestObjects [_ManagerPosition, ["thingX", "Static", "ReammoBox_F"], _BaseRadius, true];
 private _ownedObjects = {typeName _x == "OBJECT" && {!(isNil {_x getVariable "ownerUID"})} && {_x getVariable "objectLocked"}} count _objects;
 private _price = _ownedObjects * 500;
 
@@ -51,7 +56,7 @@ if (count reLockedObjectMapMarkers > 0) then {
 	reLockedObjectMapMarkers = [];
 	["Map cleared of previous markers", 5] call mf_notify_client;
 };
-
+if (_ownedObjects > _MaxObjects) exitwith { titletext [format ["Error %1 objects detected. Maximum %2 objects can be relocked. Upgrade your manager to increase this limit.", _ownedObjects, _MaxObjects], "PLAIN DOWN"]};
 if (!isNil "_price") then 
 {
 	// Add total sell value to confirm message
