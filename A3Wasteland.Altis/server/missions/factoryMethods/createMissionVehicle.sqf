@@ -19,7 +19,7 @@ _special = param [5, "None", [""]];
 _water = param [6 ,0, [0]];
 _vehPos = [_pos, 0, 50, 5,_water,0,0] call findSafePos;
 _vehheight = (_vehPos select 2) + 0.5;
-if (_specail == "FLY") then
+if (_special == "FLY") then
 {
 	_vehheight = (_vehPos select 2) + 500;
 };
