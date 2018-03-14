@@ -444,7 +444,7 @@ switch (_boxType) do
 				_boxItems =
 				[
 					["wep", ["launch_RPG32_F","launch_RPG32_ghex_F"], RANDOM_BETWEEN(2,4),0],
-					["mag", "RPG32_F","RPG32_HE_F", RANDOM_BETWEEN(5,10)]
+					["mag", ["RPG32_F","RPG32_HE_F"], RANDOM_BETWEEN(5,10)]
 				];
 			};
 			case "Mission_PCML":
@@ -793,11 +793,11 @@ switch (_boxType) do
 			};
 			case "VehicleAmmo":
 			{
-				_boxItems = [["itm", "objNull", 1]];
+				_boxItems = [["itm", "objNull", 0]];
 			};
 			case "Container":
 			{
-				_boxItems = [["itm", "objNull", 1]];
+				_boxItems = [["itm", "objNull", 0]];
 			};
 	//Airdrop Crates
 		case "airdrop_Rifles":
