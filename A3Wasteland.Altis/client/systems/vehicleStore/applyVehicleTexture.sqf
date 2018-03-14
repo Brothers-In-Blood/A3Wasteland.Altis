@@ -55,17 +55,20 @@ if (_texture isEqualType "") then
 			case (_veh isKindOf "Truck_02_base_F"):               { [0,1] };
 			case (_veh isKindOf "Truck_03_base_F"):               { [0,1,2,3] };
 
-			case (_veh isKindOf "APC_Wheeled_01_base_F"):         { [0,2] };
-			case (_veh isKindOf "APC_Wheeled_02_base_F"):         { [0,2] };
-			case (_veh isKindOf "APC_Wheeled_03_base_F"):         { [0,2,3] };
+			case (_veh isKindOf "APC_Wheeled_01_base_F"):         { [0,2,3,4] };
+			case (_veh isKindOf "APC_Wheeled_02_base_F"):         { [0,2,3,4] };
+			case (_veh isKindOf "APC_Wheeled_03_base_F"):         { [0,2,3,4,5] };
+			case (_veh isKindOf "AFV_Wheeled_01_base_F"):         { [0,1,3,4,5,6] };
 
-			case (_veh isKindOf "APC_Tracked_01_base_F"):         { [0,1,2,3] };
-			case (_veh isKindOf "APC_Tracked_02_base_F"):         { [0,1,2] };
-			case (_veh isKindOf "APC_Tracked_03_base_F"):         { [0,1] };
+			case (_veh isKindOf "APC_Tracked_01_base_F"):         { [0,1,2,3,4] };
+			case (_veh isKindOf "APC_Tracked_02_base_F"):         { [0,1,2,3,4] };
+			case (_veh isKindOf "APC_Tracked_03_base_F"):         { [0,1,2,3] };
 
-			case (_veh isKindOf "MBT_01_base_F"):                 { [0,1,2] };
-			case (_veh isKindOf "MBT_02_base_F"):                 { [0,1,2,3] };
-			case (_veh isKindOf "MBT_03_base_F"):                 { [0,1,2] };
+			case (_veh isKindOf "MBT_01_base_F"):                 { [0,1,2,3,4] };
+			case (_veh isKindOf "MBT_02_base_F"):                 { [0,1,2,3,4] };
+			case (_veh isKindOf "MBT_03_base_F"):                 { [0,1,2,3,4] };
+			case (_veh isKindOf "MBT_04_base_F"):                 { [0,1,2,3,4] };
+			case (_veh isKindOf "LT_01_base_F"):                  { [0,1,2,3] };
 
 			case (_veh isKindOf "Heli_Transport_01_base_F"):      { [0,1] };
 			case (_veh isKindOf "Heli_Transport_02_base_F"):      { [0,1,2] };
@@ -82,6 +85,8 @@ if (_texture isEqualType "") then
 
 			case (_veh isKindOf "LSV_01_base_F"):                 { [0,2] };
 			case (_veh isKindOf "LSV_02_base_F"):                 { [0,2] };
+
+			case (_veh iskindof "AAA_System_01_base_F"):		  { [0,1] };
 
 			default                                               { [0] };
 		};
