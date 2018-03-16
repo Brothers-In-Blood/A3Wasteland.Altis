@@ -3,11 +3,11 @@
 // ******************************************************************************************
 //	@file Version: 1.0
 //	@file Name: mission_VehicleCapture.sqf
-//	@file Author: [404] Deadbeat, [404] Costlyy, JoSchaap, AgentRev
+//	@file Author: [404] Deadbeat, [404] Costlyy, JoSchaap, AgentRev, BIB_Monkey
 //	@file Created: 08/12/2012 15:19
 
 if (!isServer) exitwith {};
-#include "vehicleMissionDefines.sqf";
+#include "AAFMissionDefines.sqf";
 
 private ["_vehicle", "_vehicleName", "_vehDeterminer"];
 
@@ -16,154 +16,177 @@ private ["_vehicle", "_vehicleName", "_vehDeterminer"];
 _setupObjects =
 {
 	_missionPos = markerPos _missionLocation;
-
+	_spawnPos = _missionPos;
+	_spawnPos set [2, 0.5];
+	private _randomDamage = random [0, 0.5, 0.9];
+	private _randomFuel = random [0, 0.5, 0.9];
 	// Class, Position, Fuel, Ammo, Damage, Special
-	_vehicle = [_vehicleClass, _missionPos] call createMissionVehicle;
+	_vehicle = [_vehicleClass, _spawnPos] call createMissionVehicle;
+	_vehicle setDamage _randomDamage;
+	_vehicle setFuel _randomFuel;
 
+	_createsquad1 =
+	{
+		for "_i" from 1 to 5 do
+		{
+			[_aiGroup1, _missionPos, "AAF", "Rifleman"] call createsoldier;
+		};
+		for "_i" from 1 to 2 do
+		{
+			[_aiGroup1, _missionPos, "AAF", "SAW"] call createsoldier;
+		};
+		for "_i" from 1 to 2 do
+		{
+			[_aiGroup1, _missionPos, "AAF", "Genedier"] call createsoldier;
+		};
+		for "_i" from 1 to 2 do
+		{
+			[_aiGroup1, _missionPos, "AAF", "Medic"] call createsoldier;
+		};
+		for "_i" from 1 to 2 do
+		{
+			[_aiGroup1, _missionPos, "AAF", "Marksman"] call createsoldier;
+		};
+		[_aiGroup1, _missionPos, "AAF", "AT"] call createsoldier;
+		[_aiGroup1, _missionPos, "AAF", "AA"] call createsoldier;
+		[_aiGroup1, _missionPos, "AAF", "Engineer"] call createsoldier;
+	};
+	_createsquad2 =
+	{
+		for "_i" from 1 to 5 do
+		{
+			[_aiGroup2, _missionPos, "AAF", "Rifleman"] call createsoldier;
+		};
+		for "_i" from 1 to 2 do
+		{
+			[_aiGroup2, _missionPos, "AAF", "SAW"] call createsoldier;
+		};
+		for "_i" from 1 to 2 do
+		{
+			[_aiGroup2, _missionPos, "AAF", "Genedier"] call createsoldier;
+		};
+		for "_i" from 1 to 2 do
+		{
+			[_aiGroup2, _missionPos, "AAF", "Medic"] call createsoldier;
+		};
+		for "_i" from 1 to 2 do
+		{
+			[_aiGroup2, _missionPos, "AAF", "Marksman"] call createsoldier;
+		};
+		[_aiGroup2, _missionPos, "AAF", "AT"] call createsoldier;
+		[_aiGroup2, _missionPos, "AAF", "AA"] call createsoldier;
+		[_aiGroup2, _missionPos, "AAF", "Engineer"] call createsoldier;
+	};
+	_createsquad3 =
+	{
+		for "_i" from 1 to 5 do
+		{
+			[_aiGroup3, _missionPos, "AAF", "Rifleman"] call createsoldier;
+		};
+		for "_i" from 1 to 2 do
+		{
+			[_aiGroup3, _missionPos, "AAF", "SAW"] call createsoldier;
+		};
+		for "_i" from 1 to 2 do
+		{
+			[_aiGroup3, _missionPos, "AAF", "Genedier"] call createsoldier;
+		};
+		for "_i" from 1 to 2 do
+		{
+			[_aiGroup3, _missionPos, "AAF", "Medic"] call createsoldier;
+		};
+		for "_i" from 1 to 2 do
+		{
+			[_aiGroup3, _missionPos, "AAF", "Marksman"] call createsoldier;
+		};
+		[_aiGroup3, _missionPos, "AAF", "AT"] call createsoldier;
+		[_aiGroup3, _missionPos, "AAF", "AA"] call createsoldier;
+		[_aiGroup3, _missionPos, "AAF", "Engineer"] call createsoldier;
+	};
+	_createsquad4 =
+	{
+		for "_i" from 1 to 5 do
+		{
+			[_aiGroup1, _missionPos, "AAF", "Rifleman"] call createsoldier;
+		};
+		for "_i" from 1 to 2 do
+		{
+			[_aiGroup1, _missionPos, "AAF", "SAW"] call createsoldier;
+		};
+		for "_i" from 1 to 2 do
+		{
+			[_aiGroup1, _missionPos, "AAF", "Genedier"] call createsoldier;
+		};
+		for "_i" from 1 to 2 do
+		{
+			[_aiGroup1, _missionPos, "AAF", "Medic"] call createsoldier;
+		};
+		for "_i" from 1 to 2 do
+		{
+			[_aiGroup1, _missionPos, "AAF", "Marksman"] call createsoldier;
+		};
+		[_aiGroup1, _missionPos, "AAF", "AT"] call createsoldier;
+		[_aiGroup1, _missionPos, "AAF", "AA"] call createsoldier;
+		[_aiGroup1, _missionPos, "AAF", "Engineer"] call createsoldier;
+	};
+	_aiGroup1 = createGroup CIVILIAN;
+	_aiGroup2 = createGroup CIVILIAN;
+	_aiGroup3 = createGroup CIVILIAN;
+	_aiGroup4 = createGroup CIVILIAN;
 	switch (true) do
 	{
-		// AMV-7 Marshall
-		case (_vehicle isKindOf "B_APC_Wheeled_01_cannon_F"):
+		case ({_vehicleClass isKindOf _x} count ["I_MRAP_03_hmg_F","I_MRAP_03_gmg_F"] > 0):
 		{
-			_vehicle setVehicleAmmoDef 1;
-
-			// Reduce all shells and MG ammo, reset smoke mags
-			_vehicle addMagazineTurret ["SmokeLauncherMag", [0,0]];
-			_vehicle setVehicleAmmo 1.0;
+			_squad1 = call _createsquad1;
 		};
-
-		// AFV-4 Gorgon
-		case (_vehicle isKindOf "I_APC_Wheeled_03_cannon_F"):
+		case ({_vehicleClass isKindOf _x} count ["B_APC_Tracked_01_AA_F", "O_APC_Tracked_02_AA_F"] > 0):
 		{
-			_vehicle setVehicleAmmoDef 1;
-
-			// Reduce all shells and MG ammo, reset AT missiles and smoke mags
-			_vehicle addMagazineTurret ["2Rnd_GAT_missiles", [0]];
-			_vehicle addMagazineTurret ["SmokeLauncherMag", [0,0]];
-			_vehicle setVehicleAmmo 1.0;
+			_squad1 = call _createsquad1;
 		};
-
-		// BTR-K Kamysh
-		case (_vehicle isKindOf "O_APC_Tracked_02_cannon_F"):
+		case (_vehicleClass isKindOf "I_APC_Wheeled_03_cannon_F"):
 		{
-			_vehicle setVehicleAmmoDef 1;
-
-			// Reduce all shells and MG ammo, reset AT missiles and smoke mags
-			_vehicle addMagazineTurret ["2Rnd_GAT_missiles", [0]];
-			_vehicle addMagazineTurret ["SmokeLauncherMag", [0,0]];
-			_vehicle setVehicleAmmo 1.0;
+			_squad1 = call _createsquad1;
+			_squad2 = call _createsquad2;
 		};
-
-		// FV-720 Mora
-		case (_vehicle isKindOf "I_APC_tracked_03_cannon_F"):
+		case (_vehicleClass isKindOf "I_APC_tracked_03_cannon_F"):
 		{
-			_vehicle setVehicleAmmoDef 1;
-
-			// Reduce all shells and MG ammo, reset smoke mags
-			_vehicle removeMagazineTurret ["1000Rnd_65x39_Belt_Yellow", [0]];
-			_vehicle addMagazineTurret ["SmokeLauncherMag", [0,0]];
-			_vehicle setVehicleAmmo 1.0;
+			_squad1 = call _createsquad1;
+			_squad2 = call _createsquad2;
 		};
-
-		// M2A4 Slammer UP
-		case (_vehicle isKindOf "B_MBT_01_TUSK_F"):
+		case (_vehicleClass isKindOf "I_MBT_03_cannon_F"):
 		{
-			_vehicle setVehicleAmmoDef 1;
-
-			// Reduce AP shells & MG ammo, reset HE shells and smoke mags
-			_vehicle removeMagazineTurret ["2000Rnd_65x39_Belt", [0]];
-			_vehicle removeMagazineTurret ["500Rnd_127x99_mag_Tracer_Red", [0,0]];
-			_vehicle addMagazineTurret ["20Rnd_105mm_HEAT_MP_T_Red", [0]];
-			_vehicle addMagazineTurret ["SmokeLauncherMag", [0,0]];
-			_vehicle setVehicleAmmo 1.0;
+			_squad1 = call _createsquad1;
+			_squad2 = call _createsquad2;
+			_squad3 = call _createsquad3;
+		};	
+		case ({_vehicleClass isKindOf _x} count ["I_Plane_Fighter_03_dynamicLoadout_F", "I_Plane_Fighter_04_F"] > 0):
+		{
+			_squad1 = call _createsquad1;
+			_squad2 = call _createsquad2;
+			_squad3 = call _createsquad3;
+			_squad4 = call _createsquad4;
 		};
-
-		// M2A1 Slammer
-		case (_vehicle isKindOf "B_MBT_01_cannon_F"):
+		case (_vehicleClass isKindOf "I_UAV_02_dynamicLoadout_F"):
 		{
-			_vehicle setVehicleAmmoDef 1;
-
-			// Reduce AP shells & MG ammo, reset HE shells and smoke mags
-			_vehicle addMagazineTurret ["16Rnd_120mm_HE_shells_Tracer_Red", [0]];
-			_vehicle addMagazineTurret ["SmokeLauncherMag", [0,0]];
-			_vehicle setVehicleAmmo 1.0;
+			_squad1 = call _createsquad1;
+			_squad2 = call _createsquad2;
+			_squad3 = call _createsquad3;
+			_squad4 = call _createsquad4;
 		};
-
-		// T-100 Varsuk
-		case (_vehicle isKindOf "O_MBT_02_cannon_F"):
+		case ({_vehicleClass isKindOf _x} count ["I_Heli_Transport_02_F", "I_Heli_light_03_dynamicLoadout_F", "I_Heli_light_03_unarmed_F"] > 0):
 		{
-			_vehicle setVehicleAmmoDef 1;
-
-			// Reduce all shells & MG ammo, reset smoke mags
-			_vehicle removeMagazineTurret ["2000Rnd_65x39_Belt_Green", [0]];
-			_vehicle removeMagazineTurret ["450Rnd_127x108_Ball", [0,0]];
-			_vehicle addMagazineTurret ["SmokeLauncherMag", [0,0]];
-			_vehicle setVehicleAmmo 1.0;
-		};
-
-		// MBT-52 Kuma
-		case (_vehicle isKindOf "I_MBT_03_cannon_F"):
-		{
-			_vehicle setVehicleAmmoDef 1;
-
-			// Reduce AP shells & MG ammo, reset HE shells and smoke mags
-			_vehicle removeMagazineTurret ["2000Rnd_65x39_Belt_Yellow", [0]];
-			_vehicle removeMagazineTurret ["500Rnd_127x99_mag_Tracer_Yellow", [0,0]];
-			_vehicle addMagazineTurret ["14Rnd_120mm_HE_shells_Tracer_Yellow", [0]];
-			_vehicle addMagazineTurret ["SmokeLauncherMag", [0,0]];
-			_vehicle setVehicleAmmo 1.0;
-		};
-
-		// PO-30 Orca
-		case (_vehicle isKindOf "Heli_Light_02_base_dynamicLoadout_F"):
-		{
-			// Reset all ammo
-			_vehicle setVehicleAmmoDef 1;
-		};
-
-		// Mi-48 Kajman
-		case (_vehicle isKindOf "Heli_Attack_02_base_dynamicLoadout_F"):
-		{
-			_vehicle setVehicleAmmo 1.0;
-
-			// Custom load
-			_vehicle addMagazine "250Rnd_30mm_HE_shells";
-			_vehicle addMagazine ["38Rnd_80mm_rockets", 20];
-			_vehicle addmagazine ["8Rnd_LG_scalpel", 2];
-		};
-
-		// All other helicopters
-		case (_vehicle isKindOf "Helicopter_Base_F"):
-		{
-			// Cut all ammo by half
-			_vehicle setVehicleAmmoDef 1.0;
+			_squad1 = call _createsquad1;
+			_squad2 = call _createsquad2;
+			_squad3 = call _createsquad3;
 		};
 	};
-
-	// Reset all flares to 120
-	if (_vehicleClass isKindOf "Air") then
-	{
-		{
-			if (["CMFlare", _x] call fn_findString != -1) then
-			{
-				_vehicle removeMagazinesTurret [_x, [-1]];
-			};
-		} forEach getArray (configFile >> "CfgVehicles" >> _vehicleClass >> "magazines");
-
-		_vehicle addMagazineTurret ["120Rnd_CMFlare_Chaff_Magazine", [-1]];
-	};
-
-	reload _vehicle;
-
-	_aiGroup = createGroup CIVILIAN;
-	[_aiGroup, _missionPos, _nbUnits] call createCustomGroup;
-
+	_aiGroup1 setCombatMode "RED";
 	_missionPicture = getText (configFile >> "CfgVehicles" >> _vehicleClass >> "picture");
 	_vehicleName = getText (configFile >> "CfgVehicles" >> _vehicleClass >> "displayName");
-
+	
 	_vehDeterminer = if ("AEIMO" find (_vehicleName select [0,1]) != -1) then { "An" } else { "A" };
 
-	_missionHintText = format ["%1 <t color='%3'>%2</t> has been immobilized, go get it for your team!", _vehDeterminer, _vehicleName, vehicleMissionColor];
+	_missionHintText = format ["%1 <t color='%3'>%2</t> has been immobilized, go get it for your team!", _vehDeterminer, _vehicleName, AAFMissionColor];
 };
 
 _waitUntilMarkerPos = nil;
@@ -185,4 +208,4 @@ _successExec =
 	_successHintMessage = format ["The %1 has been captured, well done.", _vehicleName];
 };
 
-_this call vehicleMissionProcessor;
+_this call AAFMissionProcessor;

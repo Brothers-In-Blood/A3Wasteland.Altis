@@ -16,54 +16,27 @@ _path = "server\missions\factoryMethods";
 attemptCompileMissions = [_path, "attemptCompileMissions.sqf"] call mf_compile;
 checkMissionVehicleLock = [_path, "checkMissionVehicleLock.sqf"] call mf_compile;
 cleanLocationObjects = [_path, "cleanLocationObjects.sqf"] call mf_compile;
-createCustomGroup = [_path, "createUnits\customGroup.sqf"] call mf_compile;
-createCustomGroup2 = [_path, "createUnits\customGroup2.sqf"] call mf_compile;
-createLargeDivers = [_path, "createUnits\largeDivers.sqf"] call mf_compile;
 createMissionLocation = [_path, "createMissionLocation.sqf"] call mf_compile;
 createMissionMarker = [_path, "createMissionMarker.sqf"] call mf_compile;
-createMissionVehicle = [_path, "createMissionVehicle.sqf"] call mf_compile;
-createMissionVehicle2 = [_path, "createMissionVehicle2.sqf"] call mf_compile;
 createOutpost = [_path, "createOutpost.sqf"] call mf_compile;
-createRandomSoldier = [_path, "createUnits\createRandomSoldier.sqf"] call mf_compile;
-createRandomSoldierC = [_path, "createUnits\createRandomSoldierC.sqf"] call mf_compile;
-createSmallDivers = [_path, "createUnits\smallDivers.sqf"] call mf_compile;
 generateMissionWeights = [_path, "generateMissionWeights.sqf"] call mf_compile;
-mission_VehicleCapture = "server\missions\mainMissions\mission_VehicleCapture.sqf" call mf_compile;
+mission_AAFVehicleCapture = "server\missions\AAFMissions\mission_VehicleCapture.sqf" call mf_compile;
+mission_NATOVehicleCapture = "server\missions\NATOMissions\mission_VehicleCapture.sqf" call mf_compile;
+mission_CSATVehicleCapture = "server\missions\CSATMissions\mission_VehicleCapture.sqf" call mf_compile;
 missionHint = [_path, "missionHint.sqf"] call mf_compile;
 moveIntoBuildings = [_path, "moveIntoBuildings.sqf"] call mf_compile;
 removeDisabledMissions = [_path, "removeDisabledMissions.sqf"] call mf_compile;
 setLocationObjects = [_path, "setLocationObjects.sqf"] call mf_compile;
 setLocationState = [_path, "setLocationState.sqf"] call mf_compile;
 setMissionState = [_path, "setMissionState.sqf"] call mf_compile;
-//Addon Missions
-createsniperGroup = [_path, "createUnits\sniperGroup.sqf"] call mf_compile;
-createsmugglerGroup = [_path, "createUnits\smugglerGroup.sqf"] call mf_compile;
-createRandomPilot = [_path, "createUnits\createRandomPilot.sqf"] call mf_compile;
-createWaitCondition = [_path, "createWaitCondition.sqf"] call mf_compile;
-createGroup1= [_path, "createUnits\Group1.sqf"] call mf_compile;
-createGroup2= [_path, "createUnits\Group2.sqf"] call mf_compile;
-createGroup3= [_path, "createUnits\Group3.sqf"] call mf_compile;
-createGroup4= [_path, "createUnits\Group4.sqf"] call mf_compile;
-createGroup5= [_path, "createUnits\Group5.sqf"] call mf_compile;
-createCSATSFDriver = [_path, "createUnits\createCSATSFDriver.sqf"] call mf_compile;
-createCSATSFGunner = [_path, "createUnits\createCSATSFGunner.sqf"] call mf_compile;
-createCSATSFCommander = [_path, "createUnits\createCSATSFCommander.sqf"] call mf_compile;
-createCSATSFAT = [_path, "createUnits\createCSATSFAT.sqf"] call mf_compile;
-createCSATSFDemo = [_path, "createUnits\createCSATSFDemo.sqf"] call mf_compile;
-createCSATSFMedic = [_path, "createUnits\createCSATSFMedic.sqf"] call mf_compile;
-createGendarmerie = [_path, "createUnits\createGendarmerie.sqf"] call mf_compile;
-createGendarmerieCommander = [_path, "createUnits\createGendarmerieCommander.sqf"] call mf_compile;
-createNATOSFAT = [_path, "createUnits\createNATOSFAT.sqf"] call mf_compile;
-createNATOSFCommander = [_path, "createUnits\createNATOSFCommander.sqf"] call mf_compile;
-createNATOSFDriver = [_path, "createUnits\createNATOSFDriver.sqf"] call mf_compile;
-createNATOSFGunner = [_path, "createUnits\createNATOSFGunner.sqf"] call mf_compile;
-createNATOSFAT = [_path, "createUnits\createNATOSFAT.sqf"] call mf_compile;
-createNATOSFSAW = [_path, "createUnits\createNATOSFSAW.sqf"] call mf_compile;
-createRandomSyndikat = [_path, "createUnits\createRandomSyndikat.sqf"] call mf_compile;
-createRandomSyndikatDemo = [_path, "createUnits\createRandomSyndikatDemo.sqf"] call mf_compile;
-createRandomSyndikatLauncher = [_path, "createUnits\createRandomSyndikatLauncher.sqf"] call mf_compile;
-createRandomSyndikatPilot = [_path, "createUnits\createRandomSyndikatPilot.sqf"] call mf_compile;
-// createLargeSyndikatroup = [_path, "createUnits\createLargeSyndikatroup.sqf"] call mf_compile;
+createMissionVehicle = [_path, "createMissionVehicle.sqf"] call mf_compile; 
+createMissionVehicle2 = [_path, "createMissionVehicle2.sqf"] call mf_compile;
+
+//New AI templates
+createsoldier = [_path, "createsoldier.sqf"] call mf_compile;
+
+//Mission Loot
+createrandomlootcrate = [_path, "createrandomlootcrate.sqf"] call mf_compile;
 
 //Function Compiles
 _path = "server\functions";

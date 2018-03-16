@@ -548,6 +548,7 @@ else
 		if (!isPlayer _x && {(toLower ((vehicleVarName _x) select [0,8])) in ["genstore","gunstore","vehstore"]}) then
 		{
 			[_x] joinSilent _storeGroup;
+			_x setCaptive true
 		};
 	} forEach entities "CAManBase";
 };

@@ -3,16 +3,16 @@
 // ******************************************************************************************
 //	@file Version: 1.0
 //	@file Name: mission_ArmedDiversquad.sqf
-//	@file Author: JoSchaap, AgentRev
+//	@file Author: JoSchaap, AgentRev, BIB_Monkey
 
 if (!isServer) exitwith {};
-#include "aquaticMissionDefines.sqf";
+#include "AAFMissionDefines.sqf";
 
-private ["_box1", "_box2", "_boxPos", "_vehicleClass", "_vehicle", "_wreck", "_drop_item", "_drugPos", "_explosivePos", "_explosive"];
+private ["_box1", "_box2", "_box3", "_box4", "_boxPos", "_vehicleClass", "_vehicle", "_wreck","_explosive"];
 
 _setupVars =
 {
-	_missionType = "Jaws Wreck";
+	_missionType = "AAF Ship Wreck";
 	_locationsArray = SunkenMissionMarkers;
 };
 
@@ -23,15 +23,15 @@ _setupObjects =
 	_wreck = createVehicle ["Land_UWreck_FishingBoat_F", _missionPos, [], 5, "None"];
 	_wreck setDir random 360;
 
-	_box1 = createVehicle ["B_supplyCrate_F", _missionPos, [], 5, "None"];
-	_box1 setDir random 360;
-	_box1 setVariable ["moveable", true, true];
-	[_box1, "Launchers_Tier_2"] call fn_refillbox;
-
-	_box2 = createVehicle ["Box_NATO_WpsSpecial_F", _missionPos, [], 5, "None"];
-	_box2 setDir random 360;
-	_box2 setVariable ["moveable", true, true];
-	[_box2, "mission_snipers"] call fn_refillbox;
+	private _BoxPos1 = [_missionPos, 3, 10,1,0,0,0] call findSafePos;
+	_box1 = [_BoxPos1, "AAF", "1", 0, 0] call createrandomlootcrate;
+	private _BoxPos2 = [_missionPos, 3, 10,1,0,0,0] call findSafePos;
+	_box2 = [_BoxPos2, "AAF", "2", 0, 0] call createrandomlootcrate;
+	private _BoxPos3 = [_missionPos, 3, 10,1,0,0,0] call findSafePos;
+	_box3 = [_BoxPos3, "AAF", "2", 0, 0] call createrandomlootcrate;
+	private _BoxPos4 = [_missionPos, 3, 10,1,0,0,0] call findSafePos;
+	_box4 = [_BoxPos4, "AAF", "3", 0, 0] call createrandomlootcrate;
+	{ _x setVariable ["R3F_LOG_disabled", true, true] } forEach [_box1, _box2, _box3, _box4];
 
 	{
 		_boxPos = getPosASL _x;
@@ -40,29 +40,61 @@ _setupObjects =
 		_x setVariable ["R3F_LOG_disabled", true, true];
 	} forEach [_box1, _box2, _wreck];
 
-	_vehicleClass = ["B_Boat_Armed_01_minigun_F", "O_Boat_Armed_01_hmg_F", "I_Boat_Armed_01_minigun_F"] call BIS_fnc_selectRandom;
-
-	// Vehicle Class, Position, Fuel, Ammo, Damage, Special
-	_vehicle = [_vehicleClass, _missionPos] call createMissionVehicle2;
-	_vehicle setPosASL _missionPos;
-	_vehicle lockDriver true;
-
-	[_vehicle, [
-		["itm", "U_B_Wetsuit", 2],
-		["itm", "U_O_Wetsuit", 2],
-		["itm", "U_I_Wetsuit", 2],
-		["itm", "V_RebreatherB", 2],
-		["itm", "G_Diving", 2],
-		["wep", "arifle_SDAR_F", 2],
-		["mag", "20Rnd_556x45_UW_mag", 8]
-	]] call processItems;
-
-	_aiGroup = createGroup CIVILIAN;
-	[_aiGroup, _missionPos] call createLargeDivers;
-
-	[_vehicle, _aiGroup] spawn checkMissionVehicleLock;
-
-	_missionPicture = getText (configFile >> "CfgVehicles" >> _vehicleClass >> "picture");
+	_vehclass1 ="I_Boat_Armed_01_minigun_F";
+	_vehclass2 ="I_Boat_Armed_01_minigun_F";
+	_aiGroup1 = createGroup CIVILIAN;
+	_aiGroup2 = createGroup CIVILIAN;
+	_aiGroup3 = createGroup CIVILIAN;
+	_veh1 = [_vehclass1, _missionPos,1,1,0,"NONE",1] call createMissionVehicle;
+	_veh2 = [_vehclass2, _missionPos,1,1,0,"NONE",1] call createMissionVehicle;
+	_vehicles = [_veh1,_veh2];
+	{
+		private _vehicle = _x;
+		private _drivers = _vehicle emptyPositions "Driver";
+		private _Commanders =  _vehicle emptyPositions "Commander";
+		private _Gunners = _vehicle emptyPositions "Gunner";
+		_aiGroup1 addVehicle _vehicle;
+		if (_drivers > 0) then
+		{
+			for "_i" from 1 to _drivers do
+			{
+				private _Driver = [_aiGroup1, _missionPos, "AAF", "Rifleman"] call createsoldier;;
+				_Driver moveInAny _vehicle;
+			};
+		};
+		if (_Commanders > 0) then
+		{
+			for "_i" from 1 to _Commanders do
+			{
+				private _Commander = [_aiGroup1, _missionPos, "AAF", "Rifleman"] call createsoldier;;
+				_Commander moveInCommander _vehicle;
+			};
+		};
+		if (_Gunners > 0) then
+		{
+			private _gunner = [_aiGroup1, _missionPos, "AAF", "Rifleman"] call createsoldier;;
+			_gunner moveInGunner _vehicle;
+		};
+		_vehicle addItemCargoGlobal ["U_I_Wetsuit", 2];
+		_vehicle addItemCargoGlobal ["V_RebreatherIA", 2];
+		_vehicle addItemCargoGlobal ["G_Diving", 2];
+		_vehicle addWeaponCargoGlobal ["arifle_SDAR_F", 2];
+		_vehicle addMagazineCargoGlobal ["20Rnd_556x45_UW_mag", 8];
+	} foreach _vehicles;
+	private _Passangers1 = _veh1 emptyPositions "Cargo";
+	private _Passangers2 = _veh2 emptyPositions "Cargo";
+	for "_i" from 1 to _Passangers1 do
+	{
+		[_aiGroup2, _missionPos, "AAF", "Diver"] call createsoldier;
+	};
+	for "_i" from 1 to _Passangers2 do
+	{
+		[_aiGroup3, _missionPos, "AAF", "Diver"] call createsoldier;
+	};
+	_aiGroup1 setCombatMode "RED";
+	_aiGroup2 setCombatMode "RED";
+	_aiGroup3 setCombatMode "RED";
+	_missionPicture = getText (configFile >> "CfgVehicles" >> _vehclass1 >> "picture");
 	_missionHintText = "We are going to need a Bigger Boat.<br/>Enemy divers are trying to recover arms and loot, go kill them and claim the loot.";
 };
 
@@ -73,7 +105,7 @@ _waitUntilCondition = nil;
 _failedExec =
 {
 	// Mission failed
-	{ deleteVehicle _x } forEach [_box1, _box2, _wreck];
+	{ deleteVehicle _x } forEach [_box1, _box2, _box3, _box4, _wreck];
 };
 
 // _vehicle is automatically deleted or unlocked in missionProcessor depending on the outcome
@@ -81,35 +113,11 @@ _failedExec =
 _successExec =
 {
 
-	{ _x setVariable ["R3F_LOG_disabled", false, true] } forEach [_box1, _box2];
+	{ _x setVariable ["R3F_LOG_disabled", false, true] } forEach [_box1, _box2, _box3, _box4];
 	{ deleteVehicle _x } forEach [_wreck];
-	_vehicle lockDriver false;
-	_vehicle setDamage 1;
+	{ _x setVariable ["cmoney", (random 10000), true] } forEach [_box1, _box2, _box3, _box4];
 
-	//Explode the boat
-	_explosive = "SatchelCharge_F" createVehicle (getPos _vehicle);
-	_explosive setDamage 1;
-
-
-_drop_item =
-{
-	private["_item", "_pos"];
-	_item = _this select 0;
-	_pos = _this select 1;
-
-	if (isNil "_item" || {typeName _item != typeName [] || {count(_item) != 2}}) exitWith {};
-	if (isNil "_pos" || {typeName _pos != typeName [] || {count(_pos) != 3}}) exitWith {};
-
-	private["_id", "_class"];
-	_id = _item select 0;
-	_class = _item select 1;
-
-	private["_obj"];
-	_obj = createVehicle [_class, _pos, [], 5, "None"];
-	_obj setPos ([_pos, [[2 + random 3,0,0], random 360] call BIS_fnc_rotateVector2D] call BIS_fnc_vectorAdd);
-	_obj setVariable ["mf_item_id", _id, true];
-};
 	_successHintMessage = "The sunken loot and money has been captured, well done.";
 };
 
-_this call aquaticMissionProcessor;
+_this call AAFMissionProcessor;

@@ -4,11 +4,11 @@
 //	@file Name: mainMissionController.sqf
 //	@file Author: AgentRev
 
-#define MISSION_CTRL_PVAR_LIST aquaticMissions
-#define MISSION_CTRL_TYPE_NAME "Aquatic"
-#define MISSION_CTRL_FOLDER "aquaticMissions"
-#define MISSION_CTRL_DELAY (["A3W_aquaticMissionDelay", 5*60] call getPublicVar)
-#define MISSION_CTRL_COLOR_DEFINE aquaticMissionColor
+#define MISSION_CTRL_PVAR_LIST AAFMissions
+#define MISSION_CTRL_TYPE_NAME "AAF"
+#define MISSION_CTRL_FOLDER "AAFMissions"
+#define MISSION_CTRL_DELAY (["A3W_AAFMissionDelay", 5*60] call getPublicVar)
+#define MISSION_CTRL_COLOR_DEFINE AAFMissionColor
 
-#include "aquaticMissions\aquaticMissionDefines.sqf"
+#include "AAFMissions\AAFMissionDefines.sqf"
 #include "missionController.sqf";

@@ -79,6 +79,9 @@ briefing = 0; // if 0, skip Continue button
 #include "addons\CHVD\dialog.hpp"
 #include "addons\GOM\dialogs\GOM_dialog_parents.hpp"
 #include "addons\GOM\dialogs\GOM_dialog_controls.hpp"
+#include "addons\VCOMAI\defines.hpp"
+#include "addons\VCOMAI\DialogDefines.hpp"
+#include "addons\VCOMAI\dialogs.hpp"
 
 class RscTitles
 {

@@ -3,18 +3,18 @@
 // ******************************************************************************************
 //	@file Version: 2
 //	@file Name: mission_Coastal_Convoy.sqf
-//	@file Author: JoSchaap / routes by Del1te - (original idea by Sanjo)
+//	@file Author: JoSchaap / routes by Del1te - (original idea by Sanjo), BIB_Monkey
 //	@file Created: 02/09/2013 11:29
 //	@file Args: none
 
 if (!isServer) exitwith {};
-#include "aquaticMissionDefines.sqf"
+#include "AAFMissionDefines.sqf"
 
-private ["_vehChoices", "_convoyVeh", "_veh1", "_veh2", "_veh3", "_createVehicle", "_vehicles", "_leader", "_speedMode", "_waypoint", "_vehicleName", "_vehicleName2", "_numWaypoints", "_box1", "_box2", "_box3"];
+private [ "_veh1", "_veh2", "_veh3", "_vehicles", "_leader", "_speedMode", "_waypoint", "_vehicleName", "_vehicleName2", "_numWaypoints", "_box1", "_box2", "_box3"];
 
 _setupVars =
 {
-	_missionType = "Coastal Patrol";
+	_missionType = "AAF Coastal Patrol";
 	_locationsArray = CoastalConvoyPaths;
 };
 
@@ -23,159 +23,88 @@ _setupObjects =
 	private ["_starts", "_startDirs", "_waypoints"];
 	call compile preprocessFileLineNumbers format ["mapConfig\convoys\%1.sqf", _missionLocation];
 
-	_vehChoices =
-	[
-		["B_Boat_Armed_01_minigun_F", "B_Heli_Transport_01_F"],
-		["O_Boat_Armed_01_hmg_F", ["O_Heli_Light_02_dynamicLoadout_F", "orcaDAGR"]],
-		["I_Boat_Armed_01_minigun_F", "I_Heli_light_03_dynamicLoadout_F"]
-	];
+	_veh1types = "I_Boat_Armed_01_minigun_F";
+	_veh2types = "I_C_Boat_Transport_02_F";
+	_veh3types = "I_Boat_Armed_01_minigun_F";
 
-	if (missionDifficultyHard) then
+	_veh1 = [_veh1types, _starts select 0,1,1,0,"NONE",1] call createMissionVehicle;
+	_veh2 = [_veh2types, _starts select 0,1,1,0,"NONE",1] call createMissionVehicle;
+	_veh3 = [_veh3types, _starts select 0,1,1,0,"NONE",1] call createMissionVehicle;
+	_vehicles = [_veh1, _veh2, _veh3];
+
+	_aiGroup1 = createGroup CIVILIAN;
 	{
-		(_vehChoices select 0) set [1, "B_Heli_Attack_01_dynamicLoadout_F"];
-		(_vehChoices select 1) set [1, "O_Heli_Attack_02_dynamicLoadout_F"];
-		(_vehChoices select 2) set [1, "O_Heli_Attack_02_dynamicLoadout_F"];
-	};
-
-	_convoyVeh = _vehChoices call BIS_fnc_selectRandom;
-
-	_veh1 = _convoyVeh select 0;
-	_veh2 = _convoyVeh select 1;
-	_veh3 = _convoyVeh select 0;
-
-	_createVehicle =
-	{
-		private ["_type", "_position", "_direction", "_variant", "_special", "_vehicle", "_soldier"];
-
-		_type = _this select 0;
-		_position = _this select 1;
-		_direction = _this select 2;
-		_variant = _type param [1,"",[""]];
-
-		if (_type isEqualType []) then
+		_vehicle = _x;
+		_position = getPos _vehicle;
+		private _drivers = _vehicle emptyPositions "Driver";
+		private _Commanders =  _vehicle emptyPositions "Commander";
+		private _Gunners = _vehicle emptyPositions "Gunner";
+		private _Passangers = _vehicle emptyPositions "Cargo";
+		if (_drivers > 0) then
 		{
-			_type = _type select 0;
-		};
-
-		_vehicle = createVehicle [_type, _position, [], 0, "FLY"];
-		_vehicle setVariable ["R3F_LOG_disabled", true, true];
-		_vehicle setVehicleReportRemoteTargets true;
-		_vehicle setVehicleReceiveRemoteTargets true;
-		_vehicle setVehicleRadar 1;
-		_vehicle confirmSensorTarget [west, true];
-		_vehicle confirmSensorTarget [east, true];
-		_vehicle confirmSensorTarget [resistance, true];
-
-
-		if (_variant != "") then
-		{
-			_vehicle setVariable ["A3W_vehicleVariant", _variant, true];
-		};
-		[_vehicle] call vehicleSetup;
-
-		_vehicle setDir _direction;
-		_aiGroup addVehicle _vehicle;
-
-		// add a driver/pilot/captain to the vehicle
-		// the little bird, orca, and hellcat do not require gunners and should not have any passengers
-		_soldier = [_aiGroup, _position] call createRandomSoldierC;
-		_soldier moveInDriver _vehicle;
- 	_soldier triggerDynamicSimulation true;
-
-		switch (true) do
-		{
-			case (_type isKindOf "Boat_Armed_01_base_F"):
+			for "_i" from 1 to _drivers do
 			{
-				// the boats need a gunner (rear) and a commander (frontgunner) aside from a driver
-				if (missionDifficultyHard) then
-				{
-					// frontgunner will be here if mission is running at hard dificulty
-					_soldier = [_aiGroup, _position] call createRandomSoldierC;
-					_soldier moveInTurret [_vehicle, [0]]; // commanderseat - front gunner
-				};
-
-				_soldier = [_aiGroup, _position] call createRandomSoldierC;
-				_soldier moveInTurret [_vehicle, [1]]; // rear gunner
-			};
-
-			case (_type isKindOf "Heli_Transport_01_base_F"):
-			{
-				// these choppers have 2 turrets so we need 2 gunners
-				_soldier = [_aiGroup, _position] call createRandomSoldierC;
-				_soldier moveInTurret [_vehicle, [1]];
-
-				_soldier = [_aiGroup, _position] call createRandomSoldierC;
-				_soldier moveInTurret [_vehicle, [2]];
-			};
-
-			case (_type isKindOf "Heli_Attack_01_base_F" || _type isKindOf "Heli_Attack_02_base_F"):
-			{
-				// these choppers need 1 gunner
-				_soldier = [_aiGroup, _position] call createRandomSoldierC;
-				_soldier moveInGunner _vehicle;
+				private _Driver = [_aiGroup1, _position, "AAF", "Rifleman"] call createsoldier;
+				_Driver moveInDriver _vehicle;
 			};
 		};
-
-		// remove flares because it overpowers AI choppers
-		if (_type isKindOf "Air") then
+		if (_Commanders > 0) then
 		{
+			for "_i" from 1 to _Commanders do
 			{
-				if (["CMFlare", _x] call fn_findString != -1) then
-				{
-					_vehicle removeMagazinesTurret [_x, [-1]];
-				};
-			} forEach getArray (configFile >> "CfgVehicles" >> _type >> "magazines");
+				private _Commander = [_aiGroup1, _position, "AAF", "Rifleman"] call createsoldier;
+				_Commander moveInCommander _vehicle;
+			};
 		};
-
-		[_vehicle, _aiGroup] spawn checkMissionVehicleLock;
-		_vehicle
-	};
-
-	_aiGroup = createGroup CIVILIAN;
-
-	_vehicles =
-	[
-		[_veh1, _starts select 0, _startdirs select 0] call _createVehicle,
-		[_veh2, _starts select 1, _startdirs select 1] call _createVehicle,
-		[_veh3, _starts select 2, _startdirs select 2] call _createVehicle
-	];
+		if (_Gunners > 0) then
+		{
+			private _gunner = [_aiGroup1, _position, "AAF", "Rifleman"] call createsoldier;
+			_gunner moveInGunner _vehicle;
+		};
+		if (_Passangers > 0) then
+		{
+			for "_i" from 1 to _Passangers do
+			{
+				private _soldierType = selectrandom ["Rifleman","Rifleman","Rifleman","Rifleman","Rifleman","Rifleman","Rifleman","Rifleman","Rifleman","Rifleman","AT","AA","SAW","SAW","SAW","Engineer","Medic","Grenedier","Engineer","Medic","Grenedier","Marksman","Marksman","Marksman"];
+				_soldier = [_aiGroup1, _position, "AAF", _soldierType] call createsoldier;
+				_soldier moveInCargo _vehicle;
+			};
+		};
+	} foreach _vehicles;
 
 	_leader = effectiveCommander (_vehicles select 0);
-	_aiGroup selectLeader _leader;
+	_aiGroup1 selectLeader _leader;
 
-	_aiGroup setCombatMode "GREEN"; // units will defend themselves
-	_aiGroup setBehaviour "SAFE"; // units feel safe until they spot an enemy or get into contact
-	_aiGroup setFormation "STAG COLUMN";
+	_aiGroup1 setCombatMode "YELLOW"; // units will defend themselves
+	_aiGroup1 setBehaviour "AWARE"; // units feel safe until they spot an enemy or get into contact
+	_aiGroup1 setFormation "STAG COLUMN";
 
-	_speedMode = if (missionDifficultyHard) then { "NORMAL" } else { "LIMITED" };
+	_speedMode = "NORMAL";
 
-	_aiGroup setSpeedMode _speedMode;
+	_aiGroup1 setSpeedMode _speedMode;
 
 	// behaviour on waypoints
 	{
-		_waypoint = _aiGroup addWaypoint [_x, 0];
+		_waypoint = _aiGroup1 addWaypoint [_x, 0];
 		_waypoint setWaypointType "MOVE";
 		_waypoint setWaypointCompletionRadius 50;
-		_waypoint setWaypointCombatMode "GREEN";
-		_waypoint setWaypointBehaviour "SAFE";
+		_waypoint setWaypointCombatMode "YELLOW";
+		_waypoint setWaypointBehaviour "AWARE";
 		_waypoint setWaypointFormation "STAG COLUMN";
 		_waypoint setWaypointSpeed _speedMode;
 	} forEach _waypoints;
 
-	_missionPos = getPosATL leader _aiGroup;
-
-	_missionPicture = getText (configFile >> "CfgVehicles" >> (_veh1 param [0,""]) >> "picture");
-	_vehicleName = getText (configFile >> "CfgVehicles" >> (_veh1 param [0,""]) >> "displayName");
-	_vehicleName2 = getText (configFile >> "CfgVehicles" >> (_veh2 param [0,""]) >> "displayName");
-
-	_missionHintText = format ["Two <t color='%3'>%1</t> are patrolling the coasts, escorted by a <t color='%3'>%2</t>.<br/>Intercept them and recover their cargo!", _vehicleName, _vehicleName2, aquaticMissionColor];
-
-	_numWaypoints = count waypoints _aiGroup;
+	_missionPos = getPosATL leader _aiGroup1;
+	_missionPicture = getText (configFile >> "CfgVehicles" >> (_veh1types param [0,""]) >> "picture");
+	_vehicleName = getText (configFile >> "CfgVehicles" >> (_veh1types param [0,""]) >> "displayName");
+	_vehicleName2 = getText (configFile >> "CfgVehicles" >> (_veh2types param [0,""]) >> "displayName");
+	_missionHintText = format ["Two <t color='%3'>%1</t> are patrolling the coasts.<br/>Intercept them and recover their cargo!", _vehicleName, _vehicleName2, AAFMissionColor];
+	_numWaypoints = count waypoints _aiGroup1;
 };
 
 _waitUntilMarkerPos = {getPosATL _leader};
 _waitUntilExec = nil;
-_waitUntilCondition = {currentWaypoint _aiGroup >= _numWaypoints};
+_waitUntilCondition = {currentWaypoint _aiGroup1 >= _numWaypoints};
 
 _failedExec = nil;
 
@@ -184,23 +113,15 @@ _failedExec = nil;
 _successExec =
 {
 	// Mission completed
-
-	_box1 = createVehicle ["Box_NATO_Wps_F", _lastPos, [], 5, "None"];
-	_box1 setDir random 360;
-	_box1 setVariable ["moveable", true, true];
-	[_box1, "mission_USSpecial"] call fn_refillbox;
-
-	_box2 = createVehicle ["Box_East_Wps_F", _lastPos, [], 5, "None"];
-	_box2 setDir random 360;
-	_box2 setVariable ["moveable", true, true];
-	[_box2, "mission_USLaunchers"] call fn_refillbox;
-
-	_box3 = createVehicle ["Box_IND_WpsSpecial_F", _lastPos, [], 5, "None"];
-	_box3 setDir random 360;
-	_box3 setVariable ["moveable", true, true];
-	[_box3, "mission_snipers"] call fn_refillbox;
-
+	_lootPos = getMarkerPos _marker;
+	for "_i" from 1 to 4 do
+	{
+		private _tier = selectrandom ["1","2","3"];
+		private _maxmoney = random 15000;
+		private _box = [_lootPos, "AAF", _tier, 0, _maxmoney] call createrandomlootcrate;
+		_box setVariable ["moveable", true, true];
+	};
 	_successHintMessage = "The patrol has been stopped, the ammo crates are yours to take. Find them near the wreck!";
 };
 
-_this call aquaticMissionProcessor;
+_this call AAFMissionProcessor;
