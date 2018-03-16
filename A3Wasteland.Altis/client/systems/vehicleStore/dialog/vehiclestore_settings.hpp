@@ -226,6 +226,6 @@ class vehshopd
 			w = 0.1173 * SZ_SCALE;
 			h = 0.040 * SZ_SCALE;
 		};
+
 	};
 };
-

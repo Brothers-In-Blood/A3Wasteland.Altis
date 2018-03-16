@@ -2,7 +2,7 @@
 // * This project is licensed under the GNU Affero GPL v3. Copyright © 2014 A3Wasteland.com *
 // ******************************************************************************************
 //	@file Name: getSellPriceList.sqf
-//	@file Author: AgentRev
+//	@file Author: AgentRev, BIB_Monkey
 
 // Returns an array in the format:
 // _x select 0 = Class
@@ -10,7 +10,7 @@
 // _x select 2 = Name
 // _x select 3 = Value
 
-#define GET_HALF_PRICE(PRICE) ((ceil ((PRICE) / 4)))
+#define GET_HALF_PRICE(PRICE) ((ceil ((PRICE) * 0.1)))
 
 private ["_obj", "_sellValue", "_objItems", "_objMags", "_objWeapons", "_weaponArray", "_class", "_container", "_allStoreMagazines", "_allGunStoreFirearms", "_allStoreItems", "_weaponEntry", "_weaponClass", "_weaponQty", "_weaponCfg", "_weaponCfgModel", "_masterCfg", "_found", "_cfgItems", "_allObjItems", "_item", "_itemClass", "_itemQty", "_itemValue", "_itemQtyArr", "_cfgCategory", "_magFullAmmo", "_magFullPrice", "_magValue", "_itemName"];
 
