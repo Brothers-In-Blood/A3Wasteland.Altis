@@ -111,8 +111,6 @@ vehicleWeapons =
 	["arifle_MXM_F", "arifle_MXM_Black_F", "arifle_MXM_khk_F", "srifle_DMR_01_F", "srifle_EBR_F"],
 	["srifle_DMR_07_blk_F", "srifle_DMR_07_hex_F", "srifle_DMR_07_ghex_F", "arifle_SPAR_03_blk_F", "arifle_SPAR_03_khk_F", "arifle_SPAR_03_snd_F"],
 	["srifle_DMR_06_camo_F", "srifle_DMR_06_olive_F", "srifle_DMR_03_F", "srifle_DMR_03_multicam_F", "srifle_DMR_03_khaki_F", "srifle_DMR_03_tan_F", "srifle_DMR_03_woodland_F", "srifle_DMR_02_F", "srifle_DMR_02_camo_F", "srifle_DMR_02_sniper_F", "srifle_DMR_05_blk_F", "srifle_DMR_05_hex_F", "srifle_DMR_05_tan_f"],
-	["srifle_LRR_LRPS_F", "srifle_LRR_camo_LRPS_F", "srifle_LRR_tna_LRPS_F"],
-	["srifle_GM6_LRPS_F", "srifle_GM6_camo_LRPS_F", "srifle_GM6_ghex_LRPS_F"],
 	["srifle_DMR_04_F", "srifle_DMR_04_tan_F"],
 	["arifle_MX_SW_F", "arifle_MX_SW_Black_F", "arifle_MX_SW_khk_F"],
 	["arifle_SPAR_02_blk_F", "arifle_SPAR_02_khk_F", "arifle_SPAR_02_snd_F"],
@@ -121,9 +119,7 @@ vehicleWeapons =
 	["MMG_02_sand_F", "MMG_02_camo_F", "MMG_02_black_F", "MMG_01_tan_F", "MMG_01_hex_F"],
 	["launch_RPG7_F"],
 	["launch_RPG32_F", "launch_RPG32_ghex_F"],
-	["launch_NLAW_F"],
-	["launch_Titan_short_F", "launch_O_Titan_short_F", "launch_I_Titan_short_F", "launch_B_Titan_short_tna_F", "launch_O_Titan_short_ghex_F"],
-	["launch_O_Titan_F", "launch_I_Titan_F", "launch_B_Titan_tna_F", "launch_O_Titan_ghex_F"]
+	["launch_NLAW_F"]
 
 ];
 
@@ -155,12 +151,8 @@ vehicleAddition =
 	["optic_AMS", "optic_AMS_khk", "optic_AMS_snd"],
 	["optic_LRPS", "optic_LRPS_ghex_F", "optic_LRPS_tna_F"],
 	["optic_NVS"],
-	["optic_tws"],
-	["optic_tws_mg"],
-	["optic_Nightstalker"],
 	["acc_flashlight", "acc_pointer_IR"],
-	["MiniGrenade", "HandGrenade"],
-	["APERSTripMine_Wire_mag", "APERSBoundingMine_Range_mag", "APERSMine_Range_mag", "ClaymoreDirectionalMine_Remote_mag", "SLAMDirectionalMine_Wire_mag", "ATMine_Range_mag", "DemoCharge_Remote_mag", "SatchelCharge_Remote_mag"]
+	["MiniGrenade", "HandGrenade"]
 	
 ];
 
