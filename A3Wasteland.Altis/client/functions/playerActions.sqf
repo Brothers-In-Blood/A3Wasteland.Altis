@@ -18,13 +18,15 @@
 	["<img image='client\icons\cancel.paa'/> Hide Body", "client\actions\hide.sqf", [], 1, false, false, "", "!isNull cursorObject && !alive cursorObject && {cursorObject isKindOf 'Man' && player distance cursorObject <= (sizeOf typeOf cursorObject / 3) max 2}"],
 	//Take Gear
 	["<img image='client\icons\cancel.paa'/> Take Gear", "client\actions\TakeGear.sqf", [], 1, false, false, "", "!isNull cursorObject && !alive cursorObject && {cursorObject isKindOf 'Man' && player distance cursorObject <= (sizeOf typeOf cursorObject / 3) max 2} && side player != west && side player != east"],
+	//Put on Uniform
+	["<img image='client\icons\cancel.paa'/> Put on Uniform", "client\actions\PutOnUniform.sqf", [], 1, false, false, "", "!isNull cursorObject && {cursorObject isKindOf 'Item_Base_F' && player distance cursorObject <= (sizeOf typeOf cursorObject / 3) max 2} && side player != west && side player != east"],
 	//Re-initialize UAV
 	["Re-Initilize UAV", "client\actions\reinitializeUAV.sqf", [], 1, false, false, "", "{_x in ['B_UavTerminal','O_UavTerminal','I_UavTerminal']} count assignedItems player > 0 && {cursorTarget iskindof _x} count ['UAV_02_base_F', 'UAV_04_base_F', 'UAV_03_base_F', 'UGV_01_base_F', 'StaticWeapon', 'UAV_05_Base_F'] >0"],
 	//Disable UAV
 	["Disable UAV", "client\actions\disableUAV.sqf", [], 1, false, false, "", "{_x in ['B_UavTerminal','O_UavTerminal','I_UavTerminal']} count assignedItems player > 0 && {cursorTarget iskindof _x} count ['UAV_02_base_F', 'UAV_04_base_F', 'UAV_03_base_F', 'UGV_01_base_F', 'StaticWeapon', 'UAV_05_Base_F'] >0"],
 	//Attach Static Weapon To Vehicle
 	["Attach To Vehicle", "client\actions\AttachtoVehicle.sqf", [], -10, false, false, "", "(cursorTarget iskindof 'StaticWeapon' || cursorTarget iskindof 'Reammobox_F')&& !(cursorTarget getVariable ['Attached', false])"],
-	// //Dettach Static Object To Vehicle
+	//Dettach Static Object To Vehicle
 	["Dettach From Vehicle", "client\actions\DetachFromVehicle.sqf", [], -10, false, false, "", "cursorTarget iskindof 'Car_F' && cursorTarget getVariable ['Attached', false]"],
 	//Push Land Vehicle
 	["Push vehicle", "server\functions\pushVehicle.sqf", [2.5, true], 1, false, false, "", "[2.5] call canPushVehicleOnFoot"],
