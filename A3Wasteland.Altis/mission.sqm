@@ -46713,8 +46713,6 @@ class Mission
 			flags=5;
 			class Attributes
 			{
-				init="[ { while {true} do { playSound3D [""A3\Sounds_F\sfx\missions\bobcat_engine_loop.wss"", gen2, false, getPosASL gen2, 1, 1, 150];  sleep 7.4;  };  }, ""BIS_fnc_SPAWN"", true, false] call BIS_fnc_MP;";
-				name="gen2";
 				disableSimulation=1;
 			};
 			id=13265;
@@ -50449,8 +50447,6 @@ class Mission
 			flags=5;
 			class Attributes
 			{
-				init="[ { while {true} do { playSound3D [""A3\Sounds_F\sfx\missions\bobcat_engine_loop.wss"", gen, false, getPosASL gen, 1, 1, 150];  sleep 7.4;  };  }, ""BIS_fnc_SPAWN"", true, false] call BIS_fnc_MP;";
-				name="gen";
 				disableSimulation=1;
 			};
 			id=13357;
