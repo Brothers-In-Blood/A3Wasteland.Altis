@@ -71,21 +71,44 @@ if (unitIsUAV _obj) then
 };
 
 _owner = _obj getVariable ["ownerUID", ""];
-if (_obj iskindof "Static") then {
+if (_obj iskindof "Static") then 
+{
 	{ _variables pushBack [_x select 0, _obj getVariable _x] } forEach
-		[
-			["bis_disabled_Door_1", 0],
-			["bis_disabled_Door_2", 0],
-			["bis_disabled_Door_3", 0],
-			["bis_disabled_Door_4", 0],
-			["bis_disabled_Door_5", 0],
-			["bis_disabled_Door_6", 0],
-			["bis_disabled_Door_7", 0],
-			["bis_disabled_Door_8", 0],
-			["Moveable", false],
-			["Baselockenabled", false],
-			["LockedDown", false]
-		];
+	[
+		["bis_disabled_Door_1", 0],
+		["bis_disabled_Door_2", 0],
+		["bis_disabled_Door_3", 0],
+		["bis_disabled_Door_4", 0],
+		["bis_disabled_Door_5", 0],
+		["bis_disabled_Door_6", 0],
+		["bis_disabled_Door_7", 0],
+		["bis_disabled_Door_8", 0],
+		["Moveable", false],
+		["Baselockenabled", false],
+		["LockedDown", false],
+		["password_door_1", ""],
+		["password_door_2", ""],
+		["password_door_3", ""],
+		["password_door_4", ""],
+		["password_door_5", ""],
+		["password_door_6", ""],
+		["password_door_7", ""],
+		["password_door_8", ""],
+		["password_door_9", ""],
+		["password_door_10", ""],
+		["password_door_11", ""],
+		["password_door_12", ""],
+		["password_door_13", ""],
+		["password_door_14", ""],
+		["password_door_15", ""],
+		["password_door_16", ""],
+		["password_door_17", ""],
+		["password_door_18", ""],
+		["password_door_19", ""],
+		["password_door_20", ""],
+		["password_door_21", ""],
+		["password_door_22", ""]
+	];
 };
 
 if (_obj iskindof "thing") then 

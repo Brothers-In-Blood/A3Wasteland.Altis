@@ -1,14 +1,37 @@
 //	@file Version: 1
 //	@file Name: BoS_hackBase.sqf
-//	@file Author: LouD (based on objectLockStateMachine.sqf by [404] Costlyy)
+//	@file Author: LouD (based on objectLockStateMachine.sqf by [404] Costlyy), BIB_Monkey
 //	@file Created: 22 march 2015
-#define BoS_coolDownTimer (["BoS_coolDownTimer", 900] call getPublicVar)
+
+private ["_totalDuration", "_checks", "_success"];
 
 if(mutexScriptInProgress) exitWith {
 	player globalChat "The current operation isn't finished !";
 };
 
-private ["_totalDuration", "_checks", "_success"];
+private _manager = cursorObject;
+private _ManagerLevel = _manager getVariable ["ManagerLevel", 1];
+private _hacktime = 20;
+switch (_ManagerLevel) do
+{
+	case (2):
+	{
+		_hacktime = 25;
+	};
+	case (3):
+	{
+		_hacktime = 30;
+	};
+	case (4):
+	{
+		_hacktime = 35;
+	};
+	case (5):
+	{
+		_hacktime = 45;
+	};
+};
+
 
 mutexScriptInProgress = true;
 _totalDuration = BoS_coolDownTimer;
@@ -21,7 +44,7 @@ _checks =
 
 	switch (true) do
 	{
-		case ((player distance cursorObject) > 5): { _text = "Hacking cancelled!" };
+		case ((player distance _manager) > 5): { _text = "Hacking cancelled!" };
 		case (doCancelAction): { doCancelAction = false; _text = "Hacking cancelled!" };
 		case (vehicle player != player): { _text = "Action failed! You can't do this in a vehicle" };
 		default
@@ -34,13 +57,13 @@ _checks =
 	[_failed, _text];
 };
 
-_success = [_totalDuration, "AinvPknlMstpSlayWrflDnon_medic", _checks, [cursorObject]] call a3w_actions_start;
+_success = [_hacktime, "AinvPknlMstpSlayWrflDnon_medic", _checks, [_manager]] call a3w_actions_start;
 
 if (_success) then
 {
-	cursorObject setVariable ["lockDown", false, true];
-	cursorObject setVariable ["password", "12345", true];
-	["Base Re-Locker is hacked, the Lock Down is removed and the password is set to 12345.", 5] call mf_notify_client;
+	_manager setVariable ["lockDown", false, true];
+	_manager setVariable ["password", "12345", true];
+	["Base Manager is hacked, the Lock Down is removed and the password is set to 12345.", 5] call mf_notify_client;
 };
 
 mutexScriptInProgress = false;
