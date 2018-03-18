@@ -102,3 +102,4 @@ if (hasInterface || isServer) then
 	[] execVM "addons\Crater_Cleaner\cratercleaner.sqf";
 	[] execVM "addons\VCOMAI\init.sqf";
 };
+setTerrainGrid 12.5;
