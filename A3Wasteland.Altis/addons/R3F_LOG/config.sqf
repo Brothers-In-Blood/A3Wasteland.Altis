@@ -378,6 +378,8 @@ R3F_LOG_CFG_can_be_transported_cargo = R3F_LOG_CFG_can_be_transported_cargo +
 	["Tank", 250],
 	["StaticWeapon", 5],
 	//Child Classes
+	["Slingload_base_F", 1000],
+	["CargoNet_01_ammo_base_F", 3],
 	["APC_Tracked_01_base_F", 200],
 	["APC_Tracked_02_base_F", 200],
 	["APC_Tracked_03_base_F", 200],
@@ -935,7 +937,6 @@ R3F_LOG_CFG_can_be_transported_cargo = R3F_LOG_CFG_can_be_transported_cargo +
 	["Land_Statue_01_F", 5],
 	["Land_Pedestal_02_F", 5],
 	["Land_Monument_01_F", 20],
-	["Slingload_base_F", 1000],
 	["B_SAM_System_02_F", 20],
 	["B_SAM_System_01_F", 20],
 	["B_AAA_System_01_F", 20]
