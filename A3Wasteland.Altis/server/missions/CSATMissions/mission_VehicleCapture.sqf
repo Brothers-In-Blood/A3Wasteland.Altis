@@ -9,8 +9,7 @@
 if (!isServer) exitwith {};
 #include "CSATMissionDefines.sqf";
 
-private ["_vehicle", "_vehicleName", "_vehDeterminer"];
-
+private ["_vehicle", "_vehicleName", "_vehDeterminer", "_minefield"];
 // setupVars must be defined in the top mission file
 
 _setupObjects =
@@ -24,6 +23,8 @@ _setupObjects =
 	_vehicle = [_vehicleClass, _spawnPos] call createMissionVehicle;
 	_vehicle setDamage _randomDamage;
 	_vehicle setFuel _randomFuel;
+	_vehicle lock 2;
+	_vehicle setVariable ["R3F_LOG_disabled", true, true];
 
 	_createsquad1 =
 	{
@@ -194,10 +195,19 @@ _setupObjects =
 	_aiGroup1 setCombatMode "RED";
 	_missionPicture = getText (configFile >> "CfgVehicles" >> _vehicleClass >> "picture");
 	_vehicleName = getText (configFile >> "CfgVehicles" >> _vehicleClass >> "displayName");
-	
 	_vehDeterminer = if ("AEIMO" find (_vehicleName select [0,1]) != -1) then { "An" } else { "A" };
-
 	_missionHintText = format ["%1 <t color='%3'>%2</t> has been immobilized, go get it for your team!", _vehDeterminer, _vehicleName, CSATMissionColor];
+	_mine1 = createvehicle ["ATMine", [(_missionPos select 0) -50 + (random 100),(_missionPos select 1) -50 + (random 100),0],[],0,"NONE"];
+	_mine2 = createvehicle ["ATMine", [(_missionPos select 0) -50 + (random 100),(_missionPos select 1) -50 + (random 100),0],[],0,"NONE"];
+	_mine3 = createvehicle ["ATMine", [(_missionPos select 0) -50 + (random 100),(_missionPos select 1) -50 + (random 100),0],[],0,"NONE"];
+	_mine4 = createvehicle ["ATMine", [(_missionPos select 0) -50 + (random 100),(_missionPos select 1) -50 + (random 100),0],[],0,"NONE"];
+	_mine5 = createvehicle ["ATMine", [(_missionPos select 0) -50 + (random 100),(_missionPos select 1) -50 + (random 100),0],[],0,"NONE"];
+	_mine6 = createvehicle ["ATMine", [(_missionPos select 0) -50 + (random 100),(_missionPos select 1) -50 + (random 100),0],[],0,"NONE"];
+	_mine7 = createvehicle ["ATMine", [(_missionPos select 0) -50 + (random 100),(_missionPos select 1) -50 + (random 100),0],[],0,"NONE"];
+	_mine8 = createvehicle ["ATMine", [(_missionPos select 0) -50 + (random 100),(_missionPos select 1) -50 + (random 100),0],[],0,"NONE"];
+	_mine9 = createvehicle ["ATMine", [(_missionPos select 0) -50 + (random 100),(_missionPos select 1) -50 + (random 100),0],[],0,"NONE"];
+	_mine10 = createvehicle ["ATMine", [(_missionPos select 0) -50 + (random 100),(_missionPos select 1) -50 + (random 100),0],[],0,"NONE"];
+	_minefield = [_mine1,_mine2,_mine3,_mine4,_mine5,_mine6,_mine7,_mine8,_mine9,_mine10];
 };
 
 _waitUntilMarkerPos = nil;
@@ -208,6 +218,7 @@ _failedExec =
 {
 	// Mission failed
 	deleteVehicle _vehicle;
+	{ deleteVehicle _x } foreach [_mine1,_mine2,_mine3,_mine4,_mine5,_mine6,_mine7,_mine8,_mine9,_mine10];
 };
 
 _successExec =
@@ -215,6 +226,7 @@ _successExec =
 	// Mission completed
 	_vehicle lock 1;
 	_vehicle setVariable ["R3F_LOG_disabled", false, true];
+	{ deleteVehicle _x } foreach [_mine1,_mine2,_mine3,_mine4,_mine5,_mine6,_mine7,_mine8,_mine9,_mine10];
 
 	_successHintMessage = format ["The %1 has been captured, well done.", _vehicleName];
 };

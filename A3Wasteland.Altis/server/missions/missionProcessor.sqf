@@ -19,6 +19,7 @@ _aiGroup1 = grpNull;
 _aiGroup2 = grpNull;
 _aiGroup3 = grpNull;
 _aiGroup4 = grpNull;
+_minefield = [];
 
 if (!isNil "_setupVars") then { call _setupVars };
 
@@ -197,7 +198,15 @@ if (_failed) then
 			};
 		} forEach _vehicles;
 	};
-
+	if (!isNil "_minefield" && {typeName _minefield == "ARRAY"}) then
+	{
+		{
+			if (!isNil "_x" && {typeName _x == "OBJECT"}) then
+			{
+				deleteVehicle _x;
+			};
+		} forEach _minefield;
+	};
 	[
 		"Objective Failed",
 		_missionType,
@@ -250,7 +259,15 @@ else
 			};
 		} forEach _vehicles;
 	};
-
+	if (!isNil "_minefield" && {typeName _minefield == "ARRAY"}) then
+	{
+		{
+			if (!isNil "_x" && {typeName _x == "OBJECT"}) then
+			{
+				deleteVehicle _x;
+			};
+		} forEach _minefield;
+	};
 	[
 		"Objective Complete",
 		_missionType,
