@@ -3,7 +3,7 @@
 // ******************************************************************************************
 /*********************************************************#
 # @@ScriptName: territoryActivityHandler_2.sqf
-# @@Author: Nick 'Bewilderbeest' Ludlam <bewilder@recoil.org>
+# @@Author: Nick 'Bewilderbeest' Ludlam <bewilder@recoil.org>, BIB_Monkey
 # @@Create Date: 2013-09-15 19:33:17
 # @@Modify Date: 2013-09-15 20:15:37
 # @@Function:
@@ -13,15 +13,61 @@
 
 diag_log format["A3W_fnc_territoryActivityHandler called with %1", _this];
 
-if (typeName _this == "ARRAY" && {count _this >= 1}) then {
-	//_msg = _this select 0;
-	_money = 0; if (count _this >= 2) then { _money = _this select 1; };
-
-	//titleText [_msg, "plain down", 0.5];
-	if (_money > 0) then {
-		player setVariable ["cmoney", (player getVariable ["cmoney", 0]) + _money, true];
+if (typeName _this == "ARRAY" && {count _this >= 1}) then 
+{
+	private _justPlayers = (allPlayers - entities "HeadlessClient_F");
+	private _CountAll = count _justPlayers;
+	// player globalChat format ["Players online %1", _CountAll];
+	private _CountEnemies = player countEnemy _justPlayers;
+	// player globalChat format ["Enemies online %1", _CountEnemies];
+	private _countGroup = count units group player;
+	// player globalChat format ["Player Group Count %1", _countGroup];
+	private _multiplier = 1;
+	private _canPayout = false;
+	{
+		private _marker = _x;
+		if (["TERRITORY_", _marker] call fn_startsWith) then
+		{
+			private _playerPOS = getPos player;
+			private _markerPOS = getMarkerPos _marker;
+			private _distance = _playerPOS distance2D _markerPOS;
+			// player globalChat format ["Distance to cap point %1", _distance];
+			if (_distance <= 3000) then
+			{
+				_canPayout = true;
+			};
+		};
+	} forEach allMapMarkers;
+	// player globalChat format ["Can Payout = %1", _canPayout];
+	if (_canPayout) then
+	{
+		_money = 0; 
+		if (count _this >= 2) then { _money = _this select 1; };
+		if (playerside == resistance ) then
+		{
+			if (_CountAll > _countGroup) then
+			{
+				_multiplier = _CountAll - _countGroup;
+				// player globalChat format ["Multiplier = %1", _multiplier];
+			};
+		}
+		else
+		{
+			if (_CountEnemies > 0) then
+			{
+				_multiplier = _CountEnemies;
+				// player globalChat format ["Multiplier = %1", _multiplier];
+			};
+		};
+		_money = _money * _multiplier;
+		// player globalChat format ["Payout = %1", _money];
+		if (_money > 0) then 
+		{
+			player setVariable ["cmoney", (player getVariable ["cmoney", 0]) + _money, true];
+		};
+	}
+	else
+	{
+		titletext ["Your are more then 3km from the closest territory. Payout impossible", "PLAIN DOWN"];
 	};
-
-	//playSound 'FD_Finish_F'; // Nice sound effect to draw players attention to the notification
 };
-
