@@ -2,7 +2,7 @@
 // * This project is licensed under the GNU Affero GPL v3. Copyright © 2014 A3Wasteland.com *
 // ******************************************************************************************
 //	@file Name: territoryPayroll.sqf
-//	@file Author: AgentRev
+//	@file Author: AgentRev, BIB_Monkey
 
 if (!isServer) exitWith {};
 
@@ -12,8 +12,9 @@ _territoryCapped = false;
 
 while {true} do
 {
-	_justPlayers = count (allPlayers - entities "HeadlessClient_F");
-	_moneyAmount = _justPlayers * _moneyMultiplier;
+	// _justPlayers = count (allPlayers - entities "HeadlessClient_F");
+	// _moneyAmount = _justPlayers * _moneyMultiplier;
+	_moneyAmount = _moneyMultiplier;
 	if (_territoryCapped) then
 	{
 		sleep _timeInterval;
