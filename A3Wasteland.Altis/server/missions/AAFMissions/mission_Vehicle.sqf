@@ -51,6 +51,7 @@ _setupVars =
 	{
 		_locationsArray = MissionSpawnMarkers;
 	};
+	
 };
 
 _this call mission_AAFVehicleCapture;

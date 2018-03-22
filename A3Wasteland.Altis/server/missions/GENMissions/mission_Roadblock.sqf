@@ -75,7 +75,6 @@ _successExec =
 	};
 	{ _x setVariable ["R3F_LOG_disabled", false, true]} forEach [_barGate, _bunker1, _bunker2];
 	{_x setVariable ["Moveable", true, true]} forEach [_barGate, _bunker1, _bunker2];
-	{ _x setVariable ["allowDamage", true, true]} forEach [_obj1, _obj2];
 	_successHintMessage = format ["The roadblock has been dismantled."];
 };
 _this call GENMissionProcessor;

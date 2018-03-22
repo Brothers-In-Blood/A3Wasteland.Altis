@@ -83,7 +83,7 @@ _successExec =
 		 private _obj = _x;
 		 if (_obj isKindOf "ReammoBox_F") then
 		 {
-			_obj setvariable ["cmoney", (random 10000), true];
+			_obj setvariable ["cmoney",ceil (random 10000), true];
 		 };
 	} forEach _objects;
 	[_locationsArray, _missionLocation, _objects] call setLocationObjects;

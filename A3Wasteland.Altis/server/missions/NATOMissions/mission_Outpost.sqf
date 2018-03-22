@@ -78,12 +78,13 @@ _successExec =
 {
 	// Mission complete
 	{ _x setVariable ["R3F_LOG_disabled", false, true] } forEach _objects;
+	{ _x setVariable ["Moveable", true, true] } forEach _objects;
 	[_locationsArray, _missionLocation, _objects] call setLocationObjects;
 	{
 		 private _obj = _x;
 		 if (_obj isKindOf "ReammoBox_F") then
 		 {
-			_obj setvariable ["cmoney", (random 10000), true];
+			_obj setvariable ["cmoney",ceil (random 10000), true];
 		 };
 	} forEach _objects;
 
