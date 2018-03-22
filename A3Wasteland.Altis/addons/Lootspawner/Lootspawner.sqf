@@ -30,8 +30,8 @@ _tmpTstPlace = [14730, 16276, 0];   //Coord's, in [x,y,z] of a preferably flat a
 //-------------- A VALUE OF '0' RESULTS IN NO LOOT FOR THIS CLASS AND TYPE ----------------
 spawnClassChance_list =
 [
-	[1, 1, 1, 1, 0.25], 	// civil
-	[1, 1, 1, 1, 0.25],  	// military
+	[1, 1, 1, 1, 0], 	// civil
+	[1, 1, 1, 1, 0.05],  	// military
 	[1, 1, 1, 1, 0], 		// industrial
 	[1, 1, 1, 1, 0]       	// research
 ];
