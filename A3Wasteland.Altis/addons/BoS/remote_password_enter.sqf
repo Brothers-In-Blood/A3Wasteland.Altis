@@ -16,7 +16,7 @@ createDialog "AF_Keypad";
 
 waitUntil {!(isNil "OutputText")};
 
-if (OutputText == _object getVariable ["password", ""]) then {
+if (OutputText == _Object getVariable [format ["password_%1", _Door], ""] && _Object getVariable [format ["password_%1", _Door], ""] != "") then {
 	execVM "addons\BoS\BoS_Remote_coownerMenu.sqf";	
 	//[format ["Doors opened for %1 seconds ",DURATION], 5] call mf_notify_client;
 }else{

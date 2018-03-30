@@ -44,12 +44,14 @@ private _price = _ownedObjects * 500;
 
 
 
-if (isNil "reLockedObjectMapMarkers") then {
+if (isNil "reLockedObjectMapMarkers") then 
+{
 	// This is the global we use to keep track of map markers
 	reLockedObjectMapMarkers = [];
 };
 
-if (count reLockedObjectMapMarkers > 0) then {
+if (count reLockedObjectMapMarkers > 0) then 
+{
 	{
 		deleteMarkerLocal _x;
 	} forEach reLockedObjectMapMarkers;
