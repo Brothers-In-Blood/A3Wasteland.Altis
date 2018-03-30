@@ -4,7 +4,7 @@
 //	@file Created:
 
 
-private _manager = cursorObject;
+private _manager = nearestObject [player, "Land_SatellitePhone_F"];
 private _lockdown = false;
 //Get manager level
 private _ManagerLevel = _manager getVariable ["ManagerLevel", 1];

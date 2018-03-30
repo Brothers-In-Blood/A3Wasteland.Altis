@@ -9,7 +9,7 @@ if(mutexScriptInProgress) exitWith {
 	player globalChat "The current operation isn't finished !";
 };
 
-private _manager = cursorObject;
+private _manager =  nearestObject [player, "Land_SatellitePhone_F"];
 private _ManagerLevel = _manager getVariable ["ManagerLevel", 1];
 private _hacktime = 20;
 switch (_ManagerLevel) do
