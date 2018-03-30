@@ -1,5 +1,5 @@
 //	@file Name: vehicleManagerHC.sqf
-//	@file Author: AgentRev, BIB_Monkey
+//	@file Author: AgentRev
 
 // This script will massively increase server FPS for missions with a lot of vehicles and players.
 // It must be spawned or execVM'd once on the headless client
@@ -13,7 +13,7 @@
 #define MIN_INIT_TIME 60
 #define LOGGING_INTERVAL (5*60)
 #define DISABLE_DISTANCE_VEHICLE 2000
-#define DISABLE_DISTANCE_THING 1
+#define DISABLE_DISTANCE_THING 1000
 
 scriptName "vehicleManagerHC";
 
@@ -43,9 +43,10 @@ A3W_vehicleManagerHC =
 
 	switch (true) do
 	{
-		case (_vehicle isKindOf "AllVehicles"):								{ _minDist = DISABLE_DISTANCE_VEHICLE };
-		case ({_vehicle isKindOf _x} count ["Thing", "Static"]>0):			{ _minDist = DISABLE_DISTANCE_THING };
-		default																{ breakOut "vehicleManagerCall" };
+		case (_vehicle isKindOf "Man"):          { breakOut "vehicleManagerCall" };
+		case (_vehicle isKindOf "AllVehicles"):  { _minDist = DISABLE_DISTANCE_VEHICLE };
+		case (_vehicle isKindOf "Thing"):        { _minDist = DISABLE_DISTANCE_THING };
+		default                                  { breakOut "vehicleManagerCall" };
 	};
 
 	_tryEnable = true;
