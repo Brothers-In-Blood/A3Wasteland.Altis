@@ -18,8 +18,10 @@ if (typeName _this == "ARRAY" && {count _this >= 1}) then
 	private _justPlayers = (allPlayers - entities "HeadlessClient_F");
 	private _CountAll = count _justPlayers;
 	// player globalChat format ["Players online %1", _CountAll];
-	private _CountEnemies = player countEnemy _justPlayers;
-	// player globalChat format ["Enemies online %1", _CountEnemies];
+	private _CountOpfor = east countside _justPlayers;
+	private _CountBlufor = west countside _justPlayers;
+	// player globalChat format ["Blufor online %1", _CountBlufor];
+	// player globalChat format ["Opfor online %1", _CountOpfor];
 	private _countGroup = count units group player;
 	// player globalChat format ["Player Group Count %1", _countGroup];
 	private _multiplier = 1;
@@ -48,17 +50,24 @@ if (typeName _this == "ARRAY" && {count _this >= 1}) then
 			if (_CountAll > _countGroup) then
 			{
 				_multiplier = _CountAll - _countGroup;
-				// player globalChat format ["Multiplier = %1", _multiplier];
-			};
-		}
-		else
-		{
-			if (_CountEnemies > 0) then
-			{
-				_multiplier = _CountEnemies;
-				// player globalChat format ["Multiplier = %1", _multiplier];
+				
 			};
 		};
+		if (playerside == west) then
+		{
+			if (_CountAll > _CountBlufor) then
+			{
+				_multiplier = _CountAll - _CountBlufor;
+			};
+		};
+		if (playerside == east) then
+		{
+			if (_CountAll > _CountOpfor) then
+			{
+				_multiplier = _CountAll - _CountOpfor;
+			};
+		};
+		// player globalChat format ["Multiplier = %1", _multiplier];
 		_money = _money * _multiplier;
 		// player globalChat format ["Payout = %1", _money];
 		if (_money > 0) then 
