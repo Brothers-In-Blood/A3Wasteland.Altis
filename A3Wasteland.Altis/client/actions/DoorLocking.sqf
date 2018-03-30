@@ -23,7 +23,7 @@ switch (_Action) do
 			OutputText = nil;
 			createDialog "AF_Keypad";
 			waitUntil {!(isNil "OutputText")};
-			if (OutputText == _Object getVariable [format ["password_%1", _Door], ""]) then 
+			if (OutputText == _Object getVariable [format ["password_%1", _Door], ""] && _Object getVariable [format ["password_%1", _Door], ""] != "") then 
 			{
 				_Object setVariable [format ["bis_disabled_%1",_Door], 1, true];	
 			}
@@ -45,7 +45,7 @@ switch (_Action) do
 			OutputText = nil;
 			createDialog "AF_Keypad";
 			waitUntil {!(isNil "OutputText")};
-			if (OutputText == _Object getVariable [format ["password_%1", _Door], ""]) then 
+			if (OutputText == _Object getVariable [format ["password_%1", _Door], ""] && _Object getVariable [format ["password_%1", _Door], ""] != "") then 
 			{
 				_Object setVariable [format ["bis_disabled_%1",_Door], 0, true];	
 			}
