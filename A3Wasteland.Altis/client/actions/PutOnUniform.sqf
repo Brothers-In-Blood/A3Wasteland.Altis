@@ -5,18 +5,12 @@ Purpose: Allow player to wear cross faction uniform, when placed on the ground
 */
 
 private _target = cursorObject;
-private _groundUni = typeof _target;
-private _uniform = [_groundUni, 5] call BIS_fnc_trimString;
-player globalchat _uniform;
-_isUniform = false;
+private _uniform = "";
+if ( typeName ((getItemCargo _target) select 0 select 0) == "STRING") then
 {
-	_check = _x select 1;
-	if (_uniform == _check) then
-	{
-		_isUniform = true;
-	};
-} foreach call uniformArray;
-if (_isUniform) then
+	_uniform = (getItemCargo _target) select 0 select 0;
+};
+if (_uniform iskindof ['Uniform_Base', configfile >> 'CfgWeapons']) then
 {
 	deleteVehicle _target;
 	private _playerUniformItems = uniformItems player;
