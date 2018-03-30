@@ -62,12 +62,12 @@ switch (true) do
 	case (_vehClass isKindOf "Man"):
 	{
 		_time = 5;
-		_money = 500;
+		_money = ceil random  1000;
 	};
 	default // Everything else
 	{
 		_time = 5;
-		_money = 500;
+		_money = 0;
 	};
 };
 
