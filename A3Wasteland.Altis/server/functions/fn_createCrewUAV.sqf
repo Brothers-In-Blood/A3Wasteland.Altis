@@ -4,7 +4,7 @@
 //	@file Name: fn_createCrewUAV.sqf
 //	@file Author: AgentRev
 
-params [["_uav",objNull,[objNull]], ["_side",sideUnknown,[sideUnknown]], ["_skipCreate",false,[false]], ["_autonomous",nil,[false]]];
+params [["_uav",objNull,[objNull]], ["_side",civilian,[civilian]], ["_skipCreate",true,[true]], ["_autonomous",nil,[false]]];
 
 if (!unitIsUAV _uav) exitWith { grpNull };
 
@@ -50,8 +50,8 @@ else
 	_uav setAutonomous _autonomous;
 };
 
-if !(_uav isKindOf "StaticWeapon") then { _grp setCombatMode "BLUE" }; // hold fire to prevent auto-teamkill shenanigans
-(crew _uav) doWatch objNull; // stop aiming turret at player
+// if !(_uav isKindOf "StaticWeapon") then { _grp setCombatMode "BLUE" }; // hold fire to prevent auto-teamkill shenanigans
+// (crew _uav) doWatch objNull; // stop aiming turret at player
 _uav addRating 1e11;
 
 _uav spawn
