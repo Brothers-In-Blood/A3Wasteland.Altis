@@ -4,7 +4,7 @@
 //	@file Name: mission_HostileJet.sqf
 //	@file Author: JoSchaap, AgentRev, LouD, BIB_Monkey
 
-if (!isServer) exitwith {};
+// if (!isServer && hasinterface) exitWith {};
 #include "CSATMissionDefines.sqf";
 
 private ["_planeChoices", "_convoyVeh", "_veh1", "_vehicles", "_leader", "_speedMode", "_waypoint", "_vehicleName", "_numWaypoints", "_cash", "_Boxes1", "_currBox1", "_Boxes2", "_currBox2", "_Box1", "_Box2"];
@@ -20,7 +20,7 @@ _setupObjects =
 	_missionPos = markerPos (((call cityList) call BIS_fnc_selectRandom) select 0);
 
 	_veh1types = selectrandom ["O_T_VTOL_02_vehicle_F","O_T_VTOL_02_infantry_F"];
-	_veh1 = [_veh1types, _missionPos,1,1,0,"Fly"] call createMissionVehicle;
+	_veh1 = [_veh1types, _missionPos,1,1,0,1000] call createMissionVehicle;
 	_aiGroup1 = createGroup CIVILIAN;
 	
 	_vehicles = [_veh1];

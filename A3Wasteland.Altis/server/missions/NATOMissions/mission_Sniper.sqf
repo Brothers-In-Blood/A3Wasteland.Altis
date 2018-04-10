@@ -4,7 +4,7 @@
 //	@file Name: mission_Sniper.sqf
 //	@file Author: JoSchaap, AgentRev, LouD, BIB_Monkey
 
-if (!isServer) exitwith {};
+// if (!isServer && hasinterface) exitWith {};
 #include "NATOMissionDefines.sqf";
 private _box1 = "";
 private _box2 = "";

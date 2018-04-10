@@ -6,7 +6,7 @@
 //	@file Author: [404] Deadbeat, [404] Costlyy, JoSchaap, AgentRev, BIB_Monkey
 //	@file Created: 08/12/2012 15:19
 
-if (!isServer) exitwith {};
+// if (!isServer && hasinterface) exitWith {};
 #include "AAFMissionDefines.sqf";
 
 private ["_vehicle", "_vehicleName", "_vehDeterminer", "_minefield"];

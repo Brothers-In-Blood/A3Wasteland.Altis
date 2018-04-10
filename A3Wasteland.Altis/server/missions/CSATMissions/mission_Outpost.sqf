@@ -6,7 +6,7 @@
 //	@file Author: [404] Deadbeat, [404] Costlyy, JoSchaap, AgentRev, BIB_Monkey
 //	@file Created: 08/12/2012 15:19
 
-if (!isServer) exitwith {};
+// if (!isServer && hasinterface) exitWith {};
 #include "CSATMissionDefines.sqf";
 
 private ["_outpost", "_objects"];
@@ -79,7 +79,7 @@ _successExec =
 {
 	// Mission complete
 	{ _x setVariable ["R3F_LOG_disabled", false, true] } forEach _objects;
-	{ _x setVariable ["Moveable", false, true] } forEach _objects;
+	{ _x setVariable ["Moveable", true, true] } forEach _objects;
 	[_locationsArray, _missionLocation, _objects] call setLocationObjects;
 	{
 		 private _obj = _x;

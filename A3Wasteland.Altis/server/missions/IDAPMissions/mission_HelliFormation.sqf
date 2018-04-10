@@ -4,7 +4,7 @@
 //	@file Name: mission_altisPatrol.sqf
 //	@file Author: JoSchaap, AgentRev, LouD, BIB_Monkey
 
-if (!isServer) exitwith {};
+// if (!isServer && hasinterface) exitWith {};
 #include "IDAPMissionDefines.sqf";
 
 private ["_convoyVeh","_veh1","_veh2","_veh3","_veh4","_veh5","_pos","_rad","_vPos1","_vPos2","_vPos3","_vehiclePos1","_vehiclePos2","_vehiclePos3","_vehiclePos4","_vehicles","_leader","_speedMode","_waypoint","_vehicleName","_numWaypoints","_box1","_box2","_box3","_box4"];
@@ -59,7 +59,7 @@ _setupObjects =
 		};
 		if (_Passangers > 0) then
 		{
-			for "_i" from 1 to _Passangers do
+			for "_i" from 1 to (ceil _Passangers/4) do
 			{
 				private _faction = selectrandom ["IDAP","IDAP","IDAP","IDAP","IDAP","IDAP","IDAP","IDAP","IDAP","NATO"];
 				_soldier = [_aiGroup1, _missionPos, _faction, "Rifleman"] call createsoldier;

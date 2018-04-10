@@ -7,7 +7,7 @@
 //	@file Created: 02/09/2013 11:29
 //	@file Args: none
 
-if (!isServer) exitwith {};
+// if (!isServer && hasinterface) exitWith {};
 #include "NATOMissionDefines.sqf"
 
 private [ "_veh1", "_veh2", "_veh3", "_vehicles", "_leader", "_speedMode", "_waypoint", "_vehicleName", "_vehicleName2", "_numWaypoints", "_box1", "_box2", "_box3"];

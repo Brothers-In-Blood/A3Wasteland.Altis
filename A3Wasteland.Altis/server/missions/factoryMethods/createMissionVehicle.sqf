@@ -6,24 +6,20 @@
 //	@file Author: [404] Deadbeat, AgentRev, BIB_Monkey
 //	@file Created: 26/1/2013 15:19
 
-if (!isServer) exitwith {};
+// if (!isServer && hasinterface) exitWith {};
 
-private ["_class", "_pos", "_fuel", "_ammo", "_damage", "_special", "_variant", "_veh"];
+private ["_class", "_pos", "_fuel", "_ammo", "_damage", "_variant", "_veh"];
 
-_class = _this select 0;
-_pos = _this select 1;
-_fuel = param [2, 1, [0]];
-_ammo = param [3, 1, [0]];
-_damage = param [4, 0, [0]];
-_special = param [5, "None", [""]];
-_water = param [6 ,0, [0]];
-_vehPos = [_pos, 0, 50, 5,_water,0,0] call findSafePos;
-_vehheight = (_vehPos select 2) + 0.5;
-if (_special == "FLY") then
-{
-	_vehheight = (_vehPos select 2) + 500;
-};
-_vehPos set [2, _vehheight];
+private _class = _this select 0;
+private _pos = _this select 1;
+private _fuel = param [2, 1, [0]];
+private _ammo = param [3, 1, [0]];
+private _damage = param [4, 0, [0]];
+private _SpawnHeight = param [5, 0.5, [0]];
+private _water = param [6 ,0, [0]];
+private _vehPos = [_pos, 0, 50, 5,_water,0,0] call findSafePos;
+_vehPos set [2, _SpawnHeight];
+
 _variant = _class param [1,"",[""]];
 
 if (_class isEqualType []) then
@@ -31,8 +27,11 @@ if (_class isEqualType []) then
 	_class = _class select 0;
 };
 
-_veh = createVehicle [_class, _vehPos, [], 0, _special];
-
+_veh = createVehicle [_class, _vehPos, [], 0, "NONE"];
+if (_SpawnHeight >= 500) then
+{
+	_veh setVelocity [500,0,0];
+};
 if (_variant != "") then
 {
 	_veh setVariable ["A3W_vehVariant", _variant, true];

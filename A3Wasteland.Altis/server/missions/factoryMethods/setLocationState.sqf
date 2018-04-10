@@ -4,7 +4,7 @@
 //	@file Name: setLocationState.sqf
 //	@file Author: AgentRev
 
-if (!isServer) exitWith {};
+// if (!isServer && hasinterface) exitWith {};
 
 private ["_locArray", "_locName", "_locState"];
 

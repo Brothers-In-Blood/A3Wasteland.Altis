@@ -5,7 +5,7 @@
 //	@file Author: [404] Deadbeat, [404] Costlyy, JoSchaap, AgentRev, Zenophon, BIB_Monkey
 //  @file Information: JoSchaap's Lite version of 'Infantry Occupy House' Original was made by: Zenophon
 
-if (!isServer) exitwith {};
+// if (!isServer && hasinterface) exitWith {};
 
 #include "NATOMissionDefines.sqf"
 
@@ -110,7 +110,7 @@ _successExec =
 	// Mission completed
 	{ _x setVariable ["R3F_LOG_disabled", false, true] } forEach [_box1, _box2, _box3, _box4];
 	{ _x setVariable ["cmoney",ceil (random 10000), true] } forEach [_box1, _box2, _box3, _box4];
-	{ _x setVariable ["Moveable", false, true] } forEach [_box1, _box2, _box3, _box4];
+	{ _x setVariable ["Moveable", true, true] } forEach [_box1, _box2, _box3, _box4];
 
 	_successHintMessage = format ["Nice work!<br/><br/><t color='%1'>%2</t><br/>is a safe place again!<br/>Their belongings are now yours to take!", NATOMissionColor, _townName];
 	{ deleteVehicle _x } forEach [_tent1, _chair1, _chair2, _cFire1];

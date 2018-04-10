@@ -4,7 +4,7 @@
 //	@file Name: setMissionState.sqf
 //	@file Author: AgentRev
 
-if (!isServer) exitWith {};
+// if (!isServer && hasinterface) exitWith {};
 
 private ["_mArray", "_mType", "_mState"];
 

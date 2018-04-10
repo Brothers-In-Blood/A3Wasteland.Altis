@@ -79,53 +79,56 @@ if (!isNil "_price") then
 		
 		reLockedObjectMapMarkers = [];
 		{
-		//if(_x getVariable "ownerUID" == getplayerUID player) then 
-		if !(isNil {_x getVariable "ownerUID"}) then // Changed so also non owned objects are relocked
+			//if(_x getVariable "ownerUID" == getplayerUID player) then 
+			if !(isNil {_x getVariable "ownerUID"}) then // Changed so also non owned objects are relocked
+			{
+				private ["_name","_objPos","_name","_marker"];
+				_x setVariable ["baseSaving_hoursAlive", nil, true];
+				_x setVariable ["baseSaving_spawningTime", nil, true];
+				_x setVariable ["objectLocked",true,true];
+				pvar_manualObjectSave = netId _x;
+				publicVariableServer "pvar_manualObjectSave";
+				//trackObject = _x;
+				//publicVariableServer "trackObject";
+				_x setVariable ["ownerUID", getPlayerUID player, true]; //possibly set new owner?
+				_x setVariable ["ownerN", name player, true]; // set this here if not set in R3F?
+				_name = gettext(configFile >> "CfgVehicles" >> (typeOf _x) >> "displayName");
+				_objPos = getPosATL _x;
+				_marker = "reLockedObjectMapMarkers" + (str _forEachIndex);
+				_marker = createMarkerLocal [_marker, _objPos];
+				_marker setMarkerTypeLocal "waypoint";
+				_marker setMarkerPosLocal _objPos;
+				_marker setMarkerTextLocal _name;
+				_marker setMarkerColorLocal "ColorBlue";
+				_marker setMarkerTextLocal _name;
+				reLockedObjectMapMarkers pushBack _marker;
+			};
+			_x setDamage 0;
+		} forEach _objects;
+
+
+		if (count reLockedObjectMapMarkers > 0) then 
 		{
-		private ["_name","_objPos","_name","_marker"];
-		_x setVariable ["baseSaving_hoursAlive", nil, true];
-		_x setVariable ["baseSaving_spawningTime", nil, true];
-		_x setVariable ["objectLocked",true,true];
-		pvar_manualObjectSave = netId _x;
-		publicVariableServer "pvar_manualObjectSave";
-		//trackObject = _x;
-		//publicVariableServer "trackObject";
-		//_x setVariable ["ownerUID", getPlayerUID player, true]; //possibly set new owner?
-		//_x setVariable ["ownerN", name player, true]; // set this here if not set in R3F?
-		_name = gettext(configFile >> "CfgVehicles" >> (typeOf _x) >> "displayName");
-		_objPos = getPosATL _x;
-		_marker = "reLockedObjectMapMarkers" + (str _forEachIndex);
-		_marker = createMarkerLocal [_marker, _objPos];
-		_marker setMarkerTypeLocal "waypoint";
-		_marker setMarkerPosLocal _objPos;
-		_marker setMarkerTextLocal _name;
-		_marker setMarkerColorLocal "ColorBlue";
-		_marker setMarkerTextLocal _name;
-	reLockedObjectMapMarkers pushBack _marker;
+
+			["Added Markers for the locked objects, they will be removed in 30 seconds", 5] call mf_notify_client;
+			
+		}
+		else
+		{
+			//["No owned objects found within the set radius", 5] call mf_notify_client;
+			[format ["No owned objects found within %1m",_BaseRadius], 5] call mf_notify_client;	
+		};
+			
+		sleep 30;
+
+		if (count reLockedObjectMapMarkers > 0) then
+		{
+			{
+				deleteMarkerLocal _x;
+			} forEach reLockedObjectMapMarkers;
+			reLockedObjectMapMarkers = [];
+			["Map cleared", 5] call mf_notify_client;
+		};
+
 	};
-	_x setDamage 0;
-} forEach _objects;
-
-
-if (count reLockedObjectMapMarkers > 0) then {
-
-	["Added Markers for the locked objects, they will be removed in 30 seconds", 5] call mf_notify_client;
-	
-	}else{
-	//["No owned objects found within the set radius", 5] call mf_notify_client;
-	[format ["No owned objects found within %1m",_BaseRadius], 5] call mf_notify_client;	
-};
-	
-sleep 30;
-
-if (count reLockedObjectMapMarkers > 0) then
-{
-	{
-		deleteMarkerLocal _x;
-	} forEach reLockedObjectMapMarkers;
-	reLockedObjectMapMarkers = [];
-	["Map cleared", 5] call mf_notify_client;
-};
-
-};
 };

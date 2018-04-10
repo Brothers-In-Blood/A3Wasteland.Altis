@@ -83,7 +83,7 @@ updateConnectingClients = "territory\client\updateConnectingClients.sqf" call mf
 vehicleRepair = [_path, "vehicleRepair.sqf"] call mf_compile;
 vehicleSetup = [_path, "vehicleSetup.sqf"] call mf_compile;
 waitUntilBagTaken = [_path, "waitUntilBagTaken.sqf"] call mf_compile;
-weaponDisassembledServer = [_path, "weaponDisassembledServer.sqf"] call mf_compile;
+//weaponDisassembledServer = [_path, "weaponDisassembledServer.sqf"] call mf_compile;
 
 //Player Management
 server_playerDied = [_path, "serverAiDied.sqf"] call mf_compile;

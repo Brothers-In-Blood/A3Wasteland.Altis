@@ -5,7 +5,7 @@
 //	@file Name: mission_ArmedDiversquad.sqf
 //	@file Author: JoSchaap, AgentRev, BIB_Monkey
 
-if (!isServer) exitwith {};
+// if (!isServer && hasinterface) exitWith {};
 #include "NATOMissionDefines.sqf";
 
 private ["_box1", "_box2", "_box3", "_box4", "_boxPos", "_vehicleClass", "_vehicle", "_wreck","_explosive"];

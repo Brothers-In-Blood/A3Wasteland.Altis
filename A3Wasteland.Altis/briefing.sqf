@@ -16,7 +16,54 @@ waitUntil {!isNull player};
 player createDiarySubject ["infos", "Infos and Help"];
 player createDiarySubject ["changelog", "Changelog"];
 player createDiarySubject ["credits", "Credits"];
+player createDiarySubject ["features", "Features"];
 
+player createDiaryRecord 
+[
+	"features",
+	["Base Management",
+		"
+		<br/> BIB Base Management
+		<br/> Base Managers are purchased from the Base Parts Store
+		<br/> Base managers start at Level 1 and can be upgraded to Level 5
+		<br/> There is a backer reward for a free upgrade to level 3
+		<br/> 
+		<br/> 
+		<br/> 
+		<br/>
+		<br/>
+		<br/>
+		<br/>
+		<br/>
+		<br/>
+		<br/>
+		<br/>
+		"
+	]
+];
+player createDiaryRecord 
+[
+	"features",
+	["Attach to Vehicle",
+		"
+		<br/> Allows players to attach static weapons and crates to certain vehicles
+		<br/> 
+		<br/> Currently supported:
+		<br/> Offroad: All attachment options
+		<br/> HEMMT tractor: SAM turrets
+		<br/> Stomper Drone: SAM turrets
+		<br/> 
+		<br/>
+		<br/> More vehicle will be added in future patches.
+		<br/>
+		<br/>
+		<br/>
+		<br/>
+		<br/>
+		<br/>
+		"
+	]
+];
 player createDiaryRecord ["changelog",
 [
 "v1.4b",
