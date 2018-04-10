@@ -54,37 +54,37 @@ player addEventHandler ["Put",
 	};
 }];
 
-player addEventHandler ["WeaponDisassembled", { _this spawn weaponDisassembledEvent }];
-player addEventHandler ["WeaponAssembled",
-{
-	params ["_player", "_obj"];
-	_objClass = typeOf _obj;
+// player addEventHandler ["WeaponDisassembled", { _this spawn weaponDisassembledEvent }];
+// player addEventHandler ["WeaponAssembled",
+// {
+// 	params ["_player", "_obj"];
+// 	_objClass = typeOf _obj;
 
-	clearBackpackCargoGlobal _obj;
-	clearMagazineCargoGlobal _obj;
-	clearWeaponCargoGlobal _obj;
-	clearItemCargoGlobal _obj;
+// 	clearBackpackCargoGlobal _obj;
+// 	clearMagazineCargoGlobal _obj;
+// 	clearWeaponCargoGlobal _obj;
+// 	clearItemCargoGlobal _obj;
 
-	if (unitIsUAV _obj) then
-	{
-		// ownerUID handled thru save funcs
+// 	if (unitIsUAV _obj) then
+// 	{
+// 		// ownerUID handled thru save funcs
 
-		_playerSide = side group _player;
+// 		_playerSide = side group _player;
 
-		if (side _obj != _playerSide) then
-		{
-			(crew _obj) joinSilent createGroup _playerSide;
-		};
+// 		if (side _obj != _playerSide) then
+// 		{
+// 			(crew _obj) joinSilent createGroup _playerSide;
+// 		};
 
-		if (!alive getConnectedUAV _player) then
-		{
-			_player connectTerminalToUAV _obj;
-		};
+// 		if (!alive getConnectedUAV _player) then
+// 		{
+// 			_player connectTerminalToUAV _obj;
+// 		};
 
-		[_obj, _playerSide, true] call fn_createCrewUAV;
-		[_obj, _player, false] call A3W_fnc_takeOwnership;
-	};
-}];
+// 		[_obj, _playerSide, true] call fn_createCrewUAV;
+// 		[_obj, _player, false] call A3W_fnc_takeOwnership;
+// 	};
+// }];
 
 player addEventHandler ["InventoryOpened",
 {

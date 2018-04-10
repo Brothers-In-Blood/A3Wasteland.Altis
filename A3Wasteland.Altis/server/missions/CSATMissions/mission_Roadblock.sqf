@@ -4,7 +4,7 @@
 //	@file Name: mission_Roadblock.sqf
 //	@file Author: JoSchaap, AgentRev, LouD, BIB_Monkey
 
-if (!isServer) exitwith {};
+// if (!isServer && hasinterface) exitWith {};
 #include "CSATMissionDefines.sqf";
 
 private [ "_box1", "_barGate", "_bunker1","_bunker2","_obj1","_obj2"];

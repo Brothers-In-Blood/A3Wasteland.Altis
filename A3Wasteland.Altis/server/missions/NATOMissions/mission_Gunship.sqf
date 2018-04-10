@@ -4,7 +4,7 @@
 //	@file Name: mission_HostileJet.sqf
 //	@file Author: JoSchaap, AgentRev, LouD, BIB_Monkey
 
-if (!isServer) exitwith {};
+// if (!isServer && hasinterface) exitWith {};
 #include "NATOMissionDefines.sqf";
 
 private ["_planeChoices", "_convoyVeh", "_veh1", "_vehicles", "_leader", "_speedMode", "_waypoint", "_vehicleName", "_numWaypoints", "_cash", "_Boxes1", "_currBox1", "_Boxes2", "_currBox2", "_Box1", "_Box2"];
@@ -20,7 +20,7 @@ _setupObjects =
 	_missionPos = markerPos (((call cityList) call BIS_fnc_selectRandom) select 0);
 
 	_veh1types = selectrandom ["B_T_VTOL_01_armed_F"];
-	_veh1 = [_veh1types, _missionPos,1,1,0,"FLY"] call createMissionVehicle;
+	_veh1 = [_veh1types, _missionPos,1,1,0,2000] call createMissionVehicle;
 	_aiGroup1 = createGroup CIVILIAN;
 	
 	_vehicles = [_veh1];
@@ -42,17 +42,17 @@ _setupObjects =
 	_speedMode ="NORMAL";
 
 	// behaviour on waypoints
-	{
-		_waypoint = _aiGroup1 addWaypoint [markerPos (_x select 0), 0];
+	{	
+		_marker = _x select 0;
+		_Pos = markerPos _marker;
+		_WayPos = [_Pos select 0,_Pos select 1, 2000];
+		_waypoint = _aiGroup1 addWaypoint [_WayPos, 100];
 		_waypoint setWaypointType "MOVE";
-		_waypoint setWaypointCompletionRadius 55;
-		_waypoint setWaypointCombatMode "GREEN";
-		_waypoint setWaypointBehaviour "SAFE";
+		_waypoint setWaypointCombatMode "RED";
+		_waypoint setWaypointBehaviour "COMBAT";
 		_waypoint setWaypointFormation "STAG COLUMN";
 		_waypoint setWaypointSpeed _speedMode;
 	} forEach ((call cityList) call BIS_fnc_arrayShuffle);
-
-	_missionPos = getPosATL leader _aiGroup1;
 
 	_missionPicture = getText (configFile >> "CfgVehicles" >> _veh1types >> "picture");
 	_vehicleName = getText (configFile >> "CfgVehicles" >> _veh1types >> "displayName");

@@ -7,7 +7,7 @@
  * Creates a random Soldier.
  */
 
-if (!isServer) exitWith {};
+// if (!isServer && hasinterface) exitWith {};
 private _group = _this select 0;
 private _position = _this select 1;
 private _faction = _this select 2;
@@ -787,25 +787,14 @@ private _commanding = 1; //Affects how quickly recognized targets are shared wit
 			//Soldier Skills are set from 0 to 1; 
 			_Accuracy = 0.3; //Soldier accuracy;
 			_Courage = 1; //Affects unit's subordinates' morale (Higher value = more courage)
-			_aimingShake = 1; //Affects how steadily the AI can hold a weapon (Higher value = less weapon sway)
+			_aimingShake = 0.7; //Affects how steadily the AI can hold a weapon (Higher value = less weapon sway)
 			_aimingSpeed = 0.4; //Affects how quickly the AI can rotate and stabilize its aim (Higher value = faster, less error)
-			_spotDistance = 1; //Affects the AI ability to spot targets within it's visual or audible range (Higher value = more likely to spot)
-			_spotTime = 1; //Affects how quick the AI react to death, damage or observing an enemy (Higher value = quicker reaction)
+			_spotDistance = 0.5; //Affects the AI ability to spot targets within it's visual or audible range (Higher value = more likely to spot)
+			_spotTime = 0.5; //Affects how quick the AI react to death, damage or observing an enemy (Higher value = quicker reaction)
 			_reloadSpeed = 0.4; //Affects the delay between switching or reloading a weapon (Higher value = less delay)
 			_commanding = 0.2; //Affects how quickly recognized targets are shared with the group (Higher value = faster reporting)	
 		};
 	};
-	_allowFleeing = 1; // can the unit flee? 0 = no 1 = yes
-	_rank = "PRIVATE"; //  PRIVATE, CORPORAL, SERGEANT, LIEUTENANT, CAPTAIN, MAJOR or COLONEL
-	//Soldier Skills are set from 0 to 1; 
-	_Accuracy = 1; //Soldier accuracy;
-	_Courage = 1; //Affects unit's subordinates' morale (Higher value = more courage)
-	_aimingShake = 1; //Affects how steadily the AI can hold a weapon (Higher value = less weapon sway)
-	_aimingSpeed = 1; //Affects how quickly the AI can rotate and stabilize its aim (Higher value = faster, less error)
-	_spotDistance = 1; //Affects the AI ability to spot targets within it's visual or audible range (Higher value = more likely to spot)
-	_spotTime = 1; //Affects how quick the AI react to death, damage or observing an enemy (Higher value = quicker reaction)
-	_reloadSpeed = 1; //Affects the delay between switching or reloading a weapon (Higher value = less delay)
-	_commanding = 1; //Affects how quickly recognized targets are shared with the group (Higher value = faster reporting)	
 //Spawn the Soldier
 	private _soldier = _group createUnit [_soldierTypes, _position, [], 20, "NONE"];
 //Give soldier a uniform

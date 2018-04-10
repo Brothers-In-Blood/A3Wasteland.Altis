@@ -4,7 +4,7 @@
 //	@file Name: missionProcessor.sqf
 //	@file Author: AgentRev, BIB_Monkey
 
-if (!isServer) exitwith {};
+// if (!isServer && hasinterface) exitWith {};
 
 #define MISSION_LOCATION_COOLDOWN (10*60)
 #define MISSION_TIMER_EXTENSION (15*60)

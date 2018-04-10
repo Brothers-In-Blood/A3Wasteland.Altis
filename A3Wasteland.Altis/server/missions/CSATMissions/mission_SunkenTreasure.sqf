@@ -7,7 +7,7 @@
 //	@file Created: 08/12/2012 15:19
 //	@file Args:
 
-if (!isServer) exitwith {};
+// if (!isServer && hasinterface) exitWith {};
 #include "CSATMissionDefines.sqf";
 
 private ["_box1", "_boxPos", "_vehicleClass", "_vehicle"];

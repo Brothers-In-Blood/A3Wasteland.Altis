@@ -30,8 +30,6 @@ CHVD_allowTerrain = false; // terrain option has been disabled out from the menu
 CHVD_maxView = 12000; // Set maximum view distance (default: 12000)
 CHVD_maxObj = 12000; // Set maximimum object view distance (default: 12000)
 
-// versionName = ""; // Set in STR_WL_WelcomeToWasteland in stringtable.xml
-
 if (isServer) then { X_Server = true };
 if (!isDedicated) then { X_Client = true };
 if (isNull player) then { X_JIP = true };

@@ -17,7 +17,7 @@
 	["pvar_disableCollision", { PVAL call fn_disableCollision }],
 	["pvar_notifyClient", { PVAL spawn mf_notify_client }],
 	["pvar_playerEventServer", { PVAL call playerEventServer }],
-	["pvar_weaponDisassembledEvent", { PVAL spawn weaponDisassembledEvent }],
+	//["pvar_weaponDisassembledEvent", { PVAL spawn weaponDisassembledEvent }],
 	["pvar_ejectCorpse", { PVAL spawn fn_ejectCorpse }],
 
 	["pvar_territoryActivityHandler", { PVAR_TARGET(_value call A3W_fnc_territoryActivityHandler) }],

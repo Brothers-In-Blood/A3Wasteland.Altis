@@ -4,7 +4,7 @@
 //	@file Name: setupMissionArrays.sqf
 //	@file Author: AgentRev, BIB_Monkey
 
-if (!isServer) exitWith {};
+// if (!isServer && hasinterface) exitWith {};
 
 
 
@@ -30,28 +30,28 @@ AAFMissions =
 ];
 NATOMissions =
 [
-	// ["mission_AirWreck", 1],
-	// ["mission_MediumPatrol", 1],
-	["mission_Vehicle", 1]
-	// ["mission_Outpost", 1],
-	// ["mission_Sniper", 1],
-	// ["mission_TownInvasion", 1],
-	// ["mission_Roadblock", 1],
-	// ["mission_Jaws", 1],
-	// ["mission_SunkenSupplies", 1],
-	// ["mission_SunkenTreasure", 1],
-	// ["mission_Coastal_Convoy", 1],
-	// ["mission_HeavyPatrol", 1],
-	// ["mission_HostileJet", 1],
-	// ["mission_InfantryPatrol", 1],
-	// ["mission_LightPatrol", 1],
-	// ["mission_AttackHelis", 1],
-	// ["mission_HeliFormation", 1],
-	// ["mission_SupplyDrop", 1],
-	// ["mission_Gunship", 1],
-	// ["mission_CTRGMediumConvoy", 1],
-	// ["mission_CTRGPatrol", 1],
-	// ["mission_CTRFSmallConvoy", 1]
+	["mission_AirWreck", 1],
+	["mission_MediumPatrol", 1],
+	["mission_Vehicle", 1],
+	["mission_Outpost", 1],
+	["mission_Sniper", 1],
+	["mission_TownInvasion", 1],
+	["mission_Roadblock", 1],
+	["mission_Jaws", 1],
+	["mission_SunkenSupplies", 1],
+	["mission_SunkenTreasure", 1],
+	["mission_Coastal_Convoy", 1],
+	["mission_HeavyPatrol", 1],
+	["mission_HostileJet", 1],
+	["mission_InfantryPatrol", 1],
+	["mission_LightPatrol", 1],
+	["mission_AttackHelis", 1],
+	["mission_HeliFormation", 1],
+	["mission_SupplyDrop", 1],
+	["mission_Gunship", 1],
+	["mission_CTRGMediumConvoy", 1],
+	["mission_CTRGPatrol", 1],
+	["mission_CTRFSmallConvoy", 1]
 ];
 CSATMissions =
 [

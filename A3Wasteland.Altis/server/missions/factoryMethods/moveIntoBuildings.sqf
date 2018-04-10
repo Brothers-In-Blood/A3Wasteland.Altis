@@ -6,7 +6,7 @@
 //  @file Information: Function called as:  [_units, _missionPos, _buildingRadius, _fillEvenly, _putOnRoof] call moveIntoBuildings;
 //  @file Information: example call: [_CivGrp1, [333.33,3.33,444.44], 300, true, false] call moveIntoBuildings;
 
-if (!isServer) exitWith {};
+// if (!isServer && hasinterface) exitWith {};
 
 #define I(X) X = X + 1;
 #define EYE_HEIGHT 1.53

@@ -6,7 +6,7 @@
 //	@file Author: [404] Deadbeat, AgentRev, BIB_Monkey
 //	@file Created: 26/1/2013 15:19
 
-if (!isServer) exitwith {};
+// if (!isServer && hasinterface) exitWith {};
 
 private ["_class2", "_pos", "_fuel", "_ammo", "_damage", "_special", "_veh2"];
 
