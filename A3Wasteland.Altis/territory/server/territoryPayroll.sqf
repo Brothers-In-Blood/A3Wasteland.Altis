@@ -4,7 +4,7 @@
 //	@file Name: territoryPayroll.sqf
 //	@file Author: AgentRev, BIB_Monkey
 
-if (!isServer) exitWith {};
+if (!isServer && hasInterface) exitwith {};
 
 _timeInterval = ["A3W_payrollInterval", 30*60] call getPublicVar;
 _moneyMultiplier = ["A3W_payrollAmount", 100] call getPublicVar;

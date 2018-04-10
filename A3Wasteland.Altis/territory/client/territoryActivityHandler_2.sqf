@@ -12,7 +12,6 @@
 // Called with [_message, _money(optional)], "A3W_fnc_territoryActivityHandler", side, false] call A3W_fnc_MP;
 
 diag_log format["A3W_fnc_territoryActivityHandler called with %1", _this];
-
 if (typeName _this == "ARRAY" && {count _this >= 1}) then 
 {
 	private _justPlayers = (allPlayers - entities "HeadlessClient_F");
@@ -77,6 +76,12 @@ if (typeName _this == "ARRAY" && {count _this >= 1}) then
 	}
 	else
 	{
-		titletext ["Your are more then 3km from the closest territory. Payout impossible", "PLAIN DOWN"];
+		if (isnil TerritoryLoopTime) then { TerritoryLoopTime = time };
+		OutOfRangeTime = time;
+		if ((OutOfRangeTime - TerritoryLoopTime) >= 30) then
+		{
+			titletext ["Your are more then 3km from the closest territory. Payout impossible", "PLAIN DOWN"];
+			TerritoryLoopTime =  time;
+		};
 	};
 };

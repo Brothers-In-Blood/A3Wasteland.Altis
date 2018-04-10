@@ -3,13 +3,13 @@
 // ******************************************************************************************
 /*********************************************************#
 # @@ScriptName: createCaptureTriggers.sqf
-# @@Author: Nick 'Bewilderbeest' Ludlam <bewilder@recoil.org>, AgentRev
+# @@Author: Nick 'Bewilderbeest' Ludlam <bewilder@recoil.org>, AgentRev, BIB_Monkey
 # @@Create Date: 2013-09-15 16:26:38
 # @@Modify Date: 2013-09-15 22:35:19
 # @@Function: Creates server-side capture zone triggers
 #*********************************************************/
 
-if (!isServer) exitWith {};
+if (!isServer && hasInterface) exitwith {};
 
 {
 	_marker = _x;
