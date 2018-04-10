@@ -181,21 +181,6 @@ inGameUISetEventHandler ["Action", "_this call A3W_fnc_inGameUIActionEvent"];
 	};
 } forEach pvar_spawn_beacons;
 
-
-//Mapstuff
-private _playerside = str (side player);
-switch (_playerside) do
-{
-	case "WEST":
-	{
-		disableMapIndicators [false,true,true,false];
-	};
-	case "EAST":
-	{
-		disableMapIndicators [false,true,true,false];
-	};
-	case "GUER":
-	{
-		disableMapIndicators [true,true,true,false];
-	};
-};
+//Initialize Territory loop Variables
+TerritoryLoopTime = nil;
+OutOfRangeTime = nil;
