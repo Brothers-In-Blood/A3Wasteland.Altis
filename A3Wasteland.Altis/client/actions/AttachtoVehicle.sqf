@@ -3,22 +3,6 @@ Authorthen BIB_Monkey
 Filenamethen AttachtoVehicle.sqf
 Purpose: Attach static weapons and objects to Vehicles
 */
-BIB_fnc_AttachObject = 
-{
-	private _object = _this select 0;
-	private _vehicle = _this select 1;
-	private _position = _this select 2;
-	private _direction = _this select 3;
-	private _vehicleSetup = _this select 4;
-	_object attachTo [_vehicle, _position];
-	_object setdir _direction;
-	_object attachTo [_vehicle, _position];
-	{
-		private _component = _x select 0;
-		private _state = _x select 1;
-		_vehicle animate [_component, _state];
-	} foreach _vehicleSetup;
-};
 
 //Define the static weapon
 private _static = cursortarget;
@@ -42,6 +26,9 @@ private _FailText_CannotAttach = format ["Cannot Attach %1 to %2",  _StaticDispl
 private _AttachmentArray =
 [
 	["StaticWeaponAttached1",		_vehicle getVariable ["StaticWeaponAttached1", 				false]],
+	["StaticWeaponAttached2",		_vehicle getVariable ["StaticWeaponAttached2", 				false]],
+	["StaticWeaponAttached3",		_vehicle getVariable ["StaticWeaponAttached3", 				false]],
+	["StaticWeaponAttached4",		_vehicle getVariable ["StaticWeaponAttached4", 				false]],
 	["StaticLDAttached", 			_vehicle getVariable ["StaticLDAttached", 					false]],
 	["SAMAttached", 				_vehicle getVariable ["SAMAttached", 						false]],
 
@@ -129,7 +116,6 @@ private _AttachmentArray =
 
 private _attachLocationArray = [];
 private _vehicleSetup = [];
-private _rotation = 0;
 private _variableNameArray = [];
 private _TotalBlockers = [];
 private _availableArray = [];
@@ -153,7 +139,7 @@ switch (true) do
 					};
 					case ((typeof _vehicle) == "B_Truck_01_transport_F"):
 					{
-						_attachLocationArray = [["StaticWeaponAttached1",[0.27,-0.37,1.16]],["StaticWeaponAttached2",[0.16,-1.6,0.969999]],["StaticWeaponAttached3",[0.16,-1.6,0.969999]],["StaticWeaponAttached4",[0.16,-1.6,0.969999]]];
+						_attachLocationArray = [["StaticWeaponAttached1",[0.21,-0.34,1.12]],["StaticWeaponAttached2",[-0.07,-2.06,1.12],90],["StaticWeaponAttached3",[0.21,-2.48,1.12],270],["StaticWeaponAttached4",[-0.17,-3.96,1.12],180]];
 					};
 					default { player globalChat _FailText_CannotAttach};
 				};
@@ -165,8 +151,7 @@ switch (true) do
 					case (_vehicle iskindof "Offroad_01_base_F"):
 					{
 						if ({_vehicle iskindof _x} count ["Offroad_01_AT_base_F","Offroad_01_armed_base_F","Offroad_01_repair_base_F"]>0) exitWith { player globalChat format ["Cannot Attach %1 to %2",  _StaticDisplayName, _VehDisplayName]};
-						_attachLocationArray = [["StaticWeaponAttached1",[-0.14,-1.86,0.46]]];
-						_rotation = 180;
+						_attachLocationArray = [["StaticWeaponAttached1",[-0.14,-1.86,0.46],180]];
 						_vehicleSetup = [["HideDoor3",1]];
 					};
 					default { player globalChat _FailText_CannotAttach};
@@ -181,8 +166,11 @@ switch (true) do
 				case (_vehicle iskindof "Offroad_01_base_F"):
 				{
 					if ({_vehicle iskindof _x} count ["Offroad_01_AT_base_F","Offroad_01_armed_base_F","Offroad_01_repair_base_F"]>0) exitWith { player globalChat format ["Cannot Attach %1 to %2",  _StaticDisplayName, _VehDisplayName]};
-					_attachLocationArray = [["StaticWeaponAttached1",[-0.01,-1.63,0.31]]];
-					_rotation = 180;
+					_attachLocationArray = [["StaticWeaponAttached1",[-0.01,-1.63,0.31],180]];
+				};
+				case ((typeof _vehicle) == "B_Truck_01_transport_F"):
+				{
+					_attachLocationArray = [["StaticWeaponAttached1",[0.21,-0.34,1.12]],["StaticWeaponAttached2",[-0.07,-2.06,1.12],90],["StaticWeaponAttached3",[0.21,-2.48,1.12],270],["StaticWeaponAttached4",[-0.17,-3.96,1.12],180]];
 				};
 				default { player globalChat _FailText_CannotAttach};
 			};
@@ -286,8 +274,7 @@ switch (true) do
 				case (_vehicle iskindof "Offroad_01_base_F"):
 				{
 					if ({_vehicle iskindof _x} count ["Offroad_01_AT_base_F","Offroad_01_armed_base_F","Offroad_01_repair_base_F"]>0) exitWith { player globalChat format ["Cannot Attach %1 to %2",  _StaticDisplayName, _VehDisplayName]};
-					_attachLocationArray = [["SynCrateAttached1",[-0.41,-1.15,-0.47]],["SynCrateAttached2",[0.11,-1.16,-0.47]],["SynCrateAttached3",[-0.43,-1.98,-0.47]],["SynCrateAttached4",[0.09,-1.98,-0.47]],["SynCrateAttached1-2",[-0.42,-1.15,-0.05]],["SynCrateAttached2-2",[0.09,-1.15,-0.05]],["SynCrateAttached3-2",[-0.44,-1.98,-0.05]],["SynCrateAttached4-2",[0.07,-1.98,-0.05]]];
-					_rotation = 90;
+					_attachLocationArray = [["SynCrateAttached1",[-0.41,-1.15,-0.47],90],["SynCrateAttached2",[0.11,-1.16,-0.47],90],["SynCrateAttached3",[-0.43,-1.98,-0.47],90],["SynCrateAttached4",[0.09,-1.98,-0.47],90],["SynCrateAttached1-2",[-0.42,-1.15,-0.05],90],["SynCrateAttached2-2",[0.09,-1.15,-0.05],90],["SynCrateAttached3-2",[-0.44,-1.98,-0.05],90],["SynCrateAttached4-2",[0.07,-1.98,-0.05],90]];
 				};
 			};
 			default { player globalChat _FailText_CannotAttach};
@@ -299,8 +286,7 @@ switch (true) do
 				case (_vehicle iskindof "Offroad_01_base_F"):
 				{
 					if ({_vehicle iskindof _x} count ["Offroad_01_AT_base_F","Offroad_01_armed_base_F","Offroad_01_repair_base_F"]>0) exitWith { player globalChat format ["Cannot Attach %1 to %2",  _StaticDisplayName, _VehDisplayName]};
-					_attachLocationArray = [["SynCrateAttached1",[-0.41,-1.15,-0.47]],["SynCrateAttached2",[0.11,-1.16,-0.47]],["SynCrateAttached3",[-0.43,-1.98,-0.47]],["SynCrateAttached4",[0.09,-1.98,-0.47]],["SynCrateAttached1-2",[-0.42,-1.15,-0.05]],["SynCrateAttached2-2",[0.09,-1.15,-0.05]],["SynCrateAttached3-2",[-0.44,-1.98,-0.05]],["SynCrateAttached4-2",[0.07,-1.98,-0.05]]];
-					_rotation = 90;
+					_attachLocationArray = [["SynCrateAttached1",[-0.41,-1.15,-0.47],90],["SynCrateAttached2",[0.11,-1.16,-0.47],90],["SynCrateAttached3",[-0.43,-1.98,-0.47],90],["SynCrateAttached4",[0.09,-1.98,-0.47],90],["SynCrateAttached1-2",[-0.42,-1.15,-0.05],90],["SynCrateAttached2-2",[0.09,-1.15,-0.05],90],["SynCrateAttached3-2",[-0.44,-1.98,-0.05],90],["SynCrateAttached4-2",[0.07,-1.98,-0.05],90]];
 				};
 			};
 			default { player globalChat _FailText_CannotAttach};
@@ -312,8 +298,7 @@ switch (true) do
 				case (_vehicle iskindof "Offroad_01_base_F"):
 				{
 					if ({_vehicle iskindof _x} count ["Offroad_01_AT_base_F","Offroad_01_armed_base_F","Offroad_01_repair_base_F"]>0) exitWith { player globalChat format ["Cannot Attach %1 to %2",  _StaticDisplayName, _VehDisplayName]};
-					_attachLocationArray = [["SynWepCrateAttached1",[-0.46,-1.22,-0.6]],["SynWepCrateAttached2",[-0.05,-1.22,-0.6]],["SynWepCrateAttached3",[0.36,-1.22,-0.6]],["SynWepCrateAttached4",[-0.46,-2.14,-0.6]],["SynWepCrateAttached5",[-0.05,-2.14,-0.6]],["SynWepCrateAttached6",[0.36,-2.14,-0.6]],["SynWepCrateAttached1-2",[-0.46,-1.23,-0.46]],["SynWepCrateAttached2-2",[-0.05,-1.23,-0.46]],["SynWepCrateAttached3-2",[0.36,-1.23,-0.46]],["SynWepCrateAttached4-2",[-0.46,-2.15,-0.46]],["SynWepCrateAttached5-2",[-0.05,-2.15,-0.46]],["SynWepCrateAttached6-2",[0.36,-2.15,-0.46]],["SynWepCrateAttached1-3",[-0.46,-1.24,-0.32]],["SynWepCrateAttached2-3",[-0.05,-1.24,-0.32]],["SynWepCrateAttached3-3",[0.36,-1.24,-0.32]],["SynWepCrateAttached4-3",[-0.46,-2.16,-0.32]],["SynWepCrateAttached5-3",[-0.05,-2.16,-0.32]],["SynWepCrateAttached6-3",[0.36,-2.16,-0.32]],["SynWepCrateAttached1-4",[-0.46,-1.24,-0.19]],["SynWepCrateAttached2-4",[-0.05,-1.24,-0.19]],["SynWepCrateAttached3-4",[0.36,-1.24,-0.19]],["SynWepCrateAttached4-4",[-0.46,-2.16,-0.19]],["SynWepCrateAttached5-4",[-0.05,-2.16,-0.19]],["SynWepCrateAttached6-4",[0.36,-2.16,-0.19]]];
-					_rotation = 90;
+					_attachLocationArray = [["SynWepCrateAttached1",[-0.46,-1.22,-0.6],90],["SynWepCrateAttached2",[-0.05,-1.22,-0.6],90],["SynWepCrateAttached3",[0.36,-1.22,-0.6],90],["SynWepCrateAttached4",[-0.46,-2.14,-0.6],90],["SynWepCrateAttached5",[-0.05,-2.14,-0.6],90],["SynWepCrateAttached6",[0.36,-2.14,-0.6],90],["SynWepCrateAttached1-2",[-0.46,-1.23,-0.46],90],["SynWepCrateAttached2-2",[-0.05,-1.23,-0.46],90],["SynWepCrateAttached3-2",[0.36,-1.23,-0.46],90],["SynWepCrateAttached4-2",[-0.46,-2.15,-0.46],90],["SynWepCrateAttached5-2",[-0.05,-2.15,-0.46],90],["SynWepCrateAttached6-2",[0.36,-2.15,-0.46],90],["SynWepCrateAttached1-3",[-0.46,-1.24,-0.32],90],["SynWepCrateAttached2-3",[-0.05,-1.24,-0.32],90],["SynWepCrateAttached3-3",[0.36,-1.24,-0.32],90],["SynWepCrateAttached4-3",[-0.46,-2.16,-0.32],90],["SynWepCrateAttached5-3",[-0.05,-2.16,-0.32],90],["SynWepCrateAttached6-3",[0.36,-2.16,-0.32],90],["SynWepCrateAttached1-4",[-0.46,-1.24,-0.19],90],["SynWepCrateAttached2-4",[-0.05,-1.24,-0.19],90],["SynWepCrateAttached3-4",[0.36,-1.24,-0.19],90],["SynWepCrateAttached4-4",[-0.46,-2.16,-0.19],90],["SynWepCrateAttached5-4",[-0.05,-2.16,-0.19],90],["SynWepCrateAttached6-4",[0.36,-2.16,-0.19],90]];
 				};
 			};
 			default { player globalChat _FailText_CannotAttach};
@@ -339,8 +324,7 @@ switch (true) do
 				case (_vehicle iskindof "Offroad_01_base_F"):
 				{
 					if ({_vehicle iskindof _x} count ["Offroad_01_AT_base_F","Offroad_01_armed_base_F","Offroad_01_repair_base_F"]>0) exitWith { player globalChat format ["Cannot Attach %1 to %2",  _StaticDisplayName, _VehDisplayName]};
-					_attachLocationArray = [["SpecialWepAttached1",[-0.30,-1.79,-0.51]], ["SpecialWepAttached1-2",[-0.30,-1.79,-0.19]]];
-					_rotation = 90;
+					_attachLocationArray = [["SpecialWepAttached1",[-0.30,-1.79,-0.51],90], ["SpecialWepAttached1-2",[-0.30,-1.79,-0.19],90]];
 				};
 				default { player globalChat _FailText_CannotAttach};
 			};
@@ -353,8 +337,7 @@ switch (true) do
 				case (_vehicle iskindof "Offroad_01_base_F"):
 				{
 					if ({_vehicle iskindof _x} count ["Offroad_01_AT_base_F","Offroad_01_armed_base_F","Offroad_01_repair_base_F"]>0) exitWith { player globalChat format ["Cannot Attach %1 to %2",  _StaticDisplayName, _VehDisplayName]};
-					_attachLocationArray = [["EquipmentCrateAttached1",[0,-1.02,-0.31]],["EquipmentCrateAttached2",[0,-1.62,-0.31]],["EquipmentCrateAttached3",[0,-2.22,-0.31]]];
-					_rotation = 90;
+					_attachLocationArray = [["EquipmentCrateAttached1",[0,-1.02,-0.31],90],["EquipmentCrateAttached2",[0,-1.62,-0.31],90],["EquipmentCrateAttached3",[0,-2.22,-0.31],90]];
 				};
 			};
 			default { player globalChat _FailText_CannotAttach};
@@ -367,8 +350,7 @@ switch (true) do
 				case (_vehicle iskindof "Offroad_01_base_F"):
 				{
 					if ({_vehicle iskindof _x} count ["Offroad_01_AT_base_F","Offroad_01_armed_base_F","Offroad_01_repair_base_F"]>0) exitWith { player globalChat format ["Cannot Attach %1 to %2",  _StaticDisplayName, _VehDisplayName]};
-					_attachLocationArray = [["LauncherCrateAttached1",[-0.5,-1.76,-0.47]],["LauncherCrateAttached2",[-0.15,-1.76,-0.47]],["LauncherCrateAttached3",[0.2,-1.76,-0.47]],["LauncherCrateAttached3B",[0.43,-1.75,-0.53]],["LauncherCrateAttached3B-2", [0.43,-1.75,-0.18]],["LauncherCrateAttached1-2",[-0.5,-1.76,-0.14]],["LauncherCrateAttached2-2",[-0.15,-1.76,-0.14]], ["LauncherCrateAttached3-2",[0.2,-1.76,-0.14]]];
-					_rotation = 90;
+					_attachLocationArray = [["LauncherCrateAttached1",[-0.5,-1.76,-0.47],90],["LauncherCrateAttached2",[-0.15,-1.76,-0.47],90],["LauncherCrateAttached3",[0.2,-1.76,-0.47],90],["LauncherCrateAttached3B",[0.43,-1.75,-0.53],90],["LauncherCrateAttached3B-2", [0.43,-1.75,-0.18],90],["LauncherCrateAttached1-2",[-0.5,-1.76,-0.14],90],["LauncherCrateAttached2-2",[-0.15,-1.76,-0.14],90], ["LauncherCrateAttached3-2",[0.2,-1.76,-0.14],90]];
 				};
 				default { player globalChat _FailText_CannotAttach};
 			};
@@ -381,8 +363,7 @@ switch (true) do
 				case (_vehicle iskindof "Offroad_01_base_F"):
 				{
 					if ({_vehicle iskindof _x} count ["Offroad_01_AT_base_F","Offroad_01_armed_base_F","Offroad_01_repair_base_F"]>0) exitWith { player globalChat format ["Cannot Attach %1 to %2",  _StaticDisplayName, _VehDisplayName]};
-					_attachLocationArray = [["SupplyCrateAttached",[1.49012e-008,-1.3,1.7]]];
-					_rotation = 90;
+					_attachLocationArray = [["SupplyCrateAttached",[1.49012e-008,-1.3,1.7],90]];
 				};
 				default { player globalChat _FailText_CannotAttach};
 			};
@@ -484,7 +465,6 @@ player globalChat format ["Attach Location Array", _attachLocationArray];
 	if !(_inuse) then
 	{
 		_availableArray pushback _Location;
-
 	};
 } foreach _AttachmentArray;
 player globalChat format ["Available Array = %1", _availableArray];
@@ -492,13 +472,19 @@ player globalChat format ["Attachment Location Array = %1", _attachLocationArray
 
 {
 	private _AttachLocationName = _x select 0;
-	private _AttachCoords= _x select 1;
+	private _AttachCoords = _x select 1;
+	private _rot = 0;
+	if (_x select 2 != 0) then
+	{
+		_rot = _x select 2;
+	};
+	player globalChat format ["object rotation = %1", _rot];
 	{
 		private _available = _x;
 		player globalchat format ["%1 ?= %2", _AttachLocationName, _available];
 		if (_AttachLocationName == _available) then
 		{
-			_availableLocArray pushback [_AttachLocationName, _AttachCoords];
+			_availableLocArray pushback [_AttachLocationName, _AttachCoords, _rot];
 		};
 	} foreach _availableArray;
 } foreach _attachLocationArray;
@@ -512,6 +498,8 @@ if ((count _availableLocArray) > 0) then
 	private _AttachPoint = _availableLocArray select 0;
 	private _AttachName = _AttachPoint select 0;
 	private _attachLocation = _AttachPoint select 1;
+	private _rotation = _AttachPoint select 2;
+	player globalChat format ["object rotation = %1", _rotation];
 	[_static, _vehicle, _attachLocation, _rotation,_vehicleSetup] remoteExecCall ["BIB_fnc_AttachObject", 0];
 	switch (true) do
 	{
