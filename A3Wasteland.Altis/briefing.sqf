@@ -461,6 +461,23 @@ player createDiaryRecord ["credits",
 [
 "Credits",
 "
+<br/><font size='16' color='#BBBBBB'>BIB Gaming Staff:</font>
+<br/>	* Monkey (Lead Developer)
+<br/>	* Witchdoctor (Senior Developer)
+<br/>	* DreadedWraith (Senior Devleoper)
+<br/>	* Masher (Admin/Co Founder BIB)
+<br/>	* Titus (Admin)
+<br/>	* Sayrus (Admin)
+<br/>	* Smokebreak (Admin)
+<br/>	* Lava_Bear (Admin)
+<br/>	* Rage (Admin)
+<br/>	* Dingus (Admin)
+<br/>	* Runner_NS (Admin)
+<br/>	* Turtle (Admin)
+<br/>	* Coolbreeze (Admin)
+<br/>	* Merc (Admin)
+<br/>	* SuicideKats (Admin)
+<br/>	* CaptainQ (Community Advocate)
 <br/><font size='16' color='#BBBBBB'>Developed by A3Wasteland.com:</font>
 <br/>	* AgentRev (TeamPlayerGaming)
 <br/>	* JoSchaap (GoT/Tweakers.net)
