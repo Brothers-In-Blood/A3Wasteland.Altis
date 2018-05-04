@@ -1480,7 +1480,7 @@ GOM_fnc_aircraftLoadoutLoadPreset =
 GOM_fnc_updateVehiclesLB =
 {
 	params ["_obj"];
-	_vehicles = (_obj nearEntities [["Car_F", "Tank_F", "Air"],50]) select {speed _x < 5 AND {alive _x} AND {isTouchingGround _x}};
+	_vehicles = (_obj nearEntities [["Car_F", "Tank_F", "Air", "StaticWeapon"],50]) select {speed _x < 5 AND {alive _x} AND {isTouchingGround _x}};
 	_lastVehs = _obj getVariable ["GOM_fnc_setPylonLoadoutVehicles",[]];
 	if (_vehicles isEqualTo []) exitWith {true};
 	if (_vehicles isEqualTo _lastVehs AND !(lbsize 1500 isequalto 0)) exitWith {true};//only update this when really needed, called on each frame
