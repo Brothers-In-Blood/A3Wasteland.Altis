@@ -326,7 +326,7 @@ Purpose: Allow players to rearm, repair, refuel, and resupply vehicles. Charges 
 							titleText ["Starting Services. Vehicle Engine must Remain Off. No refunds for aborted services.", "PLAIN DOWN"];
 							sleep 3;
 						//Make sure that vehicle engine remains off during resupply and beging servicing
-							if (isEngineOn _vehicle) exitwith {titletext ["Resupply Canceled, Vehicle engine started", "PLAIN DOWN"]};
+							if (isEngineOn _vehicle && !(_vehicle isKindOf "StaticWeapon")) exitwith {titletext ["Resupply Canceled, Vehicle engine started", "PLAIN DOWN"]};
 							//Rearm Section
 								if (_RearmCost > 0) then
 								{
@@ -334,7 +334,7 @@ Purpose: Allow players to rearm, repair, refuel, and resupply vehicles. Charges 
 									sleep 15;
 									_vehicle setVehicleAmmo 1;
 								};
-							if (isEngineOn _vehicle) exitwith {titletext ["Resupply Canceled, Vehicle engine started", "PLAIN DOWN"]};
+							if (isEngineOn _vehicle && !(_vehicle isKindOf "StaticWeapon")) exitwith {titletext ["Resupply Canceled, Vehicle engine started", "PLAIN DOWN"]};
 							//Repair Section
 								if (_repaircost > 0) then
 								{
@@ -342,7 +342,7 @@ Purpose: Allow players to rearm, repair, refuel, and resupply vehicles. Charges 
 									sleep 15;
 									_vehicle setDammage 0;
 								};
-							if (isEngineOn _vehicle) exitwith {titletext ["Resupply Canceled, Vehicle engine started", "PLAIN DOWN"]};
+							if (isEngineOn _vehicle && !(_vehicle isKindOf "StaticWeapon")) exitwith {titletext ["Resupply Canceled, Vehicle engine started", "PLAIN DOWN"]};
 							//Refuel Section
 								if (_ReFuelCost > 0) then
 								{
@@ -350,7 +350,7 @@ Purpose: Allow players to rearm, repair, refuel, and resupply vehicles. Charges 
 									sleep 15;
 									_vehicle setFuel 1;
 								};
-							if (isEngineOn _vehicle) exitwith {titletext ["Resupply Canceled, Vehicle engine started", "PLAIN DOWN"]};
+							if (isEngineOn _vehicle && !(_vehicle isKindOf "StaticWeapon")) exitwith {titletext ["Resupply Canceled, Vehicle engine started", "PLAIN DOWN"]};
 							//Ammo Resource Section
 								if (_AmmoResourceCost > 0) then
 								{
@@ -363,7 +363,7 @@ Purpose: Allow players to rearm, repair, refuel, and resupply vehicles. Charges 
 										};
 									} foreach _AmmoResourcesMax;
 								};
-							if (isEngineOn _vehicle) exitwith {titletext ["Resupply Canceled, Vehicle engine started", "PLAIN DOWN"]};
+							if (isEngineOn _vehicle && !(_vehicle isKindOf "StaticWeapon")) exitwith {titletext ["Resupply Canceled, Vehicle engine started", "PLAIN DOWN"]};
 							// Fuel resource Section
 								if (_FuelResourceCost > 0) then
 								{
@@ -376,7 +376,7 @@ Purpose: Allow players to rearm, repair, refuel, and resupply vehicles. Charges 
 										};
 									} foreach _FuelResourcesMax;
 								};
-							if (isEngineOn _vehicle) exitwith {titletext ["Resupply Canceled, Vehicle engine started", "PLAIN DOWN"]};
+							if (isEngineOn _vehicle && !(_vehicle isKindOf "StaticWeapon")) exitwith {titletext ["Resupply Canceled, Vehicle engine started", "PLAIN DOWN"]};
 							//Repair Resource Section
 								if (_RepairResourceCost > 0) then
 								{
@@ -408,4 +408,3 @@ Purpose: Allow players to rearm, repair, refuel, and resupply vehicles. Charges 
 			titleText [format ["You don't have enough money, %1 costs %2 to resupply", _vehname, _totalprice], "PLAIN DOWN"];
 		};
 //All Done!
-	mutexScriptInProgress = false;

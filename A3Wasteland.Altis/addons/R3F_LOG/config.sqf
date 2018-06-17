@@ -374,7 +374,7 @@ R3F_LOG_CFG_can_be_transported_cargo = R3F_LOG_CFG_can_be_transported_cargo +
 [
 	// e.g. : ["MyTransportableObjectClassName1", itsCost], ["MyTransportableObjectClassName2", itsCost]
 	//Parant Classes
-	["ReammoBox_F", 1],
+	//["ReammoBox_F", 1],
 	["Tank", 250],
 	["StaticWeapon", 5],
 	//Child Classes
@@ -953,7 +953,7 @@ R3F_LOG_CFG_can_be_moved_by_player = R3F_LOG_CFG_can_be_moved_by_player +
 [
 
 	//Parent Classes
-	"ReammoBox_F",
+	//"ReammoBox_F",
 	//Child Classes
 	"ArrowDesk_L_F",
 	"ArrowDesk_R_F",

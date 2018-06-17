@@ -10,13 +10,17 @@ private _Action = _this select 3 select 0;
 private _ObjectOwner = _Object getvariable ["OwnerUID", ""];
 private _PlayerUID = getPlayerUID player;
 
+
 switch (_Action) do
 {
 	case "lock":
 	{
 		if (_ObjectOwner == _PlayerUID) then
 		{
-			_Object setVariable [format ["bis_disabled_%1",_Door], 1, true];
+			while {(_Object getvariable [format ["bis_disabled_%1",_Door], 0) < 1} do
+			{
+				_Object setVariable [format ["bis_disabled_%1",_Door], 1, true];
+			};
 		}
 		else
 		{
@@ -25,7 +29,10 @@ switch (_Action) do
 			waitUntil {!(isNil "OutputText")};
 			if (OutputText == _Object getVariable [format ["password_%1", _Door], ""] && _Object getVariable [format ["password_%1", _Door], ""] != "") then 
 			{
-				_Object setVariable [format ["bis_disabled_%1",_Door], 1, true];	
+				while {(_Object getvariable [format ["bis_disabled_%1",_Door], 0) < 1} do
+				{
+					_Object setVariable [format ["bis_disabled_%1",_Door], 1, true];
+				};	
 			}
 			else
 			{
@@ -38,7 +45,10 @@ switch (_Action) do
 	{
 		if (_ObjectOwner == _PlayerUID) then
 		{
-			_Object setVariable [format ["bis_disabled_%1",_Door], 0, true];
+			while {(_Object getvariable [format ["bis_disabled_%1",_Door], 0) > 0} do
+			{
+				_Object setVariable [format ["bis_disabled_%1",_Door], 0, true];
+			};
 		}
 		else
 		{
@@ -47,7 +57,10 @@ switch (_Action) do
 			waitUntil {!(isNil "OutputText")};
 			if (OutputText == _Object getVariable [format ["password_%1", _Door], ""] && _Object getVariable [format ["password_%1", _Door], ""] != "") then 
 			{
-				_Object setVariable [format ["bis_disabled_%1",_Door], 0, true];	
+				while {(_Object getvariable [format ["bis_disabled_%1",_Door], 0) > 0} do
+				{
+					_Object setVariable [format ["bis_disabled_%1",_Door], 0, true];
+				};	
 			}
 			else
 			{
